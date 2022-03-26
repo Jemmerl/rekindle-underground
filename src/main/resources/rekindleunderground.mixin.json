@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "com.jemmerl.rekindleunderground.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "server": [
+    "server.MixinServerWorldGen",
+    "server.MixinFlatGenerationSettings"
+  ],
+  "client": [
+
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "rekindleunderground.mixin-refmap.json"
+}
