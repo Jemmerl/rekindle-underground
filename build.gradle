@@ -6,7 +6,7 @@ buildscript {
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7.+'
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
@@ -15,7 +15,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
-version = '1.16.5-0.1'
+version = '1.16.5-0.2'
 group = 'com.jemmerl.rekindleunderground' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'rekindleunderground'
 
@@ -28,7 +28,7 @@ minecraft {
     mappings channel: 'snapshot', version: '20210309-1.16.5'
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
     
-    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
         client {
@@ -47,6 +47,7 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
+            arg "-mixin.config=rekindleunderground.mixin.json"
             mods {
                 rekindleunderground {
                     source sourceSets.main
@@ -75,6 +76,7 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.16.5-36.2.20'
+    annotationProcessor 'org.spongepowered:mixin:0.8.4:processor'
 
     // You may put jars on which you depend on in ./libs or you may define them like so..
     // compile "some.group:artifact:version:classifier"
@@ -87,6 +89,7 @@ dependencies {
 
 mixin {
     add sourceSets.main, "rekindleunderground.mixin-refmap.json"
+    config 'rekindleunderground.mixin.json'
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
@@ -102,7 +105,8 @@ jar {
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
             "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
             "TweakOrder": 0,
-            "MixinConfigs" : "rekindleunderground.mixin.json"
+            "MixinConfigs" : "rekindleunderground.mixin.json",
+            "FMLAT" : "accesstransformer.cfg"
         ])
     }
 }

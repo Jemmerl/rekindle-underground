@@ -4,6 +4,9 @@ package com.jemmerl.rekindleunderground.data.noise;
  * K.jpg's OpenSimplex 2, faster variant
  */
 
+// Credit goes to OpenSimplex2 and K.jpg "KdotJPG" for this class; edited to fit needs
+// https://github.com/KdotJPG/OpenSimplex2
+
 public class OpenSimplex2 {
 
     private static final long PRIME_X = 0x5205402B9270C86FL;

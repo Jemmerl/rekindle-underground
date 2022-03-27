@@ -11,6 +11,9 @@ import net.minecraft.world.gen.feature.IFeatureConfig;
 import java.util.ArrayList;
 import java.util.List;
 
+// Credit goes to Unearthed and lilypuree for this class; edited to fit needs
+// https://github.com/lilypuree/UnEarthed/tree/Forge-1.16.X
+
 public class FeatureRegistrationHelper {
 
     public static List<Feature<?>> features = new ArrayList<>();

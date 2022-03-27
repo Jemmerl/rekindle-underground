@@ -15,11 +15,18 @@ import java.util.Map;
 
 import static com.jemmerl.rekindleunderground.RKUndergroundFeatures.STONE_CONFIG;
 
-@Mixin(FlatGenerationSettings.class)
-public class MixinFlatGenerationSettings {
+// Credit goes to Unearthed and lilypuree for this class; edited to fit needs
+// https://github.com/lilypuree/UnEarthed/tree/Forge-1.16.X
 
-    @Inject(method = "getBiomeFromSettings", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/biome/BiomeGenerationSettings$Builder;build()Lnet/minecraft/world/biome/BiomeGenerationSettings;"), locals = LocalCapture.CAPTURE_FAILHARD)
+@Mixin(value = FlatGenerationSettings.class, priority = 0)
+public class MixinFlatGenerationSettings {
+    @Inject(
+            method = "getConfiguredBiome",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/biome/BiomeGenerationSettings$Builder;build()Lnet/minecraft/world/biome/BiomeGenerationSettings;"),
+            locals = LocalCapture.CAPTURE_FAILHARD
+    )
     private void addRKUndergroundFeature(CallbackInfoReturnable<Biome> cir, Biome biome, BiomeGenerationSettings biomegenerationsettings, BiomeGenerationSettings.Builder biomegenerationsettings$builder, Map map, boolean flag, BlockState ablockstate[]) {
+        System.out.print(1010222);
         biomegenerationsettings$builder.withFeature(GenerationStage.Decoration.TOP_LAYER_MODIFICATION, STONE_CONFIG);
     }
 }

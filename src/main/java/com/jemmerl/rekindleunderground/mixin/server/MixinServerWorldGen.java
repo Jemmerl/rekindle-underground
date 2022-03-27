@@ -15,6 +15,7 @@ import net.minecraft.server.management.PlayerProfileCache;
 import net.minecraft.util.registry.DynamicRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeGenerationSettings;
 import net.minecraft.world.chunk.listener.IChunkStatusListenerFactory;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
@@ -37,32 +38,38 @@ import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-@Mixin(MinecraftServer.class)
+// Credit goes to Unearthed and lilypuree for this class; edited to fit needs
+// https://github.com/lilypuree/UnEarthed/tree/Forge-1.16.X
+
+@Mixin(value = MinecraftServer.class, priority = 0)
 public class MixinServerWorldGen {
 
     @Shadow
     @Final
-    protected DynamicRegistries.Impl registryHolder;
+    protected DynamicRegistries.Impl dynamicRegistries;
 
-    @Inject(at = @At("RETURN"), method = "<init>(Ljava/lang/Thread;Lnet/minecraft/util/registry/DynamicRegistries$Impl;Lnet/minecraft/world/storage/SaveFormat$LevelSave;Lnet/minecraft/world/storage/IServerConfiguration;Lnet/minecraft/resources/ResourcePackList;Ljava/net/Proxy;Lcom/mojang/datafixers/DataFixer;Lnet/minecraft/resources/DataPackRegistries;Lcom/mojang/authlib/minecraft/MinecraftSessionService;Lcom/mojang/authlib/GameProfileRepository;Lnet/minecraft/server/management/PlayerProfileCache;Lnet/minecraft/world/chunk/listener/IChunkStatusListenerFactory;)V", cancellable = true)
-    private void replaceRKUStones(Thread thread, DynamicRegistries.Impl impl, SaveFormat.LevelSave session, IServerConfiguration saveProperties, ResourcePackList resourcePackManager, Proxy proxy, DataFixer dataFixer, DataPackRegistries serverResourceManager, MinecraftSessionService minecraftSessionService, GameProfileRepository gameProfileRepository, PlayerProfileCache userCache, IChunkStatusListenerFactory worldGenerationProgressListenerFactory, CallbackInfo ci) {
-        System.out.print(4445444);
-        if (this.registryHolder.getRegistry(Registry.BIOME_KEY) != null) {
-            for (Biome biome : registryHolder.getRegistry(Registry.BIOME_KEY)) {
+    @Inject(
+            at = {@At("RETURN")},
+            method = "<init>(Ljava/lang/Thread;Lnet/minecraft/util/registry/DynamicRegistries$Impl;Lnet/minecraft/world/storage/SaveFormat$LevelSave;Lnet/minecraft/world/storage/IServerConfiguration;Lnet/minecraft/resources/ResourcePackList;Ljava/net/Proxy;Lcom/mojang/datafixers/DataFixer;Lnet/minecraft/resources/DataPackRegistries;Lcom/mojang/authlib/minecraft/MinecraftSessionService;Lcom/mojang/authlib/GameProfileRepository;Lnet/minecraft/server/management/PlayerProfileCache;Lnet/minecraft/world/chunk/listener/IChunkStatusListenerFactory;)V",
+            cancellable = true
+    )
+
+    private void replaceRKUStones(Thread serverThread, DynamicRegistries.Impl impl, SaveFormat.LevelSave anvilConverterForAnvilFile, IServerConfiguration serverConfig, ResourcePackList dataPacks, Proxy serverProxy, DataFixer dataFixer, DataPackRegistries dataRegistries, MinecraftSessionService sessionService, GameProfileRepository profileRepo, PlayerProfileCache profileCache, IChunkStatusListenerFactory chunkStatusListenerFactory, CallbackInfo ci) {
+        System.out.println("An instance of SomeJavaFile has been created!");
+        if (this.dynamicRegistries.getRegistry(Registry.BIOME_KEY) != null) {
+            for (Biome biome : dynamicRegistries.getRegistry(Registry.BIOME_KEY)) {
                 if (biome.getCategory() == Biome.Category.NETHER) {
                     // Nether biomes
-                } else if (biome.getCategory() != Biome.Category.THEEND && biome.getCategory() != Biome.Category.NONE) {
+                } else if ((biome.getCategory() != Biome.Category.THEEND) && (biome.getCategory() != Biome.Category.NONE)) {
                     if (biome.getCategory() == Biome.Category.EXTREME_HILLS) {
                         //addFeatureToBiome(biome, GenerationStage.Decoration.VEGETAL_DECORATION, UEFeatures.LICHEN_FEATURE);
                     }
-                    if (false) {
-                        System.out.print(333343333);
-                        // UnearthedConfig.disableGeneration.get()
-                    } else {
-                        addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, RKUndergroundFeatures.STONE_CONFIG);
-                        System.out.print(5556555);
-                        removeFeatureFromBiome(biome, GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_DIRT, Features.ORE_GRANITE, Features.ORE_DIORITE, Features.ORE_ANDESITE);
-                    }
+                    //if (UnearthedConfig.disableGeneration.get()) {
+                    //} else {
+                    //}
+                    addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, RKUndergroundFeatures.STONE_CONFIG);
+                    System.out.print(5556555);
+                    removeFeatureFromBiome(biome, GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_DIRT, Features.ORE_GRANITE, Features.ORE_DIORITE, Features.ORE_ANDESITE);
                 }
             }
         }
@@ -89,10 +96,8 @@ public class MixinServerWorldGen {
     }
 
     private static void ConvertImmutableFeatures(Biome biome) {
-        if (biome.getGenerationSettings().getFeatures() instanceof ImmutableList) {
-            List<ArrayList<Supplier<ConfiguredFeature<?, ?>>>> mutableList = biome.getGenerationSettings().getFeatures().stream().map(Lists::newArrayList).collect(Collectors.toList());
-            biome.getGenerationSettings().getFeatures().clear();
-            biome.getGenerationSettings().getFeatures().addAll(mutableList);
+        if (biome.getGenerationSettings().features instanceof ImmutableList) {
+            biome.getGenerationSettings().features = biome.getGenerationSettings().getFeatures().stream().map(Lists::newArrayList).collect(Collectors.toList());
         }
     }
 
