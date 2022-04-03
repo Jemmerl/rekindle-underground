@@ -15,7 +15,6 @@ import net.minecraft.server.management.PlayerProfileCache;
 import net.minecraft.util.registry.DynamicRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeGenerationSettings;
 import net.minecraft.world.chunk.listener.IChunkStatusListenerFactory;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
@@ -31,7 +30,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.net.Proxy;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -55,7 +53,6 @@ public class MixinServerWorldGen {
     )
 
     private void replaceRKUStones(Thread serverThread, DynamicRegistries.Impl impl, SaveFormat.LevelSave anvilConverterForAnvilFile, IServerConfiguration serverConfig, ResourcePackList dataPacks, Proxy serverProxy, DataFixer dataFixer, DataPackRegistries dataRegistries, MinecraftSessionService sessionService, GameProfileRepository profileRepo, PlayerProfileCache profileCache, IChunkStatusListenerFactory chunkStatusListenerFactory, CallbackInfo ci) {
-        System.out.println("An instance of SomeJavaFile has been created!");
         if (this.dynamicRegistries.getRegistry(Registry.BIOME_KEY) != null) {
             for (Biome biome : dynamicRegistries.getRegistry(Registry.BIOME_KEY)) {
                 if (biome.getCategory() == Biome.Category.NETHER) {
@@ -68,7 +65,6 @@ public class MixinServerWorldGen {
                     //} else {
                     //}
                     addFeatureToBiome(biome, GenerationStage.Decoration.TOP_LAYER_MODIFICATION, RKUndergroundFeatures.STONE_CONFIG);
-                    System.out.print(5556555);
                     removeFeatureFromBiome(biome, GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_DIRT, Features.ORE_GRANITE, Features.ORE_DIORITE, Features.ORE_ANDESITE);
                 }
             }

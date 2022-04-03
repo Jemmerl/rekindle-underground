@@ -26,7 +26,6 @@ public class MixinFlatGenerationSettings {
             locals = LocalCapture.CAPTURE_FAILHARD
     )
     private void addRKUndergroundFeature(CallbackInfoReturnable<Biome> cir, Biome biome, BiomeGenerationSettings biomegenerationsettings, BiomeGenerationSettings.Builder biomegenerationsettings$builder, Map map, boolean flag, BlockState ablockstate[]) {
-        System.out.print(1010222);
         biomegenerationsettings$builder.withFeature(GenerationStage.Decoration.TOP_LAYER_MODIFICATION, STONE_CONFIG);
     }
 }

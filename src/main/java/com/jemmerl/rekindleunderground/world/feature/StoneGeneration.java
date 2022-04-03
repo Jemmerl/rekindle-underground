@@ -1,12 +1,16 @@
 package com.jemmerl.rekindleunderground.world.feature;
 
-
 import com.jemmerl.rekindleunderground.util.noise.ConfiguredNoise;
 import com.jemmerl.rekindleunderground.world.feature.stonegenutil.ChunkReader;
 import com.jemmerl.rekindleunderground.world.feature.stonegenutil.StateMap;
 import com.mojang.serialization.Codec;
+import it.unimi.dsi.fastutil.objects.ObjectLists;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ITag;
+import net.minecraft.tags.ITagCollection;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
@@ -14,6 +18,7 @@ import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraftforge.common.Tags;
 
 import java.util.Random;
 
@@ -70,12 +75,13 @@ public class StoneGeneration extends Feature<NoFeatureConfig> {
     }
 
     private BlockState replaceBlock(BlockState original, BlockState replacing) {
-        if ((replacing != null) && original.isIn(BlockTags.BASE_STONE_OVERWORLD)) {
+        if ((replacing != null) && (original.isIn(BlockTags.BASE_STONE_OVERWORLD) || original.isIn(Tags.Blocks.ORES))) {
             return replacing;
         } else {
             return original;
         }
     }
+//(original.isIn(BlockTags.BASE_STONE_OVERWORLD) || original.isIn(Tags.Blocks.ORES))
 
     /*
     private BlockState replaceBlock(BlockState original, BlockPos pos) {
