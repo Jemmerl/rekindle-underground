@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground.data.noise;
+package com.jemmerl.rekindleunderground.util.noise;
 
 /**
  * K.jpg's OpenSimplex 2, faster variant
@@ -7,6 +7,7 @@ package com.jemmerl.rekindleunderground.data.noise;
 // Credit goes to OpenSimplex2 and K.jpg "KdotJPG" for this class; edited to fit needs
 // https://github.com/KdotJPG/OpenSimplex2
 
+/*
 public class OpenSimplex2 {
 
     private static final long PRIME_X = 0x5205402B9270C86FL;
@@ -45,13 +46,13 @@ public class OpenSimplex2 {
     private static final float RSQUARED_4D = 0.6f;
 
 
-    /*
+    *//*
      * Noise Evaluators
-     */
+     *//*
 
-    /**
+    *//**
      * 2D Simplex noise, standard lattice orientation.
-     */
+     *//*
     public static float noise2(long seed, double x, double y) {
 
         // Get points for A2* lattice
@@ -61,13 +62,13 @@ public class OpenSimplex2 {
         return noise2_UnskewedBase(seed, xs, ys);
     }
 
-    /**
+    *//**
      * 2D Simplex noise, with Y pointing down the main diagonal.
      * Might be better for a 2D sandbox style game, where Y is vertical.
      * Probably slightly less optimal for heightmaps or continent maps,
      * unless your map is centered around an equator. It's a subtle
      * difference, but the option is here to make it an easy choice.
-     */
+     *//*
     public static float noise2_ImproveX(long seed, double x, double y) {
 
         // Skew transform and rotation baked into one.
@@ -77,9 +78,9 @@ public class OpenSimplex2 {
         return noise2_UnskewedBase(seed, yy + xx, yy - xx);
     }
 
-    /**
+    *//**
      * 2D Simplex noise base.
-     */
+     *//*
     private static float noise2_UnskewedBase(long seed, double xs, double ys) {
 
         // Get base points and offsets.
@@ -130,14 +131,14 @@ public class OpenSimplex2 {
         return value;
     }
 
-    /**
+    *//**
      * 3D OpenSimplex2 noise, with better visual isotropy in (X, Y).
      * Recommended for 3D terrain and time-varied animations.
      * The Z coordinate should always be the "different" coordinate in whatever your use case is.
      * If Y is vertical in world coordinates, call noise3_ImproveXZ(x, z, Y) or use noise3_XZBeforeY.
      * If Z is vertical in world coordinates, call noise3_ImproveXZ(x, y, Z).
      * For a time varied animation, call noise3_ImproveXY(x, y, T).
-     */
+     *//*
     public static float noise3_ImproveXY(long seed, double x, double y, double z) {
 
         // Re-orient the cubic lattices without skewing, so Z points up the main lattice diagonal,
@@ -154,14 +155,14 @@ public class OpenSimplex2 {
         return noise3_UnrotatedBase(seed, xr, yr, zr);
     }
 
-    /**
+    *//**
      * 3D OpenSimplex2 noise, with better visual isotropy in (X, Z).
      * Recommended for 3D terrain and time-varied animations.
      * The Y coordinate should always be the "different" coordinate in whatever your use case is.
      * If Y is vertical in world coordinates, call noise3_ImproveXZ(x, Y, z).
      * If Z is vertical in world coordinates, call noise3_ImproveXZ(x, Z, y) or use noise3_ImproveXY.
      * For a time varied animation, call noise3_ImproveXZ(x, T, y) or use noise3_ImproveXY.
-     */
+     *//*
     public static float noise3_ImproveXZ(long seed, double x, double y, double z) {
 
         // Re-orient the cubic lattices without skewing, so Y points up the main lattice diagonal,
@@ -178,11 +179,11 @@ public class OpenSimplex2 {
         return noise3_UnrotatedBase(seed, xr, yr, zr);
     }
 
-    /**
+    *//**
      * 3D OpenSimplex2 noise, fallback rotation option
      * Use noise3_ImproveXY or noise3_ImproveXZ instead, wherever appropriate.
      * They have less diagonal bias. This function's best use is as a fallback.
-     */
+     *//*
     public static float noise3_Fallback(long seed, double x, double y, double z) {
 
         // Re-orient the cubic lattices via rotation, to produce a familiar look.
@@ -194,9 +195,9 @@ public class OpenSimplex2 {
         return noise3_UnrotatedBase(seed, xr, yr, zr);
     }
 
-    /**
+    *//**
      * Generate overlapping cubic lattices for 3D OpenSimplex2 noise.
-     */
+     *//*
     private static float noise3_UnrotatedBase(long seed, double xr, double yr, double zr) {
 
         // Get base points and offsets.
@@ -279,12 +280,12 @@ public class OpenSimplex2 {
         return value;
     }
 
-    /**
+    *//**
      * 4D OpenSimplex2 noise, with XYZ oriented like noise3_ImproveXY
      * and W for an extra degree of freedom. W repeats eventually.
      * Recommended for time-varied animations which texture a 3D object (W=time)
      * in a space where Z is vertical
-     */
+     *//*
     public static float noise4_ImproveXYZ_ImproveXY(long seed, double x, double y, double z, double w) {
 
         double xy = x + y;
@@ -298,12 +299,12 @@ public class OpenSimplex2 {
         return noise4_UnskewedBase(seed, xr, yr, zr, wr);
     }
 
-    /**
+    *//**
      * 4D OpenSimplex2 noise, with XYZ oriented like noise3_ImproveXZ
      * and W for an extra degree of freedom. W repeats eventually.
      * Recommended for time-varied animations which texture a 3D object (W=time)
      * in a space where Y is vertical
-     */
+     *//*
     public static float noise4_ImproveXYZ_ImproveXZ(long seed, double x, double y, double z, double w) {
 
         double xz = x + z;
@@ -317,12 +318,12 @@ public class OpenSimplex2 {
         return noise4_UnskewedBase(seed, xr, yr, zr, wr);
     }
 
-    /**
+    *//**
      * 4D OpenSimplex2 noise, with XYZ oriented like noise3_Fallback
      * and W for an extra degree of freedom. W repeats eventually.
      * Recommended for time-varied animations which texture a 3D object (W=time)
      * where there isn't a clear distinction between horizontal and vertical
-     */
+     *//*
     public static float noise4_ImproveXYZ(long seed, double x, double y, double z, double w) {
 
         double xyz = x + y + z;
@@ -333,11 +334,11 @@ public class OpenSimplex2 {
         return noise4_UnskewedBase(seed, xs, ys, zs, ws);
     }
 
-    /**
+    *//**
      * 4D OpenSimplex2 noise, with XY and ZW forming orthogonal triangular-based planes.
      * Recommended for 3D terrain, where X and Y (or Z and W) are horizontal.
      * Recommended for noise(x, y, sin(time), cos(time)) trick.
-     */
+     *//*
     public static float noise4_ImproveXY_ImproveZW(long seed, double x, double y, double z, double w) {
 
         double s2 = (x + y) * -0.178275657951399372 + (z + w) * 0.215623393288842828;
@@ -347,9 +348,9 @@ public class OpenSimplex2 {
         return noise4_UnskewedBase(seed, xs, ys, zs, ws);
     }
 
-    /**
+    *//**
      * 4D OpenSimplex2 noise, fallback lattice orientation.
-     */
+     *//*
     public static float noise4_Fallback(long seed, double x, double y, double z, double w) {
 
         // Get points for A4 lattice
@@ -359,9 +360,9 @@ public class OpenSimplex2 {
         return noise4_UnskewedBase(seed, xs, ys, zs, ws);
     }
 
-    /**
+    *//**
      * 4D OpenSimplex2 noise base.
-     */
+     *//*
     private static float noise4_UnskewedBase(long seed, double xs, double ys, double zs, double ws) {
 
         // Get base points and offsets
@@ -443,9 +444,9 @@ public class OpenSimplex2 {
         return value;
     }
 
-    /*
+    *//*
      * Utility
-     */
+     *//*
 
     private static float grad(long seed, long xsvp, long ysvp, float dx, float dy) {
         long hash = seed ^ xsvp ^ ysvp;
@@ -480,9 +481,9 @@ public class OpenSimplex2 {
         return x < 0 ? (int)(x - 0.5) : (int)(x + 0.5);
     }
 
-    /*
+    *//*
      * gradients
-     */
+     *//*
 
     private static float[] GRADIENTS_2D;
     private static float[] GRADIENTS_3D;
@@ -757,4 +758,4 @@ public class OpenSimplex2 {
             GRADIENTS_4D[i] = grad4[j];
         }
     }
-}
+}*/
