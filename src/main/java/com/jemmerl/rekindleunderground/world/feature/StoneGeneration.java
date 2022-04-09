@@ -81,23 +81,6 @@ public class StoneGeneration extends Feature<NoFeatureConfig> {
             return original;
         }
     }
-//(original.isIn(BlockTags.BASE_STONE_OVERWORLD) || original.isIn(Tags.Blocks.ORES))
-
-    /*
-    private BlockState replaceBlock(BlockState original, BlockPos pos) {
-        if (original.isIn(BlockTags.BASE_STONE_OVERWORLD)) {
-            BlockState replacer = dikeGen(noise, worldSeed, pos);
-            if (replacer == null) {
-                replacer = strataGen(noise, worldSeed, pos);
-            }
-            return replacer ;
-        } else {
-            return original;
-        }
-    }
-    */
-
-
 }
 
 
