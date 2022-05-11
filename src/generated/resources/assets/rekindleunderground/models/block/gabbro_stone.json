@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "rekindleunderground:block/gabbro_stone",
+    "down": "rekindleunderground:block/gabbro_stone",
+    "north": "rekindleunderground:block/gabbro_stone",
+    "south": "rekindleunderground:block/gabbro_stone",
+    "east": "rekindleunderground:block/gabbro_stone",
+    "west": "rekindleunderground:block/gabbro_stone"
+  }
+}

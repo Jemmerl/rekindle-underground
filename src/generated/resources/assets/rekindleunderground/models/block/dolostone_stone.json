@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "rekindleunderground:block/dolostone_stone",
+    "down": "rekindleunderground:block/dolostone_stone",
+    "north": "rekindleunderground:block/dolostone_stone",
+    "south": "rekindleunderground:block/dolostone_stone",
+    "east": "rekindleunderground:block/dolostone_stone",
+    "west": "rekindleunderground:block/dolostone_stone"
+  }
+}

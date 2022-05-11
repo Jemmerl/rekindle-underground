@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "rekindleunderground:block/borax_stone",
+    "down": "rekindleunderground:block/borax_stone",
+    "north": "rekindleunderground:block/borax_stone",
+    "south": "rekindleunderground:block/borax_stone",
+    "east": "rekindleunderground:block/borax_stone",
+    "west": "rekindleunderground:block/borax_stone"
+  }
+}

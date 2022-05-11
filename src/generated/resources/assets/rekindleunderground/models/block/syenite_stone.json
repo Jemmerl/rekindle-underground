@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "rekindleunderground:block/syenite_stone",
+    "down": "rekindleunderground:block/syenite_stone",
+    "north": "rekindleunderground:block/syenite_stone",
+    "south": "rekindleunderground:block/syenite_stone",
+    "east": "rekindleunderground:block/syenite_stone",
+    "west": "rekindleunderground:block/syenite_stone"
+  }
+}

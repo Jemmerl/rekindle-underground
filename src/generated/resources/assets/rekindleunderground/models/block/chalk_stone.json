@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "rekindleunderground:block/chalk_stone",
+    "down": "rekindleunderground:block/chalk_stone",
+    "north": "rekindleunderground:block/chalk_stone",
+    "south": "rekindleunderground:block/chalk_stone",
+    "east": "rekindleunderground:block/chalk_stone",
+    "west": "rekindleunderground:block/chalk_stone"
+  }
+}

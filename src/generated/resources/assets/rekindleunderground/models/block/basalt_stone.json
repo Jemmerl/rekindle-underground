@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "rekindleunderground:block/basalt_stone",
+    "down": "rekindleunderground:block/basalt_stone",
+    "north": "rekindleunderground:block/basalt_stone",
+    "south": "rekindleunderground:block/basalt_stone",
+    "east": "rekindleunderground:block/basalt_stone",
+    "west": "rekindleunderground:block/basalt_stone"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "oretype=none": {
+      "model": "rekindleunderground:block/gabbro_stone"
+    },
+    "oretype=test_ore_1": {
+      "model": "rekindleunderground:block/stoneore/gabbro_stone/test_ore_1"
+    },
+    "oretype=test_ore_2": {
+      "model": "rekindleunderground:block/stoneore/gabbro_stone/test_ore_2"
+    },
+    "oretype=test_ore_3": {
+      "model": "rekindleunderground:block/stoneore/gabbro_stone/test_ore_3"
+    },
+    "oretype=test_ore_4": {
+      "model": "rekindleunderground:block/stoneore/gabbro_stone/test_ore_4"
+    }
+  }
+}

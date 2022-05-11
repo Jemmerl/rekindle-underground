@@ -23,7 +23,6 @@ import org.apache.logging.log4j.Logger;
 @Mod(RekindleUnderground.MOD_ID)
 public class RekindleUnderground
 {
-
     public static final String MOD_ID = "rekindleunderground";
     private static final Logger LOGGER = LogManager.getLogger();
 

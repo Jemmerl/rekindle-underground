@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "rekindleunderground:block/schist_stone",
+    "down": "rekindleunderground:block/schist_stone",
+    "north": "rekindleunderground:block/schist_stone",
+    "south": "rekindleunderground:block/schist_stone",
+    "east": "rekindleunderground:block/schist_stone",
+    "west": "rekindleunderground:block/schist_stone"
+  }
+}

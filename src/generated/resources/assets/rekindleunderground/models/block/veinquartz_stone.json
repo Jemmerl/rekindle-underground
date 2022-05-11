@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "rekindleunderground:block/veinquartz_stone",
+    "down": "rekindleunderground:block/veinquartz_stone",
+    "north": "rekindleunderground:block/veinquartz_stone",
+    "south": "rekindleunderground:block/veinquartz_stone",
+    "east": "rekindleunderground:block/veinquartz_stone",
+    "west": "rekindleunderground:block/veinquartz_stone"
+  }
+}

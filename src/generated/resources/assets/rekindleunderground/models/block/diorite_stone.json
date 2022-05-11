@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "rekindleunderground:block/diorite_stone",
+    "down": "rekindleunderground:block/diorite_stone",
+    "north": "rekindleunderground:block/diorite_stone",
+    "south": "rekindleunderground:block/diorite_stone",
+    "east": "rekindleunderground:block/diorite_stone",
+    "west": "rekindleunderground:block/diorite_stone"
+  }
+}

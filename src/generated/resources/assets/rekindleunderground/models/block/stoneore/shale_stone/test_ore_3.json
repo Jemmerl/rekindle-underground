@@ -1,0 +1,7 @@
+{
+  "parent": "rekindleunderground:block/stone_ore_parent",
+  "textures": {
+    "all": "rekindleunderground:block/shale_stone",
+    "overlay": "rekindleunderground:block/ore/test_ore_3"
+  }
+}

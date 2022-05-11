@@ -1,8 +1,9 @@
-package com.jemmerl.rekindleunderground.util.noise;
+package com.jemmerl.rekindleunderground.util.noise.GenerationNoise;
 
 import com.jemmerl.rekindleunderground.RKUndergroundConfig;
+import com.jemmerl.rekindleunderground.util.noise.FastNoiseLite;
 
-public class ConfiguredNoise {
+public class ConfiguredRegionNoise {
 
     private static FastNoiseLite regionNoise;
     private static FastNoiseLite faultNoise;
@@ -15,8 +16,8 @@ public class ConfiguredNoise {
     private static final double REGIONAL_VARIATION = RKUndergroundConfig.COMMON.regionVariation.get();
     private static final int FAULT_SIZE = RKUndergroundConfig.COMMON.faultSize.get();
     private static final double FAULT_VARIATION = RKUndergroundConfig.COMMON.faultVariation.get();
-    private static final double STRATA_DEPTH = RKUndergroundConfig.COMMON.strataDepth.get();
-
+    private static final double STRATA_DEPTH = 0.6f;
+        //0.60; 0.00 - 1.00 scale; 0 is very thin, 1 is essentially solid regions
 
     //////////////////////////////////////////////////
     /////            Noise Generators            /////
@@ -34,13 +35,13 @@ public class ConfiguredNoise {
         return faultNoise.GetNoise(x, (y / 10f), z);
     }
 
-    // Returns the strata layer noise value for determining rock type
-    public static float stoneStrataNoise(int x, int y, int z) {
+    // Returns the strata layer noise value for determining rock type NOTE: USE AS TEMPLATE, IS OUTDATED
+/*    public static float stoneStrataNoise(int x, int y, int z) {
         int faultShiftedY = y + (int)((50 * FAULT_VARIATION) * stoneFaultNoise(x, y, z));
         int shiftedSeed = (int)(WORLD_SEED + (stoneRegionNoise(x, y, z) * (10000 * REGIONAL_VARIATION)));
         strataNoise.SetSeed(shiftedSeed);
         return strataNoise.GetNoise(x * (15f * 1), faultShiftedY * (400.0f * (1f - (float)STRATA_DEPTH)), z * (15f * 1)); // include a strata size factor?
-    }
+    }*/
 
 
     ///////////////////////////////////////////////////////

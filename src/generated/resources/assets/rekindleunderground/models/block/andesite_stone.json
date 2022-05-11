@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "rekindleunderground:block/andesite_stone",
+    "down": "rekindleunderground:block/andesite_stone",
+    "north": "rekindleunderground:block/andesite_stone",
+    "south": "rekindleunderground:block/andesite_stone",
+    "east": "rekindleunderground:block/andesite_stone",
+    "west": "rekindleunderground:block/andesite_stone"
+  }
+}

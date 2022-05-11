@@ -2,9 +2,9 @@ package com.jemmerl.rekindleunderground.item;
 
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
+import com.jemmerl.rekindleunderground.data.types.RockType;
 import net.minecraft.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -16,7 +16,7 @@ public class ModItems {
     //     ROCKS     //
     ///////////////////
 
-    // Sedimentary Rocks
+/*    // Sedimentary Rocks
     public static final RegistryObject<Item> CHALK_ROCK = ITEMS.register("chalk_rock",
             () -> new Item(new Item.Properties().group(ModItemGroup.RKU_GROUP)));
 
@@ -67,6 +67,9 @@ public class ModItems {
     public static final RegistryObject<Item> GABBRO_ROCK = ITEMS.register("gabbro_rock",
             () -> new Item(new Item.Properties().group(ModItemGroup.RKU_GROUP)));
 
+    public static final RegistryObject<Item> DIABASE_ROCK = ITEMS.register("diabase_rock",
+            () -> new Item(new Item.Properties().group(ModItemGroup.RKU_GROUP)));
+
     public static final RegistryObject<Item> PERIDOTITE_ROCK = ITEMS.register("peridotite_rock",
             () -> new Item(new Item.Properties().group(ModItemGroup.RKU_GROUP)));
 
@@ -84,7 +87,13 @@ public class ModItems {
             () -> new Item(new Item.Properties().group(ModItemGroup.RKU_GROUP)));
 
     public static final RegistryObject<Item> MARBLE_ROCK = ITEMS.register("marble_rock",
-            () -> new Item(new Item.Properties().group(ModItemGroup.RKU_GROUP)));
+            () -> new Item(new Item.Properties().group(ModItemGroup.RKU_GROUP)));*/
+
+
+
+    static {
+        RockType.register(ITEMS);
+    }
 
 
     // Item registry method

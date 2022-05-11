@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "rekindleunderground:block/soapstone_stone",
+    "down": "rekindleunderground:block/soapstone_stone",
+    "north": "rekindleunderground:block/soapstone_stone",
+    "south": "rekindleunderground:block/soapstone_stone",
+    "east": "rekindleunderground:block/soapstone_stone",
+    "west": "rekindleunderground:block/soapstone_stone"
+  }
+}

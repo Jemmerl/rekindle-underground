@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "rekindleunderground:block/kernite_stone",
+    "down": "rekindleunderground:block/kernite_stone",
+    "north": "rekindleunderground:block/kernite_stone",
+    "south": "rekindleunderground:block/kernite_stone",
+    "east": "rekindleunderground:block/kernite_stone",
+    "west": "rekindleunderground:block/kernite_stone"
+  }
+}

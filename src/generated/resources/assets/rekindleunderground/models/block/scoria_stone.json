@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "rekindleunderground:block/scoria_stone",
+    "down": "rekindleunderground:block/scoria_stone",
+    "north": "rekindleunderground:block/scoria_stone",
+    "south": "rekindleunderground:block/scoria_stone",
+    "east": "rekindleunderground:block/scoria_stone",
+    "west": "rekindleunderground:block/scoria_stone"
+  }
+}

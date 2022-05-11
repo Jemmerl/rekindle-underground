@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "rekindleunderground:block/diabase_stone",
+    "down": "rekindleunderground:block/diabase_stone",
+    "north": "rekindleunderground:block/diabase_stone",
+    "south": "rekindleunderground:block/diabase_stone",
+    "east": "rekindleunderground:block/diabase_stone",
+    "west": "rekindleunderground:block/diabase_stone"
+  }
+}

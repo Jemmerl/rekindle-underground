@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "rekindleunderground:block/gneiss_stone",
+    "down": "rekindleunderground:block/gneiss_stone",
+    "north": "rekindleunderground:block/gneiss_stone",
+    "south": "rekindleunderground:block/gneiss_stone",
+    "east": "rekindleunderground:block/gneiss_stone",
+    "west": "rekindleunderground:block/gneiss_stone"
+  }
+}

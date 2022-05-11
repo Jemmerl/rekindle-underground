@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "rekindleunderground:block/rockgypsum_stone",
+    "down": "rekindleunderground:block/rockgypsum_stone",
+    "north": "rekindleunderground:block/rockgypsum_stone",
+    "south": "rekindleunderground:block/rockgypsum_stone",
+    "east": "rekindleunderground:block/rockgypsum_stone",
+    "west": "rekindleunderground:block/rockgypsum_stone"
+  }
+}

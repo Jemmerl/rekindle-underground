@@ -1,10 +1,13 @@
 package com.jemmerl.rekindleunderground.block;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
+import com.jemmerl.rekindleunderground.block.custom.StoneOreBlock;
+import com.jemmerl.rekindleunderground.data.types.StoneType;
 import com.jemmerl.rekindleunderground.item.ModItemGroup;
 import com.jemmerl.rekindleunderground.item.ModItems;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
@@ -35,119 +38,123 @@ public class ModBlocks {
 
     // Sedimentary Stones
     public static final RegistryObject<Block> CHALK = registerBlock("chalk_stone",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.SEDIMENTARY), 64);
 
     public static final RegistryObject<Block> LIMESTONE = registerBlock("limestone_stone",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.SEDIMENTARY), 64);
 
     public static final RegistryObject<Block> DOLOSTONE = registerBlock("dolostone_stone",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.SEDIMENTARY), 64);
 
     public static final RegistryObject<Block> SHALE = registerBlock("shale_stone",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.SEDIMENTARY), 64);
 
     public static final RegistryObject<Block> SANDSTONE = registerBlock("sandstone_stone",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.SEDIMENTARY), 64);
 
     public static final RegistryObject<Block> MUDSTONE = registerBlock("mudstone_stone",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.SEDIMENTARY), 64);
 
     public static final RegistryObject<Block> ROCK_SALT = registerBlock("rocksalt_stone",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.SEDIMENTARY), 64);
 
     public static final RegistryObject<Block> ROCK_GYPSUM = registerBlock("rockgypsum_stone",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.SEDIMENTARY), 64);
 
     public static final RegistryObject<Block> BORAX = registerBlock("borax_stone",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.SEDIMENTARY), 64);
 
     public static final RegistryObject<Block> KERNITE = registerBlock("kernite_stone",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.SEDIMENTARY), 64);
 
     public static final RegistryObject<Block> VEIN_QUARTZ = registerBlock("veinquartz_stone",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.SEDIMENTARY), 64);
 
     // Igneous Extrusive Stones
     public static final RegistryObject<Block> RHYOLITE = registerBlock("rhyolite_stone",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.EXTRUSIVE), 64);
 
     public static final RegistryObject<Block> DACITE = registerBlock("dacite_stone",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.EXTRUSIVE), 64);
 
     public static final RegistryObject<Block> ANDESITE = registerBlock("andesite_stone",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.EXTRUSIVE), 64);
 
     public static final RegistryObject<Block> BASALT = registerBlock("basalt_stone",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.EXTRUSIVE), 64);
 
     public static final RegistryObject<Block> SCORIA = registerBlock("scoria_stone",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.EXTRUSIVE), 64);
 
     // Igneous Intrusive Stones
     public static final RegistryObject<Block> DIORITE = registerBlock("diorite_stone",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.INTRUSIVE), 64);
 
     public static final RegistryObject<Block> GRANODIORITE = registerBlock("granodiorite_stone",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.INTRUSIVE), 64);
 
     public static final RegistryObject<Block> GRANITE = registerBlock("granite_stone",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.INTRUSIVE), 64);
 
     public static final RegistryObject<Block> SYENITE = registerBlock("syenite_stone",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.INTRUSIVE), 64);
 
     public static final RegistryObject<Block> GABBRO = registerBlock("gabbro_stone",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.INTRUSIVE), 64);
+
+    public static final RegistryObject<Block> DIABASE = registerBlock("diabase_stone",
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.INTRUSIVE), 64);
 
     public static final RegistryObject<Block> PERIDOTITE = registerBlock("peridotite_stone",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.INTRUSIVE), 64);
 
     // Metamorphic Stones
     public static final RegistryObject<Block> QUARTZITE = registerBlock("quartzite_stone",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.METAMORPHIC), 64);
 
     public static final RegistryObject<Block> SCHIST = registerBlock("schist_stone",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.METAMORPHIC), 64);
 
     public static final RegistryObject<Block> PHYLLITE = registerBlock("phyllite_stone",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.METAMORPHIC), 64);
 
     public static final RegistryObject<Block> GNEISS = registerBlock("gneiss_stone",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.METAMORPHIC), 64);
 
     public static final RegistryObject<Block> MARBLE = registerBlock("marble_stone",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.METAMORPHIC), 64);
 
     public static final RegistryObject<Block> SOAPSTONE = registerBlock("soapstone_stone",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.METAMORPHIC), 64);
 
     /////////////////////
     //     COBBLES     //
@@ -217,6 +224,10 @@ public class ModBlocks {
                     .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
 
     public static final RegistryObject<Block> GABBRO_CS = registerBlock("gabbro_cobblestone",
+            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+
+    public static final RegistryObject<Block> DIABASE_CS = registerBlock("diabase_cobblestone",
             () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
                     .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
 

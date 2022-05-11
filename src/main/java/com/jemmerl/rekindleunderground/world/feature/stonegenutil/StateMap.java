@@ -1,9 +1,11 @@
 package com.jemmerl.rekindleunderground.world.feature.stonegenutil;
 
-import com.jemmerl.rekindleunderground.util.noise.ConfiguredNoise;
+import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredRegionNoise;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
+
+import static com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredStrataNoise.getStoneStrataBlock;
 
 public class StateMap {
 
@@ -29,9 +31,8 @@ public class StateMap {
 
     private void generateStateMap() {
         PopulateStrata();
-        //gen strata ore
-        //gen intrusive rock
-        //gen intrusive rock ore
+        // generate igneous formations
+        // generate ores
     }
 
     /////////////////////////////////////////////////
@@ -39,19 +40,24 @@ public class StateMap {
     /////////////////////////////////////////////////
 
     public void PopulateStrata() {
-        BlockState state;
         int posX, posZ;
         int topY = chunkReader.getMaxHeight();
-        float strataNoise;
 
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
                 for (int y = 0; y < topY; y++) {
                     posX = this.blockPos.getX() + x;
                     posZ = this.blockPos.getZ() + z;
-                    strataNoise = ConfiguredNoise.stoneStrataNoise(posX, y, posZ);
 
-                    // Temporary
+
+
+                    // OLD
+                    // strataNoise = ConfiguredNoise.stoneStrataNoise(posX, y, posZ);
+
+
+                    // OLD TEMP
+
+                    /*
                     if (strataNoise <= -0.8) {
                         state = Blocks.NETHERITE_BLOCK.getDefaultState();
                     } else if (strataNoise <= -0.6) {
@@ -72,9 +78,9 @@ public class StateMap {
                         state = Blocks.STONE.getDefaultState();
                     } else {
                         state = Blocks.DIRT.getDefaultState();
-                    }
+                    }*/
 
-                    stateMap[x][y][z] = state;
+                    stateMap[x][y][z] = getStoneStrataBlock(posX, y, posZ);
                 }
             }
         }

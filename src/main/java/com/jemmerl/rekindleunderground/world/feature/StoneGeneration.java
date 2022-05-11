@@ -1,16 +1,12 @@
 package com.jemmerl.rekindleunderground.world.feature;
 
-import com.jemmerl.rekindleunderground.util.noise.ConfiguredNoise;
+import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredRegionNoise;
+import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredStrataNoise;
 import com.jemmerl.rekindleunderground.world.feature.stonegenutil.ChunkReader;
 import com.jemmerl.rekindleunderground.world.feature.stonegenutil.StateMap;
 import com.mojang.serialization.Codec;
-import it.unimi.dsi.fastutil.objects.ObjectLists;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ITag;
-import net.minecraft.tags.ITagCollection;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
@@ -36,7 +32,8 @@ public class StoneGeneration extends Feature<NoFeatureConfig> {
 
         if(!setSeed){
             worldSeed = reader.getSeed();
-            ConfiguredNoise.configNoise(worldSeed);
+            ConfiguredRegionNoise.configNoise(worldSeed);
+            ConfiguredStrataNoise.configNoise(worldSeed);
             setSeed = true;
         }
 
