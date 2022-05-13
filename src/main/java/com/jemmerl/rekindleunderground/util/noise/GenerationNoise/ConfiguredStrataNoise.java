@@ -49,16 +49,13 @@ public class ConfiguredStrataNoise {
         BlockState state;
         float noiseVal;
         if (yPos <= (11 + (int)(4 * insertedStrataNoise.GetNoise((xPos * 2), (yPos), (zPos * 2))))) { // Adds Diabase layer smoothly below y 10-16
-            state = Blocks.ACACIA_PLANKS.getDefaultState(); //TEMP
-            //state = ModBlocks.DIABASE.get().getDefaultState();
+            state = ModBlocks.DIABASE.get().getDefaultState();
         } else {
             noiseVal = floodBasaltNoise.GetNoise((xPos / 5f), (yPos * 2f), (zPos / 5f));
             if (noiseVal < -0.1f) {
-                state = Blocks.CRIMSON_PLANKS.getDefaultState(); //TEMP
-                //state = ModBlocks.GABBRO.get().getDefaultState();
+                state = ModBlocks.GABBRO.get().getDefaultState();
             } else {
-                state = Blocks.WARPED_PLANKS.getDefaultState(); //TEMP
-                //state = ModBlocks.BASALT.get().getDefaultState();
+                state = ModBlocks.BASALT.get().getDefaultState();
             }
         }
         return state;
