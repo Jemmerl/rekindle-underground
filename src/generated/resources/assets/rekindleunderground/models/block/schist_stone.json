@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:block/cube",
   "textures": {
+    "particle": "rekindleunderground:block/schist_stone",
     "up": "rekindleunderground:block/schist_stone",
     "down": "rekindleunderground:block/schist_stone",
     "north": "rekindleunderground:block/schist_stone",

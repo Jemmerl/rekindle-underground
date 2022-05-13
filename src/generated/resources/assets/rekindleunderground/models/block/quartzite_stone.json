@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:block/cube",
   "textures": {
+    "particle": "rekindleunderground:block/quartzite_stone",
     "up": "rekindleunderground:block/quartzite_stone",
     "down": "rekindleunderground:block/quartzite_stone",
     "north": "rekindleunderground:block/quartzite_stone",

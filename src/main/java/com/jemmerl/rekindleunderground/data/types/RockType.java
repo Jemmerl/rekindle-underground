@@ -16,7 +16,7 @@ public enum RockType implements IItemProvider {
     SHALE_ROCK,
     SANDSTONE_ROCK,
     MUDSTONE_ROCK,
-    VEIN_QUARTZ_ROCK,
+    VEINQUARTZ_ROCK,
 
     // Extrusive Igneous
     RHYOLITE_ROCK,

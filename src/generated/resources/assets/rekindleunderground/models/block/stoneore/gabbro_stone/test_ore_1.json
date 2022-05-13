@@ -2,6 +2,7 @@
   "parent": "rekindleunderground:block/stone_ore_parent",
   "textures": {
     "all": "rekindleunderground:block/gabbro_stone",
+    "particle": "rekindleunderground:block/gabbro_stone",
     "overlay": "rekindleunderground:block/ore/test_ore_1"
   }
 }

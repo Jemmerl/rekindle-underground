@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:block/cube",
   "textures": {
+    "particle": "rekindleunderground:block/borax_stone",
     "up": "rekindleunderground:block/borax_stone",
     "down": "rekindleunderground:block/borax_stone",
     "north": "rekindleunderground:block/borax_stone",

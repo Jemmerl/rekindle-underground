@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:block/cube",
   "textures": {
+    "particle": "rekindleunderground:block/gabbro_stone",
     "up": "rekindleunderground:block/gabbro_stone",
     "down": "rekindleunderground:block/gabbro_stone",
     "north": "rekindleunderground:block/gabbro_stone",

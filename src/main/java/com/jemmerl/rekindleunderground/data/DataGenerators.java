@@ -1,7 +1,8 @@
 package com.jemmerl.rekindleunderground.data;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
-import com.jemmerl.rekindleunderground.data.generators.client.OreStoneBlockStateProvider;
+import com.jemmerl.rekindleunderground.data.generators.client.ModBlockStateProvider;
+import com.jemmerl.rekindleunderground.data.generators.client.ModItemModelProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -17,7 +18,8 @@ public final class DataGenerators {
         DataGenerator gen = event.getGenerator();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
-        gen.addProvider(new OreStoneBlockStateProvider(gen, RekindleUnderground.MOD_ID, existingFileHelper));
+        gen.addProvider(new ModBlockStateProvider(gen, RekindleUnderground.MOD_ID, existingFileHelper));
+        gen.addProvider(new ModItemModelProvider(gen, RekindleUnderground.MOD_ID, existingFileHelper));
 
 //        gen.addProvider(new ModItemModelProvider(gen, existingFileHelper));
 //        ModBlockTagsProvider blockTags = new ModBlockTagsProvider(gen, existingFileHelper);

@@ -35,7 +35,7 @@ public class ModItems {
     public static final RegistryObject<Item> MUDSTONE_ROCK = ITEMS.register("mudstone_rock",
             () -> new Item(new Item.Properties().group(ModItemGroup.RKU_GROUP)));
 
-    public static final RegistryObject<Item> VEIN_QUARTZ_ROCK = ITEMS.register("veinquartz_rock",
+    public static final RegistryObject<Item> VEINQUARTZ_ROCK = ITEMS.register("veinquartz_rock",
             () -> new Item(new Item.Properties().group(ModItemGroup.RKU_GROUP)));
 
     // Igneous Extrusive Rocks

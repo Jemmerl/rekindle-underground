@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:block/cube",
   "textures": {
+    "particle": "rekindleunderground:block/dacite_stone",
     "up": "rekindleunderground:block/dacite_stone",
     "down": "rekindleunderground:block/dacite_stone",
     "north": "rekindleunderground:block/dacite_stone",

@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:block/cube",
   "textures": {
+    "particle": "rekindleunderground:block/granite_stone",
     "up": "rekindleunderground:block/granite_stone",
     "down": "rekindleunderground:block/granite_stone",
     "north": "rekindleunderground:block/granite_stone",
