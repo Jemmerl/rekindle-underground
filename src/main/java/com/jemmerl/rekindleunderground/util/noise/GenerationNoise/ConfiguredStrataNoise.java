@@ -94,8 +94,8 @@ public class ConfiguredStrataNoise {
 
         // Apply regional seed shift
         int shiftedSeed = ConfiguredRegionNoise.getRegionShiftedSeed(x, y, z);
-        yWarpNoise.SetSeed(shiftedSeed + 1000);
-        yTiltNoise.SetSeed(shiftedSeed - 15000);
+        yWarpNoise.SetSeed(shiftedSeed + 1340);
+        yTiltNoise.SetSeed(shiftedSeed - 15605);
         strataNoise.SetSeed(shiftedSeed);
 
         // Bound input variables
@@ -107,7 +107,7 @@ public class ConfiguredStrataNoise {
 
         // Applies tile and then warp to the layers
         // If an orogeny region (mountainous or once was), then increase by y value
-        int layerShiftedY = y + (int)(tilt * 200f * yTiltNoise.GetNoise(x / 30f, z / 30f));
+        int layerShiftedY = y + (int)((tilt * tilt * tilt / 30) * yTiltNoise.GetNoise(x / 30f, z / 30f));
         if (orogeny) {
             float mappedY = UtilMethods.remap((float)y, new float[]{0,256}, new float[]{0.5f,3f});
             layerShiftedY += (int)(mappedY * warp * 0.3f * yWarpNoise.GetNoise(x * 15, z * 15));
@@ -119,7 +119,7 @@ public class ConfiguredStrataNoise {
         int faultShiftedY = layerShiftedY + (int)((fault / 2f) * stoneFaultNoise(x, y, z));
 
         // Tilting the layers shrinks layer height, tilt value is used here to counteract this effect
-        return strataNoise.GetNoise(x * 15f * curvature, faultShiftedY * ((400.0f - (tilt * 2f)) * 0.75f), z * 15f * curvature);
+        return strataNoise.GetNoise(x * 15f * curvature, faultShiftedY * ((400.0f - (tilt * 3f)) * 0.75f), z * 15f * curvature);
     }
 
 
@@ -160,9 +160,11 @@ public class ConfiguredStrataNoise {
         // // FastNoiseLite configuration for adjustable strata tilting noise
         if (yTiltNoise == null) {
             yTiltNoise = new FastNoiseLite((int)(WORLD_SEED));
-            yTiltNoise.SetNoiseType(FastNoiseLite.NoiseType.ValueCubic);
+            yTiltNoise.SetNoiseType(FastNoiseLite.NoiseType.Cellular);
+            yTiltNoise.SetCellularDistanceFunction(FastNoiseLite.CellularDistanceFunction.Hybrid);
+            yTiltNoise.SetCellularReturnType(FastNoiseLite.CellularReturnType.Distance2);
             yTiltNoise.SetFractalType(FastNoiseLite.FractalType.None);
-            yTiltNoise.SetFrequency(0.005f);
+            yTiltNoise.SetFrequency(0.002f);
         }
 
         // FastNoiseLite configuration for inserted strata

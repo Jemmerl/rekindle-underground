@@ -14,7 +14,6 @@ public class ConfiguredRegionNoise {
     private static final int REGION_SIZE = RKUndergroundConfig.COMMON.regionSize.get();
     private static final double REGIONAL_VARIATION = RKUndergroundConfig.COMMON.regionVariation.get();
     private static final int FAULT_SIZE = RKUndergroundConfig.COMMON.faultSize.get();
-    private static final double FAULT_VARIATION = RKUndergroundConfig.COMMON.faultVariation.get();
 
     ////////////////////////////////////////////////////////////
     /////            Noise Generators and Tools            /////
