@@ -7,7 +7,6 @@ public class ConfiguredRegionNoise {
 
     private static FastNoiseLite regionNoise;
     private static FastNoiseLite faultNoise;
-    private static FastNoiseLite strataNoise;
 
     private static long WORLD_SEED;
 
@@ -16,12 +15,10 @@ public class ConfiguredRegionNoise {
     private static final double REGIONAL_VARIATION = RKUndergroundConfig.COMMON.regionVariation.get();
     private static final int FAULT_SIZE = RKUndergroundConfig.COMMON.faultSize.get();
     private static final double FAULT_VARIATION = RKUndergroundConfig.COMMON.faultVariation.get();
-    private static final double STRATA_DEPTH = 0.6f;
-        //0.60; 0.00 - 1.00 scale; 0 is very thin, 1 is essentially solid regions
 
-    //////////////////////////////////////////////////
-    /////            Noise Generators            /////
-    //////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////
+    /////            Noise Generators and Tools            /////
+    ////////////////////////////////////////////////////////////
 
     // Returns the cell value for strata variation regions
     public static float stoneRegionNoise(int x, int y, int z) {
@@ -35,14 +32,10 @@ public class ConfiguredRegionNoise {
         return faultNoise.GetNoise(x, (y / 10f), z);
     }
 
-    // Returns the strata layer noise value for determining rock type NOTE: USE AS TEMPLATE, IS OUTDATED
-/*    public static float stoneStrataNoise(int x, int y, int z) {
-        int faultShiftedY = y + (int)((50 * FAULT_VARIATION) * stoneFaultNoise(x, y, z));
-        int shiftedSeed = (int)(WORLD_SEED + (stoneRegionNoise(x, y, z) * (10000 * REGIONAL_VARIATION)));
-        strataNoise.SetSeed(shiftedSeed);
-        return strataNoise.GetNoise(x * (15f * 1), faultShiftedY * (400.0f * (1f - (float)STRATA_DEPTH)), z * (15f * 1)); // include a strata size factor?
-    }*/
-
+    // Returns a shifted seed based on the region value and variation config
+    public static int getRegionShiftedSeed(int x, int y, int z) {
+        return (int)(WORLD_SEED + (stoneRegionNoise(x, y, z) * (10000 * REGIONAL_VARIATION)));
+    }
 
     ///////////////////////////////////////////////////////
     /////             Noise Configurations            /////
@@ -77,14 +70,6 @@ public class ConfiguredRegionNoise {
             faultNoise.SetCellularJitter(2f);
         }
 
-        // FastNoiseLite configuration for strata
-        if (strataNoise == null) {
-            strataNoise = new FastNoiseLite((int)(WORLD_SEED)+22493);
-            strataNoise.SetNoiseType(FastNoiseLite.NoiseType.Value);
-            strataNoise.SetRotationType3D(FastNoiseLite.RotationType3D.ImproveXZPlanes);
-            strataNoise.SetFractalType(FastNoiseLite.FractalType.None);
-            strataNoise.SetFrequency(0.0001f);
-        }
     }
 
 }
