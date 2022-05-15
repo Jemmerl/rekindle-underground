@@ -19,6 +19,7 @@ public enum StoneType implements IStringSerializable {
         this.name = name;
     }
 
+// TODO - Implement enum based registration like the rocks, use extra data to set hardness, resistance, stone type
 
 //    // Sedimentary
 //    CHALK("chalk", "sedimentary"),
@@ -26,6 +27,8 @@ public enum StoneType implements IStringSerializable {
 //    DOLOSTONE("dolostone", "sedimentary"),
 //    SHALE("shale", "sedimentary"),
 //    SANDSTONE("sandstone", "sedimentary"),
+//    RED_SANDSTONE("red_sandstone", "sedimentary"),
+//    GREYWACKE("greywacke", "sedimentary"),
 //    MUDSTONE("mudstone", "sedimentary"),
 //    ROCK_SALT("rock_salt", "sedimentary"),
 //    ROCK_GYPSUM("rock_gypsum", "sedimentary"),
@@ -55,7 +58,6 @@ public enum StoneType implements IStringSerializable {
 //    PHYLLITE("phyllite", "metamorphic"),
 //    GNEISS("gneiss", "metamorphic"),
 //    MARBLE("marble", "metamorphic"),
-//    SOAPSTONE("soapstone", "metamorphic");
 //
 //    private final String name;
 //    private final String group;

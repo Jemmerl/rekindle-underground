@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "rekindleunderground:block/greywacke_stone",
+    "up": "rekindleunderground:block/greywacke_stone",
+    "down": "rekindleunderground:block/greywacke_stone",
+    "north": "rekindleunderground:block/greywacke_stone",
+    "south": "rekindleunderground:block/greywacke_stone",
+    "east": "rekindleunderground:block/greywacke_stone",
+    "west": "rekindleunderground:block/greywacke_stone"
+  }
+}

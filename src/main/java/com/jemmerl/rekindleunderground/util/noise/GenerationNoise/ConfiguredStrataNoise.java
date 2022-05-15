@@ -12,11 +12,23 @@ import static com.jemmerl.rekindleunderground.util.noise.GenerationNoise.Configu
 
 public class ConfiguredStrataNoise {
 
+    // Configured noise
     private static FastNoiseLite strataNoise; // Used for general adjustable strata generation
     private static FastNoiseLite yWarpNoise; // Used to add warping to adjustable strata
     private static FastNoiseLite yTiltNoise; // Used to add slant to adjustable strata
-    private static FastNoiseLite insertedStrataNoise; // Used to determine the bounds of an inserted independent, wavy strata layer
+    private static FastNoiseLite smoothDividingNoise; // Used to determine the bounds of an inserted independent, wavy strata layer
     private static FastNoiseLite floodBasaltNoise; // Used to generate basalt/gabbro layers for flood basalts
+
+    // Selectable stone lists for strata generation
+    private static final Block[] SEDIMENTARY_SOIL = {ModBlocks.SHALE.get(), ModBlocks.MUDSTONE.get()};
+    private static final Block[] SEDIMENTARY_SANDY = {ModBlocks.SANDSTONE.get(), ModBlocks.RED_SANDSTONE.get(), ModBlocks.GREYWACKE.get()};
+    private static final Block[] SEDIMENTARY_CARBONATE = {ModBlocks.CHALK.get(), ModBlocks.LIMESTONE.get(), ModBlocks.DOLOSTONE.get()};
+    private static final Block[] SEDIMENTARY_EVAPORATE = {ModBlocks.ROCK_SALT.get(), ModBlocks.ROCK_GYPSUM.get(), ModBlocks.KERNITE.get(), ModBlocks.KERNITE.get()};
+    private static final Block[] EXTRUSIVE_IGNEOUS = {ModBlocks.RHYOLITE.get(), ModBlocks.SCORIA.get(), ModBlocks.DACITE.get(), ModBlocks.ANDESITE.get(), ModBlocks.BASALT.get()};
+    private static final Block[] METAMORPHIC = {ModBlocks.QUARTZITE.get(), ModBlocks.SCHIST.get(), ModBlocks.PHYLLITE.get(), ModBlocks.GNEISS.get(), ModBlocks.MARBLE.get()};
+
+    // TODO - add various hornfels for contact metamorphism
+
 
     private static long WORLD_SEED;
 
@@ -37,8 +49,30 @@ public class ConfiguredStrataNoise {
 
         BlockState blockState;
         switch (regionVal) {
-            case -5: // Flood Basalt
-                blockState = floodBasaltGen(x, y, z, false);
+            case -5: // Young Flood Basalt
+                blockState = youngFloodBasaltGen(x, y, z);
+                break;
+            case -4:
+                //
+                //break;
+            case -3:
+                //break;
+            case -2:
+                //break;
+            case -1:
+                //break;
+            case 0:
+                //break;
+            case 1:
+                //break;
+            case 2:
+                //break;
+            case 3:
+                //break;
+            case 4:
+                //break;
+            case 5: // Old Flood Basalt
+                blockState = oldFloodBasaltGen(x, y, z);
                 break;
 
             default: blockState = Blocks.IRON_BLOCK.getDefaultState();
@@ -52,16 +86,16 @@ public class ConfiguredStrataNoise {
     /////            Block Generators            /////
     //////////////////////////////////////////////////
 
-    // Gets the block state for a Flood Basalt region at the specific location
-    private static BlockState floodBasaltGen(int xPos, int yPos, int zPos, boolean faults) {
+    // The description indicates what layers the generator sets, and if they are always (F) or sometimes (F?) faulted
+
+    // Gets the block state for a new Flood Basalt region at the specific location (Flood - Diabase)
+    private static BlockState youngFloodBasaltGen(int xPos, int yPos, int zPos) {
         BlockState state;
         float noiseVal;
-        if (faults) {
-            yPos += (int)(10f * stoneFaultNoise(xPos, yPos, zPos));
-        }
-        if (yPos <= (11 + (int)(4 * insertedStrataNoise.GetNoise((xPos * 2), (yPos), (zPos * 2))))) { // Adds Diabase layer smoothly below y 10-16
+
+        if (yPos <= (11 + (4 * smoothDividingNoise.GetNoise((xPos * 2), (yPos), (zPos * 2))))) { // Adds Diabase layer smoothly below y 7-15
             state = ModBlocks.DIABASE.get().getDefaultState();
-        } else {
+        } else { // Adds flood basalt layer above
             noiseVal = floodBasaltNoise.GetNoise((xPos / 5f), (yPos * 2f), (zPos / 5f));
             if (noiseVal < -0.1f) {
                 state = ModBlocks.GABBRO.get().getDefaultState();
@@ -72,10 +106,66 @@ public class ConfiguredStrataNoise {
         return state;
     }
 
+    // Gets the block state for an old Flood Basalt region at the specific location (Sed - Flood (F) - Diabase)
+    private static BlockState oldFloodBasaltGen(int xPos, int yPos, int zPos) {
+        BlockState state;
+        float noiseVal;
+
+        int yFault = yPos + (int)(10f * stoneFaultNoise(xPos, yPos, zPos)); // Sets faulted y for older layers
+        if (yFault <= (8 + (4 * smoothDividingNoise.GetNoise((xPos * 2), (yFault), (zPos * 2))))) { // Adds Diabase layer smoothly below y 4-12
+            state = ModBlocks.DIABASE.get().getDefaultState();
+        } else if (yPos <= (55 + (10 * smoothDividingNoise.GetNoise((xPos * 3), (yPos), (zPos * 3))))) { // Adds flood basalt layer below y 45-65
+            noiseVal = floodBasaltNoise.GetNoise((xPos / 5f), (yPos * 2f), (zPos / 5f));
+            if (noiseVal < -0.1f) {
+                state = ModBlocks.GABBRO.get().getDefaultState();
+            } else {
+                state = ModBlocks.BASALT.get().getDefaultState();
+            }
+        } else { // Adds sedimentary strata above
+            noiseVal = genAdjustableLayers(xPos, yPos, zPos, 2f, 20, 0, 15, 0);
+            // todo cry
+        }
+        return state;
+    }
 
 
 
+    //////////////////////////////////////////////////
+    /////            Strata Templates            /////
+    //////////////////////////////////////////////////
 
+    /*
+     *  These are "plug and play" blocks for coding various regions
+     *  They have no function during operation, only for development work
+     */
+
+    // Generate fault line vertical shifts
+    /*
+    if (faults) {
+        yPos += (int)([MAX_DISPLACEMENT] * stoneFaultNoise(xPos, yPos, zPos));
+    }
+    */
+
+    // Generate multiple different strata sections. Multiply positions to conpress, divide to stretch
+    // Add or remove "else if" statements to generate different amounts of strata
+    /*
+    if (yPos <= ([MEDIAN_HEIGHT] + ([MAX_DEVIATION] * smoothDividingNoise.GetNoise((xPos * [HORIZ_TRANSFORM]), (yPos * [VERT_TRANSFORM]), (zPos * [HORIZ_TRANSFORM]))))) {
+        // GENERATE BOTTOM STRATA
+    } else if (yPos <= ([MEDIAN_HEIGHT] + ([MAX_DEVIATION] * smoothDividingNoise.GetNoise((xPos * [HORIZ_TRANSFORM]), (yPos * [VERT_TRANSFORM]), (zPos * [HORIZ_TRANSFORM]))))) {
+        // GENERATE MIDDLE STRATA
+    } else {
+        // GENERATE TOP STRATA
+    }
+
+    // Just the vertical boundary condition
+    // (yPos <= ([MEDIAN_HEIGHT] + ([MAX_DEVIATION] * smoothDividingNoise.GetNoise((xPos * [HORIZ_TRANSFORM]), (yPos * [VERT_TRANSFORM]), (zPos * [HORIZ_TRANSFORM])))))
+
+    */
+
+    // Replace the (yPos <=) in a strata separation layer to angle the division. Tilt value should be [20, 100] for optimal results
+    /*
+        ((yPos + (int)(([TILT] * [TILT] * [TILT] / 30) * yTiltNoise.GetNoise(x / 30f, z / 30f)))
+    */
 
 
     //////////////////////////////////////////////////
@@ -87,49 +177,35 @@ public class ConfiguredStrataNoise {
     *  Else, operations will be done in args or where called.
     */
 
-    private static float genAdjustableLayers(int x, int y, int z, float curvature, int warp, int tilt, int fault, boolean orogeny) {
+    private static float genAdjustableLayers(int x, int y, int z, float curvature, int thickness, int warp, int tilt, int fault) {
         // Warp determines how "buckled" the layers are, tilt determines what angle the strata form at.
         // Orogeny is if the region is in (or what was once) a mountain biome; means warp is
         // an increasing function of y (more y, more warp)
 
         // Apply regional seed shift
         int shiftedSeed = ConfiguredRegionNoise.getRegionShiftedSeed(x, y, z);
-        yWarpNoise.SetSeed(shiftedSeed + 1340);
+        yWarpNoise.SetSeed(shiftedSeed + 13408);
         yTiltNoise.SetSeed(shiftedSeed - 15605);
         strataNoise.SetSeed(shiftedSeed);
 
         // Bound input variables
         // curvature:(0,5]; all others:[0-100]
+        // Regarding curvature -> 0.01f is flat, 0.05f-0.3f is slight, 0.5f-1f is normal, >1f is increasingly squished
         curvature = ((curvature <= 0) || (curvature > 5f)) ? 1f : curvature;
+        thickness = ((thickness < 0) || (thickness > 100)) ? 25 : thickness;
         warp = ((warp < 0) || (warp > 100)) ? 10 : warp;
-        tilt = ((tilt < 0) || (tilt > 100)) ? 10 : tilt;
+        tilt = ((tilt < 0) || (tilt > 100)) ? 30 : tilt;
         fault = ((fault < 0) || (fault > 100)) ? 20 : fault;
 
         // Applies tile and then warp to the layers
-        // If an orogeny region (mountainous or once was), then increase by y value
-        int layerShiftedY = y + (int)((tilt * tilt * tilt / 30) * yTiltNoise.GetNoise(x / 30f, z / 30f));
-        if (orogeny) {
-            float mappedY = UtilMethods.remap((float)y, new float[]{0,256}, new float[]{0.5f,3f});
-            layerShiftedY += (int)(mappedY * warp * 0.3f * yWarpNoise.GetNoise(x * 15, z * 15));
-        } else {
-            layerShiftedY += (int)(warp * 0.3f * yWarpNoise.GetNoise(x * 15, z * 15));
-        }
-
+        int shiftedY = y + (int)((tilt * tilt * tilt / 30) * yTiltNoise.GetNoise(x / 30f, z / 30f));
+        shiftedY += (int)(warp * 0.3f * yWarpNoise.GetNoise(x * 15, z * 15));
         // Applies fault vertical shift
-        int faultShiftedY = layerShiftedY + (int)((fault / 2f) * stoneFaultNoise(x, y, z));
+        shiftedY += (int)((fault / 2f) * stoneFaultNoise(x, y, z));
 
-        // Tilting the layers shrinks layer height, tilt value is used here to counteract this effect
-        return strataNoise.GetNoise(x * 15f * curvature, faultShiftedY * ((400.0f - (tilt * 3f)) * 0.75f), z * 15f * curvature);
+        // Note: Tilting the layers compresses layer height and curving them thickens them, tilt and curvature values are used here to partially offset these effects
+        return strataNoise.GetNoise(x * 15f * curvature, shiftedY * ((350f - (tilt * 3f)) * (1.01f - (thickness / 100f))) * ((curvature / 5f) + 1), z * 15f * curvature);
     }
-
-
-    // Returns the strata layer noise value for determining rock type NOTE: USE AS TEMPLATE/EXAMPLE -- DEPRECATED
-/*    public static float stoneStrataNoise(int x, int y, int z) {
-        int faultShiftedY = y + (int)((50 * FAULT_VARIATION) * stoneFaultNoise(x, y, z));
-        int shiftedSeed = (int)(WORLD_SEED + (stoneRegionNoise(x, y, z) * (10000 * REGIONAL_VARIATION)));
-        strataNoise.SetSeed(shiftedSeed);
-        return strataNoise.GetNoise(x * (15f * 1), faultShiftedY * (400.0f * (1f - (float)STRATA_DEPTH)), z * (15f * 1)); // include a strata size factor?
-    }*/
 
 
     ///////////////////////////////////////////////////////
@@ -168,11 +244,11 @@ public class ConfiguredStrataNoise {
         }
 
         // FastNoiseLite configuration for inserted strata
-        if (insertedStrataNoise == null) {
-            insertedStrataNoise = new FastNoiseLite((int)(WORLD_SEED)-22493);
-            insertedStrataNoise.SetNoiseType(FastNoiseLite.NoiseType.Perlin);
-            insertedStrataNoise.SetRotationType3D(FastNoiseLite.RotationType3D.ImproveXZPlanes);
-            insertedStrataNoise.SetFrequency(0.04f);
+        if (smoothDividingNoise == null) {
+            smoothDividingNoise = new FastNoiseLite((int)(WORLD_SEED)-22493);
+            smoothDividingNoise.SetNoiseType(FastNoiseLite.NoiseType.Perlin);
+            smoothDividingNoise.SetRotationType3D(FastNoiseLite.RotationType3D.ImproveXZPlanes);
+            smoothDividingNoise.SetFrequency(0.04f);
         }
 
         // FastNoiseLite configuration for flood basalts

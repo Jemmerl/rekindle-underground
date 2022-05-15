@@ -57,6 +57,14 @@ public class ModBlocks {
             () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
                     .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.SEDIMENTARY), 64);
 
+    public static final RegistryObject<Block> RED_SANDSTONE = registerBlock("red_sandstone_stone",
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.SEDIMENTARY), 64);
+
+    public static final RegistryObject<Block> GREYWACKE = registerBlock("greywacke_stone",
+            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.SEDIMENTARY), 64);
+
     public static final RegistryObject<Block> MUDSTONE = registerBlock("mudstone_stone",
             () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
                     .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.SEDIMENTARY), 64);
@@ -152,10 +160,6 @@ public class ModBlocks {
             () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
                     .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.METAMORPHIC), 64);
 
-    public static final RegistryObject<Block> SOAPSTONE = registerBlock("soapstone_stone",
-            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool(), StoneType.METAMORPHIC), 64);
-
     /////////////////////
     //     COBBLES     //
     /////////////////////
@@ -178,6 +182,14 @@ public class ModBlocks {
                     .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
 
     public static final RegistryObject<Block> SANDSTONE_CS = registerBlock("sandstone_cobblestone",
+            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+
+    public static final RegistryObject<Block> RED_SANDSTONE_CS = registerBlock("red_sandstone_cobblestone",
+            () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
+                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
+
+    public static final RegistryObject<Block> GREYWACKE_CS = registerBlock("greywacke_cobblestone",
             () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
                     .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()), 64);
 
