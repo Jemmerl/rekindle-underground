@@ -1,12 +1,16 @@
 package com.jemmerl.rekindleunderground.util.noise.GenerationNoise;
 
-import com.jemmerl.rekindleunderground.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.block.ModBlocks;
-import com.jemmerl.rekindleunderground.util.UtilMethods;
 import com.jemmerl.rekindleunderground.util.noise.FastNoiseLite;
+import com.jemmerl.rekindleunderground.world.feature.stonegenutil.BlockPicker;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import static com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredRegionNoise.stoneFaultNoise;
 
@@ -18,31 +22,31 @@ public class ConfiguredStrataNoise {
     private static FastNoiseLite yTiltNoise; // Used to add slant to adjustable strata
     private static FastNoiseLite smoothDividingNoise; // Used to determine the bounds of an inserted independent, wavy strata layer
     private static FastNoiseLite floodBasaltNoise; // Used to generate basalt/gabbro layers for flood basalts
-
-    // Selectable stone lists for strata generation
-    private static final Block[] SEDIMENTARY_SOIL = {ModBlocks.SHALE.get(), ModBlocks.MUDSTONE.get()};
-    private static final Block[] SEDIMENTARY_SANDY = {ModBlocks.SANDSTONE.get(), ModBlocks.RED_SANDSTONE.get(), ModBlocks.GREYWACKE.get()};
-    private static final Block[] SEDIMENTARY_CARBONATE = {ModBlocks.CHALK.get(), ModBlocks.LIMESTONE.get(), ModBlocks.DOLOSTONE.get()};
-    private static final Block[] SEDIMENTARY_EVAPORATE = {ModBlocks.ROCK_SALT.get(), ModBlocks.ROCK_GYPSUM.get(), ModBlocks.KERNITE.get(), ModBlocks.KERNITE.get()};
-    private static final Block[] EXTRUSIVE_IGNEOUS = {ModBlocks.RHYOLITE.get(), ModBlocks.SCORIA.get(), ModBlocks.DACITE.get(), ModBlocks.ANDESITE.get(), ModBlocks.BASALT.get()};
-    private static final Block[] METAMORPHIC = {ModBlocks.QUARTZITE.get(), ModBlocks.SCHIST.get(), ModBlocks.PHYLLITE.get(), ModBlocks.GNEISS.get(), ModBlocks.MARBLE.get()};
-
     // TODO - add various hornfels for contact metamorphism
 
-
     private static long WORLD_SEED;
+
+    // These variables are held to speed up load times. If the region value is the same,
+    // then these values will just be re-used instead of
+    private static float cachedRegionVal = 0f;
+    private static List<BlockState> cachedBlockStateList = Collections.emptyList();
+    private static Boolean useCached = false;
 
     ////////////////////////////////////////////////
     /////            Region Handler            /////
     ////////////////////////////////////////////////
 
     public static BlockState getStoneStrataBlock(int x, int y, int z) {
-        //int regionVal = (int)(ConfiguredRegionNoise.stoneRegionNoise(x, y, z) * 5); //TODO 5 gives 11 region types possible rn (-5 to 5)
+        float regionNoise = ConfiguredRegionNoise.stoneRegionNoise(x, y, z);
+        //int regionVal = (int)(regionNoise * 5); //TODO 5 gives 11 region types possible rn (-5 to 5)
+        //useCached = (cachedRegionVal == regionVal);
         int regionVal;
-        if (ConfiguredRegionNoise.stoneRegionNoise(x, y, z) < 0) { // TEMP
+
+        // TEMP
+        if (ConfiguredRegionNoise.stoneRegionNoise(x, y, z) < 0) {
             regionVal = -5;
         } else {
-            regionVal = 0;
+            regionVal = 5;
         }
 
         // TODO re-implement fault shifts
@@ -72,7 +76,7 @@ public class ConfiguredStrataNoise {
             case 4:
                 //break;
             case 5: // Old Flood Basalt
-                blockState = oldFloodBasaltGen(x, y, z);
+                blockState = oldFloodBasaltGen(x, y, z, regionNoise);
                 break;
 
             default: blockState = Blocks.IRON_BLOCK.getDefaultState();
@@ -93,7 +97,7 @@ public class ConfiguredStrataNoise {
         BlockState state;
         float noiseVal;
 
-        if (yPos <= (11 + (4 * smoothDividingNoise.GetNoise((xPos * 2), (yPos), (zPos * 2))))) { // Adds Diabase layer smoothly below y 7-15
+        if (yPos <= (9 + (4 * smoothDividingNoise.GetNoise((xPos * 2), (yPos), (zPos * 2))))) { // Adds Diabase layer smoothly below y 7-15
             state = ModBlocks.DIABASE.get().getDefaultState();
         } else { // Adds flood basalt layer above
             noiseVal = floodBasaltNoise.GetNoise((xPos / 5f), (yPos * 2f), (zPos / 5f));
@@ -107,12 +111,12 @@ public class ConfiguredStrataNoise {
     }
 
     // Gets the block state for an old Flood Basalt region at the specific location (Sed - Flood (F) - Diabase)
-    private static BlockState oldFloodBasaltGen(int xPos, int yPos, int zPos) {
+    private static BlockState oldFloodBasaltGen(int xPos, int yPos, int zPos, float regionNoise) {
         BlockState state;
         float noiseVal;
 
         int yFault = yPos + (int)(10f * stoneFaultNoise(xPos, yPos, zPos)); // Sets faulted y for older layers
-        if (yFault <= (8 + (4 * smoothDividingNoise.GetNoise((xPos * 2), (yFault), (zPos * 2))))) { // Adds Diabase layer smoothly below y 4-12
+        if (yFault <= (9 + (3 * smoothDividingNoise.GetNoise((xPos * 2), (yFault), (zPos * 2))))) { // Adds Diabase layer smoothly below y 4-12
             state = ModBlocks.DIABASE.get().getDefaultState();
         } else if (yPos <= (55 + (10 * smoothDividingNoise.GetNoise((xPos * 3), (yPos), (zPos * 3))))) { // Adds flood basalt layer below y 45-65
             noiseVal = floodBasaltNoise.GetNoise((xPos / 5f), (yPos * 2f), (zPos / 5f));
@@ -123,7 +127,11 @@ public class ConfiguredStrataNoise {
             }
         } else { // Adds sedimentary strata above
             noiseVal = genAdjustableLayers(xPos, yPos, zPos, 2f, 20, 0, 15, 0);
-            // todo cry
+            // Put the names of desired block presets into "blockListNames", and any individual blocks wanted into "blocks"
+            List<String> blockListNames = new ArrayList<>(Arrays.asList("sedimentary_soil", "sedimentary_sandy", "sedimentary_carbonate"));
+            List<Block> blocks = Collections.emptyList();
+            List<BlockState> stateList = (useCached) ? cachedBlockStateList : (cachedBlockStateList = BlockPicker.buildStateList(blockListNames, blocks));
+            state = BlockPicker.selectBlock(stateList, regionNoise, noiseVal);
         }
         return state;
     }
