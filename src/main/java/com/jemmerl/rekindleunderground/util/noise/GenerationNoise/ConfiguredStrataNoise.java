@@ -31,6 +31,9 @@ public class ConfiguredStrataNoise {
     private static float cachedRegionVal = 0f;
     private static List<BlockState> cachedBlockStateList = Collections.emptyList();
     private static Boolean useCached = false;
+    private static int cachedRegionRandom1 = 0;
+    private static int cachedRegionRandom2 = 0;
+    private static int cachedRegionRandom3 = 0;
 
     ////////////////////////////////////////////////
     /////            Region Handler            /////
@@ -40,6 +43,11 @@ public class ConfiguredStrataNoise {
         float regionNoise = ConfiguredRegionNoise.stoneRegionNoise(x, y, z);
         //int regionVal = (int)(regionNoise * 5); //TODO 5 gives 11 region types possible rn (-5 to 5)
         //useCached = (cachedRegionVal == regionVal);
+        if (!useCached) {
+            cachedRegionRandom1 = 1;
+            cachedRegionRandom2 = 1;
+            cachedRegionRandom3 = 1;
+        }
         int regionVal;
 
         // TEMP
@@ -126,7 +134,7 @@ public class ConfiguredStrataNoise {
                 state = ModBlocks.BASALT.get().getDefaultState();
             }
         } else { // Adds sedimentary strata above
-            noiseVal = genAdjustableLayers(xPos, yPos, zPos, 2f, 20, 0, 15, 0);
+            noiseVal = genAdjustableLayers(xPos, yPos, zPos, 1.5f, 20, 10, 30, 0);
             // Put the names of desired block presets into "blockListNames", and any individual blocks wanted into "blocks"
             List<String> blockListNames = new ArrayList<>(Arrays.asList("sedimentary_soil", "sedimentary_sandy", "sedimentary_carbonate"));
             List<Block> blocks = Collections.emptyList();
@@ -146,6 +154,19 @@ public class ConfiguredStrataNoise {
      *  These are "plug and play" blocks for coding various regions
      *  They have no function during operation, only for development work
      */
+
+    //////////
+    /*
+
+
+     */
+
+
+    //////////
+
+
+
+
 
     // Generate fault line vertical shifts
     /*

@@ -33,7 +33,7 @@ public class ConfiguredRegionNoise {
 
     // Returns a shifted seed based on the region value and variation config
     public static int getRegionShiftedSeed(int x, int y, int z) {
-        return (int)(WORLD_SEED + (stoneRegionNoise(x, y, z) * (10000 * REGIONAL_VARIATION)));
+        return (int)(WORLD_SEED + (stoneRegionNoise(x, y, z) * (10001 * REGIONAL_VARIATION)));
     }
 
     ///////////////////////////////////////////////////////
