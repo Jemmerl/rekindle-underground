@@ -46,24 +46,45 @@ public class BlockPicker {
             .put("metamorphic", METAMORPHIC)
             .build();
 
-    public static BlockState selectBlock(List<BlockState> stateList, float regionVal, float strataVal) {
-        int randSeed = (int)(regionVal * 10000); // The current region will always have the same seed
-        Collections.shuffle(stateList, new Random(randSeed)); // Thus, the current region will always have the same shuffled list
+    // TODO Rework as enums
+
+    // Picks a block to use for a layer given the options in form of a list of blockstates
+    public static BlockState selectBlock(List<BlockState> stateList, float regionNoise, float strataVal) {
+        // The current region will always have the same seed
+        // Thus, the current region will always have the same shuffled list
+        Collections.shuffle(stateList, new Random((int)(regionNoise * 10000)));
         return stateList.get((int)(UtilMethods.remap(strataVal, new float[]{-1f, 1f}, new float[]{0, stateList.size()})));
     }
 
+    // Combines selected block presets and individual misc. blocks into one list of blockstates
     public static List<BlockState> buildStateList(List<String> blockListNames, List<Block> blocks) {
         List<BlockState> stateList = new ArrayList<>();
 
-        // Add block lists to possible strata
+        // Add block presets to possible blocks
         for (String name : blockListNames) {
             BLOCK_LISTS.get(name).forEach((val) -> stateList.add(val.getDefaultState()));
         }
-        // Add specific blocks to possible strata
+        // Add specific blocks to possible blocks
         for (Block i : blocks) {
             stateList.add(i.getDefaultState());
         }
         return stateList;
+    }
+
+    // Generates a list of blockstates from randomly selected block presets and individual misc. blocks
+    public static List<BlockState> getRandomPresets(float regionNoise, int numPick, List<String> blockListNames, List<Block> blocks) {
+        // The current region will always have the same seed
+        // Thus, the current region will always have the same shuffled list
+        Collections.shuffle(blockListNames, new Random((int)(regionNoise * -9050)));
+
+        // Removes the difference between the given options and requested options and returns the remaining
+        // Same result as selecting randomly and building a new list, but better
+        // Has (some) built in error handling; if requesting >= given options, naturally returns all options
+        for (int i = (blockListNames.size() - numPick); i > 0; i--) {
+            blockListNames.remove(0);
+        }
+
+        return buildStateList(blockListNames, blocks);
     }
 
 
