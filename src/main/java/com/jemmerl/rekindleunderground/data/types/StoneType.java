@@ -1,6 +1,5 @@
 package com.jemmerl.rekindleunderground.data.types;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import net.minecraft.util.IStringSerializable;
 
 import java.util.HashMap;

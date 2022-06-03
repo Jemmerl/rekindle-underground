@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.util.Map;
 
-import static com.jemmerl.rekindleunderground.RKUndergroundFeatures.STONE_CONFIG;
+import static com.jemmerl.rekindleunderground.world.RKUndergroundFeatures.STONE_CONFIG;
 
 // Credit goes to Unearthed and lilypuree for this class; edited to fit needs
 // https://github.com/lilypuree/UnEarthed/tree/Forge-1.16.X

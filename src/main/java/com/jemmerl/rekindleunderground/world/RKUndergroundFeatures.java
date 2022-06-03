@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground;
+package com.jemmerl.rekindleunderground.world;
 
 import com.jemmerl.rekindleunderground.world.feature.StoneGeneration;
 import net.minecraft.world.gen.feature.ConfiguredFeature;

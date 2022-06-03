@@ -3,7 +3,7 @@ package com.jemmerl.rekindleunderground.mixin.server;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.gson.JsonElement;
-import com.jemmerl.rekindleunderground.RKUndergroundFeatures;
+import com.jemmerl.rekindleunderground.world.RKUndergroundFeatures;
 import com.mojang.authlib.GameProfileRepository;
 import com.mojang.authlib.minecraft.MinecraftSessionService;
 import com.mojang.datafixers.DataFixer;

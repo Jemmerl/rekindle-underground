@@ -1,6 +1,7 @@
 package com.jemmerl.rekindleunderground.util.noise.GenerationNoise;
 
 import com.jemmerl.rekindleunderground.block.ModBlocks;
+import com.jemmerl.rekindleunderground.data.types.DefaultSets;
 import com.jemmerl.rekindleunderground.util.noise.FastNoiseLite;
 import com.jemmerl.rekindleunderground.world.feature.stonegenutil.BlockPicker;
 import net.minecraft.block.Block;
@@ -23,13 +24,16 @@ public class ConfiguredStrataNoise {
 
     private static long WORLD_SEED;
 
+    // Load the block picker for this world
+    private static final BlockPicker blockPicker = new BlockPicker();
+
     // These variables are held to speed up generation times. If the region value is the same,
     // then these values will just be used instead of re-calculating them
     private static Boolean useCached = false;
-    private static float cachedRegionNoise = 0f;
-    private static float cachedRegionRandom1 = 0;
-    private static float cachedRegionRandom2 = 0;
-    private static float cachedRegionRandom3 = 0;
+    private static float cachedRegionNoise = 100f;
+    private static float cachedRegionRandom1 = 0f;
+    private static float cachedRegionRandom2 = 0f;
+    private static float cachedRegionRandom3 = 0f;
     private static List<BlockState> cachedBlockStateList1 = Collections.emptyList();
     private static List<BlockState> cachedBlockStateList2 = Collections.emptyList();
     private static List<BlockState> cachedBlockStateList3 = Collections.emptyList();
@@ -42,10 +46,13 @@ public class ConfiguredStrataNoise {
         float regionNoise = ConfiguredRegionNoise.stoneRegionNoise(x, y, z);
         int regionVal = (int)(regionNoise * 3); //TODO gives region types possible rn (-2 to 2)
 
-        useCached = (cachedRegionNoise == regionNoise); // Use already previously generated values if in the same region
+        // Use already previously generated values if in the same region
+        useCached = (cachedRegionNoise == regionNoise);
+
         // Generate new random values if in a different region. Since the random is seeded by the region whenever
         // a new one is entered, re-entering a previous region will generate (and cache) the same random values again
         if (!useCached) {
+            cachedRegionNoise = regionNoise;
             Random random = new Random((int)(regionNoise * 15003));
             cachedRegionRandom1 = random.nextFloat();
             cachedRegionRandom2 = random.nextFloat();
@@ -58,37 +65,35 @@ public class ConfiguredStrataNoise {
                 blockState = youngFloodBasaltGen(x, y, z);
                 break;
             case -1: // Three layers
-                blockState = threeLayerGeneration(x, y, z, regionNoise);
-                break;
+                  //blockState = twoLayerGeneration(x, y, z, regionNoise);
+//                  blockState = oneLayerGeneration(x, y, z, regionNoise);
+//                  break;
             case 1: // One Layer
-                blockState = oneLayerGeneration(x, y, z, regionNoise);
+                blockState = twoLayerGeneration(x, y, z, regionNoise);
                 break;
             case 2: // Old Flood Basalt
                 blockState = oldFloodBasaltGen(x, y, z, regionNoise);
                 break;
             default: // Two Layer (Case 0 and uncaught ints)
-                blockState = twoLayerGeneration(x, y, z, regionNoise);
+                blockState = oneLayerGeneration(x, y, z, regionNoise);
                 break;
         }
         return blockState;
     }
 
-    // TODO make statelist generator function??
-    // Would be cleaner just passing those random values
-    // versus calling it for every single layer
-
-    // TODO randomize statelist generation... further
 
     // Smooth or angled nonconformity? -> if (rand3 < 0.5) then angled
 
     // TODO Have faults be RNG, but do it globally across all layer (SAME WITH WARP)
 
-    // TODO random block picker should use the BLOCKS of the inputted list, not the list itself
-
     // TODO regions should be larger
 
     // TODO use 3 layer ONLY FOR HIGH ELEVATION, I.e. 3rd layer should only be visible with mountains
     // it is too cramped when all below y60
+
+    // TODO Make functions for y-dividing noise, pass median y and range
+
+    // TODO redo layer variable randomization. there must be a nicer way
 
 
     //////////////////////////////////////////////////
@@ -97,7 +102,7 @@ public class ConfiguredStrataNoise {
 
     // The description indicates what layers the generator sets, and if they are always (F) or sometimes (F?) faulted
 
-    // Gets the block state for a new Flood Basalt region at the specific location (Flood - Diabase)
+    // Young Flood Basalt region generator
     private static BlockState youngFloodBasaltGen(int xPos, int yPos, int zPos) {
         BlockState state;
         float noiseVal;
@@ -115,10 +120,16 @@ public class ConfiguredStrataNoise {
         return state;
     }
 
-    // Gets the block state for an old Flood Basalt region at the specific location (Sed - Flood (F) - Diabase)
+    // Old Flood Basalt region generator (surface layer of sedimentary rocks)
     private static BlockState oldFloodBasaltGen(int xPos, int yPos, int zPos, float regionNoise) {
         BlockState state;
         float noiseVal;
+
+        // Setup sedimentary layer
+        if (!useCached) {
+            List<String> blockList = DefaultSets.getAllBlocks(DefaultSets.SED_SOIL, DefaultSets.SED_SANDY);
+            cachedBlockStateList1 = BlockPicker.buildStateList(blockList);
+        }
 
         // Sets faulted y for the older flood basalt
         // This is done independently, unlike adjustable layers, due to the unique generation
@@ -133,33 +144,30 @@ public class ConfiguredStrataNoise {
                 state = ModBlocks.BASALT.get().getDefaultState();
             }
         } else { // Adds sedimentary strata above
+            // TODO rewrite this section, needs to use older methods and make a sedimentary rock layer
             noiseVal = genAdjustableLayers(xPos, yPos, zPos, 1.5f, 20, 10, 30, 0, 1300);
-            // Put the names of desired block presets into "blockListNames", and any individual blocks wanted into "blocks"
-            List<String> blockListNames = new ArrayList<>(Arrays.asList("sedimentary_soil", "sedimentary_sandy", "sedimentary_carbonate"));
-            List<Block> blocks = Collections.emptyList();
-            List<BlockState> stateList = (useCached) ? cachedBlockStateList1 : (cachedBlockStateList1 = BlockPicker.getRandomPresets(regionNoise, 2, blockListNames, blocks));
-            state = BlockPicker.selectBlock(stateList, regionNoise, noiseVal);
+            state = BlockPicker.selectBlock(cachedBlockStateList1, regionNoise, noiseVal);
         }
         return state;
     }
 
-    // One layer generator
+    // One layer region generator
     private static BlockState oneLayerGeneration(int xPos, int yPos, int zPos, float regionNoise) {
         // Setup only layer
-        List<String> blockListNames = new ArrayList<>(Arrays.asList("sedimentary_soil", "sedimentary_sandy", "sedimentary_carbonate"));
-        List<Block> blocks = Collections.emptyList();
-        List<BlockState> stateList = (useCached) ? cachedBlockStateList1 : (cachedBlockStateList1 = BlockPicker.getRandomPresets(regionNoise, 2, blockListNames, blocks));
+        if (!useCached) {
+            cachedBlockStateList1 = blockPicker.getBlockStateList(blockPicker.getRandomPresetName(regionNoise, -1902));
+        }
 
         int thickness = (int)(20 * cachedRegionRandom1 + 45 * cachedRegionRandom2 + 25 * cachedRegionRandom3 + 10);
         int warp = (int)(25 * cachedRegionRandom1 + 25 * cachedRegionRandom2 + 25 * cachedRegionRandom3);
         int tilt = (int)(20 * cachedRegionRandom1 + 45 * cachedRegionRandom2 + 25 * cachedRegionRandom3 + 10);
         float noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f, thickness, warp, tilt, 20, -13370);
 
-        return BlockPicker.selectBlock(stateList, regionNoise, noiseVal);
+        return BlockPicker.selectBlock(cachedBlockStateList1, regionNoise, noiseVal);
     }
 
 
-    // Two layer generator
+    // Two layer region generator
     private static BlockState twoLayerGeneration(int xPos, int yPos, int zPos, float regionNoise) {
         BlockState state;
         List<String> blockListNames;
@@ -170,83 +178,77 @@ public class ConfiguredStrataNoise {
         int warp;
         int tilt;
 
-        // Setup bottom layer
-        blockListNames = new ArrayList<>(Arrays.asList("extrusive_igneous_main", "extrusive_igneous_aux"));
-        blocks = Collections.emptyList();
-        List<BlockState> stateList2 = (useCached) ? cachedBlockStateList2 : (cachedBlockStateList2 = BlockPicker.getRandomPresets(regionNoise, 2, blockListNames, blocks));
+        // Refresh cached settings if different region
+        if (!useCached) {
+            // Setup bottom layer
+            cachedBlockStateList2 = blockPicker.getBlockStateList(blockPicker.getRandomPresetName(regionNoise, 2902));
 
-        // Setup top layer
-        blockListNames = new ArrayList<>(Arrays.asList("sedimentary_soil", "sedimentary_sandy", "sedimentary_carbonate"));
-        blocks = Collections.emptyList();
-        List<BlockState> stateList1 = (useCached) ? cachedBlockStateList1 : (cachedBlockStateList1 = BlockPicker.getRandomPresets(regionNoise, 2, blockListNames, blocks));
+            // Setup top layer
+            cachedBlockStateList1 = blockPicker.getBlockStateList(blockPicker.getRandomPresetName(regionNoise, -6110), 2);
+        }
 
-        if (yPos < 35) { // TODO TEMP
+        if (yPos < 35) { // BOTTOM LAYER // TODO TEMP DIVISION
             thickness = (int)(20 * cachedRegionRandom1 + 45 * cachedRegionRandom2 + 25 * cachedRegionRandom3 + 10);
             warp = (int)(25 * cachedRegionRandom1 + 25 * cachedRegionRandom2 + 25 * cachedRegionRandom3);
             tilt = (int)(20 * cachedRegionRandom1 + 45 * cachedRegionRandom2 + 25 * cachedRegionRandom3 + 10);
 
             noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f, thickness, warp, tilt, 20, 86753);
-            state = BlockPicker.selectBlock(stateList2, regionNoise, noiseVal);
-        } else {
+            state = BlockPicker.selectBlock(cachedBlockStateList2, regionNoise, noiseVal);
+        } else { // TOP LAYER
             thickness = (int)(20 * cachedRegionRandom3 + 45 * cachedRegionRandom1 + 25 * cachedRegionRandom2 + 10);
             warp = (int)(25 * cachedRegionRandom3 + 25 * cachedRegionRandom1 + 25 * cachedRegionRandom2);
             tilt = (int)(20 * cachedRegionRandom3 + 45 * cachedRegionRandom1 + 25 * cachedRegionRandom2 + 10);
 
             noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f, thickness, warp, tilt, 20, -9055);
-            state = BlockPicker.selectBlock(stateList1, regionNoise, noiseVal);
+            state = BlockPicker.selectBlock(cachedBlockStateList1, regionNoise, noiseVal);
         }
 
         return state;
     }
 
 
-    // Three layer generator
+    // Three layer region generator
     private static BlockState threeLayerGeneration(int xPos, int yPos, int zPos, float regionNoise) {
         BlockState state;
-        List<String> blockListNames;
-        List<Block> blocks;
         float noiseVal;
 
         int thickness;
         int warp;
         int tilt;
 
-        // Setup bottom layer
-        blockListNames = new ArrayList<>(Arrays.asList("metamorphic", "sedimentary_evaporate"));
-        blocks = Collections.emptyList();
-        List<BlockState> stateList3 = (useCached) ? cachedBlockStateList3 : (cachedBlockStateList3 = BlockPicker.getRandomPresets(regionNoise, 2, blockListNames, blocks));
+        // Refresh cached settings if different region
+        if (!useCached) {
+            // Setup bottom layer
+            cachedBlockStateList3 = blockPicker.getBlockStateList(blockPicker.getRandomPresetName(regionNoise,  8675), 2);
 
-        // Setup middle layer
-        blockListNames = new ArrayList<>(Arrays.asList("extrusive_igneous_main", "extrusive_igneous_aux"));
-        blocks = Collections.emptyList();
-        List<BlockState> stateList2 = (useCached) ? cachedBlockStateList2 : (cachedBlockStateList2 = BlockPicker.getRandomPresets(regionNoise, 2, blockListNames, blocks));
+            // Setup middle layer
+            cachedBlockStateList2 = blockPicker.getBlockStateList(blockPicker.getRandomPresetName(regionNoise, 3090), 2);
 
-        // Setup top layer
-        blockListNames = new ArrayList<>(Arrays.asList("sedimentary_soil", "sedimentary_sandy", "sedimentary_carbonate"));
-        blocks = Collections.emptyList();
-        List<BlockState> stateList1 = (useCached) ? cachedBlockStateList1 : (cachedBlockStateList1 = BlockPicker.getRandomPresets(regionNoise, 2, blockListNames, blocks));
+            // Setup top layer
+            cachedBlockStateList1 = blockPicker.getBlockStateList(blockPicker.getRandomPresetName(regionNoise, -1337), 2);
+        }
 
-        if (yPos < 25) { // TODO TEMP
+        if (yPos < 25) { // BOTTOM LAYER // TODO TEMP DIVISION
             thickness = (int)(20 * cachedRegionRandom3 + 45 * cachedRegionRandom2 + 25 * cachedRegionRandom1 + 10);
             warp = (int)(25 * cachedRegionRandom3 + 25 * cachedRegionRandom2 + 25 * cachedRegionRandom1);
             tilt = (int)(20 * cachedRegionRandom3 + 45 * cachedRegionRandom2 + 25 * cachedRegionRandom1 + 10);
 
             noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f, thickness, warp, tilt, 20, 31301);
-            state = BlockPicker.selectBlock(stateList3, regionNoise, noiseVal);
-        } else if (yPos < 50) { // TODO TEMP
+            state = BlockPicker.selectBlock(cachedBlockStateList3, regionNoise, noiseVal);
+        } else if (yPos < 50) { // MIDDLE LAYER // TODO TEMP DIVISION
             thickness = (int)(20 * cachedRegionRandom2 + 45 * cachedRegionRandom1 + 25 * cachedRegionRandom3 + 10);
             warp = (int)(25 * cachedRegionRandom2 + 25 * cachedRegionRandom1 + 25 * cachedRegionRandom3);
             tilt = (int)(20 * cachedRegionRandom2 + 45 * cachedRegionRandom1 + 25 * cachedRegionRandom3 + 10);
 
             noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f, thickness, warp, tilt, 20, -13200);
-            state = BlockPicker.selectBlock(stateList2, regionNoise, noiseVal);
-        } else {
+            state = BlockPicker.selectBlock(cachedBlockStateList2, regionNoise, noiseVal);
+        } else { // TOP LAYER
             thickness = (int)(20 * cachedRegionRandom1 + 45 * cachedRegionRandom2 + 25 * cachedRegionRandom3 + 10);
             warp = (int)(25 * cachedRegionRandom1 + 25 * cachedRegionRandom2 + 25 * cachedRegionRandom3);
             tilt = (int)(20 * cachedRegionRandom1 + 45 * cachedRegionRandom2 + 25 * cachedRegionRandom3 + 10);
 
             noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f, thickness, warp, tilt, 20, 13000);
-            state = BlockPicker.selectBlock(stateList1, regionNoise, noiseVal);
+            state = BlockPicker.selectBlock(cachedBlockStateList1, regionNoise, noiseVal);
         }
 
         return state;
@@ -310,9 +312,6 @@ public class ConfiguredStrataNoise {
         // Warp determines how "buckled" the layers are
         // Tilt determines what general angle intensity the strata can form at.
         // Fault
-
-        // Orogeny is if the region is in (or what was once) a mountain biome; means warp is
-        // an increasing function of y (more y, more warp)
 
         // Apply regional seed shift
         int shiftedSeed = ConfiguredRegionNoise.getRegionShiftedSeed(x, y, z) + seedShift;
