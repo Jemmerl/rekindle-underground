@@ -6,11 +6,13 @@ import org.apache.commons.lang3.tuple.Pair;
 public class RKUndergroundConfig {
     public static class Common
     {
+        private static final int HARDNESS_DEPTH_FACTOR = 3; // 1 - 10 scale; 1 is no change by depth
         private static final int REGION_SIZE = 512; // Rough average, in chunks (OG IS 128)
         private static final double REGIONAL_VARIATION = 0.50; // 0.00 - 1.00 scale
         private static final int FAULT_SIZE = 128; // Rough average, in chunks (OG IS 64)
         private static final double FAULT_VARIATION = 0.20; // 0.00 - 1.00 scale; 0 is no fault shift
 
+        public final ForgeConfigSpec.ConfigValue<Integer> hardnessDepthFactor;
         public final ForgeConfigSpec.ConfigValue<Integer> regionSize;
         public final ForgeConfigSpec.ConfigValue<Double> regionVariation;
         public final ForgeConfigSpec.ConfigValue<Integer> faultSize;
@@ -18,6 +20,13 @@ public class RKUndergroundConfig {
 
         public Common(ForgeConfigSpec.Builder builder)
         {
+            builder.push("General Config");
+            this.hardnessDepthFactor = builder.comment("Sets the overall hardness scaling factor of stone from y = 50 to y = 0; Recommended Default is 3")
+                    .worldRestart()
+                    .defineInRange("Hardness Depth Factor", HARDNESS_DEPTH_FACTOR, 1, 10);
+
+            builder.pop();
+
             builder.push("Stone Generation");
             this.regionSize = builder.comment("Sets average stone region area in chunks; Recommended Default is 128")
                     .worldRestart()
