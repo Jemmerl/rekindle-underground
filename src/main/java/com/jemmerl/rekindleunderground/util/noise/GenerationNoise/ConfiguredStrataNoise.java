@@ -44,9 +44,9 @@ public class ConfiguredStrataNoise {
     private static float cachedRegionRandom1 = 0f;
     private static float cachedRegionRandom2 = 0f;
     private static float cachedRegionRandom3 = 0f;
-    private static int[] cachedLayerProperties1 = new int[]{0, 0, 0}; // Thickness, warp, tilt
-    private static int[] cachedLayerProperties2 = new int[]{0, 0, 0}; // Thickness, warp, tilt
-    private static int[] cachedLayerProperties3 = new int[]{0, 0, 0}; // Thickness, warp, tilt
+    private static final int[] cachedLayerProperties1 = new int[]{0, 0, 0}; // Thickness, warp, tilt
+    private static final int[] cachedLayerProperties2 = new int[]{0, 0, 0}; // Thickness, warp, tilt
+    private static final int[] cachedLayerProperties3 = new int[]{0, 0, 0}; // Thickness, warp, tilt
     private static List<BlockState> cachedBlockStateList1 = Collections.emptyList();
     private static List<BlockState> cachedBlockStateList2 = Collections.emptyList();
     private static List<BlockState> cachedBlockStateList3 = Collections.emptyList();
