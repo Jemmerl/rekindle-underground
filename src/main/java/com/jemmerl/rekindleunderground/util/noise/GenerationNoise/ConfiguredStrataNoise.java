@@ -1,7 +1,9 @@
 package com.jemmerl.rekindleunderground.util.noise.GenerationNoise;
 
+import com.jemmerl.rekindleunderground.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.block.ModBlocks;
 import com.jemmerl.rekindleunderground.data.types.DefaultSets;
+import com.jemmerl.rekindleunderground.util.UtilMethods;
 import com.jemmerl.rekindleunderground.util.noise.FastNoiseLite;
 import com.jemmerl.rekindleunderground.world.feature.stonegenutil.BlockPicker;
 import net.minecraft.block.Block;
@@ -22,6 +24,14 @@ public class ConfiguredStrataNoise {
     private static FastNoiseLite floodBasaltNoise; // Used to generate basalt/gabbro layers for flood basalts
     // TODO - add various hornfels for contact metamorphism
 
+    // Config values
+    private static final int THICK_MIN = RKUndergroundConfig.COMMON.thickMin.get();
+    private static final int THICK_MAX = RKUndergroundConfig.COMMON.thickMax.get();
+    private static final int WARP_MIN = RKUndergroundConfig.COMMON.warpMin.get();
+    private static final int WARP_MAX = RKUndergroundConfig.COMMON.warpMax.get();
+    private static final int TILT_MIN = RKUndergroundConfig.COMMON.tiltMin.get();
+    private static final int TILT_MAX = RKUndergroundConfig.COMMON.tiltMax.get();
+
     private static long WORLD_SEED;
 
     // Load the block picker for this world
@@ -34,6 +44,9 @@ public class ConfiguredStrataNoise {
     private static float cachedRegionRandom1 = 0f;
     private static float cachedRegionRandom2 = 0f;
     private static float cachedRegionRandom3 = 0f;
+    private static int[] cachedLayerProperties1 = new int[]{0, 0, 0}; // Thickness, warp, tilt
+    private static int[] cachedLayerProperties2 = new int[]{0, 0, 0}; // Thickness, warp, tilt
+    private static int[] cachedLayerProperties3 = new int[]{0, 0, 0}; // Thickness, warp, tilt
     private static List<BlockState> cachedBlockStateList1 = Collections.emptyList();
     private static List<BlockState> cachedBlockStateList2 = Collections.emptyList();
     private static List<BlockState> cachedBlockStateList3 = Collections.emptyList();
@@ -64,18 +77,14 @@ public class ConfiguredStrataNoise {
             case -2: // Young Flood Basalt
                 blockState = youngFloodBasaltGen(x, y, z);
                 break;
-            case -1: // Three layers
-                  //blockState = twoLayerGeneration(x, y, z, regionNoise);
-//                  blockState = oneLayerGeneration(x, y, z, regionNoise);
-//                  break;
             case 1: // One Layer
-                blockState = twoLayerGeneration(x, y, z, regionNoise);
+                blockState = oneLayerGeneration(x, y, z, regionNoise);
                 break;
             case 2: // Old Flood Basalt
                 blockState = oldFloodBasaltGen(x, y, z, regionNoise);
                 break;
             default: // Two Layer (Case 0 and uncaught ints)
-                blockState = oneLayerGeneration(x, y, z, regionNoise);
+                blockState = twoLayerGeneration(x, y, z, regionNoise);
                 break;
         }
         return blockState;
@@ -156,12 +165,15 @@ public class ConfiguredStrataNoise {
         // Setup only layer
         if (!useCached) {
             cachedBlockStateList1 = blockPicker.getBlockStateList(blockPicker.getRandomPresetName(regionNoise, -1902));
+            cachedLayerProperties1[0] = (int)UtilMethods.remap((45 * cachedRegionRandom1 + 35 * cachedRegionRandom2 + 20 * cachedRegionRandom3), new float[]{0f, 100f}, new float[]{(float)THICK_MIN, (float)THICK_MAX}); // Thickness
+            cachedLayerProperties1[1] = (int)UtilMethods.remap((35 * cachedRegionRandom1 + 25 * cachedRegionRandom2 + 40 * cachedRegionRandom3), new float[]{0f, 100f}, new float[]{(float)WARP_MIN, (float)WARP_MAX}); // Warp
+            cachedLayerProperties1[2] = (int)UtilMethods.remap((25 * cachedRegionRandom1 + 50 * cachedRegionRandom2 + 25 * cachedRegionRandom3), new float[]{0f, 100f}, new float[]{(float)TILT_MIN, (float)TILT_MAX}); // Tilt
         }
 
-        int thickness = (int)(20 * cachedRegionRandom1 + 45 * cachedRegionRandom2 + 25 * cachedRegionRandom3 + 10);
+        int thickness = (int)(15 * cachedRegionRandom1 + 25 * cachedRegionRandom2 + 20 * cachedRegionRandom3);
         int warp = (int)(25 * cachedRegionRandom1 + 25 * cachedRegionRandom2 + 25 * cachedRegionRandom3);
         int tilt = (int)(20 * cachedRegionRandom1 + 45 * cachedRegionRandom2 + 25 * cachedRegionRandom3 + 10);
-        float noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f, thickness, warp, tilt, 20, -13370);
+        float noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f, cachedLayerProperties1[0], cachedLayerProperties1[1], cachedLayerProperties1[2], 20, -13370);
 
         return BlockPicker.selectBlock(cachedBlockStateList1, regionNoise, noiseVal);
     }
@@ -170,8 +182,6 @@ public class ConfiguredStrataNoise {
     // Two layer region generator
     private static BlockState twoLayerGeneration(int xPos, int yPos, int zPos, float regionNoise) {
         BlockState state;
-        List<String> blockListNames;
-        List<Block> blocks;
         float noiseVal;
 
         int thickness;
@@ -182,24 +192,32 @@ public class ConfiguredStrataNoise {
         if (!useCached) {
             // Setup bottom layer
             cachedBlockStateList2 = blockPicker.getBlockStateList(blockPicker.getRandomPresetName(regionNoise, 2902));
+            cachedLayerProperties2[0] = (int)UtilMethods.remap((45 * cachedRegionRandom1 + 35 * cachedRegionRandom2 + 20 * cachedRegionRandom3), new float[]{0f, 100f}, new float[]{(float)THICK_MIN, (float)THICK_MAX}); // Thickness
+            cachedLayerProperties2[1] = (int)UtilMethods.remap((35 * cachedRegionRandom1 + 25 * cachedRegionRandom2 + 40 * cachedRegionRandom3), new float[]{0f, 100f}, new float[]{(float)WARP_MIN, (float)WARP_MAX}); // Warp
+            cachedLayerProperties2[2] = (int)UtilMethods.remap((25 * cachedRegionRandom1 + 50 * cachedRegionRandom2 + 25 * cachedRegionRandom3), new float[]{0f, 100f}, new float[]{(float)TILT_MIN, (float)TILT_MAX}); // Tilt
+
 
             // Setup top layer
-            cachedBlockStateList1 = blockPicker.getBlockStateList(blockPicker.getRandomPresetName(regionNoise, -6110), 2);
+            cachedBlockStateList1 = blockPicker.getBlockStateList(blockPicker.getRandomPresetName(regionNoise, -6110));
+            cachedLayerProperties1[0] = (int)UtilMethods.remap((45 * cachedRegionRandom1 + 35 * cachedRegionRandom2 + 20 * cachedRegionRandom3), new float[]{0f, 100f}, new float[]{(float)THICK_MIN, (float)THICK_MAX}); // Thickness
+            cachedLayerProperties1[1] = (int)UtilMethods.remap((35 * cachedRegionRandom1 + 25 * cachedRegionRandom2 + 40 * cachedRegionRandom3), new float[]{0f, 100f}, new float[]{(float)WARP_MIN, (float)WARP_MAX}); // Warp
+            cachedLayerProperties1[2] = (int)UtilMethods.remap((25 * cachedRegionRandom1 + 50 * cachedRegionRandom2 + 25 * cachedRegionRandom3), new float[]{0f, 100f}, new float[]{(float)TILT_MIN, (float)TILT_MAX}); // Tilt
+
         }
 
         if (yPos < 35) { // BOTTOM LAYER // TODO TEMP DIVISION
-            thickness = (int)(20 * cachedRegionRandom1 + 45 * cachedRegionRandom2 + 25 * cachedRegionRandom3 + 10);
+            thickness = (int)(20 * cachedRegionRandom1 + 45 * cachedRegionRandom2 + 25 * cachedRegionRandom3);
             warp = (int)(25 * cachedRegionRandom1 + 25 * cachedRegionRandom2 + 25 * cachedRegionRandom3);
             tilt = (int)(20 * cachedRegionRandom1 + 45 * cachedRegionRandom2 + 25 * cachedRegionRandom3 + 10);
 
-            noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f, thickness, warp, tilt, 20, 86753);
+            noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f, cachedLayerProperties2[0], cachedLayerProperties2[1], cachedLayerProperties2[2], 20, 86753);
             state = BlockPicker.selectBlock(cachedBlockStateList2, regionNoise, noiseVal);
         } else { // TOP LAYER
-            thickness = (int)(20 * cachedRegionRandom3 + 45 * cachedRegionRandom1 + 25 * cachedRegionRandom2 + 10);
+            thickness = (int)(20 * cachedRegionRandom3 + 45 * cachedRegionRandom1 + 25 * cachedRegionRandom2);
             warp = (int)(25 * cachedRegionRandom3 + 25 * cachedRegionRandom1 + 25 * cachedRegionRandom2);
             tilt = (int)(20 * cachedRegionRandom3 + 45 * cachedRegionRandom1 + 25 * cachedRegionRandom2 + 10);
 
-            noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f, thickness, warp, tilt, 20, -9055);
+            noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f, cachedLayerProperties1[0], cachedLayerProperties1[1], cachedLayerProperties1[2], 20, -9055);
             state = BlockPicker.selectBlock(cachedBlockStateList1, regionNoise, noiseVal);
         }
 
@@ -220,12 +238,24 @@ public class ConfiguredStrataNoise {
         if (!useCached) {
             // Setup bottom layer
             cachedBlockStateList3 = blockPicker.getBlockStateList(blockPicker.getRandomPresetName(regionNoise,  8675), 2);
+            cachedLayerProperties3[0] = (int)UtilMethods.remap((45 * cachedRegionRandom1 + 35 * cachedRegionRandom2 + 20 * cachedRegionRandom3), new float[]{0f, 100f}, new float[]{(float)THICK_MIN, (float)THICK_MAX}); // Thickness
+            cachedLayerProperties3[1] = (int)UtilMethods.remap((35 * cachedRegionRandom1 + 25 * cachedRegionRandom2 + 40 * cachedRegionRandom3), new float[]{0f, 100f}, new float[]{(float)WARP_MIN, (float)WARP_MAX}); // Warp
+            cachedLayerProperties3[2] = (int)UtilMethods.remap((25 * cachedRegionRandom1 + 50 * cachedRegionRandom2 + 25 * cachedRegionRandom3), new float[]{0f, 100f}, new float[]{(float)TILT_MIN, (float)TILT_MAX}); // Tilt
+
 
             // Setup middle layer
             cachedBlockStateList2 = blockPicker.getBlockStateList(blockPicker.getRandomPresetName(regionNoise, 3090), 2);
+            cachedLayerProperties2[0] = (int)UtilMethods.remap((45 * cachedRegionRandom1 + 35 * cachedRegionRandom2 + 20 * cachedRegionRandom3), new float[]{0f, 100f}, new float[]{(float)THICK_MIN, (float)THICK_MAX}); // Thickness
+            cachedLayerProperties2[1] = (int)UtilMethods.remap((35 * cachedRegionRandom1 + 25 * cachedRegionRandom2 + 40 * cachedRegionRandom3), new float[]{0f, 100f}, new float[]{(float)WARP_MIN, (float)WARP_MAX}); // Warp
+            cachedLayerProperties2[2] = (int)UtilMethods.remap((25 * cachedRegionRandom1 + 50 * cachedRegionRandom2 + 25 * cachedRegionRandom3), new float[]{0f, 100f}, new float[]{(float)TILT_MIN, (float)TILT_MAX}); // Tilt
+
 
             // Setup top layer
             cachedBlockStateList1 = blockPicker.getBlockStateList(blockPicker.getRandomPresetName(regionNoise, -1337), 2);
+            cachedLayerProperties1[0] = (int)UtilMethods.remap((45 * cachedRegionRandom1 + 35 * cachedRegionRandom2 + 20 * cachedRegionRandom3), new float[]{0f, 100f}, new float[]{(float)THICK_MIN, (float)THICK_MAX}); // Thickness
+            cachedLayerProperties1[1] = (int)UtilMethods.remap((35 * cachedRegionRandom1 + 25 * cachedRegionRandom2 + 40 * cachedRegionRandom3), new float[]{0f, 100f}, new float[]{(float)WARP_MIN, (float)WARP_MAX}); // Warp
+            cachedLayerProperties1[2] = (int)UtilMethods.remap((25 * cachedRegionRandom1 + 50 * cachedRegionRandom2 + 25 * cachedRegionRandom3), new float[]{0f, 100f}, new float[]{(float)TILT_MIN, (float)TILT_MAX}); // Tilt
+
         }
 
         if (yPos < 25) { // BOTTOM LAYER // TODO TEMP DIVISION
@@ -233,68 +263,26 @@ public class ConfiguredStrataNoise {
             warp = (int)(25 * cachedRegionRandom3 + 25 * cachedRegionRandom2 + 25 * cachedRegionRandom1);
             tilt = (int)(20 * cachedRegionRandom3 + 45 * cachedRegionRandom2 + 25 * cachedRegionRandom1 + 10);
 
-            noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f, thickness, warp, tilt, 20, 31301);
+            noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f, cachedLayerProperties3[0], cachedLayerProperties3[1], cachedLayerProperties3[2], 20, 31301);
             state = BlockPicker.selectBlock(cachedBlockStateList3, regionNoise, noiseVal);
         } else if (yPos < 50) { // MIDDLE LAYER // TODO TEMP DIVISION
             thickness = (int)(20 * cachedRegionRandom2 + 45 * cachedRegionRandom1 + 25 * cachedRegionRandom3 + 10);
             warp = (int)(25 * cachedRegionRandom2 + 25 * cachedRegionRandom1 + 25 * cachedRegionRandom3);
             tilt = (int)(20 * cachedRegionRandom2 + 45 * cachedRegionRandom1 + 25 * cachedRegionRandom3 + 10);
 
-            noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f, thickness, warp, tilt, 20, -13200);
+            noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f, cachedLayerProperties2[0], cachedLayerProperties2[1], cachedLayerProperties2[2], 20, -13200);
             state = BlockPicker.selectBlock(cachedBlockStateList2, regionNoise, noiseVal);
         } else { // TOP LAYER
             thickness = (int)(20 * cachedRegionRandom1 + 45 * cachedRegionRandom2 + 25 * cachedRegionRandom3 + 10);
             warp = (int)(25 * cachedRegionRandom1 + 25 * cachedRegionRandom2 + 25 * cachedRegionRandom3);
             tilt = (int)(20 * cachedRegionRandom1 + 45 * cachedRegionRandom2 + 25 * cachedRegionRandom3 + 10);
 
-            noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f, thickness, warp, tilt, 20, 13000);
+            noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f, cachedLayerProperties1[0], cachedLayerProperties1[1], cachedLayerProperties1[2], 20, 13000);
             state = BlockPicker.selectBlock(cachedBlockStateList1, regionNoise, noiseVal);
         }
 
         return state;
     }
-
-
-    //////////////////////////////////////////////////
-    /////            Strata Templates            /////
-    //////////////////////////////////////////////////
-
-    /*
-     *  These are "plug and play" blocks for coding various regions
-     *  They have no function during operation, only for development work
-     */
-
-    // Generate fault line vertical shifts
-    /*
-    if (faults) {
-        yPos += (int)([MAX_DISPLACEMENT] * stoneFaultNoise(xPos, yPos, zPos));
-    }
-
-    OR
-
-    int yFault = yPos + (int)([MAX_DISPLACEMENT] * stoneFaultNoise(xPos, yPos, zPos));
-    */
-
-    // Generate multiple different strata sections. Multiply positions to conpress, divide to stretch
-    // Add or remove "else if" statements to generate different amounts of strata
-    /*
-    if (yPos <= ([MEDIAN_HEIGHT] + ([MAX_DEVIATION] * smoothDividingNoise.GetNoise((xPos * [HORIZ_TRANSFORM]), (yPos * [VERT_TRANSFORM]), (zPos * [HORIZ_TRANSFORM]))))) {
-        // GENERATE BOTTOM STRATA
-    } else if (yPos <= ([MEDIAN_HEIGHT] + ([MAX_DEVIATION] * smoothDividingNoise.GetNoise((xPos * [HORIZ_TRANSFORM]), (yPos * [VERT_TRANSFORM]), (zPos * [HORIZ_TRANSFORM]))))) {
-        // GENERATE MIDDLE STRATA
-    } else {
-        // GENERATE TOP STRATA
-    }
-
-    // Just the vertical boundary condition
-    // (yPos <= ([MEDIAN_HEIGHT] + ([MAX_DEVIATION] * smoothDividingNoise.GetNoise((xPos * [HORIZ_TRANSFORM]), (yPos * [VERT_TRANSFORM]), (zPos * [HORIZ_TRANSFORM])))))
-
-    */
-
-    // Replace the (yPos <=) in a strata separation layer to angle the division. Tilt value should be [20, 100] for optimal results
-    /*
-        ((yPos + (int)(([TILT] * [TILT] * [TILT] / 30) * yTiltNoise.GetNoise(x / 30f, z / 30f)))
-    */
 
 
     //////////////////////////////////////////////////
@@ -392,3 +380,45 @@ public class ConfiguredStrataNoise {
     }
 
 }
+
+
+//////////////////////////////////////////////////
+/////            Strata Templates            /////
+//////////////////////////////////////////////////
+
+/*
+ *  These are "plug and play" blocks for coding various regions
+ *  They have no function during operation, only for development work
+ */
+
+// Generate fault line vertical shifts
+    /*
+    if (faults) {
+        yPos += (int)([MAX_DISPLACEMENT] * stoneFaultNoise(xPos, yPos, zPos));
+    }
+
+    OR
+
+    int yFault = yPos + (int)([MAX_DISPLACEMENT] * stoneFaultNoise(xPos, yPos, zPos));
+    */
+
+// Generate multiple different strata sections. Multiply positions to conpress, divide to stretch
+// Add or remove "else if" statements to generate different amounts of strata
+    /*
+    if (yPos <= ([MEDIAN_HEIGHT] + ([MAX_DEVIATION] * smoothDividingNoise.GetNoise((xPos * [HORIZ_TRANSFORM]), (yPos * [VERT_TRANSFORM]), (zPos * [HORIZ_TRANSFORM]))))) {
+        // GENERATE BOTTOM STRATA
+    } else if (yPos <= ([MEDIAN_HEIGHT] + ([MAX_DEVIATION] * smoothDividingNoise.GetNoise((xPos * [HORIZ_TRANSFORM]), (yPos * [VERT_TRANSFORM]), (zPos * [HORIZ_TRANSFORM]))))) {
+        // GENERATE MIDDLE STRATA
+    } else {
+        // GENERATE TOP STRATA
+    }
+
+    // Just the vertical boundary condition
+    // (yPos <= ([MEDIAN_HEIGHT] + ([MAX_DEVIATION] * smoothDividingNoise.GetNoise((xPos * [HORIZ_TRANSFORM]), (yPos * [VERT_TRANSFORM]), (zPos * [HORIZ_TRANSFORM])))))
+
+    */
+
+// Replace the (yPos <=) in a strata separation layer to angle the division. Tilt value should be [20, 100] for optimal results
+    /*
+        ((yPos + (int)(([TILT] * [TILT] * [TILT] / 30) * yTiltNoise.GetNoise(x / 30f, z / 30f)))
+    */

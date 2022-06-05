@@ -40,7 +40,9 @@ public class BlockPicker {
     // Picks a block to use for a layer given the options in form of a list of blockstates
     public static BlockState selectBlock(List<BlockState> stateList, float regionNoise, float strataVal) {
         Random rand = new Random((int)(regionNoise * 10000));
-        return stateList.get(rand.nextInt(stateList.size()));
+        int size = stateList.size();
+        int index = rand.nextInt(size) + (int)UtilMethods.remap(strataVal, new float[]{-1f, 1f}, new float[]{0, stateList.size()});
+        return stateList.get(((index = (index % size)) < 0) ? (index + size) : index);
     }
 
     // Get a random preset from the data-defined presets
