@@ -117,13 +117,13 @@ public class ConfiguredStrataNoise {
         float noiseVal;
 
         if (yPos <= (9 + (4 * smoothDividingNoise.GetNoise((xPos * 2), (yPos), (zPos * 2))))) { // Adds Diabase layer smoothly below y 7-15
-            state = ModBlocks.DIABASE.get().getDefaultState();
+            state = UtilMethods.stringToBlockState("rekindleunderground:diabase_stone");
         } else { // Adds flood basalt layer above
             noiseVal = floodBasaltNoise.GetNoise((xPos / 5f), (yPos * 2f), (zPos / 5f));
             if (noiseVal < -0.1f) {
-                state = ModBlocks.GABBRO.get().getDefaultState();
+                state = UtilMethods.stringToBlockState("rekindleunderground:gabbro_stone");
             } else {
-                state = ModBlocks.BASALT.get().getDefaultState();
+                state = UtilMethods.stringToBlockState("rekindleunderground:basalt_stone");
             }
         }
         return state;
@@ -144,13 +144,13 @@ public class ConfiguredStrataNoise {
         // This is done independently, unlike adjustable layers, due to the unique generation
         int yFault = yPos + (int)(10f * stoneFaultNoise(xPos, yPos, zPos));
         if (yFault <= (9 + (3 * smoothDividingNoise.GetNoise((xPos * 2), (yFault), (zPos * 2))))) { // Adds Diabase layer smoothly below y 4-12
-            state = ModBlocks.DIABASE.get().getDefaultState();
+            state = UtilMethods.stringToBlockState("rekindleunderground:diabase_stone");
         } else if (yPos <= (55 + (10 * smoothDividingNoise.GetNoise((xPos * 3), (yFault), (zPos * 3))))) { // Adds flood basalt layer below y 45-65
             noiseVal = floodBasaltNoise.GetNoise((xPos / 5f), (yPos * 2f), (zPos / 5f));
             if (noiseVal < -0.1f) {
-                state = ModBlocks.GABBRO.get().getDefaultState();
+                state = UtilMethods.stringToBlockState("rekindleunderground:gabbro_stone");
             } else {
-                state = ModBlocks.BASALT.get().getDefaultState();
+                state = UtilMethods.stringToBlockState("rekindleunderground:basalt_stone");
             }
         } else { // Adds sedimentary strata above
             // TODO rewrite this section, needs to use older methods and make a sedimentary rock layer

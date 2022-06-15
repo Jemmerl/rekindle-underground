@@ -2,6 +2,7 @@ package com.jemmerl.rekindleunderground.block.custom;
 
 import com.jemmerl.rekindleunderground.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.data.types.OreType;
+import com.jemmerl.rekindleunderground.data.types.StoneGroupType;
 import com.jemmerl.rekindleunderground.data.types.StoneType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -18,11 +19,11 @@ public class StoneOreBlock extends Block {
     private static final int HARDNESS_DEPTH_FACTOR = RKUndergroundConfig.COMMON.hardnessDepthFactor.get() - 1;
 
     public static final EnumProperty<OreType> ORE_TYPE = EnumProperty.create("oretype", OreType.class);
-    private StoneType stoneType;
+    private StoneGroupType stoneGroupType;
 
-    public StoneOreBlock(Properties properties, StoneType stoneType) {
+    public StoneOreBlock(Properties properties, StoneGroupType stoneGroupType) {
         super(properties);
-        this.stoneType = stoneType;
+        this.stoneGroupType = stoneGroupType;
         this.setDefaultState(this.stateContainer.getBaseState().with(ORE_TYPE, OreType.NONE));
     }
 
@@ -38,8 +39,8 @@ public class StoneOreBlock extends Block {
     }
 
     // Return stone type of block
-    public final StoneType getStoneType() {
-        return this.stoneType;
+    public final StoneGroupType getStoneGroupType() {
+        return this.stoneGroupType;
     }
 
     @Override

@@ -10,11 +10,26 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModItems {
 
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, RekindleUnderground.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS =
+            DeferredRegister.create(ForgeRegistries.ITEMS, RekindleUnderground.MOD_ID);
 
-    ///////////////////
-    //     ROCKS     //
-    ///////////////////
+    static {
+        RockType.register(ITEMS);
+    }
+
+    // Item registry method
+    public static void register(IEventBus eventBus) {
+        ITEMS.register(eventBus);
+    }
+}
+
+
+
+
+
+///////////////////
+//     ROCKS     //
+///////////////////
 
 /*    // Sedimentary Rocks
     public static final RegistryObject<Item> CHALK_ROCK = ITEMS.register("chalk_rock",
@@ -88,16 +103,3 @@ public class ModItems {
 
     public static final RegistryObject<Item> MARBLE_ROCK = ITEMS.register("marble_rock",
             () -> new Item(new Item.Properties().group(ModItemGroup.RKU_GROUP)));*/
-
-
-
-    static {
-        RockType.register(ITEMS);
-    }
-
-
-    // Item registry method
-    public static void register(IEventBus eventBus) {
-        ITEMS.register(eventBus);
-    }
-}

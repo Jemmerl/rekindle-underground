@@ -1,5 +1,11 @@
 package com.jemmerl.rekindleunderground.util;
 
+import net.minecraft.block.BlockState;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.Objects;
+
 public class UtilMethods {
 
     // Returns a float over a given range mapped to a new range
@@ -13,6 +19,11 @@ public class UtilMethods {
         float newVal = newRangeValue + newDomain[0];
 
         return newVal;
+    }
+
+    // Returns a block given a string representation of its resource location
+    public static BlockState stringToBlockState(String blockName) {
+        return Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(blockName))).getDefaultState();
     }
 
     // Returns the unit vector for a given vector of any size

@@ -63,7 +63,7 @@ public class BlockPicker {
     public static List<BlockState> buildStateList(List<String> blocks) {
         List<BlockState> stateList = new ArrayList<>();
         for (String name : blocks) {
-            stateList.add(stringToBlockState(name));
+            stateList.add(UtilMethods.stringToBlockState(name));
         }
         return stateList;
     }
@@ -143,7 +143,7 @@ public class BlockPicker {
         for (SetData data : setDataList) {
             ArrayList<BlockState> blockStateArrayList = new ArrayList<>();
             for (int i = 0; i < data.getBlocks().length; i++) {
-                blockStateArrayList.add(stringToBlockState(data.getBlocks()[i]));
+                blockStateArrayList.add(UtilMethods.stringToBlockState(data.getBlocks()[i]));
             }
             setListMap.putIfAbsent(data.getName(), blockStateArrayList);
         }
@@ -164,7 +164,7 @@ public class BlockPicker {
             // Add all specified individual blocks
             String[] individuals = data.getIndividuals(); // List of specified individual blocks in preset
             for (int j = 0; j < individuals.length; j++) {
-                blockStateArrayList.add(stringToBlockState(individuals[j]));
+                blockStateArrayList.add(UtilMethods.stringToBlockState(individuals[j]));
             }
 
             builtPresetMap.putIfAbsent(key, blockStateArrayList);
@@ -172,12 +172,5 @@ public class BlockPicker {
 
         return builtPresetMap;
     }
-
-
-    // Returns a block given a string representation of its resource location
-    private static BlockState stringToBlockState(String blockName) {
-        return Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(blockName))).getDefaultState();
-    }
-
 
 }

@@ -1,88 +1,145 @@
 package com.jemmerl.rekindleunderground.data.types;
 
-import net.minecraft.util.IStringSerializable;
+import com.jemmerl.rekindleunderground.block.custom.StoneOreBlock;
+import com.jemmerl.rekindleunderground.item.ModItemGroup;
+import com.jemmerl.rekindleunderground.item.ModItems;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraftforge.common.ToolType;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+public enum StoneType {
+    
+    // Sedimentary
+    CHALK("chalk", StoneGroupType.SEDIMENTARY, 0, 0, true),
+    LIMESTONE("limestone", StoneGroupType.SEDIMENTARY, 1, 1, true),
+    DOLOSTONE("dolostone", StoneGroupType.SEDIMENTARY, 2, 2, true),
+    SHALE("shale", StoneGroupType.SEDIMENTARY, 2, 2, true),
+    SANDSTONE("sandstone", StoneGroupType.SEDIMENTARY, 2, 2, true),
+    RED_SANDSTONE("red_sandstone", StoneGroupType.SEDIMENTARY, 2, 2, true),
+    GREYWACKE("greywacke", StoneGroupType.SEDIMENTARY, 2, 2, true),
+    MUDSTONE("mudstone", StoneGroupType.SEDIMENTARY, 1, 1, true),
+    ROCKSALT("rocksalt", StoneGroupType.SEDIMENTARY, 1, 1, false),
+    ROCKGYPSUM("rockgypsum", StoneGroupType.SEDIMENTARY, 0, 0, false),
+    BORAX("borax", StoneGroupType.SEDIMENTARY, 0, 0, false),
+    KERNITE("kernite", StoneGroupType.SEDIMENTARY, 0, 0, false),
+    VEIN_QUARTZ("veinquartz", StoneGroupType.SEDIMENTARY, 4, 4, true),
 
-public enum StoneType implements IStringSerializable {
-    SEDIMENTARY("sedimentary"),
-    EXTRUSIVE("extrusive"),
-    INTRUSIVE("intrusive"),
-    METAMORPHIC("metamorphic");
+    // Extrusive Igneous
+    RHYOLITE("rhyolite", StoneGroupType.EXTRUSIVE, 2, 2, true),
+    DACITE("dacite", StoneGroupType.EXTRUSIVE, 3, 3, true),
+    ANDESITE("andesite", StoneGroupType.EXTRUSIVE, 3, 3, true),
+    BASALT("basalt", StoneGroupType.EXTRUSIVE, 3, 3, true),
+    SCORIA("scoria", StoneGroupType.EXTRUSIVE, 2, 2, false),
+
+    // Intrusive Igneous
+    DIORITE("diorite", StoneGroupType.INTRUSIVE, 4, 4, true),
+    GRANODIORITE("granodiorite", StoneGroupType.INTRUSIVE, 4, 4, true),
+    GRANITE("granite", StoneGroupType.INTRUSIVE, 4, 4, true),
+    SYENITE("syenite", StoneGroupType.INTRUSIVE, 4, 4, true),
+    GABBRO("gabbro", StoneGroupType.INTRUSIVE, 4, 4, true),
+    DIABASE("diabase", StoneGroupType.INTRUSIVE, 4, 4, true),
+    PERIDOTITE("peridotite", StoneGroupType.INTRUSIVE, 3, 3, true),
+
+    // Metamorphic
+    QUARTZITE("quartzite", StoneGroupType.METAMORPHIC, 4, 4, true),
+    SCHIST("schist", StoneGroupType.METAMORPHIC, 1, 1, true),
+    PHYLLITE("phyllite", StoneGroupType.METAMORPHIC, 2, 2, true),
+    GNEISS("gneiss", StoneGroupType.METAMORPHIC, 4, 4, true),
+    MARBLE("marble", StoneGroupType.METAMORPHIC, 3, 3, true);
+
+    private static class Constants {
+        private static final Float[] HARDS = new Float[]{10f, 12.5f, 15f, 20f, 25f};
+        private static final Float[] RESISTS = {18f, 15f, 12f, 9f, 6f};
+    }
 
     private final String name;
+    private final StoneGroupType group;
+    private final int hardnessIndex;
+    private final int resistanceIndex;
+    private final boolean hasCobble;
 
-    StoneType(String name) {
+    StoneType(String name, StoneGroupType group, int hardnessIndex, int resistanceIndex, boolean hasCobble) {
         this.name = name;
+        this.group = group;
+        this.hardnessIndex = hardnessIndex;
+        this.resistanceIndex = resistanceIndex;
+        this.hasCobble = hasCobble;
     }
 
-// TODO - Implement enum based registration like the rocks, use extra data to set hardness, resistance, stone type
-
-//    // Sedimentary
-//    CHALK("chalk", "sedimentary"),
-//    LIMESTONE("limestone", "sedimentary"),
-//    DOLOSTONE("dolostone", "sedimentary"),
-//    SHALE("shale", "sedimentary"),
-//    SANDSTONE("sandstone", "sedimentary"),
-//    RED_SANDSTONE("red_sandstone", "sedimentary"),
-//    GREYWACKE("greywacke", "sedimentary"),
-//    MUDSTONE("mudstone", "sedimentary"),
-//    ROCK_SALT("rock_salt", "sedimentary"),
-//    ROCK_GYPSUM("rock_gypsum", "sedimentary"),
-//    BORAX("borax", "sedimentary"),
-//    KERNITE("kernite", "sedimentary"),
-//    VEIN_QUARTZ("vein_quartz", "sedimentary"),
-//
-//    // Extrusive Igneous
-//    RHYOLITE("rhyolite", "extrusive"),
-//    DACITE("dacite", "extrusive"),
-//    ANDESITE("andesite", "extrusive"),
-//    BASALT("basalt", "extrusive"),
-//    SCORIA("scoria", "extrusive"),
-//
-//    // Intrusive Igneous
-//    DIORITE("diorite", "intrusive"),
-//    GRANODIORITE("granodiorite", "intrusive"),
-//    GRANITE("granite", "intrusive"),
-//    SYENITE("syenite", "intrusive"),
-//    GABBRO("gabbro", "intrusive"),
-//    DIABASE("diabase", "intrusive"),
-//    PERIDOTITE("peridotite", "intrusive"),
-//
-//    // Metamorphic
-//    QUARTZITE("quartzite", "metamorphic"),
-//    SCHIST("schist", "metamorphic"),
-//    PHYLLITE("phyllite", "metamorphic"),
-//    GNEISS("gneiss", "metamorphic"),
-//    MARBLE("marble", "metamorphic"),
-//
-//    private final String name;
-//    private final String group;
-//
-//    StoneType(String name, String group) {
-//        this.name = name;
-//        this.group = group;
-//    }
-//
-//    // These may not be needed, kept just in case
-//    private static final Map<String, StoneType> BY_NAME = new HashMap<>();
-//    private static final Map<String, StoneType> BY_GROUP = new HashMap<>();
-//
-//    static {
-//        for (StoneType e : values()) {
-//            BY_NAME.put(e.name, e);
-//            BY_GROUP.put(e.group, e);
-//        }
-//    }
-//
-//    // Typos will always return false!
-//    public Boolean isInStoneGroup(String group){
-//        return (this.group == group);
-//    }
-
-    public String getString(){
+    public String getName(){
         return this.name;
     }
+
+    public StoneGroupType getGroup(){
+        return this.group;
+    }
+
+    public float getHardness(){
+        return Constants.HARDS[this.hardnessIndex];
+    }
+
+    public float getResistance(){
+        return Constants.HARDS[this.resistanceIndex];
+    }
+
+    public boolean hasCobble(){
+        return this.hasCobble;
+    }
+
+    @SuppressWarnings("NonFinalFieldInEnum")
+    private RegistryObject<Block> stoneBlock = null;
+    @SuppressWarnings("NonFinalFieldInEnum")
+    private RegistryObject<Block> cobbleBlock = null;
+
+    // Typos will always return false!
+    public Boolean isInStoneGroup(StoneGroupType group){
+        return (this.group == group);
+    }
+
+    // Register stone blocks and items
+    public static void register(DeferredRegister<Block> blocks) {
+        String blockName;
+
+        // Register stone blocks
+        for (StoneType blockEntry : values()) {
+            blockName = blockEntry.name + "_stone";
+            blockEntry.stoneBlock = blocks.register(blockName,
+                    () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                            .harvestLevel(1).harvestTool(ToolType.PICKAXE).setRequiresTool()
+                            .hardnessAndResistance(Constants.HARDS[blockEntry.hardnessIndex],
+                                    Constants.RESISTS[blockEntry.resistanceIndex]), blockEntry.group));
+            registerBlockItem(blockName, blockEntry.stoneBlock, 64);
+        }
+
+        // Register cobblestone blocks
+        for (StoneType blockEntry : values()) {
+            // Drop hardness index by one from host stone, leave resistance the same
+            // If 0 hardness, then leave the hardness the same and raise resistance by one
+            // NOTE: Assumes equal hardness and resistance indexes. If not, then resistance
+            // code needs editing.
+            if (blockEntry.hasCobble) {
+                blockName = blockEntry.name + "_cobblestone";
+                blockEntry.cobbleBlock = blocks.register(blockName,
+                        () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
+                                .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()
+                                .hardnessAndResistance(
+                                        (blockEntry.hardnessIndex == 0) ? Constants.HARDS[0] : Constants.HARDS[blockEntry.hardnessIndex - 1],
+                                        (blockEntry.hardnessIndex == 0) ? Constants.RESISTS[1] : Constants.RESISTS[blockEntry.resistanceIndex]
+                                )));
+                registerBlockItem(blockName, blockEntry.cobbleBlock, 64);
+            }
+        }
+    }
+
+
+    private static <T extends Block> void registerBlockItem(String name, RegistryObject<T> block, Integer stackSize) {
+        ModItems.ITEMS.register(name, () -> new BlockItem(block.get(),
+                new Item.Properties().group(ModItemGroup.RKU_GROUP).maxStackSize(stackSize)));
+    }
+
 }
