@@ -3,17 +3,149 @@
     "oretype=none": {
       "model": "rekindleunderground:block/rhyolite_stone"
     },
-    "oretype=test_ore_1": {
-      "model": "rekindleunderground:block/stoneore/rhyolite_stone/test_ore_1"
+    "oretype=apatite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/apatite"
     },
-    "oretype=test_ore_2": {
-      "model": "rekindleunderground:block/stoneore/rhyolite_stone/test_ore_2"
+    "oretype=azurite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/azurite"
     },
-    "oretype=test_ore_3": {
-      "model": "rekindleunderground:block/stoneore/rhyolite_stone/test_ore_3"
+    "oretype=baryte": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/baryte"
     },
-    "oretype=test_ore_4": {
-      "model": "rekindleunderground:block/stoneore/rhyolite_stone/test_ore_4"
+    "oretype=beryl": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/beryl"
+    },
+    "oretype=bismuthinite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/bismuthinite"
+    },
+    "oretype=carnotite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/carnotite"
+    },
+    "oretype=cassiterite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/cassiterite"
+    },
+    "oretype=celestine": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/celestine"
+    },
+    "oretype=chalcopyrite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/chalcopyrite"
+    },
+    "oretype=chromite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/chromite"
+    },
+    "oretype=cinnabar": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/cinnabar"
+    },
+    "oretype=cobaltite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/cobaltite"
+    },
+    "oretype=cryolite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/cryolite"
+    },
+    "oretype=electrum": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/electrum"
+    },
+    "oretype=fluorite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/fluorite"
+    },
+    "oretype=galena": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/galena"
+    },
+    "oretype=goethite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/goethite"
+    },
+    "oretype=graphite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/graphite"
+    },
+    "oretype=hematite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/hematite"
+    },
+    "oretype=ilmenite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/ilmenite"
+    },
+    "oretype=lepidolite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/lepidolite"
+    },
+    "oretype=limonite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/limonite"
+    },
+    "oretype=magnesite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/magnesite"
+    },
+    "oretype=magnetite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/magnetite"
+    },
+    "oretype=malachite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/malachite"
+    },
+    "oretype=molybdenite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/molybdenite"
+    },
+    "oretype=monazite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/monazite"
+    },
+    "oretype=native_copper": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/native_copper"
+    },
+    "oretype=native_gold": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/native_gold"
+    },
+    "oretype=native_sulfur": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/native_sulfur"
+    },
+    "oretype=pentlandite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/pentlandite"
+    },
+    "oretype=pollucite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/pollucite"
+    },
+    "oretype=psilomelane": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/psilomelane"
+    },
+    "oretype=pyrite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/pyrite"
+    },
+    "oretype=pyrochlore": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/pyrochlore"
+    },
+    "oretype=pyrolusite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/pyrolusite"
+    },
+    "oretype=rutile": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/rutile"
+    },
+    "oretype=scheelite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/scheelite"
+    },
+    "oretype=smithsonite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/smithsonite"
+    },
+    "oretype=sphalerite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/sphalerite"
+    },
+    "oretype=spodumene": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/spodumene"
+    },
+    "oretype=stibnite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/stibnite"
+    },
+    "oretype=sylvite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/sylvite"
+    },
+    "oretype=tantalite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/tantalite"
+    },
+    "oretype=tetrahedrite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/tetrahedrite"
+    },
+    "oretype=trona": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/trona"
+    },
+    "oretype=uranite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/uranite"
+    },
+    "oretype=wolframite": {
+      "model": "rekindleunderground:block/stoneore/rhyolite_stone/wolframite"
     }
   }
 }
