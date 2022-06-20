@@ -3,8 +3,7 @@
   "package": "com.jemmerl.rekindleunderground.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "server.MixinServerWorldGen",
-    "server.MixinFlatGenerationSettings"
+
   ],
   "client": [
 

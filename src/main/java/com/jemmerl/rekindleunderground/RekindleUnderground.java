@@ -3,6 +3,9 @@ package com.jemmerl.rekindleunderground;
 import com.jemmerl.rekindleunderground.block.ModBlocks;
 import com.jemmerl.rekindleunderground.block.custom.StoneOreBlock;
 import com.jemmerl.rekindleunderground.item.ModItems;
+import com.jemmerl.rekindleunderground.world.feature.ModFeatures;
+import com.jemmerl.rekindleunderground.world.RKUndergroundFeatures;
+import com.jemmerl.rekindleunderground.world.placements.ModFeaturePlacements;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
@@ -10,6 +13,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
@@ -35,20 +39,26 @@ public class RekindleUnderground
 
         ModItems.register(eventBus);
         ModBlocks.register(eventBus);
+        ModFeaturePlacements.register(eventBus);
+        ModFeatures.register(eventBus);
 
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+        eventBus.addListener(this::commonSetup);
+        eventBus.addListener(this::enqueueIMC);
+        eventBus.addListener(this::processIMC);
+        eventBus.addListener(this::clientSetup);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, RKUndergroundConfig.COMMON_SPEC);
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    private void setup(final FMLCommonSetupEvent event) {
+    private void commonSetup(final FMLCommonSetupEvent event) {
+        // Dont remove lambda incase needed later
+        DeferredWorkQueue.runLater(() -> {
+            RKUndergroundFeatures.registerConfiguredFeatures();
+        });
 
     }
 
-    private void doClientStuff(final FMLClientSetupEvent event) {
+    private void clientSetup(final FMLClientSetupEvent event) {
         // Set transparent textures for the stone ore blocks
         Block block;
         for (RegistryObject<Block> regBlock : ModBlocks.BLOCKS.getEntries()) {

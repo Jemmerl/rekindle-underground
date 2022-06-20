@@ -29,7 +29,7 @@ displayName="Rekindle Underground" #mandatory
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile="rekindleunderground.png" #optional
 # A text field displayed in the mod UI
-credits="Thanks for this example mod goes to Java and KaupenJoe" #optional
+credits="Thanks for this example mod goes to Java and KaupenJoe, along with the countless mods I learned from." #optional
 # A text field displayed in the mod UI
 authors="Jemmerl" #optional
 # The description text for the mod (multi line!) (#mandatory)

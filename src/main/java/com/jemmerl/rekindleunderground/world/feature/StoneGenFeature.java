@@ -18,9 +18,9 @@ import net.minecraftforge.common.Tags;
 
 import java.util.Random;
 
-public class StoneGeneration extends Feature<NoFeatureConfig> {
+public class StoneGenFeature extends Feature<NoFeatureConfig> {
 
-    public StoneGeneration(Codec<NoFeatureConfig> codec) {
+    public StoneGenFeature(Codec<NoFeatureConfig> codec) {
         super(codec);
     }
 

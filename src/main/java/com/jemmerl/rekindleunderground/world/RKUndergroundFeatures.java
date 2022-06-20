@@ -1,18 +1,30 @@
 package com.jemmerl.rekindleunderground.world;
 
-import com.jemmerl.rekindleunderground.world.feature.StoneGeneration;
+import com.jemmerl.rekindleunderground.RekindleUnderground;
+import com.jemmerl.rekindleunderground.world.feature.ModFeatures;
+import com.jemmerl.rekindleunderground.world.placements.ModFeaturePlacements;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.placement.NoPlacementConfig;
-import net.minecraft.world.gen.placement.Placement;
-import com.jemmerl.rekindleunderground.util.FeatureRegistrationHelper;
+import net.minecraft.world.gen.placement.IPlacementConfig;
 
-// Credit goes to Unearthed and lilypuree for this class; edited to fit needs
-// https://github.com/lilypuree/UnEarthed/tree/Forge-1.16.X
+// Credit goes to Project Rankine (CannoliCatfish and tritespartan17) for the basis of this class; edited to fit needs
+// https://github.com/CannoliCatfish/project-rankine/tree/1.16-1.3.X
 
 public class RKUndergroundFeatures {
-    public static final Feature<NoFeatureConfig> STONE_NO_CONFIG = FeatureRegistrationHelper.registerFeature("stone_generator", new StoneGeneration(NoFeatureConfig.CODEC));
-    public static final ConfiguredFeature<?, ?> STONE_CONFIG = FeatureRegistrationHelper.newConfiguredFeature("new_generator",
-            RKUndergroundFeatures.STONE_NO_CONFIG.withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(new NoPlacementConfig())));
+
+    public static final ConfiguredFeature<?, ?> STONE_GEN_CONFIG = ModFeatures.STONE_GEN.get().withConfiguration(new NoFeatureConfig())
+            .withPlacement(ModFeaturePlacements.SIMPLE_EMPTY_PLACEMENT.get().configure(IPlacementConfig.NO_PLACEMENT_CONFIG));
+
+    private static <FC extends IFeatureConfig> void CFRegister(String name, ConfiguredFeature<FC, ?> configuredFeature) {
+        Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(RekindleUnderground.MOD_ID, name), configuredFeature);
+    }
+
+    public static void registerConfiguredFeatures() {
+        CFRegister("stone_generator", STONE_GEN_CONFIG);
+    }
+
 }
