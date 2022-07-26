@@ -42,6 +42,9 @@
     "oretype=cryolite": {
       "model": "rekindleunderground:block/stoneore/peridotite_stone/cryolite"
     },
+    "oretype=diamond": {
+      "model": "rekindleunderground:block/stoneore/peridotite_stone/diamond"
+    },
     "oretype=electrum": {
       "model": "rekindleunderground:block/stoneore/peridotite_stone/electrum"
     },

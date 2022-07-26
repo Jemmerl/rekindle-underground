@@ -1,0 +1,8 @@
+{
+  "parent": "rekindleunderground:block/stone_ore_parent",
+  "textures": {
+    "all": "rekindleunderground:block/tuff_stone",
+    "particle": "rekindleunderground:block/tuff_stone",
+    "overlay": "rekindleunderground:block/ore/pyrochlore"
+  }
+}

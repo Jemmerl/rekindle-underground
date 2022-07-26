@@ -1,0 +1,8 @@
+{
+  "parent": "rekindleunderground:block/stone_ore_parent",
+  "textures": {
+    "all": "rekindleunderground:block/kimberlite_stone",
+    "particle": "rekindleunderground:block/kimberlite_stone",
+    "overlay": "rekindleunderground:block/ore/native_sulfur"
+  }
+}

@@ -24,8 +24,8 @@ public class StoneGenFeature extends Feature<NoFeatureConfig> {
         super(codec);
     }
 
-    private boolean setSeed = false;
-    private long worldSeed;
+    private static boolean setSeed = false;
+    private static long worldSeed;
 
     @Override
     public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {

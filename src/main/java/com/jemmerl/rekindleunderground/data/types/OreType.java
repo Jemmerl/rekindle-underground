@@ -19,6 +19,7 @@ public enum OreType implements IStringSerializable {
     CINNABAR("cinnabar"),
     COBALTITE("cobaltite"),
     CRYOLITE("cryolite"),
+    DIAMOND("diamond"),
     ELECTRUM("electrum"),
     FLUORITE ("fluorite"),
     GALENA("galena"),

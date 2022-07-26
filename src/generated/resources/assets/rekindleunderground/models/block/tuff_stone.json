@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "rekindleunderground:block/tuff_stone",
+    "up": "rekindleunderground:block/tuff_stone",
+    "down": "rekindleunderground:block/tuff_stone",
+    "north": "rekindleunderground:block/tuff_stone",
+    "south": "rekindleunderground:block/tuff_stone",
+    "east": "rekindleunderground:block/tuff_stone",
+    "west": "rekindleunderground:block/tuff_stone"
+  }
+}

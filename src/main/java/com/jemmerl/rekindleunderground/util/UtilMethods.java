@@ -40,4 +40,9 @@ public class UtilMethods {
         return unitVec;
     }
 
+    // Return the hypotenuse of two values
+    public static double getHypotenuse(int a1, int b1, int a2, int b2) {
+        return Math.hypot((a1 - a2), (b1 - b2));
+    }
+
 }

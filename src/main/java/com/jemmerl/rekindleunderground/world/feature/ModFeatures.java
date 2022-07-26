@@ -18,7 +18,9 @@ public class ModFeatures {
     public static final RegistryObject<Feature<NoFeatureConfig>> STONE_GEN
             = FEATURES.register("stone_gen", () -> new StoneGenFeature(NoFeatureConfig.CODEC));
 
+    public static final RegistryObject<Feature<NoFeatureConfig>> DIATREME_PIPE_GEN
+            = FEATURES.register("diatreme_pipe_gen", () -> new DiatremeMaarFeature(NoFeatureConfig.CODEC));
+
     public static void register(IEventBus eventBus) {
-        System.out.println("register mod features");
         FEATURES.register(eventBus); }
 }

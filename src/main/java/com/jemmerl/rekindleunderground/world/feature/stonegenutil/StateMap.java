@@ -31,7 +31,7 @@ public class StateMap {
 
     private void generateStateMap() {
         PopulateStrata();
-        // generate igneous formations
+        //PopulateIgneous();
         // generate ores
     }
 
@@ -39,6 +39,7 @@ public class StateMap {
     /////             Map Generators            /////
     /////////////////////////////////////////////////
 
+    // Fill the chunk state map with generated stones
     public void PopulateStrata() {
         int posX, posZ;
         int topY = chunkReader.getMaxHeight();
@@ -49,41 +50,19 @@ public class StateMap {
                     posX = this.blockPos.getX() + x;
                     posZ = this.blockPos.getZ() + z;
 
-
-
-                    // OLD
-                    // strataNoise = ConfiguredNoise.stoneStrataNoise(posX, y, posZ);
-
-
-                    // OLD TEMP
-
-                    /*
-                    if (strataNoise <= -0.8) {
-                        state = Blocks.NETHERITE_BLOCK.getDefaultState();
-                    } else if (strataNoise <= -0.6) {
-                        state = Blocks.GOLD_BLOCK.getDefaultState();
-                    } else if (strataNoise <= -0.4) {
-                        state = Blocks.LAPIS_BLOCK.getDefaultState();
-                    } else if (strataNoise <= -0.2) {
-                        state = Blocks.COAL_BLOCK.getDefaultState();
-                    } else if (strataNoise <= 0.0) {
-                        state = Blocks.IRON_BLOCK.getDefaultState();
-                    } else if (strataNoise <= 0.2) {
-                        state = Blocks.REDSTONE_BLOCK.getDefaultState();
-                    } else if (strataNoise <= 0.4) {
-                        state = Blocks.EMERALD_BLOCK.getDefaultState();
-                    } else if (strataNoise <= 0.6) {
-                        state = Blocks.DIAMOND_BLOCK.getDefaultState();
-                    } else if (strataNoise <= 0.8) {
-                        state = Blocks.STONE.getDefaultState();
-                    } else {
-                        state = Blocks.DIRT.getDefaultState();
-                    }*/
-
                     stateMap[x][y][z] = getStoneStrataBlock(posX, y, posZ);
                 }
             }
         }
+    }
+
+    // Replace stones in the current state map with generated igneous features
+    public void PopulateIgneous() {
+
+    }
+
+    public void PopulateOres() {
+
     }
 
 

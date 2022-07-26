@@ -1,16 +1,21 @@
 package com.jemmerl.rekindleunderground.data.types;
 
+import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.block.custom.StoneOreBlock;
 import com.jemmerl.rekindleunderground.item.ModItemGroup;
 import com.jemmerl.rekindleunderground.item.ModItems;
+import com.jemmerl.rekindleunderground.util.UtilMethods;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
+
+import java.util.ArrayList;
 
 public enum StoneType {
     
@@ -35,6 +40,7 @@ public enum StoneType {
     ANDESITE("andesite", StoneGroupType.EXTRUSIVE, 3, 3, true),
     BASALT("basalt", StoneGroupType.EXTRUSIVE, 3, 3, true),
     SCORIA("scoria", StoneGroupType.EXTRUSIVE, 2, 2, false),
+    TUFF("tuff", StoneGroupType.EXTRUSIVE, 1, 1, false),
 
     // Intrusive Igneous
     DIORITE("diorite", StoneGroupType.INTRUSIVE, 4, 4, true),
@@ -44,6 +50,9 @@ public enum StoneType {
     GABBRO("gabbro", StoneGroupType.INTRUSIVE, 4, 4, true),
     DIABASE("diabase", StoneGroupType.INTRUSIVE, 4, 4, true),
     PERIDOTITE("peridotite", StoneGroupType.INTRUSIVE, 3, 3, true),
+    KIMBERLITE("kimberlite", StoneGroupType.INTRUSIVE, 3, 3, true),
+    LAMPROITE("lamproite", StoneGroupType.INTRUSIVE, 3, 3, true),
+
 
     // Metamorphic
     QUARTZITE("quartzite", StoneGroupType.METAMORPHIC, 4, 4, true),
@@ -63,6 +72,9 @@ public enum StoneType {
     private final int resistanceIndex;
     private final boolean hasCobble;
 
+    private static ArrayList<String> stoneNameList = new ArrayList<>();
+    private static ArrayList<String> cobbleNameList = new ArrayList<>();
+
     StoneType(String name, StoneGroupType group, int hardnessIndex, int resistanceIndex, boolean hasCobble) {
         this.name = name;
         this.group = group;
@@ -79,16 +91,36 @@ public enum StoneType {
         return this.group;
     }
 
-    public float getHardness(){
+    public BlockState getStoneState() {
+        return UtilMethods.stringToBlockState(RekindleUnderground.MOD_ID + ":" + this.name + "_stone");
+    }
+
+    public BlockState getCobbleState() {
+        if (this.hasCobble) {
+            return UtilMethods.stringToBlockState(RekindleUnderground.MOD_ID + ":" + this.name + "_cobblestone");
+        } else {
+            return null;
+        }
+    }
+
+    public float getHardness() {
         return Constants.HARDS[this.hardnessIndex];
     }
 
-    public float getResistance(){
+    public float getResistance() {
         return Constants.HARDS[this.resistanceIndex];
     }
 
-    public boolean hasCobble(){
+    public boolean hasCobble() {
         return this.hasCobble;
+    }
+
+    public static boolean isInStones(String path) {
+        return stoneNameList.contains(path);
+    }
+
+    public static boolean isInCobbles(String path) {
+        return cobbleNameList.contains(path);
     }
 
     @SuppressWarnings("NonFinalFieldInEnum")
@@ -108,6 +140,8 @@ public enum StoneType {
         // Register stone blocks
         for (StoneType blockEntry : values()) {
             blockName = blockEntry.name + "_stone";
+            stoneNameList.add(blockName);
+
             blockEntry.stoneBlock = blocks.register(blockName,
                     () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
                             .harvestLevel(1).harvestTool(ToolType.PICKAXE).setRequiresTool()
@@ -124,6 +158,7 @@ public enum StoneType {
             // code needs editing.
             if (blockEntry.hasCobble) {
                 blockName = blockEntry.name + "_cobblestone";
+                cobbleNameList.add(blockName);
                 blockEntry.cobbleBlock = blocks.register(blockName,
                         () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
                                 .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()

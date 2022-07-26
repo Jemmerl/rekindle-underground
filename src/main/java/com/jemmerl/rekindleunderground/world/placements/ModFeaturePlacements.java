@@ -14,8 +14,11 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ModFeaturePlacements {
     public static final DeferredRegister<Placement<?>> PLACEMENTS = DeferredRegister.create(ForgeRegistries.DECORATORS, RekindleUnderground.MOD_ID);
 
-    public static final RegistryObject<Placement<NoPlacementConfig>> SIMPLE_EMPTY_PLACEMENT
+    public static final RegistryObject<Placement<NoPlacementConfig>> STONE_GEN_PLACEMENT
             = PLACEMENTS.register("stone_gen_placement", () -> new StoneGenPlacer(NoPlacementConfig.CODEC));
+
+    public static final RegistryObject<Placement<ChanceConfig>> PIPE_CHANCE_PLACEMENT
+            = PLACEMENTS.register("pipe_gen_placement", () -> new PipeGenPlacer(ChanceConfig.CODEC));
 
     public static void register(IEventBus eventBus) {
         PLACEMENTS.register(eventBus);

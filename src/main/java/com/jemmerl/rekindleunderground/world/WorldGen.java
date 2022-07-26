@@ -1,8 +1,6 @@
 package com.jemmerl.rekindleunderground.world;
 
-import com.jemmerl.rekindleunderground.world.feature.ModFeatures;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
@@ -19,10 +17,11 @@ import java.util.*;
 public class WorldGen {
 
     // Use to add intrusions, biome specifics
-    private static List<AbstractMap.SimpleEntry<ConfiguredFeature<?,?>, List<ResourceLocation>>> getAllStoneFeatures() {
-        List<AbstractMap.SimpleEntry<ConfiguredFeature<?, ?>, List<ResourceLocation>>> allStoneFeatures = new ArrayList<>();
+    private static List<LinkedHashMap.SimpleEntry<ConfiguredFeature<?,?>, List<ResourceLocation>>> getAllStoneFeatures() {
+        List<LinkedHashMap.SimpleEntry<ConfiguredFeature<?, ?>, List<ResourceLocation>>> allStoneFeatures = new ArrayList<>();
 
         allStoneFeatures.add(new AbstractMap.SimpleEntry<>(RKUndergroundFeatures.STONE_GEN_CONFIG, null));
+        allStoneFeatures.add(new AbstractMap.SimpleEntry<>(RKUndergroundFeatures.DIATREME_PIPE_GEN_CONFIG, null));
 
         //allStoneFeatures.add(new AbstractMap.SimpleEntry<>(RankineBiomeFeatures.WORLD_REPLACER_GEN, WorldgenUtils.getBiomeNamesFromCategory(Collections.emptyList(), false)));
 
@@ -34,7 +33,7 @@ public class WorldGen {
         if (biomeLoadingEvent.getName() != null) {
             GenerationStage.Decoration undergroundDecStage = GenerationStage.Decoration.UNDERGROUND_ORES;
 
-            for (AbstractMap.SimpleEntry<ConfiguredFeature<?,?>,List<ResourceLocation>> entry : getAllStoneFeatures()) {
+            for (LinkedHashMap.SimpleEntry<ConfiguredFeature<?,?>,List<ResourceLocation>> entry : getAllStoneFeatures()) {
                 if ((entry.getValue() == null) || (entry.getValue().contains(biomeLoadingEvent.getName()))) {
                     biomeLoadingEvent.getGeneration().withFeature(undergroundDecStage.ordinal(),entry::getKey);
                 }
