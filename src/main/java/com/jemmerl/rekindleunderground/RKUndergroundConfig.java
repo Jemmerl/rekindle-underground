@@ -20,7 +20,7 @@ public class RKUndergroundConfig {
         private static final int TILT_MIN = 20;
         private static final int TILT_MAX = 100;
 
-        private static final int STONE_HARDNESS = 10; // Multiply relative stone hardnesses
+        private static final int STONE_HARDNESS = 20; // Multiply relative stone hardnesses
         private static final int STONE_RESISTANCE = 6; // Multiply relative stone resistances
 
         public final ForgeConfigSpec.ConfigValue<Integer> hardnessDepthFactor;

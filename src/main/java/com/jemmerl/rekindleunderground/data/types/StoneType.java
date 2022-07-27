@@ -63,10 +63,10 @@ public enum StoneType {
     MARBLE("marble", StoneGroupType.METAMORPHIC, 3, 3, true);
 
     private static class Constants {
-        private static final Float[] HARDS = new Float[]{1f, 1.25f, 1.5f, 2f, 2.5f};
-        private static final Float[] RESISTS = {3f, 2.5f, 2f, 1.5f, 1f};
-        private static final int HARD_MULT = RKUndergroundConfig.COMMON.stoneHardness.get(); // Default 10
-        private static final int RESIST_MULT = RKUndergroundConfig.COMMON.stoneResistance.get(); // Default 6
+        private static final Float[] HARDS = new Float[]{1f, 1.75f, 2.5f, 3f, 3.5f}; // Relative hardnesses
+        private static final Float[] RESISTS = {3f, 2.5f, 2f, 1.5f, 1f}; // Relaitve resistances
+        private static final int HARD_MULT = RKUndergroundConfig.COMMON.stoneHardness.get(); // Multiplied by rel. hardnesses; Default 20
+        private static final int RESIST_MULT = RKUndergroundConfig.COMMON.stoneResistance.get(); // Multiplied by rel. resistances; Default 6
     }
 
     private final String name;
