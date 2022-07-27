@@ -1,5 +1,6 @@
 package com.jemmerl.rekindleunderground.data.types;
 
+import com.jemmerl.rekindleunderground.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.block.custom.StoneOreBlock;
 import com.jemmerl.rekindleunderground.item.ModItemGroup;
@@ -62,8 +63,10 @@ public enum StoneType {
     MARBLE("marble", StoneGroupType.METAMORPHIC, 3, 3, true);
 
     private static class Constants {
-        private static final Float[] HARDS = new Float[]{10f, 12.5f, 15f, 20f, 25f};
-        private static final Float[] RESISTS = {18f, 15f, 12f, 9f, 6f};
+        private static final Float[] HARDS = new Float[]{1f, 1.25f, 1.5f, 2f, 2.5f};
+        private static final Float[] RESISTS = {3f, 2.5f, 2f, 1.5f, 1f};
+        private static final int HARD_MULT = RKUndergroundConfig.COMMON.stoneHardness.get(); // Default 10
+        private static final int RESIST_MULT = RKUndergroundConfig.COMMON.stoneResistance.get(); // Default 6
     }
 
     private final String name;
@@ -104,11 +107,11 @@ public enum StoneType {
     }
 
     public float getHardness() {
-        return Constants.HARDS[this.hardnessIndex];
+        return (Constants.HARDS[this.hardnessIndex] * Constants.HARD_MULT);
     }
 
     public float getResistance() {
-        return Constants.HARDS[this.resistanceIndex];
+        return (Constants.HARDS[this.resistanceIndex] * Constants.RESIST_MULT);
     }
 
     public boolean hasCobble() {
@@ -145,8 +148,9 @@ public enum StoneType {
             blockEntry.stoneBlock = blocks.register(blockName,
                     () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
                             .harvestLevel(1).harvestTool(ToolType.PICKAXE).setRequiresTool()
-                            .hardnessAndResistance(Constants.HARDS[blockEntry.hardnessIndex],
-                                    Constants.RESISTS[blockEntry.resistanceIndex]), blockEntry.group));
+                            .hardnessAndResistance((Constants.HARDS[blockEntry.hardnessIndex] * Constants.HARD_MULT),
+                                    (Constants.RESISTS[blockEntry.resistanceIndex] * Constants.RESIST_MULT)),
+                            blockEntry.group));
             registerBlockItem(blockName, blockEntry.stoneBlock, 64);
         }
 

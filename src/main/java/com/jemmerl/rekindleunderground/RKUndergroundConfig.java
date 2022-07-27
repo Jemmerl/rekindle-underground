@@ -20,6 +20,9 @@ public class RKUndergroundConfig {
         private static final int TILT_MIN = 20;
         private static final int TILT_MAX = 100;
 
+        private static final int STONE_HARDNESS = 10; // Multiply relative stone hardnesses
+        private static final int STONE_RESISTANCE = 6; // Multiply relative stone resistances
+
         public final ForgeConfigSpec.ConfigValue<Integer> hardnessDepthFactor;
         public final ForgeConfigSpec.ConfigValue<Integer> regionSize;
         public final ForgeConfigSpec.ConfigValue<Double> regionVariation;
@@ -32,6 +35,9 @@ public class RKUndergroundConfig {
         public final ForgeConfigSpec.ConfigValue<Integer> warpMax;
         public final ForgeConfigSpec.ConfigValue<Integer> tiltMin;
         public final ForgeConfigSpec.ConfigValue<Integer> tiltMax;
+
+        public final ForgeConfigSpec.ConfigValue<Integer> stoneHardness;
+        public final ForgeConfigSpec.ConfigValue<Integer> stoneResistance;
 
         public Common(ForgeConfigSpec.Builder builder)
         {
@@ -94,6 +100,14 @@ public class RKUndergroundConfig {
             builder.pop();
 
             builder.pop(2);
+
+            builder.push("Stone Property Config");
+            this.stoneHardness = builder.comment("Set the multiplier for relative stone hardnesses; Recommended Default is 10")
+                    .worldRestart()
+                    .defineInRange("Hardness Multiplier", STONE_HARDNESS, 1, 50);
+            this.stoneResistance = builder.comment("Set the multiplier for relative stone resistances; Recommended Default is 6")
+                    .worldRestart()
+                    .defineInRange("Resistance Multiplier", STONE_RESISTANCE, 1, 30);
         }
     }
 
