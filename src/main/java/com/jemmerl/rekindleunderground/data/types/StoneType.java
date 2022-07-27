@@ -54,7 +54,6 @@ public enum StoneType {
     KIMBERLITE("kimberlite", StoneGroupType.INTRUSIVE, 3, 3, true),
     LAMPROITE("lamproite", StoneGroupType.INTRUSIVE, 3, 3, true),
 
-
     // Metamorphic
     QUARTZITE("quartzite", StoneGroupType.METAMORPHIC, 4, 4, true),
     SCHIST("schist", StoneGroupType.METAMORPHIC, 1, 1, true),
@@ -75,8 +74,10 @@ public enum StoneType {
     private final int resistanceIndex;
     private final boolean hasCobble;
 
-    private static ArrayList<String> stoneNameList = new ArrayList<>();
-    private static ArrayList<String> cobbleNameList = new ArrayList<>();
+    @SuppressWarnings("FieldMayBeFinal")
+    public static ArrayList<String> stoneNameList = new ArrayList<>();
+    @SuppressWarnings("FieldMayBeFinal")
+    public static ArrayList<String> cobbleNameList = new ArrayList<>();
 
     StoneType(String name, StoneGroupType group, int hardnessIndex, int resistanceIndex, boolean hasCobble) {
         this.name = name;
