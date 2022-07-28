@@ -66,6 +66,15 @@ public enum OreType implements IStringSerializable {
         return this.getString();
     }
 
+    public static OreType fromString(String string) {
+        for (OreType type : OreType.values()) {
+            if (type.name.equalsIgnoreCase(string)) {
+                return type;
+            }
+        }
+        return null;
+    }
+
     public String getString() {
         return this.name;
     }
