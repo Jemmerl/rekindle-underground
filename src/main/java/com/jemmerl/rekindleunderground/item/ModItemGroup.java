@@ -12,7 +12,7 @@ public class ModItemGroup {
         @Override
         public ItemStack createIcon() {
             return new ItemStack(StoneType.BASALT.getStoneState().getBlock());
-        } // TODO
+        }
     };
 
 }

@@ -4,6 +4,7 @@ import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.data.generators.client.ModBlockStateProvider;
 import com.jemmerl.rekindleunderground.data.generators.client.ModItemModelProvider;
 import com.jemmerl.rekindleunderground.data.generators.server.ModCobblestoneRecipeProvider;
+import com.jemmerl.rekindleunderground.data.generators.server.ModLootTableProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -25,6 +26,7 @@ public final class DataGenerators {
 
         // Server-side data providers
         gen.addProvider(new ModCobblestoneRecipeProvider(gen));
+        gen.addProvider(new ModLootTableProvider(gen));
 
 //        gen.addProvider(new ModItemModelProvider(gen, existingFileHelper));
 //        ModBlockTagsProvider blockTags = new ModBlockTagsProvider(gen, existingFileHelper);
