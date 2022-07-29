@@ -27,6 +27,8 @@ public class ModTags {
         // Example
         // public static final Tags.IOptionalNamedTag<Item> AMETHYST = createForgeTag("gems/amethyst");
 
+        public static final Tags.IOptionalNamedTag<Item> ROCKS = createTag("rk_rocks");
+
         private static Tags.IOptionalNamedTag<Item> createTag(String name) {
             return ItemTags.createOptional(new ResourceLocation(RekindleUnderground.MOD_ID, name));
         }

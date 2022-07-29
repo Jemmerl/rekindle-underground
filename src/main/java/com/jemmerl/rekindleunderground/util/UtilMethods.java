@@ -1,6 +1,7 @@
 package com.jemmerl.rekindleunderground.util;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -24,6 +25,11 @@ public class UtilMethods {
     // Returns a block given a string representation of its resource location
     public static BlockState stringToBlockState(String blockName) {
         return Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(blockName))).getDefaultState();
+    }
+
+    // Returns an item given a string representation of its resource location
+    public static Item stringToItem(String itemName) {
+        return ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemName));
     }
 
     // Returns the unit vector for a given vector of any size

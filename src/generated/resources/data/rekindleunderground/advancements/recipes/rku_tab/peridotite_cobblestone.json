@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "rekindleunderground:peridotite_cobblestone"
+    ]
+  },
+  "criteria": {
+    "has_rock": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "rekindleunderground:rk_rocks"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "rekindleunderground:peridotite_cobblestone"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_rock",
+      "has_the_recipe"
+    ]
+  ]
+}

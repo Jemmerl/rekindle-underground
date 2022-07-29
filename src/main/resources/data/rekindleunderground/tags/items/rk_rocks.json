@@ -1,0 +1,35 @@
+{
+  "replace": false,
+  "values": [
+    "rekindleunderground:chalk_rock",
+    "rekindleunderground:limestone_rock",
+    "rekindleunderground:dolostone_rock",
+    "rekindleunderground:shale_rock",
+    "rekindleunderground:sandstone_rock",
+    "rekindleunderground:red_sandstone_rock",
+    "rekindleunderground:greywacke_rock",
+    "rekindleunderground:mudstone_rock",
+    "rekindleunderground:veinquartz_rock",
+
+    "rekindleunderground:rhyolite_rock",
+    "rekindleunderground:dacite_rock",
+    "rekindleunderground:andesite_rock",
+    "rekindleunderground:basalt_rock",
+
+    "rekindleunderground:diorite_rock",
+    "rekindleunderground:granodiorite_rock",
+    "rekindleunderground:granite_rock",
+    "rekindleunderground:syenite_rock",
+    "rekindleunderground:gabbro_rock",
+    "rekindleunderground:diabase_rock",
+    "rekindleunderground:peridotite_rock",
+    "rekindleunderground:kimberlite_rock",
+    "rekindleunderground:lamproite_rock",
+
+    "rekindleunderground:quartzite_rock",
+    "rekindleunderground:schist_rock",
+    "rekindleunderground:phyllite_rock",
+    "rekindleunderground:gneiss_rock",
+    "rekindleunderground:marble_rock"
+  ]
+}
