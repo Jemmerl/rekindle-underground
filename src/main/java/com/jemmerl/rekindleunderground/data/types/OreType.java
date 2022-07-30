@@ -53,7 +53,7 @@ public enum OreType implements IStringSerializable {
     TANTALITE("tantalite"),
     TETRAHEDRITE("tetrahedrite"),
     TRONA("trona"),
-    URANITE("uranite"),
+    URANINITE("uraninite"),
     WOLFRAMITE("wolframite");
 
     private final String name;

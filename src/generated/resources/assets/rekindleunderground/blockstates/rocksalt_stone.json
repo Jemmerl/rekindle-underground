@@ -144,8 +144,8 @@
     "oretype=trona": {
       "model": "rekindleunderground:block/stoneore/rocksalt_stone/trona"
     },
-    "oretype=uranite": {
-      "model": "rekindleunderground:block/stoneore/rocksalt_stone/uranite"
+    "oretype=uraninite": {
+      "model": "rekindleunderground:block/stoneore/rocksalt_stone/uraninite"
     },
     "oretype=wolframite": {
       "model": "rekindleunderground:block/stoneore/rocksalt_stone/wolframite"

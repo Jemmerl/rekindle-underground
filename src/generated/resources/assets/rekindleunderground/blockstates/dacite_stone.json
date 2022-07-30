@@ -144,8 +144,8 @@
     "oretype=trona": {
       "model": "rekindleunderground:block/stoneore/dacite_stone/trona"
     },
-    "oretype=uranite": {
-      "model": "rekindleunderground:block/stoneore/dacite_stone/uranite"
+    "oretype=uraninite": {
+      "model": "rekindleunderground:block/stoneore/dacite_stone/uraninite"
     },
     "oretype=wolframite": {
       "model": "rekindleunderground:block/stoneore/dacite_stone/wolframite"

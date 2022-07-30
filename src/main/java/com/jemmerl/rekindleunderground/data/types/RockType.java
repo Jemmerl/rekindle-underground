@@ -76,7 +76,7 @@ public enum RockType implements IItemProvider {
 
     private static final class ItemInternal extends Item {
         ItemInternal() {
-            super(new Properties().group(ModItemGroup.RKU_GROUP));
+            super(new Properties().group(ModItemGroup.RKU_STONE_GROUP));
         }
     }
 }

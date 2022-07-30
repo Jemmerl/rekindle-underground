@@ -8,10 +8,17 @@ import net.minecraft.item.Items;
 
 public class ModItemGroup {
 
-    public static final ItemGroup RKU_GROUP = new ItemGroup("rku_tab") {
+    public static final ItemGroup RKU_STONE_GROUP = new ItemGroup("rku_stones_tab") {
         @Override
         public ItemStack createIcon() {
             return new ItemStack(StoneType.BASALT.getStoneState().getBlock());
+        }
+    };
+
+    public static final ItemGroup RKU_ORES_GROUP = new ItemGroup("rku_ores_tab") {
+        @Override
+        public ItemStack createIcon() {
+            return new ItemStack(StoneType.PERIDOTITE.getStoneState().getBlock());
         }
     };
 

@@ -179,7 +179,7 @@ public enum StoneType {
 
     private static <T extends Block> void registerBlockItem(String name, RegistryObject<T> block, Integer stackSize) {
         ModItems.ITEMS.register(name, () -> new BlockItem(block.get(),
-                new Item.Properties().group(ModItemGroup.RKU_GROUP).maxStackSize(stackSize)));
+                new Item.Properties().group(ModItemGroup.RKU_STONE_GROUP).maxStackSize(stackSize)));
     }
 
 }

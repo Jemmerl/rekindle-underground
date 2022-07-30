@@ -48,7 +48,7 @@ public class ModBlocks {
 
     private static <T extends Block> void registerBlockItem(String name, RegistryObject<T> block, Integer stackSize) {
         ModItems.ITEMS.register(name, () -> new BlockItem(block.get(),
-                new Item.Properties().group(ModItemGroup.RKU_GROUP).maxStackSize(stackSize)));
+                new Item.Properties().group(ModItemGroup.RKU_STONE_GROUP).maxStackSize(stackSize)));
     }
 
 
@@ -61,7 +61,7 @@ public class ModBlocks {
 
     private static <T extends Block> void registerBlockItem(String name, RegistryObject<T> block, Integer stackSize, String tooltipKey) {
         ModItems.ITEMS.register(name, () -> new BlockItem(block.get(),
-                new Item.Properties().group(ModItemGroup.RKU_GROUP).maxStackSize(stackSize)) {
+                new Item.Properties().group(ModItemGroup.RKU_STONE_GROUP).maxStackSize(stackSize)) {
             @Override
             public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
                 if(!Screen.hasShiftDown()) {
