@@ -63,7 +63,7 @@ public enum StoneType {
 
     private static class Constants {
         private static final Float[] HARDS = new Float[]{1f, 1.75f, 2.5f, 3f, 3.5f}; // Relative hardnesses
-        private static final Float[] RESISTS = {3f, 2.5f, 2f, 1.5f, 1f}; // Relaitve resistances
+        private static final Float[] RESISTS = {3f, 2.5f, 2f, 1.5f, 1f}; // Relative resistances
         private static final int HARD_MULT = RKUndergroundConfig.COMMON.stoneHardness.get(); // Multiplied by rel. hardnesses; Default 20
         private static final int RESIST_MULT = RKUndergroundConfig.COMMON.stoneResistance.get(); // Multiplied by rel. resistances; Default 6
     }
@@ -148,7 +148,7 @@ public enum StoneType {
 
             blockEntry.stoneBlock = blocks.register(blockName,
                     () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
-                            .harvestLevel(1).harvestTool(ToolType.PICKAXE).setRequiresTool()
+                            .harvestLevel(0).harvestTool(ToolType.PICKAXE).setRequiresTool()
                             .hardnessAndResistance((Constants.HARDS[blockEntry.hardnessIndex] * Constants.HARD_MULT),
                                     (Constants.RESISTS[blockEntry.resistanceIndex] * Constants.RESIST_MULT)),
                             blockEntry.group));
@@ -161,12 +161,13 @@ public enum StoneType {
             // If 0 hardness, then leave the hardness the same and raise resistance by one
             // NOTE: Assumes equal hardness and resistance indexes. If not, then resistance
             // code needs editing.
+            // Does not use the multipliers, as it is a pile of cobbles and not solid stone!
             if (blockEntry.hasCobble) {
                 blockName = blockEntry.name + "_cobblestone";
                 cobbleNameList.add(blockName);
                 blockEntry.cobbleBlock = blocks.register(blockName,
                         () -> new Block(AbstractBlock.Properties.create(Material.ROCK)
-                                .harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()
+                                .harvestLevel(0).harvestTool(ToolType.PICKAXE).setRequiresTool()
                                 .hardnessAndResistance(
                                         (blockEntry.hardnessIndex == 0) ? Constants.HARDS[0] : Constants.HARDS[blockEntry.hardnessIndex - 1],
                                         (blockEntry.hardnessIndex == 0) ? Constants.RESISTS[1] : Constants.RESISTS[blockEntry.resistanceIndex]

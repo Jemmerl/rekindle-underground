@@ -1,5 +1,9 @@
 package com.jemmerl.rekindleunderground.data.types;
 
+import com.jemmerl.rekindleunderground.RekindleUnderground;
+import com.jemmerl.rekindleunderground.util.UtilMethods;
+import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.util.IStringSerializable;
 
 import java.util.Locale;
@@ -73,6 +77,17 @@ public enum OreType implements IStringSerializable {
             }
         }
         return null;
+    }
+
+    // Returns the respective ore item for the enum. "DIAMOND" and "NONE" are special cases
+    public Item getOreItem() {
+        if (this.equals(OreType.DIAMOND)) {
+            return Items.DIAMOND;
+        } else if (this.equals(OreType.NONE)) {
+            return null;
+        } else {
+            return UtilMethods.stringToItem(RekindleUnderground.MOD_ID + ":" + this.name + "_ore");
+        }
     }
 
     public String getString() {

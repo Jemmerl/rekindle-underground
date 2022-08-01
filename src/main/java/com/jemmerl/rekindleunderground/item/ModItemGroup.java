@@ -18,7 +18,7 @@ public class ModItemGroup {
     public static final ItemGroup RKU_ORES_GROUP = new ItemGroup("rku_ores_tab") {
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(StoneType.PERIDOTITE.getStoneState().getBlock());
+            return ModItems.FLUORITE_ORE.get().getDefaultInstance();
         }
     };
 

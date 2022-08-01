@@ -47,11 +47,11 @@ public class StoneOreBlock extends Block {
     public float getPlayerRelativeBlockHardness(BlockState state, PlayerEntity player, IBlockReader worldIn, BlockPos pos) {
         float f = state.getBlockHardness(worldIn, pos);
         int y = pos.getY();
-        if (y <= 50) { f *= (1 + HARDNESS_DEPTH_FACTOR * ((50f - y) / 50f)); }
+        if (y <= 50) { f *= (1 + HARDNESS_DEPTH_FACTOR * ((50f - y) / 50f)); } // Increases linearly starting at y = 50
         if (f == -1.0F) {
             return 0.0F;
         } else {
-            int i = net.minecraftforge.common.ForgeHooks.canHarvestBlock(state, player, worldIn, pos) ? 30 : 100;
+            int i = net.minecraftforge.common.ForgeHooks.canHarvestBlock(state, player, worldIn, pos) ? 30 : 100; // Normal "cannot harvest" speed modifier
             return player.getDigSpeed(state, pos) / f / (float)i;
         }
 

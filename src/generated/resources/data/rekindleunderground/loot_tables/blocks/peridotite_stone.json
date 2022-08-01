@@ -2,6 +2,7 @@
   "type": "minecraft:block",
   "pools": [
     {
+      "name": "none",
       "rolls": {
         "n": 3,
         "p": 0.65,
@@ -11,6 +12,1133 @@
         {
           "type": "minecraft:item",
           "name": "rekindleunderground:peridotite_rock"
+        }
+      ]
+    },
+    {
+      "name": "apatite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:apatite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "apatite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "azurite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:azurite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "azurite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "baryte",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:baryte_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "baryte"
+          }
+        }
+      ]
+    },
+    {
+      "name": "beryl",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:beryl_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "beryl"
+          }
+        }
+      ]
+    },
+    {
+      "name": "bismuthinite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:bismuthinite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "bismuthinite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "carnotite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:carnotite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "carnotite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cassiterite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:cassiterite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "cassiterite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "celestine",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:celestine_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "celestine"
+          }
+        }
+      ]
+    },
+    {
+      "name": "chalcopyrite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:chalcopyrite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "chalcopyrite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "chromite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:chromite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "chromite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cinnabar",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:cinnabar_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "cinnabar"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cobaltite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:cobaltite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "cobaltite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cryolite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:cryolite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "cryolite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "diamond",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "diamond"
+          }
+        }
+      ]
+    },
+    {
+      "name": "electrum",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:electrum_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "electrum"
+          }
+        }
+      ]
+    },
+    {
+      "name": "fluorite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:fluorite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "fluorite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "galena",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:galena_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "galena"
+          }
+        }
+      ]
+    },
+    {
+      "name": "goethite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:goethite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "goethite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "graphite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:graphite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "graphite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "hematite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:hematite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "hematite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ilmenite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:ilmenite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "ilmenite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lepidolite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:lepidolite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "lepidolite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "limonite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:limonite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "limonite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "magnesite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:magnesite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "magnesite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "magnetite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:magnetite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "magnetite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "malachite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:malachite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "malachite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "molybdenite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:molybdenite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "molybdenite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "monazite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:monazite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "monazite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "native_copper",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:native_copper_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "native_copper"
+          }
+        }
+      ]
+    },
+    {
+      "name": "native_gold",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:native_gold_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "native_gold"
+          }
+        }
+      ]
+    },
+    {
+      "name": "native_sulfur",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:native_sulfur_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "native_sulfur"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pentlandite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:pentlandite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "pentlandite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pollucite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:pollucite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "pollucite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "psilomelane",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:psilomelane_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "psilomelane"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pyrite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:pyrite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "pyrite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pyrochlore",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:pyrochlore_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "pyrochlore"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pyrolusite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:pyrolusite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "pyrolusite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "rutile",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:rutile_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "rutile"
+          }
+        }
+      ]
+    },
+    {
+      "name": "scheelite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:scheelite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "scheelite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "smithsonite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:smithsonite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "smithsonite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "sphalerite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:sphalerite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "sphalerite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "spodumene",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:spodumene_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "spodumene"
+          }
+        }
+      ]
+    },
+    {
+      "name": "stibnite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:stibnite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "stibnite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "sylvite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:sylvite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "sylvite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "tantalite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:tantalite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "tantalite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "tetrahedrite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:tetrahedrite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "tetrahedrite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "trona",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:trona_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "trona"
+          }
+        }
+      ]
+    },
+    {
+      "name": "uraninite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:uraninite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "uraninite"
+          }
+        }
+      ]
+    },
+    {
+      "name": "wolframite",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:wolframite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:peridotite_stone",
+          "properties": {
+            "oretype": "wolframite"
+          }
         }
       ]
     }
