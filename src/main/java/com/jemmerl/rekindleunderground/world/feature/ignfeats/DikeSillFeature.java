@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground.world.feature;
+package com.jemmerl.rekindleunderground.world.feature.ignfeats;
 
 import com.jemmerl.rekindleunderground.world.feature.stonegenutil.ChunkReader;
 import com.mojang.serialization.Codec;

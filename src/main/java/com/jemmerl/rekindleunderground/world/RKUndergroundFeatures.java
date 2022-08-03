@@ -22,7 +22,11 @@ public class RKUndergroundFeatures {
             .withPlacement(ModFeaturePlacements.STONE_GEN_PLACEMENT.get().configure(IPlacementConfig.NO_PLACEMENT_CONFIG));
 
     public static final ConfiguredFeature<?, ?> DIATREME_PIPE_GEN_CONFIG = ModFeatures.DIATREME_PIPE_GEN.get().withConfiguration(new NoFeatureConfig())
-            .withPlacement(ModFeaturePlacements.PIPE_CHANCE_PLACEMENT.get().configure(new ChanceConfig(50))); // Normally 300, larger is less likely
+            .withPlacement(ModFeaturePlacements.PIPE_CHANCE_PLACEMENT.get().configure(new ChanceConfig(300))); // Normally 300, larger is less likely
+
+    // TODO test
+    public static final ConfiguredFeature<?, ?> ORE_GEN_TEST_CONFIG = ModFeatures.ORE_TEST_GEN.get().withConfiguration(new NoFeatureConfig())
+            .withPlacement(ModFeaturePlacements.ORE_TEST_PLACEMENT.get().configure(new ChanceConfig(50)));
 
     private static <FC extends IFeatureConfig> void CFRegister(String name, ConfiguredFeature<FC, ?> configuredFeature) {
         Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(RekindleUnderground.MOD_ID, name), configuredFeature);

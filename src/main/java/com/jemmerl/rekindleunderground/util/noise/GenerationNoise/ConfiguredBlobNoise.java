@@ -3,7 +3,7 @@ package com.jemmerl.rekindleunderground.util.noise.GenerationNoise;
 import com.jemmerl.rekindleunderground.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.util.noise.FastNoiseLite;
 
-public class ConfiguredPipeNoise {
+public class ConfiguredBlobNoise {
 
     private static FastNoiseLite pipeNoise;
 
@@ -14,7 +14,7 @@ public class ConfiguredPipeNoise {
     ////////////////////////////////////////////////////////////
 
     // Returns the noise value to warp the pipe radius
-    public static float pipeRadiusNoise(int x, int y, int z) {
+    public static float blobRadiusNoise(int x, int y, int z) {
         FastNoiseLite.Vector3 v3 = new FastNoiseLite.Vector3(x, y, z);
         pipeNoise.DomainWarp(v3);
         return pipeNoise.GetNoise(v3.x, (v3.y / 5f), v3.z);

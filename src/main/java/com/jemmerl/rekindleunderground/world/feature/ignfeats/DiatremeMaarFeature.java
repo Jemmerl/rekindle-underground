@@ -1,21 +1,18 @@
-package com.jemmerl.rekindleunderground.world.feature;
+package com.jemmerl.rekindleunderground.world.feature.ignfeats;
 
-import com.jemmerl.rekindleunderground.block.ModBlocks;
 import com.jemmerl.rekindleunderground.block.custom.StoneOreBlock;
 import com.jemmerl.rekindleunderground.data.types.OreType;
-import com.jemmerl.rekindleunderground.data.types.StoneGroupType;
 import com.jemmerl.rekindleunderground.data.types.StoneType;
 import com.jemmerl.rekindleunderground.util.Pair;
 import com.jemmerl.rekindleunderground.util.UtilMethods;
 import com.jemmerl.rekindleunderground.util.WeightedProbMap;
-import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredPipeNoise;
+import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredBlobNoise;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
@@ -48,7 +45,7 @@ public class DiatremeMaarFeature extends Feature<NoFeatureConfig> {
 
         // Configure the pipe noise if not done so
         if (!noiseSet) {
-            ConfiguredPipeNoise.configNoise(reader.getSeed());
+            ConfiguredBlobNoise.configNoise(reader.getSeed());
             noiseSet = true;
         }
 
@@ -117,7 +114,7 @@ public class DiatremeMaarFeature extends Feature<NoFeatureConfig> {
             if (y > 0) {
                 for (BlockPos blockPos : BlockPos.getAllInBoxMutable(posShift.add(-range, 0, -range), posShift.add(range, 0, range))) {
 
-                    float radius = (range - 10) - (baseDecrement * (1-(y/(float)height))) + (ConfiguredPipeNoise.pipeRadiusNoise(blockPos.getX(), y, blockPos.getZ()) * 10);
+                    float radius = (range - 10) - (baseDecrement * (1-(y/(float)height))) + (ConfiguredBlobNoise.blobRadiusNoise(blockPos.getX(), y, blockPos.getZ()) * 10);
 
                     float distance;
                     if ((distance = (float)UtilMethods.getHypotenuse(blockPos.getX(), blockPos.getZ(), posShift.getX(), posShift.getZ())) <= radius) {
@@ -223,7 +220,7 @@ public class DiatremeMaarFeature extends Feature<NoFeatureConfig> {
     // Get the current radius of the diatreme section
     // Will be slightly different every time it is called, causing a dithering effect
     private static int getPipeRadius(Random rand, int baseRadius, float angle, BlockPos pos) {
-        float noise = ConfiguredPipeNoise.pipeRadiusNoise(pos.getX(), pos.getY(), pos.getZ());
+        float noise = ConfiguredBlobNoise.blobRadiusNoise(pos.getX(), pos.getY(), pos.getZ());
         return (int)(baseRadius + (pos.getY() * angle) // Radius based on height and shape
                 + (PIPE_MIN_RADIUS * (1f + (0.5f * noise)))); // Warp pipe shape
                 //+ rand.nextInt(PIPE_DITHER_VARIATION)); // Add random dither

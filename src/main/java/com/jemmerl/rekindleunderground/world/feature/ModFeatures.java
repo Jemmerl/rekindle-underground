@@ -1,6 +1,8 @@
 package com.jemmerl.rekindleunderground.world.feature;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
+import com.jemmerl.rekindleunderground.world.feature.ignfeats.DiatremeMaarFeature;
+import com.jemmerl.rekindleunderground.world.feature.orefeats.OreTestFeat;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -20,6 +22,10 @@ public class ModFeatures {
 
     public static final RegistryObject<Feature<NoFeatureConfig>> DIATREME_PIPE_GEN
             = FEATURES.register("diatreme_pipe_gen", () -> new DiatremeMaarFeature(NoFeatureConfig.CODEC));
+
+    // TODO test
+    public static final RegistryObject<Feature<NoFeatureConfig>> ORE_TEST_GEN
+            = FEATURES.register("ore_test_gen", () -> new OreTestFeat(NoFeatureConfig.CODEC));
 
     public static void register(IEventBus eventBus) {
         FEATURES.register(eventBus); }

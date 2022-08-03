@@ -6,7 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.util.IStringSerializable;
 
-import java.util.Locale;
+import java.util.*;
 
 public enum OreType implements IStringSerializable {
     NONE("none"),
@@ -62,6 +62,11 @@ public enum OreType implements IStringSerializable {
 
     private final String name;
 
+    private static final List<OreType> VALUESALL =
+            Collections.unmodifiableList(Arrays.asList(values()));
+    private static final List<OreType> VALUES = new ArrayList<>(EnumSet.complementOf(EnumSet.of(OreType.NONE)));
+    private static final int SIZE = VALUES.size();
+
     OreType(String name) {
         this.name = name;
     }
@@ -92,6 +97,11 @@ public enum OreType implements IStringSerializable {
 
     public String getString() {
         return this.name;
+    }
+
+    // Gets a random ore, excluding NONE
+    public static OreType getRandomOreType(Random rand) {
+        return VALUES.get(rand.nextInt(SIZE));
     }
 
     public Boolean hasOre() { return this != NONE; }

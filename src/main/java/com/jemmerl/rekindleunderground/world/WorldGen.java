@@ -23,6 +23,9 @@ public class WorldGen {
         allStoneFeatures.add(new AbstractMap.SimpleEntry<>(RKUndergroundFeatures.STONE_GEN_CONFIG, null));
         allStoneFeatures.add(new AbstractMap.SimpleEntry<>(RKUndergroundFeatures.DIATREME_PIPE_GEN_CONFIG, null));
 
+        // TODO test
+        allStoneFeatures.add(new AbstractMap.SimpleEntry<>(RKUndergroundFeatures.ORE_GEN_TEST_CONFIG, null));
+
         //allStoneFeatures.add(new AbstractMap.SimpleEntry<>(RankineBiomeFeatures.WORLD_REPLACER_GEN, WorldgenUtils.getBiomeNamesFromCategory(Collections.emptyList(), false)));
 
         return allStoneFeatures;
