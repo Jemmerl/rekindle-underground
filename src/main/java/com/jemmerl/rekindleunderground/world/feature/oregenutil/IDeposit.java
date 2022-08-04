@@ -2,9 +2,14 @@ package com.jemmerl.rekindleunderground.world.feature.oregenutil;
 
 public class IDeposit {
 
-    // deposit _> placer or vein -> subcategories of each
+    // Oreblocks it can generate in
+
+    //
+
+    //
 }
 
+// deposit _> placer or vein -> subcategories of each
 
 /*
 Shapes:

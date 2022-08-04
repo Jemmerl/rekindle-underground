@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground;
+package com.jemmerl.rekindleunderground.setup;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;

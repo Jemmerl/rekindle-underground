@@ -1,6 +1,6 @@
 package com.jemmerl.rekindleunderground.data.types;
 
-import com.jemmerl.rekindleunderground.RKUndergroundConfig;
+import com.jemmerl.rekindleunderground.setup.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.block.custom.StoneOreBlock;
 import com.jemmerl.rekindleunderground.item.ModItemGroup;

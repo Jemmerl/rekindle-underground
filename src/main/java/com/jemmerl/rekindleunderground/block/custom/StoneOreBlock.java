@@ -1,16 +1,14 @@
 package com.jemmerl.rekindleunderground.block.custom;
 
-import com.jemmerl.rekindleunderground.RKUndergroundConfig;
+import com.jemmerl.rekindleunderground.setup.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.data.types.OreType;
 import com.jemmerl.rekindleunderground.data.types.StoneGroupType;
-import com.jemmerl.rekindleunderground.data.types.StoneType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 

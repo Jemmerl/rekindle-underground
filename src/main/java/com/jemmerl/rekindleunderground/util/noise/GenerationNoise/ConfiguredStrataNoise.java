@@ -1,14 +1,11 @@
 package com.jemmerl.rekindleunderground.util.noise.GenerationNoise;
 
-import com.jemmerl.rekindleunderground.RKUndergroundConfig;
-import com.jemmerl.rekindleunderground.block.ModBlocks;
+import com.jemmerl.rekindleunderground.setup.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.data.types.DefaultSets;
 import com.jemmerl.rekindleunderground.util.UtilMethods;
 import com.jemmerl.rekindleunderground.util.noise.FastNoiseLite;
 import com.jemmerl.rekindleunderground.world.feature.stonegenutil.BlockPicker;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 
 import java.util.*;
 

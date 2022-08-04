@@ -1,46 +1,28 @@
 
-Source installation information for modders
--------------------------------------------
-This code follows the Minecraft Forge installation methodology. It will apply
-some small patches to the vanilla MCP source code, giving you and it access 
-to some of the data and functions you need to build a successful mod.
+Rekindle Underground is a mod developed by Jemmerl (and with direct and in-direct help from countless others) for use
+in the modpack of the same name: Rekindle.
 
-Note also that the patches are built against "un-renamed" MCP source code (aka
-SRG Names) - this means that you will not be able to read them directly against
-normal code.
+RKU was created out of the want for a realistic yet still highly configurable geological generation mod.
+It is currently only intended for use within the Rekindle modpack, but may one day be improved to the point
+of general use. It is NOT a standalone mod. Consider it more as a library of realistic stones, ores, and generation
+that modpack makers can utilize to bring their worlds to... not-life? Stones are not alive, as far as I can recall!
 
-Setup Process:
-==============================
+It is designed to mimic real-world geology, obviously within the limits of Minecraft.
+Features include highly variable and random stone strata generation. No more just-flat stone layers; RKU's strata are
+deformed, tilted, and curvy! Even better, the ore follows these curves like one would expect in real life! These
+features operate using user-defined stone presets and generate within configurable ranges.
 
-Step 1: Open your command-line and browse to the folder where you extracted the zip file.
+Another configurable feature is the hardness of the various stones themselves! By default, they are harder to mine
+than vanilla obsidian. As someone who has swung a steel pickaxe at a rock wall, I can assure you, it is not as easy
+as Minecraft makes it out to be. This is of course due to the mod's primary usage being the Rekindle pack, where
+underground activities are meant to be "difficult-difficult-lemon-difficult"!
 
-Step 2: You're left with a choice.
-If you prefer to use Eclipse:
-1. Run the following command: `gradlew genEclipseRuns` (`./gradlew genEclipseRuns` if you are on Mac/Linux)
-2. Open Eclipse, Import > Existing Gradle Project > Select Folder 
-   or run `gradlew eclipse` to generate the project.
+Even worse, starting at Y-Level 50, the stones get harder and harder to mine. This too is completely configurable.
 
-If you prefer to use IntelliJ:
-1. Open IDEA, and import project.
-2. Select your build.gradle file and have it import.
-3. Run the following command: `gradlew genIntellijRuns` (`./gradlew genIntellijRuns` if you are on Mac/Linux)
-4. Refresh the Gradle Project in IDEA if required.
+Formations such as igneous bodies or hydrothermal deposits are also included! For example: explosive diatreme-maar
+formations that include kimberlite pipes can be found! No more getting your diamonds from Y-Level 16, you need to get
+prospecting! One can also expect to find dikes and sills, hydrothermally deposited veins, river and beach placers,
+large igneous plutons, basalt-gabbro "traps", and more!
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can 
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
-
-Mapping Names:
-=============================
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license, if you do not agree with it you can change your mapping names to other crowdsourced names in your 
-build.gradle. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/MinecraftForge/MCPConfig/blob/master/Mojang.md
-
-Additional Resources: 
-=========================
-Community Documentation: http://mcforge.readthedocs.io/en/latest/gettingstarted/  
-LexManos' Install Video: https://www.youtube.com/watch?v=8VEdtQLuLO0  
-Forge Forum: https://forums.minecraftforge.net/  
-Forge Discord: https://discord.gg/UvedJ9m  
+Over time, greater control is planned for these features. With more power comes more complexity, but built-in
+documentation is planned for your reading pleasure!

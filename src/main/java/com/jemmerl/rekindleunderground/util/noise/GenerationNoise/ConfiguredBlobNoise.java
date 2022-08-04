@@ -1,6 +1,5 @@
 package com.jemmerl.rekindleunderground.util.noise.GenerationNoise;
 
-import com.jemmerl.rekindleunderground.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.util.noise.FastNoiseLite;
 
 public class ConfiguredBlobNoise {

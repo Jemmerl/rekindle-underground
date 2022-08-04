@@ -3,6 +3,7 @@ package com.jemmerl.rekindleunderground;
 import com.jemmerl.rekindleunderground.block.ModBlocks;
 import com.jemmerl.rekindleunderground.block.custom.StoneOreBlock;
 import com.jemmerl.rekindleunderground.item.ModItems;
+import com.jemmerl.rekindleunderground.setup.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.world.feature.ModFeatures;
 import com.jemmerl.rekindleunderground.world.RKUndergroundFeatures;
 import com.jemmerl.rekindleunderground.world.placements.ModFeaturePlacements;
