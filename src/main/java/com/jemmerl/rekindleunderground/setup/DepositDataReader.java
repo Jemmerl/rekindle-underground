@@ -1,8 +1,9 @@
 package com.jemmerl.rekindleunderground.setup;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
+import com.google.gson.*;
+import com.jemmerl.rekindleunderground.RekindleUnderground;
+import com.jemmerl.rekindleunderground.world.feature.orefeats.LayerDeposit;
+import com.jemmerl.rekindleunderground.world.feature.oregenutil.DepositRegistrar;
 import net.minecraft.client.resources.JsonReloadListener;
 import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
@@ -16,6 +17,7 @@ import java.util.Map;
 public class DepositDataReader extends JsonReloadListener {
 
     private static final Gson GSON = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
+    private final DepositRegistrar depositRegistrar = new DepositRegistrar();
 
     public DepositDataReader() {
         super(GSON, "generation/deposits"); // Second field is the folder
@@ -23,6 +25,28 @@ public class DepositDataReader extends JsonReloadListener {
 
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
+        depositRegistrar.clearDeposits();
+        objectIn.forEach((rl, jsonElement) -> {
+            try {
+                JsonObject jsonObj = jsonElement.getAsJsonObject();
+
+                switch (jsonObj.get("type").getAsString()) {
+                    case "layer":
+                        depositRegistrar.addDeposit(new LayerDeposit(jsonObj));
+                        break;
+
+                    case "sphere":
+
+                    default:
+                        RekindleUnderground.getInstance().LOGGER.warn("Deposit type not found in: {} ", jsonElement.toString());
+                }
+
+            } catch (NullPointerException e) {
+                RekindleUnderground.getInstance().LOGGER.warn("Error reading deposit type: {}", rl);
+            }
+        });
 
     }
+
+
 }

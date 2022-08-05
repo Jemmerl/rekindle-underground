@@ -151,7 +151,7 @@ public enum StoneType {
                             .harvestLevel(0).harvestTool(ToolType.PICKAXE).setRequiresTool()
                             .hardnessAndResistance((Constants.HARDS[blockEntry.hardnessIndex] * Constants.HARD_MULT),
                                     (Constants.RESISTS[blockEntry.resistanceIndex] * Constants.RESIST_MULT)),
-                            blockEntry.group));
+                            blockEntry, blockEntry.group));
             registerBlockItem(blockName, blockEntry.stoneBlock, 64);
         }
 

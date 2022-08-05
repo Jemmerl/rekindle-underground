@@ -1,5 +1,6 @@
 package com.jemmerl.rekindleunderground.block.custom;
 
+import com.jemmerl.rekindleunderground.data.types.StoneType;
 import com.jemmerl.rekindleunderground.setup.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.data.types.OreType;
 import com.jemmerl.rekindleunderground.data.types.StoneGroupType;
@@ -17,10 +18,12 @@ public class StoneOreBlock extends Block {
     private static final int HARDNESS_DEPTH_FACTOR = RKUndergroundConfig.COMMON.hardnessDepthFactor.get() - 1;
 
     public static final EnumProperty<OreType> ORE_TYPE = EnumProperty.create("oretype", OreType.class);
-    private StoneGroupType stoneGroupType;
+    private final StoneType stoneType;
+    private final StoneGroupType stoneGroupType;
 
-    public StoneOreBlock(Properties properties, StoneGroupType stoneGroupType) {
+    public StoneOreBlock(Properties properties, StoneType stoneType, StoneGroupType stoneGroupType) {
         super(properties);
+        this.stoneType = stoneType;
         this.stoneGroupType = stoneGroupType;
         this.setDefaultState(this.stateContainer.getBaseState().with(ORE_TYPE, OreType.NONE));
     }
@@ -29,16 +32,6 @@ public class StoneOreBlock extends Block {
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(ORE_TYPE);
         super.fillStateContainer(builder);
-    }
-
-    // Return ore state of block
-    public static OreType getOreType(World world, BlockPos pos) {
-        return world.getBlockState(pos).get(ORE_TYPE);
-    }
-
-    // Return stone type of block
-    public final StoneGroupType getStoneGroupType() {
-        return this.stoneGroupType;
     }
 
     @Override
@@ -52,8 +45,21 @@ public class StoneOreBlock extends Block {
             int i = net.minecraftforge.common.ForgeHooks.canHarvestBlock(state, player, worldIn, pos) ? 30 : 100; // Normal "cannot harvest" speed modifier
             return player.getDigSpeed(state, pos) / f / (float)i;
         }
-
     }
 
+    // Return ore state of block
+    public static OreType getOreType(World world, BlockPos pos) {
+        return world.getBlockState(pos).get(ORE_TYPE);
+    }
+
+    // Return the stone type of the block
+    public StoneType getStoneType() {
+        return this.stoneType;
+    }
+
+    // Return stone group type of the block
+    public StoneGroupType getStoneGroupType() {
+        return this.stoneGroupType;
+    }
 
 }

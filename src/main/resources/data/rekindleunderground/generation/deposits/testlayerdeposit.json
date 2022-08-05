@@ -1,13 +1,23 @@
 {
-  "general": {
-    "type": "flat",
+  "deposit_type": "layer",
+  "settings": {
     "avg_radius": 10,
     "max_layers": 3,
-    "max_layer_thickness": 4
+    "avg_layer_thickness": 4,
+    "min_density": 50,
+    "max_density": 100,
+    "min_yheight": 10,
+    "max_yheight": 100
   },
   "ores": [
-    {"apatite": 50},
-    {"beryl": 50}
+    {
+      "ore": "malachite",
+      "weight": 65
+    },
+    {
+      "ore": "azurite",
+      "weight": 35
+    }
   ],
   "stones": [
     "granodiorite",

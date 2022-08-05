@@ -6,12 +6,12 @@ import com.jemmerl.rekindleunderground.item.ModItems;
 import com.jemmerl.rekindleunderground.setup.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.world.feature.ModFeatures;
 import com.jemmerl.rekindleunderground.world.RKUndergroundFeatures;
+import com.jemmerl.rekindleunderground.world.feature.oregenutil.OreFeatureUtil;
 import com.jemmerl.rekindleunderground.world.placements.ModFeaturePlacements;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
@@ -32,10 +32,12 @@ import org.apache.logging.log4j.Logger;
 @Mod(RekindleUnderground.MOD_ID)
 public class RekindleUnderground
 {
+    private static RekindleUnderground instance;
     public static final String MOD_ID = "rekindleunderground";
-    private static final Logger LOGGER = LogManager.getLogger();
+    public final Logger LOGGER = LogManager.getLogger();
 
     public RekindleUnderground() {
+        instance = this;
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModItems.register(eventBus);
@@ -51,10 +53,15 @@ public class RekindleUnderground
         MinecraftForge.EVENT_BUS.register(this);
     }
 
+    public static RekindleUnderground getInstance() {
+        return instance;
+    }
+
     private void commonSetup(final FMLCommonSetupEvent event) {
         // Dont remove lambda incase needed later
         DeferredWorkQueue.runLater(() -> {
             RKUndergroundFeatures.registerConfiguredFeatures();
+            OreFeatureUtil.init();
         });
 
     }
@@ -85,10 +92,5 @@ public class RekindleUnderground
 
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
     public static class RegistryEvents {
-        @SubscribeEvent
-        public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
-            // register a new block here
-            LOGGER.info("HELLO from Register Block");
-        }
     }
 }
