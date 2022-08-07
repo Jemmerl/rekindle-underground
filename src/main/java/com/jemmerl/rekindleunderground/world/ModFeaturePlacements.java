@@ -1,6 +1,7 @@
-package com.jemmerl.rekindleunderground.world.placements;
+package com.jemmerl.rekindleunderground.world;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
+import com.jemmerl.rekindleunderground.world.placements.PipeGenPlacer;
 import com.jemmerl.rekindleunderground.world.placements.StoneGenPlacer;
 import net.minecraft.world.gen.placement.*;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -19,10 +20,6 @@ public class ModFeaturePlacements {
 
     public static final RegistryObject<Placement<ChanceConfig>> PIPE_CHANCE_PLACEMENT
             = PLACEMENTS.register("pipe_gen_placement", () -> new PipeGenPlacer(ChanceConfig.CODEC));
-
-    // TODO test
-    public static final RegistryObject<Placement<ChanceConfig>> ORE_TEST_PLACEMENT
-            = PLACEMENTS.register("ore_test_placement", () -> new OreTestPlacer(ChanceConfig.CODEC));
 
     public static void register(IEventBus eventBus) {
         PLACEMENTS.register(eventBus);

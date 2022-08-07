@@ -1,7 +1,7 @@
 package com.jemmerl.rekindleunderground.block.custom;
 
 import com.jemmerl.rekindleunderground.data.types.StoneType;
-import com.jemmerl.rekindleunderground.setup.RKUndergroundConfig;
+import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.data.types.OreType;
 import com.jemmerl.rekindleunderground.data.types.StoneGroupType;
 import net.minecraft.block.Block;

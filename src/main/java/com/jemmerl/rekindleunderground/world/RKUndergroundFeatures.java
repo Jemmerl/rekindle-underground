@@ -2,12 +2,10 @@ package com.jemmerl.rekindleunderground.world;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.world.feature.ModFeatures;
-import com.jemmerl.rekindleunderground.world.placements.ModFeaturePlacements;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.Features;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.placement.ChanceConfig;
@@ -23,10 +21,6 @@ public class RKUndergroundFeatures {
 
     public static final ConfiguredFeature<?, ?> DIATREME_PIPE_GEN_CONFIG = ModFeatures.DIATREME_PIPE_GEN.get().withConfiguration(new NoFeatureConfig())
             .withPlacement(ModFeaturePlacements.PIPE_CHANCE_PLACEMENT.get().configure(new ChanceConfig(300))); // Normally 300, larger is less likely
-
-    // TODO test
-    public static final ConfiguredFeature<?, ?> ORE_GEN_TEST_CONFIG = ModFeatures.ORE_TEST_GEN.get().withConfiguration(new NoFeatureConfig())
-            .withPlacement(ModFeaturePlacements.ORE_TEST_PLACEMENT.get().configure(new ChanceConfig(50)));
 
     private static <FC extends IFeatureConfig> void CFRegister(String name, ConfiguredFeature<FC, ?> configuredFeature) {
         Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(RekindleUnderground.MOD_ID, name), configuredFeature);

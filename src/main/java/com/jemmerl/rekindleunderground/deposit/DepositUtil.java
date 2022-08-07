@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground.world.feature.oregenutil;
+package com.jemmerl.rekindleunderground.deposit;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -8,16 +8,21 @@ import com.jemmerl.rekindleunderground.data.types.StoneType;
 import com.jemmerl.rekindleunderground.util.Pair;
 import com.jemmerl.rekindleunderground.util.WeightedProbMap;
 import net.minecraft.block.BlockState;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraft.util.math.BlockPos;
 
 import java.util.ArrayList;
 
-public class OreFeatureUtil {
+public class DepositUtil {
 
-    public static DepositRegistrar depositRegistrar = new DepositRegistrar();
+    // public static DepositRegistrar depositRegistrar = new DepositRegistrar();
 
-    public static void init() {
-        MinecraftForge.EVENT_BUS.register(depositRegistrar);
+
+    // Check if a point lies in the chunk
+    // Only works in the StoneGenFeature feature, which
+    // generates on a specific corner of every chunk
+    public static Boolean isInsideChunk(BlockPos chunkCorner, BlockPos point) {
+        return (((chunkCorner.getX() <= point.getX()) && (point.getX() <= (chunkCorner.getX() + 15)))
+                && ((chunkCorner.getZ() <= point.getZ()) && (point.getZ() <= (chunkCorner.getZ() + 15))));
     }
 
     // Check if a blockstate is a valid stone for ore generation

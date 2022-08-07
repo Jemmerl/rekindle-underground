@@ -1,16 +1,16 @@
-package com.jemmerl.rekindleunderground.world.feature.oregenutil;
+package com.jemmerl.rekindleunderground.deposit;
 
-import com.jemmerl.rekindleunderground.data.types.featuretypes.DepositType;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 import java.util.Random;
 
 public interface IDeposit {
 
-    boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config);
+    boolean generate(ISeedReader reader, Random rand, BlockPos pos, BlockState[][][] stateMap);
+
+    int getWeight();
 
     // Oreblocks it can generate in
 

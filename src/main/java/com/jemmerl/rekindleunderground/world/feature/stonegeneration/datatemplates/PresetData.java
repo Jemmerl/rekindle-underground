@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground.world.feature.stonegenutil.datatemplates;
+package com.jemmerl.rekindleunderground.world.feature.stonegeneration.datatemplates;
 
 public class PresetData {
     private String name;

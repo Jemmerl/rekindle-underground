@@ -1,6 +1,5 @@
-package com.jemmerl.rekindleunderground.world.feature.ignfeats;
+package com.jemmerl.rekindleunderground.world.feature.igneous;
 
-import com.jemmerl.rekindleunderground.world.feature.stonegenutil.ChunkReader;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;

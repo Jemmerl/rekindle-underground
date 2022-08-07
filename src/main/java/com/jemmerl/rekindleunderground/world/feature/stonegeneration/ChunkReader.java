@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground.world.feature.stonegenutil;
+package com.jemmerl.rekindleunderground.world.feature.stonegeneration;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
@@ -16,6 +16,10 @@ public class ChunkReader {
         this.pos = pos;
         this.maxHeights = new int[17][17];
         this.maxHeight = fillMaxHeights();
+    }
+
+    public ISeedReader getSeedReader() {
+        return this.world;
     }
 
     public int getMaxHeight() {

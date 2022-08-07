@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground.world.feature.stonegenutil.datatemplates;
+package com.jemmerl.rekindleunderground.world.feature.stonegeneration.datatemplates;
 
 public class SetData {
     private String name;

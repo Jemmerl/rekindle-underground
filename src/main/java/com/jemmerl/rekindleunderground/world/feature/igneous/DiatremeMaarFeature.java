@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground.world.feature.ignfeats;
+package com.jemmerl.rekindleunderground.world.feature.igneous;
 
 import com.jemmerl.rekindleunderground.block.custom.StoneOreBlock;
 import com.jemmerl.rekindleunderground.data.types.OreType;

@@ -17,6 +17,7 @@ public class StoneGenPlacer extends SimplePlacement<NoPlacementConfig> {
     @Override
     protected Stream<BlockPos> getPositions(Random random, NoPlacementConfig config, BlockPos pos) {
         int i = 1;
+        // Gets only one blockpos per chunk: a corner!
         return IntStream.range(0, i).mapToObj((p_215060_2_) -> pos);
     }
 }

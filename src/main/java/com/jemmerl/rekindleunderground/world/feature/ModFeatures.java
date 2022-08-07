@@ -1,8 +1,8 @@
 package com.jemmerl.rekindleunderground.world.feature;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
-import com.jemmerl.rekindleunderground.world.feature.ignfeats.DiatremeMaarFeature;
-import com.jemmerl.rekindleunderground.world.feature.orefeats.LayerDeposit;
+import com.jemmerl.rekindleunderground.world.feature.igneous.DiatremeMaarFeature;
+import com.jemmerl.rekindleunderground.world.feature.stonegeneration.StoneGenFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraftforge.eventbus.api.IEventBus;

@@ -2,12 +2,12 @@ package com.jemmerl.rekindleunderground;
 
 import com.jemmerl.rekindleunderground.block.ModBlocks;
 import com.jemmerl.rekindleunderground.block.custom.StoneOreBlock;
+import com.jemmerl.rekindleunderground.deposit.DepositDataLoader;
 import com.jemmerl.rekindleunderground.item.ModItems;
-import com.jemmerl.rekindleunderground.setup.RKUndergroundConfig;
+import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.world.feature.ModFeatures;
 import com.jemmerl.rekindleunderground.world.RKUndergroundFeatures;
-import com.jemmerl.rekindleunderground.world.feature.oregenutil.OreFeatureUtil;
-import com.jemmerl.rekindleunderground.world.placements.ModFeaturePlacements;
+import com.jemmerl.rekindleunderground.world.ModFeaturePlacements;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
@@ -36,6 +36,8 @@ public class RekindleUnderground
     public static final String MOD_ID = "rekindleunderground";
     public final Logger LOGGER = LogManager.getLogger();
 
+    public static DepositDataLoader DEPOSIT_DATA_READER = new DepositDataLoader();
+
     public RekindleUnderground() {
         instance = this;
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -61,7 +63,6 @@ public class RekindleUnderground
         // Dont remove lambda incase needed later
         DeferredWorkQueue.runLater(() -> {
             RKUndergroundFeatures.registerConfiguredFeatures();
-            OreFeatureUtil.init();
         });
 
     }
@@ -87,7 +88,6 @@ public class RekindleUnderground
 
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent event) {
-
     }
 
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)

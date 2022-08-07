@@ -1,23 +1,17 @@
-package com.jemmerl.rekindleunderground.world.feature.stonegenutil;
+package com.jemmerl.rekindleunderground.world.feature.stonegeneration;
 
-import com.google.gson.reflect.TypeToken;
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.util.UtilMethods;
-import com.jemmerl.rekindleunderground.world.feature.stonegenutil.datatemplates.PresetData;
-import com.jemmerl.rekindleunderground.world.feature.stonegenutil.datatemplates.SetData;
-import net.minecraft.block.Block;
+import com.jemmerl.rekindleunderground.world.feature.stonegeneration.datatemplates.PresetData;
+import com.jemmerl.rekindleunderground.world.feature.stonegeneration.datatemplates.SetData;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.google.gson.*;
 
 import java.io.*;
-import java.lang.reflect.Type;
 import java.util.*;
 import java.util.Map;
 

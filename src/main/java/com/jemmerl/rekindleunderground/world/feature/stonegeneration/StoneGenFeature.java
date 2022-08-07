@@ -1,11 +1,12 @@
-package com.jemmerl.rekindleunderground.world.feature;
+package com.jemmerl.rekindleunderground.world.feature.stonegeneration;
 
 import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredRegionNoise;
 import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredStrataNoise;
-import com.jemmerl.rekindleunderground.world.feature.stonegenutil.ChunkReader;
-import com.jemmerl.rekindleunderground.world.feature.stonegenutil.StateMap;
+import com.jemmerl.rekindleunderground.world.feature.stonegeneration.ChunkReader;
+import com.jemmerl.rekindleunderground.world.feature.stonegeneration.StateMap;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -28,18 +29,18 @@ public class StoneGenFeature extends Feature<NoFeatureConfig> {
     private static long worldSeed;
 
     @Override
-    public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+    public boolean generate(ISeedReader seedReader, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 
         if(!setSeed){
-            worldSeed = reader.getSeed();
+            worldSeed = seedReader.getSeed();
             ConfiguredRegionNoise.configNoise(worldSeed);
             ConfiguredStrataNoise.configNoise(worldSeed);
             setSeed = true;
         }
 
-        ChunkReader chunkReader = new ChunkReader(reader, pos);
-        StateMap chunkStateMap = new StateMap(chunkReader, pos);
-        processChunk(reader, chunkReader, chunkStateMap, pos);
+        ChunkReader chunkReader = new ChunkReader(seedReader, pos);
+        StateMap chunkStateMap = new StateMap(chunkReader, pos, rand);
+        processChunk(seedReader, chunkReader, chunkStateMap, pos);
 
         return true;
     }
@@ -69,6 +70,7 @@ public class StoneGenFeature extends Feature<NoFeatureConfig> {
                 }
             }
         }
+        reader.setBlockState(pos, Blocks.DIAMOND_BLOCK.getDefaultState(), 2);
     }
 
     private BlockState replaceBlock(BlockState original, BlockState replacing) {

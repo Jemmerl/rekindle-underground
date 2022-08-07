@@ -78,6 +78,9 @@ public class ModBlocks {
 
 }
 
+
+// TODO BELOW HERE IS OLD CODE, PRESERVED IF NEEDED. WILL BE PURGED UPON ALPHA RELEASE
+
 //    @OnlyIn(Dist.CLIENT)
 //    public IFormattableTextComponent getTranslatedName() {
 //        return new TranslationTextComponent(this.getTranslationKey());
