@@ -1,11 +1,11 @@
 package com.jemmerl.rekindleunderground.world.feature.stonegeneration.datatemplates;
 
-public class PresetData {
+public class PresetTemplate {
     private String name;
     private String[] sets;
     private String[] individuals;
 
-    public PresetData(String name, String[] sets, String[] individuals) {
+    public PresetTemplate(String name, String[] sets, String[] individuals) {
         this.name = name;
         this.sets = sets;
         this.individuals = individuals;

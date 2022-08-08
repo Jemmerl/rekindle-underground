@@ -1,5 +1,6 @@
 package com.jemmerl.rekindleunderground.deposit;
 
+import com.jemmerl.rekindleunderground.world.feature.stonegeneration.ChunkReader;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
@@ -8,7 +9,7 @@ import java.util.Random;
 
 public interface IDeposit {
 
-    boolean generate(ISeedReader reader, Random rand, BlockPos pos, BlockState[][][] stateMap);
+    boolean generate(ChunkReader reader, Random rand, BlockPos pos, BlockState[][][] stateMap);
 
     int getWeight();
 

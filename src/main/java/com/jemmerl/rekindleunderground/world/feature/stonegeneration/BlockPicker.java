@@ -2,8 +2,8 @@ package com.jemmerl.rekindleunderground.world.feature.stonegeneration;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.util.UtilMethods;
-import com.jemmerl.rekindleunderground.world.feature.stonegeneration.datatemplates.PresetData;
-import com.jemmerl.rekindleunderground.world.feature.stonegeneration.datatemplates.SetData;
+import com.jemmerl.rekindleunderground.world.feature.stonegeneration.datatemplates.PresetTemplate;
+import com.jemmerl.rekindleunderground.world.feature.stonegeneration.datatemplates.SetTemplate;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
@@ -132,9 +132,9 @@ public class BlockPicker {
 
         // Build map of available sets for referencing
         JsonArray setListArr = this.presetJsonObj.getAsJsonArray("set_list");
-        SetData[] setDataList = gson.fromJson(setListArr, SetData[].class);
+        SetTemplate[] setTemplateList = gson.fromJson(setListArr, SetTemplate[].class);
         Map<String, ArrayList<BlockState>> setListMap = new HashMap<>();
-        for (SetData data : setDataList) {
+        for (SetTemplate data : setTemplateList) {
             ArrayList<BlockState> blockStateArrayList = new ArrayList<>();
             for (int i = 0; i < data.getBlocks().length; i++) {
                 blockStateArrayList.add(UtilMethods.stringToBlockState(data.getBlocks()[i]));
@@ -144,9 +144,9 @@ public class BlockPicker {
 
         // Build map of available presets from given sets and individual blocks
         JsonArray presetsArr = this.presetJsonObj.getAsJsonArray("block_presets");
-        PresetData[] presetDataList = gson.fromJson(presetsArr, PresetData[].class);
+        PresetTemplate[] presetTemplateList = gson.fromJson(presetsArr, PresetTemplate[].class);
         LinkedHashMap<String, ArrayList<BlockState>> builtPresetMap = new LinkedHashMap<>();
-        for (PresetData data : presetDataList) {
+        for (PresetTemplate data : presetTemplateList) {
             String key = data.getName();
             ArrayList<BlockState> blockStateArrayList = new ArrayList<>(); // List of blocks in preset
 

@@ -36,7 +36,7 @@ public class RekindleUnderground
     public static final String MOD_ID = "rekindleunderground";
     public final Logger LOGGER = LogManager.getLogger();
 
-    public static DepositDataLoader DEPOSIT_DATA_READER = new DepositDataLoader();
+    public static DepositDataLoader DEPOSIT_DATA_LOADER = new DepositDataLoader();
 
     public RekindleUnderground() {
         instance = this;

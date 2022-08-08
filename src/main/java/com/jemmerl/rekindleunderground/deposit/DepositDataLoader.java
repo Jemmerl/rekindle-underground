@@ -3,6 +3,7 @@ package com.jemmerl.rekindleunderground.deposit;
 import com.google.gson.*;
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.deposit.generators.LayerDeposit;
+import com.jemmerl.rekindleunderground.deposit.templates.LayerTemplate;
 import net.minecraft.client.resources.JsonReloadListener;
 import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
@@ -22,30 +23,35 @@ public class DepositDataLoader extends JsonReloadListener {
 
     public DepositDataLoader() {
         super(GSON, "generation/deposits"); // Second field is the folder
-        System.out.println("loaded");
     }
 
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
-        System.out.println("READING DATA");
+        RekindleUnderground.getInstance().LOGGER.info("Beginning to load ore deposits...");
         depositRegistrar.clearDeposits();
         objectIn.forEach((rl, jsonElement) -> {
             try {
                 JsonObject jsonObj = jsonElement.getAsJsonObject();
 
-                switch (jsonObj.get("type").getAsString()) {
+                switch (jsonObj.get("deposit_type").getAsString()) {
                     case "layer":
-                        depositRegistrar.addDeposit(new LayerDeposit(jsonObj));
+                        // Parse the settings json element into a LayerTemplate and then use to create a LayerDeposit
+                        depositRegistrar.addDeposit(
+                                new LayerDeposit(GSON.fromJson(jsonObj.get("settings"), LayerTemplate.class))
+                                        .setOres(DepositUtil.getOres(jsonObj.get("ores").getAsJsonArray()))
+                                        .setStones(DepositUtil.getStones(jsonObj.get("stones").getAsJsonArray())));
+                        RekindleUnderground.getInstance().LOGGER.info("Successfully loaded deposit {}!", rl);
                         break;
 
                     case "sphere":
 
                     default:
-                        RekindleUnderground.getInstance().LOGGER.warn("Deposit type not found in: {} ", jsonElement.toString());
+                        RekindleUnderground.getInstance().LOGGER.warn("Deposit type {} not found in: {} ", jsonObj.get("deposit_type").getAsString(), rl);
                 }
 
-            } catch (NullPointerException e) {
+            } catch (Exception e) {
                 RekindleUnderground.getInstance().LOGGER.warn("Error reading deposit type: {}", rl);
+                e.printStackTrace();
             }
         });
 

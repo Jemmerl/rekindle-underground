@@ -2,6 +2,7 @@ package com.jemmerl.rekindleunderground.deposit;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.block.custom.StoneOreBlock;
 import com.jemmerl.rekindleunderground.data.types.OreType;
 import com.jemmerl.rekindleunderground.data.types.StoneType;
@@ -43,7 +44,7 @@ public class DepositUtil {
             int weightSum = 0;
             for (int i=0; i<oresArray.size(); i++) {
                 JsonObject oreObj = oresArray.get(i).getAsJsonObject();
-                OreType oreType = OreType.valueOf(oreObj.get("ore").getAsString());
+                OreType oreType = OreType.valueOf(oreObj.get("ore").getAsString().toUpperCase());
                 int weight = oreObj.get("weight").getAsInt();
                 weightSum += weight;
                 if (weightSum > 100) {
@@ -52,6 +53,8 @@ public class DepositUtil {
                 elts.add( new Pair<>(weight, oreType));
             }
         } catch (Exception e) {
+            RekindleUnderground.getInstance().LOGGER.warn("Error in valid deposit ore reading.");
+            e.printStackTrace();
             return null;
         }
         return new WeightedProbMap<OreType>(elts);
@@ -62,9 +65,11 @@ public class DepositUtil {
         ArrayList<StoneType> stoneArray = new ArrayList<>();
             try {
                 for (int i=0; i<jsonArray.size(); i++) {
-                    stoneArray.add(StoneType.valueOf(jsonArray.get(i).getAsString()));
+                    stoneArray.add(StoneType.valueOf(jsonArray.get(i).getAsString().toUpperCase()));
                 }
             } catch (Exception e) {
+                RekindleUnderground.getInstance().LOGGER.warn("Error in deposit valid stone reading.");
+                e.printStackTrace();
                 return null;
             }
         return stoneArray;

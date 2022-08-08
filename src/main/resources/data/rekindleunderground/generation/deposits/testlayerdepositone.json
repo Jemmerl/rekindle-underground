@@ -3,13 +3,13 @@
   "settings": {
     "weight": 100,
     "avg_radius": 10,
+    "max_radius": 25,
     "max_layers": 3,
     "avg_layer_thickness": 4,
     "min_density": 50,
     "max_density": 100,
     "min_yheight": 10,
-    "max_yheight": 100,
-    "max_radius": 25
+    "max_yheight": 100
   },
   "ores": [
     {
@@ -24,8 +24,9 @@
   "stones": [
     "granodiorite",
     "granite",
-    "diorite"
+    "diorite",
+    "gabbro",
+    "diabase",
+    "syenite"
   ]
-
-
 }

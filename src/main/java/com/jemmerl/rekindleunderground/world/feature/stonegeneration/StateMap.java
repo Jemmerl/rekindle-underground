@@ -69,13 +69,12 @@ public class StateMap {
 
     // Populate ore deposits
     public void PopulateOres() {
-        System.out.println(DepositRegistrar.getDeposits().size());
         // Generates the ore deposit with a one out of the deposit's weight chance
         for (IDeposit deposit : new HashSet<>(DepositRegistrar.getDeposits())) {
             if (this.rand.nextInt(deposit.getWeight()) == 0) {
                 // Tries to update the stateMap with the generating feature
-                if (!deposit.generate(this.chunkReader.getSeedReader(), this.rand, this.blockPos, this.stateMap)) {
-                    RekindleUnderground.getInstance().LOGGER.warn("Failed to generate deposit at {}", this.blockPos.toString());
+                if (!deposit.generate(this.chunkReader, this.rand, this.blockPos, this.stateMap)) {
+                    RekindleUnderground.getInstance().LOGGER.warn("Failed to generate deposit at {}, {}", this.blockPos.getX(), this.blockPos.getZ());
                 }
             }
         }

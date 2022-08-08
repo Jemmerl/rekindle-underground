@@ -1,10 +1,10 @@
 package com.jemmerl.rekindleunderground.world.feature.stonegeneration.datatemplates;
 
-public class SetData {
+public class SetTemplate {
     private String name;
     private String[] blocks;
 
-    public SetData(String name, String[] blocks) {
+    public SetTemplate(String name, String[] blocks) {
         this.name = name;
         this.blocks = blocks;
     }
