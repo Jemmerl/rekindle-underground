@@ -1,5 +1,6 @@
 package com.jemmerl.rekindleunderground.deposit.generators;
 
+import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.block.custom.StoneOreBlock;
 import com.jemmerl.rekindleunderground.data.types.OreType;
 import com.jemmerl.rekindleunderground.data.types.StoneType;
@@ -36,7 +37,6 @@ public class LayerDeposit implements IDeposit {
 
     public LayerDeposit setStones(ArrayList<StoneType> stoneList) {
         this.validStones = stoneList;
-        System.out.println(this.validStones.size());
         return this;
     }
 
@@ -46,24 +46,24 @@ public class LayerDeposit implements IDeposit {
 
     public boolean generate(ChunkReader reader, Random rand, BlockPos pos, BlockState[][][] stateMap) {
 
-        int maxRadius = rand.nextInt(20) + 15; // TODO TEMP
-
-        // TODO
-        // Randomly place deposit within chunk
-        // check if block being set is within the active chunk
-        // if so, continue. if not, enqueue!
-        // TEMP: just make it get ignored :P
-
         ////////////////////////
         // DEPOSIT PROPERTIES //
         ////////////////////////
 
+        // Get a normally distributed average radius (for the individual deposit) around the average configured radius
+        int avgDepositRadius = getRadius(rand);
+
+        // Get a uniformly distributed density value for the deposit within the min and max density range
         float densityPercent = ((rand.nextInt(this.layerTemplate.getMaxDensity() - this.layerTemplate.getMinDensity()) + this.layerTemplate.getMinDensity()) / 100f);
-        int layers = rand.nextInt(this.layerTemplate.getMaxLayers() - 1) + 1;
-        int totalHeight = layers * this.layerTemplate.getAvgLayerThick();
-        int heightMiddle = rand.nextInt(this.layerTemplate.getMaxYHeight() - this.layerTemplate.getMinYHeight()) + this.layerTemplate.getMinYHeight();
-        int heightStart = heightMiddle - (totalHeight / 2);
-        int heightEnd = heightMiddle + (totalHeight / 2);
+
+        // If the max layers is 1, return 1. Else, random spread. (Having 1 max layer inputs 0 into rand.nextInt, which is illegal)
+        int layers = (this.layerTemplate.getMaxLayers() == 1) ? 1 : (rand.nextInt(this.layerTemplate.getMaxLayers() - 1) + 1);
+
+        // Add 1 block for in-between spacing
+        int totalHeight = layers * (this.layerTemplate.getAvgLayerThick() + 1);
+
+        int heightStart = rand.nextInt(this.layerTemplate.getMaxYHeight() - this.layerTemplate.getMinYHeight()) + this.layerTemplate.getMinYHeight();
+        int heightEnd = heightStart + totalHeight;
 
         // Check if the deposit is generating higher than possible (prevent StateMap ArrayOutOfBounds in the Y direction)
         // If so, try to truncate to that value. If that does not work, prevent it from generating.
@@ -74,114 +74,96 @@ public class LayerDeposit implements IDeposit {
             }
         }
 
-        // Approximate center of the deposit
+        // Set approximate center of the deposit
         BlockPos originPos = new BlockPos(
                 (pos.getX() + rand.nextInt(16)),
-                heightMiddle,
+                heightStart,
                 (pos.getZ() + rand.nextInt(16))
         );
-        int originPosX = originPos.getX();
-        int originPosZ = originPos.getZ();
-        System.out.println(originPos.getX() + ", " + heightMiddle + ", " + originPos.getZ());
-        float radius; // Radius is generated dynamically, this is just a pre-initialization
 
-        // TODO TODO TODO
-        // generate with radius using random blob like the diatrememaar
-        // REWORK LAYER WAVYNESS TO USE A SINGLE, GLOBAL HEIGHT MORPHER!!
-        // ALLOW ORES TO ACCESS IT! WILL LET ORES FOLLOW THE EFFECTS!
+
+        ////////////////////////
+        // DEPOSIT GENERATION //
+        ////////////////////////
 
         // TODO TEST
         BlockState indicatorState = Blocks.RED_WOOL.getDefaultState();
 
+        RekindleUnderground.getInstance().LOGGER.info("Generating deposit at {}, with {} layers.", originPos, layers);
+        float radius; // Radius is generated dynamically, this is just a pre-initialization
+
+        // Set the first layer's height
+        int currLayerHeight = getLayerHeight(rand);
+        System.out.println(currLayerHeight); // TODO TEST
+        int countLayerHeight = 0; // Used to count and put spacings between deposit layers
+        int countLayers = 0; // Used to count how many layers have generated so far
+        float adjDensityPercent = densityPercent; // Use to dynamically change density for spacing layers
+
         for (int y = heightStart; y < heightEnd; y++) {
+
+            // Check number of layers
+            if (countLayers == layers) {
+                break; // If deposit limit reached, end generation
+            }
+
+            // Check current layer height
+            if (countLayerHeight >= currLayerHeight) {
+                currLayerHeight = getLayerHeight(rand); // Get next layer height
+                countLayerHeight = rand.nextInt(3) - 3; // Tells the loop to generate one or two spacer layers
+                adjDensityPercent = densityPercent * 0.2f; // Set the density of the spacing layer to be very small
+                countLayers++; // Incrememnt the number of layers generated
+            } else {
+                adjDensityPercent = densityPercent; // Reset to regular layer density
+            }
+
             for (BlockPos areaPos : BlockPos.getAllInBoxMutable(
-                    new BlockPos((originPosX - maxRadius), y, (originPosZ - maxRadius)),
-                    new BlockPos((originPosX + maxRadius), y, (originPosZ + maxRadius))))
+                    new BlockPos((originPos.getX() - avgDepositRadius), y, (originPos.getZ() - avgDepositRadius)),
+                    new BlockPos((originPos.getX() + avgDepositRadius), y, (originPos.getZ() + avgDepositRadius))))
             {
-                radius = (float)(maxRadius); // TODO TEMP
-                if (UtilMethods.getHypotenuse(areaPos.getX(), areaPos.getZ(), originPosX, originPosZ) <= radius) {
+                radius = (float)(avgDepositRadius); // TODO TEMP
+                if (UtilMethods.getHypotenuse(areaPos.getX(), areaPos.getZ(), originPos.getX(), originPos.getZ()) <= radius) {
                     if (DepositUtil.isInsideChunk(pos, areaPos)) {
 
                         BlockState hostBlock = stateMap[(areaPos.getX() - pos.getX())][y][(areaPos.getZ() - pos.getZ())];
 
-                        if (DepositUtil.isValidStone(hostBlock, this.validStones) && (rand.nextFloat() < densityPercent)) {
-                        //if ((hostBlock.getBlock() instanceof StoneOreBlock) && (rand.nextFloat() < densityPercent)) {
+                        //if (DepositUtil.isValidStone(hostBlock, this.validStones) && (rand.nextFloat() < adjDensityPercent)) {
+                        if ((hostBlock.getBlock() instanceof StoneOreBlock) && (rand.nextFloat() < adjDensityPercent)) {
                             stateMap[(areaPos.getX() - pos.getX())][y][(areaPos.getZ() - pos.getZ())] = hostBlock.with(StoneOreBlock.ORE_TYPE, this.ores.nextElt());
-                            indicatorState = Blocks.DIAMOND_BLOCK.getDefaultState();
+                            indicatorState = Blocks.DIAMOND_BLOCK.getDefaultState(); // TODO TEST
                         }
                     } else {
-                        continue;
+                        continue; // IGNORE PLACEMENT IF OUT OF CHUNK BORDER
                     }
-
-
                 }
-
-
             }
+            countLayerHeight++;
         }
 
+        // TODO TEST
         for (int yPole = heightEnd; yPole < 120; yPole++) {
-            reader.getSeedReader().setBlockState(new BlockPos(originPosX, yPole, originPosZ), indicatorState, 2);
+            reader.getSeedReader().setBlockState(new BlockPos(originPos.getX(), yPole, originPos.getZ()), indicatorState, 2);
         }
-
-
 
         return true;
     }
+
+
+    ///////////////////////
+    // DEPOSIT UTILITIES //
+    ///////////////////////
+
+    // Gets a normally distributed avg radius
+    private int getRadius(Random rand) {
+        int radius = (int)((rand.nextGaussian() * (this.layerTemplate.getAvgRadius() / 3f)) + this.layerTemplate.getAvgRadius());
+        return (radius <= 0) ? 1 : radius;
+
+    }
+
+    // Gets a normally distributed layer height
+    private int getLayerHeight(Random rand) {
+        int height = (int)((rand.nextGaussian() * (this.layerTemplate.getAvgLayerThick() / 2f)) + this.layerTemplate.getAvgLayerThick());
+        return (height <= 0) ? 1 : height;
+    }
+
+
 }
-
-
-/*
-
-//    private final DepositType type;
-//    private final int weight;
-//    private final int maxLayers;
-//    private final int avgLayerThickness;
-//    private final int minDensity;
-//    private final int maxDensity;
-//    private final int minHeight;
-//    private final int maxHeight;
-//    private final int maxRadius;
-
-        //DepositType tempType = null;
-        int tempWeight = 1;
-        int tempMaxLayers = 0;
-        int tempAvgLayerThickness = 0;
-        int tempMinDensity = 0;
-        int tempMaxDensity = 0;
-        int tempMinYHeight = 0;
-        int tempMaxYHeight = 0;
-        int tempMaxRadius = 1;
-        WeightedProbMap<OreType> tempOreArray = null;
-        ArrayList<StoneType> tempStoneArray = null;
-
-        try {
-            JsonObject settingsObj = setupObj.get("settings").getAsJsonObject();
-            //tempType = DepositType.valueOf(setupObj.get("type").getAsString());
-            tempWeight = settingsObj.get("weight").getAsInt();
-            tempMaxLayers = settingsObj.get("max_layers").getAsInt();
-            tempAvgLayerThickness = settingsObj.get("avg_layer_thickness").getAsInt();
-            tempMinDensity = settingsObj.get("min_density").getAsInt();
-            tempMaxDensity = settingsObj.get("max_density").getAsInt();
-            tempMinYHeight = settingsObj.get("min_yheight").getAsInt();
-            tempMaxYHeight = settingsObj.get("max_yheight").getAsInt();
-            tempMaxRadius = settingsObj.get("max_radius").getAsInt();
-            tempOreArray = DepositUtil.getOres(setupObj.get("ores").getAsJsonArray());
-            tempStoneArray = DepositUtil.getStones(setupObj.get("stones").getAsJsonArray());
-        } catch (Exception e) {
-            RekindleUnderground.getInstance().LOGGER.warn("Error parsing deposit settings due to: {}", e.toString());
-        }
-
-        //this.type = tempType;
-        this.weight = tempWeight;
-        this.maxLayers = tempMaxLayers;
-        this.avgLayerThickness = tempAvgLayerThickness;
-        this.minDensity = tempMinDensity;
-        this.maxDensity = tempMaxDensity;
-        this.minHeight = tempMinYHeight;
-        this.maxHeight = tempMaxYHeight;
-        this.maxRadius = tempMaxRadius;
-        this.ores = tempOreArray;
-        this.validStones = tempStoneArray;
-
- */

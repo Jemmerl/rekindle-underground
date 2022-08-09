@@ -3,7 +3,6 @@
   "settings": {
     "weight": 60,
     "avg_radius": 10,
-    "max_radius": 25,
     "max_layers": 3,
     "avg_layer_thickness": 4,
     "min_density": 50,
@@ -25,6 +24,4 @@
     "diabase",
     "syenite"
   ]
-
-
 }
