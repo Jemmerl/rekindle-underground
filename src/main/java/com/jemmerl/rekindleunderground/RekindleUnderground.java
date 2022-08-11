@@ -5,13 +5,25 @@ import com.jemmerl.rekindleunderground.block.custom.StoneOreBlock;
 import com.jemmerl.rekindleunderground.deposit.DepositDataLoader;
 import com.jemmerl.rekindleunderground.item.ModItems;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
+import com.jemmerl.rekindleunderground.world.capability.chunk.ChunkGennedCapProvider;
+import com.jemmerl.rekindleunderground.world.capability.chunk.ChunkGennedCapStorage;
+import com.jemmerl.rekindleunderground.world.capability.chunk.ChunkGennedCapability;
+import com.jemmerl.rekindleunderground.world.capability.chunk.IChunkGennedCapability;
+import com.jemmerl.rekindleunderground.world.capability.deposit.DepositCapProvider;
+import com.jemmerl.rekindleunderground.world.capability.deposit.DepositCapStorage;
+import com.jemmerl.rekindleunderground.world.capability.deposit.DepositCapability;
+import com.jemmerl.rekindleunderground.world.capability.deposit.IDepositCapability;
 import com.jemmerl.rekindleunderground.world.feature.ModFeatures;
 import com.jemmerl.rekindleunderground.world.RKUndergroundFeatures;
 import com.jemmerl.rekindleunderground.world.ModFeaturePlacements;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
@@ -60,6 +72,10 @@ public class RekindleUnderground
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+
+        CapabilityManager.INSTANCE.register(IDepositCapability.class, new DepositCapStorage(), DepositCapability::new);
+        CapabilityManager.INSTANCE.register(IChunkGennedCapability.class, new ChunkGennedCapStorage(), ChunkGennedCapability::new);
+
         // Dont remove lambda incase needed later
         DeferredWorkQueue.runLater(() -> {
             RKUndergroundFeatures.registerConfiguredFeatures();
@@ -84,6 +100,16 @@ public class RekindleUnderground
 
     private void processIMC(final InterModProcessEvent event) {
 
+    }
+
+    // TODO CHECK IF CAN ONLY IMPLEMENT IN OVERWORLD??
+    @SubscribeEvent
+    public void attachCap(AttachCapabilitiesEvent<World> event) {
+        String dimName = event.getObject().getDimensionKey().getLocation().toString();
+
+        event.addCapability(new ResourceLocation(MOD_ID, "deposit"), new DepositCapProvider());
+        event.addCapability(new ResourceLocation(MOD_ID, "generated_chunks"), new ChunkGennedCapProvider());
+        LOGGER.info("RKU capabilities successfully attached for {}", dimName);
     }
 
     @SubscribeEvent

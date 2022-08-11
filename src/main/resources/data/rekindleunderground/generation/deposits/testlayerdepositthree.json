@@ -1,4 +1,5 @@
 {
+  "name": "testthree",
   "deposit_type": "layer",
   "settings": {
     "weight": 60,

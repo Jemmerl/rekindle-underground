@@ -1,15 +1,33 @@
 package com.jemmerl.rekindleunderground.deposit;
 
+import com.jemmerl.rekindleunderground.data.types.OreType;
+import com.jemmerl.rekindleunderground.data.types.StoneType;
+import com.jemmerl.rekindleunderground.util.WeightedProbMap;
+import com.jemmerl.rekindleunderground.world.capability.chunk.IChunkGennedCapability;
+import com.jemmerl.rekindleunderground.world.capability.deposit.IDepositCapability;
 import com.jemmerl.rekindleunderground.world.feature.stonegeneration.ChunkReader;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ISeedReader;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public interface IDeposit {
 
-    boolean generate(ChunkReader reader, Random rand, BlockPos pos, BlockState[][][] stateMap);
+    boolean generate(ChunkReader reader, Random rand, BlockPos pos, BlockState[][][] stateMap,
+                     IDepositCapability depositCapability, IChunkGennedCapability chunkGennedCapability);
+
+    IDeposit setName(String name);
+
+    IDeposit setOres(WeightedProbMap<OreType> oreMap);
+
+    IDeposit setStones(ArrayList<StoneType> stoneList);
+
+    String getName();
+
+    WeightedProbMap<OreType> getOres();
+
+    ArrayList<StoneType> getStones();
 
     int getWeight();
 

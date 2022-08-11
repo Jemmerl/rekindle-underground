@@ -1,4 +1,5 @@
 {
+  "name": "testtwo",
   "deposit_type": "layer",
   "settings": {
     "weight": 50,

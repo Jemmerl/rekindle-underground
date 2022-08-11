@@ -71,8 +71,9 @@ public enum OreType implements IStringSerializable {
         this.name = name;
     }
 
-    public String toString() {
-        return this.getString();
+    @Override
+    public String getString() {
+        return this.name;
     }
 
     public static OreType fromString(String string) {
@@ -93,10 +94,6 @@ public enum OreType implements IStringSerializable {
         } else {
             return UtilMethods.stringToItem(RekindleUnderground.MOD_ID + ":" + this.name + "_ore");
         }
-    }
-
-    public String getString() {
-        return this.name;
     }
 
     // Gets a random ore, excluding NONE

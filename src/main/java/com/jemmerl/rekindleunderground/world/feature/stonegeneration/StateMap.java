@@ -2,28 +2,42 @@ package com.jemmerl.rekindleunderground.world.feature.stonegeneration;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.deposit.DepositRegistrar;
+import com.jemmerl.rekindleunderground.deposit.DepositUtil;
 import com.jemmerl.rekindleunderground.deposit.IDeposit;
+import com.jemmerl.rekindleunderground.world.capability.chunk.ChunkGennedCapability;
+import com.jemmerl.rekindleunderground.world.capability.chunk.IChunkGennedCapability;
+import com.jemmerl.rekindleunderground.world.capability.deposit.DepositCapability;
+import com.jemmerl.rekindleunderground.world.capability.deposit.IDepositCapability;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
+import net.minecraft.world.ISeedReader;
 
-import java.util.HashSet;
 import java.util.Random;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import static com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredStrataNoise.getStoneStrataBlock;
 
 public class StateMap {
 
-    private ChunkReader chunkReader;
-    private BlockPos blockPos;
-    private Random rand;
-    private double[][][] valMap; // may be unnecessary
-    private BlockState[][][] stateMap;
+    private final ChunkReader chunkReader;
+    private final BlockPos blockPos;
+    private final Random rand;
+    private final BlockState[][][] stateMap;
+    private final IDepositCapability depositCapability;
+    private final IChunkGennedCapability chunkGennedCapability;
 
     public StateMap(ChunkReader reader, BlockPos pos, Random rand) {
         this.chunkReader = reader;
-        this.blockPos = pos;
+        this.blockPos = pos; // Starting position of this chunk's generation
         this.rand = rand;
         this.stateMap = new BlockState[16][this.chunkReader.getMaxHeight()][16];
+
+        this.depositCapability = this.chunkReader.getSeedReader().getWorld().getCapability(DepositCapability.RKU_DEPOSIT_CAPABILITY)
+                .orElseThrow(() -> new RuntimeException("RKU deposit capability is null..."));
+        this.chunkGennedCapability = this.chunkReader.getSeedReader().getWorld().getCapability(ChunkGennedCapability.RKU_CHUNK_GEN_CAPABILITY)
+                .orElseThrow(() -> new RuntimeException("RKU chunk gen capability is null..."));
+
         generateStateMap();
     }
 
@@ -38,6 +52,9 @@ public class StateMap {
     private void generateStateMap() {
         PopulateStrata();
         PopulateOres();
+
+        // Mark that this chunk was generated
+        this.chunkGennedCapability.setChunkGenerated(this.chunkReader.getSeedReader().getChunk(this.blockPos).getPos());
     }
 
     /////////////////////////////////////////////////
@@ -47,14 +64,13 @@ public class StateMap {
     // Fill the chunk state map with generated stones
     public void PopulateStrata() {
         int posX, posZ;
-        int topY = chunkReader.getMaxHeight();
+        int topY = this.chunkReader.getMaxHeight();
 
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
                 for (int y = 0; y < topY; y++) {
                     posX = this.blockPos.getX() + x;
                     posZ = this.blockPos.getZ() + z;
-
                     this.stateMap[x][y][z] = getStoneStrataBlock(posX, y, posZ);
                 }
             }
@@ -64,25 +80,40 @@ public class StateMap {
     // Replace stones in the current state map with generated igneous features
     // Will be used for less technical generation, such as dikes or LIPs
     public void PopulateIgneous() {
-
+        // TODO CURRENTLY NOT IN USE. IT WILL BE IN THE FUTURE!
     }
 
     // Populate ore deposits
     public void PopulateOres() {
-        // Generates the ore deposit with a one out of the deposit's weight chance
-        for (IDeposit deposit : new HashSet<>(DepositRegistrar.getDeposits())) {
+
+        // Fill the oremap with (or attempt to place) any previously pending blocks
+        // Method adapted from Geolosys (oitsjustjose)
+        // https://github.com/oitsjustjose/Geolosys/tree/a8e2ba469a2627bfee862f5d8b99774cc1b5981c
+        ISeedReader reader = this.chunkReader.getSeedReader();
+        ChunkPos cp = new ChunkPos(this.blockPos);
+        ConcurrentLinkedQueue<DepositCapability.PendingBlock> queue = depositCapability.getPendingBlocks(cp);
+        System.out.println("Trying to place queue with size " + queue.size());
+        if (chunkGennedCapability.hasChunkGenerated(cp) && queue.size() > 0) {
+            RekindleUnderground.getInstance().LOGGER.info(
+                    "Chunk [{}, {}] has already generated but attempting to place pending blocks anyways",
+                    cp.x, cp.z);
+        }
+        queue.stream().forEach(x -> DepositUtil.enqueueBlockPlacement(reader, x.getPos(), x.getOre(), x.getName(),
+                this.blockPos, this.stateMap, this.depositCapability, this.chunkGennedCapability));
+        depositCapability.removePendingBlocksForChunk(cp);
+
+        // Generates and enqueues the ore deposit with a one out of the deposit's weight chance
+        for (IDeposit deposit : DepositRegistrar.getDeposits().values()) {
             if (this.rand.nextInt(deposit.getWeight()) == 0) {
                 // Tries to update the stateMap with the generating feature
-                if (!deposit.generate(this.chunkReader, this.rand, this.blockPos, this.stateMap)) {
-                    RekindleUnderground.getInstance().LOGGER.warn("Failed to generate deposit at {}, {}", this.blockPos.getX(), this.blockPos.getZ());
+                if (!deposit.generate(this.chunkReader, this.rand, this.blockPos, this.stateMap, this.depositCapability, this.chunkGennedCapability)) {
+                    RekindleUnderground.getInstance().LOGGER.warn(
+                            "Failed to generate deposit at {}, {}", this.blockPos.getX(), this.blockPos.getZ());
                 }
             }
         }
 
 
-
     }
-
-
 
 }

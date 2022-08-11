@@ -1,7 +1,6 @@
 package com.jemmerl.rekindleunderground.deposit.generators;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
-import com.jemmerl.rekindleunderground.block.custom.StoneOreBlock;
 import com.jemmerl.rekindleunderground.data.types.OreType;
 import com.jemmerl.rekindleunderground.data.types.StoneType;
 import com.jemmerl.rekindleunderground.deposit.DepositUtil;
@@ -9,6 +8,8 @@ import com.jemmerl.rekindleunderground.deposit.IDeposit;
 import com.jemmerl.rekindleunderground.deposit.templates.LayerTemplate;
 import com.jemmerl.rekindleunderground.util.UtilMethods;
 import com.jemmerl.rekindleunderground.util.WeightedProbMap;
+import com.jemmerl.rekindleunderground.world.capability.chunk.IChunkGennedCapability;
+import com.jemmerl.rekindleunderground.world.capability.deposit.IDepositCapability;
 import com.jemmerl.rekindleunderground.world.feature.stonegeneration.ChunkReader;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -17,34 +18,57 @@ import net.minecraft.util.math.BlockPos;
 import java.util.ArrayList;
 import java.util.Random;
 
-// TODO test
-
 public class LayerDeposit implements IDeposit {
 
+    private final LayerTemplate layerTemplate;
+
+    private String name;
     private WeightedProbMap<OreType> ores;
     private ArrayList<StoneType> validStones;
-
-    private final LayerTemplate layerTemplate;
 
     public LayerDeposit(LayerTemplate template) {
         this.layerTemplate = template;
     }
 
+    @Override
+    public LayerDeposit setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    @Override
     public LayerDeposit setOres(WeightedProbMap<OreType> oreMap) {
         this.ores = oreMap;
         return this;
     }
 
+    @Override
     public LayerDeposit setStones(ArrayList<StoneType> stoneList) {
         this.validStones = stoneList;
         return this;
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public WeightedProbMap<OreType> getOres() {
+        return this.ores;
+    }
+
+    @Override
+    public ArrayList<StoneType> getStones() {
+        return this.validStones;
     }
 
     public int getWeight() {
         return this.layerTemplate.getWeight();
     }
 
-    public boolean generate(ChunkReader reader, Random rand, BlockPos pos, BlockState[][][] stateMap) {
+    public boolean generate(ChunkReader reader, Random rand, BlockPos pos, BlockState[][][] stateMap,
+                            IDepositCapability depositCapability, IChunkGennedCapability chunkGennedCapability) {
 
         ////////////////////////
         // DEPOSIT PROPERTIES //
@@ -99,6 +123,7 @@ public class LayerDeposit implements IDeposit {
         int countLayers = 0; // Used to count how many layers have generated so far
         float adjDensityPercent = densityPercent; // Use to dynamically change density for spacing layers
 
+        int enqCNT = 0; //todo test
         for (int y = heightStart; y < heightEnd; y++) {
 
             // Check number of layers
@@ -116,24 +141,15 @@ public class LayerDeposit implements IDeposit {
                 adjDensityPercent = densityPercent; // Reset to regular layer density
             }
 
+
             for (BlockPos areaPos : BlockPos.getAllInBoxMutable(
                     new BlockPos((originPos.getX() - avgDepositRadius), y, (originPos.getZ() - avgDepositRadius)),
                     new BlockPos((originPos.getX() + avgDepositRadius), y, (originPos.getZ() + avgDepositRadius))))
             {
                 radius = (float)(avgDepositRadius); // TODO TEMP
-                if (UtilMethods.getHypotenuse(areaPos.getX(), areaPos.getZ(), originPos.getX(), originPos.getZ()) <= radius) {
-                    if (DepositUtil.isInsideChunk(pos, areaPos)) {
-
-                        BlockState hostBlock = stateMap[(areaPos.getX() - pos.getX())][y][(areaPos.getZ() - pos.getZ())];
-
-                        //if (DepositUtil.isValidStone(hostBlock, this.validStones) && (rand.nextFloat() < adjDensityPercent)) {
-                        if ((hostBlock.getBlock() instanceof StoneOreBlock) && (rand.nextFloat() < adjDensityPercent)) {
-                            stateMap[(areaPos.getX() - pos.getX())][y][(areaPos.getZ() - pos.getZ())] = hostBlock.with(StoneOreBlock.ORE_TYPE, this.ores.nextElt());
-                            indicatorState = Blocks.DIAMOND_BLOCK.getDefaultState(); // TODO TEST
-                        }
-                    } else {
-                        continue; // IGNORE PLACEMENT IF OUT OF CHUNK BORDER
-                    }
+                if ((UtilMethods.getHypotenuse(areaPos.getX(), areaPos.getZ(), originPos.getX(), originPos.getZ()) <= radius) && (rand.nextFloat() < adjDensityPercent)) {
+                    DepositUtil.enqueueBlockPlacement(reader.getSeedReader(), areaPos, this.ores.nextElt(),
+                            this.name, pos, stateMap, depositCapability, chunkGennedCapability);
                 }
             }
             countLayerHeight++;
@@ -164,6 +180,5 @@ public class LayerDeposit implements IDeposit {
         int height = (int)((rand.nextGaussian() * (this.layerTemplate.getAvgLayerThick() / 2f)) + this.layerTemplate.getAvgLayerThick());
         return (height <= 0) ? 1 : height;
     }
-
 
 }

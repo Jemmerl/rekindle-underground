@@ -1,19 +1,19 @@
 package com.jemmerl.rekindleunderground.deposit;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DepositRegistrar {
-    private static ArrayList<IDeposit> oreDeposits;
+    private static HashMap<String, IDeposit> oreDeposits;
 
     public DepositRegistrar() {
-        oreDeposits = new ArrayList<>();
+        oreDeposits = new HashMap<>();
     }
 
-    public boolean addDeposit(IDeposit deposit) {
-        return oreDeposits.add(deposit);
+    public void addDeposit(String nameKey, IDeposit deposit) {
+        oreDeposits.put(nameKey, deposit);
     }
 
-    public static ArrayList<IDeposit> getDeposits() {
+    public static HashMap<String, IDeposit> getDeposits() {
         return oreDeposits;
     }
 
