@@ -23,6 +23,8 @@ public class RKUndergroundConfig {
         private static final int STONE_HARDNESS = 20; // Multiply relative stone hardnesses
         private static final int STONE_RESISTANCE = 6; // Multiply relative stone resistances
 
+        private static final boolean DEBUG = false; // Debug mode
+
         public final ForgeConfigSpec.ConfigValue<Integer> hardnessDepthFactor;
         public final ForgeConfigSpec.ConfigValue<Integer> regionSize;
         public final ForgeConfigSpec.ConfigValue<Double> regionVariation;
@@ -38,6 +40,8 @@ public class RKUndergroundConfig {
 
         public final ForgeConfigSpec.ConfigValue<Integer> stoneHardness;
         public final ForgeConfigSpec.ConfigValue<Integer> stoneResistance;
+
+        public final ForgeConfigSpec.ConfigValue<Boolean> debug;
 
         public Common(ForgeConfigSpec.Builder builder)
         {
@@ -108,6 +112,13 @@ public class RKUndergroundConfig {
             this.stoneResistance = builder.comment("Set the multiplier for relative stone resistances; Recommended Default is 6")
                     .worldRestart()
                     .defineInRange("Resistance Multiplier", STONE_RESISTANCE, 1, 30);
+            builder.pop();
+
+            builder.push("Debug Mode");
+            this.debug = builder.comment("Toggle debug mode - Caution: will slow down the game!")
+                    .worldRestart()
+                    .define("Debug", DEBUG);
+            builder.pop();
         }
     }
 

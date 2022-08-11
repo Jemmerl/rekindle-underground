@@ -4,10 +4,12 @@ import com.google.gson.*;
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.deposit.generators.LayerDeposit;
 import com.jemmerl.rekindleunderground.deposit.templates.LayerTemplate;
+import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import net.minecraft.client.resources.JsonReloadListener;
 import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.ArrayList;
@@ -64,7 +66,9 @@ public class DepositDataLoader extends JsonReloadListener {
 
             } catch (Exception e) {
                 RekindleUnderground.getInstance().LOGGER.warn("Error reading deposit type: {}", rl);
-                e.printStackTrace();
+                if (RKUndergroundConfig.COMMON.debug.get()) {
+                    e.printStackTrace();
+                }
             }
         });
     }

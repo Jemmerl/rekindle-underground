@@ -6,6 +6,7 @@ import com.jemmerl.rekindleunderground.data.types.StoneType;
 import com.jemmerl.rekindleunderground.deposit.DepositUtil;
 import com.jemmerl.rekindleunderground.deposit.IDeposit;
 import com.jemmerl.rekindleunderground.deposit.templates.LayerTemplate;
+import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.util.UtilMethods;
 import com.jemmerl.rekindleunderground.util.WeightedProbMap;
 import com.jemmerl.rekindleunderground.world.capability.chunk.IChunkGennedCapability;
@@ -110,9 +111,6 @@ public class LayerDeposit implements IDeposit {
         // DEPOSIT GENERATION //
         ////////////////////////
 
-        // TODO TEST
-        BlockState indicatorState = Blocks.RED_WOOL.getDefaultState();
-
         RekindleUnderground.getInstance().LOGGER.info("Generating deposit at {}, with {} layers.", originPos, layers);
         float radius; // Radius is generated dynamically, this is just a pre-initialization
 
@@ -123,7 +121,6 @@ public class LayerDeposit implements IDeposit {
         int countLayers = 0; // Used to count how many layers have generated so far
         float adjDensityPercent = densityPercent; // Use to dynamically change density for spacing layers
 
-        int enqCNT = 0; //todo test
         for (int y = heightStart; y < heightEnd; y++) {
 
             // Check number of layers
@@ -155,9 +152,12 @@ public class LayerDeposit implements IDeposit {
             countLayerHeight++;
         }
 
-        // TODO TEST
-        for (int yPole = heightEnd; yPole < 120; yPole++) {
-            reader.getSeedReader().setBlockState(new BlockPos(originPos.getX(), yPole, originPos.getZ()), indicatorState, 2);
+        // Debug tool
+        if (RKUndergroundConfig.COMMON.debug.get()) {
+            for (int yPole = heightEnd; yPole < 120; yPole++) {
+                reader.getSeedReader().setBlockState(new BlockPos(originPos.getX(), yPole, originPos.getZ()),
+                        Blocks.RED_WOOL.getDefaultState(), 2);
+            }
         }
 
         return true;

@@ -6,6 +6,7 @@ import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.block.custom.StoneOreBlock;
 import com.jemmerl.rekindleunderground.data.types.OreType;
 import com.jemmerl.rekindleunderground.data.types.StoneType;
+import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.util.Pair;
 import com.jemmerl.rekindleunderground.util.WeightedProbMap;
 import com.jemmerl.rekindleunderground.world.capability.chunk.IChunkGennedCapability;
@@ -73,10 +74,11 @@ public class DepositUtil {
                     return true;
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
-                // TODO MAKE A DEBUG STATE
-                RekindleUnderground.getInstance().LOGGER.warn(
-                        "Enq block at {} was out of bounds with values {} {} {}",
-                        qPos, xIndex, qPos.getY(), zIndex);
+                if (RKUndergroundConfig.COMMON.debug.get()){
+                    RekindleUnderground.getInstance().LOGGER.warn(
+                            "Enq block at {} was out of bounds with values {} {} {}",
+                            qPos, xIndex, qPos.getY(), zIndex);
+                }
                 return false;
             }
 
@@ -129,7 +131,9 @@ public class DepositUtil {
             }
         } catch (Exception e) {
             RekindleUnderground.getInstance().LOGGER.warn("Error in valid deposit ore reading.");
-            e.printStackTrace();
+            if (RKUndergroundConfig.COMMON.debug.get()) {
+                e.printStackTrace();
+            }
             return null;
         }
         return new WeightedProbMap<OreType>(elts);
