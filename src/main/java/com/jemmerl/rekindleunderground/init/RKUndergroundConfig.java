@@ -106,7 +106,7 @@ public class RKUndergroundConfig {
             builder.pop(2);
 
             builder.push("Stone Property Config");
-            this.stoneHardness = builder.comment("Set the multiplier for relative stone hardnesses; Recommended Default is 10")
+            this.stoneHardness = builder.comment("Set the multiplier for relative stone hardnesses; Recommended Default is 20")
                     .worldRestart()
                     .defineInRange("Hardness Multiplier", STONE_HARDNESS, 1, 50);
             this.stoneResistance = builder.comment("Set the multiplier for relative stone resistances; Recommended Default is 6")

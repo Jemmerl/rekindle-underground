@@ -4,6 +4,8 @@ import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.deposit.DepositRegistrar;
 import com.jemmerl.rekindleunderground.deposit.DepositUtil;
 import com.jemmerl.rekindleunderground.deposit.IDeposit;
+import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
+import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredStrataNoise;
 import com.jemmerl.rekindleunderground.world.capability.chunk.ChunkGennedCapability;
 import com.jemmerl.rekindleunderground.world.capability.chunk.IChunkGennedCapability;
 import com.jemmerl.rekindleunderground.world.capability.deposit.DepositCapability;
@@ -16,20 +18,18 @@ import net.minecraft.world.ISeedReader;
 import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import static com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredStrataNoise.getStoneStrataBlock;
-
 public class StateMap {
 
     private final ChunkReader chunkReader;
-    private final BlockPos blockPos;
+    private final BlockPos blockPos; // Starting position of this chunk's generation
     private final Random rand;
-    private final BlockState[][][] stateMap;
+    private final BlockState[][][] stateMap; // Positional map of blockstates to be generated
     private final IDepositCapability depositCapability;
     private final IChunkGennedCapability chunkGennedCapability;
 
     public StateMap(ChunkReader reader, BlockPos pos, Random rand) {
         this.chunkReader = reader;
-        this.blockPos = pos; // Starting position of this chunk's generation
+        this.blockPos = pos;
         this.rand = rand;
         this.stateMap = new BlockState[16][this.chunkReader.getMaxHeight()][16];
 
@@ -71,7 +71,8 @@ public class StateMap {
                 for (int y = 0; y < topY; y++) {
                     posX = this.blockPos.getX() + x;
                     posZ = this.blockPos.getZ() + z;
-                    this.stateMap[x][y][z] = getStoneStrataBlock(posX, y, posZ);
+                    this.stateMap[x][y][z] = ConfiguredStrataNoise.getStoneStrataBlock(posX, y, posZ,
+                            chunkReader.getSeedReader());
                 }
             }
         }
@@ -92,11 +93,14 @@ public class StateMap {
         ISeedReader reader = this.chunkReader.getSeedReader();
         ChunkPos cp = new ChunkPos(this.blockPos);
         ConcurrentLinkedQueue<DepositCapability.PendingBlock> queue = depositCapability.getPendingBlocks(cp);
-        System.out.println("Trying to place queue with size " + queue.size());
-        if (chunkGennedCapability.hasChunkGenerated(cp) && queue.size() > 0) {
-            RekindleUnderground.getInstance().LOGGER.info(
-                    "Chunk [{}, {}] has already generated but attempting to place pending blocks anyways",
-                    cp.x, cp.z);
+        // Debug
+        if (RKUndergroundConfig.COMMON.debug.get()) {
+            RekindleUnderground.getInstance().LOGGER.info("Trying to place queue with size {}", queue.size());
+            if (chunkGennedCapability.hasChunkGenerated(cp) && (queue.size() > 0)) {
+                RekindleUnderground.getInstance().LOGGER.info(
+                        "Chunk [{}, {}] has already generated but attempting to place pending blocks anyways",
+                        cp.x, cp.z);
+            }
         }
         queue.stream().forEach(x -> DepositUtil.enqueueBlockPlacement(reader, x.getPos(), x.getOre(), x.getName(),
                 this.blockPos, this.stateMap, this.depositCapability, this.chunkGennedCapability));
@@ -106,7 +110,8 @@ public class StateMap {
         for (IDeposit deposit : DepositRegistrar.getDeposits().values()) {
             if (this.rand.nextInt(deposit.getWeight()) == 0) {
                 // Tries to update the stateMap with the generating feature
-                if (!deposit.generate(this.chunkReader, this.rand, this.blockPos, this.stateMap, this.depositCapability, this.chunkGennedCapability)) {
+                if (!deposit.generate(this.chunkReader, this.rand, this.blockPos, this.stateMap,
+                        this.depositCapability, this.chunkGennedCapability) && RKUndergroundConfig.COMMON.debug.get()) {
                     RekindleUnderground.getInstance().LOGGER.warn(
                             "Failed to generate deposit at {}, {}", this.blockPos.getX(), this.blockPos.getZ());
                 }

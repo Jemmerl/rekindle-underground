@@ -59,9 +59,9 @@ public class StoneGenFeature extends Feature<NoFeatureConfig> {
 
                 topY = chunkReader.getMaxHeightVal(x, z);
                 for (int y = 0; y < topY; y++) {
-                    original = chunk.getBlockState(mutable);
-                    replacing = stateMap.getState(x, y, z);
-                    replaced = replaceBlock(original, replacing);
+                    original = chunk.getBlockState(mutable); // Block that generated in vanilla
+                    replacing = stateMap.getState(x, y, z); // Mod stone block attempting to generate
+                    replaced = replaceBlock(original, replacing); // The method returns the block that *will* be placed
 
                     if (original != replaced && replaced != null) {
                         chunk.getSections()[y >> 4].setBlockState(x, y & 15, z, replaced, false);
@@ -74,7 +74,9 @@ public class StoneGenFeature extends Feature<NoFeatureConfig> {
     }
 
     private BlockState replaceBlock(BlockState original, BlockState replacing) {
-        if ((replacing != null) && (original.isIn(BlockTags.BASE_STONE_OVERWORLD) || original.isIn(Tags.Blocks.ORES))) {
+        if ((replacing != null) &&
+                (original.isIn(BlockTags.BASE_STONE_OVERWORLD) || original.isIn(Tags.Blocks.ORES))
+                || original.getBlock().equals(Blocks.SANDSTONE) ||original.getBlock().equals(Blocks.RED_SANDSTONE)) {
             return replacing;
         } else {
             return original;

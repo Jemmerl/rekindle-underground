@@ -111,12 +111,15 @@ public class LayerDeposit implements IDeposit {
         // DEPOSIT GENERATION //
         ////////////////////////
 
-        RekindleUnderground.getInstance().LOGGER.info("Generating deposit at {}, with {} layers.", originPos, layers);
+        // Debug
+        if (RKUndergroundConfig.COMMON.debug.get()) {
+            RekindleUnderground.getInstance().LOGGER.info("Generating deposit at {}, with {} layers and {} total height.", originPos, layers, totalHeight);
+        }
+
         float radius; // Radius is generated dynamically, this is just a pre-initialization
 
         // Set the first layer's height
         int currLayerHeight = getLayerHeight(rand);
-        System.out.println(currLayerHeight); // TODO TEST
         int countLayerHeight = 0; // Used to count and put spacings between deposit layers
         int countLayers = 0; // Used to count how many layers have generated so far
         float adjDensityPercent = densityPercent; // Use to dynamically change density for spacing layers
