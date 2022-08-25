@@ -73,6 +73,9 @@ public class LayerDeposit implements IDeposit {
     public boolean generate(ChunkReader reader, Random rand, BlockPos pos, BlockState[][][] stateMap,
                             IDepositCapability depositCapability, IChunkGennedCapability chunkGennedCapability) {
 
+        // Constants
+        int VARIANCE = 9;
+
         // Configure noise if not done so
         if (!NoiseInit.configured) {
             NoiseInit.init(reader.getSeedReader().getSeed());
@@ -91,8 +94,8 @@ public class LayerDeposit implements IDeposit {
         // If the max layers is 1, return 1. Else, random spread. (Having 1 max layer inputs 0 into rand.nextInt, which is illegal)
         int layers = (this.layerTemplate.getMaxLayers() == 1) ? 1 : (rand.nextInt(this.layerTemplate.getMaxLayers() - 1) + 1);
 
-        // Add 1 block for in-between spacing
-        int totalHeight = layers * (this.layerTemplate.getAvgLayerThick() + 1);
+        // Add 1 block per layer and one bottom layer for in-between spacing
+        int totalHeight = layers * (this.layerTemplate.getAvgLayerThick() + 1) + 1;
         int heightStart = rand.nextInt(this.layerTemplate.getMaxYHeight() - this.layerTemplate.getMinYHeight()) + this.layerTemplate.getMinYHeight();
         int heightEnd = heightStart + totalHeight;
 
@@ -130,7 +133,7 @@ public class LayerDeposit implements IDeposit {
 
         // Set the first layer's height
         int currLayerHeight = getLayerHeight(rand);
-        int countLayerHeight = 0; // Used to count and put spacings between deposit layers
+        int countLayerHeight = -1; // Used to count and put spacings between deposit layers
         int countLayers = 0; // Used to count how many layers have generated so far
         float adjDensityPercent; // Use to dynamically change density for spacing layers
 
@@ -144,28 +147,30 @@ public class LayerDeposit implements IDeposit {
             // Check current layer height
             if (countLayerHeight >= currLayerHeight) {
                 currLayerHeight = getLayerHeight(rand); // Get next layer height
-                countLayerHeight = rand.nextInt(3) - 3; // Tells the loop to generate one or two spacer layers
+                countLayerHeight = rand.nextInt(3) - 3; // Tells the loop to generate one or two spacers
                 adjDensityPercent = densityPercent * 0.2f; // Set the density of the spacing layer to be very small
                 countLayers++; // Incrememnt the number of layers generated
             } else {
                 adjDensityPercent = densityPercent; // Reset to regular layer density
             }
 
-
             for (BlockPos areaPos : BlockPos.getAllInBoxMutable(
-                    new BlockPos((originPos.getX() - avgDepositRadius), y, (originPos.getZ() - avgDepositRadius)),
-                    new BlockPos((originPos.getX() + avgDepositRadius), y, (originPos.getZ() + avgDepositRadius))))
+                    new BlockPos((originPos.getX() - avgDepositRadius - (VARIANCE+1)), y,
+                            (originPos.getZ() - avgDepositRadius - (VARIANCE+1))),
+                    new BlockPos((originPos.getX() + avgDepositRadius + (VARIANCE+1)), y,
+                            (originPos.getZ() + avgDepositRadius + (VARIANCE+1)))))
             {
 
-                // TODO always returning 100??
-                // Oops. modeled for radius. back to drawing board. dunno why large values from hypot tho...
-                double taperPercent = Math.min(100, ((60 / (1 + Math.exp(-(Math.hypot(originPos.getY(), y)) + 0.8 * (totalHeight / 2f)))) + 45));
-                //System.out.println(taperPercent + " " + Math.hypot(originPos.getY(), y) + " " + (float)(totalHeight / 2f));
+                // Uses a logarithmic equation to taper the ends of a layer deposit.
+                // Applies mainly to larger deposits, and deposits smaller than a height of 6 are not affected
+                double taperPercent = (totalHeight < 6) ? 100 :
+                        Math.min(100, ((31 / (1 + Math.exp(-3 * (-Math.abs(originPos.getY() - y) + (totalHeight / 2f) - 2)))) + 70));
 
-                // Gets the radius and then multiplies that radius by a logistic regression from 100% to 45%
+                // Gets the radius and then multiplies that radius by a logistic regression from 100% to 55%
                 // based on the current and total vertical distance from the center. Tapers off the tops and bottoms!
-                radius = (float) ((avgDepositRadius + ConfiguredBlobNoise.blobRadiusNoise(areaPos.getX(), y, areaPos.getZ()))
-                        * taperPercent);
+                radius = (float) ((avgDepositRadius +
+                        ConfiguredBlobNoise.blobRadiusNoise(areaPos.getX(), y, areaPos.getZ()) * VARIANCE)
+                        * (taperPercent / 100f));
 
                 // Generate the ore block if within the radius and rolls a success against the density percent
                 if ((UtilMethods.getHypotenuse(areaPos.getX(), areaPos.getZ(), originPos.getX(), originPos.getZ()) <= radius)
