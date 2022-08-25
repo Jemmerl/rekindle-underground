@@ -1,8 +1,11 @@
 package com.jemmerl.rekindleunderground.world.feature.igneous;
 
+import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.block.custom.StoneOreBlock;
 import com.jemmerl.rekindleunderground.data.types.OreType;
 import com.jemmerl.rekindleunderground.data.types.StoneType;
+import com.jemmerl.rekindleunderground.init.NoiseInit;
+import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.util.Pair;
 import com.jemmerl.rekindleunderground.util.UtilMethods;
 import com.jemmerl.rekindleunderground.util.WeightedProbMap;
@@ -33,20 +36,22 @@ public class DiatremeMaarFeature extends Feature<NoFeatureConfig> {
     private static final int PIPE_MAX_DEPTH = 30; // Maximum depth below the surface a pipe can spawn
     private static final int PIPE_DITHER_VARIATION = 3; // Randomization of edge "fuzziness"
 
-    private static boolean noiseSet = false;
-
     @Override
     public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+
+        // TODO TEMP, only allow generation if in debug mode
+        if (!RKUndergroundConfig.COMMON.debug.get()) {
+            return false;
+        }
 
         // Remove oceanic mantle pipes. Mantle pipes are a continental feature
         if (reader.getBiome(pos).getCategory() == Biome.Category.OCEAN) {
             return false;
         }
 
-        // Configure the pipe noise if not done so
-        if (!noiseSet) {
-            ConfiguredBlobNoise.configNoise(reader.getSeed());
-            noiseSet = true;
+        // Configure noise if not done so
+        if (!NoiseInit.configured) {
+            NoiseInit.init(reader.getSeed());
         }
 
         // Add tuff and peridotite as random sprinkles

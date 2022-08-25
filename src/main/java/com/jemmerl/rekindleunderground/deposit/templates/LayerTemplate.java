@@ -14,9 +14,9 @@ public class LayerTemplate {
     public LayerTemplate(int weight, int avg_radius, int max_layers, int avg_layer_thickness,
                          int min_density, int max_density, int min_yheight, int max_yheight) {
         this.weight = weight;
-        this.avg_radius = avg_radius;
-        this.max_layers = max_layers;
-        this.avg_layer_thickness = avg_layer_thickness;
+        this.avg_radius = Math.max(avg_radius, 3);
+        this.max_layers = Math.max(max_layers, 1);
+        this.avg_layer_thickness = Math.max(avg_layer_thickness, 1);
         this.min_density = min_density;
         this.max_density = max_density;
         this.min_yheight = min_yheight;

@@ -39,6 +39,13 @@ public class DepositDataLoader extends JsonReloadListener {
 
                 // Check for duplicate names
                 String name = jsonObj.get("name").getAsString();
+
+                // Ignore test deposits unless in debug mode
+                if (name.contains("test") && !RKUndergroundConfig.COMMON.debug.get()) {
+                    RekindleUnderground.getInstance().LOGGER.info("Test Deposit {} ignored", name);
+                    return;
+                }
+
                 if (!nameList.contains(name)) {
                     nameList.add(name);
                 } else {
