@@ -1,0 +1,14 @@
+Important
+- Implement other ore deposit types (vein, placer, porphyry, etc)
+- Actually get textures done
+- Add poor and rich ore varieties
+- Improve stone generation
+
+Long Term
+- Layer-type ores (coal)
+- Evaporate-type ores
+- Salt domes?
+- Balance and add ore drop variability/configurability
+
+Like, Really Long Term
+- API to add in a custom ore that works with the mod's stone
