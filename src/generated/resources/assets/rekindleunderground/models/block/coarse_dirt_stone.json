@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "rekindleunderground:block/coarse_dirt_stone",
+    "up": "rekindleunderground:block/coarse_dirt_stone",
+    "down": "rekindleunderground:block/coarse_dirt_stone",
+    "north": "rekindleunderground:block/coarse_dirt_stone",
+    "south": "rekindleunderground:block/coarse_dirt_stone",
+    "east": "rekindleunderground:block/coarse_dirt_stone",
+    "west": "rekindleunderground:block/coarse_dirt_stone"
+  }
+}

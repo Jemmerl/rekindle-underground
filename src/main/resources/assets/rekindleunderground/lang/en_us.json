@@ -32,7 +32,13 @@
   "block.rekindleunderground.phyllite_stone": "Phyllite",
   "block.rekindleunderground.gneiss_stone": "Gneiss",
   "block.rekindleunderground.marble_stone": "Marble",
-  "block.rekindleunderground.soapstone_stone": "Soapstone",
+
+  "block.rekindleunderground.dirt_stone": "Dirt",
+  "block.rekindleunderground.coarse_dirt_stone": "Coarse Dirt",
+  "block.rekindleunderground.clay_stone": "Clay",
+  "block.rekindleunderground.sand_stone": "Sand",
+  "block.rekindleunderground.red_sand_stone": "Red Sand",
+  "block.rekindleunderground.gravel_stone": "Gravel",
 
   "block.rekindleunderground.chalk_cobblestone": "Chalk Cobblestone",
   "block.rekindleunderground.limestone_cobblestone": "Limestone Cobblestone",

@@ -60,7 +60,16 @@ public enum StoneType {
     SCHIST("schist", StoneGroupType.METAMORPHIC, 1, 1, true),
     PHYLLITE("phyllite", StoneGroupType.METAMORPHIC, 2, 2, true),
     GNEISS("gneiss", StoneGroupType.METAMORPHIC, 4, 4, true),
-    MARBLE("marble", StoneGroupType.METAMORPHIC, 3, 3, true);
+    MARBLE("marble", StoneGroupType.METAMORPHIC, 3, 3, true),
+
+    // Detritus
+    DIRT("dirt", StoneGroupType.DETRITUS, 4, 4, false),
+    COARSE_DIRT("coarse_dirt", StoneGroupType.DETRITUS, 4, 4, false),
+    CLAY("clay", StoneGroupType.DETRITUS, 4, 4, false),
+    SAND("sand", StoneGroupType.DETRITUS, 4, 4, false),
+    RED_SAND("red_sand", StoneGroupType.DETRITUS, 4, 4, false),
+    GRAVEL("gravel", StoneGroupType.DETRITUS, 4, 4, false);
+
 
     private static class Constants {
         private static final Float[] HARDS = new Float[]{1f, 1.75f, 2.5f, 3f, 3.5f}; // Relative hardnesses

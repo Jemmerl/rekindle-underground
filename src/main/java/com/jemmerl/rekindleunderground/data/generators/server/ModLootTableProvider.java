@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.block.ModBlocks;
 import com.jemmerl.rekindleunderground.data.types.OreType;
+import com.jemmerl.rekindleunderground.data.types.StoneGroupType;
 import com.jemmerl.rekindleunderground.data.types.StoneType;
 import com.jemmerl.rekindleunderground.util.UtilMethods;
 import com.mojang.datafixers.util.Pair;
@@ -43,11 +44,13 @@ public class ModLootTableProvider extends LootTableProvider {
 //            LootTableManager.validateLootTable(validationtracker, entry.getKey(), entry.getValue());
     }
 
+    // TODO Whole lotta TEMP shite in here
     private static class ModBlockLootTables extends BlockLootTables {
         @Override
         protected void addTables() {
             for (StoneType stoneType : StoneType.values()) {
                 Block stoneBlock = stoneType.getStoneState().getBlock();
+                //stoneType.getGroup().equals(StoneGroupType.DETRITUS)
                 if (stoneType.hasCobble()) {
                     // Register stone -> rock drop
                     LootTable.Builder lootTable = buildStoneLootTable(stoneType);

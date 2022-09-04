@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "rekindleunderground:block/red_sand_stone",
+    "up": "rekindleunderground:block/red_sand_stone",
+    "down": "rekindleunderground:block/red_sand_stone",
+    "north": "rekindleunderground:block/red_sand_stone",
+    "south": "rekindleunderground:block/red_sand_stone",
+    "east": "rekindleunderground:block/red_sand_stone",
+    "west": "rekindleunderground:block/red_sand_stone"
+  }
+}
