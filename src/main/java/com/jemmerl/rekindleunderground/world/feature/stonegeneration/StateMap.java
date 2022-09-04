@@ -95,7 +95,8 @@ public class StateMap {
         ConcurrentLinkedQueue<DepositCapability.PendingBlock> queue = depositCapability.getPendingBlocks(cp);
         // Debug
         if (RKUndergroundConfig.COMMON.debug.get()) {
-            RekindleUnderground.getInstance().LOGGER.info("Trying to place queue with size {}", queue.size());
+            // Manual toggle. It is useful, sometimes, but it's too spammy to enable with the other debug tools.
+            if (false) { RekindleUnderground.getInstance().LOGGER.info("Trying to place queue with size {}", queue.size()); }
             if (chunkGennedCapability.hasChunkGenerated(cp) && (queue.size() > 0)) {
                 RekindleUnderground.getInstance().LOGGER.info(
                         "Chunk [{}, {}] has already generated but attempting to place pending blocks anyways",

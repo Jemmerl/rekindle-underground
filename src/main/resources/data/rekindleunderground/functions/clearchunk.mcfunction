@@ -4,6 +4,7 @@ fill ~ ~ ~ ~16 10 ~16 air replace gravel
 fill ~ ~ ~ ~16 10 ~16 air replace grass_block
 fill ~ ~ ~ ~16 10 ~16 air replace water
 fill ~ ~ ~ ~16 10 ~16 air replace lava
+fill ~ ~ ~ ~16 10 ~16 air replace sand
 
 fill ~ ~ ~ ~16 10 ~16 air replace rekindleunderground:chalk_stone[oretype=none]
 fill ~ ~ ~ ~16 10 ~16 air replace rekindleunderground:limestone_stone[oretype=none]

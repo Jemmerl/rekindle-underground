@@ -70,11 +70,16 @@ public class LayerDeposit implements IDeposit {
         return this.layerTemplate.getWeight();
     }
 
+
+    //////////////////////////
+    //  DEPOSIT GENERATION  //
+    //////////////////////////
+
     public boolean generate(ChunkReader reader, Random rand, BlockPos pos, BlockState[][][] stateMap,
                             IDepositCapability depositCapability, IChunkGennedCapability chunkGennedCapability) {
 
         // Constants
-        int VARIANCE = 9;
+        final int VARIANCE = 9; // The max +/- blocks radius variation
 
         // Configure noise if not done so
         if (!NoiseInit.configured) {
@@ -85,31 +90,37 @@ public class LayerDeposit implements IDeposit {
         // DEPOSIT PROPERTIES //
         ////////////////////////
 
+        // Get a uniformly distributed density value for the deposit within the min and max density range
+        float densityPercent = ((rand.nextInt(this.layerTemplate.getMaxDensity() -
+                this.layerTemplate.getMinDensity()) + this.layerTemplate.getMinDensity()) / 100f);
+
         // Get a normally distributed average radius (for the individual deposit) around the average configured radius
         int avgDepositRadius = getAvgRadius(rand);
 
-        // Get a uniformly distributed density value for the deposit within the min and max density range
-        float densityPercent = ((rand.nextInt(this.layerTemplate.getMaxDensity() - this.layerTemplate.getMinDensity()) + this.layerTemplate.getMinDensity()) / 100f);
-
         // If the max layers is 1, return 1. Else, random spread. (Having 1 max layer inputs 0 into rand.nextInt, which is illegal)
-        int layers = (this.layerTemplate.getMaxLayers() == 1) ? 1 : (rand.nextInt(this.layerTemplate.getMaxLayers() - 1) + 1);
+        int avgLayers = (this.layerTemplate.getMaxLayers() == 1) ? 1 : (rand.nextInt(this.layerTemplate.getMaxLayers() - 1) + 1);
 
-        // Add 1 block per layer and one bottom layer for in-between spacing
-        int totalHeight = layers * (this.layerTemplate.getAvgLayerThick() + 1) + 1;
-        int heightStart = rand.nextInt(this.layerTemplate.getMaxYHeight() - this.layerTemplate.getMinYHeight()) + this.layerTemplate.getMinYHeight();
+        // Calculate the predicted total height given the total layers to be generated and the average thickness of
+        // those layers. One height is added to the avg layer thickness to compensate for spacing levels.
+        int totalHeight = avgLayers * (this.layerTemplate.getAvgLayerThick() + 1);
+
+        // Get a uniformly distributed start height for the deposit within the min and max height range
+        // The first part of this formula picks the height of the deposit center. The downward shift
+        // then defines the true start height of the deposit. Without this shift, the deposit could generate
+        // completely outside the user-defined height range. Now, only half the deposit can at maximum.
+        int heightStart = (rand.nextInt(this.layerTemplate.getMaxYHeight() - this.layerTemplate.getMinYHeight())
+                + this.layerTemplate.getMinYHeight()) - (totalHeight / 2);
         int heightEnd = heightStart + totalHeight;
 
         // Check if the deposit is generating higher than possible (prevent StateMap ArrayOutOfBounds in the Y direction)
-        // If so, try to truncate to that value. If that does not work, prevent it from generating.
+        // If so, try to truncate to that value. If that removed the whole deposit, prevent it from generating.
         if (heightEnd > reader.getMaxHeight()) {
             heightEnd = reader.getMaxHeight();
             if (heightEnd < heightStart) {
                 return false;
             }
+            totalHeight = heightEnd - heightStart; // Update the new total height
         }
-
-        // Update the new total height
-        totalHeight = heightEnd - heightStart;
 
         // Set approximate center of the deposit
         BlockPos originPos = new BlockPos(
@@ -125,34 +136,21 @@ public class LayerDeposit implements IDeposit {
 
         // Debug
         if (RKUndergroundConfig.COMMON.debug.get()) {
-            RekindleUnderground.getInstance().LOGGER.info("Generating deposit at {}, with {} layers and {} total height.", originPos, layers, totalHeight);
+            RekindleUnderground.getInstance().LOGGER.info("Generating deposit at {}, with {} avg layers and {} total height.", originPos, avgLayers, totalHeight);
         }
 
-        // Radius is generated dynamically, this is just a pre-initialization
-        float radius;
-
-        // Set the first layer's height
-        int currLayerHeight = getLayerHeight(rand);
-        int countLayerHeight = -1; // Used to count and put spacings between deposit layers
-        int countLayers = 0; // Used to count how many layers have generated so far
-        float adjDensityPercent; // Use to dynamically change density for spacing layers
+        // Pre-init dynamic variables
+        float radius; // Generated radius
+        float adjDensityPercent; // Variable density for spacing level generation
+        int layerHeightTotal = getLayerHeight(rand); // Set the first layer's total height
+        int layerHeightCount = -1; // Used to count and put spacing layers between deposit layers
 
         for (int y = heightStart; y < heightEnd; y++) {
 
-            // Check number of layers
-            if (countLayers == layers) {
-                break; // If deposit limit reached, end generation
-            }
-
-            // Check current layer height
-            if (countLayerHeight >= currLayerHeight) {
-                currLayerHeight = getLayerHeight(rand); // Get next layer height
-                countLayerHeight = rand.nextInt(3) - 3; // Tells the loop to generate one or two spacers
-                adjDensityPercent = densityPercent * 0.2f; // Set the density of the spacing layer to be very small
-                countLayers++; // Incrememnt the number of layers generated
-            } else {
-                adjDensityPercent = densityPercent; // Reset to regular layer density
-            }
+            // Set a level as a spacer (has a very low ore density compared to a normal layer)
+            // Negative values generate a spacer, >= 0 generate normally
+            // The last level of the last layer is also a spacer
+            adjDensityPercent = ((layerHeightCount < 0) || (y == (heightEnd - 1))) ? (densityPercent * 0.2f) : densityPercent;
 
             for (BlockPos areaPos : BlockPos.getAllInBoxMutable(
                     new BlockPos((originPos.getX() - avgDepositRadius - (VARIANCE+1)), y,
@@ -161,28 +159,37 @@ public class LayerDeposit implements IDeposit {
                             (originPos.getZ() + avgDepositRadius + (VARIANCE+1)))))
             {
 
-                // Uses a logarithmic equation to taper the ends of a layer deposit.
-                // Applies mainly to larger deposits, and deposits smaller than a height of 6 are not affected
-                double taperPercent = (totalHeight < 6) ? 100 :
-                        Math.min(100, ((31 / (1 + Math.exp(-3 * (-Math.abs(originPos.getY() - y) + (totalHeight / 2f) - 2)))) + 70));
+                // TODO BELOW THIS SUCKS
+//                // Uses a logarithmic equation to taper the ends of a layer deposit.
+//                // Applies mainly to larger deposits, and deposits smaller than a height of 6 are not affected
+//                double taperPercent = (totalHeight < 6) ? 100 :
+//                        Math.min(100, ((31 / (1 + Math.exp(-3 * (-Math.abs(originPos.getY() - y) + (totalHeight / 2f) - 2)))) + 70));
+//
+//                // Gets the radius and then multiplies that radius by a logistic regression from 100% to 55%
+//                // based on the current and total vertical distance from the center. Tapers off the tops and bottoms!
+//                radius = (float) ((avgDepositRadius +
+//                        ConfiguredBlobNoise.blobRadiusNoise(areaPos.getX(), y, areaPos.getZ()) * VARIANCE)
+//                        * (taperPercent / 100f));
+                // TODO ABOVE THIS SUCKS
 
-                // Gets the radius and then multiplies that radius by a logistic regression from 100% to 55%
-                // based on the current and total vertical distance from the center. Tapers off the tops and bottoms!
-                radius = (float) ((avgDepositRadius +
-                        ConfiguredBlobNoise.blobRadiusNoise(areaPos.getX(), y, areaPos.getZ()) * VARIANCE)
-                        * (taperPercent / 100f));
+                radius = (ConfiguredBlobNoise.blobRadiusNoise((areaPos.getX() * 5), (y * 6), (areaPos.getZ() * 5)) * VARIANCE)
+                        + avgDepositRadius;
 
                 // Generate the ore block if within the radius and rolls a success against the density percent
-                if ((UtilMethods.getHypotenuse(areaPos.getX(), areaPos.getZ(), originPos.getX(), originPos.getZ()) <= radius)
-                        && (rand.nextFloat() < adjDensityPercent)) {
+                if ((rand.nextFloat() < adjDensityPercent) &&
+                        (UtilMethods.getHypotenuse(areaPos.getX(), areaPos.getZ(), originPos.getX(), originPos.getZ()) <= radius)) {
                     DepositUtil.enqueueBlockPlacement(reader.getSeedReader(), areaPos, this.ores.nextElt(),
                             this.name, pos, stateMap, depositCapability, chunkGennedCapability);
                 }
             }
-            countLayerHeight++;
-        }
+            layerHeightCount++;
 
-        // ((100 / ( - totalHeight + 5)) + 10))
+            // Check current layer height
+            if (layerHeightCount >= layerHeightTotal) {
+                layerHeightTotal = getLayerHeight(rand); // Set next layer height
+                layerHeightCount = rand.nextInt(2) - 2; // Tells the loop to generate one or two spacers
+            }
+        }
 
         // Debug tool
         if (RKUndergroundConfig.COMMON.debug.get()) {
@@ -200,14 +207,14 @@ public class LayerDeposit implements IDeposit {
     // DEPOSIT UTILITIES //
     ///////////////////////
 
-    // Setup: Gets a normally distributed average radius. The actual radius value will vary around this value as a base
+    // Setup: Gets a normally distributed radius around the given average radius
     private int getAvgRadius(Random rand) {
         int radius = (int)((rand.nextGaussian() * (this.layerTemplate.getAvgRadius() / 3f)) + this.layerTemplate.getAvgRadius());
         return (radius <= 0) ? 1 : radius;
 
     }
 
-    // Setup: Gets a normally distributed layer height
+    // Setup: Gets a normally distributed layer height around the given average layer height
     private int getLayerHeight(Random rand) {
         int height = (int)((rand.nextGaussian() * (this.layerTemplate.getAvgLayerThick() / 2f)) + this.layerTemplate.getAvgLayerThick());
         return (height <= 0) ? 1 : height;
