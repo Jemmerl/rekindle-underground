@@ -1,7 +1,12 @@
-Important
-- Implement other ore deposit types (vein, placer, porphyry, etc)
+Current
+-> Placer ore deposits:
+- Add small/tiny and rich ore varieties (with those specific names!)
+    * Will be used for placer deposits, so I gotta do it sooner than later...
+- Add sand, gravel, and red sand "stone ores"
+
+Short Term
+- Implement other ore deposit types (vein, placer, porphyry, SOIL/BOG/CLAY, etc)
 - Actually get textures done
-- Add poor and rich ore varieties
 - Improve stone generation
 
 Long Term

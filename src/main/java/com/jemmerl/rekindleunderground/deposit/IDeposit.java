@@ -21,13 +21,13 @@ public interface IDeposit {
 
     IDeposit setOres(WeightedProbMap<OreType> oreMap);
 
-    IDeposit setStones(ArrayList<StoneType> stoneList);
+    IDeposit setValid(ArrayList<StoneType> validList);
 
     String getName();
 
     WeightedProbMap<OreType> getOres();
 
-    ArrayList<StoneType> getStones();
+    ArrayList<StoneType> getValid();
 
     int getWeight();
 

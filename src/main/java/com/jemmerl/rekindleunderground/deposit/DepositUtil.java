@@ -69,7 +69,7 @@ public class DepositUtil {
             int zIndex = Math.abs(qPos.getZ() - genPos.getZ());
             try {
                 BlockState hostState = stateMap[xIndex][qPos.getY()][zIndex];
-                if (isValidStone(hostState.getBlock(), DepositRegistrar.getDeposits().get(qName).getStones())) {
+                if (isValidStone(hostState.getBlock(), DepositRegistrar.getDeposits().get(qName).getValid())) {
                     stateMap[xIndex][qPos.getY()][zIndex] = hostState.with(StoneOreBlock.ORE_TYPE, qType);
                     return true;
                 }
@@ -91,7 +91,7 @@ public class DepositUtil {
         if (cgCap != null) {
             if (cgCap.hasChunkGenerated(qChunk)) {
                 BlockState state = level.getBlockState(qPos);
-                if (isValidStone(state.getBlock(), DepositRegistrar.getDeposits().get(qName).getStones())) {
+                if (isValidStone(state.getBlock(), DepositRegistrar.getDeposits().get(qName).getValid())) {
                     if (!level.setBlockState(qPos, state.with(StoneOreBlock.ORE_TYPE, qType), 2 | 16)) {
                         RekindleUnderground.getInstance().LOGGER.warn("Somehow {} could not be placed at {} even though chunk has generated",
                                 state.getBlock().getRegistryName(), qPos);

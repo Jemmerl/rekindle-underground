@@ -27,7 +27,7 @@ public class LayerDeposit implements IDeposit {
 
     private String name;
     private WeightedProbMap<OreType> ores;
-    private ArrayList<StoneType> validStones;
+    private ArrayList<StoneType> validList;
 
     public LayerDeposit(LayerTemplate template) {
         this.layerTemplate = template;
@@ -46,8 +46,8 @@ public class LayerDeposit implements IDeposit {
     }
 
     @Override
-    public LayerDeposit setStones(ArrayList<StoneType> stoneList) {
-        this.validStones = stoneList;
+    public LayerDeposit setValid(ArrayList<StoneType> validList) {
+        this.validList = validList;
         return this;
     }
 
@@ -62,10 +62,11 @@ public class LayerDeposit implements IDeposit {
     }
 
     @Override
-    public ArrayList<StoneType> getStones() {
-        return this.validStones;
+    public ArrayList<StoneType> getValid() {
+        return this.validList;
     }
 
+    @Override
     public int getWeight() {
         return this.layerTemplate.getWeight();
     }
@@ -75,6 +76,7 @@ public class LayerDeposit implements IDeposit {
     //  DEPOSIT GENERATION  //
     //////////////////////////
 
+    @Override
     public boolean generate(ChunkReader reader, Random rand, BlockPos pos, BlockState[][][] stateMap,
                             IDepositCapability depositCapability, IChunkGennedCapability chunkGennedCapability) {
 

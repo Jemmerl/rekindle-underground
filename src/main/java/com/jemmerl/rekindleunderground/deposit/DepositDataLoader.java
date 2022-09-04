@@ -3,6 +3,7 @@ package com.jemmerl.rekindleunderground.deposit;
 import com.google.gson.*;
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.deposit.generators.LayerDeposit;
+import com.jemmerl.rekindleunderground.deposit.generators.PlacerDeposit;
 import com.jemmerl.rekindleunderground.deposit.templates.LayerTemplate;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import net.minecraft.client.resources.JsonReloadListener;
@@ -61,11 +62,19 @@ public class DepositDataLoader extends JsonReloadListener {
                                 GSON.fromJson(jsonObj.get("settings"), LayerTemplate.class))
                                         .setName(name)
                                         .setOres(DepositUtil.getOres(jsonObj.get("ores").getAsJsonArray()))
-                                        .setStones(DepositUtil.getStones(jsonObj.get("stones").getAsJsonArray())));
+                                        .setValid(DepositUtil.getStones(jsonObj.get("stones").getAsJsonArray())));
                         RekindleUnderground.getInstance().LOGGER.info("Successfully loaded deposit {}!", rl);
                         break;
 
-                    case "sphere":
+                    case "placer":
+                        // Parse the settings json element into a LayerTemplate and then use to create a LayerDeposit
+                        depositRegistrar.addDeposit(name, new PlacerDeposit(
+                                GSON.fromJson(jsonObj.get("settings"), LayerTemplate.class))
+                                .setName(name)
+                                .setOres(DepositUtil.getOres(jsonObj.get("ores").getAsJsonArray()))
+                                .setValid(DepositUtil.getStones(jsonObj.get("detritus").getAsJsonArray())));
+                        RekindleUnderground.getInstance().LOGGER.info("Successfully loaded deposit {}!", rl);
+                        break;
 
                     default:
                         RekindleUnderground.getInstance().LOGGER.warn("Deposit type {} not found in: {} ", jsonObj.get("deposit_type").getAsString(), rl);

@@ -1,0 +1,32 @@
+{
+  "name": "testone",
+  "deposit_type": "placer",
+  "settings": {
+    "weight": 100,
+    "avg_radius": 10,
+    "max_layers": 2,
+    "avg_layer_thickness": 10,
+    "min_density": 50,
+    "max_density": 100,
+    "min_yheight": 10,
+    "max_yheight": 100
+  },
+  "ores": [
+    {
+      "ore": "malachite",
+      "weight": 65
+    },
+    {
+      "ore": "azurite",
+      "weight": 35
+    }
+  ],
+  "detritus": [
+    "granodiorite",
+    "granite",
+    "diorite",
+    "gabbro",
+    "diabase",
+    "syenite"
+  ]
+}
