@@ -4,7 +4,8 @@ public enum StoneGroupType {
     SEDIMENTARY("sedimentary"),
     EXTRUSIVE("extrusive"),
     INTRUSIVE("intrusive"),
-    METAMORPHIC("metamorphic");
+    METAMORPHIC("metamorphic"),
+    DETRITUS("detritus");
 
     private final String name;
 

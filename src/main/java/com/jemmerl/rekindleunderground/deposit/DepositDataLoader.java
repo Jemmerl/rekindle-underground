@@ -62,17 +62,19 @@ public class DepositDataLoader extends JsonReloadListener {
                                 GSON.fromJson(jsonObj.get("settings"), LayerTemplate.class))
                                         .setName(name)
                                         .setOres(DepositUtil.getOres(jsonObj.get("ores").getAsJsonArray()))
-                                        .setValid(DepositUtil.getStones(jsonObj.get("stones").getAsJsonArray())));
+                                        .setValid(DepositUtil.getOreStones(jsonObj.get("stones").getAsJsonArray()))
+                                        .setBiomes(DepositUtil.getBiomes(jsonObj.get("biomes").getAsJsonArray())));
                         RekindleUnderground.getInstance().LOGGER.info("Successfully loaded deposit {}!", rl);
                         break;
 
                     case "placer":
-                        // Parse the settings json element into a LayerTemplate and then use to create a LayerDeposit
+                        // Parse the settings json element into a PlacerTemplate and then use to create a PlacerDeposit
                         depositRegistrar.addDeposit(name, new PlacerDeposit(
                                 GSON.fromJson(jsonObj.get("settings"), LayerTemplate.class))
                                 .setName(name)
                                 .setOres(DepositUtil.getOres(jsonObj.get("ores").getAsJsonArray()))
-                                .setValid(DepositUtil.getStones(jsonObj.get("detritus").getAsJsonArray())));
+                                .setValid(DepositUtil.getOreStones(jsonObj.get("detritus").getAsJsonArray()))
+                                .setBiomes(DepositUtil.getBiomes(jsonObj.get("biomes").getAsJsonArray())));
                         RekindleUnderground.getInstance().LOGGER.info("Successfully loaded deposit {}!", rl);
                         break;
 

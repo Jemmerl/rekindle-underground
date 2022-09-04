@@ -26,11 +26,9 @@
     }
   ],
   "stones": [
-    "granodiorite",
-    "granite",
-    "diorite",
-    "gabbro",
-    "diabase",
-    "syenite"
+    "all"
+  ],
+  "biomes": [
+    "all"
   ]
 }

@@ -28,5 +28,11 @@
     "gabbro",
     "diabase",
     "syenite"
+  ],
+  "biomes": [
+    "beach",
+    "ocean",
+    "river",
+    "swamp"
   ]
 }

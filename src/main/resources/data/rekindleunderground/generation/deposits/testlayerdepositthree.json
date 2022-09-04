@@ -24,5 +24,8 @@
     "gabbro",
     "diabase",
     "syenite"
+  ],
+  "biomes": [
+    "all"
   ]
 }

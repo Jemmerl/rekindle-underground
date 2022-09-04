@@ -17,6 +17,7 @@ import com.jemmerl.rekindleunderground.world.feature.stonegeneration.ChunkReader
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.biome.Biome;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -28,10 +29,15 @@ public class LayerDeposit implements IDeposit {
     private String name;
     private WeightedProbMap<OreType> ores;
     private ArrayList<StoneType> validList;
+    private ArrayList<Biome.Category> validBiomes;
 
     public LayerDeposit(LayerTemplate template) {
         this.layerTemplate = template;
     }
+
+    /////////////
+    // SETTERS //
+    /////////////
 
     @Override
     public LayerDeposit setName(String name) {
@@ -52,6 +58,16 @@ public class LayerDeposit implements IDeposit {
     }
 
     @Override
+    public IDeposit setBiomes(ArrayList<Biome.Category> validBiomes) {
+        this.validBiomes = validBiomes;
+        return this;
+    }
+
+    /////////////
+    // GETTERS //
+    /////////////
+
+    @Override
     public String getName() {
         return this.name;
     }
@@ -64,6 +80,11 @@ public class LayerDeposit implements IDeposit {
     @Override
     public ArrayList<StoneType> getValid() {
         return this.validList;
+    }
+
+    @Override
+    public ArrayList<Biome.Category> getBiomes() {
+        return this.validBiomes;
     }
 
     @Override
@@ -138,7 +159,16 @@ public class LayerDeposit implements IDeposit {
 
         // Debug
         if (RKUndergroundConfig.COMMON.debug.get()) {
-            RekindleUnderground.getInstance().LOGGER.info("Generating deposit at {}, with {} avg layers and {} total height.", originPos, avgLayers, totalHeight);
+            RekindleUnderground.getInstance().LOGGER.info("Generating layer deposit at {}, with {} avg layers and {} total height.", originPos, avgLayers, totalHeight);
+        }
+
+        // Check for valid biome placement. If not in a valid biome, cancel generation
+        if (!this.validBiomes.contains(reader.getSeedReader().getBiome(originPos).getCategory())) {
+            // Debug
+            if (RKUndergroundConfig.COMMON.debug.get()) {
+                RekindleUnderground.getInstance().LOGGER.info("Invalid biome for deposit at {}, failed to generate.", originPos);
+            }
+            return false;
         }
 
         // Pre-init dynamic variables

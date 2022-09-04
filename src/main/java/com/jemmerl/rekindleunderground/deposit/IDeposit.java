@@ -8,6 +8,7 @@ import com.jemmerl.rekindleunderground.world.capability.deposit.IDepositCapabili
 import com.jemmerl.rekindleunderground.world.feature.stonegeneration.ChunkReader;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.biome.Biome;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -23,19 +24,18 @@ public interface IDeposit {
 
     IDeposit setValid(ArrayList<StoneType> validList);
 
+    IDeposit setBiomes(ArrayList<Biome.Category> validBiomes);
+
     String getName();
 
     WeightedProbMap<OreType> getOres();
 
     ArrayList<StoneType> getValid();
 
+    ArrayList<Biome.Category> getBiomes();
+
     int getWeight();
 
-    // Oreblocks it can generate in
-
-    //
-
-    //
 }
 
 // deposit _> placer or vein -> subcategories of each

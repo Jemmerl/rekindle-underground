@@ -10,6 +10,7 @@ import com.jemmerl.rekindleunderground.world.capability.deposit.IDepositCapabili
 import com.jemmerl.rekindleunderground.world.feature.stonegeneration.ChunkReader;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.biome.Biome;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -21,10 +22,15 @@ public class PlacerDeposit implements IDeposit {
     private String name;
     private WeightedProbMap<OreType> ores;
     private ArrayList<StoneType> validList;
+    private ArrayList<Biome.Category> validBiomes;
 
     public PlacerDeposit(LayerTemplate template) {
         this.layerTemplate = template;
     }
+
+    /////////////
+    // SETTERS //
+    /////////////
 
     @Override
     public PlacerDeposit setName(String name) {
@@ -45,6 +51,16 @@ public class PlacerDeposit implements IDeposit {
     }
 
     @Override
+    public IDeposit setBiomes(ArrayList<Biome.Category> validBiomes) {
+        this.validBiomes = validBiomes;
+        return this;
+    }
+
+    /////////////
+    // GETTERS //
+    /////////////
+
+    @Override
     public String getName() {
         return this.name;
     }
@@ -57,6 +73,11 @@ public class PlacerDeposit implements IDeposit {
     @Override
     public ArrayList<StoneType> getValid() {
         return this.validList;
+    }
+
+    @Override
+    public ArrayList<Biome.Category> getBiomes() {
+        return this.validBiomes;
     }
 
     @Override

@@ -1,19 +1,22 @@
 Current
 -> Placer ore deposits:
-- Add small/tiny and rich ore varieties (with those specific names!)
+- Add small/tiny and rich ore varieties (with those specific names!) [ ]
     * Will be used for placer deposits, so I gotta do it sooner than later...
-- Add sand, gravel, and red sand "stone ores"
+- Add sand, gravel, and red sand "stone ores" [ ]
+- Add biome checks to deposits [X]
 
 Short Term
-- Implement other ore deposit types (vein, placer, porphyry, SOIL/BOG/CLAY, etc)
-- Actually get textures done
-- Improve stone generation
+- Implement other ore deposit types (vein, placer, porphyry, SOIL/BOG/CLAY, etc) [ ]
+- Actually get textures done [ ]
+- Improve stone generation [ ]
+- Make biomes able to be category or specific. two json lists in one obj? [ ]
 
 Long Term
-- Layer-type ores (coal)
-- Evaporate-type ores
-- Salt domes?
-- Balance and add ore drop variability/configurability
+- Seam-type ores (coal) [ ]
+- Evaporate-type ores [ ]
+- Salt domes? [ ]
+- Balance and add ore drop variability/configurability [ ]
+- RockType might be redundant, rework to just use StoneType for registration
 
 Like, Really Long Term
-- API to add in a custom ore that works with the mod's stone
+- API to add in a custom ore that works with the mod's stone [ ]

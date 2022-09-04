@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.block.custom.StoneOreBlock;
 import com.jemmerl.rekindleunderground.data.types.OreType;
+import com.jemmerl.rekindleunderground.data.types.StoneGroupType;
 import com.jemmerl.rekindleunderground.data.types.StoneType;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.util.Pair;
@@ -16,9 +17,10 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.ISeedReader;
+import net.minecraft.world.biome.Biome;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
+import java.util.*;
 
 public class DepositUtil {
 
@@ -41,12 +43,11 @@ public class DepositUtil {
         return new ChunkPos(pos).equals(chunkPos);
     }
 
-    // Check if a blockstate is a valid stone for ore generation
-    // If not a StoneOreBlock, then the second condition (which
-    // assumes that is is such) will never be reached.
+    // Check if a blockstate is a valid stone for ore generation.
+    // If not a StoneOreBlock, then the second condition (which assumes that it is such) will never be reached.
     public static Boolean isValidStone(Block blockIn, ArrayList<StoneType> validStones) {
-        //return ((blockIn instanceof StoneOreBlock) && validStones.contains(((StoneOreBlock) blockIn).getStoneType()));
-        return (blockIn instanceof StoneOreBlock); // TODO DEBUG TOOL
+        return ((blockIn instanceof StoneOreBlock) && validStones.contains(((StoneOreBlock) blockIn).getStoneType()));
+        //return (blockIn instanceof StoneOreBlock); // TODO DEBUG TOOL
     }
 
 
@@ -59,17 +60,27 @@ public class DepositUtil {
                                                 String qName, BlockPos genPos, BlockState[][][] stateMap,
                                                 IDepositCapability depCap, @Nullable IChunkGennedCapability cgCap) {
 
-        // genPos and genChunk are the BlockPos and ChunkPos that the statemap is being generated for
+        // genPos and genChunk are the corner BlockPos and ChunkPos that the statemap is being generated for
         ChunkPos genChunk = new ChunkPos(genPos);
+
+        // qPos and qChuck are the specific block position and respective chunk of the enqueued placement
         ChunkPos qChunk = new ChunkPos(qPos);
+
+        // qName is the name of the deposit type being enqueued from, with qDeposit being that deposit instance
+        IDeposit qDeposit = DepositRegistrar.getDeposits().get(qName);
 
         // If the enqueued chunk is the current generating chunk, attempt to place into the statemap
         if (qChunk.equals(genChunk)) {
+            // Check if the block is placing in a valid deposit biome
+            if (!qDeposit.getBiomes().contains(level.getBiome(qPos).getCategory())) {
+                return false;
+            }
+
             int xIndex = Math.abs(qPos.getX() - genPos.getX());
             int zIndex = Math.abs(qPos.getZ() - genPos.getZ());
             try {
                 BlockState hostState = stateMap[xIndex][qPos.getY()][zIndex];
-                if (isValidStone(hostState.getBlock(), DepositRegistrar.getDeposits().get(qName).getValid())) {
+                if (isValidStone(hostState.getBlock(), qDeposit.getValid())) {
                     stateMap[xIndex][qPos.getY()][zIndex] = hostState.with(StoneOreBlock.ORE_TYPE, qType);
                     return true;
                 }
@@ -90,8 +101,13 @@ public class DepositUtil {
         // If not in the currently generating chunk, and the enqueued chunk has generated, try to force placement
         if (cgCap != null) {
             if (cgCap.hasChunkGenerated(qChunk)) {
+                // Check if the block is placing in a valid deposit biome
+                if (!qDeposit.getBiomes().contains(level.getBiome(qPos).getCategory())) {
+                    return false;
+                }
+
                 BlockState state = level.getBlockState(qPos);
-                if (isValidStone(state.getBlock(), DepositRegistrar.getDeposits().get(qName).getValid())) {
+                if (isValidStone(state.getBlock(), qDeposit.getValid())) {
                     if (!level.setBlockState(qPos, state.with(StoneOreBlock.ORE_TYPE, qType), 2 | 16)) {
                         RekindleUnderground.getInstance().LOGGER.warn("Somehow {} could not be placed at {} even though chunk has generated",
                                 state.getBlock().getRegistryName(), qPos);
@@ -130,7 +146,7 @@ public class DepositUtil {
                 elts.add( new Pair<>(weight, oreType));
             }
         } catch (Exception e) {
-            RekindleUnderground.getInstance().LOGGER.warn("Error in valid deposit ore reading.");
+            RekindleUnderground.getInstance().LOGGER.warn("Error in a deposit valid ore reading.");
             if (RKUndergroundConfig.COMMON.debug.get()) {
                 e.printStackTrace();
             }
@@ -140,18 +156,81 @@ public class DepositUtil {
     }
 
     // Return an array list of valid StoneTypes from a JsonArray
-    public static ArrayList<StoneType> getStones(JsonArray jsonArray) {
-        ArrayList<StoneType> stoneArray = new ArrayList<>();
+    public static ArrayList<StoneType> getOreStones(JsonArray jsonArray) {
+        HashSet<StoneType> stoneSet = new HashSet<>(); // Using a set removes duplicate entries free of charge
             try {
                 for (int i=0; i<jsonArray.size(); i++) {
-                    stoneArray.add(StoneType.valueOf(jsonArray.get(i).getAsString().toUpperCase()));
+                    String oreStoneStr = jsonArray.get(i).getAsString().toUpperCase();
+                    switch (oreStoneStr) {
+                        case "all":
+                            // No need to do anything else, just return everything
+                            return new ArrayList<>(EnumSet.allOf(StoneType.class));
+                        case "all_stone":
+                            // Return everything that is not a detritus, aka all stones
+                            stoneSet.addAll(EnumSet.complementOf(StoneType.getAllInGroup(StoneGroupType.DETRITUS)));
+                            break;
+                        case "all_sed":
+                            stoneSet.addAll(StoneType.getAllInGroup(StoneGroupType.SEDIMENTARY));
+                            break;
+                        case "all_ign":
+                            stoneSet.addAll(StoneType.getAllInGroup(StoneGroupType.EXTRUSIVE));
+                            stoneSet.addAll(StoneType.getAllInGroup(StoneGroupType.INTRUSIVE));
+                            break;
+                        case "all_ign_ext":
+                            stoneSet.addAll(StoneType.getAllInGroup(StoneGroupType.EXTRUSIVE));
+                            break;
+                        case "all_ign_int":
+                            stoneSet.addAll(StoneType.getAllInGroup(StoneGroupType.INTRUSIVE));
+                            break;
+                        case "all_meta":
+                            stoneSet.addAll(StoneType.getAllInGroup(StoneGroupType.METAMORPHIC));
+                            break;
+                        case "all_detritus":
+                            stoneSet.addAll(StoneType.getAllInGroup(StoneGroupType.DETRITUS));
+                            break;
+                        default:
+                            stoneSet.add(StoneType.valueOf(oreStoneStr));
+                    }
+
                 }
             } catch (Exception e) {
-                RekindleUnderground.getInstance().LOGGER.warn("Error in deposit valid stone reading.");
-                e.printStackTrace();
+                RekindleUnderground.getInstance().LOGGER.warn("Error in a deposit valid orestone reading.");
+                if (RKUndergroundConfig.COMMON.debug.get()) {
+                    e.printStackTrace();
+                }
                 return null;
             }
-        return stoneArray;
+
+        return new ArrayList<>(stoneSet);
+    }
+
+    // Return an array list of valid Biome Categeories from a JsonArray
+    public static ArrayList<Biome.Category> getBiomes(JsonArray jsonArray) {
+        ArrayList<Biome.Category> biomeArray = new ArrayList<>();
+        try {
+            for (int i=0; i<jsonArray.size(); i++) {
+                String cat = jsonArray.get(i).getAsString().toLowerCase(Locale.ROOT);
+                if (cat.equals("none")) {
+                    // If you don't want a deposit to generate, you could just temporarily remove it... But fine,
+                    // I'll handle it. Returns a list of just "none" and prevents the deposit from generating.
+                    RekindleUnderground.getInstance().LOGGER.warn("Use of NONE in deposit registration detected. " +
+                            "This prevents that generation despite any other listed biomes.");
+                    return new ArrayList<>(Collections.singleton(Biome.Category.NONE));
+                } else if (cat.equals("all")) {
+                    // If "all" is ever specified, just return a list of every biome
+                    return new ArrayList<>(EnumSet.allOf(Biome.Category.class));
+                } else {
+                    biomeArray.add(Biome.Category.byName(cat));
+                }
+            }
+        } catch (Exception e) {
+            RekindleUnderground.getInstance().LOGGER.warn("Error in a deposit valid biome reading.");
+            if (RKUndergroundConfig.COMMON.debug.get()) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+        return biomeArray;
     }
 
 

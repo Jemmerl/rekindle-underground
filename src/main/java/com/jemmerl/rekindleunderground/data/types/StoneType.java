@@ -17,6 +17,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 
 public enum StoneType {
     
@@ -119,6 +120,10 @@ public enum StoneType {
         return this.hasCobble;
     }
 
+    ////////////////////
+    // STATIC METHODS //
+    ////////////////////
+
     public static boolean isInStones(String path) {
         return stoneNameList.contains(path);
     }
@@ -126,6 +131,22 @@ public enum StoneType {
     public static boolean isInCobbles(String path) {
         return cobbleNameList.contains(path);
     }
+
+    // Get all the stone types for the supplied group
+    public static EnumSet<StoneType> getAllInGroup(StoneGroupType group) {
+        EnumSet<StoneType> enumSet = EnumSet.noneOf(StoneType.class);
+        for (StoneType stoneType : StoneType.values()) {
+            if (stoneType.getGroup().equals(group)) {
+                enumSet.add(stoneType);
+            }
+        }
+        return enumSet;
+    }
+
+
+    //////////////////
+    // REGISTRATION //
+    //////////////////
 
     @SuppressWarnings("NonFinalFieldInEnum")
     private RegistryObject<Block> stoneBlock = null;
