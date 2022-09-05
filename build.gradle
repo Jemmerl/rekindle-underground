@@ -16,7 +16,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
 version = '1.16.5-2.2.5'
-group = 'com.jemmerl.rekindleunderground' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = 'com.jemmerl.rekindleunderground'
 archivesBaseName = 'rekindleunderground'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8) // Mojang ships Java 8 to end users, so your mod should target Java 8.
