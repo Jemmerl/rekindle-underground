@@ -1,5 +1,6 @@
 package com.jemmerl.rekindleunderground.block.custom;
 
+import com.jemmerl.rekindleunderground.data.types.GradeType;
 import com.jemmerl.rekindleunderground.data.types.StoneType;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.data.types.OreType;
@@ -18,6 +19,7 @@ public class StoneOreBlock extends Block {
     private static final int HARDNESS_DEPTH_FACTOR = RKUndergroundConfig.COMMON.hardnessDepthFactor.get() - 1;
 
     public static final EnumProperty<OreType> ORE_TYPE = EnumProperty.create("oretype", OreType.class);
+    public static final EnumProperty<GradeType> GRADE_TYPE = EnumProperty.create("gradetype", GradeType.class);
     private final StoneType stoneType;
     private final StoneGroupType stoneGroupType;
 
@@ -25,12 +27,13 @@ public class StoneOreBlock extends Block {
         super(properties);
         this.stoneType = stoneType;
         this.stoneGroupType = stoneGroupType;
-        this.setDefaultState(this.stateContainer.getBaseState().with(ORE_TYPE, OreType.NONE));
+        this.setDefaultState(this.stateContainer.getBaseState().with(ORE_TYPE, OreType.NONE).with(GRADE_TYPE, GradeType.LOWGRADE));
     }
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(ORE_TYPE);
+        builder.add(GRADE_TYPE);
         super.fillStateContainer(builder);
     }
 
@@ -50,6 +53,11 @@ public class StoneOreBlock extends Block {
     // Return ore state of block
     public static OreType getOreType(World world, BlockPos pos) {
         return world.getBlockState(pos).get(ORE_TYPE);
+    }
+
+    // Return grade state of block
+    public static GradeType getGradeType(World world, BlockPos pos) {
+        return world.getBlockState(pos).get(GRADE_TYPE);
     }
 
     // Return the stone type of the block

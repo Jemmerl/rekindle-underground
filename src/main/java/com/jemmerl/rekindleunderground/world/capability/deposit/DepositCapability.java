@@ -1,5 +1,6 @@
 package com.jemmerl.rekindleunderground.world.capability.deposit;
 
+import com.jemmerl.rekindleunderground.data.types.GradeType;
 import com.jemmerl.rekindleunderground.data.types.OreType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
@@ -39,8 +40,8 @@ public class DepositCapability implements IDepositCapability {
     }
 
     @Override
-    public void putPendingOre(BlockPos pos, OreType oreType, String name) {
-        PendingBlock p = new PendingBlock(pos, oreType, name);
+    public void putPendingOre(BlockPos pos, OreType oreType, GradeType gradeType, String name) {
+        PendingBlock p = new PendingBlock(pos, oreType, gradeType, name);
         ChunkPos cp = new ChunkPos(pos);
         this.pendingBlocks.putIfAbsent(cp, new ConcurrentLinkedQueue<>());
         this.pendingBlocks.get(cp).add(p);
@@ -98,9 +99,10 @@ public class DepositCapability implements IDepositCapability {
             CompoundNBT pendingBlocks = compound.getCompound("PendingBlocks");
             pendingBlocks.keySet().forEach(key -> {
                 BlockPos pos = deSerializeBlockPos(key);
-                OreType type = OreType.valueOf(((CompoundNBT) Objects.requireNonNull(pendingBlocks.get(key))).getString("ore"));
+                OreType ore = OreType.valueOf(((CompoundNBT) Objects.requireNonNull(pendingBlocks.get(key))).getString("ore"));
+                GradeType grade = GradeType.valueOf(((CompoundNBT) Objects.requireNonNull(pendingBlocks.get(key))).getString("grade"));
                 String name = ((CompoundNBT) Objects.requireNonNull(pendingBlocks.get(key))).getString("name");
-                this.putPendingOre(pos, type, name);
+                this.putPendingOre(pos, ore, grade, name);
             });
         }
 
@@ -146,12 +148,14 @@ public class DepositCapability implements IDepositCapability {
 
     public static class PendingBlock {
         private BlockPos pos;
-        private OreType type;
+        private OreType ore;
+        private GradeType grade;
         private String name;
 
-        public PendingBlock(BlockPos pos, OreType type, String name) {
+        public PendingBlock(BlockPos pos, OreType oreType, GradeType gradeType, String name) {
             this.pos = pos;
-            this.type = type;
+            this.ore = oreType;
+            this.grade = gradeType;
             this.name = name;
         }
 
@@ -160,7 +164,11 @@ public class DepositCapability implements IDepositCapability {
         }
 
         public OreType getOre() {
-            return this.type;
+            return this.ore;
+        }
+
+        public GradeType getGrade() {
+            return this.grade;
         }
 
         public String getName() {
@@ -171,7 +179,8 @@ public class DepositCapability implements IDepositCapability {
             CompoundNBT tag = new CompoundNBT();
             CompoundNBT posTag = NBTUtil.writeBlockPos(this.pos);
             tag.put("pos", posTag);
-            tag.putString("ore", this.type.getString());
+            tag.putString("ore", this.ore.getString());
+            tag.putString("grade", this.grade.getString());
             tag.putString("name", this.name);
             return tag;
         }
@@ -181,9 +190,10 @@ public class DepositCapability implements IDepositCapability {
             if (nbt instanceof CompoundNBT) {
                 CompoundNBT tag = (CompoundNBT) nbt;
                 BlockPos pos = NBTUtil.readBlockPos(tag.getCompound("pos"));
-                String type = tag.getCompound("ore").toString();
+                String ore = tag.getCompound("ore").toString();
+                String grade = tag.getCompound("grade").toString();
                 String name = tag.getCompound("name").toString();
-                return new PendingBlock(pos, OreType.valueOf(type), name);
+                return new PendingBlock(pos, OreType.valueOf(ore), GradeType.valueOf(grade), name);
             }
 
             return null;

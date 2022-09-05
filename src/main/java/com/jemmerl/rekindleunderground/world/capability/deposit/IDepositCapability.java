@@ -1,5 +1,6 @@
 package com.jemmerl.rekindleunderground.world.capability.deposit;
 
+import com.jemmerl.rekindleunderground.data.types.GradeType;
 import com.jemmerl.rekindleunderground.data.types.OreType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.BlockPos;
@@ -17,7 +18,7 @@ public interface IDepositCapability extends INBTSerializable<CompoundNBT> {
 
     void setDepositGenerated(ChunkPos pos);
 
-    void putPendingOre(BlockPos pos, OreType oreType, String name);
+    void putPendingOre(BlockPos pos, OreType oreType, GradeType gradeType, String name);
 
     void removePendingBlocksForChunk(ChunkPos cp);
 

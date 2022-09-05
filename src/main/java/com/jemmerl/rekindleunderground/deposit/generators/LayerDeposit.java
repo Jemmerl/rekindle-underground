@@ -1,6 +1,7 @@
 package com.jemmerl.rekindleunderground.deposit.generators;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
+import com.jemmerl.rekindleunderground.data.types.GradeType;
 import com.jemmerl.rekindleunderground.data.types.OreType;
 import com.jemmerl.rekindleunderground.data.types.StoneType;
 import com.jemmerl.rekindleunderground.deposit.DepositUtil;
@@ -28,7 +29,7 @@ public class LayerDeposit implements IDeposit {
 
     private String name;
     private WeightedProbMap<OreType> ores;
-    private ArrayList<Integer> grades;
+    private WeightedProbMap<GradeType> gradesMap;
     private ArrayList<StoneType> validList;
     private ArrayList<Biome.Category> validBiomes;
 
@@ -53,8 +54,8 @@ public class LayerDeposit implements IDeposit {
     }
 
     @Override
-    public LayerDeposit setGrades(ArrayList<Integer> grades) {
-        this.grades = grades;
+    public LayerDeposit setGrades(WeightedProbMap<GradeType> gradesMap) {
+        this.gradesMap = gradesMap;
         return this;
     }
 
@@ -85,8 +86,8 @@ public class LayerDeposit implements IDeposit {
     }
 
     @Override
-    public ArrayList<Integer> getGrades() {
-        return this.grades;
+    public WeightedProbMap<GradeType> getGrades() {
+        return this.gradesMap;
     }
 
     @Override
@@ -128,6 +129,9 @@ public class LayerDeposit implements IDeposit {
         // Get a uniformly distributed density value for the deposit within the min and max density range
         float densityPercent = ((rand.nextInt(this.layerTemplate.getMaxDensity() -
                 this.layerTemplate.getMinDensity()) + this.layerTemplate.getMinDensity()) / 100f);
+
+        // Get the weighted random grade of the ore deposit
+        GradeType grade = this.gradesMap.nextElt();
 
         // Get a normally distributed average radius (for the individual deposit) around the average configured radius
         int avgDepositRadius = getAvgRadius(rand);
@@ -222,7 +226,7 @@ public class LayerDeposit implements IDeposit {
                 // Generate the ore block if within the radius and rolls a success against the density percent
                 if ((rand.nextFloat() < adjDensityPercent) &&
                         (UtilMethods.getHypotenuse(areaPos.getX(), areaPos.getZ(), originPos.getX(), originPos.getZ()) <= radius)) {
-                    DepositUtil.enqueueBlockPlacement(reader.getSeedReader(), areaPos, this.ores.nextElt(),
+                    DepositUtil.enqueueBlockPlacement(reader.getSeedReader(), areaPos, this.ores.nextElt(), grade,
                             this.name, pos, stateMap, depositCapability, chunkGennedCapability);
                 }
             }

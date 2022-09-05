@@ -1,5 +1,6 @@
 package com.jemmerl.rekindleunderground.deposit.generators;
 
+import com.jemmerl.rekindleunderground.data.types.GradeType;
 import com.jemmerl.rekindleunderground.data.types.OreType;
 import com.jemmerl.rekindleunderground.data.types.StoneType;
 import com.jemmerl.rekindleunderground.deposit.IDeposit;
@@ -21,7 +22,7 @@ public class PlacerDeposit implements IDeposit {
 
     private String name;
     private WeightedProbMap<OreType> ores;
-    private ArrayList<Integer> grades;
+    private WeightedProbMap<GradeType> gradesMap;
     private ArrayList<StoneType> validList;
     private ArrayList<Biome.Category> validBiomes;
 
@@ -46,8 +47,8 @@ public class PlacerDeposit implements IDeposit {
     }
 
     @Override
-    public PlacerDeposit setGrades(ArrayList<Integer> grades) {
-        this.grades = grades;
+    public PlacerDeposit setGrades(WeightedProbMap<GradeType> gradesMap) {
+        this.gradesMap = gradesMap;
         return this;
     }
 
@@ -78,8 +79,8 @@ public class PlacerDeposit implements IDeposit {
     }
 
     @Override
-    public ArrayList<Integer> getGrades() {
-        return this.grades;
+    public WeightedProbMap<GradeType> getGrades() {
+        return this.gradesMap;
     }
 
     @Override

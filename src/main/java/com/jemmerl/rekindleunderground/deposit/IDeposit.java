@@ -1,5 +1,6 @@
 package com.jemmerl.rekindleunderground.deposit;
 
+import com.jemmerl.rekindleunderground.data.types.GradeType;
 import com.jemmerl.rekindleunderground.data.types.OreType;
 import com.jemmerl.rekindleunderground.data.types.StoneType;
 import com.jemmerl.rekindleunderground.util.WeightedProbMap;
@@ -22,7 +23,7 @@ public interface IDeposit {
 
     IDeposit setOres(WeightedProbMap<OreType> oreMap);
 
-    IDeposit setGrades(ArrayList<Integer> grades);
+    IDeposit setGrades(WeightedProbMap<GradeType> grades);
 
     IDeposit setValid(ArrayList<StoneType> validList);
 
@@ -32,7 +33,7 @@ public interface IDeposit {
 
     WeightedProbMap<OreType> getOres();
 
-    ArrayList<Integer> getGrades();
+    WeightedProbMap<GradeType> getGrades();
 
     ArrayList<StoneType> getValid();
 

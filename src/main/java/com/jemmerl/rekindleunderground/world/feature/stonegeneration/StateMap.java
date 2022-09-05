@@ -103,8 +103,8 @@ public class StateMap {
                         cp.x, cp.z);
             }
         }
-        queue.stream().forEach(x -> DepositUtil.enqueueBlockPlacement(reader, x.getPos(), x.getOre(), x.getName(),
-                this.blockPos, this.stateMap, this.depositCapability, this.chunkGennedCapability));
+        queue.stream().forEach(x -> DepositUtil.enqueueBlockPlacement(reader, x.getPos(), x.getOre(), x.getGrade(),
+                x.getName(), this.blockPos, this.stateMap, this.depositCapability, this.chunkGennedCapability));
         depositCapability.removePendingBlocksForChunk(cp);
 
         // Generates and enqueues the ore deposit with a one out of the deposit's weight chance

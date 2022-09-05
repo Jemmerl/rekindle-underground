@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.block.custom.StoneOreBlock;
+import com.jemmerl.rekindleunderground.data.types.GradeType;
 import com.jemmerl.rekindleunderground.data.types.OreType;
 import com.jemmerl.rekindleunderground.data.types.StoneGroupType;
 import com.jemmerl.rekindleunderground.data.types.StoneType;
@@ -56,7 +57,7 @@ public class DepositUtil {
     //////////////////////
 
     // Process the enqueued blocks for a chunk
-    public static boolean enqueueBlockPlacement(ISeedReader level, BlockPos qPos, OreType qType,
+    public static boolean enqueueBlockPlacement(ISeedReader level, BlockPos qPos, OreType qType, GradeType qGrade,
                                                 String qName, BlockPos genPos, BlockState[][][] stateMap,
                                                 IDepositCapability depCap, @Nullable IChunkGennedCapability cgCap) {
 
@@ -81,7 +82,8 @@ public class DepositUtil {
             try {
                 BlockState hostState = stateMap[xIndex][qPos.getY()][zIndex];
                 if (isValidStone(hostState.getBlock(), qDeposit.getValid())) {
-                    stateMap[xIndex][qPos.getY()][zIndex] = hostState.with(StoneOreBlock.ORE_TYPE, qType);
+                    stateMap[xIndex][qPos.getY()][zIndex] = hostState.with(StoneOreBlock.ORE_TYPE, qType)
+                            .with(StoneOreBlock.GRADE_TYPE, qGrade);
                     return true;
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -108,7 +110,7 @@ public class DepositUtil {
 
                 BlockState state = level.getBlockState(qPos);
                 if (isValidStone(state.getBlock(), qDeposit.getValid())) {
-                    if (!level.setBlockState(qPos, state.with(StoneOreBlock.ORE_TYPE, qType), 2 | 16)) {
+                    if (!level.setBlockState(qPos, state.with(StoneOreBlock.ORE_TYPE, qType).with(StoneOreBlock.GRADE_TYPE, qGrade), 2 | 16)) {
                         RekindleUnderground.getInstance().LOGGER.warn("Somehow {} could not be placed at {} even though chunk has generated",
                                 state.getBlock().getRegistryName(), qPos);
                         return false;
@@ -116,7 +118,7 @@ public class DepositUtil {
                 }
                 return true;
             } else {
-                depCap.putPendingOre(new BlockPos(qPos), qType, qName);
+                depCap.putPendingOre(new BlockPos(qPos), qType, qGrade, qName);
                 return false;
             }
         }
@@ -152,12 +154,13 @@ public class DepositUtil {
             }
             return null;
         }
-        return new WeightedProbMap<OreType>(elts);
+        return new WeightedProbMap<>(elts);
     }
 
     // Return an array list of grade chances from a JsonObject
-    public static ArrayList<Integer> getGrades(JsonObject jsonObject) {
+    public static WeightedProbMap<GradeType> getGrades(JsonObject jsonObject) {
         int highGrade, midGrade, lowGrade;
+        ArrayList<Pair<Integer, GradeType>> elts = new ArrayList<>();
 
         try {
             highGrade = Math.min(Math.max(jsonObject.get("high").getAsInt(), 0), 100);
@@ -166,6 +169,11 @@ public class DepositUtil {
             if ((highGrade + midGrade + lowGrade) > 100) {
                 throw new Exception("Grade weights sum to over 100 in deposit");
             }
+
+            elts.add( new Pair<>(highGrade, GradeType.HIGHGRADE));
+            elts.add( new Pair<>(midGrade, GradeType.MIDGRADE));
+            elts.add( new Pair<>(lowGrade, GradeType.LOWGRADE));
+
         } catch (Exception e) {
             RekindleUnderground.getInstance().LOGGER.warn("Error in a deposit ore grades reading.");
             if (RKUndergroundConfig.COMMON.debug.get()) {
@@ -174,7 +182,7 @@ public class DepositUtil {
             return null;
         }
 
-        return new ArrayList<>(Arrays.asList(lowGrade, midGrade, highGrade));
+        return new WeightedProbMap<>(elts);
     }
 
     // Return an array list of valid StoneTypes from a JsonArray
