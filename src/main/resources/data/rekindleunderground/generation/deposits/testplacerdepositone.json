@@ -1,5 +1,5 @@
 {
-  "name": "testone",
+  "name": "testplacerone",
   "deposit_type": "placer",
   "settings": {
     "weight": 100,
@@ -10,6 +10,11 @@
     "max_density": 100,
     "min_yheight": 10,
     "max_yheight": 100
+  },
+  "grades": {
+    "high": "0",
+    "mid": "1",
+    "low": "99"
   },
   "ores": [
     {

@@ -11,6 +11,11 @@
     "min_yheight": 10,
     "max_yheight": 100
   },
+  "grades": {
+    "high": "80",
+    "mid": "20",
+    "low": "0"
+  },
   "ores": [
     {
       "ore": "malachite",

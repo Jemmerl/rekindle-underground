@@ -155,6 +155,28 @@ public class DepositUtil {
         return new WeightedProbMap<OreType>(elts);
     }
 
+    // Return an array list of grade chances from a JsonObject
+    public static ArrayList<Integer> getGrades(JsonObject jsonObject) {
+        int highGrade, midGrade, lowGrade;
+
+        try {
+            highGrade = Math.min(Math.max(jsonObject.get("high").getAsInt(), 0), 100);
+            midGrade = Math.min(Math.max(jsonObject.get("mid").getAsInt(), 0), 100);
+            lowGrade = Math.min(Math.max(jsonObject.get("low").getAsInt(), 0), 100);
+            if ((highGrade + midGrade + lowGrade) > 100) {
+                throw new Exception("Grade weights sum to over 100 in deposit");
+            }
+        } catch (Exception e) {
+            RekindleUnderground.getInstance().LOGGER.warn("Error in a deposit ore grades reading.");
+            if (RKUndergroundConfig.COMMON.debug.get()) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        return new ArrayList<>(Arrays.asList(lowGrade, midGrade, highGrade));
+    }
+
     // Return an array list of valid StoneTypes from a JsonArray
     public static ArrayList<StoneType> getOreStones(JsonArray jsonArray) {
         HashSet<StoneType> stoneSet = new HashSet<>(); // Using a set removes duplicate entries free of charge

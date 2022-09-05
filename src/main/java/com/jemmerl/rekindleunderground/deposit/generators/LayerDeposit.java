@@ -28,6 +28,7 @@ public class LayerDeposit implements IDeposit {
 
     private String name;
     private WeightedProbMap<OreType> ores;
+    private ArrayList<Integer> grades;
     private ArrayList<StoneType> validList;
     private ArrayList<Biome.Category> validBiomes;
 
@@ -48,6 +49,12 @@ public class LayerDeposit implements IDeposit {
     @Override
     public LayerDeposit setOres(WeightedProbMap<OreType> oreMap) {
         this.ores = oreMap;
+        return this;
+    }
+
+    @Override
+    public LayerDeposit setGrades(ArrayList<Integer> grades) {
+        this.grades = grades;
         return this;
     }
 
@@ -75,6 +82,11 @@ public class LayerDeposit implements IDeposit {
     @Override
     public WeightedProbMap<OreType> getOres() {
         return this.ores;
+    }
+
+    @Override
+    public ArrayList<Integer> getGrades() {
+        return this.grades;
     }
 
     @Override

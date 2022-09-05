@@ -15,7 +15,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
-version = '1.16.5-2.2.3'
+version = '1.16.5-2.2.4'
 group = 'com.jemmerl.rekindleunderground' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'rekindleunderground'
 

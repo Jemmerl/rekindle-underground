@@ -22,6 +22,8 @@ public interface IDeposit {
 
     IDeposit setOres(WeightedProbMap<OreType> oreMap);
 
+    IDeposit setGrades(ArrayList<Integer> grades);
+
     IDeposit setValid(ArrayList<StoneType> validList);
 
     IDeposit setBiomes(ArrayList<Biome.Category> validBiomes);
@@ -29,6 +31,8 @@ public interface IDeposit {
     String getName();
 
     WeightedProbMap<OreType> getOres();
+
+    ArrayList<Integer> getGrades();
 
     ArrayList<StoneType> getValid();
 

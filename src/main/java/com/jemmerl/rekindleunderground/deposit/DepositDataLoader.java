@@ -62,6 +62,7 @@ public class DepositDataLoader extends JsonReloadListener {
                                 GSON.fromJson(jsonObj.get("settings"), LayerTemplate.class))
                                         .setName(name)
                                         .setOres(DepositUtil.getOres(jsonObj.get("ores").getAsJsonArray()))
+                                        .setGrades(DepositUtil.getGrades(jsonObj.get("grades").getAsJsonObject()))
                                         .setValid(DepositUtil.getOreStones(jsonObj.get("stones").getAsJsonArray()))
                                         .setBiomes(DepositUtil.getBiomes(jsonObj.get("biomes").getAsJsonArray())));
                         RekindleUnderground.getInstance().LOGGER.info("Successfully loaded deposit {}!", rl);
@@ -71,10 +72,11 @@ public class DepositDataLoader extends JsonReloadListener {
                         // Parse the settings json element into a PlacerTemplate and then use to create a PlacerDeposit
                         depositRegistrar.addDeposit(name, new PlacerDeposit(
                                 GSON.fromJson(jsonObj.get("settings"), LayerTemplate.class))
-                                .setName(name)
-                                .setOres(DepositUtil.getOres(jsonObj.get("ores").getAsJsonArray()))
-                                .setValid(DepositUtil.getOreStones(jsonObj.get("detritus").getAsJsonArray()))
-                                .setBiomes(DepositUtil.getBiomes(jsonObj.get("biomes").getAsJsonArray())));
+                                        .setName(name)
+                                        .setOres(DepositUtil.getOres(jsonObj.get("ores").getAsJsonArray()))
+                                        .setGrades(DepositUtil.getGrades(jsonObj.get("grades").getAsJsonObject()))
+                                        .setValid(DepositUtil.getOreStones(jsonObj.get("detritus").getAsJsonArray()))
+                                        .setBiomes(DepositUtil.getBiomes(jsonObj.get("biomes").getAsJsonArray())));
                         RekindleUnderground.getInstance().LOGGER.info("Successfully loaded deposit {}!", rl);
                         break;
 
