@@ -129,6 +129,11 @@ public enum StoneType {
         return this.hasCobble;
     }
 
+    // Typos will always return false!
+    public Boolean isInStoneGroup(StoneGroupType group){
+        return (this.group == group);
+    }
+
     ////////////////////
     // STATIC METHODS //
     ////////////////////
@@ -161,11 +166,6 @@ public enum StoneType {
     private RegistryObject<Block> stoneBlock = null;
     @SuppressWarnings("NonFinalFieldInEnum")
     private RegistryObject<Block> cobbleBlock = null;
-
-    // Typos will always return false!
-    public Boolean isInStoneGroup(StoneGroupType group){
-        return (this.group == group);
-    }
 
     // Register stone blocks and items
     public static void register(DeferredRegister<Block> blocks) {

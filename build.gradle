@@ -15,7 +15,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
-version = '1.16.5-2.2.5'
+version = '1.16.5-2.2.6'
 group = 'com.jemmerl.rekindleunderground'
 archivesBaseName = 'rekindleunderground'
 
