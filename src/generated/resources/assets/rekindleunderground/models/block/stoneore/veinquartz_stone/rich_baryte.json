@@ -1,0 +1,8 @@
+{
+  "parent": "rekindleunderground:block/stone_ore_parent",
+  "textures": {
+    "all": "rekindleunderground:block/veinquartz_stone",
+    "particle": "rekindleunderground:block/veinquartz_stone",
+    "overlay": "rekindleunderground:block/ore/rich_baryte"
+  }
+}

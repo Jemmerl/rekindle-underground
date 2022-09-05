@@ -1,5 +1,5 @@
 {
-  "name": "testtwo",
+  "name": "tes1ttwo",
   "deposit_type": "layer",
   "settings": {
     "weight": 50,
@@ -12,9 +12,9 @@
     "max_yheight": 100
   },
   "grades": {
-    "high": "30",
-    "mid": "20",
-    "low": "50"
+    "high": 30,
+    "mid": 20,
+    "low": 50
   },
   "ores": [
     {

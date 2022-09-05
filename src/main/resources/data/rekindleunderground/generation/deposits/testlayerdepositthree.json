@@ -1,5 +1,5 @@
 {
-  "name": "testthree",
+  "name": "tes1tthree",
   "deposit_type": "layer",
   "settings": {
     "weight": 60,
@@ -12,9 +12,9 @@
     "max_yheight": 100
   },
   "grades": {
-    "high": "10",
-    "mid": "80",
-    "low": "10"
+    "high": 10,
+    "mid": 80,
+    "low": 10
   },
   "ores": [
     {

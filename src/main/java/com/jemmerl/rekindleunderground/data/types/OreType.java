@@ -96,14 +96,25 @@ public enum OreType implements IStringSerializable {
         return null;
     }
 
-    // Returns the respective ore item for the enum. "DIAMOND" and "NONE" are special cases
+    // Returns the respective regular ore item for the enum. "DIAMOND" and "NONE" are special cases
     public Item getOreItem() {
         if (this.equals(OreType.DIAMOND)) {
             return Items.DIAMOND;
         } else if (this.equals(OreType.NONE)) {
-            return null;
+            return Items.AIR;
         } else {
             return UtilMethods.stringToItem(RekindleUnderground.MOD_ID + ":" + this.name + "_ore");
+        }
+    }
+
+    // Returns the respective poor ore item for the enum. "DIAMOND" and "NONE" are special cases
+    public Item getPoorOreItem() {
+        if (this.equals(OreType.DIAMOND)) {
+            return Items.DIAMOND; // TODO small diamond??
+        } else if (this.equals(OreType.NONE)) {
+            return null;
+        } else {
+            return UtilMethods.stringToItem(RekindleUnderground.MOD_ID + ":poor_" + this.name + "_ore");
         }
     }
 
@@ -126,7 +137,7 @@ public enum OreType implements IStringSerializable {
         String oreName;
 
         // Register stone blocks
-        for (OreType oreEntry : values()) {
+        for (OreType oreEntry : EnumSet.complementOf(EnumSet.of(OreType.NONE, OreType.DIAMOND))) {
 
             // Register normal ore variant
             oreName = oreEntry.name + "_ore";

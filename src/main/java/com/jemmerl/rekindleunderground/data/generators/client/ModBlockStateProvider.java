@@ -31,10 +31,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 blockPath = block.getRegistryName().getPath();
                 final String tempFinalBlockPath = blockPath;
                 getVariantBuilder(block).forAllStates(state -> {
-                    String stateName = state.get(StoneOreBlock.ORE_TYPE).name().toLowerCase(Locale.ROOT);
+                    String oreStateName = state.get(StoneOreBlock.ORE_TYPE).name().toLowerCase(Locale.ROOT);
+                    String gradeStateName = state.get(StoneOreBlock.GRADE_TYPE).name().toLowerCase(Locale.ROOT);
 
                     ModelFile modelFile;
-                    if (Objects.equals(stateName, "none")) {
+                    if (oreStateName.equals("none")) {
                         modelFile = models().withExistingParent("block/" + tempFinalBlockPath,
                                         mcLoc("block/cube"))
                                 .texture("particle", modLoc("block/" + tempFinalBlockPath))
@@ -45,6 +46,16 @@ public class ModBlockStateProvider extends BlockStateProvider {
                                 .texture("east", modLoc("block/" + tempFinalBlockPath))
                                 .texture("west", modLoc("block/" + tempFinalBlockPath));
                     } else {
+                        String stateName;
+
+                        if (gradeStateName.equals("highgrade")) {
+                            stateName = "rich_" + oreStateName;
+                        } else if (gradeStateName.equals("midgrade")) {
+                            stateName = oreStateName;
+                        } else {
+                            stateName = "poor_" + oreStateName;
+                        }
+
                         modelFile = models().withExistingParent("block/stoneore/" + tempFinalBlockPath + "/" + stateName,
                                         modLoc("block/stone_ore_parent"))
                                 .texture("all", modLoc("block/" + tempFinalBlockPath))

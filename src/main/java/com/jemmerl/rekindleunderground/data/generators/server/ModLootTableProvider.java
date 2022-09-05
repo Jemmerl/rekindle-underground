@@ -3,6 +3,7 @@ package com.jemmerl.rekindleunderground.data.generators.server;
 import com.google.common.collect.ImmutableList;
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.block.ModBlocks;
+import com.jemmerl.rekindleunderground.data.types.GradeType;
 import com.jemmerl.rekindleunderground.data.types.OreType;
 import com.jemmerl.rekindleunderground.data.types.StoneGroupType;
 import com.jemmerl.rekindleunderground.data.types.StoneType;
@@ -13,6 +14,7 @@ import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.LootTableProvider;
 import net.minecraft.data.loot.BlockLootTables;
+import net.minecraft.item.Item;
 import net.minecraft.loot.*;
 import net.minecraft.loot.conditions.BlockStateProperty;
 import net.minecraft.util.ResourceLocation;
@@ -24,6 +26,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import static com.jemmerl.rekindleunderground.block.custom.StoneOreBlock.GRADE_TYPE;
 import static com.jemmerl.rekindleunderground.block.custom.StoneOreBlock.ORE_TYPE;
 
 public class ModLootTableProvider extends LootTableProvider {
@@ -50,19 +53,32 @@ public class ModLootTableProvider extends LootTableProvider {
         protected void addTables() {
             for (StoneType stoneType : StoneType.values()) {
                 Block stoneBlock = stoneType.getStoneState().getBlock();
-                //stoneType.getGroup().equals(StoneGroupType.DETRITUS)
-                if (stoneType.hasCobble()) {
-                    // Register stone -> rock drop
-                    LootTable.Builder lootTable = buildStoneLootTable(stoneType);
-                    registerLootTable(stoneBlock, lootTable);
 
-                    // Register cobble drop
-                    registerDropSelfLootTable(Objects.requireNonNull(stoneType.getCobbleState()).getBlock());
-                } else { // TODO TEMP
-                    registerDropSelfLootTable(stoneBlock); // i mean it! temp!
+                if (!stoneType.getGroup().equals(StoneGroupType.DETRITUS)) {
+                    // Handle actual "stone" blocks
+
+                    if (stoneType.hasCobble()) {
+                        // Register stone -> rock drop
+                        LootTable.Builder lootTable = buildStoneLootTable(stoneType);
+                        registerLootTable(stoneBlock, lootTable);
+
+                        // Register cobble drop
+                        registerDropSelfLootTable(Objects.requireNonNull(stoneType.getCobbleState()).getBlock());
+                    } else {
+                        // TODO TEMP
+                        registerDropSelfLootTable(stoneBlock); // i mean it! temp!
+                    }
+
+
+
+                } else {
+                    // Handle detritus blocks
+                    // TODO TEMP
+                    registerDropSelfLootTable(stoneBlock); // i REALLY mean it! TEMP-OR-ARY!
+
                 }
-            }
 
+            }
         }
 
         @Override
@@ -87,13 +103,34 @@ public class ModLootTableProvider extends LootTableProvider {
 
             // Add ore loot pools
             for (OreType oreType : EnumSet.complementOf(EnumSet.of(OreType.NONE))) {
-                lootTableBuilder.addLootPool(LootPool.builder()
-                        .name(oreType.getString())
-                        .rolls(RandomValueRange.of(1,2))
-                        .addEntry(ItemLootEntry.builder(Objects.requireNonNull(oreType.getOreItem())))
-                        .acceptCondition(BlockStateProperty
-                                .builder(stoneType.getStoneState().getBlock())
-                                .fromProperties(StatePropertiesPredicate.Builder.newBuilder().withProp(ORE_TYPE, oreType))));
+                for (GradeType gradeType : GradeType.values()) {
+                    String lootName;
+                    Item oreDropItem;
+                    IRandomRange rollsIn;
+                    if (gradeType.equals(GradeType.HIGHGRADE)) {
+                        lootName = oreType.getString() + "_highgrade";
+                        oreDropItem = oreType.getOreItem();
+                        rollsIn = RandomValueRange.of(2,4);
+                    } else if (gradeType.equals(GradeType.MIDGRADE)) {
+                        lootName = oreType.getString() + "_midgrade";
+                        oreDropItem = oreType.getOreItem();
+                        rollsIn = RandomValueRange.of(1,2);
+                    } else {
+                        lootName = oreType.getString() + "_lowgrade";
+                        oreDropItem = oreType.getPoorOreItem();
+                        rollsIn = RandomValueRange.of(1,2);
+                    }
+
+                    lootTableBuilder.addLootPool(LootPool.builder()
+                            .name(lootName)
+                            .rolls(rollsIn)
+                            .addEntry(ItemLootEntry.builder(Objects.requireNonNull(oreDropItem)))
+                            .acceptCondition(BlockStateProperty
+                                    .builder(stoneType.getStoneState().getBlock())
+                                    .fromProperties(StatePropertiesPredicate.Builder.newBuilder()
+                                            .withProp(ORE_TYPE, oreType)
+                                            .withProp(GRADE_TYPE, gradeType))));
+                }
             }
 
             return lootTableBuilder;

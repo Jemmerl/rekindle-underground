@@ -192,30 +192,30 @@ public class DepositUtil {
                 for (int i=0; i<jsonArray.size(); i++) {
                     String oreStoneStr = jsonArray.get(i).getAsString().toUpperCase();
                     switch (oreStoneStr) {
-                        case "all":
+                        case "ALL":
                             // No need to do anything else, just return everything
                             return new ArrayList<>(EnumSet.allOf(StoneType.class));
-                        case "all_stone":
+                        case "ALL_STONE":
                             // Return everything that is not a detritus, aka all stones
                             stoneSet.addAll(EnumSet.complementOf(StoneType.getAllInGroup(StoneGroupType.DETRITUS)));
                             break;
-                        case "all_sed":
+                        case "ALL_SED":
                             stoneSet.addAll(StoneType.getAllInGroup(StoneGroupType.SEDIMENTARY));
                             break;
-                        case "all_ign":
+                        case "ALL_IGN":
                             stoneSet.addAll(StoneType.getAllInGroup(StoneGroupType.EXTRUSIVE));
                             stoneSet.addAll(StoneType.getAllInGroup(StoneGroupType.INTRUSIVE));
                             break;
-                        case "all_ign_ext":
+                        case "ALL_IGN_EXT":
                             stoneSet.addAll(StoneType.getAllInGroup(StoneGroupType.EXTRUSIVE));
                             break;
-                        case "all_ign_int":
+                        case "ALL_IGN_INT":
                             stoneSet.addAll(StoneType.getAllInGroup(StoneGroupType.INTRUSIVE));
                             break;
-                        case "all_meta":
+                        case "ALL_META":
                             stoneSet.addAll(StoneType.getAllInGroup(StoneGroupType.METAMORPHIC));
                             break;
-                        case "all_detritus":
+                        case "ALL_DETRITUS":
                             stoneSet.addAll(StoneType.getAllInGroup(StoneGroupType.DETRITUS));
                             break;
                         default:
@@ -224,7 +224,7 @@ public class DepositUtil {
 
                 }
             } catch (Exception e) {
-                RekindleUnderground.getInstance().LOGGER.warn("Error in a deposit valid orestone reading.");
+                RekindleUnderground.getInstance().LOGGER.warn("Error in a deposit valid stones reading.");
                 if (RKUndergroundConfig.COMMON.debug.get()) {
                     e.printStackTrace();
                 }
