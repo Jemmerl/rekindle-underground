@@ -6,10 +6,10 @@ import net.minecraft.world.gen.Heightmap;
 
 public class ChunkReader {
 
-    private ISeedReader world;
-    private BlockPos pos;
-    private int[][] maxHeights;
-    private int maxHeight;
+    private final ISeedReader world;
+    private final BlockPos pos;
+    private final int[][] maxHeights;
+    private final int maxHeight;
 
     public ChunkReader(ISeedReader world, BlockPos pos) {
         this.world = world;

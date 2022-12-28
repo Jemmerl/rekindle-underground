@@ -1,10 +1,14 @@
 package com.jemmerl.rekindleunderground.world.feature.stonegeneration;
 
+import com.jemmerl.rekindleunderground.block.custom.StoneOreBlock;
+import com.jemmerl.rekindleunderground.data.types.StoneType;
+import com.jemmerl.rekindleunderground.tags.ModTags;
 import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredRegionNoise;
 import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredStrataNoise;
 import com.jemmerl.rekindleunderground.world.feature.stonegeneration.ChunkReader;
 import com.jemmerl.rekindleunderground.world.feature.stonegeneration.StateMap;
 import com.mojang.serialization.Codec;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.tags.BlockTags;
@@ -31,7 +35,7 @@ public class StoneGenFeature extends Feature<NoFeatureConfig> {
     @Override
     public boolean generate(ISeedReader seedReader, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 
-        if(!setSeed){
+        if (!setSeed) {
             worldSeed = seedReader.getSeed();
             ConfiguredRegionNoise.configNoise(worldSeed);
             ConfiguredStrataNoise.configNoise(worldSeed);
@@ -60,32 +64,65 @@ public class StoneGenFeature extends Feature<NoFeatureConfig> {
                 topY = chunkReader.getMaxHeightVal(x, z);
                 for (int y = 0; y < topY; y++) {
                     original = chunk.getBlockState(mutable); // Block that generated in vanilla
-                    replacing = stateMap.getState(x, y, z); // Mod stone block attempting to generate
-                    replaced = replaceBlock(original, replacing); // The method returns the block that *will* be placed
+                    replacing = stateMap.getStoneState(x, y, z); // Mod stone block attempting to generate
+                    //replaced = replaceBlock(original, replacing); // The method returns the block that *will* be placed
 
-                    if (original != replaced && replaced != null) {
-                        chunk.getSections()[y >> 4].setBlockState(x, y & 15, z, replaced, false);
+                    if (replaceStone(original)) {
+                        chunk.getSections()[y >> 4].setBlockState(x, y & 15, z, replacing, false);
                     }
+
                     mutable.move(Direction.UP);
                 }
             }
         }
-        reader.setBlockState(pos, Blocks.DIAMOND_BLOCK.getDefaultState(), 2);
     }
 
     private BlockState replaceBlock(BlockState original, BlockState replacing) {
         if ((replacing != null) &&
                 (original.isIn(BlockTags.BASE_STONE_OVERWORLD) || original.isIn(Tags.Blocks.ORES))
-                || original.getBlock().equals(Blocks.SANDSTONE) ||original.getBlock().equals(Blocks.RED_SANDSTONE)) {
+                || original.getBlock().equals(Blocks.SANDSTONE) || original.getBlock().equals(Blocks.RED_SANDSTONE)) {
             return replacing;
         } else {
             return original;
         }
     }
+
+    // Check if the block being replaced is a valid for StoneOre replacement
+    private Boolean replaceStone(BlockState original) {
+        return (original.isIn(BlockTags.BASE_STONE_OVERWORLD) || original.isIn(Tags.Blocks.ORES)
+                || original.getBlock().equals(Blocks.SANDSTONE) || original.getBlock().equals(Blocks.RED_SANDSTONE));
+    }
+
 }
 
 
+/*
+Boolean isDet;
+                topY = chunkReader.getMaxHeightVal(x, z);
+                for (int y = 0; y < topY; y++) {
+                    original = chunk.getBlockState(mutable);
+                    isDet = original.getBlock().isIn(ModTags.Blocks.DETRITUS); // Check if valid detritus
 
+                    if (!isDet) {
+                        replacing = stateMap.getStoneState(x, y, z);
+                        // Check if the pulled blockstate is null or if the block being replaced is invalid
+                        // If either is true, then skip this position
+                        if ((replacing == null) || !replaceStone(original)) {
+                            continue;
+                        }
+                    } else {
+                        BlockState stateHolder = stateMap.getDetritusState(x, y, z);
+                        // Same as above, except there is no need to check if the block is valid
+                        // Since it is already confirmed to be a detritus block, placement is valid
+                        if (stateHolder == null) {
+                            continue;
+                        }
+                        // Pull the stored state properties and put them into the appropriate detritus
+                        replacing = StoneType.convertToDetritus(original)
+                                .with(StoneOreBlock.ORE_TYPE, stateHolder.get(StoneOreBlock.ORE_TYPE))
+                                .with(StoneOreBlock.GRADE_TYPE, stateHolder.get(StoneOreBlock.GRADE_TYPE));
+                    }
+ */
 
 
 

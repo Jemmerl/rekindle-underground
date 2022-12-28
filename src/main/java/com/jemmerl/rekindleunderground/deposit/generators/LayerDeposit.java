@@ -1,6 +1,7 @@
 package com.jemmerl.rekindleunderground.deposit.generators;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
+import com.jemmerl.rekindleunderground.data.types.DepositType;
 import com.jemmerl.rekindleunderground.data.types.GradeType;
 import com.jemmerl.rekindleunderground.data.types.OreType;
 import com.jemmerl.rekindleunderground.data.types.StoneType;
@@ -15,6 +16,7 @@ import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredBlob
 import com.jemmerl.rekindleunderground.world.capability.chunk.IChunkGennedCapability;
 import com.jemmerl.rekindleunderground.world.capability.deposit.IDepositCapability;
 import com.jemmerl.rekindleunderground.world.feature.stonegeneration.ChunkReader;
+import com.jemmerl.rekindleunderground.world.feature.stonegeneration.StateMap;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -81,6 +83,11 @@ public class LayerDeposit implements IDeposit {
     }
 
     @Override
+    public DepositType getType() {
+        return DepositType.LAYER;
+    }
+
+    @Override
     public WeightedProbMap<OreType> getOres() {
         return this.ores;
     }
@@ -111,7 +118,7 @@ public class LayerDeposit implements IDeposit {
     //////////////////////////
 
     @Override
-    public boolean generate(ChunkReader reader, Random rand, BlockPos pos, BlockState[][][] stateMap,
+    public boolean generate(ChunkReader reader, Random rand, BlockPos pos, StateMap stateMap,
                             IDepositCapability depositCapability, IChunkGennedCapability chunkGennedCapability) {
 
         // Constants
@@ -182,7 +189,7 @@ public class LayerDeposit implements IDeposit {
         if (!this.validBiomes.contains(reader.getSeedReader().getBiome(originPos).getCategory())) {
             // Debug
             if (RKUndergroundConfig.COMMON.debug.get()) {
-                RekindleUnderground.getInstance().LOGGER.info("Invalid biome for deposit at {}, failed to generate.", originPos);
+                RekindleUnderground.getInstance().LOGGER.info("Invalid biome for layer deposit at {}, failed to generate.", originPos);
             }
             return false;
         }

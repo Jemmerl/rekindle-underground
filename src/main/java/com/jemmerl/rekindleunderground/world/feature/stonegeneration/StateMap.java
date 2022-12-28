@@ -23,7 +23,8 @@ public class StateMap {
     private final ChunkReader chunkReader;
     private final BlockPos blockPos; // Starting position of this chunk's generation
     private final Random rand;
-    private final BlockState[][][] stateMap; // Positional map of blockstates to be generated
+    private final BlockState[][][] stoneStateMap; // Positional map of stone blockstates to be generated
+    //private final BlockState[][][] detritusStateMap; // Positional map of detritus blockstates to be generated
     private final IDepositCapability depositCapability;
     private final IChunkGennedCapability chunkGennedCapability;
 
@@ -31,7 +32,8 @@ public class StateMap {
         this.chunkReader = reader;
         this.blockPos = pos;
         this.rand = rand;
-        this.stateMap = new BlockState[16][this.chunkReader.getMaxHeight()][16];
+        this.stoneStateMap = new BlockState[16][this.chunkReader.getMaxHeight()][16];
+        //this.detritusStateMap = new BlockState[16][this.chunkReader.getMaxHeight()][16];
 
         this.depositCapability = this.chunkReader.getSeedReader().getWorld().getCapability(DepositCapability.RKU_DEPOSIT_CAPABILITY)
                 .orElseThrow(() -> new RuntimeException("RKU deposit capability is null..."));
@@ -41,13 +43,21 @@ public class StateMap {
         generateStateMap();
     }
 
-    public BlockState[][][] getStateMap() {
-        return this.stateMap;
+    public BlockState[][][] getStoneStateMap() {
+        return this.stoneStateMap;
     }
 
-    public BlockState getState(int x, int y, int z) {
-        return this.stateMap[x][y][z];
+    //public BlockState[][][] getDetritusStateMap() {
+    //    return this.detritusStateMap;
+    //}
+
+    public BlockState getStoneState(int x, int y, int z) {
+        return this.stoneStateMap[x][y][z];
     }
+
+    //public BlockState getDetritusState(int x, int y, int z) {
+    //    return this.detritusStateMap[x][y][z];
+    //}
 
     private void generateStateMap() {
         PopulateStrata();
@@ -71,7 +81,7 @@ public class StateMap {
                 for (int y = 0; y < topY; y++) {
                     posX = this.blockPos.getX() + x;
                     posZ = this.blockPos.getZ() + z;
-                    this.stateMap[x][y][z] = ConfiguredStrataNoise.getStoneStrataBlock(posX, y, posZ,
+                    this.stoneStateMap[x][y][z] = ConfiguredStrataNoise.getStoneStrataBlock(posX, y, posZ,
                             chunkReader.getSeedReader());
                 }
             }
@@ -79,7 +89,7 @@ public class StateMap {
     }
 
     // Replace stones in the current state map with generated igneous features
-    // Will be used for less technical generation, such as dikes or LIPs
+    // Will be used for less technical generation, such as dikes or LIPs <<<-- TODO NEXT
     public void PopulateIgneous() {
         // TODO CURRENTLY NOT IN USE. IT WILL BE IN THE FUTURE!
     }
@@ -104,14 +114,14 @@ public class StateMap {
             }
         }
         queue.stream().forEach(x -> DepositUtil.enqueueBlockPlacement(reader, x.getPos(), x.getOre(), x.getGrade(),
-                x.getName(), this.blockPos, this.stateMap, this.depositCapability, this.chunkGennedCapability));
+                x.getName(), this.blockPos, this, this.depositCapability, this.chunkGennedCapability));
         depositCapability.removePendingBlocksForChunk(cp);
 
         // Generates and enqueues the ore deposit with a one out of the deposit's weight chance
         for (IDeposit deposit : DepositRegistrar.getDeposits().values()) {
             if (this.rand.nextInt(deposit.getWeight()) == 0) {
                 // Tries to update the stateMap with the generating feature
-                if (!deposit.generate(this.chunkReader, this.rand, this.blockPos, this.stateMap,
+                if (!deposit.generate(this.chunkReader, this.rand, this.blockPos, this,
                         this.depositCapability, this.chunkGennedCapability) && RKUndergroundConfig.COMMON.debug.get()) {
                     RekindleUnderground.getInstance().LOGGER.warn(
                             "Failed to generate deposit at {}, {}", this.blockPos.getX(), this.blockPos.getZ());

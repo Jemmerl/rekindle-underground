@@ -12,6 +12,7 @@ public class ModTags {
     public static class Blocks {
 
         public static final Tags.IOptionalNamedTag<Block> RK_STONE_ORE_BLOCKS = createTag("rk_stone_ore_blocks");
+        public static final Tags.IOptionalNamedTag<Block> DETRITUS = createTag("detritus");
 
         private static Tags.IOptionalNamedTag<Block> createTag(String name) {
             return BlockTags.createOptional(new ResourceLocation(RekindleUnderground.MOD_ID, name));

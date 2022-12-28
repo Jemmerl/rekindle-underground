@@ -9,6 +9,7 @@ import com.jemmerl.rekindleunderground.util.UtilMethods;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -62,7 +63,7 @@ public enum StoneType {
     GNEISS("gneiss", StoneGroupType.METAMORPHIC, 4, 4, true),
     MARBLE("marble", StoneGroupType.METAMORPHIC, 3, 3, true),
 
-    // Detritus
+    // Detritus TODO fix resistances and hardnesses
     DIRT("dirt", StoneGroupType.DETRITUS, 4, 4, false),
     COARSE_DIRT("coarse_dirt", StoneGroupType.DETRITUS, 4, 4, false),
     CLAY("clay", StoneGroupType.DETRITUS, 4, 4, false),
@@ -155,6 +156,26 @@ public enum StoneType {
             }
         }
         return enumSet;
+    }
+
+    // Convert vanilla detritus to StoneOre detritus
+    // If not convertible, return original state
+    public static BlockState convertToDetritus(BlockState vanillaState) {
+        if (vanillaState.equals(Blocks.SAND.getDefaultState())) {
+            return StoneType.SAND.getStoneState();
+        } else if (vanillaState.equals(Blocks.RED_SAND.getDefaultState())) {
+            return StoneType.RED_SAND.getStoneState();
+        } else if (vanillaState.equals(Blocks.GRAVEL.getDefaultState())) {
+            return StoneType.GRAVEL.getStoneState();
+        } else if (vanillaState.equals(Blocks.DIRT.getDefaultState())) {
+            return StoneType.DIRT.getStoneState();
+        } else if (vanillaState.equals(Blocks.COARSE_DIRT.getDefaultState())) {
+            return StoneType.COARSE_DIRT.getStoneState();
+        } else if (vanillaState.equals(Blocks.CLAY.getDefaultState())) {
+            return StoneType.CLAY.getStoneState();
+        } else {
+            return vanillaState;
+        }
     }
 
 

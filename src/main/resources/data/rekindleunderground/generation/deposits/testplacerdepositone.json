@@ -1,15 +1,11 @@
 {
-  "name": "testplacerone",
+  "name": "tefstplacerone",
   "deposit_type": "placer",
   "settings": {
-    "weight": 100,
+    "weight": 50,
     "avg_radius": 10,
-    "max_layers": 2,
-    "avg_layer_thickness": 10,
     "min_density": 50,
-    "max_density": 100,
-    "min_yheight": 10,
-    "max_yheight": 100
+    "max_density": 100
   },
   "grades": {
     "high": 0,
@@ -27,12 +23,7 @@
     }
   ],
   "detritus": [
-    "granodiorite",
-    "granite",
-    "diorite",
-    "gabbro",
-    "diabase",
-    "syenite"
+    "all_detritus"
   ],
   "biomes": [
     "beach",

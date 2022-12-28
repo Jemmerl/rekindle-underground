@@ -4,15 +4,13 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.block.custom.StoneOreBlock;
-import com.jemmerl.rekindleunderground.data.types.GradeType;
-import com.jemmerl.rekindleunderground.data.types.OreType;
-import com.jemmerl.rekindleunderground.data.types.StoneGroupType;
-import com.jemmerl.rekindleunderground.data.types.StoneType;
+import com.jemmerl.rekindleunderground.data.types.*;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.util.Pair;
 import com.jemmerl.rekindleunderground.util.WeightedProbMap;
 import com.jemmerl.rekindleunderground.world.capability.chunk.IChunkGennedCapability;
 import com.jemmerl.rekindleunderground.world.capability.deposit.IDepositCapability;
+import com.jemmerl.rekindleunderground.world.feature.stonegeneration.StateMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -58,8 +56,10 @@ public class DepositUtil {
 
     // Process the enqueued blocks for a chunk
     public static boolean enqueueBlockPlacement(ISeedReader level, BlockPos qPos, OreType qType, GradeType qGrade,
-                                                String qName, BlockPos genPos, BlockState[][][] stateMap,
+                                                String qName, BlockPos genPos, StateMap stateMap,
                                                 IDepositCapability depCap, @Nullable IChunkGennedCapability cgCap) {
+
+        BlockState[][][] stoneStateMap = stateMap.getStoneStateMap();
 
         // genPos and genChunk are the corner BlockPos and ChunkPos that the statemap is being generated for
         ChunkPos genChunk = new ChunkPos(genPos);
@@ -80,9 +80,9 @@ public class DepositUtil {
             int xIndex = Math.abs(qPos.getX() - genPos.getX());
             int zIndex = Math.abs(qPos.getZ() - genPos.getZ());
             try {
-                BlockState hostState = stateMap[xIndex][qPos.getY()][zIndex];
+                BlockState hostState = stoneStateMap[xIndex][qPos.getY()][zIndex];
                 if (isValidStone(hostState.getBlock(), qDeposit.getValid())) {
-                    stateMap[xIndex][qPos.getY()][zIndex] = hostState.with(StoneOreBlock.ORE_TYPE, qType)
+                    stoneStateMap[xIndex][qPos.getY()][zIndex] = hostState.with(StoneOreBlock.ORE_TYPE, qType)
                             .with(StoneOreBlock.GRADE_TYPE, qGrade);
                     return true;
                 }
@@ -109,6 +109,8 @@ public class DepositUtil {
                 }
 
                 BlockState state = level.getBlockState(qPos);
+                state = StoneType.convertToDetritus(state); // TODO Remnant from placer experiment, may not be needed
+
                 if (isValidStone(state.getBlock(), qDeposit.getValid())) {
                     if (!level.setBlockState(qPos, state.with(StoneOreBlock.ORE_TYPE, qType).with(StoneOreBlock.GRADE_TYPE, qGrade), 2 | 16)) {
                         RekindleUnderground.getInstance().LOGGER.warn("Somehow {} could not be placed at {} even though chunk has generated",
@@ -263,5 +265,32 @@ public class DepositUtil {
         return biomeArray;
     }
 
-
 }
+
+/*
+ try {
+                if (qDeposit.getType().equals(DepositType.PLACER)) {
+                    detritusStateMap[xIndex][qPos.getY()][zIndex] = StoneType.DIRT.getStoneState()
+                            .with(StoneOreBlock.ORE_TYPE, qType)
+                            .with(StoneOreBlock.GRADE_TYPE, qGrade);
+                } else {
+                    BlockState hostState = stoneStateMap[xIndex][qPos.getY()][zIndex];
+                    if (isValidStone(hostState.getBlock(), qDeposit.getValid())) {
+                        stoneStateMap[xIndex][qPos.getY()][zIndex] = hostState.with(StoneOreBlock.ORE_TYPE, qType)
+                                .with(StoneOreBlock.GRADE_TYPE, qGrade);
+                        return true;
+                    }
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                if (RKUndergroundConfig.COMMON.debug.get()){
+                    RekindleUnderground.getInstance().LOGGER.warn(
+                            "Enq block at {} was out of bounds with values {} {} {}",
+                            qPos, xIndex, qPos.getY(), zIndex);
+                }
+                return false;
+            }
+
+            // If this statement reaches here, the StoneOreBlock was not
+            // a valid placement stone or something has gone very wrong...
+            return false;
+ */

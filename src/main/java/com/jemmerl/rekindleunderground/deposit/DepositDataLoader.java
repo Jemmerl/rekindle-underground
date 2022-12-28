@@ -5,6 +5,7 @@ import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.deposit.generators.LayerDeposit;
 import com.jemmerl.rekindleunderground.deposit.generators.PlacerDeposit;
 import com.jemmerl.rekindleunderground.deposit.templates.LayerTemplate;
+import com.jemmerl.rekindleunderground.deposit.templates.PlacerTemplate;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import net.minecraft.client.resources.JsonReloadListener;
 import net.minecraft.profiler.IProfiler;
@@ -71,7 +72,7 @@ public class DepositDataLoader extends JsonReloadListener {
                     case "placer":
                         // Parse the settings json element into a PlacerTemplate and then use to create a PlacerDeposit
                         depositRegistrar.addDeposit(name, new PlacerDeposit(
-                                GSON.fromJson(jsonObj.get("settings"), LayerTemplate.class))
+                                GSON.fromJson(jsonObj.get("settings"), PlacerTemplate.class))
                                         .setName(name)
                                         .setOres(DepositUtil.getOres(jsonObj.get("ores").getAsJsonArray()))
                                         .setGrades(DepositUtil.getGrades(jsonObj.get("grades").getAsJsonObject()))
