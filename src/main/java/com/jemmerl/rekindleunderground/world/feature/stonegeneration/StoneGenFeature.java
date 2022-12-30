@@ -1,14 +1,8 @@
 package com.jemmerl.rekindleunderground.world.feature.stonegeneration;
 
-import com.jemmerl.rekindleunderground.block.custom.StoneOreBlock;
-import com.jemmerl.rekindleunderground.data.types.StoneType;
-import com.jemmerl.rekindleunderground.tags.ModTags;
 import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredRegionNoise;
 import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredStrataNoise;
-import com.jemmerl.rekindleunderground.world.feature.stonegeneration.ChunkReader;
-import com.jemmerl.rekindleunderground.world.feature.stonegeneration.StateMap;
 import com.mojang.serialization.Codec;
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.tags.BlockTags;

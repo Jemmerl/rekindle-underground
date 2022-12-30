@@ -1,6 +1,7 @@
 package com.jemmerl.rekindleunderground;
 
 import com.jemmerl.rekindleunderground.block.ModBlocks;
+import com.jemmerl.rekindleunderground.block.custom.FallingOreBlock;
 import com.jemmerl.rekindleunderground.block.custom.StoneOreBlock;
 import com.jemmerl.rekindleunderground.deposit.DepositDataLoader;
 import com.jemmerl.rekindleunderground.item.ModItems;
@@ -88,7 +89,7 @@ public class RekindleUnderground
         Block block;
         for (RegistryObject<Block> regBlock : ModBlocks.BLOCKS.getEntries()) {
             block = regBlock.get().getBlock();
-            if (block instanceof StoneOreBlock) {
+            if ((block instanceof StoneOreBlock) || (block instanceof FallingOreBlock)) {
                 RenderTypeLookup.setRenderLayer(block, RenderType.getCutout());
             }
         }

@@ -1,15 +1,13 @@
 package com.jemmerl.rekindleunderground.data.types;
 
+import com.jemmerl.rekindleunderground.block.custom.FallingOreBlock;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.block.custom.StoneOreBlock;
 import com.jemmerl.rekindleunderground.item.ModItemGroup;
 import com.jemmerl.rekindleunderground.item.ModItems;
 import com.jemmerl.rekindleunderground.util.UtilMethods;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -63,18 +61,21 @@ public enum StoneType {
     GNEISS("gneiss", StoneGroupType.METAMORPHIC, 4, 4, true),
     MARBLE("marble", StoneGroupType.METAMORPHIC, 3, 3, true),
 
-    // Detritus TODO fix resistances and hardnesses
-    DIRT("dirt", StoneGroupType.DETRITUS, 4, 4, false),
-    COARSE_DIRT("coarse_dirt", StoneGroupType.DETRITUS, 4, 4, false),
-    CLAY("clay", StoneGroupType.DETRITUS, 4, 4, false),
-    SAND("sand", StoneGroupType.DETRITUS, 4, 4, false),
-    RED_SAND("red_sand", StoneGroupType.DETRITUS, 4, 4, false),
-    GRAVEL("gravel", StoneGroupType.DETRITUS, 4, 4, false);
+    // Detritus
+    DIRT("dirt", StoneGroupType.DETRITUS, 0, 0, false),
+    COARSE_DIRT("coarse_dirt", StoneGroupType.DETRITUS, 0, 0, false),
+    CLAY("clay", StoneGroupType.DETRITUS, 1, 1, false),
 
+    // Falling Detritus
+    SAND("sand", StoneGroupType.DETRITUS, 0, 0, false),
+    RED_SAND("red_sand", StoneGroupType.DETRITUS, 0, 0, false),
+    GRAVEL("gravel", StoneGroupType.DETRITUS, 1, 1, false);
 
     private static class Constants {
-        private static final Float[] HARDS = new Float[]{1f, 1.75f, 2.5f, 3f, 3.5f}; // Relative hardnesses
-        private static final Float[] RESISTS = {3f, 2.5f, 2f, 1.5f, 1f}; // Relative resistances
+        private static final Float[] HARDS = {1f, 1.75f, 2.5f, 3f, 3.5f}; // Relative stone hardnesses
+        private static final Float[] RESISTS = {3f, 2.5f, 2f, 1.5f, 1f}; // Relative stone resistances
+        private static final Float[] DET_HARDS = {0.5f, 0.6f}; // Detritus hardnesses
+        private static final Float[] DET_RESISTS = {0.5f, 0.6f}; // Detritus resistances
         private static final int HARD_MULT = RKUndergroundConfig.COMMON.stoneHardness.get(); // Multiplied by rel. hardnesses; Default 20
         private static final int RESIST_MULT = RKUndergroundConfig.COMMON.stoneResistance.get(); // Multiplied by rel. resistances; Default 6
     }
@@ -132,7 +133,7 @@ public enum StoneType {
 
     // Typos will always return false!
     public Boolean isInStoneGroup(StoneGroupType group){
-        return (this.group == group);
+        return this.group.equals(group);
     }
 
     ////////////////////
@@ -193,17 +194,19 @@ public enum StoneType {
         String blockName;
 
         // Register stone blocks
-        for (StoneType blockEntry : values()) {
-            blockName = blockEntry.name + "_stone";
-            stoneNameList.add(blockName);
-
-            blockEntry.stoneBlock = blocks.register(blockName,
-                    () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
-                            .harvestLevel(0).harvestTool(ToolType.PICKAXE).setRequiresTool()
-                            .hardnessAndResistance((Constants.HARDS[blockEntry.hardnessIndex] * Constants.HARD_MULT),
-                                    (Constants.RESISTS[blockEntry.resistanceIndex] * Constants.RESIST_MULT)),
-                            blockEntry, blockEntry.group));
-            registerBlockItem(blockName, blockEntry.stoneBlock, 64);
+        for (StoneType blockEntry : EnumSet.complementOf(StoneType.getAllInGroup(StoneGroupType.DETRITUS))) {
+            if (!blockEntry.group.equals(StoneGroupType.DETRITUS)) {
+                blockName = blockEntry.name + "_stone";
+                stoneNameList.add(blockName);
+                blockEntry.stoneBlock = blocks.register(blockName,
+                        () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.ROCK)
+                                .harvestLevel(0).harvestTool(ToolType.PICKAXE).setRequiresTool()
+                                .hardnessAndResistance(
+                                        (Constants.HARDS[blockEntry.hardnessIndex] * Constants.HARD_MULT),
+                                        (Constants.RESISTS[blockEntry.resistanceIndex] * Constants.RESIST_MULT)),
+                                blockEntry, blockEntry.group));
+                registerBlockItem(blockName, blockEntry.stoneBlock, 64);
+            }
         }
 
         // Register cobblestone blocks
@@ -226,9 +229,70 @@ public enum StoneType {
                 registerBlockItem(blockName, blockEntry.cobbleBlock, 64);
             }
         }
+
+        // Register solid detritus blocks
+        // Dirt
+        blockName = DIRT.name + "_stone";
+        stoneNameList.add(blockName);
+        DIRT.stoneBlock = createSolidDetritusBlock(DIRT, Material.EARTH, SoundType.GROUND, blocks, blockName);
+        registerBlockItem(blockName, DIRT.stoneBlock, 64);
+
+        // Coarse Dirt
+        blockName = COARSE_DIRT.name + "_stone";
+        stoneNameList.add(blockName);
+        COARSE_DIRT.stoneBlock = createSolidDetritusBlock(COARSE_DIRT, Material.EARTH, SoundType.GROUND, blocks, blockName);
+        registerBlockItem(blockName, COARSE_DIRT.stoneBlock, 64);
+
+        // Clay
+        blockName = CLAY.name + "_stone";
+        stoneNameList.add(blockName);
+        CLAY.stoneBlock = createSolidDetritusBlock(DIRT, Material.CLAY, SoundType.GROUND, blocks, blockName);
+        registerBlockItem(blockName, CLAY.stoneBlock, 64);
+
+        // Register falling detritus blocks
+        // Sand
+        blockName = SAND.name + "_stone";
+        stoneNameList.add(blockName);
+        SAND.stoneBlock = createFallingDetritusBlock(SAND, Material.SAND, SoundType.SAND, blocks, blockName);
+        registerBlockItem(blockName, SAND.stoneBlock, 64);
+
+        // Red Sand
+        blockName = RED_SAND.name + "_stone";
+        stoneNameList.add(blockName);
+        RED_SAND.stoneBlock = createFallingDetritusBlock(RED_SAND, Material.SAND, SoundType.SAND, blocks, blockName);
+        registerBlockItem(blockName, RED_SAND.stoneBlock, 64);
+
+        // Gravel
+        blockName = GRAVEL.name + "_stone";
+        stoneNameList.add(blockName);
+        GRAVEL.stoneBlock = createFallingDetritusBlock(GRAVEL, Material.SAND, SoundType.GROUND, blocks, blockName);
+        registerBlockItem(blockName, GRAVEL.stoneBlock, 64);
+
     }
 
+    // Create a registry object for solid detritus blocks
+    private static RegistryObject<Block> createSolidDetritusBlock(StoneType det, Material material, SoundType sound, DeferredRegister<Block> blocks, String blockName) {
+        return blocks.register(blockName,
+                () -> new StoneOreBlock(AbstractBlock.Properties.create(material)
+                        .harvestLevel(0).harvestTool(ToolType.SHOVEL).sound(sound)
+                        .hardnessAndResistance(
+                                Constants.DET_HARDS[det.hardnessIndex],
+                                Constants.DET_RESISTS[det.resistanceIndex]),
+                        det, det.group));
+    }
 
+    // Create a registry object for falling detritus blocks
+    private static RegistryObject<Block> createFallingDetritusBlock(StoneType det, Material material, SoundType sound, DeferredRegister<Block> blocks, String blockName) {
+        return blocks.register(blockName,
+                () -> new FallingOreBlock(AbstractBlock.Properties.create(material)
+                        .harvestLevel(0).harvestTool(ToolType.SHOVEL).sound(sound)
+                        .hardnessAndResistance(
+                                Constants.DET_HARDS[det.hardnessIndex],
+                                Constants.DET_RESISTS[det.resistanceIndex]),
+                        det, det.group));
+    }
+
+    // Register the item for a block
     private static <T extends Block> void registerBlockItem(String name, RegistryObject<T> block, Integer stackSize) {
         ModItems.ITEMS.register(name, () -> new BlockItem(block.get(),
                 new Item.Properties().group(ModItemGroup.RKU_STONE_GROUP).maxStackSize(stackSize)));

@@ -54,8 +54,8 @@ public class ModLootTableProvider extends LootTableProvider {
             for (StoneType stoneType : StoneType.values()) {
                 Block stoneBlock = stoneType.getStoneState().getBlock();
 
+                // Handle actual "stone" blocks
                 if (!stoneType.getGroup().equals(StoneGroupType.DETRITUS)) {
-                    // Handle actual "stone" blocks
 
                     if (stoneType.hasCobble()) {
                         // Register stone -> rock drop
