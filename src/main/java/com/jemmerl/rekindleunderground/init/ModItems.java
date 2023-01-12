@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground.item;
+package com.jemmerl.rekindleunderground.init;
 
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
@@ -16,9 +16,60 @@ public class ModItems {
             DeferredRegister.create(ForgeRegistries.ITEMS, RekindleUnderground.MOD_ID);
 
     static {
-        RockType.register(ITEMS);
         OreType.register(ITEMS);
     }
+
+    ///////////
+    // Rocks //
+    ///////////
+
+    // Sedimentary
+    public static final RegistryObject<Item> CHALK_ROCK = registerRockItem(RockType.CHALK_ROCK);
+    public static final RegistryObject<Item> LIMESTONE_ROCK = registerRockItem(RockType.LIMESTONE_ROCK);
+    public static final RegistryObject<Item> DOLOSTONE_ROCK = registerRockItem(RockType.DOLOSTONE_ROCK);
+    public static final RegistryObject<Item> SHALE_ROCK = registerRockItem(RockType.SHALE_ROCK);
+    public static final RegistryObject<Item> SANDSTONE_ROCK = registerRockItem(RockType.SANDSTONE_ROCK);
+    public static final RegistryObject<Item> RED_SANDSTONE_ROCK = registerRockItem(RockType.RED_SANDSTONE_ROCK);
+    public static final RegistryObject<Item> GREYWACKE_ROCK = registerRockItem(RockType.GREYWACKE_ROCK);
+    public static final RegistryObject<Item> MUDSTONE_ROCK = registerRockItem(RockType.MUDSTONE_ROCK);
+    public static final RegistryObject<Item> VEINQUARTZ_ROCK = registerRockItem(RockType.VEINQUARTZ_ROCK);
+
+    // Extrusive Igneous
+    public static final RegistryObject<Item> RHYOLITE_ROCK = registerRockItem(RockType.RHYOLITE_ROCK);
+    public static final RegistryObject<Item> DACITE_ROCK = registerRockItem(RockType.DACITE_ROCK);
+    public static final RegistryObject<Item> ANDESITE_ROCK = registerRockItem(RockType.ANDESITE_ROCK);
+    public static final RegistryObject<Item> BASALT_ROCK = registerRockItem(RockType.BASALT_ROCK);
+
+    // Intrusive Igneous
+    public static final RegistryObject<Item> DIORITE_ROCK = registerRockItem(RockType.DIORITE_ROCK);
+    public static final RegistryObject<Item> GRANODIORITE_ROCK = registerRockItem(RockType.GRANODIORITE_ROCK);
+    public static final RegistryObject<Item> GRANITE_ROCK = registerRockItem(RockType.GRANITE_ROCK);
+    public static final RegistryObject<Item> SYENITE_ROCK = registerRockItem(RockType.SYENITE_ROCK);
+    public static final RegistryObject<Item> GABBRO_ROCK = registerRockItem(RockType.GABBRO_ROCK);
+    public static final RegistryObject<Item> DIABASE_ROCK = registerRockItem(RockType.DIABASE_ROCK);
+    public static final RegistryObject<Item> PERIDOTITE_ROCK = registerRockItem(RockType.PERIDOTITE_ROCK);
+    public static final RegistryObject<Item> KIMBERLITE_ROCK = registerRockItem(RockType.KIMBERLITE_ROCK);
+    public static final RegistryObject<Item> LAMPROITE_ROCK = registerRockItem(RockType.LAMPROITE_ROCK);
+
+    // Metamorphic
+    public static final RegistryObject<Item> QUARTZITE_ROCK = registerRockItem(RockType.QUARTZITE_ROCK);
+    public static final RegistryObject<Item> SCHIST_ROCK = registerRockItem(RockType.SCHIST_ROCK);
+    public static final RegistryObject<Item> PHYLLITE_ROCK = registerRockItem(RockType.PHYLLITE_ROCK);
+    public static final RegistryObject<Item> GNEISS_ROCK = registerRockItem(RockType.GNEISS_ROCK);
+    public static final RegistryObject<Item> MARBLE_ROCK = registerRockItem(RockType.MARBLE_ROCK);
+
+
+    // Rock Item Creation and Registration
+    private static RegistryObject<Item> registerRockItem(RockType rockType) {
+        return ITEMS.register(rockType.getName(), () -> new Item(new Item.Properties().group(ModItemGroups.RKU_STONE_GROUP)));
+    }
+
+    // Item registry method
+    public static void register(IEventBus eventBus) {
+        ITEMS.register(eventBus);
+    }
+
+}
 
     //////////////////
     //     ORES     //
@@ -167,10 +218,3 @@ public class ModItems {
 //
 //    public static final RegistryObject<Item> WOLFRAMITE_ORE = ITEMS.register("wolframite_ore",
 //        () -> new Item(new Item.Properties().group(ModItemGroup.RKU_ORES_GROUP)));
-
-
-    // Item registry method
-    public static void register(IEventBus eventBus) {
-        ITEMS.register(eventBus);
-    }
-}

@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground.item;
+package com.jemmerl.rekindleunderground.init;
 
 import com.jemmerl.rekindleunderground.data.types.OreType;
 import com.jemmerl.rekindleunderground.data.types.StoneType;
@@ -6,7 +6,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 
-public class ModItemGroup {
+public class ModItemGroups {
 
     public static final ItemGroup RKU_STONE_GROUP = new ItemGroup("rku_stones_tab") {
         @Override

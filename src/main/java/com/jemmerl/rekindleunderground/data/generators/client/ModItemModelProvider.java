@@ -1,17 +1,14 @@
 package com.jemmerl.rekindleunderground.data.generators.client;
 
-import com.jemmerl.rekindleunderground.block.ModBlocks;
-import com.jemmerl.rekindleunderground.item.ModItems;
+import com.jemmerl.rekindleunderground.init.ModBlocks;
+import com.jemmerl.rekindleunderground.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.Item;
-import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.fml.RegistryObject;
-
-import java.util.Collection;
 
 public class ModItemModelProvider extends ItemModelProvider {
     public ModItemModelProvider(DataGenerator generator, String modid, ExistingFileHelper existingFileHelper) {

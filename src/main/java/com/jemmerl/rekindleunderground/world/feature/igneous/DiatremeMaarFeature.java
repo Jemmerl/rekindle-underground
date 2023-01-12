@@ -1,7 +1,6 @@
 package com.jemmerl.rekindleunderground.world.feature.igneous;
 
-import com.jemmerl.rekindleunderground.RekindleUnderground;
-import com.jemmerl.rekindleunderground.block.custom.StoneOreBlock;
+import com.jemmerl.rekindleunderground.blocks.StoneOreBlock;
 import com.jemmerl.rekindleunderground.data.types.OreType;
 import com.jemmerl.rekindleunderground.data.types.StoneType;
 import com.jemmerl.rekindleunderground.init.NoiseInit;
@@ -231,9 +230,10 @@ public class DiatremeMaarFeature extends Feature<NoFeatureConfig> {
                 //+ rand.nextInt(PIPE_DITHER_VARIATION)); // Add random dither
     }
 
-
+    // TODO REWRITE
     private static void updateXenolithMap (HashMap<BlockState, Integer> map, BlockState replaced) {
-        if (StoneType.isInStones(replaced.getBlock().getRegistryName().getPath())) {
+        //if (StoneType.isInStones(replaced.getBlock().getRegistryName().getPath())) {
+        if (true) {
             if (map.containsKey(replaced)) {
                 int prevVal = map.get(replaced);
                 map.replace(replaced, prevVal + 1);

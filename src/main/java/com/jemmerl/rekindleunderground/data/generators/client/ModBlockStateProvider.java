@@ -1,18 +1,16 @@
 package com.jemmerl.rekindleunderground.data.generators.client;
 
-import com.jemmerl.rekindleunderground.block.ModBlocks;
-import com.jemmerl.rekindleunderground.block.custom.FallingOreBlock;
-import com.jemmerl.rekindleunderground.block.custom.StoneOreBlock;
+import com.jemmerl.rekindleunderground.blocks.FallingOreBlock;
+import com.jemmerl.rekindleunderground.blocks.StoneOreBlock;
+import com.jemmerl.rekindleunderground.init.ModLists;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.fml.RegistryObject;
 
 import java.util.Locale;
-import java.util.Objects;
 
 public class ModBlockStateProvider extends BlockStateProvider {
 
@@ -22,42 +20,56 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        Block block;
+
         String blockPath;
-        for (RegistryObject<Block> regBlock : ModBlocks.BLOCKS.getEntries()) {
-            block = regBlock.get().getBlock();
-            if (block instanceof StoneOreBlock) {
 
-                // Generate stone ore model and block states
-                blockPath = block.getRegistryName().getPath();
-                final String tempFinalBlockPath = blockPath;
-                getVariantBuilder(block).forAllStates(state -> {
-                    String oreStateName = state.get(StoneOreBlock.ORE_TYPE).name().toLowerCase(Locale.ROOT);
-                    String gradeStateName = state.get(StoneOreBlock.GRADE_TYPE).name().toLowerCase(Locale.ROOT);
+        for (Block block : ModLists.ALL_STONES) {
+            // Generate stone ore model and block states
+            blockPath = block.getRegistryName().getPath();
+            final String tempFinalBlockPath = blockPath;
+            getVariantBuilder(block).forAllStates(state -> {
+                String oreStateName = state.get(StoneOreBlock.ORE_TYPE).name().toLowerCase(Locale.ROOT);
+                String gradeStateName = state.get(StoneOreBlock.GRADE_TYPE).name().toLowerCase(Locale.ROOT);
 
-                    return ConfiguredModel.builder()
-                            .modelFile(buildModelFile(tempFinalBlockPath, oreStateName, gradeStateName))
-                            .build();
-                });
-
-            } else if (block instanceof FallingOreBlock) {
-
-                // Generate stone ore model and block states
-                blockPath = block.getRegistryName().getPath();
-                final String tempFinalBlockPath = blockPath;
-                getVariantBuilder(block).forAllStates(state -> {
-                    String oreStateName = state.get(FallingOreBlock.ORE_TYPE).name().toLowerCase(Locale.ROOT);
-                    String gradeStateName = state.get(FallingOreBlock.GRADE_TYPE).name().toLowerCase(Locale.ROOT);
-
-                    return ConfiguredModel.builder()
-                            .modelFile(buildModelFile(tempFinalBlockPath, oreStateName, gradeStateName))
-                            .build();
-                });
-
-            } else {
-                simpleBlock(block);
-            }
+                return ConfiguredModel.builder()
+                        .modelFile(buildModelFile(tempFinalBlockPath, oreStateName, gradeStateName))
+                        .build();
+            });
         }
+
+        for (Block block : ModLists.STABLE_DET) {
+            // Generate stone ore model and block states
+            blockPath = block.getRegistryName().getPath();
+            final String tempFinalBlockPath = blockPath;
+            getVariantBuilder(block).forAllStates(state -> {
+                String oreStateName = state.get(StoneOreBlock.ORE_TYPE).name().toLowerCase(Locale.ROOT);
+                String gradeStateName = state.get(StoneOreBlock.GRADE_TYPE).name().toLowerCase(Locale.ROOT);
+
+                return ConfiguredModel.builder()
+                        .modelFile(buildModelFile(tempFinalBlockPath, oreStateName, gradeStateName))
+                        .build();
+            });
+        }
+
+        for (Block block : ModLists.FALLING_DET) {
+            // Generate stone ore model and block states
+            blockPath = block.getRegistryName().getPath();
+            final String tempFinalBlockPath = blockPath;
+            getVariantBuilder(block).forAllStates(state -> {
+                String oreStateName = state.get(FallingOreBlock.ORE_TYPE).name().toLowerCase(Locale.ROOT);
+                String gradeStateName = state.get(FallingOreBlock.GRADE_TYPE).name().toLowerCase(Locale.ROOT);
+
+                return ConfiguredModel.builder()
+                        .modelFile(buildModelFile(tempFinalBlockPath, oreStateName, gradeStateName))
+                        .build();
+            });
+        }
+
+        for (Block block : ModLists.COBBLESTONES.keySet()) {
+            simpleBlock(block);
+        }
+
+
     }
 
     // Build the model file given the block path and property names

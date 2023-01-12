@@ -2,11 +2,13 @@ package com.jemmerl.rekindleunderground.data.generators.server;
 
 import com.google.common.collect.ImmutableList;
 import com.jemmerl.rekindleunderground.RekindleUnderground;
-import com.jemmerl.rekindleunderground.block.ModBlocks;
+import com.jemmerl.rekindleunderground.blocks.StoneOreBlock;
+import com.jemmerl.rekindleunderground.init.ModBlocks;
 import com.jemmerl.rekindleunderground.data.types.GradeType;
 import com.jemmerl.rekindleunderground.data.types.OreType;
 import com.jemmerl.rekindleunderground.data.types.StoneGroupType;
 import com.jemmerl.rekindleunderground.data.types.StoneType;
+import com.jemmerl.rekindleunderground.init.ModLists;
 import com.jemmerl.rekindleunderground.util.UtilMethods;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.advancements.criterion.StatePropertiesPredicate;
@@ -26,8 +28,8 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-import static com.jemmerl.rekindleunderground.block.custom.StoneOreBlock.GRADE_TYPE;
-import static com.jemmerl.rekindleunderground.block.custom.StoneOreBlock.ORE_TYPE;
+import static com.jemmerl.rekindleunderground.blocks.StoneOreBlock.GRADE_TYPE;
+import static com.jemmerl.rekindleunderground.blocks.StoneOreBlock.ORE_TYPE;
 
 public class ModLootTableProvider extends LootTableProvider {
     public ModLootTableProvider(DataGenerator dataGeneratorIn) {
@@ -51,33 +53,30 @@ public class ModLootTableProvider extends LootTableProvider {
     private static class ModBlockLootTables extends BlockLootTables {
         @Override
         protected void addTables() {
-            for (StoneType stoneType : StoneType.values()) {
-                Block stoneBlock = stoneType.getStoneState().getBlock();
 
-                // Handle actual "stone" blocks
-                if (!stoneType.getGroup().equals(StoneGroupType.DETRITUS)) {
+            for (Block block : ModLists.ALL_STONES) {
+                StoneType stoneType = ((StoneOreBlock) block).getStoneType();
+                if (stoneType.hasCobble()) {
+                    // Register stone -> rock drop
+                    LootTable.Builder lootTable = buildStoneLootTable(stoneType);
+                    registerLootTable(block, lootTable);
 
-                    if (stoneType.hasCobble()) {
-                        // Register stone -> rock drop
-                        LootTable.Builder lootTable = buildStoneLootTable(stoneType);
-                        registerLootTable(stoneBlock, lootTable);
-
-                        // Register cobble drop
-                        registerDropSelfLootTable(Objects.requireNonNull(stoneType.getCobbleState()).getBlock());
-                    } else {
-                        // TODO TEMP
-                        registerDropSelfLootTable(stoneBlock); // i mean it! temp!
-                    }
-
-
-
+                    // Register cobble drop
+                    registerDropSelfLootTable(Objects.requireNonNull(stoneType.getCobbleState()).getBlock());
                 } else {
-                    // Handle detritus blocks
                     // TODO TEMP
-                    registerDropSelfLootTable(stoneBlock); // i REALLY mean it! TEMP-OR-ARY!
-
+                    registerDropSelfLootTable(block); // i mean it! temp!
                 }
+            }
 
+
+            for (Block block : ModLists.COBBLESTONES.keySet()) {
+                registerDropSelfLootTable(block);
+            }
+
+            // Todo temp
+            for (Block block : ModLists.ALL_DETRITUS) {
+                registerDropSelfLootTable(block);
             }
         }
 
@@ -89,7 +88,7 @@ public class ModLootTableProvider extends LootTableProvider {
         }
 
 
-        // Creates and fills a loot table with pools for each oretype
+        // Creates and fills a loot table with pools for each OreType
         private static LootTable.Builder buildStoneLootTable(StoneType stoneType) {
             LootTable.Builder lootTableBuilder = new LootTable.Builder();
 

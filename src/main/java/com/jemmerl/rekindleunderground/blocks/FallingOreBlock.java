@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground.block.custom;
+package com.jemmerl.rekindleunderground.blocks;
 
 import com.jemmerl.rekindleunderground.data.types.GradeType;
 import com.jemmerl.rekindleunderground.data.types.OreType;
@@ -19,10 +19,10 @@ public class FallingOreBlock extends FallingBlock {
     private final StoneType stoneType;
     private final StoneGroupType stoneGroupType;
 
-    public FallingOreBlock(Properties properties, StoneType stoneType, StoneGroupType stoneGroupType) {
+    public FallingOreBlock(Properties properties, StoneType stoneType) {
         super(properties);
         this.stoneType = stoneType;
-        this.stoneGroupType = stoneGroupType;
+        this.stoneGroupType = stoneType.getGroup();
         this.setDefaultState(this.stateContainer.getBaseState().with(ORE_TYPE, OreType.NONE).with(GRADE_TYPE, GradeType.LOWGRADE));
     }
 
@@ -52,5 +52,4 @@ public class FallingOreBlock extends FallingBlock {
     public StoneGroupType getStoneGroupType() {
         return this.stoneGroupType;
     }
-
 }

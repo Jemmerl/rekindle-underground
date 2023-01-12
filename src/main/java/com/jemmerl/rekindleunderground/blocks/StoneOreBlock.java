@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground.block.custom;
+package com.jemmerl.rekindleunderground.blocks;
 
 import com.jemmerl.rekindleunderground.data.types.GradeType;
 import com.jemmerl.rekindleunderground.data.types.StoneType;
@@ -23,10 +23,10 @@ public class StoneOreBlock extends Block {
     private final StoneType stoneType;
     private final StoneGroupType stoneGroupType;
 
-    public StoneOreBlock(Properties properties, StoneType stoneType, StoneGroupType stoneGroupType) {
+    public StoneOreBlock(Properties properties, StoneType stoneType) {
         super(properties);
         this.stoneType = stoneType;
-        this.stoneGroupType = stoneGroupType;
+        this.stoneGroupType = stoneType.getGroup();
         this.setDefaultState(this.stateContainer.getBaseState().with(ORE_TYPE, OreType.NONE).with(GRADE_TYPE, GradeType.LOWGRADE));
     }
 
@@ -37,7 +37,7 @@ public class StoneOreBlock extends Block {
         super.fillStateContainer(builder);
     }
 
-    // TODO separate properties for soil blocks?
+    // TODO separate properties for soil blocks? --> (y <= 50) <-- and not config value include detritus (add config prop)
     @Override
     public float getPlayerRelativeBlockHardness(BlockState state, PlayerEntity player, IBlockReader worldIn, BlockPos pos) {
         float f = state.getBlockHardness(worldIn, pos);

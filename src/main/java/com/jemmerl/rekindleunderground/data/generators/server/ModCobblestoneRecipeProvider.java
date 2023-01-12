@@ -2,10 +2,12 @@ package com.jemmerl.rekindleunderground.data.generators.server;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.data.types.StoneType;
+import com.jemmerl.rekindleunderground.init.ModLists;
 import com.jemmerl.rekindleunderground.util.UtilMethods;
-import com.jemmerl.rekindleunderground.tags.ModTags;
+import com.jemmerl.rekindleunderground.init.ModTags;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.data.RecipeProvider;
@@ -22,13 +24,9 @@ public class ModCobblestoneRecipeProvider extends RecipeProvider {
 
     @Override
     protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
-        for (StoneType stoneType : StoneType.values()) {
-            if (!stoneType.hasCobble()) {
-                continue;
-            }
-
-            ShapedRecipeBuilder.shapedRecipe(Objects.requireNonNull(stoneType.getCobbleState()).getBlock())
-                    .key('x', UtilMethods.stringToItem(RekindleUnderground.MOD_ID + ":" + stoneType.getName() + "_rock"))
+        for (Block cobble : ModLists.COBBLESTONES.keySet()) {
+            ShapedRecipeBuilder.shapedRecipe(cobble)
+                    .key('x', UtilMethods.stringToItem(ModLists.COBBLESTONES.get(cobble).getRegistryName().toString()))
                     .patternLine("xx")
                     .patternLine("xx")
                     .setGroup("cobblestone")

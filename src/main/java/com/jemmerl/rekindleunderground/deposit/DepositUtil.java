@@ -3,7 +3,7 @@ package com.jemmerl.rekindleunderground.deposit;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.jemmerl.rekindleunderground.RekindleUnderground;
-import com.jemmerl.rekindleunderground.block.custom.StoneOreBlock;
+import com.jemmerl.rekindleunderground.blocks.StoneOreBlock;
 import com.jemmerl.rekindleunderground.data.types.*;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.util.Pair;

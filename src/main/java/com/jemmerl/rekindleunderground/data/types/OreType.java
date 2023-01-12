@@ -1,16 +1,11 @@
 package com.jemmerl.rekindleunderground.data.types;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
-import com.jemmerl.rekindleunderground.block.custom.StoneOreBlock;
-import com.jemmerl.rekindleunderground.item.ModItemGroup;
+import com.jemmerl.rekindleunderground.init.ModItemGroups;
 import com.jemmerl.rekindleunderground.util.UtilMethods;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.util.IStringSerializable;
-import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 
@@ -143,13 +138,13 @@ public enum OreType implements IStringSerializable {
             oreName = oreEntry.name + "_ore";
             oreNameList.add(oreName);
             oreEntry.oreItem = items.register(oreName,
-                    () -> new Item(new Item.Properties().group(ModItemGroup.RKU_ORES_GROUP)));
+                    () -> new Item(new Item.Properties().group(ModItemGroups.RKU_ORES_GROUP)));
 
             // Register poor ore variant
             oreName = "poor_" + oreEntry.name + "_ore";
             oreNameList.add(oreName);
             oreEntry.oreItem = items.register(oreName,
-                    () -> new Item(new Item.Properties().group(ModItemGroup.RKU_ORES_GROUP)));
+                    () -> new Item(new Item.Properties().group(ModItemGroups.RKU_ORES_GROUP)));
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground.tags;
+package com.jemmerl.rekindleunderground.init;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import net.minecraft.block.Block;

@@ -1,10 +1,11 @@
 package com.jemmerl.rekindleunderground;
 
-import com.jemmerl.rekindleunderground.block.ModBlocks;
-import com.jemmerl.rekindleunderground.block.custom.FallingOreBlock;
-import com.jemmerl.rekindleunderground.block.custom.StoneOreBlock;
+import com.jemmerl.rekindleunderground.init.ModBlocks;
+import com.jemmerl.rekindleunderground.blocks.FallingOreBlock;
+import com.jemmerl.rekindleunderground.blocks.StoneOreBlock;
 import com.jemmerl.rekindleunderground.deposit.DepositDataLoader;
-import com.jemmerl.rekindleunderground.item.ModItems;
+import com.jemmerl.rekindleunderground.init.ModItems;
+import com.jemmerl.rekindleunderground.init.ModLists;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.world.capability.chunk.ChunkGennedCapProvider;
 import com.jemmerl.rekindleunderground.world.capability.chunk.ChunkGennedCapStorage;
@@ -86,12 +87,8 @@ public class RekindleUnderground
 
     private void clientSetup(final FMLClientSetupEvent event) {
         // Set transparent textures for the stone ore blocks
-        Block block;
-        for (RegistryObject<Block> regBlock : ModBlocks.BLOCKS.getEntries()) {
-            block = regBlock.get().getBlock();
-            if ((block instanceof StoneOreBlock) || (block instanceof FallingOreBlock)) {
-                RenderTypeLookup.setRenderLayer(block, RenderType.getCutout());
-            }
+        for (Block block : ModLists.ALL_OREBLOCKS) {
+            RenderTypeLookup.setRenderLayer(block, RenderType.getCutout());
         }
     }
 

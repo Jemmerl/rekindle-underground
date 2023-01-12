@@ -2,10 +2,12 @@ package com.jemmerl.rekindleunderground.commands;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.data.types.StoneType;
+import com.jemmerl.rekindleunderground.init.ModLists;
 import com.jemmerl.rekindleunderground.util.UtilMethods;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
@@ -34,8 +36,8 @@ public class JacksonCmd {
         int x = 0; // Width offset
 
         // Place stones
-        for (String stoneName : StoneType.stoneNameList) {
-            BlockState state = UtilMethods.stringToBlockState(RekindleUnderground.MOD_ID + ":" + stoneName);
+        for (Block oreBlock : ModLists.ALL_OREBLOCKS) {
+            BlockState state = oreBlock.getDefaultState();
 
             TileEntity tileentity = serverworld.getTileEntity(pos.up(y).north(x));
             IClearable.clearObj(tileentity);
@@ -54,8 +56,8 @@ public class JacksonCmd {
         // Place cobbles
         y = 1;
         x++;
-        for (String cobbleName : StoneType.cobbleNameList) {
-            BlockState state = UtilMethods.stringToBlockState(RekindleUnderground.MOD_ID + ":" + cobbleName);
+        for (Block cobbleBlock : ModLists.COBBLESTONES.keySet()) {
+            BlockState state = cobbleBlock.getDefaultState();
 
             TileEntity tileentity = serverworld.getTileEntity(pos.up(y).north(x));
             IClearable.clearObj(tileentity);
