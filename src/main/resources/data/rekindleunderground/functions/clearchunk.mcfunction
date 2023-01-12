@@ -18,7 +18,7 @@ fill ~ ~ ~ ~16 10 ~16 air replace rekindleunderground:rocksalt_stone[oretype=non
 fill ~ ~ ~ ~16 10 ~16 air replace rekindleunderground:rockgypsum_stone[oretype=none]
 fill ~ ~ ~ ~16 10 ~16 air replace rekindleunderground:borax_stone[oretype=none]
 fill ~ ~ ~ ~16 10 ~16 air replace rekindleunderground:kernite_stone[oretype=none]
-fill ~ ~ ~ ~16 10 ~16 air replace rekindleunderground:veinquartz_stone[oretype=none]
+fill ~ ~ ~ ~16 10 ~16 air replace rekindleunderground:vein_quartz_stone[oretype=none]
 
 fill ~ ~ ~ ~16 10 ~16 air replace rekindleunderground:rhyolite_stone[oretype=none]
 fill ~ ~ ~ ~16 10 ~16 air replace rekindleunderground:dacite_stone[oretype=none]

@@ -2,9 +2,9 @@ package com.jemmerl.rekindleunderground.deposit.generators;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.data.types.DepositType;
+import com.jemmerl.rekindleunderground.data.types.GeologyType;
 import com.jemmerl.rekindleunderground.data.types.GradeType;
 import com.jemmerl.rekindleunderground.data.types.OreType;
-import com.jemmerl.rekindleunderground.data.types.StoneType;
 import com.jemmerl.rekindleunderground.deposit.DepositUtil;
 import com.jemmerl.rekindleunderground.deposit.IDeposit;
 import com.jemmerl.rekindleunderground.deposit.templates.PlacerTemplate;
@@ -16,7 +16,6 @@ import com.jemmerl.rekindleunderground.world.capability.chunk.IChunkGennedCapabi
 import com.jemmerl.rekindleunderground.world.capability.deposit.IDepositCapability;
 import com.jemmerl.rekindleunderground.world.feature.stonegeneration.ChunkReader;
 import com.jemmerl.rekindleunderground.world.feature.stonegeneration.StateMap;
-import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.biome.Biome;
@@ -32,7 +31,7 @@ public class PlacerDeposit implements IDeposit {
     private String name;
     private WeightedProbMap<OreType> ores;
     private WeightedProbMap<GradeType> gradesMap;
-    private ArrayList<StoneType> validList;
+    private ArrayList<GeologyType> validList;
     private ArrayList<Biome.Category> validBiomes;
 
     public PlacerDeposit(PlacerTemplate template) {
@@ -62,7 +61,7 @@ public class PlacerDeposit implements IDeposit {
     }
 
     @Override
-    public PlacerDeposit setValid(ArrayList<StoneType> validList) {
+    public PlacerDeposit setValid(ArrayList<GeologyType> validList) {
         this.validList = validList;
         return this;
     }
@@ -98,7 +97,7 @@ public class PlacerDeposit implements IDeposit {
     }
 
     @Override
-    public ArrayList<StoneType> getValid() {
+    public ArrayList<GeologyType> getValid() {
         return this.validList;
     }
 

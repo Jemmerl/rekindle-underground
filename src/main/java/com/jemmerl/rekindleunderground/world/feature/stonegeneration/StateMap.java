@@ -24,7 +24,6 @@ public class StateMap {
     private final BlockPos blockPos; // Starting position of this chunk's generation
     private final Random rand;
     private final BlockState[][][] stoneStateMap; // Positional map of stone blockstates to be generated
-    //private final BlockState[][][] detritusStateMap; // Positional map of detritus blockstates to be generated
     private final IDepositCapability depositCapability;
     private final IChunkGennedCapability chunkGennedCapability;
 
@@ -33,7 +32,6 @@ public class StateMap {
         this.blockPos = pos;
         this.rand = rand;
         this.stoneStateMap = new BlockState[16][this.chunkReader.getMaxHeight()][16];
-        //this.detritusStateMap = new BlockState[16][this.chunkReader.getMaxHeight()][16];
 
         this.depositCapability = this.chunkReader.getSeedReader().getWorld().getCapability(DepositCapability.RKU_DEPOSIT_CAPABILITY)
                 .orElseThrow(() -> new RuntimeException("RKU deposit capability is null..."));

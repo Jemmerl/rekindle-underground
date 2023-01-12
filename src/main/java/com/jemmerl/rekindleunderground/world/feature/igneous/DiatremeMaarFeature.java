@@ -1,10 +1,12 @@
 package com.jemmerl.rekindleunderground.world.feature.igneous;
 
 import com.jemmerl.rekindleunderground.blocks.StoneOreBlock;
+import com.jemmerl.rekindleunderground.data.types.GeologyType;
 import com.jemmerl.rekindleunderground.data.types.OreType;
-import com.jemmerl.rekindleunderground.data.types.StoneType;
+import com.jemmerl.rekindleunderground.init.ModBlocks;
 import com.jemmerl.rekindleunderground.init.NoiseInit;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
+import com.jemmerl.rekindleunderground.util.ModLists;
 import com.jemmerl.rekindleunderground.util.Pair;
 import com.jemmerl.rekindleunderground.util.UtilMethods;
 import com.jemmerl.rekindleunderground.util.WeightedProbMap;
@@ -58,8 +60,8 @@ public class DiatremeMaarFeature extends Feature<NoFeatureConfig> {
 
 
         ArrayList<BlockState> ejectaList = new ArrayList<>();
-        ejectaList.add(StoneType.SCORIA.getStoneState());
-        ejectaList.add(StoneType.TUFF.getStoneState());
+        ejectaList.add(ModBlocks.SCORIA_STONE.get().getDefaultState());
+        ejectaList.add(ModBlocks.TUFF_STONE.get().getDefaultState());
 
         /* FEATURE PROPERTY SELECTION */
 
@@ -75,24 +77,24 @@ public class DiatremeMaarFeature extends Feature<NoFeatureConfig> {
         BlockState replacingBlock;
         int randInt = rand.nextInt(101);
         if (randInt > 70) {
-            replacingBlock = StoneType.KIMBERLITE.getStoneState(); // (30% Chance)
+            replacingBlock = ModBlocks.KIMBERLITE_STONE.get().getDefaultState(); // (30% Chance)
         } else if (randInt > 65) {
-            replacingBlock = StoneType.LAMPROITE.getStoneState(); // (5% Chance)
+            replacingBlock = ModBlocks.LAMPROITE_STONE.get().getDefaultState(); // (5% Chance)
         } else if (randInt > 40) {
-            replacingBlock = StoneType.BASALT.getStoneState(); // (25% Chance)
+            replacingBlock = ModBlocks.BASALT_STONE.get().getDefaultState(); // (25% Chance)
         } else if (randInt > 25) {
-            replacingBlock = StoneType.DACITE.getStoneState(); // (15% Chance)
+            replacingBlock = ModBlocks.DACITE_STONE.get().getDefaultState(); // (15% Chance)
         } else if (randInt > 15) {
-            replacingBlock = StoneType.ANDESITE.getStoneState(); // (10% Chance)
+            replacingBlock = ModBlocks.ANDESITE_STONE.get().getDefaultState(); // (10% Chance)
         } else {
-            replacingBlock = StoneType.RHYOLITE.getStoneState(); // (15% Chance)
+            replacingBlock = ModBlocks.RHYOLITE_STONE.get().getDefaultState(); // (15% Chance)
         }
 
         // Determine if the pipe is diamond bearing
         boolean diamondiferous = false;
-        if (replacingBlock == StoneType.KIMBERLITE.getStoneState() && (rand.nextFloat() < 0.25f)) {
+        if (replacingBlock == ModBlocks.KIMBERLITE_STONE.get().getDefaultState() && (rand.nextFloat() < 0.25f)) {
             diamondiferous = true;
-        } else if (replacingBlock == StoneType.LAMPROITE.getStoneState() && (rand.nextFloat() < 0.05f)) {
+        } else if (replacingBlock == ModBlocks.LAMPROITE_STONE.get().getDefaultState() && (rand.nextFloat() < 0.05f)) {
             diamondiferous = true;
         }
 

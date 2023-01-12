@@ -1,15 +1,14 @@
 package com.jemmerl.rekindleunderground.deposit;
 
 import com.jemmerl.rekindleunderground.data.types.DepositType;
+import com.jemmerl.rekindleunderground.data.types.GeologyType;
 import com.jemmerl.rekindleunderground.data.types.GradeType;
 import com.jemmerl.rekindleunderground.data.types.OreType;
-import com.jemmerl.rekindleunderground.data.types.StoneType;
 import com.jemmerl.rekindleunderground.util.WeightedProbMap;
 import com.jemmerl.rekindleunderground.world.capability.chunk.IChunkGennedCapability;
 import com.jemmerl.rekindleunderground.world.capability.deposit.IDepositCapability;
 import com.jemmerl.rekindleunderground.world.feature.stonegeneration.ChunkReader;
 import com.jemmerl.rekindleunderground.world.feature.stonegeneration.StateMap;
-import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 
@@ -27,7 +26,7 @@ public interface IDeposit {
 
     IDeposit setGrades(WeightedProbMap<GradeType> grades);
 
-    IDeposit setValid(ArrayList<StoneType> validList);
+    IDeposit setValid(ArrayList<GeologyType> validList);
 
     IDeposit setBiomes(ArrayList<Biome.Category> validBiomes);
 
@@ -39,7 +38,7 @@ public interface IDeposit {
 
     WeightedProbMap<GradeType> getGrades();
 
-    ArrayList<StoneType> getValid();
+    ArrayList<GeologyType> getValid();
 
     ArrayList<Biome.Category> getBiomes();
 

@@ -44,8 +44,8 @@ public class DepositUtil {
 
     // Check if a blockstate is a valid stone for ore generation.
     // If not a StoneOreBlock, then the second condition (which assumes that it is such) will never be reached.
-    public static Boolean isValidStone(Block blockIn, ArrayList<StoneType> validStones) {
-        return ((blockIn instanceof StoneOreBlock) && validStones.contains(((StoneOreBlock) blockIn).getStoneType()));
+    public static Boolean isValidStone(Block blockIn, ArrayList<GeologyType> validStones) {
+        return ((blockIn instanceof StoneOreBlock) && validStones.contains(((StoneOreBlock) blockIn).getGeologyType()));
         //return (blockIn instanceof StoneOreBlock); // TODO DEBUG TOOL
     }
 
@@ -109,7 +109,7 @@ public class DepositUtil {
                 }
 
                 BlockState state = level.getBlockState(qPos);
-                state = StoneType.convertToDetritus(state); // TODO Remnant from placer experiment, may not be needed
+                state = GeologyType.convertToDetritus(state); // TODO Remnant from placer experiment, may not be needed
 
                 if (isValidStone(state.getBlock(), qDeposit.getValid())) {
                     if (!level.setBlockState(qPos, state.with(StoneOreBlock.ORE_TYPE, qType).with(StoneOreBlock.GRADE_TYPE, qGrade), 2 | 16)) {
@@ -188,40 +188,40 @@ public class DepositUtil {
     }
 
     // Return an array list of valid StoneTypes from a JsonArray
-    public static ArrayList<StoneType> getOreStones(JsonArray jsonArray) {
-        HashSet<StoneType> stoneSet = new HashSet<>(); // Using a set removes duplicate entries free of charge
+    public static ArrayList<GeologyType> getOreStones(JsonArray jsonArray) {
+        HashSet<GeologyType> oreStoneSet = new HashSet<>(); // Using a set removes duplicate entries free of charge
             try {
                 for (int i=0; i<jsonArray.size(); i++) {
                     String oreStoneStr = jsonArray.get(i).getAsString().toUpperCase();
                     switch (oreStoneStr) {
                         case "ALL":
                             // No need to do anything else, just return everything
-                            return new ArrayList<>(EnumSet.allOf(StoneType.class));
+                            return new ArrayList<>(EnumSet.allOf(GeologyType.class));
                         case "ALL_STONE":
                             // Return everything that is not a detritus, aka all stones
-                            stoneSet.addAll(EnumSet.complementOf(StoneType.getAllInGroup(StoneGroupType.DETRITUS)));
+                            oreStoneSet.addAll(EnumSet.complementOf(GeologyType.getAllInGroup(StoneGroupType.DETRITUS)));
                             break;
                         case "ALL_SED":
-                            stoneSet.addAll(StoneType.getAllInGroup(StoneGroupType.SEDIMENTARY));
+                            oreStoneSet.addAll(GeologyType.getAllInGroup(StoneGroupType.SEDIMENTARY));
                             break;
                         case "ALL_IGN":
-                            stoneSet.addAll(StoneType.getAllInGroup(StoneGroupType.EXTRUSIVE));
-                            stoneSet.addAll(StoneType.getAllInGroup(StoneGroupType.INTRUSIVE));
+                            oreStoneSet.addAll(GeologyType.getAllInGroup(StoneGroupType.EXTRUSIVE));
+                            oreStoneSet.addAll(GeologyType.getAllInGroup(StoneGroupType.INTRUSIVE));
                             break;
                         case "ALL_IGN_EXT":
-                            stoneSet.addAll(StoneType.getAllInGroup(StoneGroupType.EXTRUSIVE));
+                            oreStoneSet.addAll(GeologyType.getAllInGroup(StoneGroupType.EXTRUSIVE));
                             break;
                         case "ALL_IGN_INT":
-                            stoneSet.addAll(StoneType.getAllInGroup(StoneGroupType.INTRUSIVE));
+                            oreStoneSet.addAll(GeologyType.getAllInGroup(StoneGroupType.INTRUSIVE));
                             break;
                         case "ALL_META":
-                            stoneSet.addAll(StoneType.getAllInGroup(StoneGroupType.METAMORPHIC));
+                            oreStoneSet.addAll(GeologyType.getAllInGroup(StoneGroupType.METAMORPHIC));
                             break;
                         case "ALL_DETRITUS":
-                            stoneSet.addAll(StoneType.getAllInGroup(StoneGroupType.DETRITUS));
+                            oreStoneSet.addAll(GeologyType.getAllInGroup(StoneGroupType.DETRITUS));
                             break;
                         default:
-                            stoneSet.add(StoneType.valueOf(oreStoneStr));
+                            oreStoneSet.add(GeologyType.valueOf(oreStoneStr));
                     }
 
                 }
@@ -233,7 +233,7 @@ public class DepositUtil {
                 return null;
             }
 
-        return new ArrayList<>(stoneSet);
+        return new ArrayList<>(oreStoneSet);
     }
 
     // Return an array list of valid Biome Categeories from a JsonArray

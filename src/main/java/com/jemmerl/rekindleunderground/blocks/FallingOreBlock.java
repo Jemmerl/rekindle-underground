@@ -1,9 +1,9 @@
 package com.jemmerl.rekindleunderground.blocks;
 
+import com.jemmerl.rekindleunderground.data.types.GeologyType;
 import com.jemmerl.rekindleunderground.data.types.GradeType;
 import com.jemmerl.rekindleunderground.data.types.OreType;
 import com.jemmerl.rekindleunderground.data.types.StoneGroupType;
-import com.jemmerl.rekindleunderground.data.types.StoneType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FallingBlock;
@@ -16,13 +16,13 @@ public class FallingOreBlock extends FallingBlock {
 
     public static final EnumProperty<OreType> ORE_TYPE = EnumProperty.create("oretype", OreType.class);
     public static final EnumProperty<GradeType> GRADE_TYPE = EnumProperty.create("gradetype", GradeType.class);
-    private final StoneType stoneType;
+    private final GeologyType geologyType;
     private final StoneGroupType stoneGroupType;
 
-    public FallingOreBlock(Properties properties, StoneType stoneType) {
+    public FallingOreBlock(Properties properties, GeologyType geologyType) {
         super(properties);
-        this.stoneType = stoneType;
-        this.stoneGroupType = stoneType.getGroup();
+        this.geologyType = geologyType;
+        this.stoneGroupType = geologyType.getGroup();
         this.setDefaultState(this.stateContainer.getBaseState().with(ORE_TYPE, OreType.NONE).with(GRADE_TYPE, GradeType.LOWGRADE));
     }
 
@@ -44,8 +44,8 @@ public class FallingOreBlock extends FallingBlock {
     }
 
     // Return the stone type of the block
-    public StoneType getStoneType() {
-        return this.stoneType;
+    public GeologyType getGeologyType() {
+        return this.geologyType;
     }
 
     // Return stone group type of the block

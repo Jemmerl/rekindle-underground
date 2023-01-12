@@ -3,7 +3,7 @@ package com.jemmerl.rekindleunderground.init;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.data.types.OreType;
-import com.jemmerl.rekindleunderground.data.types.RockType;
+import com.jemmerl.rekindleunderground.data.types.GeologyType;
 import net.minecraft.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
@@ -24,44 +24,44 @@ public class ModItems {
     ///////////
 
     // Sedimentary
-    public static final RegistryObject<Item> CHALK_ROCK = registerRockItem(RockType.CHALK_ROCK);
-    public static final RegistryObject<Item> LIMESTONE_ROCK = registerRockItem(RockType.LIMESTONE_ROCK);
-    public static final RegistryObject<Item> DOLOSTONE_ROCK = registerRockItem(RockType.DOLOSTONE_ROCK);
-    public static final RegistryObject<Item> SHALE_ROCK = registerRockItem(RockType.SHALE_ROCK);
-    public static final RegistryObject<Item> SANDSTONE_ROCK = registerRockItem(RockType.SANDSTONE_ROCK);
-    public static final RegistryObject<Item> RED_SANDSTONE_ROCK = registerRockItem(RockType.RED_SANDSTONE_ROCK);
-    public static final RegistryObject<Item> GREYWACKE_ROCK = registerRockItem(RockType.GREYWACKE_ROCK);
-    public static final RegistryObject<Item> MUDSTONE_ROCK = registerRockItem(RockType.MUDSTONE_ROCK);
-    public static final RegistryObject<Item> VEINQUARTZ_ROCK = registerRockItem(RockType.VEINQUARTZ_ROCK);
+    public static final RegistryObject<Item> CHALK_ROCK = registerRockItem(GeologyType.CHALK);
+    public static final RegistryObject<Item> LIMESTONE_ROCK = registerRockItem(GeologyType.LIMESTONE);
+    public static final RegistryObject<Item> DOLOSTONE_ROCK = registerRockItem(GeologyType.DOLOSTONE);
+    public static final RegistryObject<Item> SHALE_ROCK = registerRockItem(GeologyType.SHALE);
+    public static final RegistryObject<Item> SANDSTONE_ROCK = registerRockItem(GeologyType.SANDSTONE);
+    public static final RegistryObject<Item> RED_SANDSTONE_ROCK = registerRockItem(GeologyType.RED_SANDSTONE);
+    public static final RegistryObject<Item> GREYWACKE_ROCK = registerRockItem(GeologyType.GREYWACKE);
+    public static final RegistryObject<Item> MUDSTONE_ROCK = registerRockItem(GeologyType.MUDSTONE);
+    public static final RegistryObject<Item> VEIN_QUARTZ_ROCK = registerRockItem(GeologyType.VEIN_QUARTZ);
 
     // Extrusive Igneous
-    public static final RegistryObject<Item> RHYOLITE_ROCK = registerRockItem(RockType.RHYOLITE_ROCK);
-    public static final RegistryObject<Item> DACITE_ROCK = registerRockItem(RockType.DACITE_ROCK);
-    public static final RegistryObject<Item> ANDESITE_ROCK = registerRockItem(RockType.ANDESITE_ROCK);
-    public static final RegistryObject<Item> BASALT_ROCK = registerRockItem(RockType.BASALT_ROCK);
+    public static final RegistryObject<Item> RHYOLITE_ROCK = registerRockItem(GeologyType.RHYOLITE);
+    public static final RegistryObject<Item> DACITE_ROCK = registerRockItem(GeologyType.DACITE);
+    public static final RegistryObject<Item> ANDESITE_ROCK = registerRockItem(GeologyType.ANDESITE);
+    public static final RegistryObject<Item> BASALT_ROCK = registerRockItem(GeologyType.BASALT);
 
     // Intrusive Igneous
-    public static final RegistryObject<Item> DIORITE_ROCK = registerRockItem(RockType.DIORITE_ROCK);
-    public static final RegistryObject<Item> GRANODIORITE_ROCK = registerRockItem(RockType.GRANODIORITE_ROCK);
-    public static final RegistryObject<Item> GRANITE_ROCK = registerRockItem(RockType.GRANITE_ROCK);
-    public static final RegistryObject<Item> SYENITE_ROCK = registerRockItem(RockType.SYENITE_ROCK);
-    public static final RegistryObject<Item> GABBRO_ROCK = registerRockItem(RockType.GABBRO_ROCK);
-    public static final RegistryObject<Item> DIABASE_ROCK = registerRockItem(RockType.DIABASE_ROCK);
-    public static final RegistryObject<Item> PERIDOTITE_ROCK = registerRockItem(RockType.PERIDOTITE_ROCK);
-    public static final RegistryObject<Item> KIMBERLITE_ROCK = registerRockItem(RockType.KIMBERLITE_ROCK);
-    public static final RegistryObject<Item> LAMPROITE_ROCK = registerRockItem(RockType.LAMPROITE_ROCK);
+    public static final RegistryObject<Item> DIORITE_ROCK = registerRockItem(GeologyType.DIORITE);
+    public static final RegistryObject<Item> GRANODIORITE_ROCK = registerRockItem(GeologyType.GRANODIORITE);
+    public static final RegistryObject<Item> GRANITE_ROCK = registerRockItem(GeologyType.GRANITE);
+    public static final RegistryObject<Item> SYENITE_ROCK = registerRockItem(GeologyType.SYENITE);
+    public static final RegistryObject<Item> GABBRO_ROCK = registerRockItem(GeologyType.GABBRO);
+    public static final RegistryObject<Item> DIABASE_ROCK = registerRockItem(GeologyType.DIABASE);
+    public static final RegistryObject<Item> PERIDOTITE_ROCK = registerRockItem(GeologyType.PERIDOTITE);
+    public static final RegistryObject<Item> KIMBERLITE_ROCK = registerRockItem(GeologyType.KIMBERLITE);
+    public static final RegistryObject<Item> LAMPROITE_ROCK = registerRockItem(GeologyType.LAMPROITE);
 
     // Metamorphic
-    public static final RegistryObject<Item> QUARTZITE_ROCK = registerRockItem(RockType.QUARTZITE_ROCK);
-    public static final RegistryObject<Item> SCHIST_ROCK = registerRockItem(RockType.SCHIST_ROCK);
-    public static final RegistryObject<Item> PHYLLITE_ROCK = registerRockItem(RockType.PHYLLITE_ROCK);
-    public static final RegistryObject<Item> GNEISS_ROCK = registerRockItem(RockType.GNEISS_ROCK);
-    public static final RegistryObject<Item> MARBLE_ROCK = registerRockItem(RockType.MARBLE_ROCK);
+    public static final RegistryObject<Item> QUARTZITE_ROCK = registerRockItem(GeologyType.QUARTZITE);
+    public static final RegistryObject<Item> SCHIST_ROCK = registerRockItem(GeologyType.SCHIST);
+    public static final RegistryObject<Item> PHYLLITE_ROCK = registerRockItem(GeologyType.PHYLLITE);
+    public static final RegistryObject<Item> GNEISS_ROCK = registerRockItem(GeologyType.GNEISS);
+    public static final RegistryObject<Item> MARBLE_ROCK = registerRockItem(GeologyType.MARBLE);
 
 
     // Rock Item Creation and Registration
-    private static RegistryObject<Item> registerRockItem(RockType rockType) {
-        return ITEMS.register(rockType.getName(), () -> new Item(new Item.Properties().group(ModItemGroups.RKU_STONE_GROUP)));
+    private static RegistryObject<Item> registerRockItem(GeologyType geologyType) {
+        return ITEMS.register((geologyType.getName() + "_rock"), () -> new Item(new Item.Properties().group(ModItemGroups.RKU_STONE_GROUP)));
     }
 
     // Item registry method

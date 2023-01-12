@@ -1,11 +1,9 @@
 package com.jemmerl.rekindleunderground;
 
 import com.jemmerl.rekindleunderground.init.ModBlocks;
-import com.jemmerl.rekindleunderground.blocks.FallingOreBlock;
-import com.jemmerl.rekindleunderground.blocks.StoneOreBlock;
 import com.jemmerl.rekindleunderground.deposit.DepositDataLoader;
 import com.jemmerl.rekindleunderground.init.ModItems;
-import com.jemmerl.rekindleunderground.init.ModLists;
+import com.jemmerl.rekindleunderground.util.ModLists;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.world.capability.chunk.ChunkGennedCapProvider;
 import com.jemmerl.rekindleunderground.world.capability.chunk.ChunkGennedCapStorage;
@@ -30,7 +28,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;

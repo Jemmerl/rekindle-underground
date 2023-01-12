@@ -1,7 +1,7 @@
 package com.jemmerl.rekindleunderground.blocks;
 
+import com.jemmerl.rekindleunderground.data.types.GeologyType;
 import com.jemmerl.rekindleunderground.data.types.GradeType;
-import com.jemmerl.rekindleunderground.data.types.StoneType;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.data.types.OreType;
 import com.jemmerl.rekindleunderground.data.types.StoneGroupType;
@@ -20,13 +20,13 @@ public class StoneOreBlock extends Block {
 
     public static final EnumProperty<OreType> ORE_TYPE = EnumProperty.create("oretype", OreType.class);
     public static final EnumProperty<GradeType> GRADE_TYPE = EnumProperty.create("gradetype", GradeType.class);
-    private final StoneType stoneType;
+    private final GeologyType geologyType;
     private final StoneGroupType stoneGroupType;
 
-    public StoneOreBlock(Properties properties, StoneType stoneType) {
+    public StoneOreBlock(Properties properties, GeologyType geologyType) {
         super(properties);
-        this.stoneType = stoneType;
-        this.stoneGroupType = stoneType.getGroup();
+        this.geologyType = geologyType;
+        this.stoneGroupType = geologyType.getGroup();
         this.setDefaultState(this.stateContainer.getBaseState().with(ORE_TYPE, OreType.NONE).with(GRADE_TYPE, GradeType.LOWGRADE));
     }
 
@@ -62,8 +62,8 @@ public class StoneOreBlock extends Block {
     }
 
     // Return the stone type of the block
-    public StoneType getStoneType() {
-        return this.stoneType;
+    public GeologyType getGeologyType() {
+        return this.geologyType;
     }
 
     // Return stone group type of the block

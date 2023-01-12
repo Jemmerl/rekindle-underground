@@ -1,9 +1,6 @@
 package com.jemmerl.rekindleunderground.commands;
 
-import com.jemmerl.rekindleunderground.RekindleUnderground;
-import com.jemmerl.rekindleunderground.data.types.StoneType;
-import com.jemmerl.rekindleunderground.init.ModLists;
-import com.jemmerl.rekindleunderground.util.UtilMethods;
+import com.jemmerl.rekindleunderground.util.ModLists;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
@@ -56,7 +53,7 @@ public class JacksonCmd {
         // Place cobbles
         y = 1;
         x++;
-        for (Block cobbleBlock : ModLists.COBBLESTONES.keySet()) {
+        for (Block cobbleBlock : ModLists.COBBLESTONES) {
             BlockState state = cobbleBlock.getDefaultState();
 
             TileEntity tileentity = serverworld.getTileEntity(pos.up(y).north(x));

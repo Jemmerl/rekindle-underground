@@ -2,7 +2,7 @@ package com.jemmerl.rekindleunderground.data.generators.client;
 
 import com.jemmerl.rekindleunderground.blocks.FallingOreBlock;
 import com.jemmerl.rekindleunderground.blocks.StoneOreBlock;
-import com.jemmerl.rekindleunderground.init.ModLists;
+import com.jemmerl.rekindleunderground.util.ModLists;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
@@ -65,7 +65,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
             });
         }
 
-        for (Block block : ModLists.COBBLESTONES.keySet()) {
+        for (Block block : ModLists.COBBLESTONES) {
             simpleBlock(block);
         }
 

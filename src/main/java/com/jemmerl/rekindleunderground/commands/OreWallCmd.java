@@ -1,11 +1,8 @@
 package com.jemmerl.rekindleunderground.commands;
 
-import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.blocks.StoneOreBlock;
 import com.jemmerl.rekindleunderground.data.types.OreType;
-import com.jemmerl.rekindleunderground.data.types.StoneType;
-import com.jemmerl.rekindleunderground.init.ModLists;
-import com.jemmerl.rekindleunderground.util.UtilMethods;
+import com.jemmerl.rekindleunderground.util.ModLists;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
