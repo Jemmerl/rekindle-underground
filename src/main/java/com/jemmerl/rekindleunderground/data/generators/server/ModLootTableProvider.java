@@ -7,7 +7,7 @@ import com.jemmerl.rekindleunderground.init.ModBlocks;
 import com.jemmerl.rekindleunderground.data.types.GradeType;
 import com.jemmerl.rekindleunderground.data.types.OreType;
 import com.jemmerl.rekindleunderground.util.GeoListWrapper;
-import com.jemmerl.rekindleunderground.util.ModLists;
+import com.jemmerl.rekindleunderground.util.ModBlockLists;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.block.Block;
@@ -52,9 +52,9 @@ public class ModLootTableProvider extends LootTableProvider {
         @Override
         protected void addTables() {
 
-            for (Block block : ModLists.ALL_STONES) {
+            for (Block block : ModBlockLists.ALL_STONES) {
                 GeologyType geologyType = ((StoneOreBlock) block).getGeologyType();
-                GeoListWrapper geoList = ModLists.GEO_LIST.get(geologyType);
+                GeoListWrapper geoList = ModBlockLists.GEO_LIST.get(geologyType);
                 if (geologyType.hasCobble()) {
                     // Register stone -> rock drop
                     LootTable.Builder lootTable = buildStoneLootTable(geoList);
@@ -69,12 +69,12 @@ public class ModLootTableProvider extends LootTableProvider {
             }
 
 
-            for (Block block : ModLists.COBBLESTONES) {
+            for (Block block : ModBlockLists.COBBLESTONES) {
                 registerDropSelfLootTable(block);
             }
 
             // Todo temp
-            for (Block block : ModLists.ALL_DETRITUS) {
+            for (Block block : ModBlockLists.ALL_DETRITUS) {
                 registerDropSelfLootTable(block);
             }
         }

@@ -1009,7 +1009,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:diamond"
+          "name": "rekindleunderground:poor_diamond_ore"
         }
       ],
       "conditions": [

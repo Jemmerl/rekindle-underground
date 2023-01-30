@@ -2,7 +2,7 @@ package com.jemmerl.rekindleunderground.commands;
 
 import com.jemmerl.rekindleunderground.blocks.StoneOreBlock;
 import com.jemmerl.rekindleunderground.data.types.OreType;
-import com.jemmerl.rekindleunderground.util.ModLists;
+import com.jemmerl.rekindleunderground.util.ModBlockLists;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -35,8 +35,9 @@ public class OreWallCmd {
         ServerWorld serverworld = source.getWorld();
 
         OreType oreType = null;
-        if ((oreType = OreType.fromString(oreString)) == null)
-        {
+        try {
+            oreType = OreType.valueOf(oreString);
+        } catch (Error e) {
             throw new SimpleCommandExceptionType(new StringTextComponent("Ore-wall placement failed! Invalid ore name.")).create();
         }
 
@@ -45,7 +46,7 @@ public class OreWallCmd {
         int x = 0; // Width offset
 
         // Place ores
-        for (Block oreBlock : ModLists.ALL_OREBLOCKS) {
+        for (Block oreBlock : ModBlockLists.ALL_OREBLOCKS) {
             BlockState state = oreBlock.getDefaultState();
 
             TileEntity tileentity = serverworld.getTileEntity(pos.up(y).north(x));

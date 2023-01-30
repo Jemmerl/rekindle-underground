@@ -3,7 +3,7 @@ package com.jemmerl.rekindleunderground.data.generators.server;
 import com.jemmerl.rekindleunderground.data.types.GeologyType;
 import com.jemmerl.rekindleunderground.init.ModTags;
 import com.jemmerl.rekindleunderground.util.GeoListWrapper;
-import com.jemmerl.rekindleunderground.util.ModLists;
+import com.jemmerl.rekindleunderground.util.ModBlockLists;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.data.DataGenerator;
@@ -23,7 +23,7 @@ public class ModCobblestoneRecipeProvider extends RecipeProvider {
     protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
         for (GeologyType stone : GeologyType.values()) {
             if (stone.hasCobble()) {
-                GeoListWrapper geoList = ModLists.GEO_LIST.get(stone);
+                GeoListWrapper geoList = ModBlockLists.GEO_LIST.get(stone);
                 ShapedRecipeBuilder.shapedRecipe(geoList.getCobbleBlock())
                         .key('x', geoList.getRockItem())
                         .patternLine("xx")

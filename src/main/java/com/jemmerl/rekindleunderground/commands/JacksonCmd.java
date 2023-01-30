@@ -1,6 +1,6 @@
 package com.jemmerl.rekindleunderground.commands;
 
-import com.jemmerl.rekindleunderground.util.ModLists;
+import com.jemmerl.rekindleunderground.util.ModBlockLists;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
@@ -33,7 +33,7 @@ public class JacksonCmd {
         int x = 0; // Width offset
 
         // Place stones
-        for (Block oreBlock : ModLists.ALL_OREBLOCKS) {
+        for (Block oreBlock : ModBlockLists.ALL_OREBLOCKS) {
             BlockState state = oreBlock.getDefaultState();
 
             TileEntity tileentity = serverworld.getTileEntity(pos.up(y).north(x));
@@ -53,7 +53,7 @@ public class JacksonCmd {
         // Place cobbles
         y = 1;
         x++;
-        for (Block cobbleBlock : ModLists.COBBLESTONES) {
+        for (Block cobbleBlock : ModBlockLists.COBBLESTONES) {
             BlockState state = cobbleBlock.getDefaultState();
 
             TileEntity tileentity = serverworld.getTileEntity(pos.up(y).north(x));

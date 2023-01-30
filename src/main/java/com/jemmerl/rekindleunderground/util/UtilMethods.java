@@ -23,11 +23,13 @@ public class UtilMethods {
     }
 
     // Returns a block given a string representation of its resource location
+    // Reliance on this should be minimized
     public static BlockState stringToBlockState(String blockName) {
         return Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(blockName))).getDefaultState();
     }
 
     // Returns an item given a string representation of its resource location
+    // Reliance on this should be minimized
     public static Item stringToItem(String itemName) {
         return ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemName));
     }

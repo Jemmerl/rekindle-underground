@@ -1,7 +1,7 @@
 package com.jemmerl.rekindleunderground.data.types;
 
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
-import com.jemmerl.rekindleunderground.util.ModLists;
+import com.jemmerl.rekindleunderground.util.ModBlockLists;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 
@@ -134,22 +134,22 @@ public enum GeologyType {
     // If not convertible, return original state
     public static BlockState convertToDetritus(BlockState vanillaState) {
         if (vanillaState.equals(Blocks.SAND.getDefaultState())) {
-            return ModLists.GEO_LIST.get(GeologyType.SAND).getStoneOreBlock().getDefaultState();
+            return ModBlockLists.GEO_LIST.get(GeologyType.SAND).getStoneOreBlock().getDefaultState();
 
         } else if (vanillaState.equals(Blocks.RED_SAND.getDefaultState())) {
-            return ModLists.GEO_LIST.get(GeologyType.RED_SAND).getStoneOreBlock().getDefaultState();
+            return ModBlockLists.GEO_LIST.get(GeologyType.RED_SAND).getStoneOreBlock().getDefaultState();
 
         } else if (vanillaState.equals(Blocks.GRAVEL.getDefaultState())) {
-            return ModLists.GEO_LIST.get(GeologyType.GRAVEL).getStoneOreBlock().getDefaultState();
+            return ModBlockLists.GEO_LIST.get(GeologyType.GRAVEL).getStoneOreBlock().getDefaultState();
 
         } else if (vanillaState.equals(Blocks.DIRT.getDefaultState())) {
-            return ModLists.GEO_LIST.get(GeologyType.DIRT).getStoneOreBlock().getDefaultState();
+            return ModBlockLists.GEO_LIST.get(GeologyType.DIRT).getStoneOreBlock().getDefaultState();
 
         } else if (vanillaState.equals(Blocks.COARSE_DIRT.getDefaultState())) {
-            return ModLists.GEO_LIST.get(GeologyType.COARSE_DIRT).getStoneOreBlock().getDefaultState();
+            return ModBlockLists.GEO_LIST.get(GeologyType.COARSE_DIRT).getStoneOreBlock().getDefaultState();
 
         } else if (vanillaState.equals(Blocks.CLAY.getDefaultState())) {
-            return ModLists.GEO_LIST.get(GeologyType.CLAY).getStoneOreBlock().getDefaultState();
+            return ModBlockLists.GEO_LIST.get(GeologyType.CLAY).getStoneOreBlock().getDefaultState();
         } else {
             return vanillaState;
         }

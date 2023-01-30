@@ -2,7 +2,7 @@ package com.jemmerl.rekindleunderground.data.generators.client;
 
 import com.jemmerl.rekindleunderground.blocks.FallingOreBlock;
 import com.jemmerl.rekindleunderground.blocks.StoneOreBlock;
-import com.jemmerl.rekindleunderground.util.ModLists;
+import com.jemmerl.rekindleunderground.util.ModBlockLists;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
@@ -23,7 +23,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         String blockPath;
 
-        for (Block block : ModLists.ALL_STONES) {
+        for (Block block : ModBlockLists.ALL_STONES) {
             // Generate stone ore model and block states
             blockPath = block.getRegistryName().getPath();
             final String tempFinalBlockPath = blockPath;
@@ -37,7 +37,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
             });
         }
 
-        for (Block block : ModLists.STABLE_DET) {
+        for (Block block : ModBlockLists.STABLE_DET) {
             // Generate stone ore model and block states
             blockPath = block.getRegistryName().getPath();
             final String tempFinalBlockPath = blockPath;
@@ -51,7 +51,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
             });
         }
 
-        for (Block block : ModLists.FALLING_DET) {
+        for (Block block : ModBlockLists.FALLING_DET) {
             // Generate stone ore model and block states
             blockPath = block.getRegistryName().getPath();
             final String tempFinalBlockPath = blockPath;
@@ -65,7 +65,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
             });
         }
 
-        for (Block block : ModLists.COBBLESTONES) {
+        for (Block block : ModBlockLists.COBBLESTONES) {
             simpleBlock(block);
         }
 

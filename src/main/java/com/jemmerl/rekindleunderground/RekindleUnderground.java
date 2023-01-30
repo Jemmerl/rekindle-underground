@@ -3,7 +3,7 @@ package com.jemmerl.rekindleunderground;
 import com.jemmerl.rekindleunderground.init.ModBlocks;
 import com.jemmerl.rekindleunderground.deposit.DepositDataLoader;
 import com.jemmerl.rekindleunderground.init.ModItems;
-import com.jemmerl.rekindleunderground.util.ModLists;
+import com.jemmerl.rekindleunderground.util.ModBlockLists;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.world.capability.chunk.ChunkGennedCapProvider;
 import com.jemmerl.rekindleunderground.world.capability.chunk.ChunkGennedCapStorage;
@@ -84,7 +84,7 @@ public class RekindleUnderground
 
     private void clientSetup(final FMLClientSetupEvent event) {
         // Set transparent textures for the stone ore blocks
-        for (Block block : ModLists.ALL_OREBLOCKS) {
+        for (Block block : ModBlockLists.ALL_OREBLOCKS) {
             RenderTypeLookup.setRenderLayer(block, RenderType.getCutout());
         }
     }

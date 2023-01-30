@@ -1,12 +1,10 @@
 package com.jemmerl.rekindleunderground.world.feature.igneous;
 
 import com.jemmerl.rekindleunderground.blocks.StoneOreBlock;
-import com.jemmerl.rekindleunderground.data.types.GeologyType;
 import com.jemmerl.rekindleunderground.data.types.OreType;
 import com.jemmerl.rekindleunderground.init.ModBlocks;
 import com.jemmerl.rekindleunderground.init.NoiseInit;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
-import com.jemmerl.rekindleunderground.util.ModLists;
 import com.jemmerl.rekindleunderground.util.Pair;
 import com.jemmerl.rekindleunderground.util.UtilMethods;
 import com.jemmerl.rekindleunderground.util.WeightedProbMap;

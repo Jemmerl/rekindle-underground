@@ -7,7 +7,7 @@ import net.minecraft.block.Block;
 
 import java.util.*;
 
-public class ModLists {
+public class ModBlockLists {
 
     public static List<Block> SED_STONES = Arrays.asList(
             ModBlocks.CHALK_STONE.get(),
