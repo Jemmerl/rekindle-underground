@@ -100,6 +100,7 @@ public class ModLootTableProvider extends LootTableProvider {
             );
 
             // Add ore loot pools
+            // TODO make all drop some amount of small ore
             for (OreType oreType : EnumSet.complementOf(EnumSet.of(OreType.NONE))) {
                 for (GradeType gradeType : GradeType.values()) {
                     String lootName;
