@@ -129,7 +129,7 @@ public enum GeologyType {
         return enumSet;
     }
 
-    // TODO move to utils and fix... if even needed
+    // TODO move to utils and fix... if even needed... turn into switch statement
     // Convert vanilla detritus to StoneOre detritus
     // If not convertible, return original state
     public static BlockState convertToDetritus(BlockState vanillaState) {

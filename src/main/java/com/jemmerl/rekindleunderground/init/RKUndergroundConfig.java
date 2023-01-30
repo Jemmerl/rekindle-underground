@@ -22,6 +22,7 @@ public class RKUndergroundConfig {
 
         private static final int STONE_HARDNESS = 20; // Multiply relative stone hardnesses
         private static final int STONE_RESISTANCE = 6; // Multiply relative stone resistances
+        private static final boolean DET_SCALING = false; // Apply hardness depth scaling to detritus blocks
 
         private static final boolean DEBUG = false; // Debug mode
 
@@ -41,6 +42,8 @@ public class RKUndergroundConfig {
         public final ForgeConfigSpec.ConfigValue<Integer> stoneHardness;
         public final ForgeConfigSpec.ConfigValue<Integer> stoneResistance;
 
+        public final ForgeConfigSpec.ConfigValue<Boolean> detritusScaling;
+
         public final ForgeConfigSpec.ConfigValue<Boolean> debug;
 
         public Common(ForgeConfigSpec.Builder builder)
@@ -49,6 +52,9 @@ public class RKUndergroundConfig {
             this.hardnessDepthFactor = builder.comment("Sets the overall hardness scaling factor of stone from y = 50 to y = 0; Recommended Default is 3")
                     .worldRestart()
                     .defineInRange("Hardness Depth Factor", HARDNESS_DEPTH_FACTOR, 1, 10);
+            this.detritusScaling = builder.comment("Toggle detritus depth scaling with other stones; Default is False")
+                    .worldRestart()
+                    .define("Detritus Depth Scaling", DET_SCALING);
             builder.pop();
 
             builder.push("Layer Generation");

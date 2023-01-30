@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 public class StoneOreBlock extends Block {
 
     private static final int HARDNESS_DEPTH_FACTOR = RKUndergroundConfig.COMMON.hardnessDepthFactor.get() - 1;
+    private static final boolean DET_SCALING = RKUndergroundConfig.COMMON.detritusScaling.get();
 
     public static final EnumProperty<OreType> ORE_TYPE = EnumProperty.create("oretype", OreType.class);
     public static final EnumProperty<GradeType> GRADE_TYPE = EnumProperty.create("gradetype", GradeType.class);
@@ -37,18 +38,19 @@ public class StoneOreBlock extends Block {
         super.fillStateContainer(builder);
     }
 
-    // TODO separate properties for soil blocks? --> (y <= 50) <-- and not config value include detritus (add config prop)
     @Override
     public float getPlayerRelativeBlockHardness(BlockState state, PlayerEntity player, IBlockReader worldIn, BlockPos pos) {
         float f = state.getBlockHardness(worldIn, pos);
-        int y = pos.getY();
-        if (y <= 50) { f *= (1 + HARDNESS_DEPTH_FACTOR * ((50f - y) / 50f)); } // Increases linearly starting at y = 50
         if (f == -1.0F) {
             return 0.0F;
-        } else {
-            int i = net.minecraftforge.common.ForgeHooks.canHarvestBlock(state, player, worldIn, pos) ? 30 : 100; // Normal "cannot harvest" speed modifier
-            return player.getDigSpeed(state, pos) / f / (float)i;
         }
+
+        int i = net.minecraftforge.common.ForgeHooks.canHarvestBlock(state, player, worldIn, pos) ? 30 : 100; // Normal "cannot harvest" speed modifier
+        if (!this.stoneGroupType.equals(StoneGroupType.DETRITUS) || DET_SCALING) {
+            int y = pos.getY();
+            if (y <= 50) { f *= (1 + HARDNESS_DEPTH_FACTOR * ((50f - y) / 50f)); } // Increases linearly starting at y = 50
+        }
+        return player.getDigSpeed(state, pos) / f / (float)i;
     }
 
     // Return ore state of block

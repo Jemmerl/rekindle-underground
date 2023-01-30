@@ -11,9 +11,9 @@ public class GeoListWrapper {
         this.rockItem = rockItem;
     }
 
-    private Block stoneOreBlock;
-    private Block cobbleBlock;
-    private Item rockItem;
+    private final Block stoneOreBlock;
+    private final Block cobbleBlock;
+    private final Item rockItem;
 
     public Block getStoneOreBlock() {
         return this.stoneOreBlock;

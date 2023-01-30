@@ -46,7 +46,7 @@ public class DepositUtil {
     // If not a StoneOreBlock, then the second condition (which assumes that it is such) will never be reached.
     public static Boolean isValidStone(Block blockIn, ArrayList<GeologyType> validStones) {
         return ((blockIn instanceof StoneOreBlock) && validStones.contains(((StoneOreBlock) blockIn).getGeologyType()));
-        //return (blockIn instanceof StoneOreBlock); // TODO DEBUG TOOL
+        //return (blockIn instanceof StoneOreBlock); // Debug Tool
     }
 
 

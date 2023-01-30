@@ -23,13 +23,6 @@ public class ModFeatures {
     public static final RegistryObject<Feature<NoFeatureConfig>> DIATREME_PIPE_GEN
             = FEATURES.register("diatreme_pipe_gen", () -> new DiatremeMaarFeature(NoFeatureConfig.CODEC));
 
-
-
-
-    // TODO test
-//    public static final RegistryObject<Feature<NoFeatureConfig>> ORE_TEST_GEN
-//            = FEATURES.register("ore_test_gen", () -> new LayerDeposit(NoFeatureConfig.CODEC));
-
     public static void register(IEventBus eventBus) {
         FEATURES.register(eventBus); }
 }
