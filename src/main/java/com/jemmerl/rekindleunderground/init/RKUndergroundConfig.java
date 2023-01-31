@@ -12,6 +12,8 @@ public class RKUndergroundConfig {
         private static final int FAULT_SIZE = 128; // Rough average, in chunks (OG IS 64)
         private static final double FAULT_VARIATION = 0.20; // 0.00 - 1.00 scale; 0 is no fault shift
 
+        private static final double PLACER_CHANCE = 1.00; // 0.00 - 1.00 scale, chance of placer deposit attempt in chunk; 0 is no placers
+
         // 0 to 100 scale, setting min = max will ensure that value will always be used
         private static final int THICK_MIN = 10;
         private static final int THICK_MAX = 40;
@@ -32,6 +34,8 @@ public class RKUndergroundConfig {
         public final ForgeConfigSpec.ConfigValue<Integer> faultSize;
         public final ForgeConfigSpec.ConfigValue<Double> faultVariation;
 
+        public final ForgeConfigSpec.ConfigValue<Double> placerChance;
+
         public final ForgeConfigSpec.ConfigValue<Integer> thickMin;
         public final ForgeConfigSpec.ConfigValue<Integer> thickMax;
         public final ForgeConfigSpec.ConfigValue<Integer> warpMin;
@@ -48,15 +52,24 @@ public class RKUndergroundConfig {
 
         public Common(ForgeConfigSpec.Builder builder)
         {
-            builder.push("General Config");
-            this.hardnessDepthFactor = builder.comment("Sets the overall hardness scaling factor of stone from y = 50 to y = 0; Recommended Default is 3")
-                    .worldRestart()
-                    .defineInRange("Hardness Depth Factor", HARDNESS_DEPTH_FACTOR, 1, 10);
-            this.detritusScaling = builder.comment("Toggle detritus depth scaling with other stones; Default is False")
-                    .worldRestart()
-                    .define("Detritus Depth Scaling", DET_SCALING);
-            builder.pop();
+//            // General Config
+//            builder.push("General Config");
+//
+//            builder.pop();
+//            // End General Config
 
+
+            // Ore Config
+            builder.push("Ore Generation");
+            this.placerChance = builder.comment("Sets chance of a chunk attempting to spawn placer deposits; Recommended Default is 0.25")
+                    .worldRestart()
+                    .defineInRange("Placer Chance", PLACER_CHANCE, 0.0, 1.0);
+
+            builder.pop();
+            // End Ore Config
+
+
+            // Layer Config
             builder.push("Layer Generation");
 
             builder.push("Region Config");
@@ -110,8 +123,17 @@ public class RKUndergroundConfig {
             builder.pop();
 
             builder.pop(2);
+            // End Layer Config
 
+
+            // Stone Block Config
             builder.push("Stone Property Config");
+            this.hardnessDepthFactor = builder.comment("Sets the overall hardness scaling factor of stone from y = 50 to y = 0; Recommended Default is 3")
+                    .worldRestart()
+                    .defineInRange("Hardness Depth Factor", HARDNESS_DEPTH_FACTOR, 1, 10);
+            this.detritusScaling = builder.comment("Toggle detritus depth scaling with other stones; Default is False")
+                    .worldRestart()
+                    .define("Detritus Depth Scaling", DET_SCALING);
             this.stoneHardness = builder.comment("Set the multiplier for relative stone hardnesses; Recommended Default is 20")
                     .worldRestart()
                     .defineInRange("Hardness Multiplier", STONE_HARDNESS, 1, 50);
@@ -119,12 +141,16 @@ public class RKUndergroundConfig {
                     .worldRestart()
                     .defineInRange("Resistance Multiplier", STONE_RESISTANCE, 1, 30);
             builder.pop();
+            // End Stone Block Config
 
+
+            // Debug Config
             builder.push("Debug Mode");
             this.debug = builder.comment("Toggle debug mode - Caution: will slow down the game!")
                     .worldRestart()
                     .define("Debug", DEBUG);
             builder.pop();
+            // End Debug Config
         }
     }
 

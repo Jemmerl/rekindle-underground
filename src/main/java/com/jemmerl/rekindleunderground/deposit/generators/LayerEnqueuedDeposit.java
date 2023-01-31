@@ -6,7 +6,7 @@ import com.jemmerl.rekindleunderground.data.types.GeologyType;
 import com.jemmerl.rekindleunderground.data.types.GradeType;
 import com.jemmerl.rekindleunderground.data.types.OreType;
 import com.jemmerl.rekindleunderground.deposit.DepositUtil;
-import com.jemmerl.rekindleunderground.deposit.IDeposit;
+import com.jemmerl.rekindleunderground.deposit.IEnqueuedDeposit;
 import com.jemmerl.rekindleunderground.deposit.templates.LayerTemplate;
 import com.jemmerl.rekindleunderground.init.NoiseInit;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
@@ -24,7 +24,7 @@ import net.minecraft.world.biome.Biome;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class LayerDeposit implements IDeposit {
+public class LayerEnqueuedDeposit implements IEnqueuedDeposit {
 
     private final LayerTemplate layerTemplate;
 
@@ -34,7 +34,7 @@ public class LayerDeposit implements IDeposit {
     private ArrayList<GeologyType> validList;
     private ArrayList<Biome.Category> validBiomes;
 
-    public LayerDeposit(LayerTemplate template) {
+    public LayerEnqueuedDeposit(LayerTemplate template) {
         this.layerTemplate = template;
     }
 
@@ -43,31 +43,31 @@ public class LayerDeposit implements IDeposit {
     /////////////
 
     @Override
-    public LayerDeposit setName(String name) {
+    public LayerEnqueuedDeposit setName(String name) {
         this.name = name;
         return this;
     }
 
     @Override
-    public LayerDeposit setOres(WeightedProbMap<OreType> oreMap) {
+    public LayerEnqueuedDeposit setOres(WeightedProbMap<OreType> oreMap) {
         this.ores = oreMap;
         return this;
     }
 
     @Override
-    public LayerDeposit setGrades(WeightedProbMap<GradeType> gradesMap) {
+    public LayerEnqueuedDeposit setGrades(WeightedProbMap<GradeType> gradesMap) {
         this.gradesMap = gradesMap;
         return this;
     }
 
     @Override
-    public LayerDeposit setValid(ArrayList<GeologyType> validList) {
+    public LayerEnqueuedDeposit setValid(ArrayList<GeologyType> validList) {
         this.validList = validList;
         return this;
     }
 
     @Override
-    public IDeposit setBiomes(ArrayList<Biome.Category> validBiomes) {
+    public IEnqueuedDeposit setBiomes(ArrayList<Biome.Category> validBiomes) {
         this.validBiomes = validBiomes;
         return this;
     }

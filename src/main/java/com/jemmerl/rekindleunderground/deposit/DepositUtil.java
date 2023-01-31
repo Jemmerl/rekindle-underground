@@ -68,7 +68,7 @@ public class DepositUtil {
         ChunkPos qChunk = new ChunkPos(qPos);
 
         // qName is the name of the deposit type being enqueued from, with qDeposit being that deposit instance
-        IDeposit qDeposit = DepositRegistrar.getDeposits().get(qName);
+        IEnqueuedDeposit qDeposit = DepositRegistrar.getOreDeposits().get(qName);
 
         // If the enqueued chunk is the current generating chunk, attempt to place into the statemap
         if (qChunk.equals(genChunk)) {

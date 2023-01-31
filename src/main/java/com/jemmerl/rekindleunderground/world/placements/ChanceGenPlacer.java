@@ -9,12 +9,13 @@ import net.minecraft.world.gen.placement.Placement;
 import java.util.Random;
 import java.util.stream.Stream;
 
-public class PipeGenPlacer extends Placement<ChanceConfig> {
+public class ChanceGenPlacer extends Placement<ChanceConfig> {
 
-    public PipeGenPlacer(Codec<ChanceConfig> codec) {
+    public ChanceGenPlacer(Codec<ChanceConfig> codec) {
         super(codec);
     }
 
+    // Gets a single, random position for placement with a one in CHANCE percent of success
     @Override
     public Stream<BlockPos> getPositions(WorldDecoratingHelper helper, Random rand, ChanceConfig config, BlockPos pos) {
         if (rand.nextInt(config.chance) == 0) {

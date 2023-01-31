@@ -3,7 +3,7 @@ package com.jemmerl.rekindleunderground.world.feature.stonegeneration;
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.deposit.DepositRegistrar;
 import com.jemmerl.rekindleunderground.deposit.DepositUtil;
-import com.jemmerl.rekindleunderground.deposit.IDeposit;
+import com.jemmerl.rekindleunderground.deposit.IEnqueuedDeposit;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredStrataNoise;
 import com.jemmerl.rekindleunderground.world.capability.chunk.ChunkGennedCapability;
@@ -116,7 +116,8 @@ public class StateMap {
         depositCapability.removePendingBlocksForChunk(cp);
 
         // Generates and enqueues the ore deposit with a one out of the deposit's weight chance
-        for (IDeposit deposit : DepositRegistrar.getDeposits().values()) {
+        // I.e. with a weight of 100, 1 in 100 chunks will ATTEMPT to generate the deposit
+        for (IEnqueuedDeposit deposit : DepositRegistrar.getOreDeposits().values()) {
             if (this.rand.nextInt(deposit.getWeight()) == 0) {
                 // Tries to update the stateMap with the generating feature
                 if (!deposit.generate(this.chunkReader, this.rand, this.blockPos, this,

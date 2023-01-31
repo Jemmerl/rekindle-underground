@@ -2,7 +2,7 @@ package com.jemmerl.rekindleunderground.deposit;
 
 import com.google.gson.*;
 import com.jemmerl.rekindleunderground.RekindleUnderground;
-import com.jemmerl.rekindleunderground.deposit.generators.LayerDeposit;
+import com.jemmerl.rekindleunderground.deposit.generators.LayerEnqueuedDeposit;
 import com.jemmerl.rekindleunderground.deposit.generators.PlacerDeposit;
 import com.jemmerl.rekindleunderground.deposit.templates.LayerTemplate;
 import com.jemmerl.rekindleunderground.deposit.templates.PlacerTemplate;
@@ -58,7 +58,7 @@ public class DepositDataLoader extends JsonReloadListener {
                 switch (jsonObj.get("deposit_type").getAsString()) {
                     case "layer":
                         // Parse the settings json element into a LayerTemplate and then use to create a LayerDeposit
-                        depositRegistrar.addDeposit(name, new LayerDeposit(
+                        depositRegistrar.addOreDeposit(name, new LayerEnqueuedDeposit(
                                 GSON.fromJson(jsonObj.get("settings"), LayerTemplate.class))
                                         .setName(name)
                                         .setOres(DepositUtil.getOres(jsonObj.get("ores").getAsJsonArray()))
@@ -70,7 +70,7 @@ public class DepositDataLoader extends JsonReloadListener {
 
                     case "placer":
                         // Parse the settings json element into a PlacerTemplate and then use to create a PlacerDeposit
-                        depositRegistrar.addDeposit(name, new PlacerDeposit(
+                        depositRegistrar.addPlacerDeposit(name, new PlacerDeposit(
                                 GSON.fromJson(jsonObj.get("settings"), PlacerTemplate.class))
                                         .setName(name)
                                         .setOres(DepositUtil.getOres(jsonObj.get("ores").getAsJsonArray()))

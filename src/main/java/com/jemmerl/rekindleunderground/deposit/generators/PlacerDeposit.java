@@ -1,28 +1,15 @@
 package com.jemmerl.rekindleunderground.deposit.generators;
 
-import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.data.types.DepositType;
 import com.jemmerl.rekindleunderground.data.types.GeologyType;
 import com.jemmerl.rekindleunderground.data.types.GradeType;
 import com.jemmerl.rekindleunderground.data.types.OreType;
-import com.jemmerl.rekindleunderground.deposit.DepositUtil;
 import com.jemmerl.rekindleunderground.deposit.IDeposit;
 import com.jemmerl.rekindleunderground.deposit.templates.PlacerTemplate;
-import com.jemmerl.rekindleunderground.init.NoiseInit;
-import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
-import com.jemmerl.rekindleunderground.util.UtilMethods;
 import com.jemmerl.rekindleunderground.util.WeightedProbMap;
-import com.jemmerl.rekindleunderground.world.capability.chunk.IChunkGennedCapability;
-import com.jemmerl.rekindleunderground.world.capability.deposit.IDepositCapability;
-import com.jemmerl.rekindleunderground.world.feature.stonegeneration.ChunkReader;
-import com.jemmerl.rekindleunderground.world.feature.stonegeneration.StateMap;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ISeedReader;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.server.ServerWorld;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class PlacerDeposit implements IDeposit {
 
@@ -67,7 +54,7 @@ public class PlacerDeposit implements IDeposit {
     }
 
     @Override
-    public IDeposit setBiomes(ArrayList<Biome.Category> validBiomes) {
+    public PlacerDeposit setBiomes(ArrayList<Biome.Category> validBiomes) {
         this.validBiomes = validBiomes;
         return this;
     }
@@ -111,6 +98,7 @@ public class PlacerDeposit implements IDeposit {
         return this.placerTemplate.getWeight();
     }
 
+/*
 
     //////////////////////////
     //  DEPOSIT GENERATION  //
@@ -255,6 +243,8 @@ public class PlacerDeposit implements IDeposit {
         return (radius <= 0) ? 1 : radius;
 
     }
+
+ */
 
 }
 
