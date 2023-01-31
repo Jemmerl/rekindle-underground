@@ -129,29 +129,4 @@ public enum GeologyType {
         return enumSet;
     }
 
-    // TODO move to utils and fix... if even needed... turn into switch statement
-    // Convert vanilla detritus to StoneOre detritus
-    // If not convertible, return original state
-    public static BlockState convertToDetritus(BlockState vanillaState) {
-        if (vanillaState.equals(Blocks.SAND.getDefaultState())) {
-            return ModBlockLists.GEO_LIST.get(GeologyType.SAND).getStoneOreBlock().getDefaultState();
-
-        } else if (vanillaState.equals(Blocks.RED_SAND.getDefaultState())) {
-            return ModBlockLists.GEO_LIST.get(GeologyType.RED_SAND).getStoneOreBlock().getDefaultState();
-
-        } else if (vanillaState.equals(Blocks.GRAVEL.getDefaultState())) {
-            return ModBlockLists.GEO_LIST.get(GeologyType.GRAVEL).getStoneOreBlock().getDefaultState();
-
-        } else if (vanillaState.equals(Blocks.DIRT.getDefaultState())) {
-            return ModBlockLists.GEO_LIST.get(GeologyType.DIRT).getStoneOreBlock().getDefaultState();
-
-        } else if (vanillaState.equals(Blocks.COARSE_DIRT.getDefaultState())) {
-            return ModBlockLists.GEO_LIST.get(GeologyType.COARSE_DIRT).getStoneOreBlock().getDefaultState();
-
-        } else if (vanillaState.equals(Blocks.CLAY.getDefaultState())) {
-            return ModBlockLists.GEO_LIST.get(GeologyType.CLAY).getStoneOreBlock().getDefaultState();
-        } else {
-            return vanillaState;
-        }
-    }
 }

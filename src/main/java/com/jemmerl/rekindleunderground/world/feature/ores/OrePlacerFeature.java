@@ -5,6 +5,7 @@ import com.jemmerl.rekindleunderground.deposit.DepositRegistrar;
 import com.jemmerl.rekindleunderground.deposit.IDeposit;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.mojang.serialization.Codec;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -23,14 +24,17 @@ public class OrePlacerFeature extends Feature<NoFeatureConfig>{
 
         final double PLACER_CHANCE = RKUndergroundConfig.COMMON.placerChance.get();
 
-        if (rand.nextFloat() < PLACER_CHANCE) {
+//        System.out.println("attempted placer at");
+//        System.out.println(pos);
+
+        if (rand.nextFloat() > PLACER_CHANCE) {
             return false;
         }
 
 
-
         for (IDeposit placerDeposit : DepositRegistrar.getPlacerDeposits().values()) {
-
+            //System.out.println("trying to placer at");
+            //System.out.println(pos);
             // get deposit properties
 
 
@@ -40,14 +44,22 @@ public class OrePlacerFeature extends Feature<NoFeatureConfig>{
                 if (RKUndergroundConfig.COMMON.debug.get()) {
                     RekindleUnderground.getInstance().LOGGER.info("Invalid biome for layer deposit at {}, failed to generate.", pos);
                 }
-                return false;
+                //System.out.println("skipped placer: bad biome");
+                continue;
             }
+
+            //System.out.println("tried to place blocks");
+
+            reader.setBlockState(pos, Blocks.DIAMOND_BLOCK.getDefaultState(), 2);
+            reader.setBlockState(pos.up(), Blocks.DIAMOND_BLOCK.getDefaultState(), 2);
+            reader.setBlockState(pos.up(2), Blocks.DIAMOND_BLOCK.getDefaultState(), 2);
+
 
         }
 
 
-        return false;
-        //return true;
+        //return false;
+        return true;
     }
 
 }

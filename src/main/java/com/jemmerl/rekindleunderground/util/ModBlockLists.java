@@ -4,6 +4,8 @@ import com.jemmerl.rekindleunderground.data.types.GeologyType;
 import com.jemmerl.rekindleunderground.init.ModBlocks;
 import com.jemmerl.rekindleunderground.init.ModItems;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 
 import java.util.*;
 
@@ -87,6 +89,7 @@ public class ModBlockLists {
     public static List<Block> ALL_STONES = new ArrayList<>();
     public static List<Block> ALL_DETRITUS = new ArrayList<>();
     public static List<Block> ALL_OREBLOCKS = new ArrayList<>();
+
     static {
         ALL_STONES.addAll(SED_STONES);
         ALL_STONES.addAll(IGN_STONES);
@@ -189,6 +192,17 @@ public class ModBlockLists {
         GEO_LIST.put(GeologyType.GRAVEL, new GeoListWrapper(ModBlocks.GRAVEL_STONE.get(), null, null));
     }
 
+    public static Map<BlockState, BlockState> VANILLA_DET_LIST = new HashMap<>();
+    static {
+        VANILLA_DET_LIST.put(Blocks.SAND.getDefaultState(), ModBlocks.SAND_STONE.get().getDefaultState());
+        VANILLA_DET_LIST.put(Blocks.RED_SAND.getDefaultState(), ModBlocks.RED_SAND_STONE.get().getDefaultState());
+        VANILLA_DET_LIST.put(Blocks.GRAVEL.getDefaultState(), ModBlocks.GRAVEL_STONE.get().getDefaultState());
+        VANILLA_DET_LIST.put(Blocks.DIRT.getDefaultState(), ModBlocks.DIRT_STONE.get().getDefaultState());
+        VANILLA_DET_LIST.put(Blocks.COARSE_DIRT.getDefaultState(), ModBlocks.COARSE_DIRT_STONE.get().getDefaultState());
+        VANILLA_DET_LIST.put(Blocks.CLAY.getDefaultState(), ModBlocks.CLAY_STONE.get().getDefaultState());
+    }
+
+}
 
     //    public static List<Block> ALL_STONES = Arrays.asList(
 //            // Sedimentary
@@ -270,4 +284,3 @@ public class ModBlockLists {
 //        COBBLESTONES.put(ModBlocks.GNEISS_COBBLE.get(), ModItems.GNEISS_ROCK.get());
 //        COBBLESTONES.put(ModBlocks.MARBLE_COBBLE.get(), ModItems.MARBLE_ROCK.get());
 //    }
-}

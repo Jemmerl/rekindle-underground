@@ -7,6 +7,7 @@ import com.jemmerl.rekindleunderground.blocks.StoneOreBlock;
 import com.jemmerl.rekindleunderground.data.types.*;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.util.Pair;
+import com.jemmerl.rekindleunderground.util.UtilMethods;
 import com.jemmerl.rekindleunderground.util.WeightedProbMap;
 import com.jemmerl.rekindleunderground.world.capability.chunk.IChunkGennedCapability;
 import com.jemmerl.rekindleunderground.world.capability.deposit.IDepositCapability;
@@ -109,7 +110,7 @@ public class DepositUtil {
                 }
 
                 BlockState state = level.getBlockState(qPos);
-                state = GeologyType.convertToDetritus(state); // TODO Remnant from placer experiment, may not be needed
+                state = UtilMethods.convertToDetritus(state); // TODO Remnant from placer experiment, may not be needed
 
                 if (isValidStone(state.getBlock(), qDeposit.getValid())) {
                     if (!level.setBlockState(qPos, state.with(StoneOreBlock.ORE_TYPE, qType).with(StoneOreBlock.GRADE_TYPE, qGrade), 2 | 16)) {
