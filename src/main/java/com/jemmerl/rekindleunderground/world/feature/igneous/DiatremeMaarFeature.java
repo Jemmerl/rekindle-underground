@@ -97,21 +97,17 @@ public class DiatremeMaarFeature extends Feature<NoFeatureConfig> {
         }
 
         // How rich the pipe is from 1% to 15%
-        float diamondPercent = 0f;
-        if (diamondiferous) {
-            diamondPercent = (0.14f * rand.nextFloat()) + 0.01f;
-        }
+        float diamondPercent = diamondiferous ? ((0.14f * rand.nextFloat()) + 0.01f) : 0f;
 
         BlockPos posShift = pos.add(8,0,8); // Center the feature
         int baseDecrement = rand.nextInt(6); // How much smaller the base radius will be
 
-        // TEMP
+        // TODO TEMP
         int height = 100;
         // END TEMP
 
         HashMap<BlockState, Integer> xenolithMap = new HashMap<>(); // Count replaced stones gen xenoliths
         ArrayList<BlockPos> xenolithPosList = new ArrayList<>(); // Store locations to place xenoliths
-        BlockState replacedBlock;
 
         int range = 25;
         for (int y = 0; y < height; y++) {
@@ -127,7 +123,7 @@ public class DiatremeMaarFeature extends Feature<NoFeatureConfig> {
                         if ((rand.nextFloat() + 0.15f) < (distance / radius)) {
                             xenolithPosList.add(currPos);
                         } else {
-                            replacedBlock = reader.getBlockState(currPos);
+                            BlockState replacedBlock = reader.getBlockState(currPos);
                             updateXenolithMap(xenolithMap, replacedBlock);
 
                             // Set the block
@@ -174,11 +170,10 @@ public class DiatremeMaarFeature extends Feature<NoFeatureConfig> {
         if (!xenolithPosList.isEmpty()) {
             if (totalXenoliths > 0) {
                 ArrayList<Pair<Integer, BlockState>> elts = new ArrayList<>();
-                int weight;
-                int weightSum = 0; // Used to catch (most likely impossible) 100-percent overflows
 
+                int weightSum = 0; // Used to catch (most likely impossible) 100-percent overflows
                 for (BlockState key : xenolithMap.keySet()) {
-                    weight = (xenolithMap.get(key) * 100) / totalXenoliths;
+                    int weight = (xenolithMap.get(key) * 100) / totalXenoliths;
 
                     weightSum += weight;
                     if (weightSum > 100) { weight -= (weightSum - 100); }
@@ -187,11 +182,12 @@ public class DiatremeMaarFeature extends Feature<NoFeatureConfig> {
                         elts.add(new Pair<>(weight, key));
                     }
                 }
-                WeightedProbMap<BlockState> wpm = new WeightedProbMap<>(elts);
 
+                WeightedProbMap<BlockState> wpm = new WeightedProbMap<>(elts);
                 for (BlockPos xenolithPos : xenolithPosList) {
                     reader.setBlockState(xenolithPos, wpm.nextElt(), 2);
                 }
+
             } else {
                 for (BlockPos xenolithPos : xenolithPosList) {
                     reader.setBlockState(xenolithPos, replacingBlock, 2);

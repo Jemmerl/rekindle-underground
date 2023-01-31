@@ -193,18 +193,17 @@ public class LayerEnqueuedDeposit implements IEnqueuedDeposit {
             return false;
         }
 
-        // Pre-init dynamic variables
-        float radius; // Generated radius
-        float adjDensityPercent; // Variable density for spacing level generation
+        // Layer heights setup
         int layerHeightTotal = getLayerHeight(rand); // Set the first layer's total height
         int layerHeightCount = -1; // Used to count and put spacing layers between deposit layers
 
         for (int y = heightStart; y < heightEnd; y++) {
 
+            // Variable density for spacing level generation
             // Set a level as a spacer (has a very low ore density compared to a normal layer)
             // Negative values generate a spacer, >= 0 generate normally
             // The last level of the last layer is also a spacer
-            adjDensityPercent = ((layerHeightCount < 0) || (y == (heightEnd - 1))) ? (densityPercent * 0.2f) : densityPercent;
+            float adjDensityPercent = ((layerHeightCount < 0) || (y == (heightEnd - 1))) ? (densityPercent * 0.2f) : densityPercent;
 
             for (BlockPos areaPos : BlockPos.getAllInBoxMutable(
                     new BlockPos((originPos.getX() - avgDepositRadius - (VARIANCE+1)), y,
@@ -226,7 +225,7 @@ public class LayerEnqueuedDeposit implements IEnqueuedDeposit {
 //                        * (taperPercent / 100f));
                 // TODO ABOVE THIS SUCKS
 
-                radius = (ConfiguredBlobNoise.blobRadiusNoise((areaPos.getX() * 5), (y * 6), (areaPos.getZ() * 5)) * VARIANCE)
+                float radius = (ConfiguredBlobNoise.blobRadiusNoise((areaPos.getX() * 5), (y * 6), (areaPos.getZ() * 5)) * VARIANCE)
                         + avgDepositRadius;
 
                 // Generate the ore block if within the radius and rolls a success against the density percent

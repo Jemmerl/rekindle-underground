@@ -17,10 +17,10 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        String path;
 
         // Generate block item models
         for (RegistryObject<Block> regBlock : ModBlocks.BLOCKS.getEntries()) {
+            String path;
             path = regBlock.getId().getPath();
             ModelFile blockItemGenerated = getExistingFile(modLoc("block/" + path));
             getBuilder(path).parent(blockItemGenerated);
@@ -28,6 +28,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         // Generate item models excluding blocks
         for (RegistryObject<Item> regItem : ModItems.ITEMS.getEntries()) {
+            String path;
             path = regItem.getId().getPath();
             if (!path.contains("_stone") && !path.contains("_cobblestone")) {
                 getBuilder(path).parent(getExistingFile(mcLoc("item/generated"))).texture("layer0", "item/" + path);

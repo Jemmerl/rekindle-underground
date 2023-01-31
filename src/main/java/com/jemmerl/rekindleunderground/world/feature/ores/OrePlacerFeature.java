@@ -3,7 +3,6 @@ package com.jemmerl.rekindleunderground.world.feature.ores;
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.deposit.DepositRegistrar;
 import com.jemmerl.rekindleunderground.deposit.IDeposit;
-import com.jemmerl.rekindleunderground.deposit.generators.PlacerDeposit;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;

@@ -21,10 +21,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
 
-        String blockPath;
-
         for (Block block : ModBlockLists.ALL_STONES) {
             // Generate stone ore model and block states
+            String blockPath;
             blockPath = block.getRegistryName().getPath();
             final String tempFinalBlockPath = blockPath;
             getVariantBuilder(block).forAllStates(state -> {
@@ -39,6 +38,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         for (Block block : ModBlockLists.STABLE_DET) {
             // Generate stone ore model and block states
+            String blockPath;
             blockPath = block.getRegistryName().getPath();
             final String tempFinalBlockPath = blockPath;
             getVariantBuilder(block).forAllStates(state -> {
@@ -53,6 +53,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         for (Block block : ModBlockLists.FALLING_DET) {
             // Generate stone ore model and block states
+            String blockPath;
             blockPath = block.getRegistryName().getPath();
             final String tempFinalBlockPath = blockPath;
             getVariantBuilder(block).forAllStates(state -> {

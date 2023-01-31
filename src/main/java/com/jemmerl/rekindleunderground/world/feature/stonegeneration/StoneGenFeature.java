@@ -46,19 +46,17 @@ public class StoneGenFeature extends Feature<NoFeatureConfig> {
 
     private void processChunk(ISeedReader reader, ChunkReader chunkReader, StateMap stateMap, BlockPos pos) {
         IChunk chunk = reader.getChunk(pos);
-        int posX, posZ, topY;
-        BlockState original, replacing, replaced;
         BlockPos.Mutable mutable = new BlockPos.Mutable();
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
-                posX = pos.getX() + x;
-                posZ = pos.getZ() + z;
+                int posX = pos.getX() + x;
+                int posZ = pos.getZ() + z;
                 mutable.setPos(posX, 0, posZ);
 
-                topY = chunkReader.getMaxHeightVal(x, z);
+                int topY = chunkReader.getMaxHeightVal(x, z);
                 for (int y = 0; y < topY; y++) {
-                    original = chunk.getBlockState(mutable); // Block that generated in vanilla
-                    replacing = stateMap.getStoneState(x, y, z); // Mod stone block attempting to generate
+                    BlockState original = chunk.getBlockState(mutable); // Block that generated in vanilla
+                    BlockState replacing = stateMap.getStoneState(x, y, z); // Mod stone block attempting to generate
                     //replaced = replaceBlock(original, replacing); // The method returns the block that *will* be placed
 
                     if (replaceStone(original)) {

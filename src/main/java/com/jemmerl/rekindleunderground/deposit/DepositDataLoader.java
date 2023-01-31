@@ -34,6 +34,7 @@ public class DepositDataLoader extends JsonReloadListener {
         RekindleUnderground.getInstance().LOGGER.info("Beginning to load ore deposits...");
         ArrayList<String> nameList = new ArrayList<>(); // Stores the names of each deposits to check for duplicates
         depositRegistrar.clearDeposits(); // Flush the previously cached deposits, to ensure a clean slate
+
         objectIn.forEach((rl, jsonElement) -> {
             try {
                 JsonObject jsonObj = jsonElement.getAsJsonObject();

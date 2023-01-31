@@ -45,17 +45,9 @@ public class StateMap {
         return this.stoneStateMap;
     }
 
-    //public BlockState[][][] getDetritusStateMap() {
-    //    return this.detritusStateMap;
-    //}
-
     public BlockState getStoneState(int x, int y, int z) {
         return this.stoneStateMap[x][y][z];
     }
-
-    //public BlockState getDetritusState(int x, int y, int z) {
-    //    return this.detritusStateMap[x][y][z];
-    //}
 
     private void generateStateMap() {
         PopulateStrata();
@@ -71,14 +63,13 @@ public class StateMap {
 
     // Fill the chunk state map with generated stones
     public void PopulateStrata() {
-        int posX, posZ;
         int topY = this.chunkReader.getMaxHeight();
 
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
                 for (int y = 0; y < topY; y++) {
-                    posX = this.blockPos.getX() + x;
-                    posZ = this.blockPos.getZ() + z;
+                    int posX = this.blockPos.getX() + x;
+                    int posZ = this.blockPos.getZ() + z;
                     this.stoneStateMap[x][y][z] = ConfiguredStrataNoise.getStoneStrataBlock(posX, y, posZ,
                             chunkReader.getSeedReader());
                 }

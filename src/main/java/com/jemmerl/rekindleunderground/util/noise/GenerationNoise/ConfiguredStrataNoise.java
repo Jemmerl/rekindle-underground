@@ -1,6 +1,5 @@
 package com.jemmerl.rekindleunderground.util.noise.GenerationNoise;
 
-import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.data.types.DefaultSets;
 import com.jemmerl.rekindleunderground.util.UtilMethods;
@@ -10,7 +9,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
-import net.minecraft.world.chunk.IChunk;
 
 import java.util.*;
 
@@ -128,12 +126,11 @@ public class ConfiguredStrataNoise {
     // Young Flood Basalt region generator
     private static BlockState youngFloodBasaltGen(int xPos, int yPos, int zPos) {
         BlockState state;
-        float noiseVal;
 
         if (yPos <= (9 + (4 * smoothDividingNoise.GetNoise((xPos * 2), (yPos), (zPos * 2))))) { // Adds Diabase layer smoothly below y 7-15
             state = UtilMethods.stringToBlockState("rekindleunderground:diabase_stone");
         } else { // Adds flood basalt layer above
-            noiseVal = floodBasaltNoise.GetNoise((xPos / 5f), (yPos * 2f), (zPos / 5f));
+            float noiseVal = floodBasaltNoise.GetNoise((xPos / 5f), (yPos * 2f), (zPos / 5f));
             if (noiseVal < -0.1f) {
                 state = UtilMethods.stringToBlockState("rekindleunderground:gabbro_stone");
             } else {
@@ -193,7 +190,6 @@ public class ConfiguredStrataNoise {
     // Two layer region generator
     private static BlockState twoLayerGeneration(int xPos, int yPos, int zPos, float regionNoise) {
         BlockState state;
-        float noiseVal;
 
         // Refresh cached settings if different region
         if (!useCached) {
@@ -211,12 +207,12 @@ public class ConfiguredStrataNoise {
         }
 
         if (yPos < 35) { // BOTTOM LAYER // TODO TEMP DIVISION
-            noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f,
+            float noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f,
                     cachedLayerProperties2[0], cachedLayerProperties2[1], cachedLayerProperties2[2], 20, 86753);
             state = BlockPicker.selectBlock(cachedBlockStateList2, regionNoise, noiseVal);
 
         } else { // TOP LAYER
-            noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f,
+            float noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f,
                     cachedLayerProperties1[0], cachedLayerProperties1[1], cachedLayerProperties1[2], 20, -9055);
             state = BlockPicker.selectBlock(cachedBlockStateList1, regionNoise, noiseVal);
 
@@ -229,7 +225,6 @@ public class ConfiguredStrataNoise {
     // Three layer region generator
     private static BlockState threeLayerGeneration(int xPos, int yPos, int zPos, float regionNoise) {
         BlockState state;
-        float noiseVal;
 
         // Refresh cached settings if different region
         if (!useCached) {
@@ -253,17 +248,17 @@ public class ConfiguredStrataNoise {
         }
 
         if (yPos < 25) { // BOTTOM LAYER // TODO TEMP DIVISION
-            noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f,
+            float noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f,
                     cachedLayerProperties3[0], cachedLayerProperties3[1], cachedLayerProperties3[2], 20, 31301);
             state = BlockPicker.selectBlock(cachedBlockStateList3, regionNoise, noiseVal);
 
         } else if (yPos < 50) { // MIDDLE LAYER // TODO TEMP DIVISION
-            noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f,
+            float noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f,
                     cachedLayerProperties2[0], cachedLayerProperties2[1], cachedLayerProperties2[2], 20, -13200);
             state = BlockPicker.selectBlock(cachedBlockStateList2, regionNoise, noiseVal);
 
         } else { // TOP LAYER
-            noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f,
+            float noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f,
                     cachedLayerProperties1[0], cachedLayerProperties1[1], cachedLayerProperties1[2], 20, 13000);
             state = BlockPicker.selectBlock(cachedBlockStateList1, regionNoise, noiseVal);
 

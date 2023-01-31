@@ -73,7 +73,6 @@ public class BlockPicker {
     // Used with data-generated block selections
     public List<BlockState> getBlockStateList(String presetKey, int numPick) {
         List<BlockState> stateList = new ArrayList<>(this.presetMap.get(presetKey));
-
         for (int i = (stateList.size() - numPick); i > 0; i--) {
             stateList.remove(0);
         }
