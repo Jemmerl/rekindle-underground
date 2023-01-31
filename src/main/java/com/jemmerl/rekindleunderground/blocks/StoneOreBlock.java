@@ -14,7 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
-public class StoneOreBlock extends Block {
+public class StoneOreBlock extends Block implements IOreBlock{
 
     private static final int HARDNESS_DEPTH_FACTOR = RKUndergroundConfig.COMMON.hardnessDepthFactor.get() - 1;
     private static final boolean DET_SCALING = RKUndergroundConfig.COMMON.detritusScaling.get();
@@ -54,21 +54,25 @@ public class StoneOreBlock extends Block {
     }
 
     // Return ore state of block
-    public static OreType getOreType(World world, BlockPos pos) {
+    @Override
+    public OreType getOreType(World world, BlockPos pos) {
         return world.getBlockState(pos).get(ORE_TYPE);
     }
 
     // Return grade state of block
-    public static GradeType getGradeType(World world, BlockPos pos) {
+    @Override
+    public GradeType getGradeType(World world, BlockPos pos) {
         return world.getBlockState(pos).get(GRADE_TYPE);
     }
 
     // Return the stone type of the block
+    @Override
     public GeologyType getGeologyType() {
         return this.geologyType;
     }
 
     // Return stone group type of the block
+    @Override
     public StoneGroupType getStoneGroupType() {
         return this.stoneGroupType;
     }

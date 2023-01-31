@@ -3,6 +3,7 @@ package com.jemmerl.rekindleunderground.deposit;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.jemmerl.rekindleunderground.RekindleUnderground;
+import com.jemmerl.rekindleunderground.blocks.IOreBlock;
 import com.jemmerl.rekindleunderground.blocks.StoneOreBlock;
 import com.jemmerl.rekindleunderground.data.types.*;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
@@ -46,8 +47,8 @@ public class DepositUtil {
     // Check if a blockstate is a valid stone for ore generation.
     // If not a StoneOreBlock, then the second condition (which assumes that it is such) will never be reached.
     public static Boolean isValidStone(Block blockIn, ArrayList<GeologyType> validStones) {
-        return ((blockIn instanceof StoneOreBlock) && validStones.contains(((StoneOreBlock) blockIn).getGeologyType()));
-        //return (blockIn instanceof StoneOreBlock); // Debug Tool
+        return ((blockIn instanceof IOreBlock) && validStones.contains(((IOreBlock) blockIn).getGeologyType()));
+        //return (blockIn instanceof IOreBlock); // Debug Tool
     }
 
 
@@ -227,7 +228,7 @@ public class DepositUtil {
 
                 }
             } catch (Exception e) {
-                RekindleUnderground.getInstance().LOGGER.warn("Error in a deposit valid stones reading.");
+                RekindleUnderground.getInstance().LOGGER.warn("Error in a deposit's valid stones reading.");
                 if (RKUndergroundConfig.COMMON.debug.get()) {
                     e.printStackTrace();
                 }

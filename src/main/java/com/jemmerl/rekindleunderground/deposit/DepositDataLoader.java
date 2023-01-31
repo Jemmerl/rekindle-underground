@@ -76,7 +76,7 @@ public class DepositDataLoader extends JsonReloadListener {
                                         .setName(name)
                                         .setOres(DepositUtil.getOres(jsonObj.get("ores").getAsJsonArray()))
                                         .setGrades(DepositUtil.getGrades(jsonObj.get("grades").getAsJsonObject()))
-                                        .setValid(DepositUtil.getOreStones(jsonObj.get("detritus").getAsJsonArray()))
+                                        .setValid(DepositUtil.getOreStones(jsonObj.get("stones").getAsJsonArray()))
                                         .setBiomes(DepositUtil.getBiomes(jsonObj.get("biomes").getAsJsonArray())));
                         RekindleUnderground.getInstance().LOGGER.info("Successfully loaded deposit {}!", rl);
                         break;

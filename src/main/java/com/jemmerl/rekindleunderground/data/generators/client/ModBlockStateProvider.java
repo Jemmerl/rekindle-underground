@@ -57,8 +57,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
             blockPath = block.getRegistryName().getPath();
             final String tempFinalBlockPath = blockPath;
             getVariantBuilder(block).forAllStates(state -> {
-                String oreStateName = state.get(FallingOreBlock.ORE_TYPE).name().toLowerCase(Locale.ROOT);
-                String gradeStateName = state.get(FallingOreBlock.GRADE_TYPE).name().toLowerCase(Locale.ROOT);
+                String oreStateName = state.get(StoneOreBlock.ORE_TYPE).name().toLowerCase(Locale.ROOT);
+                String gradeStateName = state.get(StoneOreBlock.GRADE_TYPE).name().toLowerCase(Locale.ROOT);
 
                 return ConfiguredModel.builder()
                         .modelFile(buildModelFile(tempFinalBlockPath, oreStateName, gradeStateName))

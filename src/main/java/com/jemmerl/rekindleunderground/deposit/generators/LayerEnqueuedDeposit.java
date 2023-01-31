@@ -168,7 +168,7 @@ public class LayerEnqueuedDeposit implements IEnqueuedDeposit {
         }
 
         // Set approximate center of the deposit
-        BlockPos originPos = new BlockPos(
+        BlockPos centerPos = new BlockPos(
                 (pos.getX() + rand.nextInt(16)),
                 (int)((heightStart + heightEnd) / 2f),
                 (pos.getZ() + rand.nextInt(16))
@@ -181,14 +181,14 @@ public class LayerEnqueuedDeposit implements IEnqueuedDeposit {
 
         // Debug
         if (RKUndergroundConfig.COMMON.debug.get()) {
-            RekindleUnderground.getInstance().LOGGER.info("Generating layer deposit at {}, with {} avg layers and {} total height.", originPos, avgLayers, totalHeight);
+            RekindleUnderground.getInstance().LOGGER.info("Generating layer deposit at {}, with {} avg layers and {} total height.", centerPos, avgLayers, totalHeight);
         }
 
         // Check for valid biome placement. If not in a valid biome, cancel generation
-        if (!this.validBiomes.contains(reader.getSeedReader().getBiome(originPos).getCategory())) {
+        if (!this.validBiomes.contains(reader.getSeedReader().getBiome(centerPos).getCategory())) {
             // Debug
             if (RKUndergroundConfig.COMMON.debug.get()) {
-                RekindleUnderground.getInstance().LOGGER.info("Invalid biome for layer deposit at {}, failed to generate.", originPos);
+                RekindleUnderground.getInstance().LOGGER.info("Invalid biome for layer deposit at {}, failed to generate.", centerPos);
             }
             return false;
         }
@@ -206,10 +206,10 @@ public class LayerEnqueuedDeposit implements IEnqueuedDeposit {
             float adjDensityPercent = ((layerHeightCount < 0) || (y == (heightEnd - 1))) ? (densityPercent * 0.2f) : densityPercent;
 
             for (BlockPos areaPos : BlockPos.getAllInBoxMutable(
-                    new BlockPos((originPos.getX() - avgDepositRadius - (VARIANCE+1)), y,
-                            (originPos.getZ() - avgDepositRadius - (VARIANCE+1))),
-                    new BlockPos((originPos.getX() + avgDepositRadius + (VARIANCE+1)), y,
-                            (originPos.getZ() + avgDepositRadius + (VARIANCE+1)))))
+                    new BlockPos((centerPos.getX() - avgDepositRadius - (VARIANCE+1)), y,
+                            (centerPos.getZ() - avgDepositRadius - (VARIANCE+1))),
+                    new BlockPos((centerPos.getX() + avgDepositRadius + (VARIANCE+1)), y,
+                            (centerPos.getZ() + avgDepositRadius + (VARIANCE+1)))))
             {
 
                 // TODO BELOW THIS SUCKS
@@ -230,7 +230,7 @@ public class LayerEnqueuedDeposit implements IEnqueuedDeposit {
 
                 // Generate the ore block if within the radius and rolls a success against the density percent
                 if ((rand.nextFloat() < adjDensityPercent) &&
-                        (UtilMethods.getHypotenuse(areaPos.getX(), areaPos.getZ(), originPos.getX(), originPos.getZ()) <= radius)) {
+                        (UtilMethods.getHypotenuse(areaPos.getX(), areaPos.getZ(), centerPos.getX(), centerPos.getZ()) <= radius)) {
                     DepositUtil.enqueueBlockPlacement(reader.getSeedReader(), areaPos, this.ores.nextElt(), grade,
                             this.name, pos, stateMap, depositCapability, chunkGennedCapability);
                 }
@@ -247,7 +247,7 @@ public class LayerEnqueuedDeposit implements IEnqueuedDeposit {
         // Debug tool
         if (RKUndergroundConfig.COMMON.debug.get()) {
             for (int yPole = heightEnd; yPole < 120; yPole++) {
-                reader.getSeedReader().setBlockState(new BlockPos(originPos.getX(), yPole, originPos.getZ()),
+                reader.getSeedReader().setBlockState(new BlockPos(centerPos.getX(), yPole, centerPos.getZ()),
                         Blocks.RED_WOOL.getDefaultState(), 2);
             }
         }

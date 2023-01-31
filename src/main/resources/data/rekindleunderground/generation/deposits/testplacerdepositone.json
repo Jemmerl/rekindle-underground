@@ -14,15 +14,15 @@
   },
   "ores": [
     {
-      "ore": "malachite",
+      "ore": "monazite",
       "weight": 65
     },
     {
-      "ore": "azurite",
+      "ore": "rutile",
       "weight": 35
     }
   ],
-  "detritus": [
+  "stones": [
     "all_detritus"
   ],
   "biomes": [

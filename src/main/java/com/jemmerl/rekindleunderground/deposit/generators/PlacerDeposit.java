@@ -98,6 +98,19 @@ public class PlacerDeposit implements IDeposit {
         return this.placerTemplate.getWeight();
     }
 
+    public int getAvgRadius() {
+        return this.placerTemplate.getAvgRadius();
+    }
+
+    public int getMinDensity() {
+        return this.placerTemplate.getMinDensity();
+    }
+
+    public int getMaxDensity() {
+        return this.placerTemplate.getMaxDensity();
+    }
+
+}
 /*
 
     //////////////////////////
@@ -245,8 +258,6 @@ public class PlacerDeposit implements IDeposit {
     }
 
  */
-
-}
 
 // Check 5 blocks max NSEW, noting distances if block found
 //
