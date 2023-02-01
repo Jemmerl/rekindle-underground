@@ -51,25 +51,14 @@ public class OrePlacerFeature extends Feature<NoFeatureConfig>{
 
             // Check for valid biome placement; if not in a valid biome, skip deposit
             if (!placerDeposit.getBiomes().contains(reader.getBiome(pos).getCategory())) {
-                // Debug
-                if (RKUndergroundConfig.COMMON.debug.get()) {
-                    RekindleUnderground.getInstance().LOGGER.info("Invalid biome for layer deposit at {}, failed to generate.", pos);
-                }
                 continue;
             }
-
-            System.out.println("Attempting to place placer at");
-            System.out.println(pos);
 
             // Get the weighted random grade of the ore deposit
             GradeType grade = placerDeposit.getGrades().nextElt();
 
             float densityPercent = ((rand.nextInt(placerDeposit.getMaxDensity() -
                     placerDeposit.getMinDensity()) + placerDeposit.getMinDensity()) / 100f);
-
-            System.out.println(placerDeposit.getMinDensity());
-            System.out.println(placerDeposit.getMaxDensity());
-            System.out.println(densityPercent);
 
             // Get a uniformly distributed density value for the deposit within the min and max density range
             int avgDepositRadius = placerDeposit.getAvgRadius();
@@ -78,9 +67,11 @@ public class OrePlacerFeature extends Feature<NoFeatureConfig>{
             // Get the random actual center for the deposit
             BlockPos centerPos = new BlockPos((pos.getX()+rand.nextInt(8)-3), pos.getY(), (pos.getZ()+rand.nextInt(8)-3));
 
-            //(BlockPos areaPos : BlockPos.getAllInBoxMutable(
-            //                    new BlockPos((centerPos.getX() - avgDepositRadius), centerPos.getY(), (centerPos.getZ() - avgDepositRadius)),
-            //                    new BlockPos((centerPos.getX() + avgDepositRadius), centerPos.getY(), (centerPos.getZ() + avgDepositRadius))))
+            // Debug
+            if (RKUndergroundConfig.COMMON.debug_placer_deposits.get()) {
+                RekindleUnderground.getInstance().LOGGER.info("Attempting to generate placer {} at {} with properties: Density {}, Grade {}, and AvgRadius {}",
+                        placerDeposit.getName(), centerPos, densityPercent, grade, avgDepositRadius);
+            }
 
             for (int y = -3; y < 3; y++) {
                 for (BlockPos areaPos : BlockPos.getAllInBoxMutable(centerPos.add(-avgDepositRadius-variance, y, -avgDepositRadius-variance),
@@ -118,10 +109,8 @@ public class OrePlacerFeature extends Feature<NoFeatureConfig>{
                 }
             }
 
-
-            // Debug TODO TEMP PERMANENTLY ENABLED
-            //RKUndergroundConfig.COMMON.debug.get()
-            if (true) {
+            // Debug
+            if (RKUndergroundConfig.COMMON.debug_placer_deposits.get()) {
                 // Original placement center
                 for (int i = 0; i<4; i++) {
                     reader.setBlockState(pos.up(i), Blocks.REDSTONE_BLOCK.getDefaultState(), 2);
@@ -132,8 +121,6 @@ public class OrePlacerFeature extends Feature<NoFeatureConfig>{
                     reader.setBlockState(centerPos.up(i), Blocks.DIAMOND_BLOCK.getDefaultState(), 2);
                 }
             }
-
-
 
         }
 

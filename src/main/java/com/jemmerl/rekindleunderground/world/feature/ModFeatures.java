@@ -3,7 +3,7 @@ package com.jemmerl.rekindleunderground.world.feature;
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.world.feature.igneous.DiatremeMaarFeature;
 import com.jemmerl.rekindleunderground.world.feature.ores.OrePlacerFeature;
-import com.jemmerl.rekindleunderground.world.feature.stonegeneration.StoneGenFeature;
+import com.jemmerl.rekindleunderground.world.feature.stones.StoneGenFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraftforge.eventbus.api.IEventBus;

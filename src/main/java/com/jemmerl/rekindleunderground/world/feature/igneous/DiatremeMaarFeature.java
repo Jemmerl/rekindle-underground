@@ -39,7 +39,7 @@ public class DiatremeMaarFeature extends Feature<NoFeatureConfig> {
     public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 
         // TODO TEMP, only allow generation if in debug mode
-        if (!RKUndergroundConfig.COMMON.debug.get()) {
+        if (!RKUndergroundConfig.COMMON.debug_diatreme_maar.get()) {
             return false;
         }
 

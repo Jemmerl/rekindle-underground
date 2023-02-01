@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground.world.feature.stonegeneration;
+package com.jemmerl.rekindleunderground.world.feature.stones;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;

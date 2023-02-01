@@ -26,7 +26,15 @@ public class RKUndergroundConfig {
         private static final int STONE_RESISTANCE = 6; // Multiply relative stone resistances
         private static final boolean DET_SCALING = false; // Apply hardness depth scaling to detritus blocks
 
-        private static final boolean DEBUG = false; // Debug mode
+        // Debug options
+        private static final boolean DEBUG_DIATREME_MAAR = false;
+        private static final boolean DEBUG_TEST_DEPOSITS = true;
+        private static final boolean DEBUG_DEPOSIT_READER = false;
+        private static final boolean DEBUG_LAYER_DEPOSITS = false;
+        private static final boolean DEBUG_PLACER_DEPOSITS = true;
+        private static final boolean DEBUG_BLOCK_ENQUEUER = false;
+
+
 
         public final ForgeConfigSpec.ConfigValue<Integer> hardnessDepthFactor;
         public final ForgeConfigSpec.ConfigValue<Integer> regionSize;
@@ -48,7 +56,12 @@ public class RKUndergroundConfig {
 
         public final ForgeConfigSpec.ConfigValue<Boolean> detritusScaling;
 
-        public final ForgeConfigSpec.ConfigValue<Boolean> debug;
+        public final ForgeConfigSpec.ConfigValue<Boolean> debug_diatreme_maar;
+        public final ForgeConfigSpec.ConfigValue<Boolean> debug_test_deposits;
+        public final ForgeConfigSpec.ConfigValue<Boolean> debug_deposit_reader;
+        public final ForgeConfigSpec.ConfigValue<Boolean> debug_layer_deposits;
+        public final ForgeConfigSpec.ConfigValue<Boolean> debug_placer_deposits;
+        public final ForgeConfigSpec.ConfigValue<Boolean> debug_block_enqueuer;
 
         public Common(ForgeConfigSpec.Builder builder)
         {
@@ -145,12 +158,28 @@ public class RKUndergroundConfig {
 
 
             // Debug Config
-            builder.push("Debug Mode");
-            this.debug = builder.comment("Toggle debug mode - Caution: will slow down the game!")
+            builder.push("Debug Options");
+            this.debug_diatreme_maar = builder.comment("Enable diatreme-maar debug mode")
                     .worldRestart()
-                    .define("Debug", DEBUG);
+                    .define("Debug Diatreme-Maars", DEBUG_DIATREME_MAAR);
+            this.debug_test_deposits = builder.comment("Enable test deposits (have \"test\" in their name) debug mode")
+                    .worldRestart()
+                    .define("Debug Test Deposits", DEBUG_TEST_DEPOSITS);
+            this.debug_deposit_reader = builder.comment("Enable deposit config reader debug mode")
+                    .worldRestart()
+                    .define("Debug Deposit Reader", DEBUG_DEPOSIT_READER);
+            this.debug_layer_deposits = builder.comment("Enable layer deposit debug mode")
+                    .worldRestart()
+                    .define("Debug Layer Deposits", DEBUG_LAYER_DEPOSITS);
+            this.debug_placer_deposits = builder.comment("Enable placer deposit debug mode")
+                    .worldRestart()
+                    .define("Debug Placers Deposits", DEBUG_PLACER_DEPOSITS);
+            this.debug_block_enqueuer = builder.comment("Enable block enqueuer debug mode")
+                    .worldRestart()
+                    .define("Debug Block Enqueuer", DEBUG_BLOCK_ENQUEUER);
             builder.pop();
             // End Debug Config
+
         }
     }
 

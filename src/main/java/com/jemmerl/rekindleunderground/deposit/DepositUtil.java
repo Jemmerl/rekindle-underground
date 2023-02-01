@@ -12,7 +12,7 @@ import com.jemmerl.rekindleunderground.util.UtilMethods;
 import com.jemmerl.rekindleunderground.util.WeightedProbMap;
 import com.jemmerl.rekindleunderground.world.capability.chunk.IChunkGennedCapability;
 import com.jemmerl.rekindleunderground.world.capability.deposit.IDepositCapability;
-import com.jemmerl.rekindleunderground.world.feature.stonegeneration.StateMap;
+import com.jemmerl.rekindleunderground.world.feature.stones.StateMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -89,16 +89,18 @@ public class DepositUtil {
                     return true;
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
-                if (RKUndergroundConfig.COMMON.debug.get()){
+
+                // Debug
+                if (RKUndergroundConfig.COMMON.debug_block_enqueuer.get()){
                     RekindleUnderground.getInstance().LOGGER.warn(
                             "Enq block at {} was out of bounds with values {} {} {}",
                             qPos, xIndex, qPos.getY(), zIndex);
                 }
+
                 return false;
             }
 
-            // If this statement reaches here, the StoneOreBlock was not
-            // a valid placement stone or something has gone very wrong...
+            // If this statement reaches here, the OreBlock was not a valid placement stone or something has gone very wrong...
             return false;
         }
 
@@ -111,12 +113,17 @@ public class DepositUtil {
                 }
 
                 BlockState state = level.getBlockState(qPos);
-                state = UtilMethods.convertToDetritus(state); // TODO Remnant from placer experiment, may not be needed
+                state = UtilMethods.convertToDetritus(state); // Convert vanilla detritus to respective OreBlocks for comparison
 
                 if (isValidStone(state.getBlock(), qDeposit.getValid())) {
                     if (!level.setBlockState(qPos, state.with(StoneOreBlock.ORE_TYPE, qType).with(StoneOreBlock.GRADE_TYPE, qGrade), 2 | 16)) {
-                        RekindleUnderground.getInstance().LOGGER.warn("Somehow {} could not be placed at {} even though chunk has generated",
-                                state.getBlock().getRegistryName(), qPos);
+
+                        // Debug
+                        if (RKUndergroundConfig.COMMON.debug_block_enqueuer.get()){
+                            RekindleUnderground.getInstance().LOGGER.warn("Somehow {} could not be placed at {} even though chunk has generated",
+                                    state.getBlock().getRegistryName(), qPos);
+                        }
+
                         return false;
                     }
                 }
@@ -153,9 +160,12 @@ public class DepositUtil {
             }
         } catch (Exception e) {
             RekindleUnderground.getInstance().LOGGER.warn("Error in a deposit valid ore reading.");
-            if (RKUndergroundConfig.COMMON.debug.get()) {
+
+            // Debug
+            if (RKUndergroundConfig.COMMON.debug_deposit_reader.get()) {
                 e.printStackTrace();
             }
+
             return null;
         }
         return new WeightedProbMap<>(elts);
@@ -180,9 +190,12 @@ public class DepositUtil {
 
         } catch (Exception e) {
             RekindleUnderground.getInstance().LOGGER.warn("Error in a deposit ore grades reading.");
-            if (RKUndergroundConfig.COMMON.debug.get()) {
+
+            // Debug
+            if (RKUndergroundConfig.COMMON.debug_deposit_reader.get()) {
                 e.printStackTrace();
             }
+
             return null;
         }
 
@@ -229,16 +242,19 @@ public class DepositUtil {
                 }
             } catch (Exception e) {
                 RekindleUnderground.getInstance().LOGGER.warn("Error in a deposit's valid stones reading.");
-                if (RKUndergroundConfig.COMMON.debug.get()) {
+
+                // Debug
+                if (RKUndergroundConfig.COMMON.debug_deposit_reader.get()) {
                     e.printStackTrace();
                 }
+
                 return null;
             }
 
         return new ArrayList<>(oreStoneSet);
     }
 
-    // Return an array list of valid Biome Categeories from a JsonArray
+    // Return an array list of valid Biome Categories from a JsonArray
     public static ArrayList<Biome.Category> getBiomes(JsonArray jsonArray) {
         ArrayList<Biome.Category> biomeArray = new ArrayList<>();
         try {
@@ -259,40 +275,15 @@ public class DepositUtil {
             }
         } catch (Exception e) {
             RekindleUnderground.getInstance().LOGGER.warn("Error in a deposit valid biome reading.");
-            if (RKUndergroundConfig.COMMON.debug.get()) {
+
+            // Debug
+            if (RKUndergroundConfig.COMMON.debug_deposit_reader.get()) {
                 e.printStackTrace();
             }
+
             return null;
         }
         return biomeArray;
     }
 
 }
-
-/*
- try {
-                if (qDeposit.getType().equals(DepositType.PLACER)) {
-                    detritusStateMap[xIndex][qPos.getY()][zIndex] = StoneType.DIRT.getStoneState()
-                            .with(StoneOreBlock.ORE_TYPE, qType)
-                            .with(StoneOreBlock.GRADE_TYPE, qGrade);
-                } else {
-                    BlockState hostState = stoneStateMap[xIndex][qPos.getY()][zIndex];
-                    if (isValidStone(hostState.getBlock(), qDeposit.getValid())) {
-                        stoneStateMap[xIndex][qPos.getY()][zIndex] = hostState.with(StoneOreBlock.ORE_TYPE, qType)
-                                .with(StoneOreBlock.GRADE_TYPE, qGrade);
-                        return true;
-                    }
-                }
-            } catch (ArrayIndexOutOfBoundsException e) {
-                if (RKUndergroundConfig.COMMON.debug.get()){
-                    RekindleUnderground.getInstance().LOGGER.warn(
-                            "Enq block at {} was out of bounds with values {} {} {}",
-                            qPos, xIndex, qPos.getY(), zIndex);
-                }
-                return false;
-            }
-
-            // If this statement reaches here, the StoneOreBlock was not
-            // a valid placement stone or something has gone very wrong...
-            return false;
- */

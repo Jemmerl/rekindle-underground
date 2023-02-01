@@ -43,11 +43,10 @@ public class DepositDataLoader extends JsonReloadListener {
                 String name = jsonObj.get("name").getAsString();
 
                 // Ignore test deposits unless in debug mode
-                // TODO DISABLED BECAUSE DEBUG MODE IS BRUTAL AND I SHOULD PROBABLY MAKE IT INDIVIDUAL TOGGLES
-//                if (name.contains("test") && !RKUndergroundConfig.COMMON.debug.get()) {
-//                    RekindleUnderground.getInstance().LOGGER.info("Test Deposit {} ignored", name);
-//                    return;
-//                }
+                if (!RKUndergroundConfig.COMMON.debug_test_deposits.get() && name.contains("test")) {
+                    RekindleUnderground.getInstance().LOGGER.info("Test Deposit {} ignored", name);
+                    return;
+                }
 
                 if (!nameList.contains(name)) {
                     nameList.add(name);
@@ -88,7 +87,9 @@ public class DepositDataLoader extends JsonReloadListener {
 
             } catch (Exception e) {
                 RekindleUnderground.getInstance().LOGGER.warn("Error reading deposit type: {}", rl);
-                if (RKUndergroundConfig.COMMON.debug.get()) {
+
+                // Debug
+                if (RKUndergroundConfig.COMMON.debug_test_deposits.get()) {
                     e.printStackTrace();
                 }
             }

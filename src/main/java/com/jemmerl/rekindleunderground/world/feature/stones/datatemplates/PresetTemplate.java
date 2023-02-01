@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground.world.feature.stonegeneration.datatemplates;
+package com.jemmerl.rekindleunderground.world.feature.stones.datatemplates;
 
 public class PresetTemplate {
     private String name;

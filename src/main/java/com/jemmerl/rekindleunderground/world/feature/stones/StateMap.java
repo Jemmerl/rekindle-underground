@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground.world.feature.stonegeneration;
+package com.jemmerl.rekindleunderground.world.feature.stones;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.deposit.DepositRegistrar;
@@ -78,7 +78,7 @@ public class StateMap {
     }
 
     // Replace stones in the current state map with generated igneous features
-    // Will be used for less technical generation, such as dikes or LIPs <<<-- TODO NEXT
+    // Will be used for less technical generation, such as dikes or LIPs
     public void PopulateIgneous() {
         // TODO CURRENTLY NOT IN USE. IT WILL BE IN THE FUTURE!
     }
@@ -92,9 +92,11 @@ public class StateMap {
         ISeedReader reader = this.chunkReader.getSeedReader();
         ChunkPos cp = new ChunkPos(this.blockPos);
         ConcurrentLinkedQueue<DepositCapability.PendingBlock> queue = depositCapability.getPendingBlocks(cp);
+
         // Debug
-        if (RKUndergroundConfig.COMMON.debug.get()) {
-            // Manual toggle. It is useful, sometimes, but it's too spammy to enable with the other debug tools.
+        if (RKUndergroundConfig.COMMON.debug_block_enqueuer.get()) {
+            // Manual toggle. It is useful, sometimes, but it's too spammy to enable with the other debug tools
+            // and likely won't be of use to any pack devs trying to understand why my spaghetti-code mod broke!
             if (false) { RekindleUnderground.getInstance().LOGGER.info("Trying to place queue with size {}", queue.size()); }
             if (chunkGennedCapability.hasChunkGenerated(cp) && (queue.size() > 0)) {
                 RekindleUnderground.getInstance().LOGGER.info(
@@ -102,6 +104,7 @@ public class StateMap {
                         cp.x, cp.z);
             }
         }
+
         queue.stream().forEach(x -> DepositUtil.enqueueBlockPlacement(reader, x.getPos(), x.getOre(), x.getGrade(),
                 x.getName(), this.blockPos, this, this.depositCapability, this.chunkGennedCapability));
         depositCapability.removePendingBlocksForChunk(cp);
@@ -112,13 +115,13 @@ public class StateMap {
             if (this.rand.nextInt(deposit.getWeight()) == 0) {
                 // Tries to update the stateMap with the generating feature
                 if (!deposit.generate(this.chunkReader, this.rand, this.blockPos, this,
-                        this.depositCapability, this.chunkGennedCapability) && RKUndergroundConfig.COMMON.debug.get()) {
+                        this.depositCapability, this.chunkGennedCapability) && RKUndergroundConfig.COMMON.debug_block_enqueuer.get()) {
+                    // Debug
                     RekindleUnderground.getInstance().LOGGER.warn(
                             "Failed to generate deposit at {}, {}", this.blockPos.getX(), this.blockPos.getZ());
                 }
             }
         }
-
 
     }
 

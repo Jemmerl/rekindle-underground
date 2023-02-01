@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground.world.feature.stonegeneration;
+package com.jemmerl.rekindleunderground.world.feature.stones;
 
 import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredRegionNoise;
 import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredStrataNoise;
@@ -79,7 +79,7 @@ public class StoneGenFeature extends Feature<NoFeatureConfig> {
         }
     }
 
-    // Check if the block being replaced is a valid for StoneOre replacement
+    // Check if the block being replaced is a valid for OreBlock replacement
     private Boolean replaceStone(BlockState original) {
         return (original.isIn(BlockTags.BASE_STONE_OVERWORLD) || original.isIn(Tags.Blocks.ORES)
                 || original.getBlock().equals(Blocks.SANDSTONE) || original.getBlock().equals(Blocks.RED_SANDSTONE));

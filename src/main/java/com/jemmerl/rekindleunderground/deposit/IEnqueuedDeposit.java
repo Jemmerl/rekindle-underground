@@ -2,8 +2,8 @@ package com.jemmerl.rekindleunderground.deposit;
 
 import com.jemmerl.rekindleunderground.world.capability.chunk.IChunkGennedCapability;
 import com.jemmerl.rekindleunderground.world.capability.deposit.IDepositCapability;
-import com.jemmerl.rekindleunderground.world.feature.stonegeneration.ChunkReader;
-import com.jemmerl.rekindleunderground.world.feature.stonegeneration.StateMap;
+import com.jemmerl.rekindleunderground.world.feature.stones.ChunkReader;
+import com.jemmerl.rekindleunderground.world.feature.stones.StateMap;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.Random;

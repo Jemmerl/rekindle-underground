@@ -15,8 +15,8 @@ import com.jemmerl.rekindleunderground.util.WeightedProbMap;
 import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredBlobNoise;
 import com.jemmerl.rekindleunderground.world.capability.chunk.IChunkGennedCapability;
 import com.jemmerl.rekindleunderground.world.capability.deposit.IDepositCapability;
-import com.jemmerl.rekindleunderground.world.feature.stonegeneration.ChunkReader;
-import com.jemmerl.rekindleunderground.world.feature.stonegeneration.StateMap;
+import com.jemmerl.rekindleunderground.world.feature.stones.ChunkReader;
+import com.jemmerl.rekindleunderground.world.feature.stones.StateMap;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
@@ -180,14 +180,14 @@ public class LayerEnqueuedDeposit implements IEnqueuedDeposit {
         ////////////////////////
 
         // Debug
-        if (RKUndergroundConfig.COMMON.debug.get()) {
+        if (RKUndergroundConfig.COMMON.debug_layer_deposits.get()) {
             RekindleUnderground.getInstance().LOGGER.info("Generating layer deposit at {}, with {} avg layers and {} total height.", centerPos, avgLayers, totalHeight);
         }
 
         // Check for valid biome placement. If not in a valid biome, cancel generation
         if (!this.validBiomes.contains(reader.getSeedReader().getBiome(centerPos).getCategory())) {
             // Debug
-            if (RKUndergroundConfig.COMMON.debug.get()) {
+            if (RKUndergroundConfig.COMMON.debug_layer_deposits.get()) {
                 RekindleUnderground.getInstance().LOGGER.info("Invalid biome for layer deposit at {}, failed to generate.", centerPos);
             }
             return false;
@@ -245,7 +245,7 @@ public class LayerEnqueuedDeposit implements IEnqueuedDeposit {
         }
 
         // Debug tool
-        if (RKUndergroundConfig.COMMON.debug.get()) {
+        if (RKUndergroundConfig.COMMON.debug_layer_deposits.get()) {
             for (int yPole = heightEnd; yPole < 120; yPole++) {
                 reader.getSeedReader().setBlockState(new BlockPos(centerPos.getX(), yPole, centerPos.getZ()),
                         Blocks.RED_WOOL.getDefaultState(), 2);
