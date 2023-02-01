@@ -1,0 +1,41 @@
+{
+  "name": "testplacertwo",
+  "deposit_type": "placer",
+  "settings": {
+    "weight": 30,
+    "avg_radius": 15,
+    "min_density": 25,
+    "max_density": 75,
+    "submerged": false
+  },
+  "grades": {
+    "high": 0,
+    "mid": 1,
+    "low": 99
+  },
+  "ores": [
+    {
+      "ore": "cassiterite",
+      "weight": 25
+    },
+    {
+      "ore": "diamond",
+      "weight": 25
+    },
+    {
+      "ore": "limonite",
+      "weight": 25
+    },
+    {
+      "ore": "chromite",
+      "weight": 25
+    }
+  ],
+  "stones": [
+    "all_detritus"
+  ],
+  "biomes": [
+    "beach",
+    "river"
+  ]
+}

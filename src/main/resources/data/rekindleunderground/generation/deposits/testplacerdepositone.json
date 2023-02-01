@@ -1,11 +1,12 @@
 {
-  "name": "tefstplacerone",
+  "name": "testplacerone",
   "deposit_type": "placer",
   "settings": {
-    "weight": 50,
+    "weight": 20,
     "avg_radius": 10,
     "min_density": 50,
-    "max_density": 100
+    "max_density": 100,
+    "submerged": true
   },
   "grades": {
     "high": 0,

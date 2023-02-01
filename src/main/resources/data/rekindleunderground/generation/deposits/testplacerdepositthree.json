@@ -1,0 +1,37 @@
+{
+  "name": "testplacerthree",
+  "deposit_type": "placer",
+  "settings": {
+    "weight": 10,
+    "avg_radius": 12,
+    "min_density": 5,
+    "max_density": 15,
+    "submerged": true
+  },
+  "grades": {
+    "high": 0,
+    "mid": 1,
+    "low": 99
+  },
+  "ores": [
+    {
+      "ore": "native_copper",
+      "weight": 80
+    },
+    {
+      "ore": "native_gold",
+      "weight": 5
+    },
+    {
+      "ore": "galena",
+      "weight": 15
+    }
+  ],
+  "stones": [
+    "sand",
+    "gravel"
+  ],
+  "biomes": [
+    "river"
+  ]
+}
