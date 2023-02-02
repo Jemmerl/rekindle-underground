@@ -35,9 +35,10 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
         super(codec);
     }
 
-    private static final int MAX_RADIUS = 22; // Min radius of diatreme at the base
+    private static final int MAX_DIATREME_RADIUS = 19; // Max radius of upper diatreme
+    private static final int MAX_MAAR_RADIUS = 22; // Max radius of upper diatreme
     private static final int MIN_DIATREME_HEIGHT = 50; // Minimum height of the top of the diatreme
-    private static final int MAX_DIATREME_HEIGHT = 65; // Maximum height of the top of the diatreme
+    private static final int MAX_DIATREME_HEIGHT = 60; // Maximum height of the top of the diatreme
     private static final int MAAR_HEIGHT = 10; // Height of the maar section
     private static final int MAAR_EJECTA_HEIGHT = 30; // Height of the maar and scattered debris above the maar
 
@@ -61,16 +62,6 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
 
         // Add tuff and peridotite as random sprinkles
         // occasional partial beds of tuff
-
-
-        ArrayList<BlockState> ejectaList = new ArrayList<>();
-        ejectaList.add(ModBlocks.SCORIA_STONE.get().getDefaultState());
-        ejectaList.add(ModBlocks.TUFF_STONE.get().getDefaultState());
-
-
-
-
-
 
 
         //////////////////////////////////////
@@ -137,50 +128,38 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
         HashMap<BlockState, Integer> brecciaMap = new HashMap<>(); // Count replaced stones gen breccia
         ArrayList<BlockPos> brecciaPosList = new ArrayList<>(); // Store locations to place breccia
 
-        for (int y = 0; y < diatreme_height; y++) {
-            if (y > 0) {
-                for (BlockPos blockPos : BlockPos.getAllInBoxMutable(pos.add(-MAX_RADIUS, 0, -MAX_RADIUS), pos.add(MAX_RADIUS, 0, MAX_RADIUS))) {
+        for (int y = 1; y < diatreme_height; y++) {
+            for (BlockPos blockPos : BlockPos.getAllInBoxMutable(pos.add(-MAX_DIATREME_RADIUS, 0, -MAX_DIATREME_RADIUS), pos.add(MAX_DIATREME_RADIUS, 0, MAX_DIATREME_RADIUS))) {
+                // Maximum possible radius for the top of diatreme is 18, which is 36/48 available blocks (3 chunks allocated to features)
 
-                    // Maximum possible radius for the top of diatreme is 18, which is 36/48 available blocks (3 chunks allocated to features)
-                    float radius = (MAX_RADIUS - 14) - (baseDecrement * (1-(y/(float)diatreme_height))) + (ConfiguredBlobNoise.blobRadiusNoise(blockPos.getX(), y, blockPos.getZ()) * 10);
+                float radius = (MAX_DIATREME_RADIUS - 7) - (baseDecrement * (1 - (y / (float) diatreme_height))) +
+                        (ConfiguredBlobNoise.blobRadiusNoise(blockPos.getX(), y, blockPos.getZ()) * 7) + rand.nextInt(3);
 
-                    float distance;
-                    if ((distance = (float)UtilMethods.getHypotenuse(blockPos.getX(), blockPos.getZ(), pos.getX(), pos.getZ())) <= radius) {
-                        BlockPos currPos = new BlockPos(blockPos.getX(), y, blockPos.getZ());
+                float distance = (float) UtilMethods.getHypotenuse(blockPos.getX(), blockPos.getZ(), pos.getX(), pos.getZ());
+                if (distance <= radius) {
+                    BlockPos currPos = new BlockPos(blockPos.getX(), y, blockPos.getZ());
+                    BlockState replacedBlock = reader.getBlockState(currPos);
 
-                        // A higher adjustment value means less breccia overall
-                        if ((rand.nextFloat() + 0.18f) < (distance / radius)) {
-                            brecciaPosList.add(currPos);
+                    // Check if valid placement
+                    if (!UtilMethods.igneousReplaceable(replacedBlock)) {
+                        continue;
+                    }
+
+                    // A higher adjustment value means less breccia overall
+                    if ((rand.nextFloat() + 0.18f) < (distance / radius)) {
+                        brecciaPosList.add(currPos);
+                    } else {
+                        // Record what block was replaced for later brecciation
+                        updateBrecciaMap(brecciaMap, replacedBlock);
+
+                        // Set the block
+                        if (diamondiferous && (rand.nextFloat() < diamondPercent)) {
+                            // Select grade of individual ore and generate the block with diamond ore
+                            reader.setBlockState(currPos, replacingBlock
+                                    .with(StoneOreBlock.ORE_TYPE, OreType.DIAMOND)
+                                    .with(StoneOreBlock.GRADE_TYPE, getDiamondGrade(rand)), 2);
                         } else {
-                            BlockState replacedBlock = reader.getBlockState(currPos);
-
-                            // Check if valid placement
-                            if (!UtilMethods.igneousReplaceable(replacedBlock)) {
-                                continue;
-                            }
-
-                            // Record what block was replaced for later brecciation
-                            updateBrecciaMap(brecciaMap, replacedBlock);
-
-                            // Set the block
-                            if (diamondiferous && (rand.nextFloat() < diamondPercent)) {
-                                // Select grade of individual ore and generate the block with diamond ore
-                                GradeType grade;
-                                randInt = rand.nextInt(101);
-                                if (randInt > 10) {
-                                    grade = GradeType.LOWGRADE; // (90% Chance)
-                                } else if (randInt > 1) {
-                                    grade = GradeType.MIDGRADE; // (9% Chance)
-                                }  else {
-                                    grade = GradeType.HIGHGRADE; // (1% Chance)
-                                }
-                                reader.setBlockState(currPos, replacingBlock
-                                        .with(StoneOreBlock.ORE_TYPE, OreType.DIAMOND)
-                                        .with(StoneOreBlock.GRADE_TYPE, grade), 2);
-                            } else {
-                                reader.setBlockState(currPos, replacingBlock, 2);
-                            }
-
+                            reader.setBlockState(currPos, replacingBlock, 2);
                         }
                     }
                 }
@@ -193,7 +172,29 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
         /////////////////////
 
         for (int y = diatreme_height; y < (diatreme_height + MAAR_HEIGHT); y++) {
+            for (BlockPos blockPos : BlockPos.getAllInBoxMutable(pos.add(-MAX_DIATREME_RADIUS, 0, -MAX_DIATREME_RADIUS), pos.add(MAX_DIATREME_RADIUS, 0, MAX_DIATREME_RADIUS))) {
+                // Maximum possible radius for the top of maar is 22, which is 44/48 available blocks (3 chunks allocated to features)
+                float outer_radius = (MAX_MAAR_RADIUS - 7) - (baseDecrement * (1 - (y / (float) (diatreme_height + MAAR_HEIGHT)))) +
+                        (ConfiguredBlobNoise.blobRadiusNoise(blockPos.getX(), y, blockPos.getZ()) * 7);
+                float inner_radius = MAX_MAAR_RADIUS - (MAX_MAAR_RADIUS * (1 - ((y - diatreme_height) / (float) MAAR_HEIGHT)));
 
+                float distance = (float) UtilMethods.getHypotenuse(blockPos.getX(), blockPos.getZ(), pos.getX(), pos.getZ());
+                if (distance <= outer_radius) {
+                    BlockPos currPos = new BlockPos(blockPos.getX(), y, blockPos.getZ());
+                    if (distance > inner_radius) {
+                        reader.setBlockState(currPos, Blocks.DARK_OAK_PLANKS.getDefaultState(), 2);
+                    } else {
+                        reader.setBlockState(currPos, Blocks.OAK_PLANKS.getDefaultState(), 2);
+                    }
+
+                    // if inside outer radius
+                    // if outside inner
+                    // maar generation
+                    // else
+                    // function for scatter generation
+
+                }
+            }
         }
 
 
@@ -202,7 +203,18 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
         ///////////////////////
 
         for (int y = (diatreme_height + MAAR_HEIGHT); y < (diatreme_height + MAAR_EJECTA_HEIGHT); y++) {
+            for (BlockPos blockPos : BlockPos.getAllInBoxMutable(pos.add(-MAX_DIATREME_RADIUS, 0, -MAX_DIATREME_RADIUS), pos.add(MAX_DIATREME_RADIUS, 0, MAX_DIATREME_RADIUS))) {
+                float radius = (MAX_MAAR_RADIUS - 7) + (ConfiguredBlobNoise.blobRadiusNoise(blockPos.getX(), y, blockPos.getZ()) * 7);
 
+                float distance = (float) UtilMethods.getHypotenuse(blockPos.getX(), blockPos.getZ(), pos.getX(), pos.getZ());
+                if (distance <= radius) {
+                    BlockPos currPos = new BlockPos(blockPos.getX(), y, blockPos.getZ());
+                    reader.setBlockState(currPos, Blocks.OAK_PLANKS.getDefaultState(), 2);
+                }
+                //if inside radius
+                // function for scatter generation
+
+            }
         }
 
 
@@ -224,7 +236,9 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
                     int weight = (brecciaMap.get(key) * 100) / totalBreccia;
 
                     weightSum += weight;
-                    if (weightSum > 100) { weight -= (weightSum - 100); }
+                    if (weightSum > 100) {
+                        weight -= (weightSum - 100);
+                    }
 
                     if (weight > 0) {
                         elts.add(new Pair<>(weight, key));
@@ -234,13 +248,23 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
                 // Build weighted map and fill each designated breccia position with weighted random breccia
                 WeightedProbMap<BlockState> wpm = new WeightedProbMap<>(elts);
                 for (BlockPos brecciaPos : brecciaPosList) {
-                    reader.setBlockState(brecciaPos, wpm.nextElt(), 2);
+                    // 25% chance of tuff
+                    if (rand.nextFloat() < 0.75f) {
+                        reader.setBlockState(brecciaPos, wpm.nextElt(), 2);
+                    } else {
+                        reader.setBlockState(brecciaPos, ModBlocks.TUFF_STONE.get().getDefaultState(), 2);
+                    }
                 }
 
             } else {
                 // If no breccias were recorded, replace breccia positions with the main igneous rock (very unlikely)
                 for (BlockPos brecciaPos : brecciaPosList) {
-                    reader.setBlockState(brecciaPos, replacingBlock, 2);
+                    // 50% chance of tuff
+                    if (rand.nextBoolean()) {
+                        reader.setBlockState(brecciaPos, replacingBlock, 2);
+                    } else {
+                        reader.setBlockState(brecciaPos, ModBlocks.TUFF_STONE.get().getDefaultState(), 2);
+                    }
                 }
             }
         }
@@ -254,6 +278,10 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
 
         return true;
     }
+
+    /////////////////////
+    // UTILITY METHODS //
+    /////////////////////
 
     // TODO REWRITE?
     // Add a replaced block to the breccia counter map
@@ -269,13 +297,16 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
         }
     }
 
-}
+    // Get the grade type for diamond ore
+    private static GradeType getDiamondGrade(Random rand) {
+        int randInt = rand.nextInt(101);
+        if (randInt > 10) {
+            return GradeType.LOWGRADE; // (90% Chance)
+        } else if (randInt > 1) {
+            return GradeType.MIDGRADE; // (9% Chance)
+        } else {
+            return GradeType.HIGHGRADE; // (1% Chance)
+        }
+    }
 
-//    // Get the current radius of the diatreme section
-//    // Will be slightly different every time it is called, causing a dithering effect
-//    private static int getPipeRadius(Random rand, int baseRadius, float angle, BlockPos pos) {
-//        float noise = ConfiguredBlobNoise.blobRadiusNoise(pos.getX(), pos.getY(), pos.getZ());
-//        return (int)(baseRadius + (pos.getY() * angle) // Radius based on height and shape
-//                + (PIPE_MIN_RADIUS * (1f + (0.5f * noise)))); // Warp pipe shape
-//                //+ rand.nextInt(PIPE_DITHER_VARIATION)); // Add random dither
-//    }
+}

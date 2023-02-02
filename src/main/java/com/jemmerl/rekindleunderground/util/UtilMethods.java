@@ -3,6 +3,7 @@ package com.jemmerl.rekindleunderground.util;
 import com.jemmerl.rekindleunderground.blocks.IOreBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ResourceLocation;
@@ -67,7 +68,9 @@ public class UtilMethods {
     public static boolean igneousReplaceable(BlockState blockState) {
         Block replaced = blockState.getBlock();
         return ((replaced instanceof IOreBlock) || replaced.isIn(Tags.Blocks.DIRT) || replaced.isIn(Tags.Blocks.SAND)
-                || replaced.isIn(Tags.Blocks.GRAVEL) || replaced.isIn(Tags.Blocks.OBSIDIAN));
+                || replaced.isIn(Tags.Blocks.GRAVEL) || replaced.isIn(Tags.Blocks.OBSIDIAN))
+                || (replaced.isIn(BlockTags.BASE_STONE_OVERWORLD) || replaced.isIn(Tags.Blocks.ORES)
+                || replaced.equals(Blocks.SANDSTONE) || replaced.equals(Blocks.RED_SANDSTONE));
     }
 
 }
