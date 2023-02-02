@@ -104,10 +104,6 @@ public class ModLootTableProvider extends LootTableProvider {
             // Clay -- may drop < 4 clay
             registerLootTable(ModBlocks.CLAY_STONE.get(), buildClayDetritusLootTable());
 
-            // Todo temp
-//            for (Block block : ModBlockLists.ALL_DETRITUS) {
-//                registerDropSelfLootTable(block);
-//            }
         }
 
 

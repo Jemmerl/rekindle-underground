@@ -1,8 +1,13 @@
 package com.jemmerl.rekindleunderground.util;
 
+import com.jemmerl.rekindleunderground.blocks.IOreBlock;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.data.ForgeBlockTagsProvider;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Objects;
@@ -56,6 +61,13 @@ public class UtilMethods {
     // Convert vanilla detritus to OreBlock detritus; If not convertible, return original state
     public static BlockState convertVanillaToDetritus(BlockState vanillaState) {
         return ModBlockLists.VANILLA_DET_LIST.getOrDefault(vanillaState, vanillaState);
+    }
+
+    // Check if the block is replaceable by igneous formations
+    public static boolean igneousReplaceable(BlockState blockState) {
+        Block replaced = blockState.getBlock();
+        return ((replaced instanceof IOreBlock) || replaced.isIn(Tags.Blocks.DIRT) || replaced.isIn(Tags.Blocks.SAND)
+                || replaced.isIn(Tags.Blocks.GRAVEL) || replaced.isIn(Tags.Blocks.OBSIDIAN));
     }
 
 }

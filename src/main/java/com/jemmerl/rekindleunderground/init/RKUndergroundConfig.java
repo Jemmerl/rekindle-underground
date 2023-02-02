@@ -12,8 +12,6 @@ public class RKUndergroundConfig {
         private static final int FAULT_SIZE = 128; // Rough average, in chunks (OG IS 64)
         private static final double FAULT_VARIATION = 0.20; // 0.00 - 1.00 scale; 0 is no fault shift
 
-        private static final double PLACER_CHANCE = 1.00; // 0.00 - 1.00 scale, chance of placer deposit attempt in chunk; 0 is no placers
-
         // 0 to 100 scale, setting min = max will ensure that value will always be used
         private static final int THICK_MIN = 10;
         private static final int THICK_MAX = 40;
@@ -26,12 +24,16 @@ public class RKUndergroundConfig {
         private static final int STONE_RESISTANCE = 6; // Multiply relative stone resistances
         private static final boolean DET_SCALING = false; // Apply hardness depth scaling to detritus blocks
 
+        private static final double PLACER_CHANCE = 1.00; // 0.00 - 1.00 scale, chance of placer deposit attempt in chunk; 0 is no placers
+
+        private static final boolean GEN_MAAR_DIATREMES = true; // Generate maar-diatremes?
+
         // Debug options
-        private static final boolean DEBUG_DIATREME_MAAR = false;
+        private static final boolean DEBUG_DIATREME_MAAR = true;
         private static final boolean DEBUG_TEST_DEPOSITS = true;
         private static final boolean DEBUG_DEPOSIT_READER = false;
         private static final boolean DEBUG_LAYER_DEPOSITS = false;
-        private static final boolean DEBUG_PLACER_DEPOSITS = true;
+        private static final boolean DEBUG_PLACER_DEPOSITS = false;
         private static final boolean DEBUG_BLOCK_ENQUEUER = false;
 
 
@@ -42,8 +44,6 @@ public class RKUndergroundConfig {
         public final ForgeConfigSpec.ConfigValue<Integer> faultSize;
         public final ForgeConfigSpec.ConfigValue<Double> faultVariation;
 
-        public final ForgeConfigSpec.ConfigValue<Double> placerChance;
-
         public final ForgeConfigSpec.ConfigValue<Integer> thickMin;
         public final ForgeConfigSpec.ConfigValue<Integer> thickMax;
         public final ForgeConfigSpec.ConfigValue<Integer> warpMin;
@@ -53,8 +53,11 @@ public class RKUndergroundConfig {
 
         public final ForgeConfigSpec.ConfigValue<Integer> stoneHardness;
         public final ForgeConfigSpec.ConfigValue<Integer> stoneResistance;
-
         public final ForgeConfigSpec.ConfigValue<Boolean> detritusScaling;
+
+        public final ForgeConfigSpec.ConfigValue<Double> placerChance;
+
+        public final ForgeConfigSpec.ConfigValue<Boolean> gen_maar_diatremes;
 
         public final ForgeConfigSpec.ConfigValue<Boolean> debug_diatreme_maar;
         public final ForgeConfigSpec.ConfigValue<Boolean> debug_test_deposits;
@@ -80,6 +83,15 @@ public class RKUndergroundConfig {
 
             builder.pop();
             // End Ore Config
+
+
+            // Igneous Config
+            builder.push("Igneous Features Generation");
+            this.gen_maar_diatremes = builder.comment("Enable Maar-Diatreme generation; Default true")
+                    .worldRestart()
+                    .define("Generate Maar-Diatremes", GEN_MAAR_DIATREMES);
+            builder.pop();
+            // End Igneous Config
 
 
             // Layer Config

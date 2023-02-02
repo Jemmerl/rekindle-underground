@@ -6,6 +6,7 @@ import java.util.TreeMap;
 
 // Credit to phooji who gave this solution in the StackOverflow forum
 // https://stackoverflow.com/questions/5212089/how-to-randomly-select-a-key-based-on-its-integer-value-in-a-map-with-respect-to
+// ELTS IS SHORT FOR ELEMENTS!
 
 public class WeightedProbMap<EltType> {
     private SortedMap<Integer, EltType> elts = new TreeMap<Integer, EltType>();

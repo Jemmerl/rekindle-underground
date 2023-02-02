@@ -20,15 +20,12 @@ public class RKUndergroundFeatures {
     public static final ConfiguredFeature<?, ?> STONE_GEN_CONFIG = ModFeatures.STONE_GEN.get().withConfiguration(new NoFeatureConfig())
             .withPlacement(ModFeaturePlacements.STONE_GEN_PLACEMENT.get().configure(IPlacementConfig.NO_PLACEMENT_CONFIG));
 
-    // TODO make chance config based
-    public static final ConfiguredFeature<?, ?> DIATREME_PIPE_GEN_CONFIG = ModFeatures.DIATREME_PIPE_GEN.get().withConfiguration(new NoFeatureConfig())
-            .withPlacement(ModFeaturePlacements.PIPE_CHANCE_PLACEMENT.get().configure(new ChanceConfig(300))); // Normally 300, larger is less likely
+    // TODO make chance config based? registration shouldnt use configs...
+    public static final ConfiguredFeature<?, ?> MAAR_DIATREME_GEN_CONFIG = ModFeatures.MAAR_DIATREME_GEN.get().withConfiguration(new NoFeatureConfig())
+            .withPlacement(ModFeaturePlacements.PIPE_CHANCE_PLACEMENT.get().configure(new ChanceConfig(100))); // Normally 300, larger is less likely
 
-//    public static final ConfiguredFeature<?, ?> ORE_PLACER_CONFIG = ModFeatures.ORE_PLACER_GEN.get().withConfiguration(new NoFeatureConfig())
-//            .withPlacement(Placement.TOP_SOLID_HEIGHTMAP.configure(IPlacementConfig.NO_PLACEMENT_CONFIG));
-
-        public static final ConfiguredFeature<?, ?> ORE_PLACER_CONFIG = ModFeatures.ORE_PLACER_GEN.get().withConfiguration(new NoFeatureConfig())
-                .withPlacement(ModFeaturePlacements.PLACER_CONSIST_PLACER.get().configure(IPlacementConfig.NO_PLACEMENT_CONFIG));
+    public static final ConfiguredFeature<?, ?> ORE_PLACER_CONFIG = ModFeatures.ORE_PLACER_GEN.get().withConfiguration(new NoFeatureConfig())
+            .withPlacement(ModFeaturePlacements.PLACER_CONSIST_PLACER.get().configure(IPlacementConfig.NO_PLACEMENT_CONFIG));
 
     private static <FC extends IFeatureConfig> void CFRegister(String name, ConfiguredFeature<FC, ?> configuredFeature) {
         Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(RekindleUnderground.MOD_ID, name), configuredFeature);
@@ -36,7 +33,7 @@ public class RKUndergroundFeatures {
 
     public static void registerConfiguredFeatures() {
         CFRegister("stone_generator", STONE_GEN_CONFIG);
-        CFRegister("mantle_pipe_generator", DIATREME_PIPE_GEN_CONFIG);
+        CFRegister("mantle_pipe_generator", MAAR_DIATREME_GEN_CONFIG);
     }
 
 }

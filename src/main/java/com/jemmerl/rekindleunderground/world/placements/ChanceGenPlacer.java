@@ -19,8 +19,8 @@ public class ChanceGenPlacer extends Placement<ChanceConfig> {
     @Override
     public Stream<BlockPos> getPositions(WorldDecoratingHelper helper, Random rand, ChanceConfig config, BlockPos pos) {
         if (rand.nextInt(config.chance) == 0) {
-            int i = rand.nextInt(16) + pos.getX();
-            int j = rand.nextInt(16) + pos.getZ();
+            int i = 7 + pos.getX();
+            int j = 7 + pos.getZ();
             int k = 1;
             return Stream.of(new BlockPos(i, k, j));
         }

@@ -21,7 +21,7 @@ public class WorldGen {
         List<LinkedHashMap.SimpleEntry<ConfiguredFeature<?, ?>, List<ResourceLocation>>> allStoneFeatures = new ArrayList<>();
 
         allStoneFeatures.add(new AbstractMap.SimpleEntry<>(RKUndergroundFeatures.STONE_GEN_CONFIG, null));
-        allStoneFeatures.add(new AbstractMap.SimpleEntry<>(RKUndergroundFeatures.DIATREME_PIPE_GEN_CONFIG, null));
+        allStoneFeatures.add(new AbstractMap.SimpleEntry<>(RKUndergroundFeatures.MAAR_DIATREME_GEN_CONFIG, null));
         allStoneFeatures.add(new AbstractMap.SimpleEntry<>(RKUndergroundFeatures.ORE_PLACER_CONFIG, null));
 
         //allStoneFeatures.add(new AbstractMap.SimpleEntry<>(RankineBiomeFeatures.WORLD_REPLACER_GEN, WorldgenUtils.getBiomeNamesFromCategory(Collections.emptyList(), false)));
