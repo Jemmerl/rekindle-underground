@@ -53,8 +53,8 @@ public class UtilMethods {
         return Math.hypot((a1 - a2), (b1 - b2));
     }
 
-    // Convert vanilla detritus to StoneOre detritus; If not convertible, return original state
-    public static BlockState convertToDetritus(BlockState vanillaState) {
+    // Convert vanilla detritus to OreBlock detritus; If not convertible, return original state
+    public static BlockState convertVanillaToDetritus(BlockState vanillaState) {
         return ModBlockLists.VANILLA_DET_LIST.getOrDefault(vanillaState, vanillaState);
     }
 

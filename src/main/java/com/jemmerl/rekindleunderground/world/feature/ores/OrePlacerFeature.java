@@ -91,7 +91,7 @@ public class OrePlacerFeature extends Feature<NoFeatureConfig>{
                     if ((rand.nextFloat() < densityPercent) &&
                             (UtilMethods.getHypotenuse(areaPos.getX(), areaPos.getZ(), centerPos.getX(), centerPos.getZ()) <= radius)) {
 
-                        BlockState hostState = UtilMethods.convertToDetritus(reader.getBlockState(areaPos));
+                        BlockState hostState = UtilMethods.convertVanillaToDetritus(reader.getBlockState(areaPos));
                         if (DepositUtil.isValidStone(hostState.getBlock(), placerDeposit.getValid())) {
                             // Check if the block already has an ore in it; if so, roll to replace
                             if (hostState.hasProperty(StoneOreBlock.ORE_TYPE) && (hostState.get(StoneOreBlock.ORE_TYPE) != OreType.NONE)) {

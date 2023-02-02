@@ -11,12 +11,17 @@ import com.jemmerl.rekindleunderground.util.ModBlockLists;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.LootTableProvider;
 import net.minecraft.data.loot.BlockLootTables;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.loot.*;
 import net.minecraft.loot.conditions.BlockStateProperty;
+import net.minecraft.loot.conditions.TableBonus;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
 
@@ -52,6 +57,10 @@ public class ModLootTableProvider extends LootTableProvider {
         @Override
         protected void addTables() {
 
+            ////////////////////////
+            // Stones Loot Tables //
+            ////////////////////////
+
             for (Block block : ModBlockLists.ALL_STONES) {
                 GeologyType geologyType = ((StoneOreBlock) block).getGeologyType();
                 GeoListWrapper geoList = ModBlockLists.GEO_LIST.get(geologyType);
@@ -73,21 +82,40 @@ public class ModLootTableProvider extends LootTableProvider {
                 registerDropSelfLootTable(block);
             }
 
+            //////////////////////////
+            // Detritus Loot Tables //
+            //////////////////////////
+
+            // Dirt
+            registerLootTable(ModBlocks.DIRT_STONE.get(), buildDetritusLootTable(Blocks.DIRT.getDefaultState()));
+
+            // Coarse Dirt
+            registerLootTable(ModBlocks.COARSE_DIRT_STONE.get(), buildDetritusLootTable(Blocks.COARSE_DIRT.getDefaultState()));
+
+            // Sand
+            registerLootTable(ModBlocks.SAND_STONE.get(), buildDetritusLootTable(Blocks.SAND.getDefaultState()));
+
+            // Red Sand
+            registerLootTable(ModBlocks.RED_SAND_STONE.get(), buildDetritusLootTable(Blocks.RED_SAND.getDefaultState()));
+
+            // Gravel -- lower flint drop rate
+            registerLootTable(ModBlocks.GRAVEL_STONE.get(), buildGravelDetritusLootTable());
+
+            // Clay -- may drop < 4 clay
+            registerLootTable(ModBlocks.CLAY_STONE.get(), buildClayDetritusLootTable());
+
             // Todo temp
-            for (Block block : ModBlockLists.ALL_DETRITUS) {
-                registerDropSelfLootTable(block);
-            }
-        }
-
-        @Override
-        protected Iterable<Block> getKnownBlocks() {
-            return ModBlocks.BLOCKS.getEntries().stream()
-                    .map(RegistryObject::get)
-                    .collect(Collectors.toList());
+//            for (Block block : ModBlockLists.ALL_DETRITUS) {
+//                registerDropSelfLootTable(block);
+//            }
         }
 
 
-        // Creates and fills a loot table with pools for each OreType
+        /////////////////////////
+        // Loot Table Builders //
+        /////////////////////////
+
+        // Creates and fills a loot table with pools for each OreType for stone blocks
         private static LootTable.Builder buildStoneLootTable(GeoListWrapper geoList) {
             LootTable.Builder lootTableBuilder = new LootTable.Builder();
 
@@ -96,11 +124,72 @@ public class ModLootTableProvider extends LootTableProvider {
                     .name(OreType.NONE.getString())
                     .rolls(BinomialRange.of(3, 0.65f))
                     .addEntry(ItemLootEntry.builder(geoList.getRockItem()))
-
             );
 
             // Add ore loot pools
-            // TODO make all drop some amount of small ore
+            fillOreTables(lootTableBuilder, geoList.getStoneOreBlock());
+
+            return lootTableBuilder;
+        }
+
+
+        // Creates and fills a loot table with pools for each OreType for detritus that drops itself
+        private static LootTable.Builder buildDetritusLootTable(BlockState vanillaState) {
+            LootTable.Builder lootTableBuilder = new LootTable.Builder();
+
+            // Loot pool for the detritus itself and "NONE" ore
+            lootTableBuilder.addLootPool(LootPool.builder()
+                    .name(OreType.NONE.getString())
+                    .addEntry(ItemLootEntry.builder(vanillaState.getBlock().asItem()))
+            );
+
+            // Add ore loot pools
+            fillOreTables(lootTableBuilder, ModBlockLists.VANILLA_DET_LIST.get(vanillaState).getBlock());
+
+            return lootTableBuilder;
+        }
+
+
+        // Create and fills a loot table with pools for each OreType for gravel detritus
+        private static LootTable.Builder buildGravelDetritusLootTable() {
+            LootTable.Builder lootTableBuilder = new LootTable.Builder();
+
+            // Gravel or flint loot pool for itself and "NONE" ore
+            lootTableBuilder.addLootPool(LootPool.builder()
+                    .name(OreType.NONE.getString())
+                    .addEntry(ItemLootEntry.builder(Items.FLINT)
+                            .acceptCondition(TableBonus.builder(Enchantments.FORTUNE, 0.1F, 0.14285715F, 0.25F, 1.0F))
+                            .alternatively(ItemLootEntry.builder(Blocks.GRAVEL)))
+            );
+
+            // Add ore loot pools
+            fillOreTables(lootTableBuilder, ModBlocks.GRAVEL_STONE.get());
+
+            return lootTableBuilder;
+        }
+
+
+        // Create and fills a loot table with pools for each OreType for clay detritus
+        private static LootTable.Builder buildClayDetritusLootTable() {
+            LootTable.Builder lootTableBuilder = new LootTable.Builder();
+
+            // Clay drops loot pool for the clay itself and "NONE" ore
+            lootTableBuilder.addLootPool(LootPool.builder()
+                    .name(OreType.NONE.getString())
+                    .rolls(BinomialRange.of(4, 0.6f))
+                    .addEntry(ItemLootEntry.builder(Items.CLAY_BALL))
+            );
+
+            // Add ore loot pools
+            fillOreTables(lootTableBuilder, ModBlocks.CLAY_STONE.get());
+
+            return lootTableBuilder;
+        }
+
+
+        // Add filled ore loot tables
+        // TODO make all drop some amount of small ore
+        private static void fillOreTables(LootTable.Builder lootTableBuilder, Block block) {
             for (OreType oreType : EnumSet.complementOf(EnumSet.of(OreType.NONE))) {
                 for (GradeType gradeType : GradeType.values()) {
                     String lootName;
@@ -125,14 +214,21 @@ public class ModLootTableProvider extends LootTableProvider {
                             .rolls(rollsIn)
                             .addEntry(ItemLootEntry.builder(Objects.requireNonNull(oreDropItem)))
                             .acceptCondition(BlockStateProperty
-                                    .builder(geoList.getStoneOreBlock())
+                                    .builder(block)
                                     .fromProperties(StatePropertiesPredicate.Builder.newBuilder()
                                             .withProp(ORE_TYPE, oreType)
                                             .withProp(GRADE_TYPE, gradeType))));
                 }
             }
-
-            return lootTableBuilder;
         }
+
+        // Don't worry about this.
+        @Override
+        protected Iterable<Block> getKnownBlocks() {
+            return ModBlocks.BLOCKS.getEntries().stream()
+                    .map(RegistryObject::get)
+                    .collect(Collectors.toList());
+        }
+
     }
 }

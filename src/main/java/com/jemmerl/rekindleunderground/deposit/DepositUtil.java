@@ -113,7 +113,7 @@ public class DepositUtil {
                 }
 
                 BlockState state = level.getBlockState(qPos);
-                state = UtilMethods.convertToDetritus(state); // Convert vanilla detritus to respective OreBlocks for comparison
+                state = UtilMethods.convertVanillaToDetritus(state); // Convert vanilla detritus to respective OreBlocks for comparison
 
                 if (isValidStone(state.getBlock(), qDeposit.getValid())) {
                     if (!level.setBlockState(qPos, state.with(StoneOreBlock.ORE_TYPE, qType).with(StoneOreBlock.GRADE_TYPE, qGrade), 2 | 16)) {
