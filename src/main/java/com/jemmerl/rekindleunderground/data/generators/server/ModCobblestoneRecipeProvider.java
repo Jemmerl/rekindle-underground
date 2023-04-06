@@ -2,8 +2,8 @@ package com.jemmerl.rekindleunderground.data.generators.server;
 
 import com.jemmerl.rekindleunderground.data.types.GeologyType;
 import com.jemmerl.rekindleunderground.init.ModTags;
-import com.jemmerl.rekindleunderground.util.GeoListWrapper;
-import com.jemmerl.rekindleunderground.util.ModBlockLists;
+import com.jemmerl.rekindleunderground.util.lists.GeoListWrapper;
+import com.jemmerl.rekindleunderground.util.lists.ModBlockLists;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.data.DataGenerator;

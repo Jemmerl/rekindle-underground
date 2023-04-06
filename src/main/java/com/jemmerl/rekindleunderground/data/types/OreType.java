@@ -1,14 +1,8 @@
 package com.jemmerl.rekindleunderground.data.types;
 
-import com.jemmerl.rekindleunderground.RekindleUnderground;
-import com.jemmerl.rekindleunderground.init.ModItemGroups;
-import com.jemmerl.rekindleunderground.util.ModOresList;
-import com.jemmerl.rekindleunderground.util.UtilMethods;
+import com.jemmerl.rekindleunderground.util.lists.ModOresList;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraft.util.IStringSerializable;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.registries.DeferredRegister;
 
 import java.util.*;
 

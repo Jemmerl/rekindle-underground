@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground.util;
+package com.jemmerl.rekindleunderground.util.lists;
 
 import com.jemmerl.rekindleunderground.data.types.GeologyType;
 import com.jemmerl.rekindleunderground.init.ModBlocks;

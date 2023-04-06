@@ -1,9 +1,6 @@
 package com.jemmerl.rekindleunderground.data.types;
 
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
-import com.jemmerl.rekindleunderground.util.ModBlockLists;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 
 import java.util.EnumSet;
 

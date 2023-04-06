@@ -36,7 +36,8 @@ public class RKUndergroundConfig {
         private static final boolean DEBUG_PLACER_DEPOSITS = false;
         private static final boolean DEBUG_BLOCK_ENQUEUER = false;
 
-
+        // TODO make placers and maar spawn in every chunk in registry, let config determine internal chance
+        // solves issue of registration with configs
 
         public final ForgeConfigSpec.ConfigValue<Integer> hardnessDepthFactor;
         public final ForgeConfigSpec.ConfigValue<Integer> regionSize;

@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground.util;
+package com.jemmerl.rekindleunderground.util.lists;
 
 import net.minecraft.item.Item;
 

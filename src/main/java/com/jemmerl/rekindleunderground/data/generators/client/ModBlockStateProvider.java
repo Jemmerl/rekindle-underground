@@ -1,8 +1,7 @@
 package com.jemmerl.rekindleunderground.data.generators.client;
 
-import com.jemmerl.rekindleunderground.blocks.FallingOreBlock;
 import com.jemmerl.rekindleunderground.blocks.StoneOreBlock;
-import com.jemmerl.rekindleunderground.util.ModBlockLists;
+import com.jemmerl.rekindleunderground.util.lists.ModBlockLists;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.client.model.generators.BlockStateProvider;

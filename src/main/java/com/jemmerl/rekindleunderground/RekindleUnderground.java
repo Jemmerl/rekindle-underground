@@ -3,7 +3,7 @@ package com.jemmerl.rekindleunderground;
 import com.jemmerl.rekindleunderground.init.ModBlocks;
 import com.jemmerl.rekindleunderground.deposit.DepositDataLoader;
 import com.jemmerl.rekindleunderground.init.ModItems;
-import com.jemmerl.rekindleunderground.util.ModBlockLists;
+import com.jemmerl.rekindleunderground.util.lists.ModBlockLists;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.world.capability.chunk.ChunkGennedCapProvider;
 import com.jemmerl.rekindleunderground.world.capability.chunk.ChunkGennedCapStorage;

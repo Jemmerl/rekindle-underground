@@ -51,6 +51,7 @@ public class StateMap {
 
     private void generateStateMap() {
         PopulateStrata();
+        PopulateIgneous();
         PopulateOres();
 
         // Mark that this chunk was generated

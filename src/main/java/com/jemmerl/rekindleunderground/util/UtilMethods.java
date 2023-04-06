@@ -1,6 +1,7 @@
 package com.jemmerl.rekindleunderground.util;
 
 import com.jemmerl.rekindleunderground.blocks.IOreBlock;
+import com.jemmerl.rekindleunderground.util.lists.ModBlockLists;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -8,7 +9,6 @@ import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.data.ForgeBlockTagsProvider;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Objects;
@@ -64,13 +64,23 @@ public class UtilMethods {
         return ModBlockLists.VANILLA_DET_LIST.getOrDefault(vanillaState, vanillaState);
     }
 
+    // Check if the block is some form of stone (vanilla or oreblock)
+    public static boolean isStoneBlock (Block block) {
+        return ((block instanceof IOreBlock) || block.isIn(Tags.Blocks.OBSIDIAN)
+        || block.isIn(BlockTags.BASE_STONE_OVERWORLD) || block.isIn(Tags.Blocks.ORES)
+        || block.equals(Blocks.SANDSTONE) || block.equals(Blocks.RED_SANDSTONE));
+    }
+
+    // Check if the block is some form of vanilla detritus
+    public static boolean isVanillaDetritus (Block block) {
+        return (block.isIn(Tags.Blocks.DIRT) || block.isIn(Tags.Blocks.SAND)
+                || block.isIn(Tags.Blocks.GRAVEL));
+    }
+
     // Check if the block is replaceable by igneous formations
     public static boolean igneousReplaceable(BlockState blockState) {
         Block replaced = blockState.getBlock();
-        return ((replaced instanceof IOreBlock) || replaced.isIn(Tags.Blocks.DIRT) || replaced.isIn(Tags.Blocks.SAND)
-                || replaced.isIn(Tags.Blocks.GRAVEL) || replaced.isIn(Tags.Blocks.OBSIDIAN))
-                || (replaced.isIn(BlockTags.BASE_STONE_OVERWORLD) || replaced.isIn(Tags.Blocks.ORES)
-                || replaced.equals(Blocks.SANDSTONE) || replaced.equals(Blocks.RED_SANDSTONE));
+        return (isStoneBlock(replaced) || isVanillaDetritus(replaced));
     }
 
 }
