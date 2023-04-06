@@ -30,7 +30,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         for (RegistryObject<Item> regItem : ModItems.ITEMS.getEntries()) {
             String path;
             path = regItem.getId().getPath();
-            if (!path.contains("_stone") && !path.contains("_cobblestone")) {
+            if (!path.contains("_stone") && !path.contains("_regolith") && !path.contains("_cobblestone")) {
                 getBuilder(path).parent(getExistingFile(mcLoc("item/generated"))).texture("layer0", "item/" + path);
             }
         }

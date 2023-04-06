@@ -10,6 +10,8 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.Locale;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ModBlockStateProvider extends BlockStateProvider {
 
@@ -20,7 +22,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
 
-        for (Block block : ModBlockLists.ALL_STONES) {
+        for (Block block : Stream.concat(ModBlockLists.ALL_STONES.stream(), ModBlockLists.ALL_REGOLITH.stream()).collect(Collectors.toList())) {
             // Generate stone ore model and block states
             String blockPath;
             blockPath = block.getRegistryName().getPath();

@@ -77,6 +77,14 @@ public class ModLootTableProvider extends LootTableProvider {
                 }
             }
 
+            for (Block block : ModBlockLists.ALL_REGOLITH) {
+                GeologyType geologyType = ((StoneOreBlock) block).getGeologyType();
+                GeoListWrapper geoList = ModBlockLists.GEO_LIST.get(geologyType);
+
+                LootTable.Builder lootTable = buildRegolithLootTable(geoList);
+                registerLootTable(block, lootTable);
+            }
+
 
             for (Block block : ModBlockLists.COBBLESTONES) {
                 registerDropSelfLootTable(block);
@@ -128,6 +136,22 @@ public class ModLootTableProvider extends LootTableProvider {
             return lootTableBuilder;
         }
 
+        // Creates and fills a loot table with pools for each OreType for regolith blocks
+        private static LootTable.Builder buildRegolithLootTable(GeoListWrapper geoList) {
+            Block regolithBlock = geoList.getRegolithBlock();
+            LootTable.Builder lootTableBuilder = new LootTable.Builder();
+
+            // Loot pool for normal regolith, "NONE" ore
+            lootTableBuilder.addLootPool(LootPool.builder()
+                    .name(OreType.NONE.getString())
+                    .addEntry(ItemLootEntry.builder(regolithBlock.asItem()))
+            );
+
+            // Add ore loot pools
+            fillOreTables(lootTableBuilder, regolithBlock);
+
+            return lootTableBuilder;
+        }
 
         // Creates and fills a loot table with pools for each OreType for detritus that drops itself
         private static LootTable.Builder buildDetritusLootTable(BlockState vanillaState) {

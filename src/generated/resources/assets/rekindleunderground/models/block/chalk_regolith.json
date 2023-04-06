@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "rekindleunderground:block/chalk_regolith",
+    "up": "rekindleunderground:block/chalk_regolith",
+    "down": "rekindleunderground:block/chalk_regolith",
+    "north": "rekindleunderground:block/chalk_regolith",
+    "south": "rekindleunderground:block/chalk_regolith",
+    "east": "rekindleunderground:block/chalk_regolith",
+    "west": "rekindleunderground:block/chalk_regolith"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "rekindleunderground:block/stone_ore_parent",
+  "textures": {
+    "all": "rekindleunderground:block/granite_regolith",
+    "particle": "rekindleunderground:block/granite_regolith",
+    "overlay": "rekindleunderground:block/ore/rich_magnetite"
+  }
+}

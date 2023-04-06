@@ -1,0 +1,8 @@
+{
+  "parent": "rekindleunderground:block/stone_ore_parent",
+  "textures": {
+    "all": "rekindleunderground:block/gneiss_regolith",
+    "particle": "rekindleunderground:block/gneiss_regolith",
+    "overlay": "rekindleunderground:block/ore/poor_trona"
+  }
+}

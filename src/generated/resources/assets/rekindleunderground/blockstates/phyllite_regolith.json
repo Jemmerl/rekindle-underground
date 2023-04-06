@@ -1,0 +1,454 @@
+{
+  "variants": {
+    "gradetype=highgrade,oretype=none": {
+      "model": "rekindleunderground:block/phyllite_regolith"
+    },
+    "gradetype=midgrade,oretype=none": {
+      "model": "rekindleunderground:block/phyllite_regolith"
+    },
+    "gradetype=lowgrade,oretype=none": {
+      "model": "rekindleunderground:block/phyllite_regolith"
+    },
+    "gradetype=highgrade,oretype=apatite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_apatite"
+    },
+    "gradetype=midgrade,oretype=apatite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/apatite"
+    },
+    "gradetype=lowgrade,oretype=apatite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_apatite"
+    },
+    "gradetype=highgrade,oretype=azurite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_azurite"
+    },
+    "gradetype=midgrade,oretype=azurite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/azurite"
+    },
+    "gradetype=lowgrade,oretype=azurite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_azurite"
+    },
+    "gradetype=highgrade,oretype=baryte": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_baryte"
+    },
+    "gradetype=midgrade,oretype=baryte": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/baryte"
+    },
+    "gradetype=lowgrade,oretype=baryte": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_baryte"
+    },
+    "gradetype=highgrade,oretype=beryl": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_beryl"
+    },
+    "gradetype=midgrade,oretype=beryl": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/beryl"
+    },
+    "gradetype=lowgrade,oretype=beryl": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_beryl"
+    },
+    "gradetype=highgrade,oretype=bismuthinite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_bismuthinite"
+    },
+    "gradetype=midgrade,oretype=bismuthinite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/bismuthinite"
+    },
+    "gradetype=lowgrade,oretype=bismuthinite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_bismuthinite"
+    },
+    "gradetype=highgrade,oretype=carnotite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_carnotite"
+    },
+    "gradetype=midgrade,oretype=carnotite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/carnotite"
+    },
+    "gradetype=lowgrade,oretype=carnotite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_carnotite"
+    },
+    "gradetype=highgrade,oretype=cassiterite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_cassiterite"
+    },
+    "gradetype=midgrade,oretype=cassiterite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/cassiterite"
+    },
+    "gradetype=lowgrade,oretype=cassiterite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_cassiterite"
+    },
+    "gradetype=highgrade,oretype=celestine": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_celestine"
+    },
+    "gradetype=midgrade,oretype=celestine": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/celestine"
+    },
+    "gradetype=lowgrade,oretype=celestine": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_celestine"
+    },
+    "gradetype=highgrade,oretype=chalcopyrite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_chalcopyrite"
+    },
+    "gradetype=midgrade,oretype=chalcopyrite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/chalcopyrite"
+    },
+    "gradetype=lowgrade,oretype=chalcopyrite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_chalcopyrite"
+    },
+    "gradetype=highgrade,oretype=chromite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_chromite"
+    },
+    "gradetype=midgrade,oretype=chromite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/chromite"
+    },
+    "gradetype=lowgrade,oretype=chromite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_chromite"
+    },
+    "gradetype=highgrade,oretype=cinnabar": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_cinnabar"
+    },
+    "gradetype=midgrade,oretype=cinnabar": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/cinnabar"
+    },
+    "gradetype=lowgrade,oretype=cinnabar": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_cinnabar"
+    },
+    "gradetype=highgrade,oretype=cobaltite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_cobaltite"
+    },
+    "gradetype=midgrade,oretype=cobaltite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/cobaltite"
+    },
+    "gradetype=lowgrade,oretype=cobaltite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_cobaltite"
+    },
+    "gradetype=highgrade,oretype=cryolite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_cryolite"
+    },
+    "gradetype=midgrade,oretype=cryolite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/cryolite"
+    },
+    "gradetype=lowgrade,oretype=cryolite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_cryolite"
+    },
+    "gradetype=highgrade,oretype=diamond": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_diamond"
+    },
+    "gradetype=midgrade,oretype=diamond": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/diamond"
+    },
+    "gradetype=lowgrade,oretype=diamond": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_diamond"
+    },
+    "gradetype=highgrade,oretype=electrum": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_electrum"
+    },
+    "gradetype=midgrade,oretype=electrum": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/electrum"
+    },
+    "gradetype=lowgrade,oretype=electrum": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_electrum"
+    },
+    "gradetype=highgrade,oretype=fluorite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_fluorite"
+    },
+    "gradetype=midgrade,oretype=fluorite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/fluorite"
+    },
+    "gradetype=lowgrade,oretype=fluorite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_fluorite"
+    },
+    "gradetype=highgrade,oretype=galena": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_galena"
+    },
+    "gradetype=midgrade,oretype=galena": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/galena"
+    },
+    "gradetype=lowgrade,oretype=galena": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_galena"
+    },
+    "gradetype=highgrade,oretype=goethite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_goethite"
+    },
+    "gradetype=midgrade,oretype=goethite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/goethite"
+    },
+    "gradetype=lowgrade,oretype=goethite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_goethite"
+    },
+    "gradetype=highgrade,oretype=graphite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_graphite"
+    },
+    "gradetype=midgrade,oretype=graphite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/graphite"
+    },
+    "gradetype=lowgrade,oretype=graphite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_graphite"
+    },
+    "gradetype=highgrade,oretype=hematite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_hematite"
+    },
+    "gradetype=midgrade,oretype=hematite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/hematite"
+    },
+    "gradetype=lowgrade,oretype=hematite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_hematite"
+    },
+    "gradetype=highgrade,oretype=ilmenite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_ilmenite"
+    },
+    "gradetype=midgrade,oretype=ilmenite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/ilmenite"
+    },
+    "gradetype=lowgrade,oretype=ilmenite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_ilmenite"
+    },
+    "gradetype=highgrade,oretype=lepidolite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_lepidolite"
+    },
+    "gradetype=midgrade,oretype=lepidolite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/lepidolite"
+    },
+    "gradetype=lowgrade,oretype=lepidolite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_lepidolite"
+    },
+    "gradetype=highgrade,oretype=limonite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_limonite"
+    },
+    "gradetype=midgrade,oretype=limonite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/limonite"
+    },
+    "gradetype=lowgrade,oretype=limonite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_limonite"
+    },
+    "gradetype=highgrade,oretype=magnesite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_magnesite"
+    },
+    "gradetype=midgrade,oretype=magnesite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/magnesite"
+    },
+    "gradetype=lowgrade,oretype=magnesite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_magnesite"
+    },
+    "gradetype=highgrade,oretype=magnetite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_magnetite"
+    },
+    "gradetype=midgrade,oretype=magnetite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/magnetite"
+    },
+    "gradetype=lowgrade,oretype=magnetite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_magnetite"
+    },
+    "gradetype=highgrade,oretype=malachite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_malachite"
+    },
+    "gradetype=midgrade,oretype=malachite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/malachite"
+    },
+    "gradetype=lowgrade,oretype=malachite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_malachite"
+    },
+    "gradetype=highgrade,oretype=molybdenite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_molybdenite"
+    },
+    "gradetype=midgrade,oretype=molybdenite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/molybdenite"
+    },
+    "gradetype=lowgrade,oretype=molybdenite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_molybdenite"
+    },
+    "gradetype=highgrade,oretype=monazite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_monazite"
+    },
+    "gradetype=midgrade,oretype=monazite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/monazite"
+    },
+    "gradetype=lowgrade,oretype=monazite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_monazite"
+    },
+    "gradetype=highgrade,oretype=native_copper": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_native_copper"
+    },
+    "gradetype=midgrade,oretype=native_copper": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/native_copper"
+    },
+    "gradetype=lowgrade,oretype=native_copper": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_native_copper"
+    },
+    "gradetype=highgrade,oretype=native_gold": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_native_gold"
+    },
+    "gradetype=midgrade,oretype=native_gold": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/native_gold"
+    },
+    "gradetype=lowgrade,oretype=native_gold": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_native_gold"
+    },
+    "gradetype=highgrade,oretype=native_sulfur": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_native_sulfur"
+    },
+    "gradetype=midgrade,oretype=native_sulfur": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/native_sulfur"
+    },
+    "gradetype=lowgrade,oretype=native_sulfur": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_native_sulfur"
+    },
+    "gradetype=highgrade,oretype=pentlandite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_pentlandite"
+    },
+    "gradetype=midgrade,oretype=pentlandite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/pentlandite"
+    },
+    "gradetype=lowgrade,oretype=pentlandite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_pentlandite"
+    },
+    "gradetype=highgrade,oretype=pollucite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_pollucite"
+    },
+    "gradetype=midgrade,oretype=pollucite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/pollucite"
+    },
+    "gradetype=lowgrade,oretype=pollucite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_pollucite"
+    },
+    "gradetype=highgrade,oretype=psilomelane": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_psilomelane"
+    },
+    "gradetype=midgrade,oretype=psilomelane": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/psilomelane"
+    },
+    "gradetype=lowgrade,oretype=psilomelane": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_psilomelane"
+    },
+    "gradetype=highgrade,oretype=pyrite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_pyrite"
+    },
+    "gradetype=midgrade,oretype=pyrite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/pyrite"
+    },
+    "gradetype=lowgrade,oretype=pyrite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_pyrite"
+    },
+    "gradetype=highgrade,oretype=pyrochlore": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_pyrochlore"
+    },
+    "gradetype=midgrade,oretype=pyrochlore": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/pyrochlore"
+    },
+    "gradetype=lowgrade,oretype=pyrochlore": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_pyrochlore"
+    },
+    "gradetype=highgrade,oretype=pyrolusite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_pyrolusite"
+    },
+    "gradetype=midgrade,oretype=pyrolusite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/pyrolusite"
+    },
+    "gradetype=lowgrade,oretype=pyrolusite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_pyrolusite"
+    },
+    "gradetype=highgrade,oretype=rutile": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_rutile"
+    },
+    "gradetype=midgrade,oretype=rutile": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rutile"
+    },
+    "gradetype=lowgrade,oretype=rutile": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_rutile"
+    },
+    "gradetype=highgrade,oretype=scheelite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_scheelite"
+    },
+    "gradetype=midgrade,oretype=scheelite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/scheelite"
+    },
+    "gradetype=lowgrade,oretype=scheelite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_scheelite"
+    },
+    "gradetype=highgrade,oretype=smithsonite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_smithsonite"
+    },
+    "gradetype=midgrade,oretype=smithsonite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/smithsonite"
+    },
+    "gradetype=lowgrade,oretype=smithsonite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_smithsonite"
+    },
+    "gradetype=highgrade,oretype=sphalerite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_sphalerite"
+    },
+    "gradetype=midgrade,oretype=sphalerite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/sphalerite"
+    },
+    "gradetype=lowgrade,oretype=sphalerite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_sphalerite"
+    },
+    "gradetype=highgrade,oretype=spodumene": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_spodumene"
+    },
+    "gradetype=midgrade,oretype=spodumene": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/spodumene"
+    },
+    "gradetype=lowgrade,oretype=spodumene": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_spodumene"
+    },
+    "gradetype=highgrade,oretype=stibnite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_stibnite"
+    },
+    "gradetype=midgrade,oretype=stibnite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/stibnite"
+    },
+    "gradetype=lowgrade,oretype=stibnite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_stibnite"
+    },
+    "gradetype=highgrade,oretype=sylvite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_sylvite"
+    },
+    "gradetype=midgrade,oretype=sylvite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/sylvite"
+    },
+    "gradetype=lowgrade,oretype=sylvite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_sylvite"
+    },
+    "gradetype=highgrade,oretype=tantalite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_tantalite"
+    },
+    "gradetype=midgrade,oretype=tantalite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/tantalite"
+    },
+    "gradetype=lowgrade,oretype=tantalite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_tantalite"
+    },
+    "gradetype=highgrade,oretype=tetrahedrite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_tetrahedrite"
+    },
+    "gradetype=midgrade,oretype=tetrahedrite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/tetrahedrite"
+    },
+    "gradetype=lowgrade,oretype=tetrahedrite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_tetrahedrite"
+    },
+    "gradetype=highgrade,oretype=trona": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_trona"
+    },
+    "gradetype=midgrade,oretype=trona": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/trona"
+    },
+    "gradetype=lowgrade,oretype=trona": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_trona"
+    },
+    "gradetype=highgrade,oretype=uraninite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_uraninite"
+    },
+    "gradetype=midgrade,oretype=uraninite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/uraninite"
+    },
+    "gradetype=lowgrade,oretype=uraninite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_uraninite"
+    },
+    "gradetype=highgrade,oretype=wolframite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/rich_wolframite"
+    },
+    "gradetype=midgrade,oretype=wolframite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/wolframite"
+    },
+    "gradetype=lowgrade,oretype=wolframite": {
+      "model": "rekindleunderground:block/stoneore/phyllite_regolith/poor_wolframite"
+    }
+  }
+}

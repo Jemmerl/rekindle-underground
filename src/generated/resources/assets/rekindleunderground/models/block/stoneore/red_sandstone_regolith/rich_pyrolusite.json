@@ -1,0 +1,8 @@
+{
+  "parent": "rekindleunderground:block/stone_ore_parent",
+  "textures": {
+    "all": "rekindleunderground:block/red_sandstone_regolith",
+    "particle": "rekindleunderground:block/red_sandstone_regolith",
+    "overlay": "rekindleunderground:block/ore/rich_pyrolusite"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "rekindleunderground:block/vein_quartz_regolith",
+    "up": "rekindleunderground:block/vein_quartz_regolith",
+    "down": "rekindleunderground:block/vein_quartz_regolith",
+    "north": "rekindleunderground:block/vein_quartz_regolith",
+    "south": "rekindleunderground:block/vein_quartz_regolith",
+    "east": "rekindleunderground:block/vein_quartz_regolith",
+    "west": "rekindleunderground:block/vein_quartz_regolith"
+  }
+}
