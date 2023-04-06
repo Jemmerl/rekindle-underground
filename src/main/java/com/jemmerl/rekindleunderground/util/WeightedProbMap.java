@@ -33,6 +33,10 @@ public class WeightedProbMap<EltType> {
         return view.get(view.lastKey());
     }
 
+    public boolean isEmpty() {
+        return elts.isEmpty();
+    }
+
 }
 
 

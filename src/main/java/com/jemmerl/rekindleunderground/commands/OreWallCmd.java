@@ -34,16 +34,11 @@ public class OreWallCmd {
     private int placeOreWall(CommandSource source, BlockPos pos, String oreString) throws CommandSyntaxException {
         ServerWorld serverworld = source.getWorld();
 
-        System.out.println("okay1");
-
         OreType oreType = null;
-        System.out.println("okay21");
         try {
-            System.out.println("okay22");
+            // todo Error does not output if incorrect ore name
             oreType = OreType.valueOf(oreString.toUpperCase());
-            System.out.println("okay23");
         } catch (Error e) {
-            System.out.println("NOTOKAY");
             throw new SimpleCommandExceptionType(new StringTextComponent("Ore-wall placement failed! Invalid ore name.")).create();
         }
 
@@ -55,16 +50,11 @@ public class OreWallCmd {
         for (Block oreBlock : ModBlockLists.ALL_OREBLOCKS) {
             BlockState state = oreBlock.getDefaultState();
 
-            System.out.println("okay oreblock");
-            System.out.println(oreBlock.getDefaultState().toString());
-
             TileEntity tileentity = serverworld.getTileEntity(pos.up(y).north(x));
             IClearable.clearObj(tileentity);
             if (!serverworld.setBlockState(pos.up(y).north(x), state.with(StoneOreBlock.ORE_TYPE, oreType), 2)) {
                 throw new SimpleCommandExceptionType(new StringTextComponent("Ore-wall placement failed!")).create();
             }
-
-            System.out.println("okay placed");
 
             if (y < 4) {
                 y++;
@@ -73,8 +63,6 @@ public class OreWallCmd {
                 y = 1;
             }
         }
-
-        System.out.println("okay5");
 
         source.sendFeedback(new StringTextComponent("Placed ores-wall with ore " + oreString + "!"), true);
         return 1;

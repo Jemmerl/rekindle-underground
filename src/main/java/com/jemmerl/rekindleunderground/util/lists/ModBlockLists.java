@@ -100,8 +100,7 @@ public class ModBlockLists {
             ModBlocks.DACITE_REGOLITH.get(),
             ModBlocks.ANDESITE_REGOLITH.get(),
             ModBlocks.BASALT_REGOLITH.get(),
-            ModBlocks.SCORIA_REGOLITH.get(),
-            ModBlocks.TUFF_REGOLITH.get()
+            ModBlocks.SCORIA_REGOLITH.get()
     );
 
     public static List<Block> INT_REGOLITH = Arrays.asList(
@@ -122,7 +121,6 @@ public class ModBlockLists {
             ModBlocks.ANDESITE_REGOLITH.get(),
             ModBlocks.BASALT_REGOLITH.get(),
             ModBlocks.SCORIA_REGOLITH.get(),
-            ModBlocks.TUFF_REGOLITH.get(),
             ModBlocks.DIORITE_REGOLITH.get(),
             ModBlocks.GRANODIORITE_REGOLITH.get(),
             ModBlocks.GRANITE_REGOLITH.get(),
@@ -235,10 +233,10 @@ public class ModBlockLists {
         GEO_LIST.put(GeologyType.RED_SANDSTONE, new GeoListWrapper(ModBlocks.RED_SANDSTONE_STONE.get(), ModBlocks.RED_SANDSTONE_COBBLE.get(), ModBlocks.RED_SANDSTONE_REGOLITH.get(), ModItems.RED_SANDSTONE_ROCK.get()));
         GEO_LIST.put(GeologyType.GREYWACKE, new GeoListWrapper(ModBlocks.GREYWACKE_STONE.get(), ModBlocks.GREYWACKE_COBBLE.get(), ModBlocks.GREYWACKE_REGOLITH.get(), ModItems.GREYWACKE_ROCK.get()));
         GEO_LIST.put(GeologyType.MUDSTONE, new GeoListWrapper(ModBlocks.MUDSTONE_STONE.get(), ModBlocks.MUDSTONE_COBBLE.get(), ModBlocks.MUDSTONE_REGOLITH.get(), ModItems.MUDSTONE_ROCK.get()));
-        GEO_LIST.put(GeologyType.ROCKSALT, new GeoListWrapper(ModBlocks.ROCKSALT_STONE.get(), null, null, null));
-        GEO_LIST.put(GeologyType.ROCKGYPSUM, new GeoListWrapper(ModBlocks.ROCKGYPSUM_STONE.get(), null, null, null));
-        GEO_LIST.put(GeologyType.BORAX, new GeoListWrapper(ModBlocks.BORAX_STONE.get(), null, null, null));
-        GEO_LIST.put(GeologyType.KERNITE, new GeoListWrapper(ModBlocks.KERNITE_STONE.get(), null, null, null));
+        GEO_LIST.put(GeologyType.ROCKSALT, new GeoListWrapper(ModBlocks.ROCKSALT_STONE.get(), null, ModBlocks.ROCKSALT_STONE.get(), null));
+        GEO_LIST.put(GeologyType.ROCKGYPSUM, new GeoListWrapper(ModBlocks.ROCKGYPSUM_STONE.get(), null, ModBlocks.ROCKGYPSUM_STONE.get(), null));
+        GEO_LIST.put(GeologyType.BORAX, new GeoListWrapper(ModBlocks.BORAX_STONE.get(), null, ModBlocks.BORAX_STONE.get(), null));
+        GEO_LIST.put(GeologyType.KERNITE, new GeoListWrapper(ModBlocks.KERNITE_STONE.get(), null, ModBlocks.KERNITE_STONE.get(), null));
         GEO_LIST.put(GeologyType.VEIN_QUARTZ, new GeoListWrapper(ModBlocks.VEIN_QUARTZ_STONE.get(), ModBlocks.VEIN_QUARTZ_COBBLE.get(), ModBlocks.VEIN_QUARTZ_REGOLITH.get(), ModItems.VEIN_QUARTZ_ROCK.get()));
 
         // Igneous Extrusive
@@ -247,7 +245,7 @@ public class ModBlockLists {
         GEO_LIST.put(GeologyType.ANDESITE, new GeoListWrapper(ModBlocks.ANDESITE_STONE.get(), ModBlocks.ANDESITE_COBBLE.get(), ModBlocks.ANDESITE_REGOLITH.get(), ModItems.ANDESITE_ROCK.get()));
         GEO_LIST.put(GeologyType.BASALT, new GeoListWrapper(ModBlocks.BASALT_STONE.get(), ModBlocks.BASALT_COBBLE.get(), ModBlocks.BASALT_REGOLITH.get(), ModItems.BASALT_ROCK.get()));
         GEO_LIST.put(GeologyType.SCORIA, new GeoListWrapper(ModBlocks.SCORIA_STONE.get(), null, ModBlocks.SCORIA_REGOLITH.get(), null));
-        GEO_LIST.put(GeologyType.TUFF, new GeoListWrapper(ModBlocks.TUFF_STONE.get(), null, ModBlocks.TUFF_REGOLITH.get(), null));
+        GEO_LIST.put(GeologyType.TUFF, new GeoListWrapper(ModBlocks.TUFF_STONE.get(), null, ModBlocks.TUFF_STONE.get(), null));
 
         // Igneous Intrusive
         GEO_LIST.put(GeologyType.DIORITE, new GeoListWrapper(ModBlocks.DIORITE_STONE.get(), ModBlocks.DIORITE_COBBLE.get(), ModBlocks.DIORITE_REGOLITH.get(), ModItems.DIORITE_ROCK.get()));

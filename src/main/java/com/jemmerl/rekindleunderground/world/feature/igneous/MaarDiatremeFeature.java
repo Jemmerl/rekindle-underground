@@ -3,16 +3,20 @@ package com.jemmerl.rekindleunderground.world.feature.igneous;
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.blocks.IOreBlock;
 import com.jemmerl.rekindleunderground.blocks.StoneOreBlock;
+import com.jemmerl.rekindleunderground.data.types.GeologyType;
 import com.jemmerl.rekindleunderground.data.types.GradeType;
 import com.jemmerl.rekindleunderground.data.types.OreType;
+import com.jemmerl.rekindleunderground.data.types.StoneGroupType;
 import com.jemmerl.rekindleunderground.init.ModBlocks;
 import com.jemmerl.rekindleunderground.init.NoiseInit;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.util.Pair;
 import com.jemmerl.rekindleunderground.util.UtilMethods;
 import com.jemmerl.rekindleunderground.util.WeightedProbMap;
+import com.jemmerl.rekindleunderground.util.lists.ModBlockLists;
 import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredBlobNoise;
 import com.mojang.serialization.Codec;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -127,8 +131,10 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
         // DIATREME GENERATION //
         /////////////////////////
 
-        HashMap<BlockState, Integer> brecciaMap = new HashMap<>(); // Count replaced stones gen breccia
+        HashMap<BlockState, Integer> brecciaMap = new HashMap<>(); // Count the relative amounts of replaced stones for breccia ratios
+        int brecciaCount = 0; // Count the overall number of recorded replaced stones
         ArrayList<BlockPos> brecciaPosList = new ArrayList<>(); // Store locations to place breccia
+        ArrayList<BlockPos> regolithPosList = new ArrayList<>(); // Store locations to place regolith
 
         for (int y = 1; y < diatreme_height; y++) {
             for (BlockPos blockPos : BlockPos.getAllInBoxMutable(pos.add(-MAX_DIATREME_RADIUS, 0, -MAX_DIATREME_RADIUS), pos.add(MAX_DIATREME_RADIUS, 0, MAX_DIATREME_RADIUS))) {
@@ -152,12 +158,36 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
                         brecciaPosList.add(currPos);
                     } else {
                         // Record what block was replaced for later brecciation
-                        updateBrecciaMap(brecciaMap, replacedBlock);
+                        brecciaCount += updateBrecciaMap(brecciaMap, replacedBlock);
                         placeDiamondiferousBlock(rand, reader, currPos, mainIgnBlock, diamondiferous, diamondPercent);
                     }
                 }
             }
         }
+
+
+        /////////////////
+        // BRECCIA MAP //
+        /////////////////
+
+        ArrayList<Pair<Integer, BlockState>> elts = new ArrayList<>();
+        if (brecciaCount > 0) {
+            // Sort breccias into weighted map entries
+            int weightSum = 0; // Used to catch (most likely impossible) 100-percent overflows
+            for (BlockState key : brecciaMap.keySet()) {
+                int weight = (brecciaMap.get(key) * 100) / brecciaCount;
+
+                weightSum += weight;
+                if (weightSum > 100) {
+                    weight -= (weightSum - 100);
+                }
+
+                if (weight > 0) {
+                    elts.add(new Pair<>(weight, key));
+                }
+            }
+        }
+        WeightedProbMap<BlockState> brecciaProbMap = new WeightedProbMap<>(elts);
 
 
         /////////////////////
@@ -189,8 +219,8 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
                                 // 45% Chance of tuff + 10% chance from brecca == 55% chance overall
                                 reader.setBlockState(currPos, ModBlocks.TUFF_STONE.get().getDefaultState(), 2);
                             } else if (randInt > 15) {
-                                // 40% Chance of breccia (which gives 10% chance of tuff itself, giving 30% chance of true breccia)
-                                brecciaPosList.add(currPos);
+                                // 40% Chance of regolith (which gives 10% chance of tuff itself, giving 30% chance of true regolith)
+                                regolithPosList.add(currPos);
                             } else {
                                 // 15% Chance of main igneous
                                 reader.setBlockState(currPos, mainIgnBlock, 2);
@@ -198,7 +228,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
                         }
                     } else {
                         // Ejecta generation
-                        generateEjecta(rand, reader, currPos, mainIgnBlock, diamondiferous, diamondPercent, brecciaPosList);
+                        generateEjecta(rand, reader, currPos, mainIgnBlock, diamondiferous, diamondPercent, regolithPosList);
                     }
                 }
             }
@@ -224,7 +254,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
                     }
 
                     // Ejecta generation
-                    generateEjecta(rand, reader, currPos, mainIgnBlock, diamondiferous, diamondPercent, brecciaPosList);
+                    generateEjecta(rand, reader, currPos, mainIgnBlock, diamondiferous, diamondPercent, regolithPosList);
                 }
             }
         }
@@ -234,35 +264,12 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
         /// BRECCIA HANDLING ///
         ////////////////////////
 
-        // Sum the total number of counted breccia
-        int totalBreccia = brecciaMap.values().stream().reduce(0, Integer::sum);
-
-        // Place breccias into diatreme
         if (!brecciaPosList.isEmpty()) {
-            if (totalBreccia > 0) {
-                ArrayList<Pair<Integer, BlockState>> elts = new ArrayList<>();
-
-                // Sort breccias into weighted map entries
-                int weightSum = 0; // Used to catch (most likely impossible) 100-percent overflows
-                for (BlockState key : brecciaMap.keySet()) {
-                    int weight = (brecciaMap.get(key) * 100) / totalBreccia;
-
-                    weightSum += weight;
-                    if (weightSum > 100) {
-                        weight -= (weightSum - 100);
-                    }
-
-                    if (weight > 0) {
-                        elts.add(new Pair<>(weight, key));
-                    }
-                }
-
-                // Build weighted map and fill each designated breccia position with weighted random breccia
-                WeightedProbMap<BlockState> wpm = new WeightedProbMap<>(elts);
+            if (!brecciaProbMap.isEmpty()) {
                 for (BlockPos brecciaPos : brecciaPosList) {
                     // 25% chance of tuff
                     if (rand.nextFloat() < 0.75f) {
-                        reader.setBlockState(brecciaPos, wpm.nextElt(), 2);
+                        reader.setBlockState(brecciaPos, brecciaProbMap.nextElt(), 2);
                     } else {
                         reader.setBlockState(brecciaPos, ModBlocks.TUFF_STONE.get().getDefaultState(), 2);
                     }
@@ -281,6 +288,21 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
             }
         }
 
+
+        /////////////////////////
+        /// REGOLITH HANDLING ///
+        /////////////////////////
+
+        if (!regolithPosList.isEmpty()) {
+            boolean emptyProbMap = brecciaProbMap.isEmpty();
+            for (BlockPos regolithPos : regolithPosList) {
+                GeologyType regolithType = ((StoneOreBlock) (((!emptyProbMap && (rand.nextFloat() > 0.35f)) ? brecciaProbMap.nextElt() : mainIgnBlock).getBlock())).getGeologyType();
+                BlockState regolithState = (ModBlockLists.GEO_LIST.get(regolithType).getRegolithBlock().getDefaultState());
+                placeDiamondiferousBlock(rand, reader, regolithPos, regolithState, diamondiferous, diamondPercent);
+            }
+        }
+
+
         // Debug
         if (RKUndergroundConfig.COMMON.debug_diatreme_maar.get()) {
             for (int i = 0; i < 10; i++) {
@@ -288,6 +310,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
             }
         }
 
+        // Finish maar-diatreme generation
         return true;
     }
 
@@ -297,8 +320,9 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
     /////////////////////
 
     // Add a replaced block to the breccia counter map
-    private static void updateBrecciaMap(HashMap<BlockState, Integer> brecciaMap, BlockState replaced) {
-        if (replaced.getBlock() instanceof IOreBlock) {
+    private static int updateBrecciaMap(HashMap<BlockState, Integer> brecciaMap, BlockState replaced) {
+        Block replacedBlock = replaced.getBlock();
+        if (replacedBlock instanceof IOreBlock && !(((IOreBlock) replacedBlock).getStoneGroupType().equals(StoneGroupType.DETRITUS))) {
             // If map entry exists, add to it. Else, start a new entry
             if (brecciaMap.containsKey(replaced)) {
                 int prevVal = brecciaMap.get(replaced);
@@ -306,18 +330,17 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
             } else {
                 brecciaMap.put(replaced, 1);
             }
+            return 1;
         }
+        return 0;
     }
 
 
     // Place an ejecta block
     private static void generateEjecta(Random rand, ISeedReader reader, BlockPos currPos, BlockState mainIgnBlock,
-                                       Boolean diamondiferous, float diamondPercent, ArrayList<BlockPos> brecciaPosList) {
-        int randInt = rand.nextInt(101);
-        if (randInt > 95) {
-            placeDiamondiferousBlock(rand, reader, currPos, mainIgnBlock, diamondiferous, diamondPercent);
-        } else if (randInt > 85) {
-            brecciaPosList.add(currPos);
+                                       Boolean diamondiferous, float diamondPercent, ArrayList<BlockPos> regolithPosList) {
+        if (rand.nextFloat() > 0.65f) {
+            regolithPosList.add(currPos);
         } else {
             setFillBlock(rand, reader, currPos, diamondiferous, diamondPercent);
         }
@@ -331,19 +354,17 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
         int height = reader.getHeight(Heightmap.Type.WORLD_SURFACE_WG, currPos).getY() - 1;
 
         // Get appropriate infill
-        if (currPos.getY() < height) {
-            fillState = surfaceConfig.getUnder();
-        } else if (currPos.getY() == height) {
+        if (currPos.getY() == height) {
             fillState = surfaceConfig.getTop();
         } else {
-            // This really should not occur...
-            fillState = surfaceConfig.getUnder();
+            fillState = (rand.nextFloat() > 0.20f) ? surfaceConfig.getUnder() : ModBlocks.TUFF_STONE.get().getDefaultState();
 
             // Debug
-            if (RKUndergroundConfig.COMMON.debug_diatreme_maar.get()) {
+            if (RKUndergroundConfig.COMMON.debug_diatreme_maar.get() && (currPos.getY() > height)) {
                 RekindleUnderground.getInstance().LOGGER.info("Placed an unexpected maar-fill block at {}", currPos);
             }
         }
+        //fillState = surfaceConfig.getUnderWaterMaterial(); need to cast to (SurfaceBuilderConfig)
 
         if (UtilMethods.convertVanillaToDetritus(fillState) instanceof IOreBlock) {
             // Places fill block with a fourth of the chance as the normal diatreme to have diamonds (if diamondiferous)
@@ -351,14 +372,12 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
         } else {
             reader.setBlockState(currPos, fillState, 2);
         }
-
-        //fillState = surfaceConfig.getUnderWaterMaterial(); need to cast to (SurfaceBuilderConfig)
-
     }
 
 
     // Place potentially diamondiferous block
-    private static void placeDiamondiferousBlock(Random rand, ISeedReader reader, BlockPos currPos, BlockState blockState, Boolean diamondiferous, float diamondPercent) {
+    private static void placeDiamondiferousBlock(Random rand, ISeedReader reader, BlockPos currPos,
+                                                 BlockState blockState, Boolean diamondiferous, float diamondPercent) {
         if (diamondiferous && (rand.nextFloat() < diamondPercent)) {
             blockState = UtilMethods.convertVanillaToDetritus(blockState);
 
