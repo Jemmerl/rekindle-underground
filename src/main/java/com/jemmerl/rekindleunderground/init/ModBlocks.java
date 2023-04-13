@@ -65,7 +65,6 @@ public class ModBlocks {
     public static final RegistryObject<Block> SYENITE_STONE = registerBlock(GeologyType.SYENITE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.SYENITE), GeologyType.SYENITE), 64);
     public static final RegistryObject<Block> GABBRO_STONE = registerBlock(GeologyType.GABBRO.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.GABBRO), GeologyType.GABBRO), 64);
     public static final RegistryObject<Block> DIABASE_STONE = registerBlock(GeologyType.DIABASE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.DIABASE), GeologyType.DIABASE), 64);
-    public static final RegistryObject<Block> PERIDOTITE_STONE = registerBlock(GeologyType.PERIDOTITE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.PERIDOTITE), GeologyType.PERIDOTITE), 64);
     public static final RegistryObject<Block> KIMBERLITE_STONE = registerBlock(GeologyType.KIMBERLITE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.KIMBERLITE), GeologyType.KIMBERLITE), 64);
     public static final RegistryObject<Block> LAMPROITE_STONE = registerBlock(GeologyType.LAMPROITE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.LAMPROITE), GeologyType.LAMPROITE), 64);
 
@@ -105,7 +104,6 @@ public class ModBlocks {
     public static final RegistryObject<Block> SYENITE_COBBLE = registerBlock(GeologyType.SYENITE.getName() + "_cobblestone", () -> new Block(buildCobbleProperties(GeologyType.SYENITE)), 64);
     public static final RegistryObject<Block> GABBRO_COBBLE = registerBlock(GeologyType.GABBRO.getName() + "_cobblestone", () -> new Block(buildCobbleProperties(GeologyType.GABBRO)), 64);
     public static final RegistryObject<Block> DIABASE_COBBLE = registerBlock(GeologyType.DIABASE.getName() + "_cobblestone", () -> new Block(buildCobbleProperties(GeologyType.DIABASE)), 64);
-    public static final RegistryObject<Block> PERIDOTITE_COBBLE = registerBlock(GeologyType.PERIDOTITE.getName() + "_cobblestone", () -> new Block(buildCobbleProperties(GeologyType.PERIDOTITE)), 64);
     public static final RegistryObject<Block> KIMBERLITE_COBBLE = registerBlock(GeologyType.KIMBERLITE.getName() + "_cobblestone", () -> new Block(buildCobbleProperties(GeologyType.KIMBERLITE)), 64);
     public static final RegistryObject<Block> LAMPROITE_COBBLE = registerBlock(GeologyType.LAMPROITE.getName() + "_cobblestone", () -> new Block(buildCobbleProperties(GeologyType.LAMPROITE)), 64);
 
@@ -146,7 +144,6 @@ public class ModBlocks {
     public static final RegistryObject<Block> SYENITE_REGOLITH = registerBlock(GeologyType.SYENITE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.SYENITE), 64);
     public static final RegistryObject<Block> GABBRO_REGOLITH = registerBlock(GeologyType.GABBRO.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.GABBRO), 64);
     public static final RegistryObject<Block> DIABASE_REGOLITH = registerBlock(GeologyType.DIABASE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.DIABASE), 64);
-    public static final RegistryObject<Block> PERIDOTITE_REGOLITH = registerBlock(GeologyType.PERIDOTITE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.PERIDOTITE), 64);
     public static final RegistryObject<Block> KIMBERLITE_REGOLITH = registerBlock(GeologyType.KIMBERLITE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.KIMBERLITE), 64);
     public static final RegistryObject<Block> LAMPROITE_REGOLITH = registerBlock(GeologyType.LAMPROITE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.LAMPROITE), 64);
 

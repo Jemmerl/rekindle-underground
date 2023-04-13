@@ -44,7 +44,6 @@ public class ModBlockLists {
             ModBlocks.SYENITE_STONE.get(),
             ModBlocks.GABBRO_STONE.get(),
             ModBlocks.DIABASE_STONE.get(),
-            ModBlocks.PERIDOTITE_STONE.get(),
             ModBlocks.KIMBERLITE_STONE.get(),
             ModBlocks.LAMPROITE_STONE.get()
     );
@@ -65,7 +64,6 @@ public class ModBlockLists {
             ModBlocks.SYENITE_STONE.get(),
             ModBlocks.GABBRO_STONE.get(),
             ModBlocks.DIABASE_STONE.get(),
-            ModBlocks.PERIDOTITE_STONE.get(),
             ModBlocks.KIMBERLITE_STONE.get(),
             ModBlocks.LAMPROITE_STONE.get()
     );
@@ -110,7 +108,6 @@ public class ModBlockLists {
             ModBlocks.SYENITE_REGOLITH.get(),
             ModBlocks.GABBRO_REGOLITH.get(),
             ModBlocks.DIABASE_REGOLITH.get(),
-            ModBlocks.PERIDOTITE_REGOLITH.get(),
             ModBlocks.KIMBERLITE_REGOLITH.get(),
             ModBlocks.LAMPROITE_REGOLITH.get()
     );
@@ -127,7 +124,6 @@ public class ModBlockLists {
             ModBlocks.SYENITE_REGOLITH.get(),
             ModBlocks.GABBRO_REGOLITH.get(),
             ModBlocks.DIABASE_REGOLITH.get(),
-            ModBlocks.PERIDOTITE_REGOLITH.get(),
             ModBlocks.KIMBERLITE_REGOLITH.get(),
             ModBlocks.LAMPROITE_REGOLITH.get()
     );
@@ -187,7 +183,6 @@ public class ModBlockLists {
             ModBlocks.SYENITE_COBBLE.get(),
             ModBlocks.GABBRO_COBBLE.get(),
             ModBlocks.DIABASE_COBBLE.get(),
-            ModBlocks.PERIDOTITE_COBBLE.get(),
             ModBlocks.KIMBERLITE_COBBLE.get(),
             ModBlocks.LAMPROITE_COBBLE.get(),
 
@@ -254,7 +249,6 @@ public class ModBlockLists {
         GEO_LIST.put(GeologyType.SYENITE, new GeoListWrapper(ModBlocks.SYENITE_STONE.get(), ModBlocks.SYENITE_COBBLE.get(), ModBlocks.SYENITE_REGOLITH.get(), ModItems.SYENITE_ROCK.get()));
         GEO_LIST.put(GeologyType.GABBRO, new GeoListWrapper(ModBlocks.GABBRO_STONE.get(), ModBlocks.GABBRO_COBBLE.get(), ModBlocks.GABBRO_REGOLITH.get(), ModItems.GABBRO_ROCK.get()));
         GEO_LIST.put(GeologyType.DIABASE, new GeoListWrapper(ModBlocks.DIABASE_STONE.get(), ModBlocks.DIABASE_COBBLE.get(), ModBlocks.DIABASE_REGOLITH.get(), ModItems.DIABASE_ROCK.get()));
-        GEO_LIST.put(GeologyType.PERIDOTITE, new GeoListWrapper(ModBlocks.PERIDOTITE_STONE.get(), ModBlocks.PERIDOTITE_COBBLE.get(), ModBlocks.PERIDOTITE_REGOLITH.get(), ModItems.PERIDOTITE_ROCK.get()));
         GEO_LIST.put(GeologyType.KIMBERLITE, new GeoListWrapper(ModBlocks.KIMBERLITE_STONE.get(), ModBlocks.KIMBERLITE_COBBLE.get(), ModBlocks.KIMBERLITE_REGOLITH.get(), ModItems.KIMBERLITE_ROCK.get()));
         GEO_LIST.put(GeologyType.LAMPROITE, new GeoListWrapper(ModBlocks.LAMPROITE_STONE.get(), ModBlocks.LAMPROITE_COBBLE.get(), ModBlocks.LAMPROITE_REGOLITH.get(), ModItems.LAMPROITE_ROCK.get()));
 

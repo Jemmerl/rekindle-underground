@@ -1,8 +1,0 @@
-{
-  "parent": "rekindleunderground:block/stone_ore_parent",
-  "textures": {
-    "all": "rekindleunderground:block/peridotite_regolith",
-    "particle": "rekindleunderground:block/peridotite_regolith",
-    "overlay": "rekindleunderground:block/ore/poor_pyrolusite"
-  }
-}

@@ -2320,6 +2320,78 @@
       ]
     },
     {
+      "name": "peridotite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:peridotite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:mudstone_stone",
+          "properties": {
+            "oretype": "peridotite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "peridotite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:peridotite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:mudstone_stone",
+          "properties": {
+            "oretype": "peridotite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "peridotite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "rekindleunderground:poor_peridotite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "rekindleunderground:mudstone_stone",
+          "properties": {
+            "oretype": "peridotite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
       "name": "pollucite_highgrade",
       "rolls": {
         "min": 2.0,

@@ -36,7 +36,6 @@ public enum GeologyType {
     SYENITE("syenite", StoneGroupType.INTRUSIVE, true, 4, 4),
     GABBRO("gabbro", StoneGroupType.INTRUSIVE, true, 4, 4),
     DIABASE("diabase", StoneGroupType.INTRUSIVE, true, 4, 4),
-    PERIDOTITE("peridotite", StoneGroupType.INTRUSIVE, true, 3, 3),
     KIMBERLITE("kimberlite", StoneGroupType.INTRUSIVE, true, 3, 3),
     LAMPROITE("lamproite", StoneGroupType.INTRUSIVE, true, 3, 3),
 

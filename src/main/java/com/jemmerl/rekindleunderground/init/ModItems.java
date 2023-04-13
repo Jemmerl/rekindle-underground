@@ -43,7 +43,6 @@ public class ModItems {
     public static final RegistryObject<Item> SYENITE_ROCK = registerRockItem(GeologyType.SYENITE);
     public static final RegistryObject<Item> GABBRO_ROCK = registerRockItem(GeologyType.GABBRO);
     public static final RegistryObject<Item> DIABASE_ROCK = registerRockItem(GeologyType.DIABASE);
-    public static final RegistryObject<Item> PERIDOTITE_ROCK = registerRockItem(GeologyType.PERIDOTITE);
     public static final RegistryObject<Item> KIMBERLITE_ROCK = registerRockItem(GeologyType.KIMBERLITE);
     public static final RegistryObject<Item> LAMPROITE_ROCK = registerRockItem(GeologyType.LAMPROITE);
 
@@ -153,6 +152,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> PENTLANDITE_ORE = registerOreItem(OreType.PENTLANDITE);
     public static final RegistryObject<Item> POOR_PENTLANDITE_ORE = registerPoorOreItem(OreType.PENTLANDITE);
+
+    public static final RegistryObject<Item> PERIDOTITE_ORE = registerOreItem(OreType.PERIDOTITE);
+    public static final RegistryObject<Item> POOR_PERIDOTITE_ORE = registerPoorOreItem(OreType.PERIDOTITE);
 
     public static final RegistryObject<Item> POLLUCITE_ORE = registerOreItem(OreType.POLLUCITE);
     public static final RegistryObject<Item> POOR_POLLUCITE_ORE = registerPoorOreItem(OreType.POLLUCITE);

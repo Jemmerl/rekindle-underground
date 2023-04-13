@@ -297,6 +297,15 @@
     "gradetype=lowgrade,oretype=pentlandite": {
       "model": "rekindleunderground:block/stoneore/quartzite_stone/poor_pentlandite"
     },
+    "gradetype=highgrade,oretype=peridotite": {
+      "model": "rekindleunderground:block/stoneore/quartzite_stone/rich_peridotite"
+    },
+    "gradetype=midgrade,oretype=peridotite": {
+      "model": "rekindleunderground:block/stoneore/quartzite_stone/peridotite"
+    },
+    "gradetype=lowgrade,oretype=peridotite": {
+      "model": "rekindleunderground:block/stoneore/quartzite_stone/poor_peridotite"
+    },
     "gradetype=highgrade,oretype=pollucite": {
       "model": "rekindleunderground:block/stoneore/quartzite_stone/rich_pollucite"
     },

@@ -44,6 +44,7 @@ public class ModOresList {
         ORE_LIST.put(OreType.NATIVE_GOLD, new OreListWrapper(ModItems.NATIVE_GOLD_ORE.get(), ModItems.POOR_NATIVE_GOLD_ORE.get()));
         ORE_LIST.put(OreType.NATIVE_SULFUR, new OreListWrapper(ModItems.NATIVE_SULFUR_ORE.get(), ModItems.POOR_NATIVE_SULFUR_ORE.get()));
         ORE_LIST.put(OreType.PENTLANDITE, new OreListWrapper(ModItems.PENTLANDITE_ORE.get(), ModItems.POOR_PENTLANDITE_ORE.get()));
+        ORE_LIST.put(OreType.PERIDOTITE, new OreListWrapper(ModItems.PERIDOTITE_ORE.get(), ModItems.POOR_PERIDOTITE_ORE.get()));
         ORE_LIST.put(OreType.POLLUCITE, new OreListWrapper(ModItems.POLLUCITE_ORE.get(), ModItems.POOR_POLLUCITE_ORE.get()));
         ORE_LIST.put(OreType.PSILOMELANE, new OreListWrapper(ModItems.PSILOMELANE_ORE.get(), ModItems.POOR_PSILOMELANE_ORE.get()));
         ORE_LIST.put(OreType.PYRITE, new OreListWrapper(ModItems.PYRITE_ORE.get(), ModItems.POOR_PYRITE_ORE.get()));

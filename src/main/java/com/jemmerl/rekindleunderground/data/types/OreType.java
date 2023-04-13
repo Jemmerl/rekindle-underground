@@ -40,6 +40,7 @@ public enum OreType implements IStringSerializable{
     NATIVE_GOLD("native_gold"),
     NATIVE_SULFUR("native_sulfur"),
     PENTLANDITE("pentlandite"),
+    PERIDOTITE("peridotite"),
     POLLUCITE("pollucite"),
     PSILOMELANE("psilomelane"),
     PYRITE("pyrite"),

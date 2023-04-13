@@ -33,7 +33,6 @@ fill ~ ~ ~ ~16 10 ~16 air replace rekindleunderground:granite_stone[oretype=none
 fill ~ ~ ~ ~16 10 ~16 air replace rekindleunderground:syenite_stone[oretype=none]
 fill ~ ~ ~ ~16 10 ~16 air replace rekindleunderground:gabbro_stone[oretype=none]
 fill ~ ~ ~ ~16 10 ~16 air replace rekindleunderground:diabase_stone[oretype=none]
-fill ~ ~ ~ ~16 10 ~16 air replace rekindleunderground:peridotite_stone[oretype=none]
 fill ~ ~ ~ ~16 10 ~16 air replace rekindleunderground:kimberlite_stone[oretype=none]
 fill ~ ~ ~ ~16 10 ~16 air replace rekindleunderground:lamproite_stone[oretype=none]
 
