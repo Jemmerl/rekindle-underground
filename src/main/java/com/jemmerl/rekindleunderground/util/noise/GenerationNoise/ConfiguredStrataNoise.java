@@ -89,15 +89,15 @@ public class ConfiguredStrataNoise {
                 break;
         }
 
-        // Replace sandstones with MY sandstone >:)
-        // Note: Sandstone replacement is done now rather than at state-map placement to allow ores to generate in it
-        BlockState original = reader.getBlockState(new BlockPos(x, y, z));
-        if (original.getBlock().equals(Blocks.SANDSTONE)) {
-            blockState = UtilMethods.stringToBlockState("rekindleunderground:sandstone_stone");
-        }
-        if (original.getBlock().equals(Blocks.RED_SANDSTONE)) {
-            blockState = UtilMethods.stringToBlockState("rekindleunderground:red_sandstone_stone");
-        }
+//        // Replace sandstones with MY sandstone >:)
+//        // Note: Sandstone replacement is done now rather than at state-map placement to allow ores to generate in it
+//        BlockState original = reader.getBlockState(new BlockPos(x, y, z));
+//        if (original.getBlock().equals(Blocks.SANDSTONE)) {
+//            blockState = UtilMethods.stringToBlockState("rekindleunderground:sandstone_stone");
+//        }
+//        if (original.getBlock().equals(Blocks.RED_SANDSTONE)) {
+//            blockState = UtilMethods.stringToBlockState("rekindleunderground:red_sandstone_stone");
+//        }
 
         return blockState;
     }

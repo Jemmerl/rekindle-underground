@@ -47,7 +47,7 @@
     {"name": "sed_carbonate", "blocks": ["rekindleunderground:chalk_stone", "rekindleunderground:limestone_stone", "rekindleunderground:dolostone_stone"]},
     {"name": "sed_evaporate", "blocks": ["rekindleunderground:rocksalt_stone", "rekindleunderground:rockgypsum_stone", "rekindleunderground:borax_stone", "rekindleunderground:kernite_stone"]},
     {"name": "ign_ext_main", "blocks": ["rekindleunderground:dacite_stone", "rekindleunderground:andesite_stone", "rekindleunderground:basalt_stone"]},
-    {"name": "ign_ext_aux", "blocks": ["rekindleunderground:rhyolite_stone", "rekindleunderground:scoria_stone", "minecraft:obsidian"]},
+    {"name": "ign_ext_aux", "blocks": ["rekindleunderground:rhyolite_stone", "rekindleunderground:scoria_stone"]},
     {"name": "metamorphic", "blocks": ["rekindleunderground:quartzite_stone", "rekindleunderground:schist_stone", "rekindleunderground:phyllite_stone", "rekindleunderground:gneiss_stone", "rekindleunderground:marble_stone"]}
   ]
 }

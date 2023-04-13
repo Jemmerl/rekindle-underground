@@ -1,19 +1,27 @@
 package com.jemmerl.rekindleunderground.world.feature.stones;
 
+import com.jemmerl.rekindleunderground.RekindleUnderground;
+import com.jemmerl.rekindleunderground.blocks.IOreBlock;
+import com.jemmerl.rekindleunderground.blocks.StoneOreBlock;
+import com.jemmerl.rekindleunderground.init.NoiseInit;
+import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
+import com.jemmerl.rekindleunderground.util.ReplaceableStatus;
+import com.jemmerl.rekindleunderground.util.UtilMethods;
+import com.jemmerl.rekindleunderground.util.lists.ModBlockLists;
+import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredBlobNoise;
 import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredRegionNoise;
 import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredStrataNoise;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraftforge.common.Tags;
 
 import java.util.Random;
 
@@ -23,17 +31,11 @@ public class StoneGenFeature extends Feature<NoFeatureConfig> {
         super(codec);
     }
 
-    private static boolean setSeed = false;
-    private static long worldSeed;
-
     @Override
     public boolean generate(ISeedReader seedReader, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 
-        if (!setSeed) {
-            worldSeed = seedReader.getSeed();
-            ConfiguredRegionNoise.configNoise(worldSeed);
-            ConfiguredStrataNoise.configNoise(worldSeed);
-            setSeed = true;
+        if (!NoiseInit.configured) {
+            NoiseInit.init(seedReader.getSeed());
         }
 
         ChunkReader chunkReader = new ChunkReader(seedReader, pos);
@@ -46,46 +48,52 @@ public class StoneGenFeature extends Feature<NoFeatureConfig> {
 
     private void processChunk(ISeedReader reader, ChunkReader chunkReader, StateMap stateMap, BlockPos pos) {
         IChunk chunk = reader.getChunk(pos);
-        BlockPos.Mutable mutable = new BlockPos.Mutable();
+        BlockPos.Mutable mutablePos = new BlockPos.Mutable();
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
                 int posX = pos.getX() + x;
                 int posZ = pos.getZ() + z;
-                mutable.setPos(posX, 0, posZ);
+                mutablePos.setPos(posX, 0, posZ);
 
                 int topY = chunkReader.getMaxHeightVal(x, z);
+
                 for (int y = 0; y < topY; y++) {
-                    BlockState original = chunk.getBlockState(mutable); // Block that generated in vanilla
-                    BlockState replacing = stateMap.getStoneState(x, y, z); // Mod stone block attempting to generate
-                    //replaced = replaceBlock(original, replacing); // The method returns the block that *will* be placed
+                    mutablePos.setY(y);
 
-                    if (replaceStone(original)) {
-                        chunk.getSections()[y >> 4].setBlockState(x, y & 15, z, replacing, false);
+                    BlockState stoneState = stateMap.getStoneState(x, y, z);
+                    switch (UtilMethods.replaceableStatus(chunk.getBlockState(mutablePos))) {
+                        case FAILED:
+                        case OREBLOCK_STONE:
+                        case OREBLOCK_DETRITUS:
+                            break;
+                        case VANILLA_STONE:
+                            chunk.getSections()[y >> 4].setBlockState(x, y & 15, z, stoneState, false);
+                            break;
+                        case VANILLA_DETRITUS:
+                            if (y <= (topY - getDepth(mutablePos.toImmutable()))) {
+                                BlockState regolith = ModBlockLists.GEO_LIST.get(((StoneOreBlock) stoneState.getBlock()).getGeologyType())
+                                        .getRegolithBlock().getDefaultState();
+
+                                // Add ore properties from original stone
+                                regolith = regolith.with(StoneOreBlock.GRADE_TYPE, stoneState.get(StoneOreBlock.GRADE_TYPE))
+                                        .with(StoneOreBlock.ORE_TYPE, stoneState.get(StoneOreBlock.ORE_TYPE));
+                                chunk.getSections()[y >> 4].setBlockState(x, y & 15, z, regolith, false);
+                            }
+                            break;
+                        default:
+                            RekindleUnderground.getInstance().LOGGER.warn("Unexpected block condition in Stone Generation replacement; contact mod dev!");
                     }
-
-                    mutable.move(Direction.UP);
                 }
             }
         }
     }
 
-    private BlockState replaceBlock(BlockState original, BlockState replacing) {
-        if ((replacing != null) &&
-                (original.isIn(BlockTags.BASE_STONE_OVERWORLD) || original.isIn(Tags.Blocks.ORES))
-                || original.getBlock().equals(Blocks.SANDSTONE) || original.getBlock().equals(Blocks.RED_SANDSTONE)) {
-            return replacing;
-        } else {
-            return original;
-        }
-    }
-
-    // Check if the block being replaced is a valid for OreBlock replacement
-    private Boolean replaceStone(BlockState original) {
-        return (original.isIn(BlockTags.BASE_STONE_OVERWORLD) || original.isIn(Tags.Blocks.ORES)
-                || original.getBlock().equals(Blocks.SANDSTONE) || original.getBlock().equals(Blocks.RED_SANDSTONE));
+    private int getDepth(BlockPos pos) {
+        return Math.round((Math.abs(ConfiguredBlobNoise.blobRadiusNoise((pos.getX() * 2), 0, (pos.getZ() * 2))) * 3) + 3);
     }
 
 }
+
 
 
 /*

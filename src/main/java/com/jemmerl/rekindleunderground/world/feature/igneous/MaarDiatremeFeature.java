@@ -11,6 +11,7 @@ import com.jemmerl.rekindleunderground.init.ModBlocks;
 import com.jemmerl.rekindleunderground.init.NoiseInit;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.util.Pair;
+import com.jemmerl.rekindleunderground.util.ReplaceableStatus;
 import com.jemmerl.rekindleunderground.util.UtilMethods;
 import com.jemmerl.rekindleunderground.util.WeightedProbMap;
 import com.jemmerl.rekindleunderground.util.lists.ModBlockLists;
@@ -27,7 +28,6 @@ import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.surfacebuilders.ISurfaceBuilderConfig;
-import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -149,16 +149,17 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
                     BlockState replacedBlock = reader.getBlockState(currPos);
 
                     // Check if valid placement
-                    if (!UtilMethods.igneousReplaceable(replacedBlock)) {
+                    if (UtilMethods.replaceableStatus(replacedBlock).equals(ReplaceableStatus.FAILED)) {
                         continue;
                     }
+
+                    // Record what block was replaced for later brecciation
+                    brecciaCount += updateBrecciaMap(brecciaMap, replacedBlock);
 
                     // A higher adjustment value means less breccia overall
                     if ((rand.nextFloat() + 0.18f) < (distance / radius)) {
                         brecciaPosList.add(currPos);
                     } else {
-                        // Record what block was replaced for later brecciation
-                        brecciaCount += updateBrecciaMap(brecciaMap, replacedBlock);
                         placeDiamondiferousBlock(rand, reader, currPos, mainIgnBlock, diamondiferous, diamondPercent);
                     }
                 }
@@ -207,7 +208,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
                     BlockState replacedBlock = reader.getBlockState(currPos);
 
                     // Check if valid placement
-                    if (!UtilMethods.igneousReplaceable(replacedBlock)) {
+                    if (UtilMethods.replaceableStatus(replacedBlock).equals(ReplaceableStatus.FAILED)) {
                         continue;
                     }
 
@@ -249,7 +250,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
                     BlockState replacedBlock = reader.getBlockState(currPos);
 
                     // Check if valid placement
-                    if (!UtilMethods.igneousReplaceable(replacedBlock)) {
+                    if (UtilMethods.replaceableStatus(replacedBlock).equals(ReplaceableStatus.FAILED)) {
                         continue;
                     }
 
