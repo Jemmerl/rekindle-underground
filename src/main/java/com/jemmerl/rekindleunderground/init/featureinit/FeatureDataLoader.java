@@ -58,13 +58,13 @@ public class FeatureDataLoader extends JsonReloadListener {
                 }
 
                 // Sort and add deposits
-                switch (jsonObj.get("deposit_type").getAsString()) {
+                switch (jsonObj.get("feature_type").getAsString()) {
                     case "dike_sill":
                         // Parse the settings json element into a LayerTemplate and then use to create a LayerDeposit
                         featureRegistrar.addDikeSillFeature(name, new DikeSillEntry(
                                 GSON.fromJson(jsonObj.get("settings"), DikeSillTemplate.class))
                                         .setName(name)
-                                        .setStone(FeatureUtil.getGenStone(jsonObj.get("stone").getAsJsonObject())));
+                                        .setStone(FeatureUtil.getGenStone(jsonObj.get("stone"))));
                         RekindleUnderground.getInstance().LOGGER.info("Successfully loaded generation feature: {}", rl);
                         break;
 
@@ -81,6 +81,10 @@ public class FeatureDataLoader extends JsonReloadListener {
                 }
             }
         });
+
+        // temp test
+        //FeatureRegistrar.shuffle();
+
     }
 
 }

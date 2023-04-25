@@ -1,5 +1,6 @@
 package com.jemmerl.rekindleunderground.geology.features;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.data.types.GeologyType;
@@ -13,11 +14,11 @@ public class FeatureUtil {
     ////////////////////////
 
     // Read in a generated feature's stone
-    public static GeologyType getGenStone(JsonObject jsonObject) {
+    public static GeologyType getGenStone(JsonElement jsonElement) {
         GeologyType geologyType;
 
         try {
-            String oreStoneStr = jsonObject.getAsString().toUpperCase();
+            String oreStoneStr = jsonElement.getAsString().toUpperCase();
             geologyType = GeologyType.valueOf(oreStoneStr);
         } catch (Exception e) {
             RekindleUnderground.getInstance().LOGGER.warn("Error in a feature's generation stone reading.");

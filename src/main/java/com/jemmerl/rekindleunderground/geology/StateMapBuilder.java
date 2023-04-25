@@ -100,10 +100,10 @@ public class StateMapBuilder {
                     // DO THAT HERE
 
                     // Populate dike/sills
-//                    BlockState dikeSillState = DikeSillGen.generate(posX, y, posZ);
-//                    if (dikeSillState != null) {
-//                        this.stoneStateMap[x][y][z] = dikeSillState;
-//                    }
+                    BlockState dikeSillState = DikeSillGen.generate(posX, y, posZ);
+                    if (dikeSillState != null) {
+                        this.stoneStateMap[x][y][z] = dikeSillState;
+                    }
                 }
             }
         }

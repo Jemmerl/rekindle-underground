@@ -181,10 +181,10 @@ public class RKUndergroundConfig {
                     .define("Debug Diatreme-Maars", DEBUG_DIATREME_MAAR);
             this.debug_test_genfeatures = builder.comment("Enable generated features for testing (have \"test\" in their name) debug mode")
                     .worldRestart()
-                    .define("Debug Test Deposits", DEBUG_TEST_GENFEATURES);
+                    .define("Debug Test Generated Features", DEBUG_TEST_GENFEATURES);
             this.debug_genfeature_reader = builder.comment("Enable generated feature config reader debug mode")
                     .worldRestart()
-                    .define("Debug Deposit Reader", DEBUG_GENFEATURES_READER);
+                    .define("Debug Generated Features Reader", DEBUG_GENFEATURES_READER);
             this.debug_test_deposits = builder.comment("Enable deposits for testing (have \"test\" in their name) debug mode")
                     .worldRestart()
                     .define("Debug Test Deposits", DEBUG_TEST_DEPOSITS);

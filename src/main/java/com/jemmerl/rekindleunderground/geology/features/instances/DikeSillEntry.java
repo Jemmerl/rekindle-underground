@@ -10,6 +10,7 @@ public class DikeSillEntry {
     private String name;
     private GeologyType genStone;
 
+
     public DikeSillEntry(DikeSillTemplate template) {
         this.dikeSillTemplate = template;
     }
@@ -39,6 +40,10 @@ public class DikeSillEntry {
 
     public GeologyType getStone() {
         return this.genStone;
+    }
+
+    public int getInteg() {
+        return this.dikeSillTemplate.getInteg();
     }
 
 
