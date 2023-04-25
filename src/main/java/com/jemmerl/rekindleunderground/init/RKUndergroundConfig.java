@@ -30,6 +30,8 @@ public class RKUndergroundConfig {
 
         // Debug options
         private static final boolean DEBUG_DIATREME_MAAR = true;
+        private static final boolean DEBUG_TEST_GENFEATURES = true;
+        private static final boolean DEBUG_GENFEATURES_READER = false;
         private static final boolean DEBUG_TEST_DEPOSITS = true;
         private static final boolean DEBUG_DEPOSIT_READER = false;
         private static final boolean DEBUG_LAYER_DEPOSITS = false;
@@ -61,6 +63,8 @@ public class RKUndergroundConfig {
         public final ForgeConfigSpec.ConfigValue<Boolean> gen_maar_diatremes;
 
         public final ForgeConfigSpec.ConfigValue<Boolean> debug_diatreme_maar;
+        public final ForgeConfigSpec.ConfigValue<Boolean> debug_test_genfeatures;
+        public final ForgeConfigSpec.ConfigValue<Boolean> debug_genfeature_reader;
         public final ForgeConfigSpec.ConfigValue<Boolean> debug_test_deposits;
         public final ForgeConfigSpec.ConfigValue<Boolean> debug_deposit_reader;
         public final ForgeConfigSpec.ConfigValue<Boolean> debug_layer_deposits;
@@ -175,7 +179,13 @@ public class RKUndergroundConfig {
             this.debug_diatreme_maar = builder.comment("Enable diatreme-maar debug mode")
                     .worldRestart()
                     .define("Debug Diatreme-Maars", DEBUG_DIATREME_MAAR);
-            this.debug_test_deposits = builder.comment("Enable test deposits (have \"test\" in their name) debug mode")
+            this.debug_test_genfeatures = builder.comment("Enable generated features for testing (have \"test\" in their name) debug mode")
+                    .worldRestart()
+                    .define("Debug Test Deposits", DEBUG_TEST_GENFEATURES);
+            this.debug_genfeature_reader = builder.comment("Enable generated feature config reader debug mode")
+                    .worldRestart()
+                    .define("Debug Deposit Reader", DEBUG_GENFEATURES_READER);
+            this.debug_test_deposits = builder.comment("Enable deposits for testing (have \"test\" in their name) debug mode")
                     .worldRestart()
                     .define("Debug Test Deposits", DEBUG_TEST_DEPOSITS);
             this.debug_deposit_reader = builder.comment("Enable deposit config reader debug mode")

@@ -90,7 +90,7 @@ public class DepositDataLoader extends JsonReloadListener {
                 RekindleUnderground.getInstance().LOGGER.warn("Error reading deposit type: {}", rl);
 
                 // Debug
-                if (RKUndergroundConfig.COMMON.debug_test_deposits.get()) {
+                if (RKUndergroundConfig.COMMON.debug_deposit_reader.get()) {
                     e.printStackTrace();
                 }
             }

@@ -1,0 +1,8 @@
+{
+  "name": "testfeatureone",
+  "feature_type": "dike_sill",
+  "settings": {
+    "integ": 1
+  },
+  "stone": "kimberlite"
+}

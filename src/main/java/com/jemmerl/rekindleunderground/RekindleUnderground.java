@@ -1,6 +1,7 @@
 package com.jemmerl.rekindleunderground;
 
 import com.jemmerl.rekindleunderground.init.*;
+import com.jemmerl.rekindleunderground.init.FeatureDataLoader;
 import com.jemmerl.rekindleunderground.init.depositinit.DepositDataLoader;
 import com.jemmerl.rekindleunderground.util.lists.ModBlockLists;
 import com.jemmerl.rekindleunderground.world.capability.chunk.ChunkGennedCapProvider;
@@ -46,7 +47,7 @@ public class RekindleUnderground
     public final Logger LOGGER = LogManager.getLogger();
 
     public static DepositDataLoader DEPOSIT_DATA_LOADER = new DepositDataLoader();
-    //public static FeatureDataLoader FEATURE_DATA_LOADER = new FeatureDataLoader();
+    public static FeatureDataLoader FEATURE_DATA_LOADER = new FeatureDataLoader();
 
     public RekindleUnderground() {
         instance = this;
