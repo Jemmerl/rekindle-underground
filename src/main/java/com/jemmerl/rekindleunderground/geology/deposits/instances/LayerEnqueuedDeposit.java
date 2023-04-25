@@ -1,13 +1,13 @@
-package com.jemmerl.rekindleunderground.deposit.generators;
+package com.jemmerl.rekindleunderground.geology.deposits.instances;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.data.types.DepositType;
 import com.jemmerl.rekindleunderground.data.types.GeologyType;
 import com.jemmerl.rekindleunderground.data.types.GradeType;
 import com.jemmerl.rekindleunderground.data.types.OreType;
-import com.jemmerl.rekindleunderground.deposit.DepositUtil;
-import com.jemmerl.rekindleunderground.deposit.IEnqueuedDeposit;
-import com.jemmerl.rekindleunderground.deposit.templates.LayerTemplate;
+import com.jemmerl.rekindleunderground.geology.deposits.DepositUtil;
+import com.jemmerl.rekindleunderground.geology.deposits.IEnqueuedDeposit;
+import com.jemmerl.rekindleunderground.geology.deposits.templates.LayerTemplate;
 import com.jemmerl.rekindleunderground.init.NoiseInit;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.util.UtilMethods;
@@ -15,8 +15,8 @@ import com.jemmerl.rekindleunderground.util.WeightedProbMap;
 import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredBlobNoise;
 import com.jemmerl.rekindleunderground.world.capability.chunk.IChunkGennedCapability;
 import com.jemmerl.rekindleunderground.world.capability.deposit.IDepositCapability;
-import com.jemmerl.rekindleunderground.world.feature.stones.ChunkReader;
-import com.jemmerl.rekindleunderground.world.feature.stones.StateMap;
+import com.jemmerl.rekindleunderground.geology.ChunkReader;
+import com.jemmerl.rekindleunderground.geology.StateMapBuilder;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
@@ -117,7 +117,7 @@ public class LayerEnqueuedDeposit implements IEnqueuedDeposit {
     //////////////////////////
 
     @Override
-    public boolean generate(ChunkReader reader, Random rand, BlockPos pos, StateMap stateMap,
+    public boolean generate(ChunkReader reader, Random rand, BlockPos pos, StateMapBuilder stateMap,
                             IDepositCapability depositCapability, IChunkGennedCapability chunkGennedCapability) {
 
         // Constants

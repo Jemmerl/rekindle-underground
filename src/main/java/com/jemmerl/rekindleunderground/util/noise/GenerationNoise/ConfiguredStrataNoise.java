@@ -4,10 +4,8 @@ import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.data.types.DefaultSets;
 import com.jemmerl.rekindleunderground.util.UtilMethods;
 import com.jemmerl.rekindleunderground.util.noise.FastNoiseLite;
-import com.jemmerl.rekindleunderground.world.feature.stones.BlockPicker;
+import com.jemmerl.rekindleunderground.geology.strata.BlockPicker;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 
 import java.util.*;

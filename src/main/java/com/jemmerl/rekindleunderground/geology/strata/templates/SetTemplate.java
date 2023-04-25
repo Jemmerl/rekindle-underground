@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground.world.feature.stones.datatemplates;
+package com.jemmerl.rekindleunderground.geology.strata.templates;
 
 public class SetTemplate {
     private String name;

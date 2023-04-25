@@ -1,12 +1,12 @@
-package com.jemmerl.rekindleunderground.world.feature.ores;
+package com.jemmerl.rekindleunderground.world.feature;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.blocks.StoneOreBlock;
 import com.jemmerl.rekindleunderground.data.types.GradeType;
 import com.jemmerl.rekindleunderground.data.types.OreType;
-import com.jemmerl.rekindleunderground.deposit.DepositRegistrar;
-import com.jemmerl.rekindleunderground.deposit.DepositUtil;
-import com.jemmerl.rekindleunderground.deposit.generators.PlacerDeposit;
+import com.jemmerl.rekindleunderground.init.depositinit.DepositRegistrar;
+import com.jemmerl.rekindleunderground.geology.deposits.DepositUtil;
+import com.jemmerl.rekindleunderground.geology.deposits.instances.PlacerDeposit;
 import com.jemmerl.rekindleunderground.init.NoiseInit;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.util.UtilMethods;

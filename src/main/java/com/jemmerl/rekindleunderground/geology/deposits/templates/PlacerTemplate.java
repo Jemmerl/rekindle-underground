@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground.deposit.templates;
+package com.jemmerl.rekindleunderground.geology.deposits.templates;
 
 public class PlacerTemplate {
 

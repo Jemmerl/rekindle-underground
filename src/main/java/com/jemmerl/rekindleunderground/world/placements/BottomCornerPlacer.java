@@ -9,8 +9,8 @@ import java.util.Random;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class StoneGenPlacer extends SimplePlacement<NoPlacementConfig> {
-    public StoneGenPlacer(Codec<NoPlacementConfig> codec) {
+public class BottomCornerPlacer extends SimplePlacement<NoPlacementConfig> {
+    public BottomCornerPlacer(Codec<NoPlacementConfig> codec) {
         super(codec);
     }
 

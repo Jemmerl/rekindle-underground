@@ -1,33 +1,27 @@
-package com.jemmerl.rekindleunderground.world.feature.stones;
+package com.jemmerl.rekindleunderground.world.feature;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
-import com.jemmerl.rekindleunderground.blocks.IOreBlock;
 import com.jemmerl.rekindleunderground.blocks.StoneOreBlock;
 import com.jemmerl.rekindleunderground.init.NoiseInit;
-import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
-import com.jemmerl.rekindleunderground.util.ReplaceableStatus;
 import com.jemmerl.rekindleunderground.util.UtilMethods;
 import com.jemmerl.rekindleunderground.util.lists.ModBlockLists;
 import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredBlobNoise;
-import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredRegionNoise;
-import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredStrataNoise;
+import com.jemmerl.rekindleunderground.geology.ChunkReader;
+import com.jemmerl.rekindleunderground.geology.StateMapBuilder;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 import java.util.Random;
 
-public class StoneGenFeature extends Feature<NoFeatureConfig> {
+public class GeologyFeature extends Feature<NoFeatureConfig> {
 
-    public StoneGenFeature(Codec<NoFeatureConfig> codec) {
+    public GeologyFeature(Codec<NoFeatureConfig> codec) {
         super(codec);
     }
 
@@ -39,14 +33,14 @@ public class StoneGenFeature extends Feature<NoFeatureConfig> {
         }
 
         ChunkReader chunkReader = new ChunkReader(seedReader, pos);
-        StateMap chunkStateMap = new StateMap(chunkReader, pos, rand);
-        processChunk(seedReader, chunkReader, chunkStateMap, pos);
+        StateMapBuilder stateMapBuilder = new StateMapBuilder(chunkReader, pos, rand);
+        processChunk(seedReader, chunkReader, stateMapBuilder, pos);
 
         return true;
     }
 
 
-    private void processChunk(ISeedReader reader, ChunkReader chunkReader, StateMap stateMap, BlockPos pos) {
+    private void processChunk(ISeedReader reader, ChunkReader chunkReader, StateMapBuilder stateMap, BlockPos pos) {
         IChunk chunk = reader.getChunk(pos);
         BlockPos.Mutable mutablePos = new BlockPos.Mutable();
         for (int x = 0; x < 16; x++) {

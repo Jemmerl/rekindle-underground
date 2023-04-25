@@ -1,15 +1,16 @@
-package com.jemmerl.rekindleunderground.world.feature.stones;
+package com.jemmerl.rekindleunderground.geology;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
-import com.jemmerl.rekindleunderground.deposit.DepositRegistrar;
-import com.jemmerl.rekindleunderground.deposit.DepositUtil;
-import com.jemmerl.rekindleunderground.deposit.IEnqueuedDeposit;
+import com.jemmerl.rekindleunderground.init.depositinit.DepositRegistrar;
+import com.jemmerl.rekindleunderground.geology.deposits.DepositUtil;
+import com.jemmerl.rekindleunderground.geology.deposits.IEnqueuedDeposit;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredStrataNoise;
 import com.jemmerl.rekindleunderground.world.capability.chunk.ChunkGennedCapability;
 import com.jemmerl.rekindleunderground.world.capability.chunk.IChunkGennedCapability;
 import com.jemmerl.rekindleunderground.world.capability.deposit.DepositCapability;
 import com.jemmerl.rekindleunderground.world.capability.deposit.IDepositCapability;
+import com.jemmerl.rekindleunderground.geology.features.DikeSillGen;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -18,7 +19,7 @@ import net.minecraft.world.ISeedReader;
 import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class StateMap {
+public class StateMapBuilder {
 
     private final ChunkReader chunkReader;
     private final BlockPos blockPos; // Starting position of this chunk's generation
@@ -27,7 +28,7 @@ public class StateMap {
     private final IDepositCapability depositCapability;
     private final IChunkGennedCapability chunkGennedCapability;
 
-    public StateMap(ChunkReader reader, BlockPos pos, Random rand) {
+    public StateMapBuilder(ChunkReader reader, BlockPos pos, Random rand) {
         this.chunkReader = reader;
         this.blockPos = pos;
         this.rand = rand;
@@ -51,7 +52,7 @@ public class StateMap {
 
     private void generateStateMap() {
         PopulateStrata();
-        PopulateIgneous();
+        PopulateFeatures();
         PopulateOres();
 
         // Mark that this chunk was generated
@@ -64,11 +65,10 @@ public class StateMap {
 
     // Fill the chunk state map with generated stones
     public void PopulateStrata() {
-        int topY = this.chunkReader.getMaxHeight();
 
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
-                for (int y = 0; y < topY; y++) {
+                for (int y = 0; y < this.chunkReader.getMaxHeight(); y++) {
                     int posX = this.blockPos.getX() + x;
                     int posZ = this.blockPos.getZ() + z;
                     this.stoneStateMap[x][y][z] = ConfiguredStrataNoise.getStoneStrataBlock(posX, y, posZ,
@@ -78,10 +78,36 @@ public class StateMap {
         }
     }
 
-    // Replace stones in the current state map with generated igneous features
+    // Replace stones in the current state map with generated features
     // Will be used for less technical generation, such as dikes or LIPs
-    public void PopulateIgneous() {
+    public void PopulateFeatures() {
         // TODO CURRENTLY NOT IN USE. IT WILL BE IN THE FUTURE!
+        // use datapack to define various dike sills and their stone
+        // loop over them sequentially
+        // (try randomly depending on the region order etc later to layer them)
+        // as this doesnt place and override blocks, should be fast
+        // by doing each dikesill for the whole chunk in order, noise seeds will not change many times
+        // only need to change once for each dikesill
+        // DO DIKES SILLS LAST SO THEY OVERLAP OTHER FEATURES
+
+        for (int x = 0; x < 16; x++) {
+            for (int z = 0; z < 16; z++) {
+                for (int y = 0; y < this.chunkReader.getMaxHeight(); y++) {
+                    int posX = this.blockPos.getX() + x;
+                    int posZ = this.blockPos.getZ() + z;
+
+                    // Generate underlying stone feature
+                    // DO THAT HERE
+
+                    // Populate dike/sills
+//                    BlockState dikeSillState = DikeSillGen.generate(posX, y, posZ);
+//                    if (dikeSillState != null) {
+//                        this.stoneStateMap[x][y][z] = dikeSillState;
+//                    }
+                }
+            }
+        }
+
     }
 
     // Populate ore deposits

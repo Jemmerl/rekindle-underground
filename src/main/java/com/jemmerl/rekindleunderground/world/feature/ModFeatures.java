@@ -1,9 +1,6 @@
 package com.jemmerl.rekindleunderground.world.feature;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
-import com.jemmerl.rekindleunderground.world.feature.igneous.MaarDiatremeFeature;
-import com.jemmerl.rekindleunderground.world.feature.ores.OrePlacerFeature;
-import com.jemmerl.rekindleunderground.world.feature.stones.StoneGenFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -19,7 +16,7 @@ public class ModFeatures {
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, RekindleUnderground.MOD_ID);
 
     public static final RegistryObject<Feature<NoFeatureConfig>> STONE_GEN
-            = FEATURES.register("stone_gen", () -> new StoneGenFeature(NoFeatureConfig.CODEC));
+            = FEATURES.register("stone_gen", () -> new GeologyFeature(NoFeatureConfig.CODEC));
 
     public static final RegistryObject<Feature<NoFeatureConfig>> MAAR_DIATREME_GEN
             = FEATURES.register("maar_diatreme_gen", () -> new MaarDiatremeFeature(NoFeatureConfig.CODEC));

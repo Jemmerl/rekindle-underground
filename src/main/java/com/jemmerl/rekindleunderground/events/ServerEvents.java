@@ -11,5 +11,6 @@ public class ServerEvents {
     @SubscribeEvent
     public static void addReloadListenerEvent(AddReloadListenerEvent event) {
         event.addListener(RekindleUnderground.DEPOSIT_DATA_LOADER);
+        //event.addListener(RekindleUnderground.FEATURE_DATA_LOADER);
     }
 }

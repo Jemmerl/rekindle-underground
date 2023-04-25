@@ -1,11 +1,11 @@
-package com.jemmerl.rekindleunderground.deposit.generators;
+package com.jemmerl.rekindleunderground.geology.deposits.instances;
 
 import com.jemmerl.rekindleunderground.data.types.DepositType;
 import com.jemmerl.rekindleunderground.data.types.GeologyType;
 import com.jemmerl.rekindleunderground.data.types.GradeType;
 import com.jemmerl.rekindleunderground.data.types.OreType;
-import com.jemmerl.rekindleunderground.deposit.IDeposit;
-import com.jemmerl.rekindleunderground.deposit.templates.PlacerTemplate;
+import com.jemmerl.rekindleunderground.geology.deposits.IDeposit;
+import com.jemmerl.rekindleunderground.geology.deposits.templates.PlacerTemplate;
 import com.jemmerl.rekindleunderground.util.WeightedProbMap;
 import net.minecraft.world.biome.Biome;
 

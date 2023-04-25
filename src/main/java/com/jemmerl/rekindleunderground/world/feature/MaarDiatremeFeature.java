@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground.world.feature.igneous;
+package com.jemmerl.rekindleunderground.world.feature;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.blocks.IOreBlock;

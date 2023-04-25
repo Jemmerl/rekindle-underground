@@ -1,16 +1,16 @@
-package com.jemmerl.rekindleunderground.deposit;
+package com.jemmerl.rekindleunderground.geology.deposits;
 
 import com.jemmerl.rekindleunderground.world.capability.chunk.IChunkGennedCapability;
 import com.jemmerl.rekindleunderground.world.capability.deposit.IDepositCapability;
-import com.jemmerl.rekindleunderground.world.feature.stones.ChunkReader;
-import com.jemmerl.rekindleunderground.world.feature.stones.StateMap;
+import com.jemmerl.rekindleunderground.geology.ChunkReader;
+import com.jemmerl.rekindleunderground.geology.StateMapBuilder;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.Random;
 
 public interface IEnqueuedDeposit extends IDeposit {
 
-    boolean generate(ChunkReader reader, Random rand, BlockPos pos, StateMap stateMap,
+    boolean generate(ChunkReader reader, Random rand, BlockPos pos, StateMapBuilder stateMap,
                      IDepositCapability depositCapability, IChunkGennedCapability chunkGennedCapability);
 
 }

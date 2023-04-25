@@ -18,7 +18,7 @@ import net.minecraft.world.gen.placement.Placement;
 public class RKUndergroundFeatures {
 
     public static final ConfiguredFeature<?, ?> STONE_GEN_CONFIG = ModFeatures.STONE_GEN.get().withConfiguration(new NoFeatureConfig())
-            .withPlacement(ModFeaturePlacements.STONE_GEN_PLACEMENT.get().configure(IPlacementConfig.NO_PLACEMENT_CONFIG));
+            .withPlacement(ModFeaturePlacements.BOTTOM_CORNER_PLACEMENT.get().configure(IPlacementConfig.NO_PLACEMENT_CONFIG));
 
     // TODO make chance config based? registration shouldnt use configs...
     public static final ConfiguredFeature<?, ?> MAAR_DIATREME_GEN_CONFIG = ModFeatures.MAAR_DIATREME_GEN.get().withConfiguration(new NoFeatureConfig())

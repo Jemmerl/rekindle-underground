@@ -1,9 +1,9 @@
-package com.jemmerl.rekindleunderground.world.feature.stones;
+package com.jemmerl.rekindleunderground.geology.strata;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.util.UtilMethods;
-import com.jemmerl.rekindleunderground.world.feature.stones.datatemplates.PresetTemplate;
-import com.jemmerl.rekindleunderground.world.feature.stones.datatemplates.SetTemplate;
+import com.jemmerl.rekindleunderground.geology.strata.templates.PresetTemplate;
+import com.jemmerl.rekindleunderground.geology.strata.templates.SetTemplate;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.LogManager;

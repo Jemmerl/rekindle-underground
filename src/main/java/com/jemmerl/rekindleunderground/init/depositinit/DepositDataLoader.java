@@ -1,11 +1,12 @@
-package com.jemmerl.rekindleunderground.deposit;
+package com.jemmerl.rekindleunderground.init.depositinit;
 
 import com.google.gson.*;
 import com.jemmerl.rekindleunderground.RekindleUnderground;
-import com.jemmerl.rekindleunderground.deposit.generators.LayerEnqueuedDeposit;
-import com.jemmerl.rekindleunderground.deposit.generators.PlacerDeposit;
-import com.jemmerl.rekindleunderground.deposit.templates.LayerTemplate;
-import com.jemmerl.rekindleunderground.deposit.templates.PlacerTemplate;
+import com.jemmerl.rekindleunderground.geology.deposits.DepositUtil;
+import com.jemmerl.rekindleunderground.geology.deposits.instances.LayerEnqueuedDeposit;
+import com.jemmerl.rekindleunderground.geology.deposits.instances.PlacerDeposit;
+import com.jemmerl.rekindleunderground.geology.deposits.templates.LayerTemplate;
+import com.jemmerl.rekindleunderground.geology.deposits.templates.PlacerTemplate;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import net.minecraft.client.resources.JsonReloadListener;
 import net.minecraft.profiler.IProfiler;

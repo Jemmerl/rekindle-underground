@@ -27,7 +27,7 @@ public enum GeologyType {
     ANDESITE("andesite", StoneGroupType.EXTRUSIVE, true, 3, 3),
     BASALT("basalt", StoneGroupType.EXTRUSIVE, true, 3, 3),
     SCORIA("scoria", StoneGroupType.EXTRUSIVE, false, 2, 2),
-    TUFF("tuff", StoneGroupType.EXTRUSIVE, false, 1, 1),
+    TUFF("tuff", StoneGroupType.EXTRUSIVE, false, 0, 0),
 
     // Intrusive Igneous
     DIORITE("diorite", StoneGroupType.INTRUSIVE, true, 4, 4),

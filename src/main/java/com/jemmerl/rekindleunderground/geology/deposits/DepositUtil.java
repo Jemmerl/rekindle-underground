@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground.deposit;
+package com.jemmerl.rekindleunderground.geology.deposits;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -6,13 +6,14 @@ import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.blocks.IOreBlock;
 import com.jemmerl.rekindleunderground.blocks.StoneOreBlock;
 import com.jemmerl.rekindleunderground.data.types.*;
+import com.jemmerl.rekindleunderground.init.depositinit.DepositRegistrar;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.util.Pair;
 import com.jemmerl.rekindleunderground.util.UtilMethods;
 import com.jemmerl.rekindleunderground.util.WeightedProbMap;
 import com.jemmerl.rekindleunderground.world.capability.chunk.IChunkGennedCapability;
 import com.jemmerl.rekindleunderground.world.capability.deposit.IDepositCapability;
-import com.jemmerl.rekindleunderground.world.feature.stones.StateMap;
+import com.jemmerl.rekindleunderground.geology.StateMapBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -58,7 +59,7 @@ public class DepositUtil {
 
     // Process the enqueued blocks for a chunk
     public static boolean enqueueBlockPlacement(ISeedReader level, BlockPos qPos, OreType qType, GradeType qGrade,
-                                                String qName, BlockPos genPos, StateMap stateMap,
+                                                String qName, BlockPos genPos, StateMapBuilder stateMap,
                                                 IDepositCapability depCap, @Nullable IChunkGennedCapability cgCap) {
 
         BlockState[][][] stoneStateMap = stateMap.getStoneStateMap();

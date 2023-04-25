@@ -1,6 +1,7 @@
-package com.jemmerl.rekindleunderground.deposit;
+package com.jemmerl.rekindleunderground.init.depositinit;
 
-import com.jemmerl.rekindleunderground.deposit.generators.PlacerDeposit;
+import com.jemmerl.rekindleunderground.geology.deposits.IEnqueuedDeposit;
+import com.jemmerl.rekindleunderground.geology.deposits.instances.PlacerDeposit;
 
 import java.util.HashMap;
 

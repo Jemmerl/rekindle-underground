@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground.deposit;
+package com.jemmerl.rekindleunderground.geology.deposits;
 
 import com.jemmerl.rekindleunderground.data.types.DepositType;
 import com.jemmerl.rekindleunderground.data.types.GeologyType;
