@@ -2,7 +2,7 @@
   "name": "testfeatureone",
   "feature_type": "dike_sill",
   "settings": {
-    "integ": 1
+    "seed": 200
   },
   "stone": "kimberlite"
 }

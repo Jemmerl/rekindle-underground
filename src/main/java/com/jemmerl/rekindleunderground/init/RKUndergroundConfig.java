@@ -29,7 +29,7 @@ public class RKUndergroundConfig {
         private static final boolean GEN_MAAR_DIATREMES = true; // Generate maar-diatremes?
 
         // Debug options
-        private static final boolean DEBUG_DIATREME_MAAR = true;
+        private static final boolean DEBUG_DIATREME_MAAR = false;
         private static final boolean DEBUG_TEST_GENFEATURES = true;
         private static final boolean DEBUG_GENFEATURES_READER = false;
         private static final boolean DEBUG_TEST_DEPOSITS = true;

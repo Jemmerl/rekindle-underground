@@ -12,7 +12,7 @@ import com.jemmerl.rekindleunderground.init.NoiseInit;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.util.UtilMethods;
 import com.jemmerl.rekindleunderground.util.WeightedProbMap;
-import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredBlobNoise;
+import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.BlobNoise;
 import com.jemmerl.rekindleunderground.world.capability.chunk.IChunkGennedCapability;
 import com.jemmerl.rekindleunderground.world.capability.deposit.IDepositCapability;
 import com.jemmerl.rekindleunderground.geology.ChunkReader;
@@ -225,7 +225,7 @@ public class LayerEnqueuedDeposit implements IEnqueuedDeposit {
 //                        * (taperPercent / 100f));
                 // TODO ABOVE THIS SUCKS
 
-                float radius = (ConfiguredBlobNoise.blobRadiusNoise((areaPos.getX() * 5), (y * 6), (areaPos.getZ() * 5)) * VARIANCE)
+                float radius = (BlobNoise.blobRadiusNoise((areaPos.getX() * 5), (y * 6), (areaPos.getZ() * 5)) * VARIANCE)
                         + avgDepositRadius;
 
                 // Generate the ore block if within the radius and rolls a success against the density percent

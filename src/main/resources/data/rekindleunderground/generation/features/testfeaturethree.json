@@ -2,7 +2,7 @@
   "name": "testfeaturthree",
   "feature_type": "dike_sill",
   "settings": {
-    "integ": 3
+    "seed": -367
   },
   "stone": "diabase"
 }

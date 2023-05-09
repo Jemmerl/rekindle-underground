@@ -1,7 +1,6 @@
 package com.jemmerl.rekindleunderground.geology.features;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.data.types.GeologyType;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;

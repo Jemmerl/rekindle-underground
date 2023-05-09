@@ -1,8 +1,9 @@
 package com.jemmerl.rekindleunderground.init;
 
-import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredBlobNoise;
-import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredRegionNoise;
-import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredStrataNoise;
+import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.BlobNoise;
+import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.DikeSillNoise;
+import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.RegionNoise;
+import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.StrataNoise;
 
 public class NoiseInit {
 
@@ -10,9 +11,10 @@ public class NoiseInit {
 
     // Initialize and configure the various noise generators that are used in more than one class
     public static void init(long seed) {
-        ConfiguredBlobNoise.configNoise(seed);
-        ConfiguredRegionNoise.configNoise(seed);
-        ConfiguredStrataNoise.configNoise(seed);
+        BlobNoise.configNoise(seed);
+        RegionNoise.configNoise(seed);
+        StrataNoise.configNoise(seed);
+        DikeSillNoise.configNoise(seed);
         configured = true;
     }
 }

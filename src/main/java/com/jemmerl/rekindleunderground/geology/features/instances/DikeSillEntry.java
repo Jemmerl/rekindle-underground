@@ -42,8 +42,8 @@ public class DikeSillEntry {
         return this.genStone;
     }
 
-    public int getInteg() {
-        return this.dikeSillTemplate.getInteg();
+    public int getSeed() {
+        return this.dikeSillTemplate.getSeed();
     }
 
 

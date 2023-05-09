@@ -10,7 +10,7 @@ import com.jemmerl.rekindleunderground.geology.deposits.instances.PlacerDeposit;
 import com.jemmerl.rekindleunderground.init.NoiseInit;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.util.UtilMethods;
-import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredBlobNoise;
+import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.BlobNoise;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -83,7 +83,7 @@ public class OrePlacerFeature extends Feature<NoFeatureConfig>{
                         continue;
                     }
 
-                    float radius = (ConfiguredBlobNoise.blobRadiusNoise((areaPos.getX() * 5), (areaPos.getY() * 6), (areaPos.getZ() * 5))
+                    float radius = (BlobNoise.blobRadiusNoise((areaPos.getX() * 5), (areaPos.getY() * 6), (areaPos.getZ() * 5))
                             * variance) + avgDepositRadius;
                     //System.out.println(radius);
 

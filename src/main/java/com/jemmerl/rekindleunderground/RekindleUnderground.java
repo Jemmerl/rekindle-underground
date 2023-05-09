@@ -19,6 +19,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.Dimension;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -63,6 +64,7 @@ public class RekindleUnderground
         eventBus.addListener(this::processIMC);
         eventBus.addListener(this::clientSetup);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, RKUndergroundConfig.COMMON_SPEC);
+
         MinecraftForge.EVENT_BUS.register(this);
     }
 

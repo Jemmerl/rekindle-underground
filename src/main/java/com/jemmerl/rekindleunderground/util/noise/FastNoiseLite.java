@@ -55,7 +55,7 @@ package com.jemmerl.rekindleunderground.util.noise;
 // /*FNLfloat*/ double
 
 // Note from Jemmerl: Separated noise and domain warp frequency,
-// they are now independantly configurable. Default domain warp
+// they are now independently configurable. Default domain warp
 // frequency is still the same as the noise frequency, unless
 // otherwise manually changed.
 

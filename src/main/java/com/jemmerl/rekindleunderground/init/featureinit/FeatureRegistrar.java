@@ -2,12 +2,12 @@ package com.jemmerl.rekindleunderground.init.featureinit;
 
 import com.jemmerl.rekindleunderground.geology.features.instances.DikeSillEntry;
 
-import java.util.*;
+import java.util.LinkedHashMap;
 
 public class FeatureRegistrar {
+
     private static LinkedHashMap<String, DikeSillEntry> dikeSills;
-
-
+    
     public FeatureRegistrar() {
         dikeSills = new LinkedHashMap<>();
     }

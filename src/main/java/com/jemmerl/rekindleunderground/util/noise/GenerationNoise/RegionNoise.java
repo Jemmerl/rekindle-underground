@@ -3,7 +3,7 @@ package com.jemmerl.rekindleunderground.util.noise.GenerationNoise;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 import com.jemmerl.rekindleunderground.util.noise.FastNoiseLite;
 
-public class ConfiguredRegionNoise {
+public class RegionNoise {
 
     private static FastNoiseLite regionNoise;
     private static FastNoiseLite faultNoise;

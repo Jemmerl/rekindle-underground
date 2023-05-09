@@ -1,26 +1,24 @@
 package com.jemmerl.rekindleunderground.geology.features;
 
 import com.jemmerl.rekindleunderground.geology.features.instances.DikeSillEntry;
-import com.jemmerl.rekindleunderground.init.featureinit.FeatureRegistrar;
+import com.jemmerl.rekindleunderground.init.ModBlocks;
 import com.jemmerl.rekindleunderground.util.lists.ModBlockLists;
-import com.jemmerl.rekindleunderground.util.noise.FastNoiseLite;
+import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.DikeSillNoise;
 import net.minecraft.block.BlockState;
 
 public class DikeSillGen {
 
-    public static BlockState generate(int x, int y, int z) {
+    public static BlockState generate(int x, int y, int z, DikeSillEntry dikeSillEntry) {
+
         BlockState state = null;
 
-        FastNoiseLite noise = new FastNoiseLite(100);
+        float dikeSillNoise = DikeSillNoise.getShiftedDikeNoise(x, y, z, 0, dikeSillEntry.getSeed(), 1f);
 
-        for (final DikeSillEntry dikeSillEntry : FeatureRegistrar.getDikeSillFeatures().values()) {
-            noise.SetSeed(10243 * dikeSillEntry.getInteg());
-            if (noise.GetNoise(x * 2, y * 2, z * 2) > 0.6) {
-                state = ModBlockLists.GEO_LIST.get(dikeSillEntry.getStone()).getStoneOreBlock().getDefaultState();
-            }
+        if (dikeSillNoise > 0.6) {
+            state = ModBlockLists.GEO_LIST.get(dikeSillEntry.getStone()).getStoneOreBlock().getDefaultState();
+            //state = ModBlocks.RED_SANDSTONE_STONE.get().getDefaultState();
         }
 
         return state;
     }
-
 }

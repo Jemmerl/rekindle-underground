@@ -2,7 +2,7 @@ package com.jemmerl.rekindleunderground.util.noise.GenerationNoise;
 
 import com.jemmerl.rekindleunderground.util.noise.FastNoiseLite;
 
-public class ConfiguredBlobNoise {
+public class BlobNoise {
 
     private static FastNoiseLite blobNoise;
 

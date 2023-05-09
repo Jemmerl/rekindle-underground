@@ -2,7 +2,7 @@
   "name": "testfeaturetwo",
   "feature_type": "dike_sill",
   "settings": {
-    "integ": 2
+    "seed": 268
   },
   "stone": "basalt"
 }

@@ -10,9 +10,9 @@ import net.minecraft.world.ISeedReader;
 
 import java.util.*;
 
-import static com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredRegionNoise.stoneFaultNoise;
+import static com.jemmerl.rekindleunderground.util.noise.GenerationNoise.RegionNoise.stoneFaultNoise;
 
-public class ConfiguredStrataNoise {
+public class StrataNoise {
 
     // Configured noise
     private static FastNoiseLite strataNoise; // Used for general adjustable strata generation
@@ -29,8 +29,6 @@ public class ConfiguredStrataNoise {
     private static final int WARP_MAX = RKUndergroundConfig.COMMON.warpMax.get();
     private static final int TILT_MIN = RKUndergroundConfig.COMMON.tiltMin.get();
     private static final int TILT_MAX = RKUndergroundConfig.COMMON.tiltMax.get();
-
-    private static long WORLD_SEED;
 
     // Load the block picker for this world
     private static final BlockPicker blockPicker = new BlockPicker();
@@ -55,7 +53,7 @@ public class ConfiguredStrataNoise {
     ////////////////////////////////////////////////
 
     public static BlockState getStoneStrataBlock(int x, int y, int z, ISeedReader reader) {
-        float regionNoise = ConfiguredRegionNoise.stoneRegionNoise(x, y, z);
+        float regionNoise = RegionNoise.stoneRegionNoise(x, y, z);
         int regionVal = (int)(regionNoise * 3); //TODO gives region types possible rn (-2 to 2)
 
         // Use already previously generated values if in the same region
@@ -279,7 +277,7 @@ public class ConfiguredStrataNoise {
         // Fault
 
         // Apply regional seed shift
-        int shiftedSeed = ConfiguredRegionNoise.getRegionShiftedSeed(x, y, z) + seedShift;
+        int shiftedSeed = RegionNoise.getRegionShiftedSeed(x, y, z) + seedShift;
         yWarpNoise.SetSeed(shiftedSeed + 13408);
         yTiltNoise.SetSeed(shiftedSeed - 15605);
         strataNoise.SetSeed(shiftedSeed);
@@ -319,11 +317,11 @@ public class ConfiguredStrataNoise {
 
     // FastNoiseLite configuration for strata generation
     public static void configNoise(long worldSeed) {
-        WORLD_SEED = worldSeed; // Sets the world seed for access in noise generation
+        //WORLD_SEED = worldSeed; // Sets the world seed for access in noise generation
 
         // FastNoiseLite configuration for adjustable strata
         if (strataNoise == null) {
-            strataNoise = new FastNoiseLite((int)(WORLD_SEED)+22493);
+            strataNoise = new FastNoiseLite((int)(worldSeed)+22493);
             strataNoise.SetNoiseType(FastNoiseLite.NoiseType.Value);
             strataNoise.SetRotationType3D(FastNoiseLite.RotationType3D.ImproveXZPlanes);
             strataNoise.SetFractalType(FastNoiseLite.FractalType.None);
@@ -332,7 +330,7 @@ public class ConfiguredStrataNoise {
 
         // FastNoiseLite configuration for adjustable strata warping noise
         if (yWarpNoise == null) {
-            yWarpNoise = new FastNoiseLite((int)(WORLD_SEED));
+            yWarpNoise = new FastNoiseLite((int)(worldSeed));
             yWarpNoise.SetNoiseType(FastNoiseLite.NoiseType.ValueCubic);
             yWarpNoise.SetFractalType(FastNoiseLite.FractalType.None);
             yWarpNoise.SetFrequency(0.015f);
@@ -340,7 +338,7 @@ public class ConfiguredStrataNoise {
 
         // // FastNoiseLite configuration for adjustable strata tilting noise
         if (yTiltNoise == null) {
-            yTiltNoise = new FastNoiseLite((int)(WORLD_SEED));
+            yTiltNoise = new FastNoiseLite((int)(worldSeed));
             yTiltNoise.SetNoiseType(FastNoiseLite.NoiseType.Cellular);
             yTiltNoise.SetCellularDistanceFunction(FastNoiseLite.CellularDistanceFunction.Hybrid);
             yTiltNoise.SetCellularReturnType(FastNoiseLite.CellularReturnType.Distance2);
@@ -350,7 +348,7 @@ public class ConfiguredStrataNoise {
 
         // FastNoiseLite configuration for inserted strata
         if (smoothDividingNoise == null) {
-            smoothDividingNoise = new FastNoiseLite((int)(WORLD_SEED)-22493);
+            smoothDividingNoise = new FastNoiseLite((int)(worldSeed)-22493);
             smoothDividingNoise.SetNoiseType(FastNoiseLite.NoiseType.Perlin);
             smoothDividingNoise.SetRotationType3D(FastNoiseLite.RotationType3D.ImproveXZPlanes);
             smoothDividingNoise.SetFrequency(0.04f);
@@ -358,7 +356,7 @@ public class ConfiguredStrataNoise {
 
         // FastNoiseLite configuration for flood basalts
         if (floodBasaltNoise == null) {
-            floodBasaltNoise = new FastNoiseLite((int)(WORLD_SEED)-22493);
+            floodBasaltNoise = new FastNoiseLite((int)(worldSeed)-22493);
             floodBasaltNoise.SetNoiseType(FastNoiseLite.NoiseType.Perlin);
             floodBasaltNoise.SetRotationType3D(FastNoiseLite.RotationType3D.ImproveXZPlanes);
             floodBasaltNoise.SetFrequency(0.03f);

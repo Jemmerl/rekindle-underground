@@ -1,11 +1,13 @@
 package com.jemmerl.rekindleunderground.geology;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
+import com.jemmerl.rekindleunderground.geology.features.instances.DikeSillEntry;
 import com.jemmerl.rekindleunderground.init.depositinit.DepositRegistrar;
 import com.jemmerl.rekindleunderground.geology.deposits.DepositUtil;
 import com.jemmerl.rekindleunderground.geology.deposits.IEnqueuedDeposit;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
-import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredStrataNoise;
+import com.jemmerl.rekindleunderground.init.featureinit.FeatureRegistrar;
+import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.StrataNoise;
 import com.jemmerl.rekindleunderground.world.capability.chunk.ChunkGennedCapability;
 import com.jemmerl.rekindleunderground.world.capability.chunk.IChunkGennedCapability;
 import com.jemmerl.rekindleunderground.world.capability.deposit.DepositCapability;
@@ -71,7 +73,7 @@ public class StateMapBuilder {
                 for (int y = 0; y < this.chunkReader.getMaxHeight(); y++) {
                     int posX = this.blockPos.getX() + x;
                     int posZ = this.blockPos.getZ() + z;
-                    this.stoneStateMap[x][y][z] = ConfiguredStrataNoise.getStoneStrataBlock(posX, y, posZ,
+                    this.stoneStateMap[x][y][z] = StrataNoise.getStoneStrataBlock(posX, y, posZ,
                             chunkReader.getSeedReader());
                 }
             }
@@ -90,23 +92,29 @@ public class StateMapBuilder {
         // only need to change once for each dikesill
         // DO DIKES SILLS LAST SO THEY OVERLAP OTHER FEATURES
 
-        for (int x = 0; x < 16; x++) {
-            for (int z = 0; z < 16; z++) {
-                for (int y = 0; y < this.chunkReader.getMaxHeight(); y++) {
-                    int posX = this.blockPos.getX() + x;
-                    int posZ = this.blockPos.getZ() + z;
+        // Populate dike/sills
+        for (final DikeSillEntry dikeSillEntry : FeatureRegistrar.getDikeSillFeatures().values()) {
+            for (int x = 0; x < 16; x++) {
+                for (int z = 0; z < 16; z++) {
+                    for (int y = 0; y < this.chunkReader.getMaxHeight(); y++) {
+                        int posX = this.blockPos.getX() + x;
+                        int posZ = this.blockPos.getZ() + z;
 
-                    // Generate underlying stone feature
-                    // DO THAT HERE
-
-                    // Populate dike/sills
-                    BlockState dikeSillState = DikeSillGen.generate(posX, y, posZ);
-                    if (dikeSillState != null) {
-                        this.stoneStateMap[x][y][z] = dikeSillState;
+                        BlockState dikeSillState = DikeSillGen.generate(posX, y, posZ, dikeSillEntry);
+                        if (dikeSillState != null) {
+                            //System.out.println("x: " + x + " y: " + y + " z: " + z);
+                            this.stoneStateMap[x][y][z] = dikeSillState;
+                        }
                     }
                 }
             }
         }
+
+
+
+
+
+
 
     }
 

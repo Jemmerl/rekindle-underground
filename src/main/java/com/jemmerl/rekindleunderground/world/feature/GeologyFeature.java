@@ -1,14 +1,17 @@
 package com.jemmerl.rekindleunderground.world.feature;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
+import com.jemmerl.rekindleunderground.blocks.IOreBlock;
 import com.jemmerl.rekindleunderground.blocks.StoneOreBlock;
+import com.jemmerl.rekindleunderground.data.types.GeologyType;
 import com.jemmerl.rekindleunderground.init.NoiseInit;
 import com.jemmerl.rekindleunderground.util.UtilMethods;
 import com.jemmerl.rekindleunderground.util.lists.ModBlockLists;
-import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.ConfiguredBlobNoise;
+import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.BlobNoise;
 import com.jemmerl.rekindleunderground.geology.ChunkReader;
 import com.jemmerl.rekindleunderground.geology.StateMapBuilder;
 import com.mojang.serialization.Codec;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
@@ -54,8 +57,10 @@ public class GeologyFeature extends Feature<NoFeatureConfig> {
                 for (int y = 0; y < topY; y++) {
                     mutablePos.setY(y);
 
+                    BlockState originalState = chunk.getBlockState(mutablePos);
                     BlockState stoneState = stateMap.getStoneState(x, y, z);
-                    switch (UtilMethods.replaceableStatus(chunk.getBlockState(mutablePos))) {
+
+                    switch (UtilMethods.replaceableStatus(originalState)) {
                         case FAILED:
                         case OREBLOCK_STONE:
                         case OREBLOCK_DETRITUS:
@@ -65,12 +70,17 @@ public class GeologyFeature extends Feature<NoFeatureConfig> {
                             break;
                         case VANILLA_DETRITUS:
                             if (y <= (topY - getDepth(mutablePos.toImmutable()))) {
-                                BlockState regolith = ModBlockLists.GEO_LIST.get(((StoneOreBlock) stoneState.getBlock()).getGeologyType())
-                                        .getRegolithBlock().getDefaultState();
+                                Block regolithBlock = ModBlockLists.GEO_LIST.get(((IOreBlock) stoneState.getBlock()).getGeologyType()).getRegolithBlock();
+
+                                BlockState regolith = stoneState;
+                                if (regolithBlock != null) {
+                                    regolith = regolithBlock.getDefaultState();
+                                }
 
                                 // Add ore properties from original stone
                                 regolith = regolith.with(StoneOreBlock.GRADE_TYPE, stoneState.get(StoneOreBlock.GRADE_TYPE))
                                         .with(StoneOreBlock.ORE_TYPE, stoneState.get(StoneOreBlock.ORE_TYPE));
+
                                 chunk.getSections()[y >> 4].setBlockState(x, y & 15, z, regolith, false);
                             }
                             break;
@@ -83,7 +93,7 @@ public class GeologyFeature extends Feature<NoFeatureConfig> {
     }
 
     private int getDepth(BlockPos pos) {
-        return Math.round((Math.abs(ConfiguredBlobNoise.blobRadiusNoise((pos.getX() * 2), 0, (pos.getZ() * 2))) * 3) + 3);
+        return Math.round((Math.abs(BlobNoise.blobRadiusNoise((pos.getX() * 2), 0, (pos.getZ() * 2))) * 3) + 3);
     }
 
 }
