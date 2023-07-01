@@ -55,6 +55,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> DACITE_STONE = registerBlock(GeologyType.DACITE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.DACITE), GeologyType.DACITE), 64);
     public static final RegistryObject<Block> ANDESITE_STONE = registerBlock(GeologyType.ANDESITE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.ANDESITE), GeologyType.ANDESITE), 64);
     public static final RegistryObject<Block> BASALT_STONE = registerBlock(GeologyType.BASALT.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.BASALT), GeologyType.BASALT), 64);
+    public static final RegistryObject<Block> PAHOEHOE_STONE = registerBlock(GeologyType.PAHOEHOE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.PAHOEHOE), GeologyType.PAHOEHOE), 64);
     public static final RegistryObject<Block> SCORIA_STONE = registerBlock(GeologyType.SCORIA.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.SCORIA), GeologyType.SCORIA), 64);
     public static final RegistryObject<Block> TUFF_STONE = registerBlock(GeologyType.TUFF.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.TUFF), GeologyType.TUFF), 64);
 

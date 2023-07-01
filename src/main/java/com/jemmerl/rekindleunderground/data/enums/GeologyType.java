@@ -26,6 +26,7 @@ public enum GeologyType {
     DACITE("dacite", StoneGroupType.EXTRUSIVE, true, 3, 3),
     ANDESITE("andesite", StoneGroupType.EXTRUSIVE, true, 3, 3),
     BASALT("basalt", StoneGroupType.EXTRUSIVE, true, 3, 3),
+    PAHOEHOE("pahoehoe", StoneGroupType.EXTRUSIVE, true, 2, 2),
     SCORIA("scoria", StoneGroupType.EXTRUSIVE, false, 2, 2),
     TUFF("tuff", StoneGroupType.EXTRUSIVE, false, 0, 0),
 

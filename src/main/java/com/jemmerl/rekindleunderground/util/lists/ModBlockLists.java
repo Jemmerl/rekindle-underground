@@ -6,6 +6,7 @@ import com.jemmerl.rekindleunderground.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraftforge.fml.RegistryObject;
 
 import java.util.*;
 
@@ -36,6 +37,7 @@ public class ModBlockLists {
             ModBlocks.DACITE_STONE.get(),
             ModBlocks.ANDESITE_STONE.get(),
             ModBlocks.BASALT_STONE.get(),
+            ModBlocks.PAHOEHOE_STONE.get(),
             ModBlocks.SCORIA_STONE.get(),
             ModBlocks.TUFF_STONE.get(),
             ModBlocks.DIORITE_STONE.get(),
@@ -53,6 +55,7 @@ public class ModBlockLists {
             ModBlocks.DACITE_STONE.get(),
             ModBlocks.ANDESITE_STONE.get(),
             ModBlocks.BASALT_STONE.get(),
+            ModBlocks.PAHOEHOE_STONE.get(),
             ModBlocks.SCORIA_STONE.get(),
             ModBlocks.TUFF_STONE.get()
     );
@@ -239,6 +242,7 @@ public class ModBlockLists {
         GEO_LIST.put(GeologyType.DACITE, new GeoListWrapper(ModBlocks.DACITE_STONE.get(), ModBlocks.DACITE_COBBLE.get(), ModBlocks.DACITE_REGOLITH.get(), ModItems.DACITE_ROCK.get()));
         GEO_LIST.put(GeologyType.ANDESITE, new GeoListWrapper(ModBlocks.ANDESITE_STONE.get(), ModBlocks.ANDESITE_COBBLE.get(), ModBlocks.ANDESITE_REGOLITH.get(), ModItems.ANDESITE_ROCK.get()));
         GEO_LIST.put(GeologyType.BASALT, new GeoListWrapper(ModBlocks.BASALT_STONE.get(), ModBlocks.BASALT_COBBLE.get(), ModBlocks.BASALT_REGOLITH.get(), ModItems.BASALT_ROCK.get()));
+        GEO_LIST.put(GeologyType.PAHOEHOE, new GeoListWrapper(ModBlocks.PAHOEHOE_STONE.get(), ModBlocks.BASALT_COBBLE.get(), ModBlocks.BASALT_REGOLITH.get(), ModItems.BASALT_ROCK.get()));
         GEO_LIST.put(GeologyType.SCORIA, new GeoListWrapper(ModBlocks.SCORIA_STONE.get(), null, ModBlocks.SCORIA_REGOLITH.get(), null));
         GEO_LIST.put(GeologyType.TUFF, new GeoListWrapper(ModBlocks.TUFF_STONE.get(), null, ModBlocks.TUFF_STONE.get(), null));
 
@@ -285,85 +289,14 @@ public class ModBlockLists {
         VANILLA_DET_LIST.put(Blocks.CLAY.getDefaultState(), ModBlocks.CLAY_STONE.get().getDefaultState());
     }
 
+    ////////////////////
+    // MODEL BUILDING //
+    ////////////////////
+
+    // List of blocks with a different side texture
+    public static List<Block> SIDE_TEXTURE_MODELS = Arrays.asList(
+            ModBlocks.PAHOEHOE_STONE.get()
+    );
+
 }
 
-    //    public static List<Block> ALL_STONES = Arrays.asList(
-//            // Sedimentary
-//            ModBlocks.CHALK_STONE.get(),
-//            ModBlocks.LIMESTONE_STONE.get(),
-//            ModBlocks.DOLOSTONE_STONE.get(),
-//            ModBlocks.SHALE_STONE.get(),
-//            ModBlocks.SANDSTONE_STONE.get(),
-//            ModBlocks.RED_SANDSTONE_STONE.get(),
-//            ModBlocks.GREYWACKE_STONE.get(),
-//            ModBlocks.MUDSTONE_STONE.get(),
-//            ModBlocks.ROCKSALT_STONE.get(),
-//            ModBlocks.ROCKGYPSUM_STONE.get(),
-//            ModBlocks.BORAX_STONE.get(),
-//            ModBlocks.KERNITE_STONE.get(),
-//            ModBlocks.VEIN_QUARTZ_STONE.get(),
-//
-//            // Igneous Extrusive
-//            ModBlocks.RHYOLITE_STONE.get(),
-//            ModBlocks.DACITE_STONE.get(),
-//            ModBlocks.ANDESITE_STONE.get(),
-//            ModBlocks.BASALT_STONE.get(),
-//            ModBlocks.SCORIA_STONE.get(),
-//            ModBlocks.TUFF_STONE.get(),
-//
-//            // Igneous Intrusive
-//            ModBlocks.DIORITE_STONE.get(),
-//            ModBlocks.GRANODIORITE_STONE.get(),
-//            ModBlocks.GRANITE_STONE.get(),
-//            ModBlocks.SYENITE_STONE.get(),
-//            ModBlocks.GABBRO_STONE.get(),
-//            ModBlocks.DIABASE_STONE.get(),
-//            ModBlocks.PERIDOTITE_STONE.get(),
-//            ModBlocks.KIMBERLITE_STONE.get(),
-//            ModBlocks.LAMPROITE_STONE.get(),
-//
-//            // Metamorphic
-//            ModBlocks.QUARTZITE_STONE.get(),
-//            ModBlocks.SCHIST_STONE.get(),
-//            ModBlocks.PHYLLITE_STONE.get(),
-//            ModBlocks.GNEISS_STONE.get(),
-//            ModBlocks.MARBLE_STONE.get()
-//    );
-
-//    public static HashMap<Block, Item> COBBLESTONES = new HashMap<>();
-//    static {
-//        // Sedimentary
-//        COBBLESTONES.put(ModBlocks.CHALK_COBBLE.get(), ModItems.CHALK_ROCK.get());
-//        COBBLESTONES.put(ModBlocks.LIMESTONE_COBBLE.get(), ModItems.LIMESTONE_ROCK.get());
-//        COBBLESTONES.put(ModBlocks.DOLOSTONE_COBBLE.get(), ModItems.DOLOSTONE_ROCK.get());
-//        COBBLESTONES.put(ModBlocks.SHALE_COBBLE.get(), ModItems.SHALE_ROCK.get());
-//        COBBLESTONES.put(ModBlocks.SANDSTONE_COBBLE.get(), ModItems.SANDSTONE_ROCK.get());
-//        COBBLESTONES.put(ModBlocks.RED_SANDSTONE_COBBLE.get(), ModItems.RED_SANDSTONE_ROCK.get());
-//        COBBLESTONES.put(ModBlocks.GREYWACKE_COBBLE.get(), ModItems.GREYWACKE_ROCK.get());
-//        COBBLESTONES.put(ModBlocks.MUDSTONE_COBBLE.get(), ModItems.MUDSTONE_ROCK.get());
-//        COBBLESTONES.put(ModBlocks.VEIN_QUARTZ_COBBLE.get(), ModItems.VEIN_QUARTZ_ROCK.get());
-//
-//        // Igneous Extrusive
-//        COBBLESTONES.put(ModBlocks.RHYOLITE_COBBLE.get(), ModItems.RHYOLITE_ROCK.get());
-//        COBBLESTONES.put(ModBlocks.DACITE_COBBLE.get(), ModItems.DACITE_ROCK.get());
-//        COBBLESTONES.put(ModBlocks.ANDESITE_COBBLE.get(), ModItems.ANDESITE_ROCK.get());
-//        COBBLESTONES.put(ModBlocks.BASALT_COBBLE.get(), ModItems.BASALT_ROCK.get());
-//
-//        // Igneous Intrusive
-//        COBBLESTONES.put(ModBlocks.DIORITE_COBBLE.get(), ModItems.DIORITE_ROCK.get());
-//        COBBLESTONES.put(ModBlocks.GRANODIORITE_COBBLE.get(), ModItems.GRANODIORITE_ROCK.get());
-//        COBBLESTONES.put(ModBlocks.GRANITE_COBBLE.get(), ModItems.GRANITE_ROCK.get());
-//        COBBLESTONES.put(ModBlocks.SYENITE_COBBLE.get(), ModItems.SYENITE_ROCK.get());
-//        COBBLESTONES.put(ModBlocks.GABBRO_COBBLE.get(), ModItems.GABBRO_ROCK.get());
-//        COBBLESTONES.put(ModBlocks.DIABASE_COBBLE.get(), ModItems.DIABASE_ROCK.get());
-//        COBBLESTONES.put(ModBlocks.PERIDOTITE_COBBLE.get(), ModItems.PERIDOTITE_ROCK.get());
-//        COBBLESTONES.put(ModBlocks.KIMBERLITE_COBBLE.get(), ModItems.KIMBERLITE_ROCK.get());
-//        COBBLESTONES.put(ModBlocks.LAMPROITE_COBBLE.get(), ModItems.LAMPROITE_ROCK.get());
-//
-//        // Metamorphic
-//        COBBLESTONES.put(ModBlocks.QUARTZITE_COBBLE.get(), ModItems.QUARTZITE_ROCK.get());
-//        COBBLESTONES.put(ModBlocks.SCHIST_COBBLE.get(), ModItems.SCHIST_ROCK.get());
-//        COBBLESTONES.put(ModBlocks.PHYLLITE_COBBLE.get(), ModItems.PHYLLITE_ROCK.get());
-//        COBBLESTONES.put(ModBlocks.GNEISS_COBBLE.get(), ModItems.GNEISS_ROCK.get());
-//        COBBLESTONES.put(ModBlocks.MARBLE_COBBLE.get(), ModItems.MARBLE_ROCK.get());
-//    }

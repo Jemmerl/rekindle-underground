@@ -68,9 +68,6 @@ public class ModLootTableProvider extends LootTableProvider {
                     // Register stone -> rock drop
                     LootTable.Builder lootTable = buildStoneLootTable(geoList);
                     registerLootTable(block, lootTable);
-
-                    // Register cobble drop
-                    registerDropSelfLootTable(geoList.getCobbleBlock());
                 } else {
                     // TODO TEMP
                     registerDropSelfLootTable(block); // i mean it! temp!

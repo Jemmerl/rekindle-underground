@@ -22,7 +22,7 @@ public class ModCobblestoneRecipeProvider extends RecipeProvider {
     @Override
     protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
         for (GeologyType stone : GeologyType.values()) {
-            if (stone.hasCobble()) {
+            if (stone.hasCobble() && !stone.equals(GeologyType.PAHOEHOE)) {
                 GeoListWrapper geoList = ModBlockLists.GEO_LIST.get(stone);
                 ShapedRecipeBuilder.shapedRecipe(geoList.getCobbleBlock())
                         .key('x', geoList.getRockItem())
