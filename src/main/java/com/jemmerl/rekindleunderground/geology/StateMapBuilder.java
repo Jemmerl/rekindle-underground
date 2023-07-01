@@ -2,6 +2,8 @@ package com.jemmerl.rekindleunderground.geology;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.geology.features.instances.DikeSillEntry;
+import com.jemmerl.rekindleunderground.geology.strata.VolcanicRegionBuilder;
+import com.jemmerl.rekindleunderground.init.ModBlocks;
 import com.jemmerl.rekindleunderground.init.depositinit.DepositRegistrar;
 import com.jemmerl.rekindleunderground.geology.deposits.DepositUtil;
 import com.jemmerl.rekindleunderground.geology.deposits.IEnqueuedDeposit;
@@ -14,6 +16,7 @@ import com.jemmerl.rekindleunderground.world.capability.deposit.DepositCapabilit
 import com.jemmerl.rekindleunderground.world.capability.deposit.IDepositCapability;
 import com.jemmerl.rekindleunderground.geology.features.DikeSillGen;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.ISeedReader;
@@ -73,8 +76,23 @@ public class StateMapBuilder {
                 for (int y = 0; y < this.chunkReader.getMaxHeight(); y++) {
                     int posX = this.blockPos.getX() + x;
                     int posZ = this.blockPos.getZ() + z;
-                    this.stoneStateMap[x][y][z] = StrataNoise.getStoneStrataBlock(posX, y, posZ,
+
+                    // Generate the potential blockstate given the larger volcanic region.
+                    // If no block generated, return null and let the strata generate the position.
+                    // If not null, then there is no need to generate the strata block as the volcanic
+                    // spot technically is to generate on top of the strata, replacing it.
+                    // If a spot is to be contact metamorphosed, then it will be set as AIR
+                    BlockState volcanicState = VolcanicRegionBuilder.getVolcanicState(posX, y, posZ,
                             chunkReader.getSeedReader());
+
+                    boolean contactMeta = (volcanicState == Blocks.AIR.getDefaultState());
+                    if ((volcanicState == null) || contactMeta) {
+//                        this.stoneStateMap[x][y][z] = StrataNoise.getStoneStrataBlock(posX, y, posZ,
+//                                chunkReader.getSeedReader(), contactMeta);
+                        this.stoneStateMap[x][y][z] = ModBlocks.LIMESTONE_STONE.get().getDefaultState(); // TODO TEMP
+                    } else {
+                        this.stoneStateMap[x][y][z] = volcanicState;
+                    }
                 }
             }
         }
@@ -110,7 +128,7 @@ public class StateMapBuilder {
             }
         }
 
-
+        // Populate plutons
 
 
 

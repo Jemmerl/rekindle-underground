@@ -2,8 +2,8 @@ package com.jemmerl.rekindleunderground.world.feature;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.blocks.StoneOreBlock;
-import com.jemmerl.rekindleunderground.data.types.GradeType;
-import com.jemmerl.rekindleunderground.data.types.OreType;
+import com.jemmerl.rekindleunderground.data.enums.ore.GradeType;
+import com.jemmerl.rekindleunderground.data.enums.ore.OreType;
 import com.jemmerl.rekindleunderground.init.depositinit.DepositRegistrar;
 import com.jemmerl.rekindleunderground.geology.deposits.DepositUtil;
 import com.jemmerl.rekindleunderground.geology.deposits.instances.PlacerDeposit;

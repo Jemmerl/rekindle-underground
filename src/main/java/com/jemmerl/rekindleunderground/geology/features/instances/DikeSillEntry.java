@@ -1,6 +1,6 @@
 package com.jemmerl.rekindleunderground.geology.features.instances;
 
-import com.jemmerl.rekindleunderground.data.types.GeologyType;
+import com.jemmerl.rekindleunderground.data.enums.GeologyType;
 import com.jemmerl.rekindleunderground.geology.features.templates.DikeSillTemplate;
 
 public class DikeSillEntry {

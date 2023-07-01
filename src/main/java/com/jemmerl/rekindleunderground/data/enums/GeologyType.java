@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground.data.types;
+package com.jemmerl.rekindleunderground.data.enums;
 
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
 

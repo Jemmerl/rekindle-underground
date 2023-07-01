@@ -2,10 +2,10 @@ package com.jemmerl.rekindleunderground.data.generators.server;
 
 import com.google.common.collect.ImmutableList;
 import com.jemmerl.rekindleunderground.blocks.StoneOreBlock;
-import com.jemmerl.rekindleunderground.data.types.GeologyType;
+import com.jemmerl.rekindleunderground.data.enums.GeologyType;
 import com.jemmerl.rekindleunderground.init.ModBlocks;
-import com.jemmerl.rekindleunderground.data.types.GradeType;
-import com.jemmerl.rekindleunderground.data.types.OreType;
+import com.jemmerl.rekindleunderground.data.enums.ore.GradeType;
+import com.jemmerl.rekindleunderground.data.enums.ore.OreType;
 import com.jemmerl.rekindleunderground.util.lists.GeoListWrapper;
 import com.jemmerl.rekindleunderground.util.lists.ModBlockLists;
 import com.mojang.datafixers.util.Pair;

@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground.data.types;
+package com.jemmerl.rekindleunderground.data.enums;
 
 public enum StoneGroupType {
     SEDIMENTARY("sedimentary"),

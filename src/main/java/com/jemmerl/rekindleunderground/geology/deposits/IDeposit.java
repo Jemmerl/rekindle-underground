@@ -1,9 +1,9 @@
 package com.jemmerl.rekindleunderground.geology.deposits;
 
-import com.jemmerl.rekindleunderground.data.types.DepositType;
-import com.jemmerl.rekindleunderground.data.types.GeologyType;
-import com.jemmerl.rekindleunderground.data.types.GradeType;
-import com.jemmerl.rekindleunderground.data.types.OreType;
+import com.jemmerl.rekindleunderground.data.enums.ore.DepositType;
+import com.jemmerl.rekindleunderground.data.enums.GeologyType;
+import com.jemmerl.rekindleunderground.data.enums.ore.GradeType;
+import com.jemmerl.rekindleunderground.data.enums.ore.OreType;
 import com.jemmerl.rekindleunderground.util.WeightedProbMap;
 import net.minecraft.world.biome.Biome;
 

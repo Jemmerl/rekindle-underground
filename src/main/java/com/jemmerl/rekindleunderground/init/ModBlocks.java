@@ -3,7 +3,7 @@ package com.jemmerl.rekindleunderground.init;
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.blocks.FallingOreBlock;
 import com.jemmerl.rekindleunderground.blocks.StoneOreBlock;
-import com.jemmerl.rekindleunderground.data.types.GeologyType;
+import com.jemmerl.rekindleunderground.data.enums.GeologyType;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

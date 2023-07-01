@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground.data.types;
+package com.jemmerl.rekindleunderground.data.enums.ore;
 
 import net.minecraft.util.IStringSerializable;
 

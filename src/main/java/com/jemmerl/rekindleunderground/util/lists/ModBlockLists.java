@@ -1,6 +1,6 @@
 package com.jemmerl.rekindleunderground.util.lists;
 
-import com.jemmerl.rekindleunderground.data.types.GeologyType;
+import com.jemmerl.rekindleunderground.data.enums.GeologyType;
 import com.jemmerl.rekindleunderground.init.ModBlocks;
 import com.jemmerl.rekindleunderground.init.ModItems;
 import net.minecraft.block.Block;

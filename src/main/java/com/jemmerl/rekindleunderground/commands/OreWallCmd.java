@@ -1,7 +1,7 @@
 package com.jemmerl.rekindleunderground.commands;
 
 import com.jemmerl.rekindleunderground.blocks.StoneOreBlock;
-import com.jemmerl.rekindleunderground.data.types.OreType;
+import com.jemmerl.rekindleunderground.data.enums.ore.OreType;
 import com.jemmerl.rekindleunderground.util.lists.ModBlockLists;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;

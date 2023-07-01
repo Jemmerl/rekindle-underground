@@ -2,7 +2,6 @@ package com.jemmerl.rekindleunderground.util.noise.GenerationNoise;
 
 import com.jemmerl.rekindleunderground.util.noise.FastNoiseLite;
 
-import javax.swing.plaf.synth.Region;
 import java.util.Random;
 
 public class DikeSillNoise {

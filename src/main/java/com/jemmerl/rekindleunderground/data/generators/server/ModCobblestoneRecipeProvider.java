@@ -1,6 +1,6 @@
 package com.jemmerl.rekindleunderground.data.generators.server;
 
-import com.jemmerl.rekindleunderground.data.types.GeologyType;
+import com.jemmerl.rekindleunderground.data.enums.GeologyType;
 import com.jemmerl.rekindleunderground.init.ModTags;
 import com.jemmerl.rekindleunderground.util.lists.GeoListWrapper;
 import com.jemmerl.rekindleunderground.util.lists.ModBlockLists;

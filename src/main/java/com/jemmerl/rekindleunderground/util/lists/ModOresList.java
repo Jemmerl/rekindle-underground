@@ -1,6 +1,6 @@
 package com.jemmerl.rekindleunderground.util.lists;
 
-import com.jemmerl.rekindleunderground.data.types.OreType;
+import com.jemmerl.rekindleunderground.data.enums.ore.OreType;
 import com.jemmerl.rekindleunderground.init.ModItems;
 import net.minecraft.item.Items;
 

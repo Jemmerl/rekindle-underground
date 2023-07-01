@@ -3,7 +3,6 @@ package com.jemmerl.rekindleunderground.world.feature;
 import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.blocks.IOreBlock;
 import com.jemmerl.rekindleunderground.blocks.StoneOreBlock;
-import com.jemmerl.rekindleunderground.data.types.GeologyType;
 import com.jemmerl.rekindleunderground.init.NoiseInit;
 import com.jemmerl.rekindleunderground.util.UtilMethods;
 import com.jemmerl.rekindleunderground.util.lists.ModBlockLists;
@@ -69,6 +68,8 @@ public class GeologyFeature extends Feature<NoFeatureConfig> {
                             chunk.getSections()[y >> 4].setBlockState(x, y & 15, z, stoneState, false);
                             break;
                         case VANILLA_DETRITUS:
+                            //if(gravel)
+                            //ifelse{
                             if (y <= (topY - getDepth(mutablePos.toImmutable()))) {
                                 Block regolithBlock = ModBlockLists.GEO_LIST.get(((IOreBlock) stoneState.getBlock()).getGeologyType()).getRegolithBlock();
 

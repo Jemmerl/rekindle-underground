@@ -2,8 +2,8 @@ package com.jemmerl.rekindleunderground.init;
 
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
-import com.jemmerl.rekindleunderground.data.types.OreType;
-import com.jemmerl.rekindleunderground.data.types.GeologyType;
+import com.jemmerl.rekindleunderground.data.enums.ore.OreType;
+import com.jemmerl.rekindleunderground.data.enums.GeologyType;
 import net.minecraft.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;

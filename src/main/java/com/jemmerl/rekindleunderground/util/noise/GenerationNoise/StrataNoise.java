@@ -1,7 +1,7 @@
 package com.jemmerl.rekindleunderground.util.noise.GenerationNoise;
 
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
-import com.jemmerl.rekindleunderground.data.types.DefaultSets;
+import com.jemmerl.rekindleunderground.data.enums.DefaultSets;
 import com.jemmerl.rekindleunderground.util.UtilMethods;
 import com.jemmerl.rekindleunderground.util.noise.FastNoiseLite;
 import com.jemmerl.rekindleunderground.geology.strata.BlockPicker;
@@ -52,7 +52,7 @@ public class StrataNoise {
     /////            Region Handler            /////
     ////////////////////////////////////////////////
 
-    public static BlockState getStoneStrataBlock(int x, int y, int z, ISeedReader reader) {
+    public static BlockState getStoneStrataBlock(int x, int y, int z, ISeedReader reader, boolean contactMeta) {
         float regionNoise = RegionNoise.stoneRegionNoise(x, y, z);
         int regionVal = (int)(regionNoise * 3); //TODO gives region types possible rn (-2 to 2)
 

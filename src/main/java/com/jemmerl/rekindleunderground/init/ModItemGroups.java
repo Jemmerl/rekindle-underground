@@ -1,6 +1,6 @@
 package com.jemmerl.rekindleunderground.init;
 
-import com.jemmerl.rekindleunderground.data.types.OreType;
+import com.jemmerl.rekindleunderground.data.enums.ore.OreType;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 

@@ -1,10 +1,10 @@
 package com.jemmerl.rekindleunderground.blocks;
 
-import com.jemmerl.rekindleunderground.data.types.GeologyType;
-import com.jemmerl.rekindleunderground.data.types.GradeType;
+import com.jemmerl.rekindleunderground.data.enums.GeologyType;
+import com.jemmerl.rekindleunderground.data.enums.ore.GradeType;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
-import com.jemmerl.rekindleunderground.data.types.OreType;
-import com.jemmerl.rekindleunderground.data.types.StoneGroupType;
+import com.jemmerl.rekindleunderground.data.enums.ore.OreType;
+import com.jemmerl.rekindleunderground.data.enums.StoneGroupType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;

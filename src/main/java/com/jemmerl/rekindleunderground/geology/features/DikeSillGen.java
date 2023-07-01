@@ -1,7 +1,6 @@
 package com.jemmerl.rekindleunderground.geology.features;
 
 import com.jemmerl.rekindleunderground.geology.features.instances.DikeSillEntry;
-import com.jemmerl.rekindleunderground.init.ModBlocks;
 import com.jemmerl.rekindleunderground.util.lists.ModBlockLists;
 import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.DikeSillNoise;
 import net.minecraft.block.BlockState;
@@ -16,7 +15,6 @@ public class DikeSillGen {
 
         if (dikeSillNoise > 0.6) {
             state = ModBlockLists.GEO_LIST.get(dikeSillEntry.getStone()).getStoneOreBlock().getDefaultState();
-            //state = ModBlocks.RED_SANDSTONE_STONE.get().getDefaultState();
         }
 
         return state;

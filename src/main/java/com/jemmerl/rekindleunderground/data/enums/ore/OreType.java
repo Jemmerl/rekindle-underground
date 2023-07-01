@@ -1,4 +1,4 @@
-package com.jemmerl.rekindleunderground.data.types;
+package com.jemmerl.rekindleunderground.data.enums.ore;
 
 import com.jemmerl.rekindleunderground.util.lists.ModOresList;
 import net.minecraft.item.Item;

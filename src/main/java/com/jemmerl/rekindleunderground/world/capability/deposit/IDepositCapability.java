@@ -1,7 +1,7 @@
 package com.jemmerl.rekindleunderground.world.capability.deposit;
 
-import com.jemmerl.rekindleunderground.data.types.GradeType;
-import com.jemmerl.rekindleunderground.data.types.OreType;
+import com.jemmerl.rekindleunderground.data.enums.ore.GradeType;
+import com.jemmerl.rekindleunderground.data.enums.ore.OreType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;

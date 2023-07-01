@@ -1,13 +1,12 @@
 package com.jemmerl.rekindleunderground.util;
 
 import com.jemmerl.rekindleunderground.blocks.IOreBlock;
-import com.jemmerl.rekindleunderground.data.types.StoneGroupType;
+import com.jemmerl.rekindleunderground.data.enums.StoneGroupType;
 import com.jemmerl.rekindleunderground.util.lists.ModBlockLists;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.state.Property;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
