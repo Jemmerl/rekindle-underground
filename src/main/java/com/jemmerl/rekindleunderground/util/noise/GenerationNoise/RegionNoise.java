@@ -90,9 +90,9 @@ public class RegionNoise {
             volcanicNoise.SetNoiseType(FastNoiseLite.NoiseType.Cellular);
             volcanicNoise.SetCellularReturnType(FastNoiseLite.CellularReturnType.CellValue);
             volcanicNoise.SetCellularDistanceFunction(FastNoiseLite.CellularDistanceFunction.Euclidean);
-            volcanicNoise.SetCellularJitter(2f);
+            volcanicNoise.SetCellularJitter(0.70f);
             volcanicNoise.SetFractalType(FastNoiseLite.FractalType.None);
-            volcanicNoise.SetFrequency(0.024f / (float)Math.sqrt(REGION_SIZE));
+            volcanicNoise.SetFrequency(0.030f / (float)Math.sqrt(REGION_SIZE));
             volcanicNoise.SetDomainWarpType(FastNoiseLite.DomainWarpType.OpenSimplex2Reduced);
             volcanicNoise.SetDomainWarpFrequency(0.025f);
             volcanicNoise.SetDomainWarpAmp(15f);

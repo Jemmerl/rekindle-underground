@@ -1,20 +1,16 @@
 package com.jemmerl.rekindleunderground.geology;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
-import com.jemmerl.rekindleunderground.geology.features.instances.DikeSillEntry;
 import com.jemmerl.rekindleunderground.geology.strata.VolcanicRegionBuilder;
 import com.jemmerl.rekindleunderground.init.ModBlocks;
 import com.jemmerl.rekindleunderground.init.depositinit.DepositRegistrar;
 import com.jemmerl.rekindleunderground.geology.deposits.DepositUtil;
 import com.jemmerl.rekindleunderground.geology.deposits.IEnqueuedDeposit;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
-import com.jemmerl.rekindleunderground.init.featureinit.FeatureRegistrar;
-import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.StrataNoise;
 import com.jemmerl.rekindleunderground.world.capability.chunk.ChunkGennedCapability;
 import com.jemmerl.rekindleunderground.world.capability.chunk.IChunkGennedCapability;
 import com.jemmerl.rekindleunderground.world.capability.deposit.DepositCapability;
 import com.jemmerl.rekindleunderground.world.capability.deposit.IDepositCapability;
-import com.jemmerl.rekindleunderground.geology.features.DikeSillGen;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -56,8 +52,8 @@ public class StateMapBuilder {
     }
 
     private void generateStateMap() {
+        PopulateIgneous();
         PopulateStrata();
-        PopulateFeatures();
         PopulateOres();
 
         // Mark that this chunk was generated
@@ -68,39 +64,9 @@ public class StateMapBuilder {
     /////             Map Generators            /////
     /////////////////////////////////////////////////
 
-    // Fill the chunk state map with generated stones
-    public void PopulateStrata() {
-
-        for (int x = 0; x < 16; x++) {
-            for (int z = 0; z < 16; z++) {
-                for (int y = 0; y < this.chunkReader.getMaxHeight(); y++) {
-                    int posX = this.blockPos.getX() + x;
-                    int posZ = this.blockPos.getZ() + z;
-
-                    // Generate the potential blockstate given the larger volcanic region.
-                    // If no block generated, return null and let the strata generate the position.
-                    // If not null, then there is no need to generate the strata block as the volcanic
-                    // spot technically is to generate on top of the strata, replacing it.
-                    // If a spot is to be contact metamorphosed, then it will be set as AIR
-                    BlockState volcanicState = VolcanicRegionBuilder.getVolcanicState(posX, y, posZ,
-                            chunkReader.getSeedReader());
-
-                    boolean contactMeta = (volcanicState == Blocks.AIR.getDefaultState());
-                    if ((volcanicState == null) || contactMeta) {
-//                        this.stoneStateMap[x][y][z] = StrataNoise.getStoneStrataBlock(posX, y, posZ,
-//                                chunkReader.getSeedReader(), contactMeta);
-                        this.stoneStateMap[x][y][z] = ModBlocks.LIMESTONE_STONE.get().getDefaultState(); // TODO TEMP
-                    } else {
-                        this.stoneStateMap[x][y][z] = volcanicState;
-                    }
-                }
-            }
-        }
-    }
-
     // Replace stones in the current state map with generated features
     // Will be used for less technical generation, such as dikes or LIPs
-    public void PopulateFeatures() {
+    public void PopulateIgneous() {
         // TODO CURRENTLY NOT IN USE. IT WILL BE IN THE FUTURE!
         // use datapack to define various dike sills and their stone
         // loop over them sequentially
@@ -110,31 +76,71 @@ public class StateMapBuilder {
         // only need to change once for each dikesill
         // DO DIKES SILLS LAST SO THEY OVERLAP OTHER FEATURES
 
-        // Populate dike/sills
-        for (final DikeSillEntry dikeSillEntry : FeatureRegistrar.getDikeSillFeatures().values()) {
-            for (int x = 0; x < 16; x++) {
-                for (int z = 0; z < 16; z++) {
-                    for (int y = 0; y < this.chunkReader.getMaxHeight(); y++) {
-                        int posX = this.blockPos.getX() + x;
-                        int posZ = this.blockPos.getZ() + z;
+//        // Populate dike/sills
+//        for (final DikeSillEntry dikeSillEntry : FeatureRegistrar.getDikeSillFeatures().values()) {
+//            for (int x = 0; x < 16; x++) {
+//                for (int z = 0; z < 16; z++) {
+//                    for (int y = 0; y < this.chunkReader.getMaxHeight(); y++) {
+//                        int posX = this.blockPos.getX() + x;
+//                        int posZ = this.blockPos.getZ() + z;
+//
+//                        BlockState dikeSillState = DikeSillGen.generate(posX, y, posZ, dikeSillEntry);
+//                        if (dikeSillState != null) {
+//                            //System.out.println("x: " + x + " y: " + y + " z: " + z);
+//                            this.stoneStateMap[x][y][z] = dikeSillState;
+//                        }
+//                    }
+//                }
+//            }
+//        }
 
-                        BlockState dikeSillState = DikeSillGen.generate(posX, y, posZ, dikeSillEntry);
-                        if (dikeSillState != null) {
-                            //System.out.println("x: " + x + " y: " + y + " z: " + z);
-                            this.stoneStateMap[x][y][z] = dikeSillState;
-                        }
-                    }
+
+
+        // Generate the potential blockstate given the larger volcanic region.
+        // If no block generated, return null and let the strata generate the position.
+        // If not null, then there is no need to generate the strata block as the volcanic
+        // spot technically is to generate on top of the strata, replacing it.
+        // If a spot is to be contact metamorphosed, then it will be set as AIR
+        for (int x = 0; x < 16; x++) {
+            for (int z = 0; z < 16; z++) {
+                for (int y = 0; y < this.chunkReader.getMaxHeight(); y++) {
+                    int posX = this.blockPos.getX() + x;
+                    int posZ = this.blockPos.getZ() + z;
+
+                    this.stoneStateMap[x][y][z] = VolcanicRegionBuilder.getVolcanicState(posX, y, posZ,
+                            chunkReader.getSeedReader());
                 }
             }
         }
 
-        // Populate plutons
-
-
-
 
 
     }
+
+
+    // Fill the chunk state map with generated stones
+    public void PopulateStrata() {
+        for (int x = 0; x < 16; x++) {
+            for (int z = 0; z < 16; z++) {
+                for (int y = 0; y < this.chunkReader.getMaxHeight(); y++) {
+                    int posX = this.blockPos.getX() + x;
+                    int posZ = this.blockPos.getZ() + z;
+
+                    BlockState ignState = this.stoneStateMap[x][y][z];
+                    boolean contactMeta = (ignState == Blocks.AIR.getDefaultState());
+                    if ((ignState == null)) {
+//                        this.stoneStateMap[x][y][z] = StrataNoise.getStoneStrataBlock(posX, y, posZ,
+//                                chunkReader.getSeedReader(), contactMeta);
+                        this.stoneStateMap[x][y][z] = ModBlocks.LIMESTONE_STONE.get().getDefaultState(); // TODO TEMP
+                    } else if (contactMeta) {
+                        //System.out.println(posX + " " + y + " " + posZ);
+                        this.stoneStateMap[x][y][z] = ModBlocks.MARBLE_STONE.get().getDefaultState();
+                    }
+                }
+            }
+        }
+    }
+
 
     // Populate ore deposits
     public void PopulateOres() {

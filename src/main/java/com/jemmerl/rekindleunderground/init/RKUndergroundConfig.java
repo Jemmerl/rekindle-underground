@@ -26,10 +26,12 @@ public class RKUndergroundConfig {
 
         private static final double PLACER_CHANCE = 1.00; // 0.00 - 1.00 scale, chance of placer deposit attempt in chunk; 0 is no placers
 
-        private static final boolean GEN_MAAR_DIATREMES = true; // Generate maar-diatremes?
+        private static final boolean GEN_MAAR_DIATREMES = true; // Generate maar-diatremes? TODO why tf is a '?' here
+        private static final boolean GEN_BATHOLITHS = true; // Generate batholiths
 
         // Debug options
         private static final boolean DEBUG_DIATREME_MAAR = false;
+        private static final boolean DEBUG_BATHOLITHS = false;
         private static final boolean DEBUG_TEST_GENFEATURES = true;
         private static final boolean DEBUG_GENFEATURES_READER = false;
         private static final boolean DEBUG_TEST_DEPOSITS = true;
@@ -61,8 +63,10 @@ public class RKUndergroundConfig {
         public final ForgeConfigSpec.ConfigValue<Double> placerChance;
 
         public final ForgeConfigSpec.ConfigValue<Boolean> gen_maar_diatremes;
+        public final ForgeConfigSpec.ConfigValue<Boolean> gen_batholiths;
 
         public final ForgeConfigSpec.ConfigValue<Boolean> debug_diatreme_maar;
+        public final ForgeConfigSpec.ConfigValue<Boolean> debug_batholiths;
         public final ForgeConfigSpec.ConfigValue<Boolean> debug_test_genfeatures;
         public final ForgeConfigSpec.ConfigValue<Boolean> debug_genfeature_reader;
         public final ForgeConfigSpec.ConfigValue<Boolean> debug_test_deposits;
@@ -95,6 +99,9 @@ public class RKUndergroundConfig {
             this.gen_maar_diatremes = builder.comment("Enable Maar-Diatreme generation; Default true")
                     .worldRestart()
                     .define("Generate Maar-Diatremes", GEN_MAAR_DIATREMES);
+            this.gen_batholiths = builder.comment("Enable Batholith generation; Default true")
+                    .worldRestart()
+                    .define("Generate Batholiths", GEN_BATHOLITHS);
             builder.pop();
             // End Igneous Config
 
@@ -179,6 +186,9 @@ public class RKUndergroundConfig {
             this.debug_diatreme_maar = builder.comment("Enable diatreme-maar debug mode")
                     .worldRestart()
                     .define("Debug Diatreme-Maars", DEBUG_DIATREME_MAAR);
+            this.debug_batholiths = builder.comment("Enable batholith debug mode")
+                    .worldRestart()
+                    .define("Debug Diatreme-Maars", DEBUG_BATHOLITHS);
             this.debug_test_genfeatures = builder.comment("Enable generated features for testing (have \"test\" in their name) debug mode")
                     .worldRestart()
                     .define("Debug Test Generated Features", DEBUG_TEST_GENFEATURES);

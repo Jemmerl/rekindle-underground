@@ -1,11 +1,15 @@
 package com.jemmerl.rekindleunderground.geology.strata;
 
+import com.jemmerl.rekindleunderground.RekindleUnderground;
 import com.jemmerl.rekindleunderground.data.enums.igneous.BatholithType;
 import com.jemmerl.rekindleunderground.data.enums.igneous.DikeType;
 import com.jemmerl.rekindleunderground.data.enums.igneous.IgnProvinceType;
 import com.jemmerl.rekindleunderground.init.ModBlocks;
+import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
+import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.BlobNoise;
 import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.RegionNoise;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.world.ISeedReader;
 
 import java.util.Random;
@@ -21,21 +25,20 @@ public class VolcanicRegionBuilder {
 
     // Cached dike properties
     private static DikeType cachedDikeType;
-    private static BlockState cachedDikeStoneOne;
-    private static BlockState cachedDikeStoneTwo;
-    private static BlockState cachedDikeStoneThree;
+    private static BlockState cachedDikeStoneOne; // Stone the first dike will generate with (if applicable)
+    private static BlockState cachedDikeStoneTwo; // Stone the second dike will generate with (if applicable)
+    private static BlockState cachedDikeStoneThree; // Stone the third dike will generate with (if applicable)
 
     // Cached batholith properties
     private static BatholithType cachedBatholithType;
-    private static BlockState cachedBatholithStone;
-    private static int cachedBatholithHeight;
-
+    private static BlockState cachedBatholithStone; // Stone the batholith will generate with (if applicable)
+    private static int cachedBatholithHeight; // Max height of the batholith
 
     // Constants
     private static final int BATHOLITH_DEEP_MIN = 25;
-    private static final int BATHOLITH_DEEP_MAX = 45;
-    private static final int BATHOLITH_PROT_MIN = 75;
-    private static final int BATHOLITH_PROT_MAX = 130; //-0.013x^2 + HEIGHT
+    private static final int BATHOLITH_DEEP_MAX = 50;
+    private static final int BATHOLITH_PROT_MIN = 65;
+    private static final int BATHOLITH_PROT_MAX = 130;
 
     public static BlockState getVolcanicState(int x, int y, int z, ISeedReader seedReader) {
 
@@ -68,28 +71,57 @@ public class VolcanicRegionBuilder {
             rfloat = rand.nextFloat();
             switch (cachedProvinceType) {
                 case NONE:
-                    if (rfloat > 0.90f) {
-                        cachedBatholithType = BatholithType.PROTRUDING; // 10% if no LIP
+                    // Config to disable batholiths
+                    if (!RKUndergroundConfig.COMMON.gen_batholiths.get()) {
+                        cachedBatholithType = BatholithType.NONE;
+                        break;
+                    }
+
+                    if (rfloat > 0.93f) {
+                        cachedBatholithType = BatholithType.PROTRUDING; // 8%
                         cachedBatholithHeight = rand.nextInt(BATHOLITH_PROT_MAX - BATHOLITH_PROT_MIN) + BATHOLITH_PROT_MIN;
+                        break;
+                    } else if (rfloat > 0.75f) {
+                        cachedBatholithType = BatholithType.DEEP; // 17%
+                        cachedBatholithHeight = rand.nextInt(BATHOLITH_DEEP_MAX - BATHOLITH_DEEP_MIN) + BATHOLITH_DEEP_MIN;
                         break;
                     }
                 case EXTRUDED:
                 case ERODED:
-                    if (rfloat > 0.65f) {
-                        cachedBatholithType = BatholithType.DEEP; // 35% if LIP, 25% if none
-                        cachedBatholithHeight = rand.nextInt(BATHOLITH_DEEP_MAX - BATHOLITH_DEEP_MIN) + BATHOLITH_DEEP_MIN;
-                        break;
-                    }
                 case INTRUDED:
                 default:
-                    cachedBatholithType = BatholithType.NONE; // 65% (35% chance for a batholith, unless intruded LIP)
+                    cachedBatholithType = BatholithType.NONE; // 75% (25% chance for a batholith if no FB)
             }
 
             // Pick batholith stone
-            if (cachedBatholithType != BatholithType.NONE) {
-                // cachedBatholithStone = BlockPicker.getBatholithStone(volRegionVal);
-                cachedBatholithStone = ModBlocks.GRANITE_STONE.get().getDefaultState(); // TODO TEMP
+            rfloat = rand.nextFloat();
+            if (cachedBatholithType.equals(BatholithType.NONE)) {
+                cachedBatholithStone = ModBlocks.SAND_STONE.get().getDefaultState(); // Debug, should not appear!
+            } else {
+                // Most batholiths are mixes of various felsic and intermediate plutonic rocks
+                // To save on computing cost (might experiment later), they will be generated as homogenous masses
+                // Gabbro is sometimes a small component of batholiths, which is represented here as a very
+                // rare chance of generation. Will also provide a non-oceanic source of gabbro for building
+                if (rfloat > 0.65f) {
+                    cachedBatholithStone = ModBlocks.GRANITE_STONE.get().getDefaultState(); // 35% -- felsic
+                } else if (rfloat > 0.41f) {
+                    cachedBatholithStone = ModBlocks.SYENITE_STONE.get().getDefaultState(); // 24% -- felsic
+                } else if (rfloat > 0.17f) {
+                    cachedBatholithStone = ModBlocks.GRANODIORITE_STONE.get().getDefaultState(); // 24% -- intermediate-felsic
+                } else if (rfloat > 0.02f) {
+                    cachedBatholithStone = ModBlocks.DIORITE_STONE.get().getDefaultState(); // 15% -- intermediate
+                } else {
+                    cachedBatholithStone = ModBlocks.GABBRO_STONE.get().getDefaultState(); // 2% -- mafic
+                }
+
+                // Debug
+                if (true) {
+                    RekindleUnderground.getInstance().LOGGER.info(
+                            "Generating batholith with type {} and max height {} at: ({}, {})",
+                            cachedBatholithType, cachedBatholithHeight, x, z);
+                }
             }
+
 
             // Select dike type
             rfloat = rand.nextFloat();
@@ -103,14 +135,14 @@ public class VolcanicRegionBuilder {
                 default:
                     if (rfloat > 0.96f) {
                         cachedDikeType = DikeType.LINEAR_SWARM_ONE; // 4%
-                    } else if (rfloat > 0.88f) {
-                        cachedDikeType = DikeType.LINEAR_SWARM; // 8%
+                    } else if (rfloat > 0.90f) {
+                        cachedDikeType = DikeType.LINEAR_SWARM; // 6%
                     } else if (rfloat > 0.65f) {
-                        cachedDikeType = DikeType.TWO; // 23%
+                        cachedDikeType = DikeType.TWO; // 25%
                     } else if (rfloat > 0.35f) {
                         cachedDikeType = DikeType.ONE; // 30%
                     } else {
-                        cachedDikeType = DikeType.NONE; // 35%
+                        cachedDikeType = DikeType.NONE; // 35% (65% chance of some dike)
                     }
             }
         }
@@ -120,24 +152,9 @@ public class VolcanicRegionBuilder {
         // GENERATION //
         ////////////////
 
-        // Build batholith
-        float heightPercent = 1 - (1 / RegionNoise.volcanicRegionNoise(x, z, false));
-        switch (cachedBatholithType) {
-            case PROTRUDING:
-
-                break;
-            case DEEP:
-
-                break;
-            case NONE:
-            default:
-                break;
-        }
-
-
-        // Build dikes
-
-
+        // Builder exits with return if a block is placed, given the appearance of the following:
+        // Flood basalts on top, followed by batholiths, with both overlaying on dikes.
+        // This is subject to change.
 
         // Build flood basalt
         switch (cachedProvinceType) {
@@ -158,15 +175,29 @@ public class VolcanicRegionBuilder {
                 break;
         }
 
+        // Build batholith
+        switch (cachedBatholithType) {
+            case PROTRUDING:
+            case DEEP:
+                float percentContactMeta = -RegionNoise.volcanicRegionNoise(x, z, false);
+                float percentBatholith = (float)Math.pow(percentContactMeta, 1.5);
+                if ((y + 20) <= (((cachedBatholithHeight + 20) * percentBatholith) + (5 * BlobNoise.blobRadiusNoise((x * 4), y, (z * 4))))) {
+                    return cachedBatholithStone; // Batholith itself
+                } else if ((y + 20) <= ((cachedBatholithHeight + 27) * percentContactMeta)) {
+                    volcanicState = Blocks.AIR.getDefaultState(); // Region of contact metamorphism
+                }
+                break;
+            case NONE:
+            default:
+                break;
+        }
+
+        // Build dikes
+        switch (cachedDikeType) {
+            default:
+                break;
+        }
+
         return volcanicState;
-
-//        if (true) {
-//        } else if (false) {
-//            return Blocks.AIR.getDefaultState();
-//        } else {
-//            return null;
-//        }
-//        return null;
-
     }
 }
