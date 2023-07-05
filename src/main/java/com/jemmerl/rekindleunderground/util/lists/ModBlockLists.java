@@ -289,6 +289,22 @@ public class ModBlockLists {
         VANILLA_DET_LIST.put(Blocks.CLAY.getDefaultState(), ModBlocks.CLAY_STONE.get().getDefaultState());
     }
 
+
+    ///////////////////////////
+    // CONTACT METAMORPHISM //
+    ///////////////////////////
+
+    //TODO hornfels
+    public static Map<GeologyType, BlockState> CONTACT_META_MAP = new HashMap<>();
+    static {
+        CONTACT_META_MAP.put(GeologyType.SANDSTONE, ModBlocks.QUARTZITE_STONE.get().getDefaultState());
+        CONTACT_META_MAP.put(GeologyType.RED_SANDSTONE, ModBlocks.QUARTZITE_STONE.get().getDefaultState());
+        CONTACT_META_MAP.put(GeologyType.LIMESTONE, ModBlocks.MARBLE_STONE.get().getDefaultState());
+        CONTACT_META_MAP.put(GeologyType.DOLOSTONE, ModBlocks.MARBLE_STONE.get().getDefaultState());
+        CONTACT_META_MAP.put(GeologyType.CHALK, ModBlocks.MARBLE_STONE.get().getDefaultState());
+    }
+
+
     ////////////////////
     // MODEL BUILDING //
     ////////////////////
@@ -299,4 +315,3 @@ public class ModBlockLists {
     );
 
 }
-

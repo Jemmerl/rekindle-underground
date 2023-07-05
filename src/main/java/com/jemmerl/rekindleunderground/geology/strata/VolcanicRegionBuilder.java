@@ -77,12 +77,12 @@ public class VolcanicRegionBuilder {
                         break;
                     }
 
-                    if (rfloat > 0.93f) {
-                        cachedBatholithType = BatholithType.PROTRUDING; // 8%
+                    if (rfloat > 0.90f) {
+                        cachedBatholithType = BatholithType.PROTRUDING; // 10%
                         cachedBatholithHeight = rand.nextInt(BATHOLITH_PROT_MAX - BATHOLITH_PROT_MIN) + BATHOLITH_PROT_MIN;
                         break;
-                    } else if (rfloat > 0.75f) {
-                        cachedBatholithType = BatholithType.DEEP; // 17%
+                    } else if (rfloat > 0.65f) {
+                        cachedBatholithType = BatholithType.DEEP; // 25%
                         cachedBatholithHeight = rand.nextInt(BATHOLITH_DEEP_MAX - BATHOLITH_DEEP_MIN) + BATHOLITH_DEEP_MIN;
                         break;
                     }
@@ -90,7 +90,7 @@ public class VolcanicRegionBuilder {
                 case ERODED:
                 case INTRUDED:
                 default:
-                    cachedBatholithType = BatholithType.NONE; // 75% (25% chance for a batholith if no FB)
+                    cachedBatholithType = BatholithType.NONE; // 75% (35% chance for a batholith if no FB)
             }
 
             // Pick batholith stone
@@ -112,13 +112,6 @@ public class VolcanicRegionBuilder {
                     cachedBatholithStone = ModBlocks.DIORITE_STONE.get().getDefaultState(); // 15% -- intermediate
                 } else {
                     cachedBatholithStone = ModBlocks.GABBRO_STONE.get().getDefaultState(); // 2% -- mafic
-                }
-
-                // Debug
-                if (true) {
-                    RekindleUnderground.getInstance().LOGGER.info(
-                            "Generating batholith with type {} and max height {} at: ({}, {})",
-                            cachedBatholithType, cachedBatholithHeight, x, z);
                 }
             }
 
@@ -183,9 +176,17 @@ public class VolcanicRegionBuilder {
                 float percentBatholith = (float)Math.pow(percentContactMeta, 1.5);
                 if ((y + 20) <= (((cachedBatholithHeight + 20) * percentBatholith) + (5 * BlobNoise.blobRadiusNoise((x * 4), y, (z * 4))))) {
                     return cachedBatholithStone; // Batholith itself
-                } else if ((y + 20) <= ((cachedBatholithHeight + 27) * percentContactMeta)) {
+                } else if ((y + 20) <= ((cachedBatholithHeight + 30) * percentContactMeta)) {
                     volcanicState = Blocks.AIR.getDefaultState(); // Region of contact metamorphism
                 }
+
+                // Debug
+                if (RKUndergroundConfig.COMMON.gen_batholiths.get() && (percentBatholith > 0.605f) && (percentBatholith < 0.61f)) {
+                    RekindleUnderground.getInstance().LOGGER.info(
+                            "Generating batholith with type {} and max height {} at: ({}, {})",
+                            cachedBatholithType, cachedBatholithHeight, x, z);
+                }
+
                 break;
             case NONE:
             default:
@@ -201,3 +202,8 @@ public class VolcanicRegionBuilder {
         return volcanicState;
     }
 }
+
+// Batholith Learnings
+
+
+// Metamorphism Learnings

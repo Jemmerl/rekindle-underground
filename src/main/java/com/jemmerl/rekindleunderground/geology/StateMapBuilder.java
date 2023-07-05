@@ -1,22 +1,29 @@
 package com.jemmerl.rekindleunderground.geology;
 
 import com.jemmerl.rekindleunderground.RekindleUnderground;
+import com.jemmerl.rekindleunderground.blocks.IOreBlock;
+import com.jemmerl.rekindleunderground.data.enums.GeologyType;
 import com.jemmerl.rekindleunderground.geology.strata.VolcanicRegionBuilder;
 import com.jemmerl.rekindleunderground.init.ModBlocks;
 import com.jemmerl.rekindleunderground.init.depositinit.DepositRegistrar;
 import com.jemmerl.rekindleunderground.geology.deposits.DepositUtil;
 import com.jemmerl.rekindleunderground.geology.deposits.IEnqueuedDeposit;
 import com.jemmerl.rekindleunderground.init.RKUndergroundConfig;
+import com.jemmerl.rekindleunderground.util.lists.ModBlockLists;
+import com.jemmerl.rekindleunderground.util.noise.GenerationNoise.StrataNoise;
 import com.jemmerl.rekindleunderground.world.capability.chunk.ChunkGennedCapability;
 import com.jemmerl.rekindleunderground.world.capability.chunk.IChunkGennedCapability;
 import com.jemmerl.rekindleunderground.world.capability.deposit.DepositCapability;
 import com.jemmerl.rekindleunderground.world.capability.deposit.IDepositCapability;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.ISeedReader;
+import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -128,13 +135,17 @@ public class StateMapBuilder {
 
                     BlockState ignState = this.stoneStateMap[x][y][z];
                     boolean contactMeta = (ignState == Blocks.AIR.getDefaultState());
-                    if ((ignState == null)) {
-//                        this.stoneStateMap[x][y][z] = StrataNoise.getStoneStrataBlock(posX, y, posZ,
-//                                chunkReader.getSeedReader(), contactMeta);
-                        this.stoneStateMap[x][y][z] = ModBlocks.LIMESTONE_STONE.get().getDefaultState(); // TODO TEMP
-                    } else if (contactMeta) {
-                        //System.out.println(posX + " " + y + " " + posZ);
-                        this.stoneStateMap[x][y][z] = ModBlocks.MARBLE_STONE.get().getDefaultState();
+                    if ((ignState == null) || contactMeta) {
+                        BlockState stoneState = StrataNoise.getStoneStrataBlock(posX, y, posZ,
+                                chunkReader.getSeedReader(), contactMeta);
+
+                        // might be temporary, may move into new strata gen
+                        if (contactMeta) {
+                            GeologyType geoType = ((IOreBlock)(stoneState.getBlock())).getGeologyType();
+                            stoneState = ModBlockLists.CONTACT_META_MAP.getOrDefault(geoType, stoneState);
+                        }
+
+                        this.stoneStateMap[x][y][z] = stoneState;
                     }
                 }
             }
