@@ -1,0 +1,8 @@
+{
+  "parent": "rekindleunderground:block/stone_ore_parent",
+  "textures": {
+    "all": "rekindleunderground:block/greisen_stone",
+    "particle": "rekindleunderground:block/greisen_stone",
+    "overlay": "rekindleunderground:block/ore/rich_bismuthinite"
+  }
+}

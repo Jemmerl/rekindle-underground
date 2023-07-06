@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "rekindleunderground:block/limy_shale_stone",
+    "up": "rekindleunderground:block/limy_shale_stone",
+    "down": "rekindleunderground:block/limy_shale_stone",
+    "north": "rekindleunderground:block/limy_shale_stone",
+    "south": "rekindleunderground:block/limy_shale_stone",
+    "east": "rekindleunderground:block/limy_shale_stone",
+    "west": "rekindleunderground:block/limy_shale_stone"
+  }
+}

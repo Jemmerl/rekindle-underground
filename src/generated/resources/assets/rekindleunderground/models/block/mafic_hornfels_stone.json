@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "rekindleunderground:block/mafic_hornfels_stone",
+    "up": "rekindleunderground:block/mafic_hornfels_stone",
+    "down": "rekindleunderground:block/mafic_hornfels_stone",
+    "north": "rekindleunderground:block/mafic_hornfels_stone",
+    "south": "rekindleunderground:block/mafic_hornfels_stone",
+    "east": "rekindleunderground:block/mafic_hornfels_stone",
+    "west": "rekindleunderground:block/mafic_hornfels_stone"
+  }
+}

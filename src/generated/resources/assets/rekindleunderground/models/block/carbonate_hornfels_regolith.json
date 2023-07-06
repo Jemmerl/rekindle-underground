@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "rekindleunderground:block/carbonate_hornfels_regolith",
+    "up": "rekindleunderground:block/carbonate_hornfels_regolith",
+    "down": "rekindleunderground:block/carbonate_hornfels_regolith",
+    "north": "rekindleunderground:block/carbonate_hornfels_regolith",
+    "south": "rekindleunderground:block/carbonate_hornfels_regolith",
+    "east": "rekindleunderground:block/carbonate_hornfels_regolith",
+    "west": "rekindleunderground:block/carbonate_hornfels_regolith"
+  }
+}

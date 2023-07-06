@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "cobblestone",
+  "pattern": [
+    "xx",
+    "xx"
+  ],
+  "key": {
+    "x": {
+      "item": "rekindleunderground:claystone_rock"
+    }
+  },
+  "result": {
+    "item": "rekindleunderground:claystone_cobblestone"
+  }
+}

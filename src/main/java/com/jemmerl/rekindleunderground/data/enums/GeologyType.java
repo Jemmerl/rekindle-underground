@@ -10,25 +10,38 @@ public enum GeologyType {
     CHALK("chalk", StoneGroupType.SEDIMENTARY, true, 0, 0),
     LIMESTONE("limestone", StoneGroupType.SEDIMENTARY, true, 1, 1),
     DOLOSTONE("dolostone", StoneGroupType.SEDIMENTARY, true, 2, 2),
+    MARLSTONE("marlstone", StoneGroupType.SEDIMENTARY, true, 2, 2), //TODO COBBLE
     SHALE("shale", StoneGroupType.SEDIMENTARY, true, 2, 2),
+    LIMY_SHALE("limy_shale", StoneGroupType.SEDIMENTARY, true, 2, 2), //TODO COBBLE
     SANDSTONE("sandstone", StoneGroupType.SEDIMENTARY, true, 2, 2),
     RED_SANDSTONE("red_sandstone", StoneGroupType.SEDIMENTARY, true, 2, 2),
+    ARKOSE("arkose", StoneGroupType.SEDIMENTARY, true, 2, 2), //TODO COBBLE
     GREYWACKE("greywacke", StoneGroupType.SEDIMENTARY, true, 2, 2),
     MUDSTONE("mudstone", StoneGroupType.SEDIMENTARY, true, 1, 1),
+    CLAYSTONE("claystone", StoneGroupType.SEDIMENTARY, true, 1, 1), //TODO COBBLE
+    SILTSTONE("siltstone", StoneGroupType.SEDIMENTARY, true, 1, 1), //TODO COBBLE
+    CONGLOMERATE("conglomerate", StoneGroupType.SEDIMENTARY, true, 2, 2), //TODO COBBLE
+    VEIN_QUARTZ("vein_quartz", StoneGroupType.SEDIMENTARY, true, 4, 4),
+
+    // TODO evaporates
     ROCKSALT("rocksalt", StoneGroupType.SEDIMENTARY, false, 1, 1),
     ROCKGYPSUM("rockgypsum", StoneGroupType.SEDIMENTARY, false, 0, 0),
     BORAX("borax", StoneGroupType.SEDIMENTARY, false, 0, 0),
     KERNITE("kernite", StoneGroupType.SEDIMENTARY, false, 0, 0),
-    VEIN_QUARTZ("vein_quartz", StoneGroupType.SEDIMENTARY, true, 4, 4),
 
     // Extrusive Igneous
     RHYOLITE("rhyolite", StoneGroupType.EXTRUSIVE, true, 2, 2),
     DACITE("dacite", StoneGroupType.EXTRUSIVE, true, 3, 3),
     ANDESITE("andesite", StoneGroupType.EXTRUSIVE, true, 3, 3),
+    TRACHYTE("trachyte", StoneGroupType.EXTRUSIVE, true, 3, 3),
     BASALT("basalt", StoneGroupType.EXTRUSIVE, true, 3, 3),
     PAHOEHOE("pahoehoe", StoneGroupType.EXTRUSIVE, true, 2, 2),
     SCORIA("scoria", StoneGroupType.EXTRUSIVE, false, 2, 2),
-    TUFF("tuff", StoneGroupType.EXTRUSIVE, false, 0, 0),
+    RHYOLITIC_TUFF("rhyolitic_tuff", StoneGroupType.EXTRUSIVE, false, 0, 0),
+    TRACHYTIC_TUFF("trachytic_tuff", StoneGroupType.EXTRUSIVE, false, 0, 0),
+    ANDESITIC_TUFF("andesitic_tuff", StoneGroupType.EXTRUSIVE, false, 0, 0),
+    BASALTIC_TUFF("basaltic_tuff", StoneGroupType.EXTRUSIVE, false, 0, 0),
+    ULTRAMAFIC_TUFF("ultramafic_tuff", StoneGroupType.EXTRUSIVE, false, 0, 0),
 
     // Intrusive Igneous
     DIORITE("diorite", StoneGroupType.INTRUSIVE, true, 4, 4),
@@ -44,8 +57,14 @@ public enum GeologyType {
     QUARTZITE("quartzite", StoneGroupType.METAMORPHIC, true, 4, 4),
     SCHIST("schist", StoneGroupType.METAMORPHIC, true, 1, 1),
     PHYLLITE("phyllite", StoneGroupType.METAMORPHIC, true, 2, 2),
+    SLATE("slate", StoneGroupType.METAMORPHIC, true, 3, 3),
     GNEISS("gneiss", StoneGroupType.METAMORPHIC, true, 4, 4),
     MARBLE("marble", StoneGroupType.METAMORPHIC, true, 3, 3),
+    PELITIC_HORNFELS("pelitic_hornfels", StoneGroupType.METAMORPHIC, true, 3, 3), //TODO COBBLE
+    CARBONATE_HORNFELS("carbonate_hornfels", StoneGroupType.METAMORPHIC, true, 3, 3), //TODO COBBLE
+    MAFIC_HORNFELS("mafic_hornfels", StoneGroupType.METAMORPHIC, true, 3, 3), //TODO COBBLE
+    METACONGLOMERATE("metaconglomerate", StoneGroupType.METAMORPHIC, true, 3, 3), //TODO COBBLE
+    GREISEN("greisen", StoneGroupType.METAMORPHIC, true, 4, 4), //TODO COBBLE
 
     // Detritus do not really need to be present, but since they can carry ores, they must be to be compatible
     // Stable Detritus

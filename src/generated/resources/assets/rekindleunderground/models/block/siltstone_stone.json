@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "rekindleunderground:block/siltstone_stone",
+    "up": "rekindleunderground:block/siltstone_stone",
+    "down": "rekindleunderground:block/siltstone_stone",
+    "north": "rekindleunderground:block/siltstone_stone",
+    "south": "rekindleunderground:block/siltstone_stone",
+    "east": "rekindleunderground:block/siltstone_stone",
+    "west": "rekindleunderground:block/siltstone_stone"
+  }
+}

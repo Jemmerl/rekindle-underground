@@ -64,9 +64,9 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
             return false;
         }
 
+        // TODO
         // Add tuff and peridotite as random sprinkles
         // occasional partial beds of tuff
-        // todo add olivine as an ore to allow xenoliths
 
         //////////////////////////////////////
         /// COMPOSITION PROPERTY SELECTION ///
@@ -218,7 +218,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
                             int randInt = rand.nextInt(101);
                             if (randInt > 55) {
                                 // 45% Chance of tuff + 10% chance from brecca == 55% chance overall
-                                reader.setBlockState(currPos, ModBlocks.TUFF_STONE.get().getDefaultState(), 2);
+                                reader.setBlockState(currPos, ModBlocks.ULTRAMAFIC_TUFF_STONE.get().getDefaultState(), 2); //TODO TEMP
                             } else if (randInt > 15) {
                                 // 40% Chance of regolith (which gives 10% chance of tuff itself, giving 30% chance of true regolith)
                                 regolithPosList.add(currPos);
@@ -272,7 +272,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
                     if (rand.nextFloat() < 0.75f) {
                         reader.setBlockState(brecciaPos, brecciaProbMap.nextElt(), 2);
                     } else {
-                        reader.setBlockState(brecciaPos, ModBlocks.TUFF_STONE.get().getDefaultState(), 2);
+                        reader.setBlockState(brecciaPos, ModBlocks.ULTRAMAFIC_TUFF_STONE.get().getDefaultState(), 2); //TODO TEMP
                     }
                 }
 
@@ -283,7 +283,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
                     if (rand.nextBoolean()) {
                         reader.setBlockState(brecciaPos, mainIgnBlock, 2);
                     } else {
-                        reader.setBlockState(brecciaPos, ModBlocks.TUFF_STONE.get().getDefaultState(), 2);
+                        reader.setBlockState(brecciaPos, ModBlocks.ULTRAMAFIC_TUFF_STONE.get().getDefaultState(), 2); //TODO TEMP
                     }
                 }
             }
@@ -358,7 +358,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
         if (currPos.getY() == height) {
             fillState = surfaceConfig.getTop();
         } else {
-            fillState = (rand.nextFloat() > 0.20f) ? surfaceConfig.getUnder() : ModBlocks.TUFF_STONE.get().getDefaultState();
+            fillState = (rand.nextFloat() > 0.20f) ? surfaceConfig.getUnder() : ModBlocks.ULTRAMAFIC_TUFF_STONE.get().getDefaultState(); //TODO TEMP
 
             // Debug
             if (RKUndergroundConfig.COMMON.debug_diatreme_maar.get() && (currPos.getY() > height)) {

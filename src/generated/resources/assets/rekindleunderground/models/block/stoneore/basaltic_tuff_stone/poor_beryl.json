@@ -1,0 +1,8 @@
+{
+  "parent": "rekindleunderground:block/stone_ore_parent",
+  "textures": {
+    "all": "rekindleunderground:block/basaltic_tuff_stone",
+    "particle": "rekindleunderground:block/basaltic_tuff_stone",
+    "overlay": "rekindleunderground:block/ore/poor_beryl"
+  }
+}

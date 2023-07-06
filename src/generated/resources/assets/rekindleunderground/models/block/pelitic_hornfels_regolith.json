@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "rekindleunderground:block/pelitic_hornfels_regolith",
+    "up": "rekindleunderground:block/pelitic_hornfels_regolith",
+    "down": "rekindleunderground:block/pelitic_hornfels_regolith",
+    "north": "rekindleunderground:block/pelitic_hornfels_regolith",
+    "south": "rekindleunderground:block/pelitic_hornfels_regolith",
+    "east": "rekindleunderground:block/pelitic_hornfels_regolith",
+    "west": "rekindleunderground:block/pelitic_hornfels_regolith"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "rekindleunderground:block/marlstone_stone",
+    "up": "rekindleunderground:block/marlstone_stone",
+    "down": "rekindleunderground:block/marlstone_stone",
+    "north": "rekindleunderground:block/marlstone_stone",
+    "south": "rekindleunderground:block/marlstone_stone",
+    "east": "rekindleunderground:block/marlstone_stone",
+    "west": "rekindleunderground:block/marlstone_stone"
+  }
+}

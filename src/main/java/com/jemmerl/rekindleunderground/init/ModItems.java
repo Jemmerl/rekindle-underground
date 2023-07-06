@@ -23,17 +23,24 @@ public class ModItems {
     public static final RegistryObject<Item> CHALK_ROCK = registerRockItem(GeologyType.CHALK);
     public static final RegistryObject<Item> LIMESTONE_ROCK = registerRockItem(GeologyType.LIMESTONE);
     public static final RegistryObject<Item> DOLOSTONE_ROCK = registerRockItem(GeologyType.DOLOSTONE);
+    public static final RegistryObject<Item> MARLSTONE_ROCK = registerRockItem(GeologyType.MARLSTONE);
     public static final RegistryObject<Item> SHALE_ROCK = registerRockItem(GeologyType.SHALE);
+    public static final RegistryObject<Item> LIMY_SHALE_ROCK = registerRockItem(GeologyType.LIMY_SHALE);
     public static final RegistryObject<Item> SANDSTONE_ROCK = registerRockItem(GeologyType.SANDSTONE);
     public static final RegistryObject<Item> RED_SANDSTONE_ROCK = registerRockItem(GeologyType.RED_SANDSTONE);
+    public static final RegistryObject<Item> ARKOSE_ROCK = registerRockItem(GeologyType.ARKOSE);
     public static final RegistryObject<Item> GREYWACKE_ROCK = registerRockItem(GeologyType.GREYWACKE);
     public static final RegistryObject<Item> MUDSTONE_ROCK = registerRockItem(GeologyType.MUDSTONE);
+    public static final RegistryObject<Item> CLAYSTONE_ROCK = registerRockItem(GeologyType.CLAYSTONE);
+    public static final RegistryObject<Item> SILTSTONE_ROCK = registerRockItem(GeologyType.SILTSTONE);
+    public static final RegistryObject<Item> CONGLOMERATE_ROCK = registerRockItem(GeologyType.CONGLOMERATE);
     public static final RegistryObject<Item> VEIN_QUARTZ_ROCK = registerRockItem(GeologyType.VEIN_QUARTZ);
 
     // Extrusive Igneous
     public static final RegistryObject<Item> RHYOLITE_ROCK = registerRockItem(GeologyType.RHYOLITE);
     public static final RegistryObject<Item> DACITE_ROCK = registerRockItem(GeologyType.DACITE);
     public static final RegistryObject<Item> ANDESITE_ROCK = registerRockItem(GeologyType.ANDESITE);
+    public static final RegistryObject<Item> TRACHYTE_ROCK = registerRockItem(GeologyType.TRACHYTE);
     public static final RegistryObject<Item> BASALT_ROCK = registerRockItem(GeologyType.BASALT);
 
     // Intrusive Igneous
@@ -50,8 +57,14 @@ public class ModItems {
     public static final RegistryObject<Item> QUARTZITE_ROCK = registerRockItem(GeologyType.QUARTZITE);
     public static final RegistryObject<Item> SCHIST_ROCK = registerRockItem(GeologyType.SCHIST);
     public static final RegistryObject<Item> PHYLLITE_ROCK = registerRockItem(GeologyType.PHYLLITE);
+    public static final RegistryObject<Item> SLATE_ROCK = registerRockItem(GeologyType.SLATE);
     public static final RegistryObject<Item> GNEISS_ROCK = registerRockItem(GeologyType.GNEISS);
     public static final RegistryObject<Item> MARBLE_ROCK = registerRockItem(GeologyType.MARBLE);
+    public static final RegistryObject<Item> PELITIC_HORNFELS_ROCK = registerRockItem(GeologyType.PELITIC_HORNFELS);
+    public static final RegistryObject<Item> CARBONATE_HORNFELS_ROCK = registerRockItem(GeologyType.CARBONATE_HORNFELS);
+    public static final RegistryObject<Item> MAFIC_HORNFELS_ROCK = registerRockItem(GeologyType.MAFIC_HORNFELS);
+    public static final RegistryObject<Item> METACONGLOMERATE_ROCK = registerRockItem(GeologyType.METACONGLOMERATE);
+    public static final RegistryObject<Item> GREISEN_ROCK = registerRockItem(GeologyType.GREISEN);
 
 
     //////////

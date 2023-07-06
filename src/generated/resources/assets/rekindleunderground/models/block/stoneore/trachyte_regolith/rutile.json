@@ -1,0 +1,8 @@
+{
+  "parent": "rekindleunderground:block/stone_ore_parent",
+  "textures": {
+    "all": "rekindleunderground:block/trachyte_regolith",
+    "particle": "rekindleunderground:block/trachyte_regolith",
+    "overlay": "rekindleunderground:block/ore/rutile"
+  }
+}

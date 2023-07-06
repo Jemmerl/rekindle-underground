@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "rekindleunderground:block/metaconglomerate_stone",
+    "up": "rekindleunderground:block/metaconglomerate_stone",
+    "down": "rekindleunderground:block/metaconglomerate_stone",
+    "north": "rekindleunderground:block/metaconglomerate_stone",
+    "south": "rekindleunderground:block/metaconglomerate_stone",
+    "east": "rekindleunderground:block/metaconglomerate_stone",
+    "west": "rekindleunderground:block/metaconglomerate_stone"
+  }
+}
