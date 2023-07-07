@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "com.jemmerl.jemsgeology.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+
+  ],
+  "client": [
+
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "jemsgeology.mixin-refmap.json"
+}

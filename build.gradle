@@ -15,9 +15,9 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
-version = '1.16.5-2.2.8'
-group = 'com.jemmerl.rekindleunderground'
-archivesBaseName = 'rekindleunderground'
+version = '1.16.5-2.5.0'
+group = 'com.jemmerl.jemsgeology'
+archivesBaseName = 'jemsgeology'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8) // Mojang ships Java 8 to end users, so your mod should target Java 8.
 
@@ -35,9 +35,9 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            arg "-mixin.config=rekindleunderground.mixin.json"
+            arg "-mixin.config=jemsgeology.mixin.json"
             mods {
-                rekindleunderground {
+                jemsgeology {
                     source sourceSets.main
                 }
             }
@@ -47,9 +47,9 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            arg "-mixin.config=rekindleunderground.mixin.json"
+            arg "-mixin.config=jemsgeology.mixin.json"
             mods {
-                rekindleunderground {
+                jemsgeology {
                     source sourceSets.main
                 }
             }
@@ -61,12 +61,12 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            args '--mod', 'rekindleunderground', '--all',
+            args '--mod', 'jemsgeology', '--all',
                     '--output', file('src/generated/resources/'),
                     '--existing', file('src/main/resources/'),
                     '--existing', file('src/generated/resources/')
             mods {
-                rekindleunderground {
+                jemsgeology {
                     source sourceSets.main
                 }
             }
@@ -91,24 +91,24 @@ dependencies {
 }
 
 mixin {
-    add sourceSets.main, "rekindleunderground.mixin-refmap.json"
-    config 'rekindleunderground.mixin.json'
+    add sourceSets.main, "jemsgeology.mixin-refmap.json"
+    config 'jemsgeology.mixin.json'
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
 jar {
     manifest {
         attributes([
-            "Specification-Title": "rekindleunderground",
-            "Specification-Vendor": "rekindleundergroundsareus",
+            "Specification-Title": "jemsgeology",
+            "Specification-Vendor": "jemsgeologysareus",
             "Specification-Version": "0.1", // We are version 1 of ourselves
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"rekindleundergroundsareus",
+            "Implementation-Vendor" :"jemsgeologysareus",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
             "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
             "TweakOrder": 0,
-            "MixinConfigs" : "rekindleunderground.mixin.json",
+            "MixinConfigs" : "jemsgeology.mixin.json",
             "FMLAT" : "accesstransformer.cfg"
         ])
     }

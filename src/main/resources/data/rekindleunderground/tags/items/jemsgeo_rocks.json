@@ -1,0 +1,34 @@
+{
+  "replace": false,
+  "values": [
+    "jemsgeology:chalk_rock",
+    "jemsgeology:limestone_rock",
+    "jemsgeology:dolostone_rock",
+    "jemsgeology:shale_rock",
+    "jemsgeology:sandstone_rock",
+    "jemsgeology:red_sandstone_rock",
+    "jemsgeology:greywacke_rock",
+    "jemsgeology:mudstone_rock",
+    "jemsgeology:vein_quartz_rock",
+
+    "jemsgeology:rhyolite_rock",
+    "jemsgeology:dacite_rock",
+    "jemsgeology:andesite_rock",
+    "jemsgeology:basalt_rock",
+
+    "jemsgeology:diorite_rock",
+    "jemsgeology:granodiorite_rock",
+    "jemsgeology:granite_rock",
+    "jemsgeology:syenite_rock",
+    "jemsgeology:gabbro_rock",
+    "jemsgeology:diabase_rock",
+    "jemsgeology:kimberlite_rock",
+    "jemsgeology:lamproite_rock",
+
+    "jemsgeology:quartzite_rock",
+    "jemsgeology:schist_rock",
+    "jemsgeology:phyllite_rock",
+    "jemsgeology:gneiss_rock",
+    "jemsgeology:marble_rock"
+  ]
+}
