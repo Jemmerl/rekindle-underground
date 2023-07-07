@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "jemsgeology:block/lamproite_stone",
+    "up": "jemsgeology:block/lamproite_stone",
+    "down": "jemsgeology:block/lamproite_stone",
+    "north": "jemsgeology:block/lamproite_stone",
+    "south": "jemsgeology:block/lamproite_stone",
+    "east": "jemsgeology:block/lamproite_stone",
+    "west": "jemsgeology:block/lamproite_stone"
+  }
+}

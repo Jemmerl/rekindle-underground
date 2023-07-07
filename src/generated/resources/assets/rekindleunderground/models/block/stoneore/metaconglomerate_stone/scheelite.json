@@ -1,8 +1,0 @@
-{
-  "parent": "rekindleunderground:block/stone_ore_parent",
-  "textures": {
-    "all": "rekindleunderground:block/metaconglomerate_stone",
-    "particle": "rekindleunderground:block/metaconglomerate_stone",
-    "overlay": "rekindleunderground:block/ore/scheelite"
-  }
-}

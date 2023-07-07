@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "jemsgeology:block/slate_stone",
+    "up": "jemsgeology:block/slate_stone",
+    "down": "jemsgeology:block/slate_stone",
+    "north": "jemsgeology:block/slate_stone",
+    "south": "jemsgeology:block/slate_stone",
+    "east": "jemsgeology:block/slate_stone",
+    "west": "jemsgeology:block/slate_stone"
+  }
+}

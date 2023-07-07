@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "jemsgeology:block/dacite_stone",
+    "up": "jemsgeology:block/dacite_stone",
+    "down": "jemsgeology:block/dacite_stone",
+    "north": "jemsgeology:block/dacite_stone",
+    "south": "jemsgeology:block/dacite_stone",
+    "east": "jemsgeology:block/dacite_stone",
+    "west": "jemsgeology:block/dacite_stone"
+  }
+}

@@ -1,8 +1,0 @@
-{
-  "parent": "rekindleunderground:block/stone_ore_parent",
-  "textures": {
-    "all": "rekindleunderground:block/arkose_stone",
-    "particle": "rekindleunderground:block/arkose_stone",
-    "overlay": "rekindleunderground:block/ore/rich_chalcopyrite"
-  }
-}

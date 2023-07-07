@@ -1,8 +1,0 @@
-{
-  "parent": "rekindleunderground:block/stone_ore_parent",
-  "textures": {
-    "all": "rekindleunderground:block/schist_regolith",
-    "particle": "rekindleunderground:block/schist_regolith",
-    "overlay": "rekindleunderground:block/ore/poor_sylvite"
-  }
-}

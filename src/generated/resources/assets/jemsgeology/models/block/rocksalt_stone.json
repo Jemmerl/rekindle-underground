@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "jemsgeology:block/rocksalt_stone",
+    "up": "jemsgeology:block/rocksalt_stone",
+    "down": "jemsgeology:block/rocksalt_stone",
+    "north": "jemsgeology:block/rocksalt_stone",
+    "south": "jemsgeology:block/rocksalt_stone",
+    "east": "jemsgeology:block/rocksalt_stone",
+    "west": "jemsgeology:block/rocksalt_stone"
+  }
+}

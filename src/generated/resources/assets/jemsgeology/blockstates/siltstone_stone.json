@@ -1,0 +1,463 @@
+{
+  "variants": {
+    "gradetype=highgrade,oretype=none": {
+      "model": "jemsgeology:block/siltstone_stone"
+    },
+    "gradetype=midgrade,oretype=none": {
+      "model": "jemsgeology:block/siltstone_stone"
+    },
+    "gradetype=lowgrade,oretype=none": {
+      "model": "jemsgeology:block/siltstone_stone"
+    },
+    "gradetype=highgrade,oretype=apatite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_apatite"
+    },
+    "gradetype=midgrade,oretype=apatite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/apatite"
+    },
+    "gradetype=lowgrade,oretype=apatite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_apatite"
+    },
+    "gradetype=highgrade,oretype=azurite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_azurite"
+    },
+    "gradetype=midgrade,oretype=azurite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/azurite"
+    },
+    "gradetype=lowgrade,oretype=azurite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_azurite"
+    },
+    "gradetype=highgrade,oretype=baryte": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_baryte"
+    },
+    "gradetype=midgrade,oretype=baryte": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/baryte"
+    },
+    "gradetype=lowgrade,oretype=baryte": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_baryte"
+    },
+    "gradetype=highgrade,oretype=beryl": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_beryl"
+    },
+    "gradetype=midgrade,oretype=beryl": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/beryl"
+    },
+    "gradetype=lowgrade,oretype=beryl": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_beryl"
+    },
+    "gradetype=highgrade,oretype=bismuthinite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_bismuthinite"
+    },
+    "gradetype=midgrade,oretype=bismuthinite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/bismuthinite"
+    },
+    "gradetype=lowgrade,oretype=bismuthinite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_bismuthinite"
+    },
+    "gradetype=highgrade,oretype=carnotite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_carnotite"
+    },
+    "gradetype=midgrade,oretype=carnotite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/carnotite"
+    },
+    "gradetype=lowgrade,oretype=carnotite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_carnotite"
+    },
+    "gradetype=highgrade,oretype=cassiterite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_cassiterite"
+    },
+    "gradetype=midgrade,oretype=cassiterite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/cassiterite"
+    },
+    "gradetype=lowgrade,oretype=cassiterite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_cassiterite"
+    },
+    "gradetype=highgrade,oretype=celestine": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_celestine"
+    },
+    "gradetype=midgrade,oretype=celestine": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/celestine"
+    },
+    "gradetype=lowgrade,oretype=celestine": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_celestine"
+    },
+    "gradetype=highgrade,oretype=chalcopyrite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_chalcopyrite"
+    },
+    "gradetype=midgrade,oretype=chalcopyrite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/chalcopyrite"
+    },
+    "gradetype=lowgrade,oretype=chalcopyrite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_chalcopyrite"
+    },
+    "gradetype=highgrade,oretype=chromite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_chromite"
+    },
+    "gradetype=midgrade,oretype=chromite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/chromite"
+    },
+    "gradetype=lowgrade,oretype=chromite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_chromite"
+    },
+    "gradetype=highgrade,oretype=cinnabar": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_cinnabar"
+    },
+    "gradetype=midgrade,oretype=cinnabar": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/cinnabar"
+    },
+    "gradetype=lowgrade,oretype=cinnabar": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_cinnabar"
+    },
+    "gradetype=highgrade,oretype=cobaltite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_cobaltite"
+    },
+    "gradetype=midgrade,oretype=cobaltite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/cobaltite"
+    },
+    "gradetype=lowgrade,oretype=cobaltite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_cobaltite"
+    },
+    "gradetype=highgrade,oretype=cryolite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_cryolite"
+    },
+    "gradetype=midgrade,oretype=cryolite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/cryolite"
+    },
+    "gradetype=lowgrade,oretype=cryolite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_cryolite"
+    },
+    "gradetype=highgrade,oretype=diamond": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_diamond"
+    },
+    "gradetype=midgrade,oretype=diamond": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/diamond"
+    },
+    "gradetype=lowgrade,oretype=diamond": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_diamond"
+    },
+    "gradetype=highgrade,oretype=electrum": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_electrum"
+    },
+    "gradetype=midgrade,oretype=electrum": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/electrum"
+    },
+    "gradetype=lowgrade,oretype=electrum": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_electrum"
+    },
+    "gradetype=highgrade,oretype=fluorite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_fluorite"
+    },
+    "gradetype=midgrade,oretype=fluorite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/fluorite"
+    },
+    "gradetype=lowgrade,oretype=fluorite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_fluorite"
+    },
+    "gradetype=highgrade,oretype=galena": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_galena"
+    },
+    "gradetype=midgrade,oretype=galena": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/galena"
+    },
+    "gradetype=lowgrade,oretype=galena": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_galena"
+    },
+    "gradetype=highgrade,oretype=goethite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_goethite"
+    },
+    "gradetype=midgrade,oretype=goethite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/goethite"
+    },
+    "gradetype=lowgrade,oretype=goethite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_goethite"
+    },
+    "gradetype=highgrade,oretype=graphite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_graphite"
+    },
+    "gradetype=midgrade,oretype=graphite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/graphite"
+    },
+    "gradetype=lowgrade,oretype=graphite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_graphite"
+    },
+    "gradetype=highgrade,oretype=hematite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_hematite"
+    },
+    "gradetype=midgrade,oretype=hematite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/hematite"
+    },
+    "gradetype=lowgrade,oretype=hematite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_hematite"
+    },
+    "gradetype=highgrade,oretype=ilmenite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_ilmenite"
+    },
+    "gradetype=midgrade,oretype=ilmenite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/ilmenite"
+    },
+    "gradetype=lowgrade,oretype=ilmenite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_ilmenite"
+    },
+    "gradetype=highgrade,oretype=lepidolite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_lepidolite"
+    },
+    "gradetype=midgrade,oretype=lepidolite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/lepidolite"
+    },
+    "gradetype=lowgrade,oretype=lepidolite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_lepidolite"
+    },
+    "gradetype=highgrade,oretype=limonite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_limonite"
+    },
+    "gradetype=midgrade,oretype=limonite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/limonite"
+    },
+    "gradetype=lowgrade,oretype=limonite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_limonite"
+    },
+    "gradetype=highgrade,oretype=magnesite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_magnesite"
+    },
+    "gradetype=midgrade,oretype=magnesite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/magnesite"
+    },
+    "gradetype=lowgrade,oretype=magnesite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_magnesite"
+    },
+    "gradetype=highgrade,oretype=magnetite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_magnetite"
+    },
+    "gradetype=midgrade,oretype=magnetite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/magnetite"
+    },
+    "gradetype=lowgrade,oretype=magnetite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_magnetite"
+    },
+    "gradetype=highgrade,oretype=malachite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_malachite"
+    },
+    "gradetype=midgrade,oretype=malachite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/malachite"
+    },
+    "gradetype=lowgrade,oretype=malachite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_malachite"
+    },
+    "gradetype=highgrade,oretype=molybdenite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_molybdenite"
+    },
+    "gradetype=midgrade,oretype=molybdenite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/molybdenite"
+    },
+    "gradetype=lowgrade,oretype=molybdenite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_molybdenite"
+    },
+    "gradetype=highgrade,oretype=monazite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_monazite"
+    },
+    "gradetype=midgrade,oretype=monazite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/monazite"
+    },
+    "gradetype=lowgrade,oretype=monazite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_monazite"
+    },
+    "gradetype=highgrade,oretype=native_copper": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_native_copper"
+    },
+    "gradetype=midgrade,oretype=native_copper": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/native_copper"
+    },
+    "gradetype=lowgrade,oretype=native_copper": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_native_copper"
+    },
+    "gradetype=highgrade,oretype=native_gold": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_native_gold"
+    },
+    "gradetype=midgrade,oretype=native_gold": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/native_gold"
+    },
+    "gradetype=lowgrade,oretype=native_gold": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_native_gold"
+    },
+    "gradetype=highgrade,oretype=native_sulfur": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_native_sulfur"
+    },
+    "gradetype=midgrade,oretype=native_sulfur": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/native_sulfur"
+    },
+    "gradetype=lowgrade,oretype=native_sulfur": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_native_sulfur"
+    },
+    "gradetype=highgrade,oretype=pentlandite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_pentlandite"
+    },
+    "gradetype=midgrade,oretype=pentlandite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/pentlandite"
+    },
+    "gradetype=lowgrade,oretype=pentlandite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_pentlandite"
+    },
+    "gradetype=highgrade,oretype=peridotite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_peridotite"
+    },
+    "gradetype=midgrade,oretype=peridotite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/peridotite"
+    },
+    "gradetype=lowgrade,oretype=peridotite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_peridotite"
+    },
+    "gradetype=highgrade,oretype=pollucite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_pollucite"
+    },
+    "gradetype=midgrade,oretype=pollucite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/pollucite"
+    },
+    "gradetype=lowgrade,oretype=pollucite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_pollucite"
+    },
+    "gradetype=highgrade,oretype=psilomelane": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_psilomelane"
+    },
+    "gradetype=midgrade,oretype=psilomelane": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/psilomelane"
+    },
+    "gradetype=lowgrade,oretype=psilomelane": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_psilomelane"
+    },
+    "gradetype=highgrade,oretype=pyrite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_pyrite"
+    },
+    "gradetype=midgrade,oretype=pyrite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/pyrite"
+    },
+    "gradetype=lowgrade,oretype=pyrite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_pyrite"
+    },
+    "gradetype=highgrade,oretype=pyrochlore": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_pyrochlore"
+    },
+    "gradetype=midgrade,oretype=pyrochlore": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/pyrochlore"
+    },
+    "gradetype=lowgrade,oretype=pyrochlore": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_pyrochlore"
+    },
+    "gradetype=highgrade,oretype=pyrolusite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_pyrolusite"
+    },
+    "gradetype=midgrade,oretype=pyrolusite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/pyrolusite"
+    },
+    "gradetype=lowgrade,oretype=pyrolusite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_pyrolusite"
+    },
+    "gradetype=highgrade,oretype=rutile": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_rutile"
+    },
+    "gradetype=midgrade,oretype=rutile": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rutile"
+    },
+    "gradetype=lowgrade,oretype=rutile": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_rutile"
+    },
+    "gradetype=highgrade,oretype=scheelite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_scheelite"
+    },
+    "gradetype=midgrade,oretype=scheelite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/scheelite"
+    },
+    "gradetype=lowgrade,oretype=scheelite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_scheelite"
+    },
+    "gradetype=highgrade,oretype=smithsonite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_smithsonite"
+    },
+    "gradetype=midgrade,oretype=smithsonite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/smithsonite"
+    },
+    "gradetype=lowgrade,oretype=smithsonite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_smithsonite"
+    },
+    "gradetype=highgrade,oretype=sphalerite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_sphalerite"
+    },
+    "gradetype=midgrade,oretype=sphalerite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/sphalerite"
+    },
+    "gradetype=lowgrade,oretype=sphalerite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_sphalerite"
+    },
+    "gradetype=highgrade,oretype=spodumene": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_spodumene"
+    },
+    "gradetype=midgrade,oretype=spodumene": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/spodumene"
+    },
+    "gradetype=lowgrade,oretype=spodumene": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_spodumene"
+    },
+    "gradetype=highgrade,oretype=stibnite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_stibnite"
+    },
+    "gradetype=midgrade,oretype=stibnite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/stibnite"
+    },
+    "gradetype=lowgrade,oretype=stibnite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_stibnite"
+    },
+    "gradetype=highgrade,oretype=sylvite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_sylvite"
+    },
+    "gradetype=midgrade,oretype=sylvite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/sylvite"
+    },
+    "gradetype=lowgrade,oretype=sylvite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_sylvite"
+    },
+    "gradetype=highgrade,oretype=tantalite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_tantalite"
+    },
+    "gradetype=midgrade,oretype=tantalite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/tantalite"
+    },
+    "gradetype=lowgrade,oretype=tantalite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_tantalite"
+    },
+    "gradetype=highgrade,oretype=tetrahedrite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_tetrahedrite"
+    },
+    "gradetype=midgrade,oretype=tetrahedrite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/tetrahedrite"
+    },
+    "gradetype=lowgrade,oretype=tetrahedrite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_tetrahedrite"
+    },
+    "gradetype=highgrade,oretype=trona": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_trona"
+    },
+    "gradetype=midgrade,oretype=trona": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/trona"
+    },
+    "gradetype=lowgrade,oretype=trona": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_trona"
+    },
+    "gradetype=highgrade,oretype=uraninite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_uraninite"
+    },
+    "gradetype=midgrade,oretype=uraninite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/uraninite"
+    },
+    "gradetype=lowgrade,oretype=uraninite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_uraninite"
+    },
+    "gradetype=highgrade,oretype=wolframite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/rich_wolframite"
+    },
+    "gradetype=midgrade,oretype=wolframite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/wolframite"
+    },
+    "gradetype=lowgrade,oretype=wolframite": {
+      "model": "jemsgeology:block/stoneore/siltstone_stone/poor_wolframite"
+    }
+  }
+}

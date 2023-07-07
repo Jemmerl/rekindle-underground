@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "jemsgeology:block/granodiorite_stone",
+    "up": "jemsgeology:block/granodiorite_stone",
+    "down": "jemsgeology:block/granodiorite_stone",
+    "north": "jemsgeology:block/granodiorite_stone",
+    "south": "jemsgeology:block/granodiorite_stone",
+    "east": "jemsgeology:block/granodiorite_stone",
+    "west": "jemsgeology:block/granodiorite_stone"
+  }
+}

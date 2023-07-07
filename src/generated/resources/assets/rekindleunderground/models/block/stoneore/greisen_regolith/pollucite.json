@@ -1,8 +1,0 @@
-{
-  "parent": "rekindleunderground:block/stone_ore_parent",
-  "textures": {
-    "all": "rekindleunderground:block/greisen_regolith",
-    "particle": "rekindleunderground:block/greisen_regolith",
-    "overlay": "rekindleunderground:block/ore/pollucite"
-  }
-}

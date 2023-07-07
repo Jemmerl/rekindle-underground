@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "cobblestone",
+  "pattern": [
+    "xx",
+    "xx"
+  ],
+  "key": {
+    "x": {
+      "item": "jemsgeology:limestone_rock"
+    }
+  },
+  "result": {
+    "item": "jemsgeology:limestone_cobblestone"
+  }
+}

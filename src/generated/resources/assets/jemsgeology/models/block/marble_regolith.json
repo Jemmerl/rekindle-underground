@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "jemsgeology:block/marble_regolith",
+    "up": "jemsgeology:block/marble_regolith",
+    "down": "jemsgeology:block/marble_regolith",
+    "north": "jemsgeology:block/marble_regolith",
+    "south": "jemsgeology:block/marble_regolith",
+    "east": "jemsgeology:block/marble_regolith",
+    "west": "jemsgeology:block/marble_regolith"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "jemsgeology:block/greywacke_regolith",
+    "up": "jemsgeology:block/greywacke_regolith",
+    "down": "jemsgeology:block/greywacke_regolith",
+    "north": "jemsgeology:block/greywacke_regolith",
+    "south": "jemsgeology:block/greywacke_regolith",
+    "east": "jemsgeology:block/greywacke_regolith",
+    "west": "jemsgeology:block/greywacke_regolith"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "jemsgeology:block/stone_ore_parent",
+  "textures": {
+    "all": "jemsgeology:block/kimberlite_stone",
+    "particle": "jemsgeology:block/kimberlite_stone",
+    "overlay": "jemsgeology:block/ore/poor_native_copper"
+  }
+}

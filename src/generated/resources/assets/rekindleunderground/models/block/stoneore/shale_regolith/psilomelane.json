@@ -1,8 +1,0 @@
-{
-  "parent": "rekindleunderground:block/stone_ore_parent",
-  "textures": {
-    "all": "rekindleunderground:block/shale_regolith",
-    "particle": "rekindleunderground:block/shale_regolith",
-    "overlay": "rekindleunderground:block/ore/psilomelane"
-  }
-}

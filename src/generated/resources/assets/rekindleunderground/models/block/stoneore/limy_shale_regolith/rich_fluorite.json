@@ -1,8 +1,0 @@
-{
-  "parent": "rekindleunderground:block/stone_ore_parent",
-  "textures": {
-    "all": "rekindleunderground:block/limy_shale_regolith",
-    "particle": "rekindleunderground:block/limy_shale_regolith",
-    "overlay": "rekindleunderground:block/ore/rich_fluorite"
-  }
-}

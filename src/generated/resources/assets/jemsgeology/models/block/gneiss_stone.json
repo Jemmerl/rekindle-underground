@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "jemsgeology:block/gneiss_stone",
+    "up": "jemsgeology:block/gneiss_stone",
+    "down": "jemsgeology:block/gneiss_stone",
+    "north": "jemsgeology:block/gneiss_stone",
+    "south": "jemsgeology:block/gneiss_stone",
+    "east": "jemsgeology:block/gneiss_stone",
+    "west": "jemsgeology:block/gneiss_stone"
+  }
+}

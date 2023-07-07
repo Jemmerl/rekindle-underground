@@ -1,0 +1,9 @@
+{
+  "parent": "jemsgeology:block/stone_ore_parent_sides",
+  "textures": {
+    "particle": "jemsgeology:block/pahoehoe_stone1",
+    "ends": "jemsgeology:block/pahoehoe_stone1",
+    "sides": "jemsgeology:block/pahoehoe_stone2",
+    "overlay": "jemsgeology:block/ore/rich_tetrahedrite"
+  }
+}

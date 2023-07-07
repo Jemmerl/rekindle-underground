@@ -1,8 +1,0 @@
-{
-  "parent": "rekindleunderground:block/stone_ore_parent",
-  "textures": {
-    "all": "rekindleunderground:block/dacite_regolith",
-    "particle": "rekindleunderground:block/dacite_regolith",
-    "overlay": "rekindleunderground:block/ore/rich_malachite"
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "parent": "rekindleunderground:block/stone_ore_parent",
-  "textures": {
-    "all": "rekindleunderground:block/siltstone_regolith",
-    "particle": "rekindleunderground:block/siltstone_regolith",
-    "overlay": "rekindleunderground:block/ore/wolframite"
-  }
-}

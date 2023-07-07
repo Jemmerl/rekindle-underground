@@ -1,8 +1,0 @@
-{
-  "parent": "rekindleunderground:block/stone_ore_parent",
-  "textures": {
-    "all": "rekindleunderground:block/andesite_regolith",
-    "particle": "rekindleunderground:block/andesite_regolith",
-    "overlay": "rekindleunderground:block/ore/diamond"
-  }
-}

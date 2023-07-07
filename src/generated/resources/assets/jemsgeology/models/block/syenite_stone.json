@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "jemsgeology:block/syenite_stone",
+    "up": "jemsgeology:block/syenite_stone",
+    "down": "jemsgeology:block/syenite_stone",
+    "north": "jemsgeology:block/syenite_stone",
+    "south": "jemsgeology:block/syenite_stone",
+    "east": "jemsgeology:block/syenite_stone",
+    "west": "jemsgeology:block/syenite_stone"
+  }
+}

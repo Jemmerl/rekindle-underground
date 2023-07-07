@@ -1,8 +1,0 @@
-{
-  "parent": "rekindleunderground:block/stone_ore_parent",
-  "textures": {
-    "all": "rekindleunderground:block/basalt_regolith",
-    "particle": "rekindleunderground:block/basalt_regolith",
-    "overlay": "rekindleunderground:block/ore/rich_native_sulfur"
-  }
-}

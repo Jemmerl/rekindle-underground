@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "jemsgeology:block/mafic_hornfels_stone",
+    "up": "jemsgeology:block/mafic_hornfels_stone",
+    "down": "jemsgeology:block/mafic_hornfels_stone",
+    "north": "jemsgeology:block/mafic_hornfels_stone",
+    "south": "jemsgeology:block/mafic_hornfels_stone",
+    "east": "jemsgeology:block/mafic_hornfels_stone",
+    "west": "jemsgeology:block/mafic_hornfels_stone"
+  }
+}

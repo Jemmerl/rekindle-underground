@@ -1,0 +1,3615 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "name": "none",
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:red_sand"
+        }
+      ]
+    },
+    {
+      "name": "apatite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:apatite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "apatite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "apatite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:apatite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "apatite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "apatite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_apatite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "apatite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "azurite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:azurite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "azurite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "azurite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:azurite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "azurite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "azurite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_azurite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "azurite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "baryte_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:baryte_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "baryte",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "baryte_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:baryte_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "baryte",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "baryte_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_baryte_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "baryte",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "beryl_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:beryl_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "beryl",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "beryl_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:beryl_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "beryl",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "beryl_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_beryl_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "beryl",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "bismuthinite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:bismuthinite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "bismuthinite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "bismuthinite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:bismuthinite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "bismuthinite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "bismuthinite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_bismuthinite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "bismuthinite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "carnotite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:carnotite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "carnotite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "carnotite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:carnotite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "carnotite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "carnotite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_carnotite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "carnotite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cassiterite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:cassiterite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "cassiterite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cassiterite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:cassiterite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "cassiterite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cassiterite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_cassiterite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "cassiterite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "celestine_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:celestine_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "celestine",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "celestine_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:celestine_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "celestine",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "celestine_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_celestine_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "celestine",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "chalcopyrite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:chalcopyrite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "chalcopyrite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "chalcopyrite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:chalcopyrite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "chalcopyrite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "chalcopyrite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_chalcopyrite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "chalcopyrite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "chromite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:chromite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "chromite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "chromite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:chromite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "chromite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "chromite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_chromite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "chromite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cinnabar_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:cinnabar_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "cinnabar",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cinnabar_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:cinnabar_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "cinnabar",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cinnabar_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_cinnabar_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "cinnabar",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cobaltite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:cobaltite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "cobaltite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cobaltite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:cobaltite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "cobaltite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cobaltite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_cobaltite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "cobaltite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cryolite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:cryolite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "cryolite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cryolite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:cryolite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "cryolite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cryolite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_cryolite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "cryolite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "diamond_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "diamond",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "diamond_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "diamond",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "diamond_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_diamond_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "diamond",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "electrum_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:electrum_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "electrum",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "electrum_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:electrum_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "electrum",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "electrum_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_electrum_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "electrum",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "fluorite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:fluorite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "fluorite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "fluorite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:fluorite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "fluorite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "fluorite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_fluorite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "fluorite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "galena_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:galena_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "galena",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "galena_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:galena_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "galena",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "galena_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_galena_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "galena",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "goethite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:goethite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "goethite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "goethite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:goethite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "goethite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "goethite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_goethite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "goethite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "graphite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:graphite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "graphite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "graphite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:graphite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "graphite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "graphite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_graphite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "graphite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "hematite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:hematite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "hematite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "hematite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:hematite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "hematite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "hematite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_hematite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "hematite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ilmenite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:ilmenite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "ilmenite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ilmenite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:ilmenite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "ilmenite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ilmenite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_ilmenite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "ilmenite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lepidolite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:lepidolite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "lepidolite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lepidolite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:lepidolite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "lepidolite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "lepidolite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_lepidolite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "lepidolite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "limonite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:limonite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "limonite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "limonite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:limonite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "limonite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "limonite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_limonite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "limonite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "magnesite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:magnesite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "magnesite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "magnesite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:magnesite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "magnesite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "magnesite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_magnesite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "magnesite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "magnetite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:magnetite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "magnetite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "magnetite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:magnetite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "magnetite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "magnetite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_magnetite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "magnetite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "malachite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:malachite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "malachite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "malachite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:malachite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "malachite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "malachite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_malachite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "malachite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "molybdenite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:molybdenite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "molybdenite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "molybdenite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:molybdenite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "molybdenite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "molybdenite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_molybdenite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "molybdenite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "monazite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:monazite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "monazite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "monazite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:monazite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "monazite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "monazite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_monazite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "monazite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "native_copper_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:native_copper_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "native_copper",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "native_copper_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:native_copper_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "native_copper",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "native_copper_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_native_copper_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "native_copper",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "native_gold_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:native_gold_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "native_gold",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "native_gold_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:native_gold_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "native_gold",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "native_gold_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_native_gold_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "native_gold",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "native_sulfur_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:native_sulfur_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "native_sulfur",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "native_sulfur_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:native_sulfur_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "native_sulfur",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "native_sulfur_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_native_sulfur_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "native_sulfur",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pentlandite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:pentlandite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "pentlandite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pentlandite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:pentlandite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "pentlandite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pentlandite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_pentlandite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "pentlandite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "peridotite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:peridotite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "peridotite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "peridotite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:peridotite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "peridotite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "peridotite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_peridotite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "peridotite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pollucite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:pollucite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "pollucite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pollucite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:pollucite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "pollucite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pollucite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_pollucite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "pollucite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "psilomelane_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:psilomelane_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "psilomelane",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "psilomelane_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:psilomelane_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "psilomelane",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "psilomelane_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_psilomelane_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "psilomelane",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pyrite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:pyrite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "pyrite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pyrite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:pyrite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "pyrite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pyrite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_pyrite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "pyrite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pyrochlore_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:pyrochlore_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "pyrochlore",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pyrochlore_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:pyrochlore_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "pyrochlore",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pyrochlore_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_pyrochlore_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "pyrochlore",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pyrolusite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:pyrolusite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "pyrolusite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pyrolusite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:pyrolusite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "pyrolusite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pyrolusite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_pyrolusite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "pyrolusite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "rutile_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:rutile_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "rutile",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "rutile_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:rutile_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "rutile",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "rutile_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_rutile_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "rutile",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "scheelite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:scheelite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "scheelite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "scheelite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:scheelite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "scheelite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "scheelite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_scheelite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "scheelite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "smithsonite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:smithsonite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "smithsonite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "smithsonite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:smithsonite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "smithsonite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "smithsonite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_smithsonite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "smithsonite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "sphalerite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:sphalerite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "sphalerite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "sphalerite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:sphalerite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "sphalerite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "sphalerite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_sphalerite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "sphalerite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "spodumene_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:spodumene_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "spodumene",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "spodumene_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:spodumene_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "spodumene",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "spodumene_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_spodumene_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "spodumene",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "stibnite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:stibnite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "stibnite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "stibnite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:stibnite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "stibnite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "stibnite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_stibnite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "stibnite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "sylvite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:sylvite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "sylvite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "sylvite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:sylvite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "sylvite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "sylvite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_sylvite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "sylvite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "tantalite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:tantalite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "tantalite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "tantalite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:tantalite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "tantalite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "tantalite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_tantalite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "tantalite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "tetrahedrite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:tetrahedrite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "tetrahedrite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "tetrahedrite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:tetrahedrite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "tetrahedrite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "tetrahedrite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_tetrahedrite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "tetrahedrite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "trona_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:trona_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "trona",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "trona_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:trona_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "trona",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "trona_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_trona_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "trona",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "uraninite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:uraninite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "uraninite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "uraninite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:uraninite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "uraninite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "uraninite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_uraninite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "uraninite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "wolframite_highgrade",
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:wolframite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "wolframite",
+            "gradetype": "highgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "wolframite_midgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:wolframite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "wolframite",
+            "gradetype": "midgrade"
+          }
+        }
+      ]
+    },
+    {
+      "name": "wolframite_lowgrade",
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "jemsgeology:poor_wolframite_ore"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "jemsgeology:red_sand_stone",
+          "properties": {
+            "oretype": "wolframite",
+            "gradetype": "lowgrade"
+          }
+        }
+      ]
+    }
+  ]
+}

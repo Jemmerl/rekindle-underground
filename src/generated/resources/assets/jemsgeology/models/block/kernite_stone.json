@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "jemsgeology:block/kernite_stone",
+    "up": "jemsgeology:block/kernite_stone",
+    "down": "jemsgeology:block/kernite_stone",
+    "north": "jemsgeology:block/kernite_stone",
+    "south": "jemsgeology:block/kernite_stone",
+    "east": "jemsgeology:block/kernite_stone",
+    "west": "jemsgeology:block/kernite_stone"
+  }
+}

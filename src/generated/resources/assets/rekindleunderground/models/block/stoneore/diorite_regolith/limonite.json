@@ -1,8 +1,0 @@
-{
-  "parent": "rekindleunderground:block/stone_ore_parent",
-  "textures": {
-    "all": "rekindleunderground:block/diorite_regolith",
-    "particle": "rekindleunderground:block/diorite_regolith",
-    "overlay": "rekindleunderground:block/ore/limonite"
-  }
-}

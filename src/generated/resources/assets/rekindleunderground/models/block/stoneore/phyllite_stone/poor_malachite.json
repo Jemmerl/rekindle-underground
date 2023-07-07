@@ -1,8 +1,0 @@
-{
-  "parent": "rekindleunderground:block/stone_ore_parent",
-  "textures": {
-    "all": "rekindleunderground:block/phyllite_stone",
-    "particle": "rekindleunderground:block/phyllite_stone",
-    "overlay": "rekindleunderground:block/ore/poor_malachite"
-  }
-}

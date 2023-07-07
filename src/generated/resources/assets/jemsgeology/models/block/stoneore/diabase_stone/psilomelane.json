@@ -1,0 +1,8 @@
+{
+  "parent": "jemsgeology:block/stone_ore_parent",
+  "textures": {
+    "all": "jemsgeology:block/diabase_stone",
+    "particle": "jemsgeology:block/diabase_stone",
+    "overlay": "jemsgeology:block/ore/psilomelane"
+  }
+}
