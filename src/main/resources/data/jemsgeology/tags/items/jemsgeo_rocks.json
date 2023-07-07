@@ -4,18 +4,23 @@
     "jemsgeology:chalk_rock",
     "jemsgeology:limestone_rock",
     "jemsgeology:dolostone_rock",
+    "jemsgeology:marlstone_rock",
     "jemsgeology:shale_rock",
+    "jemsgeology:limy_shale_rock",
     "jemsgeology:sandstone_rock",
     "jemsgeology:red_sandstone_rock",
+    "jemsgeology:arkose_rock",
     "jemsgeology:greywacke_rock",
     "jemsgeology:mudstone_rock",
+    "jemsgeology:claystone_rock",
+    "jemsgeology:siltstone_rock",
+    "jemsgeology:conglomerate_rock",
     "jemsgeology:vein_quartz_rock",
-
     "jemsgeology:rhyolite_rock",
     "jemsgeology:dacite_rock",
     "jemsgeology:andesite_rock",
+    "jemsgeology:trachyte_rock",
     "jemsgeology:basalt_rock",
-
     "jemsgeology:diorite_rock",
     "jemsgeology:granodiorite_rock",
     "jemsgeology:granite_rock",
@@ -24,11 +29,16 @@
     "jemsgeology:diabase_rock",
     "jemsgeology:kimberlite_rock",
     "jemsgeology:lamproite_rock",
-
     "jemsgeology:quartzite_rock",
     "jemsgeology:schist_rock",
     "jemsgeology:phyllite_rock",
+    "jemsgeology:slate_rock",
     "jemsgeology:gneiss_rock",
-    "jemsgeology:marble_rock"
+    "jemsgeology:marble_rock",
+    "jemsgeology:pelitic_hornfels_rock",
+    "jemsgeology:carbonate_hornfels_rock",
+    "jemsgeology:mafic_hornfels_rock",
+    "jemsgeology:metaconglomerate_rock",
+    "jemsgeology:greisen_rock"
   ]
 }
