@@ -1,8 +1,8 @@
 
-Rekindle Underground is a mod developed by Jemmerl (and with direct and in-direct help from countless others) for use
-in the modpack of the same name: Rekindle. IT IS IN DEVELOPMENT, AND MANY FEATURES ARE INCOMPLETE OR NOT YET IMPLEMENTED!
+Jem's Geology is a mod originally developed by Jemmerl (and with direct and in-direct help from countless others) for use
+in the modpack: Rekindle. IT IS IN DEVELOPMENT, AND MANY FEATURES ARE INCOMPLETE OR NOT YET IMPLEMENTED!
 
-RKU was created out of the want for a realistic yet still highly configurable geological generation mod.
+Jem's Geo was created out of the want for a realistic yet still highly configurable geological generation mod.
 It is currently only intended for use within the Rekindle modpack, but may one day be improved to the point
 of general use. It is NOT a standalone mod. Consider it more as a library of realistic stones, ores, and generation
 that modpack makers can utilize to bring their worlds to... not-life? Stones are not alive, as far as I can recall!
