@@ -62,7 +62,7 @@ public class JemsGeology
         eventBus.addListener(this::enqueueIMC);
         eventBus.addListener(this::processIMC);
         eventBus.addListener(this::clientSetup);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, JemsGeoConfig.COMMON_SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, JemsGeoConfig.SERVER_SPEC);
 
         MinecraftForge.EVENT_BUS.register(this);
     }

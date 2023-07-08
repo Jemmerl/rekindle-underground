@@ -45,7 +45,7 @@ public class FeatureDataLoader extends JsonReloadListener {
                 String name = jsonObj.get("name").getAsString();
 
                 // Ignore test deposits unless in debug mode
-                if (!JemsGeoConfig.COMMON.debug_test_genfeatures.get() && name.contains("test")) {
+                if (!JemsGeoConfig.SERVER.debug_test_genfeatures.get() && name.contains("test")) {
                     JemsGeology.getInstance().LOGGER.info("Test Feature {} ignored", name);
                     return;
                 }
@@ -76,7 +76,7 @@ public class FeatureDataLoader extends JsonReloadListener {
                 JemsGeology.getInstance().LOGGER.warn("Error reading feature: {}", rl);
 
                 // Debug
-                if (JemsGeoConfig.COMMON.debug_genfeature_reader.get()) {
+                if (JemsGeoConfig.SERVER.debug_genfeature_reader.get()) {
                     e.printStackTrace();
                 }
             }

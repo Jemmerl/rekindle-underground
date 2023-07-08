@@ -23,12 +23,12 @@ public class StrataNoise {
     // TODO - add various hornfels for contact metamorphism
 
     // Config values
-    private static final int THICK_MIN = JemsGeoConfig.COMMON.thickMin.get();
-    private static final int THICK_MAX = JemsGeoConfig.COMMON.thickMax.get();
-    private static final int WARP_MIN = JemsGeoConfig.COMMON.warpMin.get();
-    private static final int WARP_MAX = JemsGeoConfig.COMMON.warpMax.get();
-    private static final int TILT_MIN = JemsGeoConfig.COMMON.tiltMin.get();
-    private static final int TILT_MAX = JemsGeoConfig.COMMON.tiltMax.get();
+    private static final int THICK_MIN = JemsGeoConfig.SERVER.thickMin.get();
+    private static final int THICK_MAX = JemsGeoConfig.SERVER.thickMax.get();
+    private static final int WARP_MIN = JemsGeoConfig.SERVER.warpMin.get();
+    private static final int WARP_MAX = JemsGeoConfig.SERVER.warpMax.get();
+    private static final int TILT_MIN = JemsGeoConfig.SERVER.tiltMin.get();
+    private static final int TILT_MAX = JemsGeoConfig.SERVER.tiltMax.get();
 
     // Load the block picker for this world
     private static final BlockPicker blockPicker = new BlockPicker();

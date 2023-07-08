@@ -72,7 +72,7 @@ public class VolcanicRegionBuilder {
             switch (cachedProvinceType) {
                 case NONE:
                     // Config to disable batholiths
-                    if (!JemsGeoConfig.COMMON.gen_batholiths.get()) {
+                    if (!JemsGeoConfig.SERVER.gen_batholiths.get()) {
                         cachedBatholithType = BatholithType.NONE;
                         break;
                     }
@@ -181,7 +181,7 @@ public class VolcanicRegionBuilder {
                 }
 
                 // Debug
-                if (JemsGeoConfig.COMMON.gen_batholiths.get() && (percentBatholith > 0.605f) && (percentBatholith < 0.61f)) {
+                if (JemsGeoConfig.SERVER.gen_batholiths.get() && (percentBatholith > 0.605f) && (percentBatholith < 0.61f)) {
                     JemsGeology.getInstance().LOGGER.info(
                             "Generating batholith with type {} and max height {} at: ({}, {})",
                             cachedBatholithType, cachedBatholithHeight, x, z);

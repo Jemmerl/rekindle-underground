@@ -94,7 +94,7 @@ public class DepositUtil {
             } catch (ArrayIndexOutOfBoundsException e) {
 
                 // Debug
-                if (JemsGeoConfig.COMMON.debug_block_enqueuer.get()){
+                if (JemsGeoConfig.SERVER.debug_block_enqueuer.get()){
                     JemsGeology.getInstance().LOGGER.warn(
                             "Enq block at {} was out of bounds with values {} {} {}",
                             qPos, xIndex, qPos.getY(), zIndex);
@@ -122,7 +122,7 @@ public class DepositUtil {
                     if (!level.setBlockState(qPos, state.with(StoneOreBlock.ORE_TYPE, qType).with(StoneOreBlock.GRADE_TYPE, qGrade), 2 | 16)) {
 
                         // Debug
-                        if (JemsGeoConfig.COMMON.debug_block_enqueuer.get()){
+                        if (JemsGeoConfig.SERVER.debug_block_enqueuer.get()){
                             JemsGeology.getInstance().LOGGER.warn("Somehow {} could not be placed at {} even though chunk has generated",
                                     state.getBlock().getRegistryName(), qPos);
                         }
@@ -165,7 +165,7 @@ public class DepositUtil {
             JemsGeology.getInstance().LOGGER.warn("Error in a deposit valid ore reading.");
 
             // Debug
-            if (JemsGeoConfig.COMMON.debug_deposit_reader.get()) {
+            if (JemsGeoConfig.SERVER.debug_deposit_reader.get()) {
                 e.printStackTrace();
             }
 
@@ -195,7 +195,7 @@ public class DepositUtil {
             JemsGeology.getInstance().LOGGER.warn("Error in a deposit ore grades reading.");
 
             // Debug
-            if (JemsGeoConfig.COMMON.debug_deposit_reader.get()) {
+            if (JemsGeoConfig.SERVER.debug_deposit_reader.get()) {
                 e.printStackTrace();
             }
 
@@ -247,7 +247,7 @@ public class DepositUtil {
                 JemsGeology.getInstance().LOGGER.warn("Error in a deposit's valid stones reading.");
 
                 // Debug
-                if (JemsGeoConfig.COMMON.debug_deposit_reader.get()) {
+                if (JemsGeoConfig.SERVER.debug_deposit_reader.get()) {
                     e.printStackTrace();
                 }
 
@@ -280,7 +280,7 @@ public class DepositUtil {
             JemsGeology.getInstance().LOGGER.warn("Error in a deposit valid biome reading.");
 
             // Debug
-            if (JemsGeoConfig.COMMON.debug_deposit_reader.get()) {
+            if (JemsGeoConfig.SERVER.debug_deposit_reader.get()) {
                 e.printStackTrace();
             }
 

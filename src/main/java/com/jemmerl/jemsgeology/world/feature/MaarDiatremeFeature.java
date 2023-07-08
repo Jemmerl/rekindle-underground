@@ -50,7 +50,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
     public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 
         // Config disable option
-        if (!JemsGeoConfig.COMMON.gen_maar_diatremes.get()) {
+        if (!JemsGeoConfig.SERVER.gen_maar_diatremes.get()) {
             return false;
         }
 
@@ -103,7 +103,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
         float diamondPercent = diamondiferous ? ((0.10f * rand.nextFloat()) + 0.05f) : 0f;
 
         // Debug
-        if (diamondiferous && JemsGeoConfig.COMMON.debug_diatreme_maar.get()) {
+        if (diamondiferous && JemsGeoConfig.SERVER.debug_diatreme_maar.get()) {
             JemsGeology.getInstance().LOGGER.info("Diamondiferous diatreme generating at {} with {} richness", pos, diamondPercent);
         }
 
@@ -305,7 +305,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
 
 
         // Debug
-        if (JemsGeoConfig.COMMON.debug_diatreme_maar.get()) {
+        if (JemsGeoConfig.SERVER.debug_diatreme_maar.get()) {
             for (int i = 0; i < 10; i++) {
                 reader.setBlockState(new BlockPos(pos.getX(), (max_height + 10 + i), pos.getZ()), Blocks.GOLD_BLOCK.getDefaultState(), 2);
             }
@@ -361,7 +361,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
             fillState = (rand.nextFloat() > 0.20f) ? surfaceConfig.getUnder() : ModBlocks.ULTRAMAFIC_TUFF_STONE.get().getDefaultState(); //TODO TEMP
 
             // Debug
-            if (JemsGeoConfig.COMMON.debug_diatreme_maar.get() && (currPos.getY() > height)) {
+            if (JemsGeoConfig.SERVER.debug_diatreme_maar.get() && (currPos.getY() > height)) {
                 JemsGeology.getInstance().LOGGER.info("Placed an unexpected maar-fill block at {}", currPos);
             }
         }

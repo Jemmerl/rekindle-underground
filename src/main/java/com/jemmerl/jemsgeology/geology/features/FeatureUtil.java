@@ -23,7 +23,7 @@ public class FeatureUtil {
             JemsGeology.getInstance().LOGGER.warn("Error in a feature's generation stone reading.");
 
             // Debug
-            if (JemsGeoConfig.COMMON.debug_genfeature_reader.get()) {
+            if (JemsGeoConfig.SERVER.debug_genfeature_reader.get()) {
                 e.printStackTrace();
             }
 

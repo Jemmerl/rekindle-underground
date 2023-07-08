@@ -160,7 +160,7 @@ public class StateMapBuilder {
         ConcurrentLinkedQueue<DepositCapability.PendingBlock> queue = depositCapability.getPendingBlocks(cp);
 
         // Debug
-        if (JemsGeoConfig.COMMON.debug_block_enqueuer.get()) {
+        if (JemsGeoConfig.SERVER.debug_block_enqueuer.get()) {
             // Manual toggle. It is useful, sometimes, but it's too spammy to enable with the other debug tools
             // and likely won't be of use to any pack devs trying to understand why my spaghetti-code mod broke!
             if (false) { JemsGeology.getInstance().LOGGER.info("Trying to place queue with size {}", queue.size()); }
@@ -181,7 +181,7 @@ public class StateMapBuilder {
             if (this.rand.nextInt(deposit.getWeight()) == 0) {
                 // Tries to update the stateMap with the generating feature
                 if (!deposit.generate(this.chunkReader, this.rand, this.blockPos, this,
-                        this.depositCapability, this.chunkGennedCapability) && JemsGeoConfig.COMMON.debug_block_enqueuer.get()) {
+                        this.depositCapability, this.chunkGennedCapability) && JemsGeoConfig.SERVER.debug_block_enqueuer.get()) {
                     // Debug
                     JemsGeology.getInstance().LOGGER.warn(
                             "Failed to generate deposit at {}, {}", this.blockPos.getX(), this.blockPos.getZ());

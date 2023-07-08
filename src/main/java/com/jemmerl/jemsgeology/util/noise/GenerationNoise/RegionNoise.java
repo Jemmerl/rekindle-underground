@@ -12,9 +12,9 @@ public class RegionNoise {
     private static long WORLD_SEED;
 
     // Config values loaded in here to allow for typecasting
-    private static final int REGION_SIZE = JemsGeoConfig.COMMON.regionSize.get();
-    private static final double REGIONAL_VARIATION = JemsGeoConfig.COMMON.regionVariation.get();
-    private static final int FAULT_SIZE = JemsGeoConfig.COMMON.faultSize.get();
+    private static final int REGION_SIZE = JemsGeoConfig.SERVER.regionSize.get();
+    private static final double REGIONAL_VARIATION = JemsGeoConfig.SERVER.regionVariation.get();
+    private static final int FAULT_SIZE = JemsGeoConfig.SERVER.faultSize.get();
 
 
     ////////////////////////////////////////////////////////////

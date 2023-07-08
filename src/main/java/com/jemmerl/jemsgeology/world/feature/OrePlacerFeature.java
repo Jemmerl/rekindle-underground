@@ -36,7 +36,7 @@ public class OrePlacerFeature extends Feature<NoFeatureConfig>{
             NoiseInit.init(reader.getSeed());
         }
 
-        final double PLACER_CHANCE = JemsGeoConfig.COMMON.placerChance.get();
+        final double PLACER_CHANCE = JemsGeoConfig.SERVER.placerChance.get();
 
         if (rand.nextFloat() > PLACER_CHANCE) {
             return false;
@@ -68,7 +68,7 @@ public class OrePlacerFeature extends Feature<NoFeatureConfig>{
             BlockPos centerPos = new BlockPos((pos.getX()+rand.nextInt(8)-3), pos.getY(), (pos.getZ()+rand.nextInt(8)-3));
 
             // Debug
-            if (JemsGeoConfig.COMMON.debug_placer_deposits.get()) {
+            if (JemsGeoConfig.SERVER.debug_placer_deposits.get()) {
                 JemsGeology.getInstance().LOGGER.info("Attempting to generate placer {} at {} with properties: Density {}, Grade {}, and AvgRadius {}",
                         placerDeposit.getName(), centerPos, densityPercent, grade, avgDepositRadius);
             }
@@ -110,7 +110,7 @@ public class OrePlacerFeature extends Feature<NoFeatureConfig>{
             }
 
             // Debug
-            if (JemsGeoConfig.COMMON.debug_placer_deposits.get()) {
+            if (JemsGeoConfig.SERVER.debug_placer_deposits.get()) {
                 // Original placement center
                 for (int i = 0; i<4; i++) {
                     reader.setBlockState(pos.up(i), Blocks.REDSTONE_BLOCK.getDefaultState(), 2);

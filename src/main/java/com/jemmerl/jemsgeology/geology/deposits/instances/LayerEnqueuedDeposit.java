@@ -180,14 +180,14 @@ public class LayerEnqueuedDeposit implements IEnqueuedDeposit {
         ////////////////////////
 
         // Debug
-        if (JemsGeoConfig.COMMON.debug_layer_deposits.get()) {
+        if (JemsGeoConfig.SERVER.debug_layer_deposits.get()) {
             JemsGeology.getInstance().LOGGER.info("Generating layer deposit at {}, with {} avg layers and {} total height.", centerPos, avgLayers, totalHeight);
         }
 
         // Check for valid biome placement. If not in a valid biome, cancel generation
         if (!this.validBiomes.contains(reader.getSeedReader().getBiome(centerPos).getCategory())) {
             // Debug
-            if (JemsGeoConfig.COMMON.debug_layer_deposits.get()) {
+            if (JemsGeoConfig.SERVER.debug_layer_deposits.get()) {
                 JemsGeology.getInstance().LOGGER.info("Invalid biome for layer deposit at {}, failed to generate.", centerPos);
             }
             return false;
@@ -245,7 +245,7 @@ public class LayerEnqueuedDeposit implements IEnqueuedDeposit {
         }
 
         // Debug tool
-        if (JemsGeoConfig.COMMON.debug_layer_deposits.get()) {
+        if (JemsGeoConfig.SERVER.debug_layer_deposits.get()) {
             for (int yPole = heightEnd; yPole < 120; yPole++) {
                 reader.getSeedReader().setBlockState(new BlockPos(centerPos.getX(), yPole, centerPos.getZ()),
                         Blocks.RED_WOOL.getDefaultState(), 2);
