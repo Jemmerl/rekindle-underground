@@ -15,7 +15,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public final class JemsGeoConfig {
 
-    public static final SeverConfig.Server SERVER;
+    public static final ServerConfig.Server SERVER;
     public static final ForgeConfigSpec SERVER_SPEC;
 
     public static final CommonConfig.Common COMMON;
@@ -23,7 +23,7 @@ public final class JemsGeoConfig {
 
     static //constructor
     {
-        Pair<SeverConfig.Server, ForgeConfigSpec> serverSpecPair = new ForgeConfigSpec.Builder().configure(SeverConfig.Server::new);
+        Pair<ServerConfig.Server, ForgeConfigSpec> serverSpecPair = new ForgeConfigSpec.Builder().configure(ServerConfig.Server::new);
         SERVER = serverSpecPair.getLeft();
         SERVER_SPEC = serverSpecPair.getRight();
 

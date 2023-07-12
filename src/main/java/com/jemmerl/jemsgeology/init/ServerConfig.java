@@ -3,7 +3,7 @@ package com.jemmerl.jemsgeology.init;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 // Per-world config
-public class SeverConfig {
+public class ServerConfig {
 
     public static class Server {
         private static final int REGION_SIZE = 512; // Rough average, in chunks (OG IS 128)

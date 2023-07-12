@@ -3,6 +3,7 @@ package com.jemmerl.jemsgeology.geology;
 import com.jemmerl.jemsgeology.JemsGeology;
 import com.jemmerl.jemsgeology.blocks.IOreBlock;
 import com.jemmerl.jemsgeology.data.enums.GeologyType;
+import com.jemmerl.jemsgeology.geology.strata.StoneRegionBuilder;
 import com.jemmerl.jemsgeology.geology.strata.VolcanicRegionBuilder;
 import com.jemmerl.jemsgeology.init.JemsGeoConfig;
 import com.jemmerl.jemsgeology.init.depositinit.DepositRegistrar;
@@ -132,7 +133,7 @@ public class StateMapBuilder {
                     BlockState ignState = this.stoneStateMap[x][y][z];
                     boolean contactMeta = (ignState == Blocks.AIR.getDefaultState());
                     if ((ignState == null) || contactMeta) {
-                        BlockState stoneState = StrataNoise.getStoneStrataBlock(posX, y, posZ,
+                        BlockState stoneState = StoneRegionBuilder.getStoneStrataBlock(posX, y, posZ,
                                 chunkReader.getSeedReader(), contactMeta);
 
                         // might be temporary, may move into new strata gen
