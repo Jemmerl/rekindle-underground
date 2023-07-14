@@ -181,7 +181,7 @@ public class VolcanicRegionBuilder {
                 }
 
                 // Debug
-                if (JemsGeoConfig.SERVER.gen_batholiths.get() && (percentBatholith > 0.605f) && (percentBatholith < 0.61f)) {
+                if (JemsGeoConfig.SERVER.debug_batholiths.get() && (percentBatholith > 0.605f) && (percentBatholith < 0.61f)) {
                     JemsGeology.getInstance().LOGGER.info(
                             "Generating batholith with type {} and max height {} at: ({}, {})",
                             cachedBatholithType, cachedBatholithHeight, x, z);
