@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "rocks",
+  "ingredients": [
+    {
+      "item": "jemsgeology:limy_shale_cobbles"
+    }
+  ],
+  "result": {
+    "item": "jemsgeology:limy_shale_rock",
+    "count": 4
+  }
+}

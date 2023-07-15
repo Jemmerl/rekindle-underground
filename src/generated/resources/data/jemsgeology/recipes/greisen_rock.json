@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "rocks",
+  "ingredients": [
+    {
+      "item": "jemsgeology:greisen_cobbles"
+    }
+  ],
+  "result": {
+    "item": "jemsgeology:greisen_rock",
+    "count": 4
+  }
+}

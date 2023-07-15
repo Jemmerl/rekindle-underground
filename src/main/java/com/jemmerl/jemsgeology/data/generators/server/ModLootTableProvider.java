@@ -1,6 +1,7 @@
 package com.jemmerl.jemsgeology.data.generators.server;
 
 import com.google.common.collect.ImmutableList;
+import com.jemmerl.jemsgeology.blocks.FallingCobbleBlock;
 import com.jemmerl.jemsgeology.blocks.StoneOreBlock;
 import com.jemmerl.jemsgeology.data.enums.GeologyType;
 import com.jemmerl.jemsgeology.init.ModBlocks;
@@ -83,6 +84,14 @@ public class ModLootTableProvider extends LootTableProvider {
             }
 
 
+            for (Block block : ModBlockLists.COBBLES) {
+                GeologyType geologyType = ((FallingCobbleBlock) block).getGeologyType();
+                GeoListWrapper geoList = ModBlockLists.GEO_LIST.get(geologyType);
+
+                LootTable.Builder lootTable = buildCobblesLootTable(geoList);
+                registerLootTable(block, lootTable);
+            }
+
             for (Block block : ModBlockLists.COBBLESTONES) {
                 registerDropSelfLootTable(block);
             }
@@ -115,6 +124,20 @@ public class ModLootTableProvider extends LootTableProvider {
         /////////////////////////
         // Loot Table Builders //
         /////////////////////////
+
+        // Creates and fills a loot table with the respective rock for cobbles blocks
+        private static LootTable.Builder buildCobblesLootTable(GeoListWrapper geoList) {
+            LootTable.Builder lootTableBuilder = new LootTable.Builder();
+
+            lootTableBuilder.addLootPool(LootPool.builder()
+                    .name("Rocks")
+                    .rolls(ConstantRange.of(4))
+                    .addEntry(ItemLootEntry.builder(geoList.getRockItem()))
+            );
+
+            return lootTableBuilder;
+        }
+
 
         // Creates and fills a loot table with pools for each OreType for stone blocks
         private static LootTable.Builder buildStoneLootTable(GeoListWrapper geoList) {

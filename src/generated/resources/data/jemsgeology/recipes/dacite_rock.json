@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "rocks",
+  "ingredients": [
+    {
+      "item": "jemsgeology:dacite_cobbles"
+    }
+  ],
+  "result": {
+    "item": "jemsgeology:dacite_rock",
+    "count": 4
+  }
+}

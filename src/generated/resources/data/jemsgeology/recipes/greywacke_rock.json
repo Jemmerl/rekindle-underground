@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "rocks",
+  "ingredients": [
+    {
+      "item": "jemsgeology:greywacke_cobbles"
+    }
+  ],
+  "result": {
+    "item": "jemsgeology:greywacke_rock",
+    "count": 4
+  }
+}

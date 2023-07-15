@@ -5,15 +5,17 @@ import net.minecraft.item.Item;
 
 public class GeoListWrapper {
 
-    public GeoListWrapper(Block stoneOreBlock, Block cobbleBlock, Block regolithBlock, Item rockItem) {
+    public GeoListWrapper(Block stoneOreBlock, Block cobbleBlock, Block cobblestoneBlock, Block regolithBlock, Item rockItem) {
         this.stoneOreBlock = stoneOreBlock;
         this.cobbleBlock = cobbleBlock;
+        this.cobblestoneBlock = cobblestoneBlock;
         this.regolithBlock = regolithBlock;
         this.rockItem = rockItem;
     }
 
     private final Block stoneOreBlock;
     private final Block cobbleBlock;
+    private final Block cobblestoneBlock;
     private final Block regolithBlock;
     private final Item rockItem;
 
@@ -23,6 +25,10 @@ public class GeoListWrapper {
 
     public Block getCobbleBlock() {
         return this.cobbleBlock;
+    }
+
+    public Block getCobblestoneBlock() {
+        return this.cobblestoneBlock;
     }
 
     public Block getRegolithBlock() {

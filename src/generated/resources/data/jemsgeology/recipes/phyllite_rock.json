@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "rocks",
+  "ingredients": [
+    {
+      "item": "jemsgeology:phyllite_cobbles"
+    }
+  ],
+  "result": {
+    "item": "jemsgeology:phyllite_rock",
+    "count": 4
+  }
+}

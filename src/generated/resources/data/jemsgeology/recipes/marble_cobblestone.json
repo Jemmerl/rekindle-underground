@@ -1,16 +1,21 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "cobblestone",
+  "group": "cobblestones",
   "pattern": [
-    "xx",
-    "xx"
+    "xxx",
+    "mxm",
+    "xxx"
   ],
   "key": {
     "x": {
       "item": "jemsgeology:marble_rock"
+    },
+    "m": {
+      "item": "jemsgeology:lime_mortar"
     }
   },
   "result": {
-    "item": "jemsgeology:marble_cobblestone"
+    "item": "jemsgeology:marble_cobblestone",
+    "count": 3
   }
 }

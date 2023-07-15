@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "cobbles",
+  "pattern": [
+    "xx",
+    "xx"
+  ],
+  "key": {
+    "x": {
+      "item": "jemsgeology:metaconglomerate_rock"
+    }
+  },
+  "result": {
+    "item": "jemsgeology:metaconglomerate_cobbles"
+  }
+}

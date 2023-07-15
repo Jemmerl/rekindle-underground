@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "cobbles",
+  "pattern": [
+    "xx",
+    "xx"
+  ],
+  "key": {
+    "x": {
+      "item": "jemsgeology:andesite_rock"
+    }
+  },
+  "result": {
+    "item": "jemsgeology:andesite_cobbles"
+  }
+}

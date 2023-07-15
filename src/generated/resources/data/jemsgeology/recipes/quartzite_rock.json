@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "rocks",
+  "ingredients": [
+    {
+      "item": "jemsgeology:quartzite_cobbles"
+    }
+  ],
+  "result": {
+    "item": "jemsgeology:quartzite_rock",
+    "count": 4
+  }
+}

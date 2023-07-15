@@ -68,6 +68,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
             });
         }
 
+        for (Block block : ModBlockLists.COBBLES) {
+            simpleBlock(block);
+        }
+
         for (Block block : ModBlockLists.COBBLESTONES) {
             simpleBlock(block);
         }

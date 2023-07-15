@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "rocks",
+  "ingredients": [
+    {
+      "item": "jemsgeology:granodiorite_cobbles"
+    }
+  ],
+  "result": {
+    "item": "jemsgeology:granodiorite_rock",
+    "count": 4
+  }
+}

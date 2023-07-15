@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "rocks",
+  "ingredients": [
+    {
+      "item": "jemsgeology:carbonate_hornfels_cobbles"
+    }
+  ],
+  "result": {
+    "item": "jemsgeology:carbonate_hornfels_rock",
+    "count": 4
+  }
+}

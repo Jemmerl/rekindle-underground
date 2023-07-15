@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "rocks",
+  "ingredients": [
+    {
+      "item": "jemsgeology:chalk_cobbles"
+    }
+  ],
+  "result": {
+    "item": "jemsgeology:chalk_rock",
+    "count": 4
+  }
+}

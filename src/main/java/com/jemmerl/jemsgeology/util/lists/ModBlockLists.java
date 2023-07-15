@@ -164,57 +164,111 @@ public class ModBlockLists {
     );
 
 
-    ////////////
-    // COBBLE //
-    ////////////
+    /////////////
+    // COBBLES //
+    /////////////
+
+    public static List<Block> COBBLES = Arrays.asList(
+            // Sedimentary
+            ModBlocks.CHALK_COBBLES.get(),
+            ModBlocks.LIMESTONE_COBBLES.get(),
+            ModBlocks.DOLOSTONE_COBBLES.get(),
+            ModBlocks.MARLSTONE_COBBLES.get(),
+            ModBlocks.SHALE_COBBLES.get(),
+            ModBlocks.LIMY_SHALE_COBBLES.get(),
+            ModBlocks.SANDSTONE_COBBLES.get(),
+            ModBlocks.RED_SANDSTONE_COBBLES.get(),
+            ModBlocks.ARKOSE_COBBLES.get(),
+            ModBlocks.GREYWACKE_COBBLES.get(),
+            ModBlocks.MUDSTONE_COBBLES.get(),
+            ModBlocks.CLAYSTONE_COBBLES.get(),
+            ModBlocks.SILTSTONE_COBBLES.get(),
+            ModBlocks.CONGLOMERATE_COBBLES.get(),
+            ModBlocks.VEIN_QUARTZ_COBBLES.get(),
+
+            // Igneous Extrusive
+            ModBlocks.RHYOLITE_COBBLES.get(),
+            ModBlocks.DACITE_COBBLES.get(),
+            ModBlocks.ANDESITE_COBBLES.get(),
+            ModBlocks.TRACHYTE_COBBLES.get(),
+            ModBlocks.BASALT_COBBLES.get(),
+
+            // Igneous Intrusive
+            ModBlocks.DIORITE_COBBLES.get(),
+            ModBlocks.GRANODIORITE_COBBLES.get(),
+            ModBlocks.GRANITE_COBBLES.get(),
+            ModBlocks.SYENITE_COBBLES.get(),
+            ModBlocks.GABBRO_COBBLES.get(),
+            ModBlocks.DIABASE_COBBLES.get(),
+            ModBlocks.KIMBERLITE_COBBLES.get(),
+            ModBlocks.LAMPROITE_COBBLES.get(),
+
+            // Metamorphic
+            ModBlocks.QUARTZITE_COBBLES.get(),
+            ModBlocks.SCHIST_COBBLES.get(),
+            ModBlocks.PHYLLITE_COBBLES.get(),
+            ModBlocks.SLATE_COBBLES.get(),
+            ModBlocks.GNEISS_COBBLES.get(),
+            ModBlocks.MARBLE_COBBLES.get(),
+            ModBlocks.PELITIC_HORNFELS_COBBLES.get(),
+            ModBlocks.CARBONATE_HORNFELS_COBBLES.get(),
+            ModBlocks.MAFIC_HORNFELS_COBBLES.get(),
+            ModBlocks.METACONGLOMERATE_COBBLES.get(),
+            ModBlocks.GREISEN_COBBLES.get()
+    );
+
+
+    //////////////////
+    // COBBLESTONES //
+    //////////////////
 
     public static List<Block> COBBLESTONES = Arrays.asList(
             // Sedimentary
-            ModBlocks.CHALK_COBBLE.get(),
-            ModBlocks.LIMESTONE_COBBLE.get(),
-            ModBlocks.DOLOSTONE_COBBLE.get(),
-            ModBlocks.MARLSTONE_COBBLE.get(),
-            ModBlocks.SHALE_COBBLE.get(),
-            ModBlocks.LIMY_SHALE_COBBLE.get(),
-            ModBlocks.SANDSTONE_COBBLE.get(),
-            ModBlocks.RED_SANDSTONE_COBBLE.get(),
-            ModBlocks.ARKOSE_COBBLE.get(),
-            ModBlocks.GREYWACKE_COBBLE.get(),
-            ModBlocks.MUDSTONE_COBBLE.get(),
-            ModBlocks.CLAYSTONE_COBBLE.get(),
-            ModBlocks.SILTSTONE_COBBLE.get(),
-            ModBlocks.CONGLOMERATE_COBBLE.get(),
-            ModBlocks.VEIN_QUARTZ_COBBLE.get(),
+            ModBlocks.CHALK_COBBLESTONE.get(),
+            ModBlocks.LIMESTONE_COBBLESTONE.get(),
+            ModBlocks.DOLOSTONE_COBBLESTONE.get(),
+            ModBlocks.MARLSTONE_COBBLESTONE.get(),
+            ModBlocks.SHALE_COBBLESTONE.get(),
+            ModBlocks.LIMY_SHALE_COBBLESTONE.get(),
+            ModBlocks.SANDSTONE_COBBLESTONE.get(),
+            ModBlocks.RED_SANDSTONE_COBBLESTONE.get(),
+            ModBlocks.ARKOSE_COBBLESTONE.get(),
+            ModBlocks.GREYWACKE_COBBLESTONE.get(),
+            ModBlocks.MUDSTONE_COBBLESTONE.get(),
+            ModBlocks.CLAYSTONE_COBBLESTONE.get(),
+            ModBlocks.SILTSTONE_COBBLESTONE.get(),
+            ModBlocks.CONGLOMERATE_COBBLESTONE.get(),
+            ModBlocks.VEIN_QUARTZ_COBBLESTONE.get(),
 
             // Igneous Extrusive
-            ModBlocks.RHYOLITE_COBBLE.get(),
-            ModBlocks.DACITE_COBBLE.get(),
-            ModBlocks.ANDESITE_COBBLE.get(),
-            ModBlocks.TRACHYTE_COBBLE.get(),
-            ModBlocks.BASALT_COBBLE.get(),
+            ModBlocks.RHYOLITE_COBBLESTONE.get(),
+            ModBlocks.DACITE_COBBLESTONE.get(),
+            ModBlocks.ANDESITE_COBBLESTONE.get(),
+            ModBlocks.TRACHYTE_COBBLESTONE.get(),
+            ModBlocks.BASALT_COBBLESTONE.get(),
 
             // Igneous Intrusive
-            ModBlocks.DIORITE_COBBLE.get(),
-            ModBlocks.GRANODIORITE_COBBLE.get(),
-            ModBlocks.GRANITE_COBBLE.get(),
-            ModBlocks.SYENITE_COBBLE.get(),
-            ModBlocks.GABBRO_COBBLE.get(),
-            ModBlocks.DIABASE_COBBLE.get(),
-            ModBlocks.KIMBERLITE_COBBLE.get(),
-            ModBlocks.LAMPROITE_COBBLE.get(),
+            ModBlocks.DIORITE_COBBLESTONE.get(),
+            ModBlocks.GRANODIORITE_COBBLESTONE.get(),
+            ModBlocks.GRANITE_COBBLESTONE.get(),
+            ModBlocks.SYENITE_COBBLESTONE.get(),
+            ModBlocks.GABBRO_COBBLESTONE.get(),
+            ModBlocks.DIABASE_COBBLESTONE.get(),
+            ModBlocks.KIMBERLITE_COBBLESTONE.get(),
+            ModBlocks.LAMPROITE_COBBLESTONE.get(),
 
             // Metamorphic
-            ModBlocks.QUARTZITE_COBBLE.get(),
-            ModBlocks.SCHIST_COBBLE.get(),
-            ModBlocks.PHYLLITE_COBBLE.get(),
-            ModBlocks.SLATE_COBBLE.get(),
-            ModBlocks.GNEISS_COBBLE.get(),
-            ModBlocks.MARBLE_COBBLE.get(),
-            ModBlocks.PELITIC_HORNFELS_COBBLE.get(),
-            ModBlocks.CARBONATE_HORNFELS_COBBLE.get(),
-            ModBlocks.MAFIC_HORNFELS_COBBLE.get(),
-            ModBlocks.METACONGLOMERATE_COBBLE.get(),
-            ModBlocks.GREISEN_COBBLE.get()
+            ModBlocks.QUARTZITE_COBBLESTONE.get(),
+            ModBlocks.SCHIST_COBBLESTONE.get(),
+            ModBlocks.PHYLLITE_COBBLESTONE.get(),
+            ModBlocks.SLATE_COBBLESTONE.get(),
+            ModBlocks.GNEISS_COBBLESTONE.get(),
+            ModBlocks.MARBLE_COBBLESTONE.get(),
+            ModBlocks.PELITIC_HORNFELS_COBBLESTONE.get(),
+            ModBlocks.CARBONATE_HORNFELS_COBBLESTONE.get(),
+            ModBlocks.MAFIC_HORNFELS_COBBLESTONE.get(),
+            ModBlocks.METACONGLOMERATE_COBBLESTONE.get(),
+            ModBlocks.GREISEN_COBBLESTONE.get()
     );
 
 
@@ -243,72 +297,72 @@ public class ModBlockLists {
 
     public static Map<GeologyType, GeoListWrapper> GEO_LIST = new HashMap<>();
     static {
-        GEO_LIST.put(GeologyType.CHALK, new GeoListWrapper(ModBlocks.CHALK_STONE.get(), ModBlocks.CHALK_COBBLE.get(), ModBlocks.CHALK_REGOLITH.get(), ModItems.CHALK_ROCK.get()));
-        GEO_LIST.put(GeologyType.LIMESTONE, new GeoListWrapper(ModBlocks.LIMESTONE_STONE.get(), ModBlocks.LIMESTONE_COBBLE.get(), ModBlocks.LIMESTONE_REGOLITH.get(), ModItems.LIMESTONE_ROCK.get()));
-        GEO_LIST.put(GeologyType.DOLOSTONE, new GeoListWrapper(ModBlocks.DOLOSTONE_STONE.get(), ModBlocks.DOLOSTONE_COBBLE.get(), ModBlocks.DOLOSTONE_REGOLITH.get(), ModItems.DOLOSTONE_ROCK.get()));
-        GEO_LIST.put(GeologyType.MARLSTONE, new GeoListWrapper(ModBlocks.MARLSTONE_STONE.get(), ModBlocks.MARLSTONE_COBBLE.get(), ModBlocks.MARLSTONE_REGOLITH.get(), ModItems.MARLSTONE_ROCK.get()));
-        GEO_LIST.put(GeologyType.SHALE, new GeoListWrapper(ModBlocks.SHALE_STONE.get(), ModBlocks.SHALE_COBBLE.get(), ModBlocks.SHALE_REGOLITH.get(), ModItems.SHALE_ROCK.get()));
-        GEO_LIST.put(GeologyType.LIMY_SHALE, new GeoListWrapper(ModBlocks.LIMY_SHALE_STONE.get(), ModBlocks.LIMY_SHALE_COBBLE.get(), ModBlocks.LIMY_SHALE_REGOLITH.get(), ModItems.LIMY_SHALE_ROCK.get()));
-        GEO_LIST.put(GeologyType.SANDSTONE, new GeoListWrapper(ModBlocks.SANDSTONE_STONE.get(), ModBlocks.SANDSTONE_COBBLE.get(), ModBlocks.SANDSTONE_REGOLITH.get(), ModItems.SANDSTONE_ROCK.get()));
-        GEO_LIST.put(GeologyType.RED_SANDSTONE, new GeoListWrapper(ModBlocks.RED_SANDSTONE_STONE.get(), ModBlocks.RED_SANDSTONE_COBBLE.get(), ModBlocks.RED_SANDSTONE_REGOLITH.get(), ModItems.RED_SANDSTONE_ROCK.get()));
-        GEO_LIST.put(GeologyType.ARKOSE, new GeoListWrapper(ModBlocks.ARKOSE_STONE.get(), ModBlocks.ARKOSE_COBBLE.get(), ModBlocks.ARKOSE_REGOLITH.get(), ModItems.ARKOSE_ROCK.get()));
-        GEO_LIST.put(GeologyType.GREYWACKE, new GeoListWrapper(ModBlocks.GREYWACKE_STONE.get(), ModBlocks.GREYWACKE_COBBLE.get(), ModBlocks.GREYWACKE_REGOLITH.get(), ModItems.GREYWACKE_ROCK.get()));
-        GEO_LIST.put(GeologyType.MUDSTONE, new GeoListWrapper(ModBlocks.MUDSTONE_STONE.get(), ModBlocks.MUDSTONE_COBBLE.get(), ModBlocks.MUDSTONE_REGOLITH.get(), ModItems.MUDSTONE_ROCK.get()));
-        GEO_LIST.put(GeologyType.CLAYSTONE, new GeoListWrapper(ModBlocks.CLAYSTONE_STONE.get(), ModBlocks.CLAYSTONE_COBBLE.get(), ModBlocks.CLAYSTONE_REGOLITH.get(), ModItems.CLAYSTONE_ROCK.get()));
-        GEO_LIST.put(GeologyType.SILTSTONE, new GeoListWrapper(ModBlocks.SILTSTONE_STONE.get(), ModBlocks.SILTSTONE_COBBLE.get(), ModBlocks.SILTSTONE_REGOLITH.get(), ModItems.SILTSTONE_ROCK.get()));
-        GEO_LIST.put(GeologyType.CONGLOMERATE, new GeoListWrapper(ModBlocks.CONGLOMERATE_STONE.get(), ModBlocks.CONGLOMERATE_COBBLE.get(), ModBlocks.CONGLOMERATE_REGOLITH.get(), ModItems.CONGLOMERATE_ROCK.get()));
-        GEO_LIST.put(GeologyType.ROCKSALT, new GeoListWrapper(ModBlocks.ROCKSALT_STONE.get(), null, ModBlocks.ROCKSALT_STONE.get(), null));
-        GEO_LIST.put(GeologyType.ROCKGYPSUM, new GeoListWrapper(ModBlocks.ROCKGYPSUM_STONE.get(), null, ModBlocks.ROCKGYPSUM_STONE.get(), null));
-        GEO_LIST.put(GeologyType.BORAX, new GeoListWrapper(ModBlocks.BORAX_STONE.get(), null, ModBlocks.BORAX_STONE.get(), null));
-        GEO_LIST.put(GeologyType.KERNITE, new GeoListWrapper(ModBlocks.KERNITE_STONE.get(), null, ModBlocks.KERNITE_STONE.get(), null));
-        GEO_LIST.put(GeologyType.VEIN_QUARTZ, new GeoListWrapper(ModBlocks.VEIN_QUARTZ_STONE.get(), ModBlocks.VEIN_QUARTZ_COBBLE.get(), ModBlocks.VEIN_QUARTZ_REGOLITH.get(), ModItems.VEIN_QUARTZ_ROCK.get()));
+        GEO_LIST.put(GeologyType.CHALK, new GeoListWrapper(ModBlocks.CHALK_STONE.get(), ModBlocks.CHALK_COBBLES.get(), ModBlocks.CHALK_COBBLESTONE.get(), ModBlocks.CHALK_REGOLITH.get(), ModItems.CHALK_ROCK.get()));
+        GEO_LIST.put(GeologyType.LIMESTONE, new GeoListWrapper(ModBlocks.LIMESTONE_STONE.get(), ModBlocks.LIMESTONE_COBBLES.get(), ModBlocks.LIMESTONE_COBBLESTONE.get(), ModBlocks.LIMESTONE_REGOLITH.get(), ModItems.LIMESTONE_ROCK.get()));
+        GEO_LIST.put(GeologyType.DOLOSTONE, new GeoListWrapper(ModBlocks.DOLOSTONE_STONE.get(), ModBlocks.DOLOSTONE_COBBLES.get(), ModBlocks.DOLOSTONE_COBBLESTONE.get(), ModBlocks.DOLOSTONE_REGOLITH.get(), ModItems.DOLOSTONE_ROCK.get()));
+        GEO_LIST.put(GeologyType.MARLSTONE, new GeoListWrapper(ModBlocks.MARLSTONE_STONE.get(), ModBlocks.MARLSTONE_COBBLES.get(), ModBlocks.MARLSTONE_COBBLESTONE.get(), ModBlocks.MARLSTONE_REGOLITH.get(), ModItems.MARLSTONE_ROCK.get()));
+        GEO_LIST.put(GeologyType.SHALE, new GeoListWrapper(ModBlocks.SHALE_STONE.get(), ModBlocks.SHALE_COBBLES.get(), ModBlocks.SHALE_COBBLESTONE.get(), ModBlocks.SHALE_REGOLITH.get(), ModItems.SHALE_ROCK.get()));
+        GEO_LIST.put(GeologyType.LIMY_SHALE, new GeoListWrapper(ModBlocks.LIMY_SHALE_STONE.get(), ModBlocks.LIMY_SHALE_COBBLES.get(), ModBlocks.LIMY_SHALE_COBBLESTONE.get(), ModBlocks.LIMY_SHALE_REGOLITH.get(), ModItems.LIMY_SHALE_ROCK.get()));
+        GEO_LIST.put(GeologyType.SANDSTONE, new GeoListWrapper(ModBlocks.SANDSTONE_STONE.get(), ModBlocks.SANDSTONE_COBBLES.get(), ModBlocks.SANDSTONE_COBBLESTONE.get(), ModBlocks.SANDSTONE_REGOLITH.get(), ModItems.SANDSTONE_ROCK.get()));
+        GEO_LIST.put(GeologyType.RED_SANDSTONE, new GeoListWrapper(ModBlocks.RED_SANDSTONE_STONE.get(), ModBlocks.RED_SANDSTONE_COBBLES.get(), ModBlocks.RED_SANDSTONE_COBBLESTONE.get(), ModBlocks.RED_SANDSTONE_REGOLITH.get(), ModItems.RED_SANDSTONE_ROCK.get()));
+        GEO_LIST.put(GeologyType.ARKOSE, new GeoListWrapper(ModBlocks.ARKOSE_STONE.get(), ModBlocks.ARKOSE_COBBLES.get(), ModBlocks.ARKOSE_COBBLESTONE.get(), ModBlocks.ARKOSE_REGOLITH.get(), ModItems.ARKOSE_ROCK.get()));
+        GEO_LIST.put(GeologyType.GREYWACKE, new GeoListWrapper(ModBlocks.GREYWACKE_STONE.get(), ModBlocks.GREYWACKE_COBBLES.get(), ModBlocks.GREYWACKE_COBBLESTONE.get(), ModBlocks.GREYWACKE_REGOLITH.get(), ModItems.GREYWACKE_ROCK.get()));
+        GEO_LIST.put(GeologyType.MUDSTONE, new GeoListWrapper(ModBlocks.MUDSTONE_STONE.get(), ModBlocks.MUDSTONE_COBBLES.get(), ModBlocks.MUDSTONE_COBBLESTONE.get(), ModBlocks.MUDSTONE_REGOLITH.get(), ModItems.MUDSTONE_ROCK.get()));
+        GEO_LIST.put(GeologyType.CLAYSTONE, new GeoListWrapper(ModBlocks.CLAYSTONE_STONE.get(), ModBlocks.CLAYSTONE_COBBLES.get(), ModBlocks.CLAYSTONE_COBBLESTONE.get(), ModBlocks.CLAYSTONE_REGOLITH.get(), ModItems.CLAYSTONE_ROCK.get()));
+        GEO_LIST.put(GeologyType.SILTSTONE, new GeoListWrapper(ModBlocks.SILTSTONE_STONE.get(), ModBlocks.SILTSTONE_COBBLES.get(), ModBlocks.SILTSTONE_COBBLESTONE.get(), ModBlocks.SILTSTONE_REGOLITH.get(), ModItems.SILTSTONE_ROCK.get()));
+        GEO_LIST.put(GeologyType.CONGLOMERATE, new GeoListWrapper(ModBlocks.CONGLOMERATE_STONE.get(), ModBlocks.CONGLOMERATE_COBBLES.get(), ModBlocks.CONGLOMERATE_COBBLESTONE.get(), ModBlocks.CONGLOMERATE_REGOLITH.get(), ModItems.CONGLOMERATE_ROCK.get()));
+        GEO_LIST.put(GeologyType.ROCKSALT, new GeoListWrapper(ModBlocks.ROCKSALT_STONE.get(), null, null, ModBlocks.ROCKSALT_STONE.get(), null));
+        GEO_LIST.put(GeologyType.ROCKGYPSUM, new GeoListWrapper(ModBlocks.ROCKGYPSUM_STONE.get(), null, null, ModBlocks.ROCKGYPSUM_STONE.get(), null));
+        GEO_LIST.put(GeologyType.BORAX, new GeoListWrapper(ModBlocks.BORAX_STONE.get(), null, null, ModBlocks.BORAX_STONE.get(), null));
+        GEO_LIST.put(GeologyType.KERNITE, new GeoListWrapper(ModBlocks.KERNITE_STONE.get(), null, null, ModBlocks.KERNITE_STONE.get(), null));
+        GEO_LIST.put(GeologyType.VEIN_QUARTZ, new GeoListWrapper(ModBlocks.VEIN_QUARTZ_STONE.get(), ModBlocks.VEIN_QUARTZ_COBBLES.get(), ModBlocks.VEIN_QUARTZ_COBBLESTONE.get(), ModBlocks.VEIN_QUARTZ_REGOLITH.get(), ModItems.VEIN_QUARTZ_ROCK.get()));
 
         // Igneous Extrusive
-        GEO_LIST.put(GeologyType.RHYOLITE, new GeoListWrapper(ModBlocks.RHYOLITE_STONE.get(), ModBlocks.RHYOLITE_COBBLE.get(), ModBlocks.RHYOLITE_REGOLITH.get(), ModItems.RHYOLITE_ROCK.get()));
-        GEO_LIST.put(GeologyType.DACITE, new GeoListWrapper(ModBlocks.DACITE_STONE.get(), ModBlocks.DACITE_COBBLE.get(), ModBlocks.DACITE_REGOLITH.get(), ModItems.DACITE_ROCK.get()));
-        GEO_LIST.put(GeologyType.ANDESITE, new GeoListWrapper(ModBlocks.ANDESITE_STONE.get(), ModBlocks.ANDESITE_COBBLE.get(), ModBlocks.ANDESITE_REGOLITH.get(), ModItems.ANDESITE_ROCK.get()));
-        GEO_LIST.put(GeologyType.TRACHYTE, new GeoListWrapper(ModBlocks.TRACHYTE_STONE.get(), ModBlocks.TRACHYTE_COBBLE.get(), ModBlocks.TRACHYTE_REGOLITH.get(), ModItems.TRACHYTE_ROCK.get()));
-        GEO_LIST.put(GeologyType.BASALT, new GeoListWrapper(ModBlocks.BASALT_STONE.get(), ModBlocks.BASALT_COBBLE.get(), ModBlocks.BASALT_REGOLITH.get(), ModItems.BASALT_ROCK.get()));
-        GEO_LIST.put(GeologyType.PAHOEHOE, new GeoListWrapper(ModBlocks.PAHOEHOE_STONE.get(), ModBlocks.BASALT_COBBLE.get(), ModBlocks.BASALT_REGOLITH.get(), ModItems.BASALT_ROCK.get()));
-        GEO_LIST.put(GeologyType.SCORIA, new GeoListWrapper(ModBlocks.SCORIA_STONE.get(), null, ModBlocks.SCORIA_REGOLITH.get(), null));
-        GEO_LIST.put(GeologyType.RHYOLITIC_TUFF, new GeoListWrapper(ModBlocks.RHYOLITIC_TUFF_STONE.get(), null, ModBlocks.RHYOLITIC_TUFF_STONE.get(), null));
-        GEO_LIST.put(GeologyType.TRACHYTIC_TUFF, new GeoListWrapper(ModBlocks.TRACHYTIC_TUFF_STONE.get(), null, ModBlocks.TRACHYTIC_TUFF_STONE.get(), null));
-        GEO_LIST.put(GeologyType.ANDESITIC_TUFF, new GeoListWrapper(ModBlocks.ANDESITIC_TUFF_STONE.get(), null, ModBlocks.ANDESITIC_TUFF_STONE.get(), null));
-        GEO_LIST.put(GeologyType.BASALTIC_TUFF, new GeoListWrapper(ModBlocks.BASALTIC_TUFF_STONE.get(), null, ModBlocks.BASALTIC_TUFF_STONE.get(), null));
-        GEO_LIST.put(GeologyType.ULTRAMAFIC_TUFF, new GeoListWrapper(ModBlocks.ULTRAMAFIC_TUFF_STONE.get(), null, ModBlocks.ULTRAMAFIC_TUFF_STONE.get(), null));
+        GEO_LIST.put(GeologyType.RHYOLITE, new GeoListWrapper(ModBlocks.RHYOLITE_STONE.get(), ModBlocks.RHYOLITE_COBBLES.get(), ModBlocks.RHYOLITE_COBBLESTONE.get(), ModBlocks.RHYOLITE_REGOLITH.get(), ModItems.RHYOLITE_ROCK.get()));
+        GEO_LIST.put(GeologyType.DACITE, new GeoListWrapper(ModBlocks.DACITE_STONE.get(), ModBlocks.DACITE_COBBLES.get(), ModBlocks.DACITE_COBBLESTONE.get(), ModBlocks.DACITE_REGOLITH.get(), ModItems.DACITE_ROCK.get()));
+        GEO_LIST.put(GeologyType.ANDESITE, new GeoListWrapper(ModBlocks.ANDESITE_STONE.get(), ModBlocks.ANDESITE_COBBLES.get(), ModBlocks.ANDESITE_COBBLESTONE.get(), ModBlocks.ANDESITE_REGOLITH.get(), ModItems.ANDESITE_ROCK.get()));
+        GEO_LIST.put(GeologyType.TRACHYTE, new GeoListWrapper(ModBlocks.TRACHYTE_STONE.get(), ModBlocks.TRACHYTE_COBBLES.get(), ModBlocks.TRACHYTE_COBBLESTONE.get(), ModBlocks.TRACHYTE_REGOLITH.get(), ModItems.TRACHYTE_ROCK.get()));
+        GEO_LIST.put(GeologyType.BASALT, new GeoListWrapper(ModBlocks.BASALT_STONE.get(), ModBlocks.BASALT_COBBLES.get(), ModBlocks.BASALT_COBBLESTONE.get(), ModBlocks.BASALT_REGOLITH.get(), ModItems.BASALT_ROCK.get()));
+        GEO_LIST.put(GeologyType.PAHOEHOE, new GeoListWrapper(ModBlocks.PAHOEHOE_STONE.get(), ModBlocks.BASALT_COBBLES.get(), ModBlocks.BASALT_COBBLESTONE.get(), ModBlocks.BASALT_REGOLITH.get(), ModItems.BASALT_ROCK.get()));
+        GEO_LIST.put(GeologyType.SCORIA, new GeoListWrapper(ModBlocks.SCORIA_STONE.get(), null, null, ModBlocks.SCORIA_REGOLITH.get(), null));
+        GEO_LIST.put(GeologyType.RHYOLITIC_TUFF, new GeoListWrapper(ModBlocks.RHYOLITIC_TUFF_STONE.get(), null, null, ModBlocks.RHYOLITIC_TUFF_STONE.get(), null));
+        GEO_LIST.put(GeologyType.TRACHYTIC_TUFF, new GeoListWrapper(ModBlocks.TRACHYTIC_TUFF_STONE.get(), null, null, ModBlocks.TRACHYTIC_TUFF_STONE.get(), null));
+        GEO_LIST.put(GeologyType.ANDESITIC_TUFF, new GeoListWrapper(ModBlocks.ANDESITIC_TUFF_STONE.get(), null, null, ModBlocks.ANDESITIC_TUFF_STONE.get(), null));
+        GEO_LIST.put(GeologyType.BASALTIC_TUFF, new GeoListWrapper(ModBlocks.BASALTIC_TUFF_STONE.get(), null, null, ModBlocks.BASALTIC_TUFF_STONE.get(), null));
+        GEO_LIST.put(GeologyType.ULTRAMAFIC_TUFF, new GeoListWrapper(ModBlocks.ULTRAMAFIC_TUFF_STONE.get(), null, null, ModBlocks.ULTRAMAFIC_TUFF_STONE.get(), null));
 
         // Igneous Intrusive
-        GEO_LIST.put(GeologyType.DIORITE, new GeoListWrapper(ModBlocks.DIORITE_STONE.get(), ModBlocks.DIORITE_COBBLE.get(), ModBlocks.DIORITE_REGOLITH.get(), ModItems.DIORITE_ROCK.get()));
-        GEO_LIST.put(GeologyType.GRANODIORITE, new GeoListWrapper(ModBlocks.GRANODIORITE_STONE.get(), ModBlocks.GRANODIORITE_COBBLE.get(), ModBlocks.GRANODIORITE_REGOLITH.get(), ModItems.GRANODIORITE_ROCK.get()));
-        GEO_LIST.put(GeologyType.GRANITE, new GeoListWrapper(ModBlocks.GRANITE_STONE.get(), ModBlocks.GRANITE_COBBLE.get(), ModBlocks.GRANITE_REGOLITH.get(), ModItems.GRANITE_ROCK.get()));
-        GEO_LIST.put(GeologyType.SYENITE, new GeoListWrapper(ModBlocks.SYENITE_STONE.get(), ModBlocks.SYENITE_COBBLE.get(), ModBlocks.SYENITE_REGOLITH.get(), ModItems.SYENITE_ROCK.get()));
-        GEO_LIST.put(GeologyType.GABBRO, new GeoListWrapper(ModBlocks.GABBRO_STONE.get(), ModBlocks.GABBRO_COBBLE.get(), ModBlocks.GABBRO_REGOLITH.get(), ModItems.GABBRO_ROCK.get()));
-        GEO_LIST.put(GeologyType.DIABASE, new GeoListWrapper(ModBlocks.DIABASE_STONE.get(), ModBlocks.DIABASE_COBBLE.get(), ModBlocks.DIABASE_REGOLITH.get(), ModItems.DIABASE_ROCK.get()));
-        GEO_LIST.put(GeologyType.KIMBERLITE, new GeoListWrapper(ModBlocks.KIMBERLITE_STONE.get(), ModBlocks.KIMBERLITE_COBBLE.get(), ModBlocks.KIMBERLITE_REGOLITH.get(), ModItems.KIMBERLITE_ROCK.get()));
-        GEO_LIST.put(GeologyType.LAMPROITE, new GeoListWrapper(ModBlocks.LAMPROITE_STONE.get(), ModBlocks.LAMPROITE_COBBLE.get(), ModBlocks.LAMPROITE_REGOLITH.get(), ModItems.LAMPROITE_ROCK.get()));
+        GEO_LIST.put(GeologyType.DIORITE, new GeoListWrapper(ModBlocks.DIORITE_STONE.get(), ModBlocks.DIORITE_COBBLES.get(), ModBlocks.DIORITE_COBBLESTONE.get(), ModBlocks.DIORITE_REGOLITH.get(), ModItems.DIORITE_ROCK.get()));
+        GEO_LIST.put(GeologyType.GRANODIORITE, new GeoListWrapper(ModBlocks.GRANODIORITE_STONE.get(), ModBlocks.GRANODIORITE_COBBLES.get(), ModBlocks.GRANODIORITE_COBBLESTONE.get(), ModBlocks.GRANODIORITE_REGOLITH.get(), ModItems.GRANODIORITE_ROCK.get()));
+        GEO_LIST.put(GeologyType.GRANITE, new GeoListWrapper(ModBlocks.GRANITE_STONE.get(), ModBlocks.GRANITE_COBBLES.get(), ModBlocks.GRANITE_COBBLESTONE.get(), ModBlocks.GRANITE_REGOLITH.get(), ModItems.GRANITE_ROCK.get()));
+        GEO_LIST.put(GeologyType.SYENITE, new GeoListWrapper(ModBlocks.SYENITE_STONE.get(), ModBlocks.SYENITE_COBBLES.get(), ModBlocks.SYENITE_COBBLESTONE.get(), ModBlocks.SYENITE_REGOLITH.get(), ModItems.SYENITE_ROCK.get()));
+        GEO_LIST.put(GeologyType.GABBRO, new GeoListWrapper(ModBlocks.GABBRO_STONE.get(), ModBlocks.GABBRO_COBBLES.get(), ModBlocks.GABBRO_COBBLESTONE.get(), ModBlocks.GABBRO_REGOLITH.get(), ModItems.GABBRO_ROCK.get()));
+        GEO_LIST.put(GeologyType.DIABASE, new GeoListWrapper(ModBlocks.DIABASE_STONE.get(), ModBlocks.DIABASE_COBBLES.get(), ModBlocks.DIABASE_COBBLESTONE.get(), ModBlocks.DIABASE_REGOLITH.get(), ModItems.DIABASE_ROCK.get()));
+        GEO_LIST.put(GeologyType.KIMBERLITE, new GeoListWrapper(ModBlocks.KIMBERLITE_STONE.get(), ModBlocks.KIMBERLITE_COBBLES.get(), ModBlocks.KIMBERLITE_COBBLESTONE.get(), ModBlocks.KIMBERLITE_REGOLITH.get(), ModItems.KIMBERLITE_ROCK.get()));
+        GEO_LIST.put(GeologyType.LAMPROITE, new GeoListWrapper(ModBlocks.LAMPROITE_STONE.get(), ModBlocks.LAMPROITE_COBBLES.get(), ModBlocks.LAMPROITE_COBBLESTONE.get(), ModBlocks.LAMPROITE_REGOLITH.get(), ModItems.LAMPROITE_ROCK.get()));
 
         // Metamorphic
-        GEO_LIST.put(GeologyType.QUARTZITE, new GeoListWrapper(ModBlocks.QUARTZITE_STONE.get(), ModBlocks.QUARTZITE_COBBLE.get(), ModBlocks.QUARTZITE_REGOLITH.get(), ModItems.QUARTZITE_ROCK.get()));
-        GEO_LIST.put(GeologyType.SCHIST, new GeoListWrapper(ModBlocks.SCHIST_STONE.get(), ModBlocks.SCHIST_COBBLE.get(), ModBlocks.SCHIST_REGOLITH.get(), ModItems.SCHIST_ROCK.get()));
-        GEO_LIST.put(GeologyType.PHYLLITE, new GeoListWrapper(ModBlocks.PHYLLITE_STONE.get(), ModBlocks.PHYLLITE_COBBLE.get(), ModBlocks.PHYLLITE_REGOLITH.get(), ModItems.PHYLLITE_ROCK.get()));
-        GEO_LIST.put(GeologyType.SLATE, new GeoListWrapper(ModBlocks.SLATE_STONE.get(), ModBlocks.SLATE_COBBLE.get(), ModBlocks.SLATE_REGOLITH.get(), ModItems.SLATE_ROCK.get()));
-        GEO_LIST.put(GeologyType.GNEISS, new GeoListWrapper(ModBlocks.GNEISS_STONE.get(), ModBlocks.GNEISS_COBBLE.get(), ModBlocks.GNEISS_REGOLITH.get(), ModItems.GNEISS_ROCK.get()));
-        GEO_LIST.put(GeologyType.MARBLE, new GeoListWrapper(ModBlocks.MARBLE_STONE.get(), ModBlocks.MARBLE_COBBLE.get(), ModBlocks.MARBLE_REGOLITH.get(), ModItems.MARBLE_ROCK.get()));
-        GEO_LIST.put(GeologyType.PELITIC_HORNFELS, new GeoListWrapper(ModBlocks.PELITIC_HORNFELS_STONE.get(), ModBlocks.PELITIC_HORNFELS_COBBLE.get(), ModBlocks.PELITIC_HORNFELS_REGOLITH.get(), ModItems.PELITIC_HORNFELS_ROCK.get()));
-        GEO_LIST.put(GeologyType.CARBONATE_HORNFELS, new GeoListWrapper(ModBlocks.CARBONATE_HORNFELS_STONE.get(), ModBlocks.CARBONATE_HORNFELS_COBBLE.get(), ModBlocks.CARBONATE_HORNFELS_REGOLITH.get(), ModItems.CARBONATE_HORNFELS_ROCK.get()));
-        GEO_LIST.put(GeologyType.MAFIC_HORNFELS, new GeoListWrapper(ModBlocks.MAFIC_HORNFELS_STONE.get(), ModBlocks.MAFIC_HORNFELS_COBBLE.get(), ModBlocks.MAFIC_HORNFELS_REGOLITH.get(), ModItems.MAFIC_HORNFELS_ROCK.get()));
-        GEO_LIST.put(GeologyType.METACONGLOMERATE, new GeoListWrapper(ModBlocks.METACONGLOMERATE_STONE.get(), ModBlocks.METACONGLOMERATE_COBBLE.get(), ModBlocks.METACONGLOMERATE_REGOLITH.get(), ModItems.METACONGLOMERATE_ROCK.get()));
-        GEO_LIST.put(GeologyType.GREISEN, new GeoListWrapper(ModBlocks.GREISEN_STONE.get(), ModBlocks.GREISEN_COBBLE.get(), ModBlocks.GREISEN_REGOLITH.get(), ModItems.GREISEN_ROCK.get()));
+        GEO_LIST.put(GeologyType.QUARTZITE, new GeoListWrapper(ModBlocks.QUARTZITE_STONE.get(), ModBlocks.QUARTZITE_COBBLES.get(), ModBlocks.QUARTZITE_COBBLESTONE.get(), ModBlocks.QUARTZITE_REGOLITH.get(), ModItems.QUARTZITE_ROCK.get()));
+        GEO_LIST.put(GeologyType.SCHIST, new GeoListWrapper(ModBlocks.SCHIST_STONE.get(), ModBlocks.SCHIST_COBBLES.get(), ModBlocks.SCHIST_COBBLESTONE.get(), ModBlocks.SCHIST_REGOLITH.get(), ModItems.SCHIST_ROCK.get()));
+        GEO_LIST.put(GeologyType.PHYLLITE, new GeoListWrapper(ModBlocks.PHYLLITE_STONE.get(), ModBlocks.PHYLLITE_COBBLES.get(), ModBlocks.PHYLLITE_COBBLESTONE.get(), ModBlocks.PHYLLITE_REGOLITH.get(), ModItems.PHYLLITE_ROCK.get()));
+        GEO_LIST.put(GeologyType.SLATE, new GeoListWrapper(ModBlocks.SLATE_STONE.get(), ModBlocks.SLATE_COBBLES.get(), ModBlocks.SLATE_COBBLESTONE.get(), ModBlocks.SLATE_REGOLITH.get(), ModItems.SLATE_ROCK.get()));
+        GEO_LIST.put(GeologyType.GNEISS, new GeoListWrapper(ModBlocks.GNEISS_STONE.get(), ModBlocks.GNEISS_COBBLES.get(), ModBlocks.GNEISS_COBBLESTONE.get(), ModBlocks.GNEISS_REGOLITH.get(), ModItems.GNEISS_ROCK.get()));
+        GEO_LIST.put(GeologyType.MARBLE, new GeoListWrapper(ModBlocks.MARBLE_STONE.get(), ModBlocks.MARBLE_COBBLES.get(), ModBlocks.MARBLE_COBBLESTONE.get(), ModBlocks.MARBLE_REGOLITH.get(), ModItems.MARBLE_ROCK.get()));
+        GEO_LIST.put(GeologyType.PELITIC_HORNFELS, new GeoListWrapper(ModBlocks.PELITIC_HORNFELS_STONE.get(), ModBlocks.PELITIC_HORNFELS_COBBLES.get(), ModBlocks.PELITIC_HORNFELS_COBBLESTONE.get(), ModBlocks.PELITIC_HORNFELS_REGOLITH.get(), ModItems.PELITIC_HORNFELS_ROCK.get()));
+        GEO_LIST.put(GeologyType.CARBONATE_HORNFELS, new GeoListWrapper(ModBlocks.CARBONATE_HORNFELS_STONE.get(), ModBlocks.CARBONATE_HORNFELS_COBBLES.get(), ModBlocks.CARBONATE_HORNFELS_COBBLESTONE.get(), ModBlocks.CARBONATE_HORNFELS_REGOLITH.get(), ModItems.CARBONATE_HORNFELS_ROCK.get()));
+        GEO_LIST.put(GeologyType.MAFIC_HORNFELS, new GeoListWrapper(ModBlocks.MAFIC_HORNFELS_STONE.get(), ModBlocks.MAFIC_HORNFELS_COBBLES.get(), ModBlocks.MAFIC_HORNFELS_COBBLESTONE.get(), ModBlocks.MAFIC_HORNFELS_REGOLITH.get(), ModItems.MAFIC_HORNFELS_ROCK.get()));
+        GEO_LIST.put(GeologyType.METACONGLOMERATE, new GeoListWrapper(ModBlocks.METACONGLOMERATE_STONE.get(), ModBlocks.METACONGLOMERATE_COBBLES.get(), ModBlocks.METACONGLOMERATE_COBBLESTONE.get(), ModBlocks.METACONGLOMERATE_REGOLITH.get(), ModItems.METACONGLOMERATE_ROCK.get()));
+        GEO_LIST.put(GeologyType.GREISEN, new GeoListWrapper(ModBlocks.GREISEN_STONE.get(), ModBlocks.GREISEN_COBBLES.get(), ModBlocks.GREISEN_COBBLESTONE.get(), ModBlocks.GREISEN_REGOLITH.get(), ModItems.GREISEN_ROCK.get()));
 
         // Stable Detritus
-        GEO_LIST.put(GeologyType.DIRT, new GeoListWrapper(ModBlocks.DIRT_STONE.get(), null, null, null));
-        GEO_LIST.put(GeologyType.COARSE_DIRT, new GeoListWrapper(ModBlocks.COARSE_DIRT_STONE.get(), null, null, null));
-        GEO_LIST.put(GeologyType.CLAY, new GeoListWrapper(ModBlocks.CLAY_STONE.get(), null, null, null));
+        GEO_LIST.put(GeologyType.DIRT, new GeoListWrapper(ModBlocks.DIRT_STONE.get(), null, null, null, null));
+        GEO_LIST.put(GeologyType.COARSE_DIRT, new GeoListWrapper(ModBlocks.COARSE_DIRT_STONE.get(), null, null, null, null));
+        GEO_LIST.put(GeologyType.CLAY, new GeoListWrapper(ModBlocks.CLAY_STONE.get(), null, null, null, null));
 
         // Falling Detritus
-        GEO_LIST.put(GeologyType.SAND, new GeoListWrapper(ModBlocks.SAND_STONE.get(), null, null, null));
-        GEO_LIST.put(GeologyType.RED_SAND, new GeoListWrapper(ModBlocks.RED_SAND_STONE.get(), null, null, null));
-        GEO_LIST.put(GeologyType.GRAVEL, new GeoListWrapper(ModBlocks.GRAVEL_STONE.get(), null, null, null));
+        GEO_LIST.put(GeologyType.SAND, new GeoListWrapper(ModBlocks.SAND_STONE.get(), null, null, null, null));
+        GEO_LIST.put(GeologyType.RED_SAND, new GeoListWrapper(ModBlocks.RED_SAND_STONE.get(), null, null, null, null));
+        GEO_LIST.put(GeologyType.GRAVEL, new GeoListWrapper(ModBlocks.GRAVEL_STONE.get(), null, null, null, null));
     }
 
 

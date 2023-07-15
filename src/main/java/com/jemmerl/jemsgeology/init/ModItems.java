@@ -66,6 +66,7 @@ public class ModItems {
     public static final RegistryObject<Item> METACONGLOMERATE_ROCK = registerRockItem(GeologyType.METACONGLOMERATE);
     public static final RegistryObject<Item> GREISEN_ROCK = registerRockItem(GeologyType.GREISEN);
 
+    public static final RegistryObject<Item> MORTAR = ITEMS.register("lime_mortar", () -> new Item(new Item.Properties().group(ModItemGroups.JEMGEO_ORES_GROUP)));
 
     //////////
     // Ores //
@@ -227,15 +228,15 @@ public class ModItems {
 
     // Rock Item Creation and Registration
     private static RegistryObject<Item> registerRockItem(GeologyType geologyType) {
-        return ITEMS.register((geologyType.getName() + "_rock"), () -> new Item(new Item.Properties().group(ModItemGroups.RKU_STONE_GROUP)));
+        return ITEMS.register((geologyType.getName() + "_rock"), () -> new Item(new Item.Properties().group(ModItemGroups.JEMGEO_COBBLE_GROUP)));
     }
 
     private static RegistryObject<Item> registerOreItem(OreType oreType) {
-        return ITEMS.register((oreType.getName() + "_ore"), () -> new Item(new Item.Properties().group(ModItemGroups.RKU_ORES_GROUP)));
+        return ITEMS.register((oreType.getName() + "_ore"), () -> new Item(new Item.Properties().group(ModItemGroups.JEMGEO_ORES_GROUP)));
     }
 
     private static RegistryObject<Item> registerPoorOreItem(OreType oreType) {
-        return ITEMS.register(("poor_" + oreType.getName() + "_ore"), () -> new Item(new Item.Properties().group(ModItemGroups.RKU_ORES_GROUP)));
+        return ITEMS.register(("poor_" + oreType.getName() + "_ore"), () -> new Item(new Item.Properties().group(ModItemGroups.JEMGEO_ORES_GROUP)));
     }
 
     // Item registry method
