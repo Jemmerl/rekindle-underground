@@ -11,8 +11,10 @@ import net.minecraftforge.common.Tags;
 public class ModTags {
     public static class Blocks {
 
-        public static final Tags.IOptionalNamedTag<Block> RK_STONE_ORE_BLOCKS = createTag("jemsgeo_stone");
+        public static final Tags.IOptionalNamedTag<Block> JEMSGEO_STONEORE = createTag("jemsgeo_stone");
         public static final Tags.IOptionalNamedTag<Block> DETRITUS = createTag("detritus");
+        public static final Tags.IOptionalNamedTag<Block> COBBLES_CAN_BREAK = createTag("jemsgeo_cobbles_break"); // Cobbles cannot be supported by...
+        public static final Tags.IOptionalNamedTag<Block> COBBLES_CAN_SMASH = createTag("jemsgeo_cobbles_smash"); // Cobbles cannot be STOPPED by...
 
         private static Tags.IOptionalNamedTag<Block> createTag(String name) {
             return BlockTags.createOptional(new ResourceLocation(JemsGeology.MOD_ID, name));

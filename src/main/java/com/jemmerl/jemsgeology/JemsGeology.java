@@ -55,6 +55,7 @@ public class JemsGeology
 
         ModItems.register(eventBus);
         ModBlocks.register(eventBus);
+        ModEntities.register(eventBus);
         ModFeaturePlacements.register(eventBus);
         ModFeatures.register(eventBus);
 
