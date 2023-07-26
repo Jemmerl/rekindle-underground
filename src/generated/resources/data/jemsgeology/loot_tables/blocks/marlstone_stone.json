@@ -2,7 +2,7 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "name": "none",
+      "name": "flint",
       "rolls": {
         "n": 3,
         "p": 0.65,
@@ -10,8 +10,23 @@
       },
       "entries": [
         {
-          "type": "minecraft:item",
-          "name": "jemsgeology:marlstone_rock"
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:random_chance",
+                  "chance": 0.06
+                }
+              ],
+              "name": "minecraft:flint"
+            },
+            {
+              "type": "minecraft:item",
+              "name": "jemsgeology:marlstone_rock"
+            }
+          ]
         }
       ]
     },

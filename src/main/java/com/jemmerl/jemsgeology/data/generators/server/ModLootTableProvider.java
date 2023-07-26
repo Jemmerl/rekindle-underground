@@ -14,6 +14,7 @@ import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.SnowBlock;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.LootTableProvider;
 import net.minecraft.data.loot.BlockLootTables;
@@ -22,7 +23,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.loot.*;
 import net.minecraft.loot.conditions.BlockStateProperty;
+import net.minecraft.loot.conditions.EntityHasProperty;
+import net.minecraft.loot.conditions.RandomChance;
 import net.minecraft.loot.conditions.TableBonus;
+import net.minecraft.loot.functions.SetCount;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
 
@@ -64,10 +68,9 @@ public class ModLootTableProvider extends LootTableProvider {
 
             for (Block block : ModBlockLists.ALL_STONES) {
                 GeologyType geologyType = ((StoneOreBlock) block).getGeologyType();
-                GeoListWrapper geoList = ModBlockLists.GEO_LIST.get(geologyType);
                 if (geologyType.hasCobble()) {
                     // Register stone -> rock drop
-                    LootTable.Builder lootTable = buildStoneLootTable(geoList);
+                    LootTable.Builder lootTable = buildStoneLootTable(geologyType);
                     registerLootTable(block, lootTable);
                 } else {
                     // TODO TEMP
@@ -77,9 +80,8 @@ public class ModLootTableProvider extends LootTableProvider {
 
             for (Block block : ModBlockLists.ALL_REGOLITH) {
                 GeologyType geologyType = ((StoneOreBlock) block).getGeologyType();
-                GeoListWrapper geoList = ModBlockLists.GEO_LIST.get(geologyType);
 
-                LootTable.Builder lootTable = buildRegolithLootTable(geoList);
+                LootTable.Builder lootTable = buildRegolithLootTable(geologyType);
                 registerLootTable(block, lootTable);
             }
 
@@ -140,15 +142,28 @@ public class ModLootTableProvider extends LootTableProvider {
 
 
         // Creates and fills a loot table with pools for each OreType for stone blocks
-        private static LootTable.Builder buildStoneLootTable(GeoListWrapper geoList) {
+        private static LootTable.Builder buildStoneLootTable(GeologyType geologyType) {
+            GeoListWrapper geoList = ModBlockLists.GEO_LIST.get(geologyType);
             LootTable.Builder lootTableBuilder = new LootTable.Builder();
 
             // Loot pool for normal stone, "NONE" ore
-            lootTableBuilder.addLootPool(LootPool.builder()
-                    .name(OreType.NONE.getString())
-                    .rolls(BinomialRange.of(3, 0.65f))
-                    .addEntry(ItemLootEntry.builder(geoList.getRockItem()))
-            );
+            if (ModBlockLists.FLINT_BEARING.containsKey(geologyType)) {
+                // Alternative loot entry for flint bearing stones
+                lootTableBuilder.addLootPool(LootPool.builder()
+                        .name("flint")
+                        .rolls(BinomialRange.of(3, 0.65f))
+                        .addEntry(ItemLootEntry.builder(Items.FLINT.asItem())
+                                        .acceptCondition(RandomChance.builder(ModBlockLists.FLINT_BEARING.get(geologyType) / 100f))
+                                .alternatively(ItemLootEntry.builder(geoList.getRockItem())))
+                );
+            } else {
+                // No flint drop
+                lootTableBuilder.addLootPool(LootPool.builder()
+                        .name(OreType.NONE.getString())
+                        .rolls(BinomialRange.of(3, 0.65f))
+                        .addEntry(ItemLootEntry.builder(geoList.getRockItem()))
+                );
+            }
 
             // Add ore loot pools
             fillOreTables(lootTableBuilder, geoList.getStoneOreBlock());
@@ -157,15 +172,27 @@ public class ModLootTableProvider extends LootTableProvider {
         }
 
         // Creates and fills a loot table with pools for each OreType for regolith blocks
-        private static LootTable.Builder buildRegolithLootTable(GeoListWrapper geoList) {
+        private static LootTable.Builder buildRegolithLootTable(GeologyType geologyType) {
+            GeoListWrapper geoList = ModBlockLists.GEO_LIST.get(geologyType);
             Block regolithBlock = geoList.getRegolithBlock();
             LootTable.Builder lootTableBuilder = new LootTable.Builder();
 
             // Loot pool for normal regolith, "NONE" ore
-            lootTableBuilder.addLootPool(LootPool.builder()
-                    .name(OreType.NONE.getString())
-                    .addEntry(ItemLootEntry.builder(regolithBlock.asItem()))
-            );
+            if (ModBlockLists.FLINT_BEARING.containsKey(geologyType)) {
+                // Additional loot pool for flint bearing regoliths (additional 2% flint drop rate for regoliths)
+                lootTableBuilder.addLootPool(LootPool.builder()
+                        .name("flint")
+                        .addEntry(ItemLootEntry.builder(Items.FLINT.asItem())
+                                .acceptCondition(RandomChance.builder((ModBlockLists.FLINT_BEARING.get(geologyType) + 2) / 100f))
+                                .alternatively(ItemLootEntry.builder(regolithBlock.asItem())))
+                );
+            } else {
+                // No flint drop
+                lootTableBuilder.addLootPool(LootPool.builder()
+                        .name(OreType.NONE.getString())
+                        .addEntry(ItemLootEntry.builder(regolithBlock.asItem()))
+                );
+            }
 
             // Add ore loot pools
             fillOreTables(lootTableBuilder, regolithBlock);
@@ -195,10 +222,11 @@ public class ModLootTableProvider extends LootTableProvider {
             LootTable.Builder lootTableBuilder = new LootTable.Builder();
 
             // Gravel or flint loot pool for itself and "NONE" ore
+            // Flint drop rates are VERY nerfed. Might be removed if vanilla gravel is removed
             lootTableBuilder.addLootPool(LootPool.builder()
                     .name(OreType.NONE.getString())
                     .addEntry(ItemLootEntry.builder(Items.FLINT)
-                            .acceptCondition(TableBonus.builder(Enchantments.FORTUNE, 0.1F, 0.14285715F, 0.25F, 1.0F))
+                            .acceptCondition(TableBonus.builder(Enchantments.FORTUNE, 0.005F, 0.14285715F, 0.25F, 1.0F))
                             .alternatively(ItemLootEntry.builder(Blocks.GRAVEL)))
             );
 
@@ -228,7 +256,7 @@ public class ModLootTableProvider extends LootTableProvider {
 
 
         // Add filled ore loot tables
-        // TODO make all drop some amount of small ore
+        // TODO make all drop some amount of small ore (<- what does this mean?)
         private static void fillOreTables(LootTable.Builder lootTableBuilder, Block block) {
             for (OreType oreType : EnumSet.complementOf(EnumSet.of(OreType.NONE))) {
                 for (GradeType gradeType : GradeType.values()) {

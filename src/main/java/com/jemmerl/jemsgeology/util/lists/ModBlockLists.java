@@ -422,6 +422,22 @@ public class ModBlockLists {
     }
 
 
+    ///////////////////
+    // FLINT BEARING //
+    ///////////////////
+
+    // Lists with flint drop rates (out of 100) for the respective stones
+    // Regoliths of the same type have a +2% chance to drop flint
+    // Todo needs balancing upon testing
+    public static Map<GeologyType, Integer> FLINT_BEARING = new HashMap<>();
+    static {
+        FLINT_BEARING.put(GeologyType.CHALK, 8);
+        FLINT_BEARING.put(GeologyType.MARLSTONE, 6);
+        FLINT_BEARING.put(GeologyType.LIMESTONE, 3);
+        FLINT_BEARING.put(GeologyType.DOLOSTONE, 1);
+    }
+
+
     ////////////////////
     // MODEL BUILDING //
     ////////////////////
