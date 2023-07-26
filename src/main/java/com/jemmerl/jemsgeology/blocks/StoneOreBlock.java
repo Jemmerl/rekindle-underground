@@ -16,8 +16,8 @@ import net.minecraft.world.World;
 
 public class StoneOreBlock extends Block implements IOreBlock{
 
-    private static final int HARDNESS_DEPTH_FACTOR = JemsGeoConfig.COMMON.hardnessDepthFactor.get() - 1;
-    private static final boolean DET_SCALING = JemsGeoConfig.COMMON.detritusScaling.get();
+    private static final int HARDNESS_DEPTH_FACTOR = JemsGeoConfig.SERVER.hardnessDepthFactor.get() - 1;
+    private static final boolean DET_SCALING = JemsGeoConfig.SERVER.detritusScaling.get();
 
     public static final EnumProperty<OreType> ORE_TYPE = EnumProperty.create("oretype", OreType.class);
     public static final EnumProperty<GradeType> GRADE_TYPE = EnumProperty.create("gradetype", GradeType.class);
@@ -39,8 +39,13 @@ public class StoneOreBlock extends Block implements IOreBlock{
     }
 
     @Override
+    public float getExplosionResistance() {
+        return (this.blastResistance * JemsGeoConfig.SERVER.stoneResistance.get());
+    }
+
+    @Override
     public float getPlayerRelativeBlockHardness(BlockState state, PlayerEntity player, IBlockReader worldIn, BlockPos pos) {
-        float f = state.getBlockHardness(worldIn, pos);
+        float f = state.getBlockHardness(worldIn, pos) * JemsGeoConfig.SERVER.stoneHardness.get();
         if (f == -1.0F) {
             return 0.0F;
         }

@@ -16,8 +16,8 @@ import net.minecraft.world.World;
 
 public class FallingOreBlock extends FallingBlock implements IOreBlock{
 
-    private static final int HARDNESS_DEPTH_FACTOR = JemsGeoConfig.COMMON.hardnessDepthFactor.get() - 1;
-    private static final boolean DET_SCALING = JemsGeoConfig.COMMON.detritusScaling.get();
+    private static final int HARDNESS_DEPTH_FACTOR = JemsGeoConfig.SERVER.hardnessDepthFactor.get() - 1;
+    private static final boolean DET_SCALING = JemsGeoConfig.SERVER.detritusScaling.get();
 
     private final GeologyType geologyType;
     private final StoneGroupType stoneGroupType;
@@ -36,6 +36,7 @@ public class FallingOreBlock extends FallingBlock implements IOreBlock{
         super.fillStateContainer(builder);
     }
 
+    // Todo different than StoneOreBlock, in that there is no hardness multiplier
     @Override
     public float getPlayerRelativeBlockHardness(BlockState state, PlayerEntity player, IBlockReader worldIn, BlockPos pos) {
         float f = state.getBlockHardness(worldIn, pos);

@@ -10,17 +10,17 @@ public enum GeologyType {
     CHALK("chalk", StoneGroupType.SEDIMENTARY, true, 0, 0),
     LIMESTONE("limestone", StoneGroupType.SEDIMENTARY, true, 1, 1),
     DOLOSTONE("dolostone", StoneGroupType.SEDIMENTARY, true, 2, 2),
-    MARLSTONE("marlstone", StoneGroupType.SEDIMENTARY, true, 2, 2), //TODO COBBLE
+    MARLSTONE("marlstone", StoneGroupType.SEDIMENTARY, true, 2, 2),
     SHALE("shale", StoneGroupType.SEDIMENTARY, true, 2, 2),
-    LIMY_SHALE("limy_shale", StoneGroupType.SEDIMENTARY, true, 2, 2), //TODO COBBLE
+    LIMY_SHALE("limy_shale", StoneGroupType.SEDIMENTARY, true, 2, 2),
     SANDSTONE("sandstone", StoneGroupType.SEDIMENTARY, true, 2, 2),
     RED_SANDSTONE("red_sandstone", StoneGroupType.SEDIMENTARY, true, 2, 2),
-    ARKOSE("arkose", StoneGroupType.SEDIMENTARY, true, 2, 2), //TODO COBBLE
+    ARKOSE("arkose", StoneGroupType.SEDIMENTARY, true, 2, 2),
     GREYWACKE("greywacke", StoneGroupType.SEDIMENTARY, true, 2, 2),
     MUDSTONE("mudstone", StoneGroupType.SEDIMENTARY, true, 1, 1),
-    CLAYSTONE("claystone", StoneGroupType.SEDIMENTARY, true, 1, 1), //TODO COBBLE
-    SILTSTONE("siltstone", StoneGroupType.SEDIMENTARY, true, 1, 1), //TODO COBBLE
-    CONGLOMERATE("conglomerate", StoneGroupType.SEDIMENTARY, true, 2, 2), //TODO COBBLE
+    CLAYSTONE("claystone", StoneGroupType.SEDIMENTARY, true, 1, 1),
+    SILTSTONE("siltstone", StoneGroupType.SEDIMENTARY, true, 1, 1),
+    CONGLOMERATE("conglomerate", StoneGroupType.SEDIMENTARY, true, 2, 2),
     VEIN_QUARTZ("vein_quartz", StoneGroupType.SEDIMENTARY, true, 4, 4),
 
     // TODO evaporates
@@ -60,11 +60,11 @@ public enum GeologyType {
     SLATE("slate", StoneGroupType.METAMORPHIC, true, 3, 3),
     GNEISS("gneiss", StoneGroupType.METAMORPHIC, true, 4, 4),
     MARBLE("marble", StoneGroupType.METAMORPHIC, true, 3, 3),
-    PELITIC_HORNFELS("pelitic_hornfels", StoneGroupType.METAMORPHIC, true, 3, 3), //TODO COBBLE
-    CARBONATE_HORNFELS("carbonate_hornfels", StoneGroupType.METAMORPHIC, true, 3, 3), //TODO COBBLE
-    MAFIC_HORNFELS("mafic_hornfels", StoneGroupType.METAMORPHIC, true, 3, 3), //TODO COBBLE
-    METACONGLOMERATE("metaconglomerate", StoneGroupType.METAMORPHIC, true, 3, 3), //TODO COBBLE
-    GREISEN("greisen", StoneGroupType.METAMORPHIC, true, 4, 4), //TODO COBBLE
+    PELITIC_HORNFELS("pelitic_hornfels", StoneGroupType.METAMORPHIC, true, 3, 3),
+    CARBONATE_HORNFELS("carbonate_hornfels", StoneGroupType.METAMORPHIC, true, 3, 3),
+    MAFIC_HORNFELS("mafic_hornfels", StoneGroupType.METAMORPHIC, true, 3, 3),
+    METACONGLOMERATE("metaconglomerate", StoneGroupType.METAMORPHIC, true, 3, 3),
+    GREISEN("greisen", StoneGroupType.METAMORPHIC, true, 4, 4),
 
     // Detritus do not really need to be present, but since they can carry ores, they must be to be compatible
     // Stable Detritus
@@ -94,8 +94,8 @@ public enum GeologyType {
     private static class Constants {
         private static final Float[] HARDS = {1f, 1.75f, 2.5f, 3f, 3.5f}; // Relative stone hardnesses
         private static final Float[] RESISTS = {3f, 2.5f, 2f, 1.5f, 1f}; // Relative stone resistances
-        private static final int HARD_MULT = JemsGeoConfig.COMMON.stoneHardness.get(); // Multiplied by rel. hardnesses; Default 20
-        private static final int RESIST_MULT = JemsGeoConfig.COMMON.stoneResistance.get(); // Multiplied by rel. resistances; Default 6
+        //private static final int HARD_MULT = JemsGeoConfig.SERVER.stoneHardness.get(); // Multiplied by rel. hardnesses; Default 20
+        //private static final int RESIST_MULT = JemsGeoConfig.SERVER.stoneResistance.get(); // Multiplied by rel. resistances; Default 6
     }
 
     public String getName() {
@@ -111,12 +111,20 @@ public enum GeologyType {
     }
 
     public float getStoneHardness() {
-        return (GeologyType.Constants.HARDS[this.hardnessIndex] * GeologyType.Constants.HARD_MULT);
+        return (GeologyType.Constants.HARDS[this.hardnessIndex]);
     }
 
     public float getStoneResistance() {
-        return (GeologyType.Constants.RESISTS[this.resistanceIndex] * GeologyType.Constants.RESIST_MULT);
+        return (GeologyType.Constants.RESISTS[this.resistanceIndex]);
     }
+
+//    public float getStoneHardness() {
+//        return (GeologyType.Constants.HARDS[this.hardnessIndex] * GeologyType.Constants.HARD_MULT);
+//    }
+//
+//    public float getStoneResistance() {
+//        return (GeologyType.Constants.RESISTS[this.resistanceIndex] * GeologyType.Constants.RESIST_MULT);
+//    }
 
     public float getCobbleHardness() {
         return ((this.hardnessIndex == 0) ? GeologyType.Constants.HARDS[0] : GeologyType.Constants.HARDS[this.hardnessIndex - 1]);
