@@ -1,9 +1,7 @@
 package com.jemmerl.jemsgeology.init;
 
 import com.jemmerl.jemsgeology.JemsGeology;
-import com.jemmerl.jemsgeology.blocks.FallingCobbleBlock;
-import com.jemmerl.jemsgeology.blocks.FallingOreBlock;
-import com.jemmerl.jemsgeology.blocks.StoneOreBlock;
+import com.jemmerl.jemsgeology.blocks.*;
 import com.jemmerl.jemsgeology.data.enums.GeologyType;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -41,65 +39,65 @@ public class ModBlocks {
     ////////////
 
     // Sedimentary
-    public static final RegistryObject<Block> CHALK_STONE = registerBlock(GeologyType.CHALK.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.CHALK), GeologyType.CHALK), 64, STONE_GROUP);
-    public static final RegistryObject<Block> LIMESTONE_STONE = registerBlock(GeologyType.LIMESTONE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.LIMESTONE), GeologyType.LIMESTONE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> DOLOSTONE_STONE = registerBlock(GeologyType.DOLOSTONE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.DOLOSTONE), GeologyType.DOLOSTONE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> MARLSTONE_STONE = registerBlock(GeologyType.MARLSTONE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.MARLSTONE), GeologyType.MARLSTONE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> SHALE_STONE = registerBlock(GeologyType.SHALE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.SHALE), GeologyType.SHALE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> LIMY_SHALE_STONE = registerBlock(GeologyType.LIMY_SHALE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.LIMY_SHALE), GeologyType.LIMY_SHALE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> SANDSTONE_STONE = registerBlock(GeologyType.SANDSTONE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.SANDSTONE), GeologyType.SANDSTONE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> RED_SANDSTONE_STONE = registerBlock(GeologyType.RED_SANDSTONE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.RED_SANDSTONE), GeologyType.RED_SANDSTONE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> ARKOSE_STONE = registerBlock(GeologyType.ARKOSE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.ARKOSE), GeologyType.ARKOSE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> GREYWACKE_STONE = registerBlock(GeologyType.GREYWACKE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.GREYWACKE), GeologyType.GREYWACKE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> MUDSTONE_STONE = registerBlock(GeologyType.MUDSTONE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.MUDSTONE), GeologyType.MUDSTONE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> CLAYSTONE_STONE = registerBlock(GeologyType.CLAYSTONE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.CLAYSTONE), GeologyType.CLAYSTONE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> SILTSTONE_STONE = registerBlock(GeologyType.SILTSTONE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.SILTSTONE), GeologyType.SILTSTONE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> CONGLOMERATE_STONE = registerBlock(GeologyType.CONGLOMERATE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.CONGLOMERATE), GeologyType.CONGLOMERATE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> VEIN_QUARTZ_STONE = registerBlock(GeologyType.VEIN_QUARTZ.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.VEIN_QUARTZ), GeologyType.VEIN_QUARTZ), 64, STONE_GROUP);
+    public static final RegistryObject<Block> CHALK_STONE = registerBlock(GeologyType.CHALK.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.CHALK), GeologyType.CHALK), 64, STONE_GROUP);
+    public static final RegistryObject<Block> LIMESTONE_STONE = registerBlock(GeologyType.LIMESTONE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.LIMESTONE), GeologyType.LIMESTONE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> DOLOSTONE_STONE = registerBlock(GeologyType.DOLOSTONE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.DOLOSTONE), GeologyType.DOLOSTONE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> MARLSTONE_STONE = registerBlock(GeologyType.MARLSTONE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.MARLSTONE), GeologyType.MARLSTONE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> SHALE_STONE = registerBlock(GeologyType.SHALE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.SHALE), GeologyType.SHALE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> LIMY_SHALE_STONE = registerBlock(GeologyType.LIMY_SHALE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.LIMY_SHALE), GeologyType.LIMY_SHALE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> SANDSTONE_STONE = registerBlock(GeologyType.SANDSTONE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.SANDSTONE), GeologyType.SANDSTONE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> RED_SANDSTONE_STONE = registerBlock(GeologyType.RED_SANDSTONE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.RED_SANDSTONE), GeologyType.RED_SANDSTONE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> ARKOSE_STONE = registerBlock(GeologyType.ARKOSE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.ARKOSE), GeologyType.ARKOSE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> GREYWACKE_STONE = registerBlock(GeologyType.GREYWACKE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.GREYWACKE), GeologyType.GREYWACKE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> MUDSTONE_STONE = registerBlock(GeologyType.MUDSTONE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.MUDSTONE), GeologyType.MUDSTONE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> CLAYSTONE_STONE = registerBlock(GeologyType.CLAYSTONE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.CLAYSTONE), GeologyType.CLAYSTONE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> SILTSTONE_STONE = registerBlock(GeologyType.SILTSTONE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.SILTSTONE), GeologyType.SILTSTONE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> CONGLOMERATE_STONE = registerBlock(GeologyType.CONGLOMERATE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.CONGLOMERATE), GeologyType.CONGLOMERATE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> VEIN_QUARTZ_STONE = registerBlock(GeologyType.VEIN_QUARTZ.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.VEIN_QUARTZ), GeologyType.VEIN_QUARTZ), 64, STONE_GROUP);
 
     // evaporites
-    public static final RegistryObject<Block> ROCKSALT_STONE = registerBlock(GeologyType.ROCKSALT.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.ROCKSALT), GeologyType.ROCKSALT), 64, STONE_GROUP);
-    public static final RegistryObject<Block> ROCKGYPSUM_STONE = registerBlock(GeologyType.ROCKGYPSUM.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.ROCKGYPSUM), GeologyType.ROCKGYPSUM), 64, STONE_GROUP);
-    public static final RegistryObject<Block> BORAX_STONE = registerBlock(GeologyType.BORAX.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.BORAX), GeologyType.BORAX), 64, STONE_GROUP);
-    public static final RegistryObject<Block> KERNITE_STONE = registerBlock(GeologyType.KERNITE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.KERNITE), GeologyType.KERNITE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> ROCKSALT_STONE = registerBlock(GeologyType.ROCKSALT.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.ROCKSALT), GeologyType.ROCKSALT), 64, STONE_GROUP);
+    public static final RegistryObject<Block> ROCKGYPSUM_STONE = registerBlock(GeologyType.ROCKGYPSUM.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.ROCKGYPSUM), GeologyType.ROCKGYPSUM), 64, STONE_GROUP);
+    public static final RegistryObject<Block> BORAX_STONE = registerBlock(GeologyType.BORAX.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.BORAX), GeologyType.BORAX), 64, STONE_GROUP);
+    public static final RegistryObject<Block> KERNITE_STONE = registerBlock(GeologyType.KERNITE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.KERNITE), GeologyType.KERNITE), 64, STONE_GROUP);
 
     // Igneous Extrusive
-    public static final RegistryObject<Block> RHYOLITE_STONE = registerBlock(GeologyType.RHYOLITE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.RHYOLITE), GeologyType.RHYOLITE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> DACITE_STONE = registerBlock(GeologyType.DACITE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.DACITE), GeologyType.DACITE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> ANDESITE_STONE = registerBlock(GeologyType.ANDESITE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.ANDESITE), GeologyType.ANDESITE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> TRACHYTE_STONE = registerBlock(GeologyType.TRACHYTE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.TRACHYTE), GeologyType.TRACHYTE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> BASALT_STONE = registerBlock(GeologyType.BASALT.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.BASALT), GeologyType.BASALT), 64, STONE_GROUP);
-    public static final RegistryObject<Block> PAHOEHOE_STONE = registerBlock(GeologyType.PAHOEHOE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.PAHOEHOE), GeologyType.PAHOEHOE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> SCORIA_STONE = registerBlock(GeologyType.SCORIA.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.SCORIA), GeologyType.SCORIA), 64, STONE_GROUP);
-    public static final RegistryObject<Block> RHYOLITIC_TUFF_STONE = registerBlock(GeologyType.RHYOLITIC_TUFF.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.RHYOLITIC_TUFF), GeologyType.RHYOLITIC_TUFF), 64, STONE_GROUP);
-    public static final RegistryObject<Block> TRACHYTIC_TUFF_STONE = registerBlock(GeologyType.TRACHYTIC_TUFF.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.TRACHYTIC_TUFF), GeologyType.TRACHYTIC_TUFF), 64, STONE_GROUP);
-    public static final RegistryObject<Block> ANDESITIC_TUFF_STONE = registerBlock(GeologyType.ANDESITIC_TUFF.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.ANDESITIC_TUFF), GeologyType.ANDESITIC_TUFF), 64, STONE_GROUP);
-    public static final RegistryObject<Block> BASALTIC_TUFF_STONE = registerBlock(GeologyType.BASALTIC_TUFF.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.BASALTIC_TUFF), GeologyType.BASALTIC_TUFF), 64, STONE_GROUP);
-    public static final RegistryObject<Block> ULTRAMAFIC_TUFF_STONE = registerBlock(GeologyType.ULTRAMAFIC_TUFF.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.ULTRAMAFIC_TUFF), GeologyType.ULTRAMAFIC_TUFF), 64, STONE_GROUP);
+    public static final RegistryObject<Block> RHYOLITE_STONE = registerBlock(GeologyType.RHYOLITE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.RHYOLITE), GeologyType.RHYOLITE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> DACITE_STONE = registerBlock(GeologyType.DACITE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.DACITE), GeologyType.DACITE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> ANDESITE_STONE = registerBlock(GeologyType.ANDESITE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.ANDESITE), GeologyType.ANDESITE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> TRACHYTE_STONE = registerBlock(GeologyType.TRACHYTE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.TRACHYTE), GeologyType.TRACHYTE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> BASALT_STONE = registerBlock(GeologyType.BASALT.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.BASALT), GeologyType.BASALT), 64, STONE_GROUP);
+    public static final RegistryObject<Block> PAHOEHOE_STONE = registerBlock(GeologyType.PAHOEHOE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.PAHOEHOE), GeologyType.PAHOEHOE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> SCORIA_STONE = registerBlock(GeologyType.SCORIA.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.SCORIA), GeologyType.SCORIA), 64, STONE_GROUP);
+    public static final RegistryObject<Block> RHYOLITIC_TUFF_STONE = registerBlock(GeologyType.RHYOLITIC_TUFF.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.RHYOLITIC_TUFF), GeologyType.RHYOLITIC_TUFF), 64, STONE_GROUP);
+    public static final RegistryObject<Block> TRACHYTIC_TUFF_STONE = registerBlock(GeologyType.TRACHYTIC_TUFF.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.TRACHYTIC_TUFF), GeologyType.TRACHYTIC_TUFF), 64, STONE_GROUP);
+    public static final RegistryObject<Block> ANDESITIC_TUFF_STONE = registerBlock(GeologyType.ANDESITIC_TUFF.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.ANDESITIC_TUFF), GeologyType.ANDESITIC_TUFF), 64, STONE_GROUP);
+    public static final RegistryObject<Block> BASALTIC_TUFF_STONE = registerBlock(GeologyType.BASALTIC_TUFF.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.BASALTIC_TUFF), GeologyType.BASALTIC_TUFF), 64, STONE_GROUP);
+    public static final RegistryObject<Block> ULTRAMAFIC_TUFF_STONE = registerBlock(GeologyType.ULTRAMAFIC_TUFF.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.ULTRAMAFIC_TUFF), GeologyType.ULTRAMAFIC_TUFF), 64, STONE_GROUP);
 
     // Igneous Intrusive
-    public static final RegistryObject<Block> DIORITE_STONE = registerBlock(GeologyType.DIORITE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.DIORITE), GeologyType.DIORITE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> GRANODIORITE_STONE = registerBlock(GeologyType.GRANODIORITE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.GRANODIORITE), GeologyType.GRANODIORITE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> GRANITE_STONE = registerBlock(GeologyType.GRANITE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.GRANITE), GeologyType.GRANITE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> SYENITE_STONE = registerBlock(GeologyType.SYENITE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.SYENITE), GeologyType.SYENITE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> GABBRO_STONE = registerBlock(GeologyType.GABBRO.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.GABBRO), GeologyType.GABBRO), 64, STONE_GROUP);
-    public static final RegistryObject<Block> DIABASE_STONE = registerBlock(GeologyType.DIABASE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.DIABASE), GeologyType.DIABASE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> KIMBERLITE_STONE = registerBlock(GeologyType.KIMBERLITE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.KIMBERLITE), GeologyType.KIMBERLITE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> LAMPROITE_STONE = registerBlock(GeologyType.LAMPROITE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.LAMPROITE), GeologyType.LAMPROITE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> DIORITE_STONE = registerBlock(GeologyType.DIORITE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.DIORITE), GeologyType.DIORITE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> GRANODIORITE_STONE = registerBlock(GeologyType.GRANODIORITE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.GRANODIORITE), GeologyType.GRANODIORITE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> GRANITE_STONE = registerBlock(GeologyType.GRANITE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.GRANITE), GeologyType.GRANITE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> SYENITE_STONE = registerBlock(GeologyType.SYENITE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.SYENITE), GeologyType.SYENITE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> GABBRO_STONE = registerBlock(GeologyType.GABBRO.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.GABBRO), GeologyType.GABBRO), 64, STONE_GROUP);
+    public static final RegistryObject<Block> DIABASE_STONE = registerBlock(GeologyType.DIABASE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.DIABASE), GeologyType.DIABASE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> KIMBERLITE_STONE = registerBlock(GeologyType.KIMBERLITE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.KIMBERLITE), GeologyType.KIMBERLITE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> LAMPROITE_STONE = registerBlock(GeologyType.LAMPROITE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.LAMPROITE), GeologyType.LAMPROITE), 64, STONE_GROUP);
 
     // Metamorphic
-    public static final RegistryObject<Block> QUARTZITE_STONE = registerBlock(GeologyType.QUARTZITE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.QUARTZITE), GeologyType.QUARTZITE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> SCHIST_STONE = registerBlock(GeologyType.SCHIST.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.SCHIST), GeologyType.SCHIST), 64, STONE_GROUP);
-    public static final RegistryObject<Block> PHYLLITE_STONE = registerBlock(GeologyType.PHYLLITE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.PHYLLITE), GeologyType.PHYLLITE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> SLATE_STONE = registerBlock(GeologyType.SLATE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.SLATE), GeologyType.SLATE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> GNEISS_STONE = registerBlock(GeologyType.GNEISS.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.GNEISS), GeologyType.GNEISS), 64, STONE_GROUP);
-    public static final RegistryObject<Block> MARBLE_STONE = registerBlock(GeologyType.MARBLE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.MARBLE), GeologyType.MARBLE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> QUARTZITE_STONE = registerBlock(GeologyType.QUARTZITE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.QUARTZITE), GeologyType.QUARTZITE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> SCHIST_STONE = registerBlock(GeologyType.SCHIST.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.SCHIST), GeologyType.SCHIST), 64, STONE_GROUP);
+    public static final RegistryObject<Block> PHYLLITE_STONE = registerBlock(GeologyType.PHYLLITE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.PHYLLITE), GeologyType.PHYLLITE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> SLATE_STONE = registerBlock(GeologyType.SLATE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.SLATE), GeologyType.SLATE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> GNEISS_STONE = registerBlock(GeologyType.GNEISS.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.GNEISS), GeologyType.GNEISS), 64, STONE_GROUP);
+    public static final RegistryObject<Block> MARBLE_STONE = registerBlock(GeologyType.MARBLE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.MARBLE), GeologyType.MARBLE), 64, STONE_GROUP);
 
-    public static final RegistryObject<Block> PELITIC_HORNFELS_STONE = registerBlock(GeologyType.PELITIC_HORNFELS.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.PELITIC_HORNFELS), GeologyType.PELITIC_HORNFELS), 64, STONE_GROUP);
-    public static final RegistryObject<Block> CARBONATE_HORNFELS_STONE = registerBlock(GeologyType.CARBONATE_HORNFELS.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.CARBONATE_HORNFELS), GeologyType.CARBONATE_HORNFELS), 64, STONE_GROUP);
-    public static final RegistryObject<Block> MAFIC_HORNFELS_STONE = registerBlock(GeologyType.MAFIC_HORNFELS.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.MAFIC_HORNFELS), GeologyType.MAFIC_HORNFELS), 64, STONE_GROUP);
-    public static final RegistryObject<Block> METACONGLOMERATE_STONE = registerBlock(GeologyType.METACONGLOMERATE.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.METACONGLOMERATE), GeologyType.METACONGLOMERATE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> GREISEN_STONE = registerBlock(GeologyType.GREISEN.getName() + "_stone", () -> new StoneOreBlock(buildStoneProperties(GeologyType.GREISEN), GeologyType.GREISEN), 64, STONE_GROUP);
+    public static final RegistryObject<Block> PELITIC_HORNFELS_STONE = registerBlock(GeologyType.PELITIC_HORNFELS.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.PELITIC_HORNFELS), GeologyType.PELITIC_HORNFELS), 64, STONE_GROUP);
+    public static final RegistryObject<Block> CARBONATE_HORNFELS_STONE = registerBlock(GeologyType.CARBONATE_HORNFELS.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.CARBONATE_HORNFELS), GeologyType.CARBONATE_HORNFELS), 64, STONE_GROUP);
+    public static final RegistryObject<Block> MAFIC_HORNFELS_STONE = registerBlock(GeologyType.MAFIC_HORNFELS.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.MAFIC_HORNFELS), GeologyType.MAFIC_HORNFELS), 64, STONE_GROUP);
+    public static final RegistryObject<Block> METACONGLOMERATE_STONE = registerBlock(GeologyType.METACONGLOMERATE.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.METACONGLOMERATE), GeologyType.METACONGLOMERATE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> GREISEN_STONE = registerBlock(GeologyType.GREISEN.getName() + "_stone", () -> new StoneGeoBlock(buildStoneProperties(GeologyType.GREISEN), GeologyType.GREISEN), 64, STONE_GROUP);
 
 
     /////////////
@@ -211,52 +209,52 @@ public class ModBlocks {
     //////////////
 
     // Sedimentary
-    public static final RegistryObject<Block> CHALK_REGOLITH = registerBlock(GeologyType.CHALK.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.CHALK), 64, STONE_GROUP);
-    public static final RegistryObject<Block> LIMESTONE_REGOLITH = registerBlock(GeologyType.LIMESTONE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.LIMESTONE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> DOLOSTONE_REGOLITH = registerBlock(GeologyType.DOLOSTONE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.DOLOSTONE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> MARLSTONE_REGOLITH = registerBlock(GeologyType.MARLSTONE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.MARLSTONE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> SHALE_REGOLITH = registerBlock(GeologyType.SHALE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.SHALE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> LIMY_SHALE_REGOLITH = registerBlock(GeologyType.LIMY_SHALE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.LIMY_SHALE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> SANDSTONE_REGOLITH = registerBlock(GeologyType.SANDSTONE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.SANDSTONE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> RED_SANDSTONE_REGOLITH = registerBlock(GeologyType.RED_SANDSTONE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.RED_SANDSTONE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> ARKOSE_REGOLITH = registerBlock(GeologyType.ARKOSE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.ARKOSE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> GREYWACKE_REGOLITH = registerBlock(GeologyType.GREYWACKE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.GREYWACKE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> MUDSTONE_REGOLITH = registerBlock(GeologyType.MUDSTONE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.MUDSTONE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> CLAYSTONE_REGOLITH = registerBlock(GeologyType.CLAYSTONE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.CLAYSTONE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> SILTSTONE_REGOLITH = registerBlock(GeologyType.SILTSTONE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.SILTSTONE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> CONGLOMERATE_REGOLITH = registerBlock(GeologyType.CONGLOMERATE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.CONGLOMERATE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> VEIN_QUARTZ_REGOLITH = registerBlock(GeologyType.VEIN_QUARTZ.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.VEIN_QUARTZ), 64, STONE_GROUP);
+    public static final RegistryObject<Block> CHALK_REGOLITH = registerBlock(GeologyType.CHALK.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.CHALK), 64, STONE_GROUP);
+    public static final RegistryObject<Block> LIMESTONE_REGOLITH = registerBlock(GeologyType.LIMESTONE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.LIMESTONE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> DOLOSTONE_REGOLITH = registerBlock(GeologyType.DOLOSTONE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.DOLOSTONE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> MARLSTONE_REGOLITH = registerBlock(GeologyType.MARLSTONE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.MARLSTONE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> SHALE_REGOLITH = registerBlock(GeologyType.SHALE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.SHALE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> LIMY_SHALE_REGOLITH = registerBlock(GeologyType.LIMY_SHALE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.LIMY_SHALE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> SANDSTONE_REGOLITH = registerBlock(GeologyType.SANDSTONE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.SANDSTONE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> RED_SANDSTONE_REGOLITH = registerBlock(GeologyType.RED_SANDSTONE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.RED_SANDSTONE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> ARKOSE_REGOLITH = registerBlock(GeologyType.ARKOSE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.ARKOSE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> GREYWACKE_REGOLITH = registerBlock(GeologyType.GREYWACKE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.GREYWACKE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> MUDSTONE_REGOLITH = registerBlock(GeologyType.MUDSTONE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.MUDSTONE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> CLAYSTONE_REGOLITH = registerBlock(GeologyType.CLAYSTONE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.CLAYSTONE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> SILTSTONE_REGOLITH = registerBlock(GeologyType.SILTSTONE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.SILTSTONE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> CONGLOMERATE_REGOLITH = registerBlock(GeologyType.CONGLOMERATE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.CONGLOMERATE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> VEIN_QUARTZ_REGOLITH = registerBlock(GeologyType.VEIN_QUARTZ.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.VEIN_QUARTZ), 64, STONE_GROUP);
 
     // Igneous Extrusive
-    public static final RegistryObject<Block> RHYOLITE_REGOLITH = registerBlock(GeologyType.RHYOLITE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.RHYOLITE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> DACITE_REGOLITH = registerBlock(GeologyType.DACITE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.DACITE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> ANDESITE_REGOLITH = registerBlock(GeologyType.ANDESITE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.ANDESITE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> TRACHYTE_REGOLITH = registerBlock(GeologyType.TRACHYTE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.TRACHYTE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> BASALT_REGOLITH = registerBlock(GeologyType.BASALT.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.BASALT), 64, STONE_GROUP);
-    public static final RegistryObject<Block> SCORIA_REGOLITH = registerBlock(GeologyType.SCORIA.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.SCORIA), 64, STONE_GROUP);
+    public static final RegistryObject<Block> RHYOLITE_REGOLITH = registerBlock(GeologyType.RHYOLITE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.RHYOLITE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> DACITE_REGOLITH = registerBlock(GeologyType.DACITE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.DACITE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> ANDESITE_REGOLITH = registerBlock(GeologyType.ANDESITE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.ANDESITE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> TRACHYTE_REGOLITH = registerBlock(GeologyType.TRACHYTE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.TRACHYTE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> BASALT_REGOLITH = registerBlock(GeologyType.BASALT.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.BASALT), 64, STONE_GROUP);
+    public static final RegistryObject<Block> SCORIA_REGOLITH = registerBlock(GeologyType.SCORIA.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.SCORIA), 64, STONE_GROUP);
 
     // Igneous Intrusive
-    public static final RegistryObject<Block> DIORITE_REGOLITH = registerBlock(GeologyType.DIORITE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.DIORITE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> GRANODIORITE_REGOLITH = registerBlock(GeologyType.GRANODIORITE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.GRANODIORITE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> GRANITE_REGOLITH = registerBlock(GeologyType.GRANITE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.GRANITE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> SYENITE_REGOLITH = registerBlock(GeologyType.SYENITE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.SYENITE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> GABBRO_REGOLITH = registerBlock(GeologyType.GABBRO.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.GABBRO), 64, STONE_GROUP);
-    public static final RegistryObject<Block> DIABASE_REGOLITH = registerBlock(GeologyType.DIABASE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.DIABASE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> KIMBERLITE_REGOLITH = registerBlock(GeologyType.KIMBERLITE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.KIMBERLITE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> LAMPROITE_REGOLITH = registerBlock(GeologyType.LAMPROITE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.LAMPROITE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> DIORITE_REGOLITH = registerBlock(GeologyType.DIORITE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.DIORITE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> GRANODIORITE_REGOLITH = registerBlock(GeologyType.GRANODIORITE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.GRANODIORITE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> GRANITE_REGOLITH = registerBlock(GeologyType.GRANITE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.GRANITE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> SYENITE_REGOLITH = registerBlock(GeologyType.SYENITE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.SYENITE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> GABBRO_REGOLITH = registerBlock(GeologyType.GABBRO.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.GABBRO), 64, STONE_GROUP);
+    public static final RegistryObject<Block> DIABASE_REGOLITH = registerBlock(GeologyType.DIABASE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.DIABASE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> KIMBERLITE_REGOLITH = registerBlock(GeologyType.KIMBERLITE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.KIMBERLITE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> LAMPROITE_REGOLITH = registerBlock(GeologyType.LAMPROITE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.LAMPROITE), 64, STONE_GROUP);
 
     // Metamorphic
-    public static final RegistryObject<Block> QUARTZITE_REGOLITH = registerBlock(GeologyType.QUARTZITE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.QUARTZITE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> SCHIST_REGOLITH = registerBlock(GeologyType.SCHIST.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.SCHIST), 64, STONE_GROUP);
-    public static final RegistryObject<Block> PHYLLITE_REGOLITH = registerBlock(GeologyType.PHYLLITE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.PHYLLITE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> SLATE_REGOLITH = registerBlock(GeologyType.SLATE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.SLATE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> GNEISS_REGOLITH = registerBlock(GeologyType.GNEISS.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.GNEISS), 64, STONE_GROUP);
-    public static final RegistryObject<Block> MARBLE_REGOLITH = registerBlock(GeologyType.MARBLE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.MARBLE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> PELITIC_HORNFELS_REGOLITH = registerBlock(GeologyType.PELITIC_HORNFELS.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.PELITIC_HORNFELS), 64, STONE_GROUP);
-    public static final RegistryObject<Block> CARBONATE_HORNFELS_REGOLITH = registerBlock(GeologyType.CARBONATE_HORNFELS.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.CARBONATE_HORNFELS), 64, STONE_GROUP);
-    public static final RegistryObject<Block> MAFIC_HORNFELS_REGOLITH = registerBlock(GeologyType.MAFIC_HORNFELS.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.MAFIC_HORNFELS), 64, STONE_GROUP);
-    public static final RegistryObject<Block> METACONGLOMERATE_REGOLITH = registerBlock(GeologyType.METACONGLOMERATE.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.METACONGLOMERATE), 64, STONE_GROUP);
-    public static final RegistryObject<Block> GREISEN_REGOLITH = registerBlock(GeologyType.GREISEN.getName() + "_regolith", () -> new StoneOreBlock(REGOLITH_PROP, GeologyType.GREISEN), 64, STONE_GROUP);
+    public static final RegistryObject<Block> QUARTZITE_REGOLITH = registerBlock(GeologyType.QUARTZITE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.QUARTZITE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> SCHIST_REGOLITH = registerBlock(GeologyType.SCHIST.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.SCHIST), 64, STONE_GROUP);
+    public static final RegistryObject<Block> PHYLLITE_REGOLITH = registerBlock(GeologyType.PHYLLITE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.PHYLLITE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> SLATE_REGOLITH = registerBlock(GeologyType.SLATE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.SLATE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> GNEISS_REGOLITH = registerBlock(GeologyType.GNEISS.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.GNEISS), 64, STONE_GROUP);
+    public static final RegistryObject<Block> MARBLE_REGOLITH = registerBlock(GeologyType.MARBLE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.MARBLE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> PELITIC_HORNFELS_REGOLITH = registerBlock(GeologyType.PELITIC_HORNFELS.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.PELITIC_HORNFELS), 64, STONE_GROUP);
+    public static final RegistryObject<Block> CARBONATE_HORNFELS_REGOLITH = registerBlock(GeologyType.CARBONATE_HORNFELS.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.CARBONATE_HORNFELS), 64, STONE_GROUP);
+    public static final RegistryObject<Block> MAFIC_HORNFELS_REGOLITH = registerBlock(GeologyType.MAFIC_HORNFELS.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.MAFIC_HORNFELS), 64, STONE_GROUP);
+    public static final RegistryObject<Block> METACONGLOMERATE_REGOLITH = registerBlock(GeologyType.METACONGLOMERATE.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.METACONGLOMERATE), 64, STONE_GROUP);
+    public static final RegistryObject<Block> GREISEN_REGOLITH = registerBlock(GeologyType.GREISEN.getName() + "_regolith", () -> new RegolithGeoBlock(REGOLITH_PROP, GeologyType.GREISEN), 64, STONE_GROUP);
 
 
     //////////////
@@ -265,28 +263,28 @@ public class ModBlocks {
 
     // Stable Detritus
     public static final RegistryObject<Block> DIRT_STONE = registerBlock(GeologyType.DIRT.getName() + "_stone",
-            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.EARTH).harvestLevel(0).harvestTool(ToolType.SHOVEL).sound(SoundType.GROUND)
+            () -> new BaseGeoBlock(AbstractBlock.Properties.create(Material.EARTH).harvestLevel(0).harvestTool(ToolType.SHOVEL).sound(SoundType.GROUND)
             .hardnessAndResistance(0.5f), GeologyType.DIRT), 64, STONE_GROUP);
 
     public static final RegistryObject<Block> COARSE_DIRT_STONE = registerBlock(GeologyType.COARSE_DIRT.getName() + "_stone",
-            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.EARTH).harvestLevel(0).harvestTool(ToolType.SHOVEL).sound(SoundType.GROUND)
+            () -> new BaseGeoBlock(AbstractBlock.Properties.create(Material.EARTH).harvestLevel(0).harvestTool(ToolType.SHOVEL).sound(SoundType.GROUND)
                     .hardnessAndResistance(0.5f), GeologyType.COARSE_DIRT), 64, STONE_GROUP);
 
     public static final RegistryObject<Block> CLAY_STONE = registerBlock(GeologyType.CLAY.getName() + "_stone",
-            () -> new StoneOreBlock(AbstractBlock.Properties.create(Material.CLAY).harvestLevel(0).harvestTool(ToolType.SHOVEL).sound(SoundType.GROUND)
+            () -> new BaseGeoBlock(AbstractBlock.Properties.create(Material.CLAY).harvestLevel(0).harvestTool(ToolType.SHOVEL).sound(SoundType.GROUND)
                     .hardnessAndResistance(0.6f), GeologyType.CLAY), 64, STONE_GROUP);
 
     // Falling Detritus
     public static final RegistryObject<Block> SAND_STONE = registerBlock(GeologyType.SAND.getName() + "_stone",
-            () -> new FallingOreBlock(AbstractBlock.Properties.create(Material.SAND).harvestLevel(0).harvestTool(ToolType.SHOVEL).sound(SoundType.SAND)
+            () -> new FallingGeoBlock(AbstractBlock.Properties.create(Material.SAND).harvestLevel(0).harvestTool(ToolType.SHOVEL).sound(SoundType.SAND)
             .hardnessAndResistance(0.5f), GeologyType.SAND), 64, STONE_GROUP);
 
     public static final RegistryObject<Block> RED_SAND_STONE = registerBlock(GeologyType.RED_SAND.getName() + "_stone",
-            () -> new FallingOreBlock(AbstractBlock.Properties.create(Material.SAND).harvestLevel(0).harvestTool(ToolType.SHOVEL).sound(SoundType.SAND)
+            () -> new FallingGeoBlock(AbstractBlock.Properties.create(Material.SAND).harvestLevel(0).harvestTool(ToolType.SHOVEL).sound(SoundType.SAND)
                     .hardnessAndResistance(0.5f), GeologyType.RED_SAND), 64, STONE_GROUP);
 
     public static final RegistryObject<Block> GRAVEL_STONE = registerBlock(GeologyType.GRAVEL.getName() + "_stone",
-            () -> new FallingOreBlock(AbstractBlock.Properties.create(Material.SAND).harvestLevel(0).harvestTool(ToolType.SHOVEL).sound(SoundType.GROUND)
+            () -> new FallingGeoBlock(AbstractBlock.Properties.create(Material.SAND).harvestLevel(0).harvestTool(ToolType.SHOVEL).sound(SoundType.GROUND)
                     .hardnessAndResistance(0.6f), GeologyType.GRAVEL), 64, STONE_GROUP);
 
 

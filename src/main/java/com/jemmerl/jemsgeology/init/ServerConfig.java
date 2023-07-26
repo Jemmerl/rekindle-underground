@@ -9,7 +9,6 @@ public class ServerConfig {
         private static final int HARDNESS_DEPTH_FACTOR = 3; // 1 - 10 scale; 1 is no change by depth
         private static final int STONE_HARDNESS = 20; // Multiply relative stone hardnesses
         private static final int STONE_RESISTANCE = 6; // Multiply relative stone resistances
-        private static final boolean DET_SCALING = false; // Apply hardness depth scaling to detritus blocks
 
         private static final int REGION_SIZE = 512; // Rough average, in chunks (OG IS 128)
         private static final double REGIONAL_VARIATION = 0.50; // 0.00 - 1.00 scale
@@ -66,7 +65,6 @@ public class ServerConfig {
         public final ForgeConfigSpec.ConfigValue<Integer> hardnessDepthFactor;
         public final ForgeConfigSpec.ConfigValue<Integer> stoneHardness;
         public final ForgeConfigSpec.ConfigValue<Integer> stoneResistance;
-        public final ForgeConfigSpec.ConfigValue<Boolean> detritusScaling;
 
         public final ForgeConfigSpec.ConfigValue<Integer> regionSize;
         public final ForgeConfigSpec.ConfigValue<Double> regionVariation;
@@ -122,9 +120,6 @@ public class ServerConfig {
             this.hardnessDepthFactor = builder.comment("Sets the overall hardness scaling factor of stone from y = 50 to y = 0; Recommended Default is 3")
                     .worldRestart()
                     .defineInRange("Hardness Depth Factor", HARDNESS_DEPTH_FACTOR, 1, 10);
-            this.detritusScaling = builder.comment("Toggle detritus depth scaling with other stones; Default is False")
-                    .worldRestart()
-                    .define("Detritus Depth Scaling", DET_SCALING);
             this.stoneHardness = builder.comment("Set the multiplier for relative stone hardnesses; Recommended Default is 20")
                     .worldRestart()
                     .defineInRange("Hardness Multiplier", STONE_HARDNESS, 1, 50);

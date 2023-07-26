@@ -3,8 +3,8 @@ package com.jemmerl.jemsgeology.geology.deposits;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.jemmerl.jemsgeology.JemsGeology;
-import com.jemmerl.jemsgeology.blocks.IOreBlock;
-import com.jemmerl.jemsgeology.blocks.StoneOreBlock;
+import com.jemmerl.jemsgeology.blocks.IGeoBlock;
+import com.jemmerl.jemsgeology.blocks.StoneGeoBlock;
 import com.jemmerl.jemsgeology.data.enums.*;
 import com.jemmerl.jemsgeology.data.enums.ore.GradeType;
 import com.jemmerl.jemsgeology.data.enums.ore.OreType;
@@ -50,7 +50,7 @@ public class DepositUtil {
     // Check if a blockstate is a valid stone for ore generation.
     // If not a StoneOreBlock, then the second condition (which assumes that it is such) will never be reached.
     public static Boolean isValidStone(Block blockIn, ArrayList<GeologyType> validStones) {
-        return ((blockIn instanceof IOreBlock) && validStones.contains(((IOreBlock) blockIn).getGeologyType()));
+        return ((blockIn instanceof IGeoBlock) && validStones.contains(((IGeoBlock) blockIn).getGeologyType()));
         //return (blockIn instanceof IOreBlock); // Debug Tool
     }
 
@@ -87,8 +87,8 @@ public class DepositUtil {
             try {
                 BlockState hostState = stoneStateMap[xIndex][qPos.getY()][zIndex];
                 if (isValidStone(hostState.getBlock(), qDeposit.getValid())) {
-                    stoneStateMap[xIndex][qPos.getY()][zIndex] = hostState.with(StoneOreBlock.ORE_TYPE, qType)
-                            .with(StoneOreBlock.GRADE_TYPE, qGrade);
+                    stoneStateMap[xIndex][qPos.getY()][zIndex] = hostState.with(StoneGeoBlock.ORE_TYPE, qType)
+                            .with(StoneGeoBlock.GRADE_TYPE, qGrade);
                     return true;
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -119,7 +119,7 @@ public class DepositUtil {
                 state = UtilMethods.convertVanillaToDetritus(state); // Convert vanilla detritus to respective OreBlocks for comparison
 
                 if (isValidStone(state.getBlock(), qDeposit.getValid())) {
-                    if (!level.setBlockState(qPos, state.with(StoneOreBlock.ORE_TYPE, qType).with(StoneOreBlock.GRADE_TYPE, qGrade), 2 | 16)) {
+                    if (!level.setBlockState(qPos, state.with(StoneGeoBlock.ORE_TYPE, qType).with(StoneGeoBlock.GRADE_TYPE, qGrade), 2 | 16)) {
 
                         // Debug
                         if (JemsGeoConfig.SERVER.debug_block_enqueuer.get()){

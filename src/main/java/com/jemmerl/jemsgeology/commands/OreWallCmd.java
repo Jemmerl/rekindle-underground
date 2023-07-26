@@ -1,6 +1,6 @@
 package com.jemmerl.jemsgeology.commands;
 
-import com.jemmerl.jemsgeology.blocks.StoneOreBlock;
+import com.jemmerl.jemsgeology.blocks.StoneGeoBlock;
 import com.jemmerl.jemsgeology.data.enums.ore.OreType;
 import com.jemmerl.jemsgeology.util.lists.ModBlockLists;
 import com.mojang.brigadier.CommandDispatcher;
@@ -52,7 +52,7 @@ public class OreWallCmd {
 
             TileEntity tileentity = serverworld.getTileEntity(pos.up(y).north(x));
             IClearable.clearObj(tileentity);
-            if (!serverworld.setBlockState(pos.up(y).north(x), state.with(StoneOreBlock.ORE_TYPE, oreType), 2)) {
+            if (!serverworld.setBlockState(pos.up(y).north(x), state.with(StoneGeoBlock.ORE_TYPE, oreType), 2)) {
                 throw new SimpleCommandExceptionType(new StringTextComponent("Ore-wall placement failed!")).create();
             }
 

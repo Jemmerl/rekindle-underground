@@ -20,6 +20,7 @@ public class FallingCobbleBlock extends FallingBlock {
 
     private final GeologyType geologyType;
     private final StoneGroupType stoneGroupType;
+
     public FallingCobbleBlock(Properties properties, GeologyType geologyType) {
         super(properties);
         this.geologyType = geologyType;

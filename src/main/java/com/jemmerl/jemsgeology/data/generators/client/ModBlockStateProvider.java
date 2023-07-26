@@ -1,6 +1,6 @@
 package com.jemmerl.jemsgeology.data.generators.client;
 
-import com.jemmerl.jemsgeology.blocks.StoneOreBlock;
+import com.jemmerl.jemsgeology.blocks.StoneGeoBlock;
 import com.jemmerl.jemsgeology.util.lists.ModBlockLists;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
@@ -28,8 +28,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
 //            blockPath = block.getRegistryName().getPath();
 //            final String tempFinalBlockPath = blockPath;
             getVariantBuilder(block).forAllStates(state -> {
-                String oreStateName = state.get(StoneOreBlock.ORE_TYPE).name().toLowerCase(Locale.ROOT);
-                String gradeStateName = state.get(StoneOreBlock.GRADE_TYPE).name().toLowerCase(Locale.ROOT);
+                String oreStateName = state.get(StoneGeoBlock.ORE_TYPE).name().toLowerCase(Locale.ROOT);
+                String gradeStateName = state.get(StoneGeoBlock.GRADE_TYPE).name().toLowerCase(Locale.ROOT);
 
                 return ConfiguredModel.builder()
                         .modelFile(buildModelFile(block, oreStateName, gradeStateName))
@@ -43,8 +43,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
 //            blockPath = block.getRegistryName().getPath();
 //            final String tempFinalBlockPath = blockPath;
             getVariantBuilder(block).forAllStates(state -> {
-                String oreStateName = state.get(StoneOreBlock.ORE_TYPE).name().toLowerCase(Locale.ROOT);
-                String gradeStateName = state.get(StoneOreBlock.GRADE_TYPE).name().toLowerCase(Locale.ROOT);
+                String oreStateName = state.get(StoneGeoBlock.ORE_TYPE).name().toLowerCase(Locale.ROOT);
+                String gradeStateName = state.get(StoneGeoBlock.GRADE_TYPE).name().toLowerCase(Locale.ROOT);
 
                 return ConfiguredModel.builder()
                         .modelFile(buildModelFile(block, oreStateName, gradeStateName))
@@ -59,8 +59,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
 //            final String tempFinalBlockPath = blockPath;
 //            final Block tempFinalBlock = block;
             getVariantBuilder(block).forAllStates(state -> {
-                String oreStateName = state.get(StoneOreBlock.ORE_TYPE).name().toLowerCase(Locale.ROOT);
-                String gradeStateName = state.get(StoneOreBlock.GRADE_TYPE).name().toLowerCase(Locale.ROOT);
+                String oreStateName = state.get(StoneGeoBlock.ORE_TYPE).name().toLowerCase(Locale.ROOT);
+                String gradeStateName = state.get(StoneGeoBlock.GRADE_TYPE).name().toLowerCase(Locale.ROOT);
 
                 return ConfiguredModel.builder()
                         .modelFile(buildModelFile(block, oreStateName, gradeStateName))

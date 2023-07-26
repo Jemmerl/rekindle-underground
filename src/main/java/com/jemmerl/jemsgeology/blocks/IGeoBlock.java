@@ -4,10 +4,14 @@ import com.jemmerl.jemsgeology.data.enums.GeologyType;
 import com.jemmerl.jemsgeology.data.enums.ore.GradeType;
 import com.jemmerl.jemsgeology.data.enums.ore.OreType;
 import com.jemmerl.jemsgeology.data.enums.StoneGroupType;
+import net.minecraft.state.EnumProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public interface IOreBlock {
+public interface IGeoBlock {
+
+    EnumProperty<OreType> ORE_TYPE = EnumProperty.create("oretype", OreType.class);
+    EnumProperty<GradeType> GRADE_TYPE = EnumProperty.create("gradetype", GradeType.class);
 
     // Return ore state of block
     OreType getOreType(World world, BlockPos pos);

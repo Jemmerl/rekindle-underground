@@ -2,7 +2,7 @@ package com.jemmerl.jemsgeology.data.generators.server;
 
 import com.google.common.collect.ImmutableList;
 import com.jemmerl.jemsgeology.blocks.FallingCobbleBlock;
-import com.jemmerl.jemsgeology.blocks.StoneOreBlock;
+import com.jemmerl.jemsgeology.blocks.StoneGeoBlock;
 import com.jemmerl.jemsgeology.data.enums.GeologyType;
 import com.jemmerl.jemsgeology.init.ModBlocks;
 import com.jemmerl.jemsgeology.data.enums.ore.GradeType;
@@ -14,7 +14,6 @@ import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.SnowBlock;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.LootTableProvider;
 import net.minecraft.data.loot.BlockLootTables;
@@ -23,10 +22,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.loot.*;
 import net.minecraft.loot.conditions.BlockStateProperty;
-import net.minecraft.loot.conditions.EntityHasProperty;
 import net.minecraft.loot.conditions.RandomChance;
 import net.minecraft.loot.conditions.TableBonus;
-import net.minecraft.loot.functions.SetCount;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
 
@@ -36,8 +33,8 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-import static com.jemmerl.jemsgeology.blocks.StoneOreBlock.GRADE_TYPE;
-import static com.jemmerl.jemsgeology.blocks.StoneOreBlock.ORE_TYPE;
+import static com.jemmerl.jemsgeology.blocks.StoneGeoBlock.GRADE_TYPE;
+import static com.jemmerl.jemsgeology.blocks.StoneGeoBlock.ORE_TYPE;
 
 public class ModLootTableProvider extends LootTableProvider {
     public ModLootTableProvider(DataGenerator dataGeneratorIn) {
@@ -67,7 +64,7 @@ public class ModLootTableProvider extends LootTableProvider {
             ////////////////////////
 
             for (Block block : ModBlockLists.ALL_STONES) {
-                GeologyType geologyType = ((StoneOreBlock) block).getGeologyType();
+                GeologyType geologyType = ((StoneGeoBlock) block).getGeologyType();
                 if (geologyType.hasCobble()) {
                     // Register stone -> rock drop
                     LootTable.Builder lootTable = buildStoneLootTable(geologyType);
@@ -79,7 +76,7 @@ public class ModLootTableProvider extends LootTableProvider {
             }
 
             for (Block block : ModBlockLists.ALL_REGOLITH) {
-                GeologyType geologyType = ((StoneOreBlock) block).getGeologyType();
+                GeologyType geologyType = ((StoneGeoBlock) block).getGeologyType();
 
                 LootTable.Builder lootTable = buildRegolithLootTable(geologyType);
                 registerLootTable(block, lootTable);

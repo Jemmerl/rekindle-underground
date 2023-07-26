@@ -1,7 +1,7 @@
 package com.jemmerl.jemsgeology.geology;
 
 import com.jemmerl.jemsgeology.JemsGeology;
-import com.jemmerl.jemsgeology.blocks.IOreBlock;
+import com.jemmerl.jemsgeology.blocks.IGeoBlock;
 import com.jemmerl.jemsgeology.data.enums.GeologyType;
 import com.jemmerl.jemsgeology.geology.strata.StoneRegionBuilder;
 import com.jemmerl.jemsgeology.geology.strata.VolcanicRegionBuilder;
@@ -10,7 +10,6 @@ import com.jemmerl.jemsgeology.init.depositinit.DepositRegistrar;
 import com.jemmerl.jemsgeology.geology.deposits.DepositUtil;
 import com.jemmerl.jemsgeology.geology.deposits.IEnqueuedDeposit;
 import com.jemmerl.jemsgeology.util.lists.ModBlockLists;
-import com.jemmerl.jemsgeology.util.noise.GenerationNoise.StrataNoise;
 import com.jemmerl.jemsgeology.world.capability.chunk.ChunkGennedCapability;
 import com.jemmerl.jemsgeology.world.capability.chunk.IChunkGennedCapability;
 import com.jemmerl.jemsgeology.world.capability.deposit.DepositCapability;
@@ -138,7 +137,7 @@ public class StateMapBuilder {
 
                         // might be temporary, may move into new strata gen
                         if (contactMeta) {
-                            GeologyType geoType = ((IOreBlock)(stoneState.getBlock())).getGeologyType();
+                            GeologyType geoType = ((IGeoBlock)(stoneState.getBlock())).getGeologyType();
                             stoneState = ModBlockLists.CONTACT_META_MAP.getOrDefault(geoType, stoneState);
                         }
 

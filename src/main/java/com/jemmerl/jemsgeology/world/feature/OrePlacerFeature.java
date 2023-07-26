@@ -1,7 +1,7 @@
 package com.jemmerl.jemsgeology.world.feature;
 
 import com.jemmerl.jemsgeology.JemsGeology;
-import com.jemmerl.jemsgeology.blocks.StoneOreBlock;
+import com.jemmerl.jemsgeology.blocks.StoneGeoBlock;
 import com.jemmerl.jemsgeology.data.enums.ore.GradeType;
 import com.jemmerl.jemsgeology.data.enums.ore.OreType;
 import com.jemmerl.jemsgeology.init.JemsGeoConfig;
@@ -94,14 +94,14 @@ public class OrePlacerFeature extends Feature<NoFeatureConfig>{
                         BlockState hostState = UtilMethods.convertVanillaToDetritus(reader.getBlockState(areaPos));
                         if (DepositUtil.isValidStone(hostState.getBlock(), placerDeposit.getValid())) {
                             // Check if the block already has an ore in it; if so, roll to replace
-                            if (hostState.hasProperty(StoneOreBlock.ORE_TYPE) && (hostState.get(StoneOreBlock.ORE_TYPE) != OreType.NONE)) {
+                            if (hostState.hasProperty(StoneGeoBlock.ORE_TYPE) && (hostState.get(StoneGeoBlock.ORE_TYPE) != OreType.NONE)) {
                                 // TODO Currently set to 40% chance to NOT replace
                                 if (rand.nextFloat() > 0.60f) { continue; }
                             }
 
                             reader.setBlockState(areaPos,hostState
-                                    .with(StoneOreBlock.ORE_TYPE, placerDeposit.getOres().nextElt())
-                                    .with(StoneOreBlock.GRADE_TYPE, grade), 2);
+                                    .with(StoneGeoBlock.ORE_TYPE, placerDeposit.getOres().nextElt())
+                                    .with(StoneGeoBlock.GRADE_TYPE, grade), 2);
 
                         }
 

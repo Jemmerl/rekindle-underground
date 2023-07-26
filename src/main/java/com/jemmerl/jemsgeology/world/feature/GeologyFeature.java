@@ -1,8 +1,8 @@
 package com.jemmerl.jemsgeology.world.feature;
 
 import com.jemmerl.jemsgeology.JemsGeology;
-import com.jemmerl.jemsgeology.blocks.IOreBlock;
-import com.jemmerl.jemsgeology.blocks.StoneOreBlock;
+import com.jemmerl.jemsgeology.blocks.IGeoBlock;
+import com.jemmerl.jemsgeology.blocks.StoneGeoBlock;
 import com.jemmerl.jemsgeology.init.NoiseInit;
 import com.jemmerl.jemsgeology.util.UtilMethods;
 import com.jemmerl.jemsgeology.util.lists.ModBlockLists;
@@ -71,7 +71,7 @@ public class GeologyFeature extends Feature<NoFeatureConfig> {
                             //if(gravel)
                             //ifelse{
                             if (y <= (topY - getDepth(mutablePos.toImmutable()))) {
-                                Block regolithBlock = ModBlockLists.GEO_LIST.get(((IOreBlock) stoneState.getBlock()).getGeologyType()).getRegolithBlock();
+                                Block regolithBlock = ModBlockLists.GEO_LIST.get(((IGeoBlock) stoneState.getBlock()).getGeologyType()).getRegolithBlock();
 
                                 BlockState regolith = stoneState;
                                 if (regolithBlock != null) {
@@ -79,8 +79,8 @@ public class GeologyFeature extends Feature<NoFeatureConfig> {
                                 }
 
                                 // Add ore properties from original stone
-                                regolith = regolith.with(StoneOreBlock.GRADE_TYPE, stoneState.get(StoneOreBlock.GRADE_TYPE))
-                                        .with(StoneOreBlock.ORE_TYPE, stoneState.get(StoneOreBlock.ORE_TYPE));
+                                regolith = regolith.with(StoneGeoBlock.GRADE_TYPE, stoneState.get(StoneGeoBlock.GRADE_TYPE))
+                                        .with(StoneGeoBlock.ORE_TYPE, stoneState.get(StoneGeoBlock.ORE_TYPE));
 
                                 chunk.getSections()[y >> 4].setBlockState(x, y & 15, z, regolith, false);
                             }

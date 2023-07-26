@@ -1,8 +1,8 @@
 package com.jemmerl.jemsgeology.world.feature;
 
 import com.jemmerl.jemsgeology.JemsGeology;
-import com.jemmerl.jemsgeology.blocks.IOreBlock;
-import com.jemmerl.jemsgeology.blocks.StoneOreBlock;
+import com.jemmerl.jemsgeology.blocks.IGeoBlock;
+import com.jemmerl.jemsgeology.blocks.StoneGeoBlock;
 import com.jemmerl.jemsgeology.data.enums.GeologyType;
 import com.jemmerl.jemsgeology.data.enums.ore.GradeType;
 import com.jemmerl.jemsgeology.data.enums.ore.OreType;
@@ -297,7 +297,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
         if (!regolithPosList.isEmpty()) {
             boolean emptyProbMap = brecciaProbMap.isEmpty();
             for (BlockPos regolithPos : regolithPosList) {
-                GeologyType regolithType = ((StoneOreBlock) (((!emptyProbMap && (rand.nextFloat() > 0.35f)) ? brecciaProbMap.nextElt() : mainIgnBlock).getBlock())).getGeologyType();
+                GeologyType regolithType = ((StoneGeoBlock) (((!emptyProbMap && (rand.nextFloat() > 0.35f)) ? brecciaProbMap.nextElt() : mainIgnBlock).getBlock())).getGeologyType();
                 BlockState regolithState = (ModBlockLists.GEO_LIST.get(regolithType).getRegolithBlock().getDefaultState());
                 placeDiamondiferousBlock(rand, reader, regolithPos, regolithState, diamondiferous, diamondPercent);
             }
@@ -323,7 +323,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
     // Add a replaced block to the breccia counter map
     private static int updateBrecciaMap(HashMap<BlockState, Integer> brecciaMap, BlockState replaced) {
         Block replacedBlock = replaced.getBlock();
-        if (replacedBlock instanceof IOreBlock && !(((IOreBlock) replacedBlock).getStoneGroupType().equals(StoneGroupType.DETRITUS))) {
+        if (replacedBlock instanceof IGeoBlock && !(((IGeoBlock) replacedBlock).getStoneGroupType().equals(StoneGroupType.DETRITUS))) {
             // If map entry exists, add to it. Else, start a new entry
             if (brecciaMap.containsKey(replaced)) {
                 int prevVal = brecciaMap.get(replaced);
@@ -367,7 +367,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
         }
         //fillState = surfaceConfig.getUnderWaterMaterial(); need to cast to (SurfaceBuilderConfig)
 
-        if (UtilMethods.convertVanillaToDetritus(fillState) instanceof IOreBlock) {
+        if (UtilMethods.convertVanillaToDetritus(fillState) instanceof IGeoBlock) {
             // Places fill block with a fourth of the chance as the normal diatreme to have diamonds (if diamondiferous)
             placeDiamondiferousBlock(rand, reader, currPos, fillState, diamondiferous, (diamondPercent / 4f));
         } else {
@@ -384,8 +384,8 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
 
             // Select grade of individual ore and generate the block with diamond ore
             reader.setBlockState(currPos, blockState
-                    .with(StoneOreBlock.ORE_TYPE, OreType.DIAMOND)
-                    .with(StoneOreBlock.GRADE_TYPE, getDiamondGrade(rand)), 2);
+                    .with(StoneGeoBlock.ORE_TYPE, OreType.DIAMOND)
+                    .with(StoneGeoBlock.GRADE_TYPE, getDiamondGrade(rand)), 2);
         } else {
             reader.setBlockState(currPos, blockState, 2);
         }
