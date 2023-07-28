@@ -10,8 +10,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
+import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nullable;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -24,7 +26,7 @@ import java.util.stream.Collectors;
 public class DepositCapability implements IDepositCapability {
 
     @CapabilityInject(IDepositCapability.class)
-    public static final Capability<IDepositCapability> RKU_DEPOSIT_CAPABILITY = null;
+    public static final Capability<IDepositCapability> JEMGEO_DEPOSIT_CAPABILITY = null;
 
     private final ConcurrentLinkedQueue<ChunkPos> oreGenMap;
     private final ConcurrentHashMap<ChunkPos, ConcurrentLinkedQueue<PendingBlock>> pendingBlocks;
@@ -98,11 +100,17 @@ public class DepositCapability implements IDepositCapability {
         if (compound.contains("PendingBlocks")) {
             CompoundNBT pendingBlocks = compound.getCompound("PendingBlocks");
             pendingBlocks.keySet().forEach(key -> {
-                BlockPos pos = deSerializeBlockPos(key);
-                OreType ore = OreType.valueOf(((CompoundNBT) Objects.requireNonNull(pendingBlocks.get(key))).getString("ore"));
-                GradeType grade = GradeType.valueOf(((CompoundNBT) Objects.requireNonNull(pendingBlocks.get(key))).getString("grade"));
-                String name = ((CompoundNBT) Objects.requireNonNull(pendingBlocks.get(key))).getString("name");
-                this.putPendingOre(pos, ore, grade, name);
+                ListNBT pending = compound.getList(key, 10);
+                //ListNBT listNBT = ((ListNBT) Objects.requireNonNull(pendingBlocks.get(key)));
+                //CompoundNBT compoundNBT = ((CompoundNBT) Objects.requireNonNull(pendingBlocks.get(key)));
+                pending.forEach(e -> {
+                    CompoundNBT compoundNBT = (CompoundNBT) e;
+                    BlockPos pos = deSerializeBlockPos(compoundNBT.getString("pos"));
+                    OreType ore = OreType.valueOf(compoundNBT.getString("ore"));
+                    GradeType grade = GradeType.valueOf(compoundNBT.getString("grade"));
+                    String name = (compoundNBT.getString("name"));
+                    this.putPendingOre(pos, ore, grade, name);
+                });
             });
         }
 
@@ -129,20 +137,22 @@ public class DepositCapability implements IDepositCapability {
     }
 
     private String serializeChunkPos(ChunkPos pos) {
-        return pos.x + "," + pos.z;
+        return pos.x + "_" + pos.z;
     }
 
     private String serializeBlockPos(BlockPos pos) {
-        return pos.getX() + "," + pos.getY() + "," + pos.getZ();
+        return pos.getX() + "_" + pos.getY() + "_" + pos.getZ();
     }
 
     private ChunkPos deSerializeChunkPos(String asStr) {
-        String[] parts = asStr.split(",");
+        String[] parts = asStr.split("_");
         return new ChunkPos(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
     }
 
     private BlockPos deSerializeBlockPos(String asStr) {
-        String[] parts = asStr.split(",");
+        System.out.println(asStr);
+        String[] parts = asStr.split("_");
+        System.out.println(Arrays.toString(parts));
         return new BlockPos(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
     }
 

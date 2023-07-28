@@ -107,7 +107,7 @@ public class JemsGeology
 
         event.addCapability(new ResourceLocation(MOD_ID, "deposit"), new DepositCapProvider());
         event.addCapability(new ResourceLocation(MOD_ID, "generated_chunks"), new ChunkGennedCapProvider());
-        LOGGER.info("RKU capabilities successfully attached for {}", dimName);
+        LOGGER.info("JemsGeology capabilities successfully attached for {}", dimName);
     }
 
     @SubscribeEvent

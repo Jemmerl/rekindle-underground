@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class ChunkGennedCapability implements IChunkGennedCapability {
 
     @CapabilityInject(IChunkGennedCapability.class)
-    public static final Capability<IChunkGennedCapability> RKU_CHUNK_GEN_CAPABILITY = null;
+    public static final Capability<IChunkGennedCapability> JEMGEO_CHUNK_GEN_CAPABILITY = null;
 
     private final ConcurrentLinkedQueue<ChunkPos> generatedChunks;
 

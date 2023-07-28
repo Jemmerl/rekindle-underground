@@ -38,10 +38,10 @@ public class StateMapBuilder {
         this.rand = rand;
         this.stoneStateMap = new BlockState[16][this.chunkReader.getMaxHeight()][16];
 
-        this.depositCapability = this.chunkReader.getSeedReader().getWorld().getCapability(DepositCapability.RKU_DEPOSIT_CAPABILITY)
-                .orElseThrow(() -> new RuntimeException("RKU deposit capability is null..."));
-        this.chunkGennedCapability = this.chunkReader.getSeedReader().getWorld().getCapability(ChunkGennedCapability.RKU_CHUNK_GEN_CAPABILITY)
-                .orElseThrow(() -> new RuntimeException("RKU chunk gen capability is null..."));
+        this.depositCapability = this.chunkReader.getSeedReader().getWorld().getCapability(DepositCapability.JEMGEO_DEPOSIT_CAPABILITY)
+                .orElseThrow(() -> new RuntimeException("JemsGeo deposit capability is null..."));
+        this.chunkGennedCapability = this.chunkReader.getSeedReader().getWorld().getCapability(ChunkGennedCapability.JEMGEO_CHUNK_GEN_CAPABILITY)
+                .orElseThrow(() -> new RuntimeException("JemsGeo chunk gen capability is null..."));
 
         generateStateMap();
     }

@@ -20,7 +20,7 @@ public class ChunkGennedCapProvider implements ICapabilitySerializable<CompoundN
     @Override
     @Nonnull
     public <T> LazyOptional<T> getCapability(@Nonnull final Capability<T> capIn, final @Nullable Direction side) {
-        if (capIn == ChunkGennedCapability.RKU_CHUNK_GEN_CAPABILITY) {
+        if (capIn == ChunkGennedCapability.JEMGEO_CHUNK_GEN_CAPABILITY) {
             return cap.cast();
         }
 

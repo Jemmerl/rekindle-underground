@@ -20,7 +20,7 @@ public class DepositCapProvider implements ICapabilitySerializable<CompoundNBT> 
     @Override
     @Nonnull
     public <T> LazyOptional<T> getCapability(@Nonnull final Capability<T> capIn, final @Nullable Direction side) {
-        if (capIn == DepositCapability.RKU_DEPOSIT_CAPABILITY) {
+        if (capIn == DepositCapability.JEMGEO_DEPOSIT_CAPABILITY) {
             return cap.cast();
         }
 
