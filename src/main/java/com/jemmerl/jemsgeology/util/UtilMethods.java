@@ -8,7 +8,10 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.vector.Matrix3f;
+import net.minecraft.util.math.vector.Vector3i;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -126,4 +129,38 @@ public class UtilMethods {
         return ReplaceableStatus.FAILED;
     }
 
+    // Rotate a face in a relative direction :)
+    /*
+        Assumes "UP" rotations return the input whereas "DOWN" returns its opposite
+        Assumes N,S,E,W to be the relative directions of up, down, right, and left respectively
+        The result is rotation in any relative direction based off the starting face
+        You can confirm this by building a 6x6 logic table of the input face and rotation directions and its outputs!
+     */
+    public static Direction rotateDirection(Direction face, Direction rotation) {
+        // Rotations based on input face (UP and DOWN)
+        switch (face) {
+            case UP:
+                return rotation;
+            case DOWN:
+                return rotation.getOpposite();
+            default:
+        }
+
+        // Rotations based on rotation direction (N, S, E, W)
+        switch (rotation) {
+            case NORTH:
+                return Direction.UP;
+            case SOUTH:
+                return Direction.DOWN;
+            case EAST:
+                return face.rotateYCCW();
+            case WEST:
+                return face.rotateY();
+            case DOWN:
+                return face.getOpposite();
+            case UP:
+            default:
+                return face;
+        }
+    }
 }

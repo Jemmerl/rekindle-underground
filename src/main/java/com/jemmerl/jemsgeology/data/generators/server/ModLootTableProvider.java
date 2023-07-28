@@ -2,6 +2,7 @@ package com.jemmerl.jemsgeology.data.generators.server;
 
 import com.google.common.collect.ImmutableList;
 import com.jemmerl.jemsgeology.blocks.FallingCobbleBlock;
+import com.jemmerl.jemsgeology.blocks.IGeoBlock;
 import com.jemmerl.jemsgeology.blocks.StoneGeoBlock;
 import com.jemmerl.jemsgeology.data.enums.GeologyType;
 import com.jemmerl.jemsgeology.init.ModBlocks;
@@ -64,7 +65,7 @@ public class ModLootTableProvider extends LootTableProvider {
             ////////////////////////
 
             for (Block block : ModBlockLists.ALL_STONES) {
-                GeologyType geologyType = ((StoneGeoBlock) block).getGeologyType();
+                GeologyType geologyType = ((IGeoBlock) block).getGeologyType();
                 if (geologyType.hasCobble()) {
                     // Register stone -> rock drop
                     LootTable.Builder lootTable = buildStoneLootTable(geologyType);
@@ -76,7 +77,7 @@ public class ModLootTableProvider extends LootTableProvider {
             }
 
             for (Block block : ModBlockLists.ALL_REGOLITH) {
-                GeologyType geologyType = ((StoneGeoBlock) block).getGeologyType();
+                GeologyType geologyType = ((IGeoBlock) block).getGeologyType();
 
                 LootTable.Builder lootTable = buildRegolithLootTable(geologyType);
                 registerLootTable(block, lootTable);

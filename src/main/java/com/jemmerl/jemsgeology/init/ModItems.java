@@ -15,6 +15,15 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, JemsGeology.MOD_ID);
 
+
+    //////////
+    // MISC //
+    //////////
+
+    public static final RegistryObject<Item> MORTAR = ITEMS.register("lime_mortar", () -> new Item(new Item.Properties().group(ModItemGroups.JEMGEO_ORES_GROUP)));
+    public static final RegistryObject<Item> QUARRY_TOOL = ITEMS.register("quarry_tool", () -> new Item(new Item.Properties().group(ModItemGroups.JEMGEO_STONE_GROUP)));
+
+
     ///////////
     // Rocks //
     ///////////
@@ -65,8 +74,6 @@ public class ModItems {
     public static final RegistryObject<Item> MAFIC_HORNFELS_ROCK = registerRockItem(GeologyType.MAFIC_HORNFELS);
     public static final RegistryObject<Item> METACONGLOMERATE_ROCK = registerRockItem(GeologyType.METACONGLOMERATE);
     public static final RegistryObject<Item> GREISEN_ROCK = registerRockItem(GeologyType.GREISEN);
-
-    public static final RegistryObject<Item> MORTAR = ITEMS.register("lime_mortar", () -> new Item(new Item.Properties().group(ModItemGroups.JEMGEO_ORES_GROUP)));
 
     //////////
     // Ores //

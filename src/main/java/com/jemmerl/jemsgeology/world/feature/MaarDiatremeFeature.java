@@ -297,7 +297,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
         if (!regolithPosList.isEmpty()) {
             boolean emptyProbMap = brecciaProbMap.isEmpty();
             for (BlockPos regolithPos : regolithPosList) {
-                GeologyType regolithType = ((StoneGeoBlock) (((!emptyProbMap && (rand.nextFloat() > 0.35f)) ? brecciaProbMap.nextElt() : mainIgnBlock).getBlock())).getGeologyType();
+                GeologyType regolithType = ((IGeoBlock) (((!emptyProbMap && (rand.nextFloat() > 0.35f)) ? brecciaProbMap.nextElt() : mainIgnBlock).getBlock())).getGeologyType();
                 BlockState regolithState = (ModBlockLists.GEO_LIST.get(regolithType).getRegolithBlock().getDefaultState());
                 placeDiamondiferousBlock(rand, reader, regolithPos, regolithState, diamondiferous, diamondPercent);
             }
