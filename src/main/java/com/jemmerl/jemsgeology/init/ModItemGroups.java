@@ -9,7 +9,7 @@ public class ModItemGroups {
     public static final ItemGroup JEMGEO_STONE_GROUP = new ItemGroup("jemsgeo_stones_tab") {
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(ModBlocks.BASALT_STONE.get());
+            return ModBlocks.BASALT_STONE.get().asItem().getDefaultInstance();
         }
     };
 
@@ -24,6 +24,13 @@ public class ModItemGroups {
         @Override
         public ItemStack createIcon() {
             return OreType.FLUORITE.getOreItem().getDefaultInstance();
+        }
+    };
+
+    public static final ItemGroup JEMGEO_MISC_GROUP = new ItemGroup("jemsgeo_misc_tab") {
+        @Override
+        public ItemStack createIcon() {
+            return ModItems.QUARRY_TOOL.get().getDefaultInstance();
         }
     };
 

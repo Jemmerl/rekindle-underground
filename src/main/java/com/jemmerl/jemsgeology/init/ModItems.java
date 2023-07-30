@@ -20,8 +20,8 @@ public class ModItems {
     // MISC //
     //////////
 
-    public static final RegistryObject<Item> MORTAR = ITEMS.register("lime_mortar", () -> new Item(new Item.Properties().group(ModItemGroups.JEMGEO_ORES_GROUP)));
-    public static final RegistryObject<Item> QUARRY_TOOL = ITEMS.register("quarry_tool", () -> new Item(new Item.Properties().group(ModItemGroups.JEMGEO_STONE_GROUP)));
+    public static final RegistryObject<Item> MORTAR = ITEMS.register("lime_mortar", () -> new Item(new Item.Properties().group(ModItemGroups.JEMGEO_MISC_GROUP)));
+    public static final RegistryObject<Item> QUARRY_TOOL = ITEMS.register("quarry_tool", () -> new Item(new Item.Properties().group(ModItemGroups.JEMGEO_MISC_GROUP)));
 
 
     ///////////

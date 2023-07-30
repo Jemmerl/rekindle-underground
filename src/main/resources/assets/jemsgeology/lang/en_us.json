@@ -219,6 +219,7 @@
   "item.jemsgeology.greisen_rock": "Greisen Cobble",
 
   "item.jemsgeology.lime_mortar": "Lime Mortar",
+  "item.jemsgeology.quarry_tool": "Quarrying Chisel",
 
   "item.jemsgeology.apatite_ore": "Apatite",
   "item.jemsgeology.azurite_ore": "Azurite",
@@ -324,6 +325,7 @@
   "itemGroup.jemsgeo_stones_tab": "Jem's Geology: Stones",
   "itemGroup.jemsgeo_cobbles_tab": "Jem's Geology: Cobbles",
   "itemGroup.jemsgeo_ores_tab": "Jem's Geology: Ores",
+  "itemGroup.jemsgeo_misc_tab": "Jem's Geology: Misc",
 
   "tooltip.all.jemsgeology.shiftinfo": "\u00A77Hold\u00A7r \u00A7eSHIFT\u00A7r \u00A77for details...\u00A7r"
 }
