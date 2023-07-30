@@ -4,7 +4,9 @@ package com.jemmerl.jemsgeology.init;
 import com.jemmerl.jemsgeology.JemsGeology;
 import com.jemmerl.jemsgeology.data.enums.ore.OreType;
 import com.jemmerl.jemsgeology.data.enums.GeologyType;
+import com.jemmerl.jemsgeology.items.QuarryToolItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -21,8 +23,7 @@ public class ModItems {
     //////////
 
     public static final RegistryObject<Item> MORTAR = ITEMS.register("lime_mortar", () -> new Item(new Item.Properties().group(ModItemGroups.JEMGEO_MISC_GROUP)));
-    public static final RegistryObject<Item> QUARRY_TOOL = ITEMS.register("quarry_tool", () -> new Item(new Item.Properties().group(ModItemGroups.JEMGEO_MISC_GROUP)));
-
+    public static final RegistryObject<Item> QUARRY_TOOL = ITEMS.register("quarry_tool", () -> new Item(new Item.Properties().maxDamage(128).group(ModItemGroups.JEMGEO_MISC_GROUP)));
 
     ///////////
     // Rocks //

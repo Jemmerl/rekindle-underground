@@ -50,15 +50,18 @@ public class StoneGeoBlock extends BaseGeoBlock implements IGeoBlock {
     }
 
     @Override
-    public void onBlockHarvested(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public void onBlockHarvested(World world, BlockPos pos, BlockState state, PlayerEntity playerIn) {
         if (!world.isRemote) {
-            if (!player.isCreative()) {
-                if (holdingQuarryTools(state, player) && canQuarryBlock(world, pos, player)) {
+            if (!playerIn.isCreative()) {
+                if (holdingQuarryTools(state, playerIn) && canQuarryBlock(world, pos, playerIn)) {
+                    playerIn.getHeldItemOffhand().damageItem(1, playerIn, (player) -> {
+                        player.sendBreakAnimation(Hand.OFF_HAND);
+                    });
                     world.destroyBlock(pos, false);
                     spawnAsEntity(world, pos, new ItemStack(state.getBlock().asItem()));
                 }
             }
-            super.onBlockHarvested(world, pos, state, player);
+            super.onBlockHarvested(world, pos, state, playerIn);
         }
     }
 
