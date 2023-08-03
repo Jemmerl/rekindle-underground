@@ -1,12 +1,9 @@
 package com.jemmerl.jemsgeology.init;
 
-
 import com.jemmerl.jemsgeology.JemsGeology;
 import com.jemmerl.jemsgeology.data.enums.ore.OreType;
 import com.jemmerl.jemsgeology.data.enums.GeologyType;
-import com.jemmerl.jemsgeology.items.QuarryToolItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;

@@ -59,6 +59,12 @@ public class StoneGeoBlock extends BaseGeoBlock implements IGeoBlock {
                     });
                     world.destroyBlock(pos, false);
                     spawnAsEntity(world, pos, new ItemStack(state.getBlock().asItem()));
+
+                    // Drop a poor ore item if the quarry'ed block has ore in it (with 50% chance)
+                    OreType oreType = state.get(ORE_TYPE);
+                    if (JemsGeoConfig.SERVER.ore_quarrying.get() && oreType.hasOre() && world.rand.nextBoolean()) {
+                        spawnAsEntity(world, pos, new ItemStack(oreType.getPoorOreItem()));
+                    }
                 }
             }
             super.onBlockHarvested(world, pos, state, playerIn);
