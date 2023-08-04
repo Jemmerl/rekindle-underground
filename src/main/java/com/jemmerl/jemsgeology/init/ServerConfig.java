@@ -27,8 +27,9 @@ public class ServerConfig {
 
         private static final double PLACER_CHANCE = 0.90; // 0.00 - 1.00 scale, chance of placer deposit attempt in chunk; 0 is no placers
 
-        private static final boolean GEN_MAAR_DIATREMES = true; // Generate maar-diatremes? TODO why tf is a '?' here
-        private static final boolean GEN_BATHOLITHS = true; // Generate batholiths
+        private static final boolean GEN_BOULDERS = true; // Generate any boulder features?
+        private static final boolean GEN_MAAR_DIATREMES = true; // Generate maar-diatremes?
+        private static final boolean GEN_BATHOLITHS = true; // Generate batholiths?
 
         // Disable vanilla options
         private static final boolean DISABLE_WATER_LAKES = false; // Disable vanilla water lakes
@@ -51,6 +52,7 @@ public class ServerConfig {
 
         // Debug options
         private static final boolean DEBUG_DIATREME_MAAR = false;
+        private static final boolean DEBUG_BOULDERS = true;
         private static final boolean DEBUG_BATHOLITHS = false;
         private static final boolean DEBUG_TEST_GENFEATURES = true;
         private static final boolean DEBUG_GENFEATURES_READER = false;
@@ -83,6 +85,7 @@ public class ServerConfig {
 
         public final ForgeConfigSpec.ConfigValue<Double> placerChance;
 
+        public final ForgeConfigSpec.ConfigValue<Boolean> gen_boulders;
         public final ForgeConfigSpec.ConfigValue<Boolean> gen_maar_diatremes;
         public final ForgeConfigSpec.ConfigValue<Boolean> gen_batholiths;
 
@@ -105,6 +108,7 @@ public class ServerConfig {
         public final ForgeConfigSpec.ConfigValue<Boolean>  disable_silverfish;
 
         public final ForgeConfigSpec.ConfigValue<Boolean> debug_diatreme_maar;
+        public final ForgeConfigSpec.ConfigValue<Boolean> debug_boulders;
         public final ForgeConfigSpec.ConfigValue<Boolean> debug_batholiths;
         public final ForgeConfigSpec.ConfigValue<Boolean> debug_test_genfeatures;
         public final ForgeConfigSpec.ConfigValue<Boolean> debug_genfeature_reader;
@@ -156,6 +160,15 @@ public class ServerConfig {
                     .define("Generate Batholiths", GEN_BATHOLITHS);
             builder.pop();
             // End Igneous Config
+
+
+            // Misc WorldGen Config
+            builder.push("Other Features Generation");
+            this.gen_boulders = builder.comment("Enable all Boulder generation; Default true")
+                    .worldRestart()
+                    .define("Generate Boulders", GEN_BOULDERS);
+            builder.pop();
+            // Misc WorldGen Config
 
 
             // Layer Config
@@ -281,6 +294,9 @@ public class ServerConfig {
             this.debug_diatreme_maar = builder.comment("Enable diatreme-maar debug mode")
                     .worldRestart()
                     .define("Debug Diatreme-Maars", DEBUG_DIATREME_MAAR);
+            this.debug_boulders = builder.comment("Enable boulder debug mode")
+                    .worldRestart()
+                    .define("Debug Boulders", DEBUG_BOULDERS);
             this.debug_batholiths = builder.comment("Enable batholith debug mode")
                     .worldRestart()
                     .define("Debug Batholiths", DEBUG_BATHOLITHS);

@@ -19,8 +19,11 @@ public class JemsGeoFeatures {
     public static final ConfiguredFeature<?, ?> STONE_GEN_CONFIG = ModFeatures.STONE_GEN.get().withConfiguration(new NoFeatureConfig())
             .withPlacement(ModFeaturePlacements.BOTTOM_CORNER_PLACEMENT.get().configure(IPlacementConfig.NO_PLACEMENT_CONFIG));
 
-    // TODO make chance config based? registration shouldnt use configs...
+    // TODO make chance config based? registration shouldnt use configs... move chance into generate method -- same for boulders
     public static final ConfiguredFeature<?, ?> MAAR_DIATREME_GEN_CONFIG = ModFeatures.MAAR_DIATREME_GEN.get().withConfiguration(new NoFeatureConfig())
+            .withPlacement(ModFeaturePlacements.PIPE_CHANCE_PLACEMENT.get().configure(new ChanceConfig(300))); // Normally 300, larger is less likely (100 for testing)
+
+    public static final ConfiguredFeature<?, ?> BOULDER_GEN_CONFIG = ModFeatures.BOULDER_GEN.get().withConfiguration(new NoFeatureConfig())
             .withPlacement(ModFeaturePlacements.PIPE_CHANCE_PLACEMENT.get().configure(new ChanceConfig(100))); // Normally 300, larger is less likely
 
     public static final ConfiguredFeature<?, ?> ORE_PLACER_CONFIG = ModFeatures.ORE_PLACER_GEN.get().withConfiguration(new NoFeatureConfig())
@@ -33,6 +36,7 @@ public class JemsGeoFeatures {
     public static void registerConfiguredFeatures() {
         CFRegister("stone_generator", STONE_GEN_CONFIG);
         CFRegister("mantle_pipe_generator", MAAR_DIATREME_GEN_CONFIG);
+        CFRegister("mantle_pipe_generator", BOULDER_GEN_CONFIG);
     }
 
 }

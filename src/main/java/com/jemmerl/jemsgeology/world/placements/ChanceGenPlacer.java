@@ -15,7 +15,7 @@ public class ChanceGenPlacer extends Placement<ChanceConfig> {
         super(codec);
     }
 
-    // Gets a single, random position for placement with a one in CHANCE percent of success
+    // Gets a single, random centered position for placement with a one in CHANCE percent of success
     @Override
     public Stream<BlockPos> getPositions(WorldDecoratingHelper helper, Random rand, ChanceConfig config, BlockPos pos) {
         if (rand.nextInt(config.chance) == 0) {

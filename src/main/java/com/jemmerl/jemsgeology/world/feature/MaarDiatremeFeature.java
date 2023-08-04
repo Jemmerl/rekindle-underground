@@ -143,7 +143,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
                 float radius = (MAX_DIATREME_RADIUS - 7) - (baseDecrement * (1 - (y / (float) diatreme_height))) +
                         (BlobNoise.blobRadiusNoise(blockPos.getX(), y, blockPos.getZ()) * 7) + rand.nextInt(3);
 
-                float distance = (float) UtilMethods.getHypotenuse(blockPos.getX(), blockPos.getZ(), pos.getX(), pos.getZ());
+                float distance = (float) UtilMethods.getDistance2D(blockPos.getX(), blockPos.getZ(), pos.getX(), pos.getZ());
                 if (distance <= radius) {
                     BlockPos currPos = new BlockPos(blockPos.getX(), y, blockPos.getZ());
                     BlockState replacedBlock = reader.getBlockState(currPos);
@@ -202,7 +202,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
                         (BlobNoise.blobRadiusNoise(blockPos.getX(), y, blockPos.getZ()) * 7);
                 float inner_radius = MAX_MAAR_RADIUS - (MAX_MAAR_RADIUS * (1 - ((y - diatreme_height) / (float) MAAR_HEIGHT)));
 
-                float distance = (float) UtilMethods.getHypotenuse(blockPos.getX(), blockPos.getZ(), pos.getX(), pos.getZ());
+                float distance = (float) UtilMethods.getDistance2D(blockPos.getX(), blockPos.getZ(), pos.getX(), pos.getZ());
                 if (distance <= outer_radius) {
                     BlockPos currPos = new BlockPos(blockPos.getX(), y, blockPos.getZ());
                     BlockState replacedBlock = reader.getBlockState(currPos);
@@ -244,7 +244,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
             for (BlockPos blockPos : BlockPos.getAllInBoxMutable(pos.add(-MAX_DIATREME_RADIUS, 0, -MAX_DIATREME_RADIUS), pos.add(MAX_DIATREME_RADIUS, 0, MAX_DIATREME_RADIUS))) {
                 float radius = (MAX_MAAR_RADIUS - 7) + (BlobNoise.blobRadiusNoise(blockPos.getX(), y, blockPos.getZ()) * 7);
 
-                float distance = (float) UtilMethods.getHypotenuse(blockPos.getX(), blockPos.getZ(), pos.getX(), pos.getZ());
+                float distance = (float) UtilMethods.getDistance2D(blockPos.getX(), blockPos.getZ(), pos.getX(), pos.getZ());
                 if (distance <= radius) {
                     BlockPos currPos = new BlockPos(blockPos.getX(), y, blockPos.getZ());
                     BlockState replacedBlock = reader.getBlockState(currPos);

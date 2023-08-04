@@ -21,6 +21,9 @@ public class ModFeatures {
     public static final RegistryObject<Feature<NoFeatureConfig>> MAAR_DIATREME_GEN
             = FEATURES.register("maar_diatreme_gen", () -> new MaarDiatremeFeature(NoFeatureConfig.CODEC));
 
+    public static final RegistryObject<Feature<NoFeatureConfig>> BOULDER_GEN
+            = FEATURES.register("boulder_gen", () -> new BoulderFeature(NoFeatureConfig.CODEC));
+
     public static final RegistryObject<Feature<NoFeatureConfig>> ORE_PLACER_GEN
             = FEATURES.register("ore_placer_gen", () -> new OrePlacerFeature(NoFeatureConfig.CODEC));
 

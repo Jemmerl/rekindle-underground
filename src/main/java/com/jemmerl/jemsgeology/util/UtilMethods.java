@@ -15,6 +15,7 @@ import net.minecraft.util.math.vector.Vector3i;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.awt.*;
 import java.util.Objects;
 
 public class UtilMethods {
@@ -58,9 +59,14 @@ public class UtilMethods {
         return unitVec;
     }
 
-    // Return the hypotenuse of two values
-    public static double getHypotenuse(int a1, int b1, int a2, int b2) {
-        return Math.hypot((a1 - a2), (b1 - b2));
+    // Return the 2D distance between two variables
+    public static double getDistance2D(int x1, int z1, int x2, int z2) {
+        return Math.hypot((x1 - x2), (z1 - z2));
+    }
+
+    // Return the 3D distance squared between two variables
+    public static float getSquareDistance3D(int x1, int y1, int z1, int x2, int y2, int z2) {
+        return ((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)) + ((z2 - z1) * (z2 - z1));
     }
 
 //    // Copy blockstate property from one similar block to another

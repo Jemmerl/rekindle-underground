@@ -230,7 +230,7 @@ public class LayerEnqueuedDeposit implements IEnqueuedDeposit {
 
                 // Generate the ore block if within the radius and rolls a success against the density percent
                 if ((rand.nextFloat() < adjDensityPercent) &&
-                        (UtilMethods.getHypotenuse(areaPos.getX(), areaPos.getZ(), centerPos.getX(), centerPos.getZ()) <= radius)) {
+                        (UtilMethods.getDistance2D(areaPos.getX(), areaPos.getZ(), centerPos.getX(), centerPos.getZ()) <= radius)) {
                     DepositUtil.enqueueBlockPlacement(reader.getSeedReader(), areaPos, this.ores.nextElt(), grade,
                             this.name, pos, stateMap, depositCapability, chunkGennedCapability);
                 }

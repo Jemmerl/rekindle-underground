@@ -19,6 +19,9 @@ public class ModFeaturePlacements {
     public static final RegistryObject<Placement<ChanceConfig>> PIPE_CHANCE_PLACEMENT
             = PLACEMENTS.register("pipe_gen_placement", () -> new ChanceGenPlacer(ChanceConfig.CODEC));
 
+    public static final RegistryObject<Placement<ChanceConfig>> BOULDER_CHANCE_PLACEMENT
+            = PLACEMENTS.register("boulder_gen_placement", () -> new ChanceGenPlacer(ChanceConfig.CODEC));
+
     public static final RegistryObject<Placement<NoPlacementConfig>> PLACER_CONSIST_PLACER
             = PLACEMENTS.register("placer_gen_placement", () -> new CenteredGenPlacer(NoPlacementConfig.CODEC));
 

@@ -89,7 +89,7 @@ public class OrePlacerFeature extends Feature<NoFeatureConfig>{
 
                     // Generate the ore block if rolls a success against the density percent and within the random radius
                     if ((rand.nextFloat() < densityPercent) &&
-                            (UtilMethods.getHypotenuse(areaPos.getX(), areaPos.getZ(), centerPos.getX(), centerPos.getZ()) <= radius)) {
+                            (UtilMethods.getDistance2D(areaPos.getX(), areaPos.getZ(), centerPos.getX(), centerPos.getZ()) <= radius)) {
 
                         BlockState hostState = UtilMethods.convertVanillaToDetritus(reader.getBlockState(areaPos));
                         if (DepositUtil.isValidStone(hostState.getBlock(), placerDeposit.getValid())) {

@@ -32,6 +32,7 @@ public class WorldGen {
         List<LinkedHashMap.SimpleEntry<ConfiguredFeature<?, ?>, List<ResourceLocation>>> allStoneFeatures = new ArrayList<>();
 
         allStoneFeatures.add(new AbstractMap.SimpleEntry<>(JemsGeoFeatures.MAAR_DIATREME_GEN_CONFIG, null));
+        allStoneFeatures.add(new AbstractMap.SimpleEntry<>(JemsGeoFeatures.BOULDER_GEN_CONFIG, null));
 
         return allStoneFeatures;
     }
