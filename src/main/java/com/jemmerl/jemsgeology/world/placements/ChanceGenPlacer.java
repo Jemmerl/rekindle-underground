@@ -21,7 +21,7 @@ public class ChanceGenPlacer extends Placement<ChanceConfig> {
         if (rand.nextInt(config.chance) == 0) {
             int i = 7 + pos.getX();
             int j = 7 + pos.getZ();
-            int k = 1;
+            int k = 0;
             return Stream.of(new BlockPos(i, k, j));
         }
         return Stream.empty();

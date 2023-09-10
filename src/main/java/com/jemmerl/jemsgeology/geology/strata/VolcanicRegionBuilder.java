@@ -6,7 +6,7 @@ import com.jemmerl.jemsgeology.data.enums.igneous.DikeType;
 import com.jemmerl.jemsgeology.data.enums.igneous.IgnProvinceType;
 import com.jemmerl.jemsgeology.init.ModBlocks;
 import com.jemmerl.jemsgeology.init.JemsGeoConfig;
-import com.jemmerl.jemsgeology.util.noise.GenerationNoise.BlobNoise;
+import com.jemmerl.jemsgeology.util.noise.GenerationNoise.BlobWarpNoise;
 import com.jemmerl.jemsgeology.util.noise.GenerationNoise.RegionNoise;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -174,7 +174,7 @@ public class VolcanicRegionBuilder {
             case DEEP:
                 float percentContactMeta = -RegionNoise.volcanicRegionNoise(x, z, false);
                 float percentBatholith = (float)Math.pow(percentContactMeta, 1.5);
-                if ((y + 20) <= (((cachedBatholithHeight + 20) * percentBatholith) + (5 * BlobNoise.blobRadiusNoise((x * 4), y, (z * 4))))) {
+                if ((y + 20) <= (((cachedBatholithHeight + 20) * percentBatholith) + (5 * BlobWarpNoise.blobWarpRadiusNoise((x * 4), y, (z * 4))))) {
                     return cachedBatholithStone; // Batholith itself
                 } else if ((y + 20) <= ((cachedBatholithHeight + 30) * percentContactMeta)) {
                     volcanicState = Blocks.AIR.getDefaultState(); // Region of contact metamorphism

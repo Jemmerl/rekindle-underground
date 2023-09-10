@@ -1,9 +1,6 @@
 package com.jemmerl.jemsgeology.init;
 
-import com.jemmerl.jemsgeology.util.noise.GenerationNoise.BlobNoise;
-import com.jemmerl.jemsgeology.util.noise.GenerationNoise.DikeSillNoise;
-import com.jemmerl.jemsgeology.util.noise.GenerationNoise.RegionNoise;
-import com.jemmerl.jemsgeology.util.noise.GenerationNoise.StrataNoise;
+import com.jemmerl.jemsgeology.util.noise.GenerationNoise.*;
 
 public class NoiseInit {
 
@@ -12,6 +9,7 @@ public class NoiseInit {
     // Initialize and configure the various noise generators that are used in more than one class
     public static void init(long seed) {
         BlobNoise.configNoise(seed);
+        BlobWarpNoise.configNoise(seed);
         RegionNoise.configNoise(seed);
         StrataNoise.configNoise(seed);
         DikeSillNoise.configNoise(seed);

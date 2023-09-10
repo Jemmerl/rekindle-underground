@@ -64,8 +64,13 @@ public class UtilMethods {
         return Math.hypot((x1 - x2), (z1 - z2));
     }
 
-    // Return the 3D distance squared between two variables
+    // Return the 3D distance squared between two integer-based variables
     public static float getSquareDistance3D(int x1, int y1, int z1, int x2, int y2, int z2) {
+        return ((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)) + ((z2 - z1) * (z2 - z1));
+    }
+
+    // Return the 3D distance squared between two float-based variables
+    public static float getSquareDistance3D(float x1, float y1, float z1, float x2, float y2, float z2) {
         return ((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)) + ((z2 - z1) * (z2 - z1));
     }
 

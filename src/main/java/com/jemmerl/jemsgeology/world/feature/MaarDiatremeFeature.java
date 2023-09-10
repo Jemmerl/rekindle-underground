@@ -15,7 +15,7 @@ import com.jemmerl.jemsgeology.util.ReplaceableStatus;
 import com.jemmerl.jemsgeology.util.UtilMethods;
 import com.jemmerl.jemsgeology.util.WeightedProbMap;
 import com.jemmerl.jemsgeology.util.lists.ModBlockLists;
-import com.jemmerl.jemsgeology.util.noise.GenerationNoise.BlobNoise;
+import com.jemmerl.jemsgeology.util.noise.GenerationNoise.BlobWarpNoise;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -141,7 +141,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
                 // Maximum possible radius for the top of diatreme is 18, which is 36/48 available blocks (3 chunks allocated to features)
 
                 float radius = (MAX_DIATREME_RADIUS - 7) - (baseDecrement * (1 - (y / (float) diatreme_height))) +
-                        (BlobNoise.blobRadiusNoise(blockPos.getX(), y, blockPos.getZ()) * 7) + rand.nextInt(3);
+                        (BlobWarpNoise.blobWarpRadiusNoise(blockPos.getX(), y, blockPos.getZ()) * 7) + rand.nextInt(3);
 
                 float distance = (float) UtilMethods.getDistance2D(blockPos.getX(), blockPos.getZ(), pos.getX(), pos.getZ());
                 if (distance <= radius) {
@@ -199,7 +199,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
             for (BlockPos blockPos : BlockPos.getAllInBoxMutable(pos.add(-MAX_DIATREME_RADIUS, 0, -MAX_DIATREME_RADIUS), pos.add(MAX_DIATREME_RADIUS, 0, MAX_DIATREME_RADIUS))) {
                 // Maximum possible radius for the top of maar is 22, which is 44/48 available blocks (3 chunks allocated to features)
                 float outer_radius = (MAX_MAAR_RADIUS - 7) - (baseDecrement * (1 - (y / (float) (diatreme_height + MAAR_HEIGHT)))) +
-                        (BlobNoise.blobRadiusNoise(blockPos.getX(), y, blockPos.getZ()) * 7);
+                        (BlobWarpNoise.blobWarpRadiusNoise(blockPos.getX(), y, blockPos.getZ()) * 7);
                 float inner_radius = MAX_MAAR_RADIUS - (MAX_MAAR_RADIUS * (1 - ((y - diatreme_height) / (float) MAAR_HEIGHT)));
 
                 float distance = (float) UtilMethods.getDistance2D(blockPos.getX(), blockPos.getZ(), pos.getX(), pos.getZ());
@@ -242,7 +242,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
 
         for (int y = (diatreme_height + MAAR_HEIGHT); y < (diatreme_height + MAAR_EJECTA_HEIGHT); y++) {
             for (BlockPos blockPos : BlockPos.getAllInBoxMutable(pos.add(-MAX_DIATREME_RADIUS, 0, -MAX_DIATREME_RADIUS), pos.add(MAX_DIATREME_RADIUS, 0, MAX_DIATREME_RADIUS))) {
-                float radius = (MAX_MAAR_RADIUS - 7) + (BlobNoise.blobRadiusNoise(blockPos.getX(), y, blockPos.getZ()) * 7);
+                float radius = (MAX_MAAR_RADIUS - 7) + (BlobWarpNoise.blobWarpRadiusNoise(blockPos.getX(), y, blockPos.getZ()) * 7);
 
                 float distance = (float) UtilMethods.getDistance2D(blockPos.getX(), blockPos.getZ(), pos.getX(), pos.getZ());
                 if (distance <= radius) {

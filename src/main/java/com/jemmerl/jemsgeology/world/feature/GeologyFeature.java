@@ -6,7 +6,7 @@ import com.jemmerl.jemsgeology.blocks.StoneGeoBlock;
 import com.jemmerl.jemsgeology.init.NoiseInit;
 import com.jemmerl.jemsgeology.util.UtilMethods;
 import com.jemmerl.jemsgeology.util.lists.ModBlockLists;
-import com.jemmerl.jemsgeology.util.noise.GenerationNoise.BlobNoise;
+import com.jemmerl.jemsgeology.util.noise.GenerationNoise.BlobWarpNoise;
 import com.jemmerl.jemsgeology.geology.ChunkReader;
 import com.jemmerl.jemsgeology.geology.StateMapBuilder;
 import com.mojang.serialization.Codec;
@@ -94,7 +94,7 @@ public class GeologyFeature extends Feature<NoFeatureConfig> {
     }
 
     private int getDepth(BlockPos pos) {
-        return Math.round((Math.abs(BlobNoise.blobRadiusNoise((pos.getX() * 2), 0, (pos.getZ() * 2))) * 3) + 3);
+        return Math.round((Math.abs(BlobWarpNoise.blobWarpRadiusNoise((pos.getX() * 2), 0, (pos.getZ() * 2))) * 3) + 3);
     }
 
 }
