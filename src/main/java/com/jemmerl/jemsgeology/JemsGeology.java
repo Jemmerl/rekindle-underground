@@ -1,7 +1,7 @@
 package com.jemmerl.jemsgeology;
 
 import com.jemmerl.jemsgeology.init.*;
-import com.jemmerl.jemsgeology.init.FeatureDataLoader;
+import com.jemmerl.jemsgeology.init.featureinit.FeatureDataLoader;
 import com.jemmerl.jemsgeology.init.depositinit.DepositDataLoader;
 import com.jemmerl.jemsgeology.util.lists.ModBlockLists;
 import com.jemmerl.jemsgeology.world.capability.chunk.ChunkGennedCapProvider;

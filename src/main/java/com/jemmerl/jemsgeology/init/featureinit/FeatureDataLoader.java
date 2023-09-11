@@ -1,14 +1,17 @@
-package com.jemmerl.jemsgeology.init;
+package com.jemmerl.jemsgeology.init.featureinit;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.jemmerl.jemsgeology.JemsGeology;
+import com.jemmerl.jemsgeology.geology.deposits.DepositUtil;
 import com.jemmerl.jemsgeology.geology.features.FeatureUtil;
+import com.jemmerl.jemsgeology.geology.features.instances.BoulderEntry;
 import com.jemmerl.jemsgeology.geology.features.instances.DikeSillEntry;
+import com.jemmerl.jemsgeology.geology.features.templates.BoulderTemplate;
 import com.jemmerl.jemsgeology.geology.features.templates.DikeSillTemplate;
-import com.jemmerl.jemsgeology.init.featureinit.FeatureRegistrar;
+import com.jemmerl.jemsgeology.init.JemsGeoConfig;
 import net.minecraft.client.resources.JsonReloadListener;
 import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
@@ -60,14 +63,21 @@ public class FeatureDataLoader extends JsonReloadListener {
                 // Sort and add deposits
                 switch (jsonObj.get("feature_type").getAsString()) {
                     case "dike_sill":
-                        // Parse the settings json element into a LayerTemplate and then use to create a LayerDeposit
                         featureRegistrar.addDikeSillFeature(name, new DikeSillEntry(
                                 GSON.fromJson(jsonObj.get("settings"), DikeSillTemplate.class))
                                         .setName(name)
-                                        .setStone(FeatureUtil.getGenStone(jsonObj.get("stone"))));
-                        JemsGeology.getInstance().LOGGER.info("Successfully loaded generation feature: {}", rl);
+                                        .setStone(FeatureUtil.getGenStone(jsonObj.get("stone"), name)));
+                        JemsGeology.getInstance().LOGGER.info("Successfully loaded dike-sill feature: {}", rl);
                         break;
 
+                    case "boulder":
+                        featureRegistrar.addBoulderFeature(name, new BoulderEntry(
+                                GSON.fromJson(jsonObj.get("settings"), BoulderTemplate.class))
+                                        .setName(name)
+                                        .setStones(DepositUtil.getOreStones(jsonObj.get("stones").getAsJsonArray(), name))
+                                        .setBiomes(DepositUtil.getBiomes(jsonObj.get("biomes").getAsJsonArray(), name)));
+                        JemsGeology.getInstance().LOGGER.info("Successfully loaded boulder feature: {}", rl);
+                        break;
                     default:
                         JemsGeology.getInstance().LOGGER.warn("Feature type {} not found in: {} ", jsonObj.get("feature_type").getAsString(), rl);
                 }

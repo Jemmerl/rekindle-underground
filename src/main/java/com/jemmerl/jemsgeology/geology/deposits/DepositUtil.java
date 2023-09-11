@@ -147,7 +147,7 @@ public class DepositUtil {
     ////////////////////////
 
     // Return an weighted probability map of OreTypes from a JsonArray
-    public static WeightedProbMap<OreType> getOres(JsonArray oresArray) {
+    public static WeightedProbMap<OreType> getOres(JsonArray oresArray, String name) {
         ArrayList<Pair<Integer, OreType>> elts = new ArrayList<>();
         try {
             int weightSum = 0;
@@ -157,12 +157,12 @@ public class DepositUtil {
                 int weight = oreObj.get("weight").getAsInt();
                 weightSum += weight;
                 if (weightSum > 100) {
-                    throw new Exception("Ore weights sum to over 100 in deposit");
+                    throw new Exception("Ore weights sum to over 100 in deposit: " + name);
                 }
                 elts.add( new Pair<>(weight, oreType));
             }
         } catch (Exception e) {
-            JemsGeology.getInstance().LOGGER.warn("Error in a deposit valid ore reading.");
+            JemsGeology.getInstance().LOGGER.warn("Error in a deposit: {}, invalid ore entry.", name);
 
             // Debug
             if (JemsGeoConfig.SERVER.debug_deposit_reader.get()) {
@@ -175,7 +175,7 @@ public class DepositUtil {
     }
 
     // Return an array list of grade chances from a JsonObject
-    public static WeightedProbMap<GradeType> getGrades(JsonObject jsonObject) {
+    public static WeightedProbMap<GradeType> getGrades(JsonObject jsonObject, String name) {
         int highGrade, midGrade, lowGrade;
         ArrayList<Pair<Integer, GradeType>> elts = new ArrayList<>();
 
@@ -184,7 +184,7 @@ public class DepositUtil {
             midGrade = Math.min(Math.max(jsonObject.get("mid").getAsInt(), 0), 100);
             lowGrade = Math.min(Math.max(jsonObject.get("low").getAsInt(), 0), 100);
             if ((highGrade + midGrade + lowGrade) > 100) {
-                throw new Exception("Grade weights sum to over 100 in deposit");
+                throw new Exception("Grade weights sum to over 100 in deposit: " + name);
             }
 
             elts.add( new Pair<>(highGrade, GradeType.HIGHGRADE));
@@ -192,7 +192,7 @@ public class DepositUtil {
             elts.add( new Pair<>(lowGrade, GradeType.LOWGRADE));
 
         } catch (Exception e) {
-            JemsGeology.getInstance().LOGGER.warn("Error in a deposit ore grades reading.");
+            JemsGeology.getInstance().LOGGER.warn("Error in a deposit: {}, invalid ore grades entry.", name);
 
             // Debug
             if (JemsGeoConfig.SERVER.debug_deposit_reader.get()) {
@@ -206,7 +206,7 @@ public class DepositUtil {
     }
 
     // Return an array list of valid StoneTypes from a JsonArray
-    public static ArrayList<GeologyType> getOreStones(JsonArray jsonArray) {
+    public static ArrayList<GeologyType> getOreStones(JsonArray jsonArray, String name) {
         HashSet<GeologyType> oreStoneSet = new HashSet<>(); // Using a set removes duplicate entries free of charge
             try {
                 for (int i=0; i<jsonArray.size(); i++) {
@@ -244,7 +244,7 @@ public class DepositUtil {
 
                 }
             } catch (Exception e) {
-                JemsGeology.getInstance().LOGGER.warn("Error in a deposit's valid stones reading.");
+                JemsGeology.getInstance().LOGGER.warn("Error in a deposit/feature: {}, invalid stones entry.", name);
 
                 // Debug
                 if (JemsGeoConfig.SERVER.debug_deposit_reader.get()) {
@@ -258,7 +258,7 @@ public class DepositUtil {
     }
 
     // Return an array list of valid Biome Categories from a JsonArray
-    public static ArrayList<Biome.Category> getBiomes(JsonArray jsonArray) {
+    public static ArrayList<Biome.Category> getBiomes(JsonArray jsonArray, String name) {
         ArrayList<Biome.Category> biomeArray = new ArrayList<>();
         try {
             for (int i=0; i<jsonArray.size(); i++) {
@@ -266,8 +266,8 @@ public class DepositUtil {
                 if (cat.equals("none")) {
                     // If you don't want a deposit to generate, you could just temporarily remove it... But fine,
                     // I'll handle it. Returns a list of just "none" and prevents the deposit from generating.
-                    JemsGeology.getInstance().LOGGER.warn("Use of NONE in deposit registration detected. " +
-                            "This prevents that generation despite any other listed biomes.");
+                    JemsGeology.getInstance().LOGGER.warn("Use of NONE in deposit/feature: {} registration detected. " +
+                            "This prevents that generation despite any other listed biomes.", name);
                     return new ArrayList<>(Collections.singleton(Biome.Category.NONE));
                 } else if (cat.equals("all")) {
                     // If "all" is ever specified, just return a list of every biome
@@ -277,7 +277,7 @@ public class DepositUtil {
                 }
             }
         } catch (Exception e) {
-            JemsGeology.getInstance().LOGGER.warn("Error in a deposit valid biome reading.");
+            JemsGeology.getInstance().LOGGER.warn("Error in a deposit/feature: {}, invalid biome entry.", name);
 
             // Debug
             if (JemsGeoConfig.SERVER.debug_deposit_reader.get()) {

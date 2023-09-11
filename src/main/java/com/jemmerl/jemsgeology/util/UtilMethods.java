@@ -1,6 +1,7 @@
 package com.jemmerl.jemsgeology.util;
 
 import com.jemmerl.jemsgeology.blocks.IGeoBlock;
+import com.jemmerl.jemsgeology.blocks.StoneGeoBlock;
 import com.jemmerl.jemsgeology.data.enums.StoneGroupType;
 import com.jemmerl.jemsgeology.util.lists.ModBlockLists;
 import net.minecraft.block.Block;
@@ -92,7 +93,7 @@ public class UtilMethods {
 
     // Check if the block is some form of OreBlock stone
     public static boolean isOreBlockStone (Block block) {
-        return ((block instanceof IGeoBlock) && !((IGeoBlock) block).getStoneGroupType().equals(StoneGroupType.DETRITUS));
+        return (block instanceof StoneGeoBlock);
     }
 
     // Check if the block is some form of vanilla detritus

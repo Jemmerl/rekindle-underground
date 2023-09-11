@@ -63,10 +63,10 @@ public class DepositDataLoader extends JsonReloadListener {
                         depositRegistrar.addOreDeposit(name, new LayerEnqueuedDeposit(
                                 GSON.fromJson(jsonObj.get("settings"), LayerTemplate.class))
                                         .setName(name)
-                                        .setOres(DepositUtil.getOres(jsonObj.get("ores").getAsJsonArray()))
-                                        .setGrades(DepositUtil.getGrades(jsonObj.get("grades").getAsJsonObject()))
-                                        .setValid(DepositUtil.getOreStones(jsonObj.get("stones").getAsJsonArray()))
-                                        .setBiomes(DepositUtil.getBiomes(jsonObj.get("biomes").getAsJsonArray())));
+                                        .setOres(DepositUtil.getOres(jsonObj.get("ores").getAsJsonArray(), name))
+                                        .setGrades(DepositUtil.getGrades(jsonObj.get("grades").getAsJsonObject(), name))
+                                        .setValid(DepositUtil.getOreStones(jsonObj.get("stones").getAsJsonArray(), name))
+                                        .setBiomes(DepositUtil.getBiomes(jsonObj.get("biomes").getAsJsonArray(), name)));
                         JemsGeology.getInstance().LOGGER.info("Successfully loaded deposit {}!", rl);
                         break;
 
@@ -75,10 +75,10 @@ public class DepositDataLoader extends JsonReloadListener {
                         depositRegistrar.addPlacerDeposit(name, new PlacerDeposit(
                                 GSON.fromJson(jsonObj.get("settings"), PlacerTemplate.class))
                                         .setName(name)
-                                        .setOres(DepositUtil.getOres(jsonObj.get("ores").getAsJsonArray()))
-                                        .setGrades(DepositUtil.getGrades(jsonObj.get("grades").getAsJsonObject()))
-                                        .setValid(DepositUtil.getOreStones(jsonObj.get("stones").getAsJsonArray()))
-                                        .setBiomes(DepositUtil.getBiomes(jsonObj.get("biomes").getAsJsonArray())));
+                                        .setOres(DepositUtil.getOres(jsonObj.get("ores").getAsJsonArray(), name))
+                                        .setGrades(DepositUtil.getGrades(jsonObj.get("grades").getAsJsonObject(), name))
+                                        .setValid(DepositUtil.getOreStones(jsonObj.get("stones").getAsJsonArray(), name))
+                                        .setBiomes(DepositUtil.getBiomes(jsonObj.get("biomes").getAsJsonArray(), name)));
                         JemsGeology.getInstance().LOGGER.info("Successfully loaded deposit {}", rl);
                         break;
 

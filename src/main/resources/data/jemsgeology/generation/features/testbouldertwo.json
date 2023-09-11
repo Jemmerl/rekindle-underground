@@ -1,0 +1,22 @@
+{
+  "name": "testboulder2",
+  "feature_type": "boulder",
+  "settings": {
+    "seed": 1872,
+    "chance": 50,
+    "max_long_radius": 14,
+    "min_long_radius": 7,
+    "max_short_radius": 10,
+    "min_short_radius": 6
+  },
+  "stones": [
+    "sandstone",
+    "arkose",
+    "greywacke",
+    "red_sandstone"
+  ],
+  "biomes": [
+    "desert",
+    "savanna"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "testboulder3",
+  "feature_type": "boulder",
+  "settings": {
+    "seed": 8722,
+    "chance": 30,
+    "max_long_radius": 5,
+    "min_long_radius": 3,
+    "max_short_radius": 4,
+    "min_short_radius": 2
+  },
+  "stones": [
+    "vein_quartz"
+  ],
+  "biomes": [
+    "ocean",
+    "beach"
+  ]
+}

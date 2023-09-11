@@ -61,8 +61,7 @@ public enum OreType implements IStringSerializable{
 
     private final String name;
 
-    private static final List<OreType> VALUESALL =
-            Collections.unmodifiableList(Arrays.asList(values()));
+    private static final List<OreType> VALUESALL = Collections.unmodifiableList(Arrays.asList(values()));
     private static final List<OreType> VALUES = new ArrayList<>(EnumSet.complementOf(EnumSet.of(OreType.NONE)));
     private static final int SIZE = VALUES.size();
 

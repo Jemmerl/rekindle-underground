@@ -1,0 +1,24 @@
+{
+  "name": "testboulder1",
+  "feature_type": "boulder",
+  "settings": {
+    "seed": 872,
+    "chance": 30,
+    "max_long_radius": 8,
+    "min_long_radius": 3,
+    "max_short_radius": 6,
+    "min_short_radius": 2
+  },
+  "stones": [
+    "granite",
+    "diorite",
+    "granodiorite",
+    "syenite"
+  ],
+  "biomes": [
+    "plains",
+    "savanna",
+    "forest",
+    "taiga"
+  ]
+}
