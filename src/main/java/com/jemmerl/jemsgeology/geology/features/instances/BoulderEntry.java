@@ -66,6 +66,10 @@ public class BoulderEntry {
         return this.boulderTemplate.getHillsValid();
     }
 
+    public boolean getPlaceExtra() {
+        return this.boulderTemplate.getPlaceExtra();
+    }
+
     public int getLongRadiusMax() {
         return this.boulderTemplate.getMaxLongRad();
     }

@@ -53,14 +53,20 @@ public class BoulderFeature extends Feature<NoFeatureConfig> {
                 continue;
             }
 
-            BlockPos placePos = pos.add(rand.nextInt(16), 0, rand.nextInt(16));
+            // Place boulder in center of chunk +/-4 blocks in any direction (12x12 valid area vs 16x16 for buffer)
+            BlockPos placePos = pos.add((8 + rand.nextInt(5)), 0, (8 + rand.nextInt(5)));
             Biome biome = reader.getBiome(placePos);
             if (!entry.getBiomes().contains(biome.getCategory())) {
                 continue;
             }
 
-            if (buildBoulder(entry, reader, rand, placePos)) {
+            ArrayList<GeologyType> stones = entry.getStones();
+            GeologyType geologyType = stones.get(rand.nextInt(stones.size()));
+            if (buildBoulder(entry, reader, rand, placePos, geologyType, false)) {
                 didGen = true;
+                // Attempt to place up to 2 smaller adjacent boulders if enabled
+                if (entry.getPlaceExtra() && rand.nextBoolean()) buildBoulder(entry, reader, rand, placePos, geologyType, true);
+                if (entry.getPlaceExtra() && rand.nextBoolean()) buildBoulder(entry, reader, rand, placePos, geologyType, true);
             }
         }
 
@@ -68,14 +74,19 @@ public class BoulderFeature extends Feature<NoFeatureConfig> {
     }
 
 
-    private boolean buildBoulder(BoulderEntry entry, ISeedReader reader, Random rand, BlockPos pos) {
-        ArrayList<GeologyType> stones = entry.getStones();
-        final GeologyType geologyType = stones.get(rand.nextInt(stones.size()));
+    private boolean buildBoulder(BoulderEntry entry, ISeedReader reader, Random rand, BlockPos pos, GeologyType geologyType, boolean adjacent) {
         final BlockState boulderState = ModBlockLists.GEO_LIST.get(geologyType).getStoneOreBlock().getDefaultState();
         int rLong = rand.nextInt(entry.getLongRadiusMax() - entry.getLongRadiusMin() + 1) + entry.getLongRadiusMin();
         int rShort = rand.nextInt(entry.getShortRadiusMax() - entry.getShortRadiusMin() + 1) + entry.getShortRadiusMin();
         int embedDepth = rand.nextInt(rShort-1) + 1; // Depth the center is into the ground (1 to (rShort-1))
         float rotAngle = (float) Math.toRadians(rand.nextInt(181) - 90); // Horizontal rotation angle (-90 to 90)
+
+        // Shift placement location and shrink size if adjacent boulder
+        if (adjacent) {
+            pos = pos.add((rand.nextInt((rLong * 2) + 1) - rLong), 0, (rand.nextInt((rLong * 2) + 1) - rLong));
+            if (rLong > 3) rLong /= 2;
+            if (rShort > 3) rShort /= 2;
+        }
 
         int centerX = pos.getX();
         int centerZ = pos.getZ();
@@ -168,9 +179,15 @@ public class BoulderFeature extends Feature<NoFeatureConfig> {
 
         // Debug
         if (JemsGeoConfig.SERVER.debug_boulders.get()) {
-            JemsGeology.getInstance().LOGGER.info(
-                    "Placed Boulder from gen: {} with stone: {} at ({} ~ {}) with long radius: {}, short radius {}, and embed depth {}.",
-                    entry.getName(), geologyType.getName(), centerX, centerZ, rLong, rShort, embedDepth);
+            if (adjacent) {
+                JemsGeology.getInstance().LOGGER.info(
+                        "Placed Adjacent Boulder from gen: {} with stone: {} at ({} ~ {}) with long radius: {}, short radius {}, and embed depth {}.",
+                        entry.getName(), geologyType.getName(), centerX, centerZ, rLong, rShort, embedDepth);
+            } else {
+                JemsGeology.getInstance().LOGGER.info(
+                        "Placed Boulder from gen: {} with stone: {} at ({} ~ {}) with long radius: {}, short radius {}, and embed depth {}.",
+                        entry.getName(), geologyType.getName(), centerX, centerZ, rLong, rShort, embedDepth);
+            }
         }
 
         return true;
