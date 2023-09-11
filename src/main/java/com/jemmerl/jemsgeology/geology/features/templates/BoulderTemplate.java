@@ -8,10 +8,12 @@ public class BoulderTemplate {
     private final int min_long_radius;
     private final int max_short_radius;
     private final int min_short_radius;
+    private final boolean on_hills;
 
-    public BoulderTemplate(int seed, int chance, int max_long_radius, int min_long_radius, int max_short_radius, int min_short_radius) {
+    public BoulderTemplate(int seed, int chance, int max_long_radius, int min_long_radius, int max_short_radius, int min_short_radius, boolean on_hills) {
         this.seed = seed;
         this.chance = chance;
+        this.on_hills = on_hills;
 
         // I would rather just handle accidentally swapped values instead of making the user hunt down the error
         // Fast swap values if the long radius min is bigger than the large radius max
@@ -28,10 +30,11 @@ public class BoulderTemplate {
             max_short_radius = max_short_radius ^ min_short_radius;
         }
 
-        this.max_long_radius = max_long_radius;
-        this.min_long_radius = min_long_radius;
-        this.max_short_radius = max_short_radius;
-        this.min_short_radius = min_short_radius;
+        // Clamp values from 2 to 16
+        this.max_long_radius = Math.max(2, Math.min(14, max_long_radius));
+        this.min_long_radius = Math.max(2, Math.min(14, min_long_radius));
+        this.max_short_radius = Math.max(2, Math.min(14, max_short_radius));
+        this.min_short_radius = Math.max(2, Math.min(14, min_short_radius));
     }
 
     public int getSeed() {
@@ -40,6 +43,10 @@ public class BoulderTemplate {
 
     public int getChance() {
         return this.chance;
+    }
+
+    public boolean getHillsValid() {
+        return this.on_hills;
     }
 
     public int getMaxLongRad() {

@@ -44,6 +44,8 @@ public class BoulderFeature extends Feature<NoFeatureConfig> {
             NoiseInit.init(reader.getSeed());
         }
 
+        boolean didGen = false;
+
         for (BoulderEntry entry : FeatureRegistrar.getBoulderFeatures().values()) {
             //Random boulderRand = new Random(entry.getSeed());
 
@@ -53,12 +55,16 @@ public class BoulderFeature extends Feature<NoFeatureConfig> {
 
             BlockPos placePos = pos.add(rand.nextInt(16), 0, rand.nextInt(16));
             Biome biome = reader.getBiome(placePos);
-            if (entry.getBiomes().contains(biome.getCategory())) {
-                buildBoulder(entry, reader, rand, placePos);
+            if (!entry.getBiomes().contains(biome.getCategory())) {
+                continue;
+            }
+
+            if (buildBoulder(entry, reader, rand, placePos)) {
+                didGen = true;
             }
         }
 
-        return true;
+        return didGen;
     }
 
 
@@ -74,6 +80,15 @@ public class BoulderFeature extends Feature<NoFeatureConfig> {
         int centerX = pos.getX();
         int centerZ = pos.getZ();
         int centerY = reader.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, centerX, centerZ) - embedDepth;
+
+        // Check if the boulder can spawn on hill slopes. If not, check if it is on a hill and cancel if so
+        if (!entry.getOnHills() && isOnHill(reader, centerX, centerZ)) {
+            // Debug
+            if (JemsGeoConfig.SERVER.debug_boulders.get()) {
+                JemsGeology.getInstance().LOGGER.info("Boulder failed to place on hill at ({} ~ {})", centerX, centerZ);
+            }
+            return false;
+        }
 
         // Fast swap values if the short radius is bigger than the large radius
         if (rShort > rLong) {
@@ -161,6 +176,25 @@ public class BoulderFeature extends Feature<NoFeatureConfig> {
         return true;
     }
 
+    private boolean isOnHill(ISeedReader reader, int centerX, int centerZ) {
+        int yX1 = reader.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, centerX + 1, centerZ);
+        int yX2 = reader.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, centerX - 1, centerZ);
+        float mX = (yX1 - yX2) / 2f;
+
+        if (Math.abs(mX) > 0.75f) {
+            return true;
+        }
+
+        int yZ1 = reader.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, centerX, centerZ + 1);
+        int yZ2 = reader.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, centerX, centerZ - 1);
+        float mZ = (yZ1 - yZ2) / 2f;
+
+        if (Math.abs(mZ) > 0.75f) {
+            return true;
+        }
+
+        return false;
+    }
 
     private boolean isInvalidPlacement(Block block) {
         return UtilMethods.isStoneBlock(block) || (block.isIn(BlockTags.LOGS));

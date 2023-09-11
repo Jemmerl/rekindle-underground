@@ -62,6 +62,10 @@ public class BoulderEntry {
         return this.boulderTemplate.getChance();
     }
 
+    public boolean getOnHills() {
+        return this.boulderTemplate.getHillsValid();
+    }
+
     public int getLongRadiusMax() {
         return this.boulderTemplate.getMaxLongRad();
     }
