@@ -54,9 +54,9 @@ public class BoulderEntry {
         return this.validBiomes;
     }
 
-    public int getSeed() {
-        return this.boulderTemplate.getSeed();
-    }
+//    public int getSeed() {
+//        return this.boulderTemplate.getSeed();
+//    }
 
     public int getChance() {
         return this.boulderTemplate.getChance();

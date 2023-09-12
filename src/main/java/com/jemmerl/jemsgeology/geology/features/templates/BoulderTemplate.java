@@ -2,7 +2,7 @@ package com.jemmerl.jemsgeology.geology.features.templates;
 
 public class BoulderTemplate {
 
-    private final int seed;
+    //private final int seed;
     private final int chance;
     private final int max_long_radius;
     private final int min_long_radius;
@@ -11,8 +11,8 @@ public class BoulderTemplate {
     private final boolean on_hills;
     private final boolean place_extra;
 
-    public BoulderTemplate(int seed, int chance, int max_long_radius, int min_long_radius, int max_short_radius, int min_short_radius, boolean on_hills, boolean place_extra) {
-        this.seed = seed;
+    public BoulderTemplate(int chance, int max_long_radius, int min_long_radius, int max_short_radius, int min_short_radius, boolean on_hills, boolean place_extra) {
+        //this.seed = seed;
         this.chance = chance;
         this.on_hills = on_hills;
         this.place_extra = place_extra;
@@ -39,9 +39,9 @@ public class BoulderTemplate {
         this.min_short_radius = Math.max(2, Math.min(12, min_short_radius));
     }
 
-    public int getSeed() {
-        return this.seed;
-    }
+//    public int getSeed() {
+//        return this.seed;
+//    }
 
     public int getChance() {
         return this.chance;

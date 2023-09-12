@@ -4,9 +4,7 @@ import com.jemmerl.jemsgeology.JemsGeology;
 import com.jemmerl.jemsgeology.data.enums.GeologyType;
 import com.jemmerl.jemsgeology.geology.features.instances.BoulderEntry;
 import com.jemmerl.jemsgeology.init.JemsGeoConfig;
-import com.jemmerl.jemsgeology.init.ModBlocks;
 import com.jemmerl.jemsgeology.init.NoiseInit;
-import com.jemmerl.jemsgeology.init.featureinit.FeatureDataLoader;
 import com.jemmerl.jemsgeology.init.featureinit.FeatureRegistrar;
 import com.jemmerl.jemsgeology.util.UtilMethods;
 import com.jemmerl.jemsgeology.util.lists.ModBlockLists;
@@ -45,7 +43,6 @@ public class BoulderFeature extends Feature<NoFeatureConfig> {
         }
 
         boolean didGen = false;
-
         for (BoulderEntry entry : FeatureRegistrar.getBoulderFeatures().values()) {
             //Random boulderRand = new Random(entry.getSeed());
 
@@ -81,6 +78,13 @@ public class BoulderFeature extends Feature<NoFeatureConfig> {
         int embedDepth = rand.nextInt(rShort-1) + 1; // Depth the center is into the ground (1 to (rShort-1))
         float rotAngle = (float) Math.toRadians(rand.nextInt(181) - 90); // Horizontal rotation angle (-90 to 90)
 
+        // Fast swap values if the short radius is bigger than the large radius
+        if (rShort > rLong) {
+            rLong = rLong ^ rShort;
+            rShort = rLong ^ rShort;
+            rLong = rLong ^ rShort;
+        }
+
         // Shift placement location and shrink size if adjacent boulder
         if (adjacent) {
             pos = pos.add((rand.nextInt((rLong * 2) + 1) - rLong), 0, (rand.nextInt((rLong * 2) + 1) - rLong));
@@ -101,68 +105,51 @@ public class BoulderFeature extends Feature<NoFeatureConfig> {
             return false;
         }
 
-        // Fast swap values if the short radius is bigger than the large radius
-        if (rShort > rLong) {
-            rLong = rLong ^ rShort;
-            rShort = rLong ^ rShort;
-            rLong = rLong ^ rShort;
-        }
-
         float alpha = (float) Math.tan(rotAngle/2f); // flipped signs to change rotation direction
         float beta = (float) -Math.sin(rotAngle);
 
-        // Calculate shear13 movements
-        int[] shear13 = new int[rLong + 1];
-        for (int z = 0; z < (rLong + 1); z++) {
-            shear13[z] = Math.round(z * alpha);
-        }
+        // Generate planar rotation matrix
+        int[][] xShears = new int[(rLong * 2) + 1][(rLong * 2) + 1];
+        int[][] zShears = new int[(rLong * 2) + 1][(rLong * 2) + 1];
+        for (BlockPos currPos : BlockPos.getAllInBoxMutable(pos.add(-rLong, 0, -rLong), pos.add(rLong, 0, rLong))) {
+            int xRot = currPos.getX() - centerX;
+            int zRot = currPos.getZ() - centerZ;
 
-        // Calculate shear2 movements
-        int[] shear2 = new int[rLong + 1];
-        for (int x = 0; x < (rLong + 1); x++) {
-            shear2[x] = Math.round(x * beta);
-        }
-
-        // rewrite to do once and make a 2 layer matrix of the final rotation movements
-
-        for (BlockPos currPos : BlockPos.getAllInBoxMutable(pos.add(-rLong, (centerY - rLong), -rLong), pos.add(rLong, (centerY + rLong), rLong))) {
-            int xPos = currPos.getX();
-            int yPos = currPos.getY();
-            int zPos = currPos.getZ();
-
-            int xPosAdj = xPos - centerX;
-            int yPosAdj = yPos - centerY;
-            int zPosAdj = zPos - centerZ;
-
-            int xRot = xPosAdj;
-            int zRot = zPosAdj;
+            int iX = xRot + rLong;
+            int iZ = zRot + rLong;
 
             // First shear - horizontal
-            int xShear = shear13[Math.abs(zRot)];
+            int xShear = Math.round(Math.abs(zRot) * alpha);
             if (zRot < 0) xShear *= -1;
             xRot += xShear;
-            if ((Math.abs(xRot)) > rLong) {
-                continue;
-            }
 
             // Second shear - vertical
-            int zShear = shear2[Math.abs(xRot)];
+            int zShear = Math.round(Math.abs(xRot) * beta);
             if (xRot < 0) zShear *= -1;
             zRot += zShear;
-            if (Math.abs(zRot) > rLong) {
-                continue;
-            }
 
             // Third shear - horizontal
-            xShear = shear13[Math.abs(zRot)];
+            xShear = Math.round(Math.abs(zRot) * alpha);
             if (zRot < 0) xShear *= -1;
             xRot += xShear;
-            if (Math.abs(xRot) > rLong) {
-                continue;
-            }
+
+            xShears[iX][iZ] = xRot;
+            zShears[iX][iZ] = zRot;
+        }
+
+        // Rotate and place boulder
+        for (BlockPos currPos : BlockPos.getAllInBoxMutable(pos.add(-rLong, (centerY - rLong), -rLong), pos.add(rLong, (centerY + rLong), rLong))) {
+            int xPosAdj = currPos.getX() - centerX;
+            int zPosAdj = currPos.getZ() - centerZ;
+
+            int iX = xPosAdj + rLong;
+            int iZ = zPosAdj + rLong;
+
+            int xRot = xPosAdj + xShears[iX][iZ];
+            int zRot = zPosAdj + zShears[iX][iZ];
 
             // Calculate vertical decrement
-            int yAdjAbs = Math.abs(yPosAdj);
+            int yAdjAbs = Math.abs(currPos.getY() - centerY);
             if (yAdjAbs > rShort) continue;
             float yPercent = 1 - (float) Math.pow((yAdjAbs / (float) rShort), 2);
 
@@ -171,7 +158,7 @@ public class BoulderFeature extends Feature<NoFeatureConfig> {
                 continue;
             }
 
-            float noiseVal = BlobNoise.getNoise((xRot * BlobNoise.xLength / (rShort * 2f)), (zRot * BlobNoise.zLength / (rLong * 2f)));
+            float noiseVal = BlobNoise.getNoise((xRot * BlobNoise.xLength / (rShort * 4f)), (zRot * BlobNoise.zLength / (rLong * 4f)));
             if (noiseVal < -(0.43f - (0.13f * yPercent))) {
                 reader.setBlockState(currPos, boulderState, 2);
             }
@@ -181,11 +168,11 @@ public class BoulderFeature extends Feature<NoFeatureConfig> {
         if (JemsGeoConfig.SERVER.debug_boulders.get()) {
             if (adjacent) {
                 JemsGeology.getInstance().LOGGER.info(
-                        "Placed Adjacent Boulder from gen: {} with stone: {} at ({} ~ {}) with long radius: {}, short radius {}, and embed depth {}.",
+                        "Placed Extra Boulder from gen: {} with stone: {} at ({} ~ {}) with long radius: {}, short radius {}, and embed depth {}.",
                         entry.getName(), geologyType.getName(), centerX, centerZ, rLong, rShort, embedDepth);
             } else {
                 JemsGeology.getInstance().LOGGER.info(
-                        "Placed Boulder from gen: {} with stone: {} at ({} ~ {}) with long radius: {}, short radius {}, and embed depth {}.",
+                        "Placed Basic Boulder from gen: {} with stone: {} at ({} ~ {}) with long radius: {}, short radius {}, and embed depth {}.",
                         entry.getName(), geologyType.getName(), centerX, centerZ, rLong, rShort, embedDepth);
             }
         }

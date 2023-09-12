@@ -2,7 +2,6 @@
   "name": "testboulder2",
   "feature_type": "boulder",
   "settings": {
-    "seed": 1872,
     "chance": 50,
     "max_long_radius": 12,
     "min_long_radius": 7,
