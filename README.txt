@@ -11,6 +11,15 @@ It is currently mainly for use within the in-dev Rekindle modpack, but is being 
 for general use. It is NOT a standalone mod. Consider it more as a library of realistic stones, ores, and generation
 that modpack makers can utilize to bring their worlds to... not-life? Stones are not alive, as far as I can recall!
 
+Included are 50+ generatable stones, plus their respective
+regolith, cobble, and decorative variants. 
+Additonally, 50+ ores are available to mine. These ores can
+be generated as several kinds of deposits. Large layers or blobs,
+placer deposits in rivers, large porphyry masses, hydrothermal
+veins, or even Minecraft-style scattering if desired! Properties
+such as ore richness, density, spawn heights, valid geology, and 
+even mixes of different ores in the same deposit are configurable!
+
 Features include highly variable and random stone strata generation. No more just-flat stone layers; JemGeo's strata
 can be deformed, tilted, and curvy! These features operate using user-defined stone presets and generate within
 configurable ranges. This means if one does not want a realistic setting, more of one rock over another, etc., then
