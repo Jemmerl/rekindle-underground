@@ -11,14 +11,15 @@ It is currently mainly for use within the in-dev Rekindle modpack, but is being 
 for general use. It is NOT a standalone mod. Consider it more as a library of realistic stones, ores, and generation
 that modpack makers can utilize to bring their worlds to... not-life? Stones are not alive, as far as I can recall!
 
-Included are 50+ generatable stones, plus their respective
-regolith, cobble, and decorative variants. 
-Additonally, 50+ ores are available to mine. These ores can
-be generated as several kinds of deposits. Large layers or blobs,
-placer deposits in rivers, large porphyry masses, hydrothermal
-veins, or even Minecraft-style scattering if desired! Properties
-such as ore richness, density, spawn heights, valid geology, and 
+Included are 50+ generatable stones, plus their respective regolith, cobble, and decorative variants.
+Additonally, 50+ ores are available to mine. These ores can be generated as several kinds of deposits.
+Large layers or blobs, placer deposits in rivers, large porphyry masses, hydrothermal veins, or even Minecraft-style
+scattering if desired! Properties such as ore richness, density, spawn heights, valid geology, and
 even mixes of different ores in the same deposit are configurable!
+
+Moreover, there is no longer a need for silk-touch to acquire raw stone. Get a chisel and start an open pit quarry!
+By requiring multiple faces open to quarry raw stone, players are highly encouraged to build realistic quarries to
+most efficiently harvest stone.
 
 Features include highly variable and random stone strata generation. No more just-flat stone layers; JemGeo's strata
 can be deformed, tilted, and curvy! These features operate using user-defined stone presets and generate within
@@ -35,8 +36,8 @@ the stones get harder and harder to mine. Both of these features are completely 
 Formations such as igneous bodies or hydrothermal deposits are also included! For example: explosive diatreme-maar
 formations that include kimberlite pipes can be found! No more getting your diamonds from Y-Level 16, you need to get
 prospecting! One can also expect to find dikes and sills, surface boulders, hydrothermally deposited veins,
-river and beach placers, large igneous plutons, flood basalt "traps", surface regoliths, and more -- all entirely
-user configurable!
+river and beach placers, large igneous plutons, flood basalt "traps", surface regoliths, and more -- need I say it?
+All entirely user configurable!
 
 Over time, greater control is planned for these features. With more power comes more complexity, but built-in
 documentation is planned for your reading pleasure!
