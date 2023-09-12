@@ -168,11 +168,11 @@ public class BoulderFeature extends Feature<NoFeatureConfig> {
         if (JemsGeoConfig.SERVER.debug_boulders.get()) {
             if (adjacent) {
                 JemsGeology.getInstance().LOGGER.info(
-                        "Placed Extra Boulder from gen: {} with stone: {} at ({} ~ {}) with long radius: {}, short radius {}, and embed depth {}.",
+                        "-> Placed Extra Boulder from gen: {} with stone: {} at ({} ~ {}) with long radius: {}, short radius {}, and embed depth {}.",
                         entry.getName(), geologyType.getName(), centerX, centerZ, rLong, rShort, embedDepth);
             } else {
                 JemsGeology.getInstance().LOGGER.info(
-                        "Placed Basic Boulder from gen: {} with stone: {} at ({} ~ {}) with long radius: {}, short radius {}, and embed depth {}.",
+                        "Placed Boulder from gen: {} with stone: {} at ({} ~ {}) with long radius: {}, short radius {}, and embed depth {}.",
                         entry.getName(), geologyType.getName(), centerX, centerZ, rLong, rShort, embedDepth);
             }
         }

@@ -52,7 +52,7 @@ public class ServerConfig {
 
         // Debug options
         private static final boolean DEBUG_DIATREME_MAAR = false;
-        private static final boolean DEBUG_BOULDERS = true;
+        private static final boolean DEBUG_BOULDERS = false;
         private static final boolean DEBUG_BATHOLITHS = false;
         private static final boolean DEBUG_TEST_GENFEATURES = true;
         private static final boolean DEBUG_GENFEATURES_READER = false;
