@@ -1,0 +1,29 @@
+{
+  "name": "const_scatter_two",
+  "deposit_type": "constant_scatter",
+  "settings": {
+    "chunk_spawn_tries": 20,
+    "size": 9,
+    "max_height": 80,
+    "min_height": 35,
+    "accurate_size": false
+  },
+  "grades": {
+    "high": 80,
+    "mid": 20,
+    "low": 0
+  },
+  "ores": [
+    {
+      "ore": "magnetite",
+      "weight": 100
+    }
+  ],
+  "stones": [
+    "all_stone"
+  ],
+  "biomes": [
+    "all"
+  ]
+}
+

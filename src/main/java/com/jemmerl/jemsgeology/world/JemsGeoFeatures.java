@@ -19,7 +19,7 @@ public class JemsGeoFeatures {
     public static final ConfiguredFeature<?, ?> STONE_GEN_CONFIG = ModFeatures.STONE_GEN.get().withConfiguration(new NoFeatureConfig())
             .withPlacement(ModFeaturePlacements.BOTTOM_CORNER_PLACEMENT.get().configure(IPlacementConfig.NO_PLACEMENT_CONFIG));
 
-    // TODO make chance config based? registration shouldnt use configs... move chance into generate method -- same for boulders
+    // TODO make chance config based? registration shouldnt use configs... move chance into generate method -- see same for boulders
     public static final ConfiguredFeature<?, ?> MAAR_DIATREME_GEN_CONFIG = ModFeatures.MAAR_DIATREME_GEN.get().withConfiguration(new NoFeatureConfig())
             .withPlacement(ModFeaturePlacements.PIPE_CHANCE_PLACEMENT.get().configure(new ChanceConfig(300))); // Normally 300, larger is less likely (100 for testing)
 
@@ -29,6 +29,11 @@ public class JemsGeoFeatures {
     public static final ConfiguredFeature<?, ?> ORE_PLACER_CONFIG = ModFeatures.ORE_PLACER_GEN.get().withConfiguration(new NoFeatureConfig())
             .withPlacement(ModFeaturePlacements.PLACER_CONSIST_PLACER.get().configure(IPlacementConfig.NO_PLACEMENT_CONFIG));
 
+    public static final ConfiguredFeature<?, ?> ORE_CONST_SCATTER_CONFIG = ModFeatures.ORE_CONST_SCATTER_GEN.get().withConfiguration(new NoFeatureConfig())
+            .withPlacement(ModFeaturePlacements.BOTTOM_CORNER_PLACEMENT.get().configure(IPlacementConfig.NO_PLACEMENT_CONFIG));
+
+    /////////////////////////////////////////////////////////////////////////////////////////
+
     private static <FC extends IFeatureConfig> void CFRegister(String name, ConfiguredFeature<FC, ?> configuredFeature) {
         Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(JemsGeology.MOD_ID, name), configuredFeature);
     }
@@ -36,7 +41,9 @@ public class JemsGeoFeatures {
     public static void registerConfiguredFeatures() {
         CFRegister("stone_generator", STONE_GEN_CONFIG);
         CFRegister("mantle_pipe_generator", MAAR_DIATREME_GEN_CONFIG);
-        CFRegister("mantle_pipe_generator", BOULDER_GEN_CONFIG);
+        CFRegister("boulder_generator", BOULDER_GEN_CONFIG);
+        CFRegister("ore_placer_generator", ORE_PLACER_CONFIG);
+        CFRegister("ore_const_scatter_generator", ORE_CONST_SCATTER_CONFIG);
     }
 
 }

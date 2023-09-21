@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Matrix3f;
 import net.minecraft.util.math.vector.Vector3i;
 import net.minecraftforge.common.Tags;
@@ -46,18 +47,27 @@ public class UtilMethods {
         return ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemName));
     }
 
-    // Returns the unit vector for a given vector of any size
-    public static double[] getUnitVector(double[] vals) {
-        double squareSum = 0;
-        for (double n:vals) {
-            squareSum += n*n;
-        }
-        double magnitude = Math.cbrt(squareSum);
-        double[] unitVec = new double[vals.length];
-        for (int i = 0; i < vals.length; i++) {
-            unitVec[i] = (vals[i] / magnitude);
-        }
-        return unitVec;
+    // Returns the 2D unit vector using 2D coordinates
+    public static float[] points2DUnitVec(float x, float y) {
+        float magnitude = (float)Math.sqrt(x*x + y*y);
+        return new float[]{(x / magnitude), (y / magnitude)};
+    }
+
+    // Returns the 3D unit vector using 3D coordinates
+    public static float[] points3DUnitVec(float x, float y, float z) {
+        float magnitude = (float)Math.sqrt(x*x + y*y + z*z);
+        return new float[]{(x / magnitude), (y / magnitude), (z / magnitude)};
+    }
+
+    // Returns the 2D unit vector using an angle in radians
+    public static float[] angles2DUnitVec(float alpha) {
+        return new float[]{((float)Math.cos(alpha)), ((float)Math.sin(alpha))};
+    }
+
+    // Returns the 3D unit vector using two angles in radians
+    public static float[] angles3DUnitVec(float alpha, float beta) {
+        float cosB = (float)Math.cos(beta);
+        return new float[]{(cosB * (float)Math.sin(alpha)), ((float)Math.sin(beta)), (cosB * (float)Math.cos(alpha))};
     }
 
     // Return the 2D distance between two variables
@@ -173,6 +183,28 @@ public class UtilMethods {
             case UP:
             default:
                 return face;
+        }
+    }
+
+    // Adds a value to specific BlockPos ordinate(s)
+    public static BlockPos addToOrdinate(BlockPos pos, float add, int flag) {
+        switch (flag) {
+            case 0:
+                return pos.add(add, 0, 0);
+            case 1:
+                return pos.add(0, add, 0);
+            case 2:
+                return pos.add(0, 0, add);
+            case 3:
+                return pos.add(add, add, 0);
+            case 4:
+                return pos.add(0, add, add);
+            case 5:
+                return pos.add(add, 0, add);
+//            case 3:
+//                return pos.add(add, add, add);
+            default:
+                return pos;
         }
     }
 }

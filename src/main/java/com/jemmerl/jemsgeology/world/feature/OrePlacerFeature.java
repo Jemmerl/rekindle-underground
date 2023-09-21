@@ -96,6 +96,7 @@ public class OrePlacerFeature extends Feature<NoFeatureConfig>{
                             // Check if the block already has an ore in it; if so, roll to replace
                             if (hostState.hasProperty(StoneGeoBlock.ORE_TYPE) && (hostState.get(StoneGeoBlock.ORE_TYPE) != OreType.NONE)) {
                                 // TODO Currently set to 40% chance to NOT replace
+                                // add to other deposits? if so, add to the placeDepositOre method in DepositUtils
                                 if (rand.nextFloat() > 0.60f) { continue; }
                             }
 

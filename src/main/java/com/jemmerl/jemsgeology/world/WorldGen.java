@@ -21,8 +21,7 @@ public class WorldGen {
         List<LinkedHashMap.SimpleEntry<ConfiguredFeature<?, ?>, List<ResourceLocation>>> allStoneFeatures = new ArrayList<>();
 
         allStoneFeatures.add(new AbstractMap.SimpleEntry<>(JemsGeoFeatures.STONE_GEN_CONFIG, null));
-
-        //allStoneFeatures.add(new AbstractMap.SimpleEntry<>(RankineBiomeFeatures.WORLD_REPLACER_GEN, WorldgenUtils.getBiomeNamesFromCategory(Collections.emptyList(), false)));
+        allStoneFeatures.add(new AbstractMap.SimpleEntry<>(JemsGeoFeatures.ORE_CONST_SCATTER_CONFIG, null));
 
         return allStoneFeatures;
     }

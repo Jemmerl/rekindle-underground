@@ -14,7 +14,8 @@ public class BottomCornerPlacer extends SimplePlacement<NoPlacementConfig> {
         super(codec);
     }
 
-    // Gets a single spot for placement, the bottom chunk corner
+    // Gets a single spot for placement, the bottom, north-west chunk corner.
+    // X and Z increases into the chunk. Starts at Y = 0
     @Override
     protected Stream<BlockPos> getPositions(Random random, NoPlacementConfig config, BlockPos pos) {
         int i = 1;

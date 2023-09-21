@@ -27,6 +27,9 @@ public class ModFeatures {
     public static final RegistryObject<Feature<NoFeatureConfig>> ORE_PLACER_GEN
             = FEATURES.register("ore_placer_gen", () -> new OrePlacerFeature(NoFeatureConfig.CODEC));
 
+    public static final RegistryObject<Feature<NoFeatureConfig>> ORE_CONST_SCATTER_GEN
+            = FEATURES.register("ore_const_scatter_gen", () -> new OreConstantScatterFeature(NoFeatureConfig.CODEC));
+
     public static void register(IEventBus eventBus) {
         FEATURES.register(eventBus); }
 }

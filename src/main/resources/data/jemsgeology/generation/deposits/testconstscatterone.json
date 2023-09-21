@@ -1,0 +1,33 @@
+{
+  "name": "testconst_scatter_one",
+  "deposit_type": "constant_scatter",
+  "settings": {
+    "chunk_spawn_tries": 10,
+    "size": 22,
+    "max_height": 45,
+    "min_height": 5,
+    "accurate_size": false
+  },
+  "grades": {
+    "high": 80,
+    "mid": 20,
+    "low": 0
+  },
+  "ores": [
+    {
+      "ore": "cryolite",
+      "weight": 65
+    },
+    {
+      "ore": "cinnabar",
+      "weight": 35
+    }
+  ],
+  "stones": [
+    "all_stone"
+  ],
+  "biomes": [
+    "all"
+  ]
+}
+

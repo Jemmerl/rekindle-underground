@@ -56,7 +56,7 @@ public class ServerConfig {
         private static final boolean DEBUG_BATHOLITHS = false;
         private static final boolean DEBUG_TEST_GENFEATURES = true;
         private static final boolean DEBUG_GENFEATURES_READER = false;
-        private static final boolean DEBUG_TEST_DEPOSITS = true;
+        private static final boolean DEBUG_TEST_DEPOSITS = false;
         private static final boolean DEBUG_DEPOSIT_READER = false;
         private static final boolean DEBUG_LAYER_DEPOSITS = false;
         private static final boolean DEBUG_PLACER_DEPOSITS = false;

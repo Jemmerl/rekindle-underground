@@ -20,8 +20,13 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.ISeedReader;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.Heightmap;
+import net.minecraft.world.gen.feature.OreFeature;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -53,93 +58,6 @@ public class DepositUtil {
         return ((blockIn instanceof IGeoBlock) && validStones.contains(((IGeoBlock) blockIn).getGeologyType()));
         //return (blockIn instanceof IOreBlock); // Debug Tool
     }
-
-
-    //////////////////////
-    // Generation Utils //
-    //////////////////////
-
-    // Process the enqueued blocks for a chunk
-    public static boolean enqueueBlockPlacement(ISeedReader level, BlockPos qPos, OreType qType, GradeType qGrade,
-                                                String qName, BlockPos genPos, StateMapBuilder stateMap,
-                                                IDepositCapability depCap, @Nullable IChunkGennedCapability cgCap) {
-
-        BlockState[][][] stoneStateMap = stateMap.getStoneStateMap();
-
-        // genPos and genChunk are the corner BlockPos and ChunkPos that the statemap is being generated for
-        ChunkPos genChunk = new ChunkPos(genPos);
-
-        // qPos and qChuck are the specific block position and respective chunk of the enqueued placement
-        ChunkPos qChunk = new ChunkPos(qPos);
-
-        // qName is the name of the deposit type being enqueued from, with qDeposit being that deposit instance
-        IEnqueuedDeposit qDeposit = DepositRegistrar.getOreDeposits().get(qName);
-
-        // If the enqueued chunk is the current generating chunk, attempt to place into the statemap
-        if (qChunk.equals(genChunk)) {
-            // Check if the block is placing in a valid deposit biome
-            if (!qDeposit.getBiomes().contains(level.getBiome(qPos).getCategory())) {
-                return false;
-            }
-
-            int xIndex = Math.abs(qPos.getX() - genPos.getX());
-            int zIndex = Math.abs(qPos.getZ() - genPos.getZ());
-            try {
-                BlockState hostState = stoneStateMap[xIndex][qPos.getY()][zIndex];
-                if (isValidStone(hostState.getBlock(), qDeposit.getValid())) {
-                    stoneStateMap[xIndex][qPos.getY()][zIndex] = hostState.with(StoneGeoBlock.ORE_TYPE, qType)
-                            .with(StoneGeoBlock.GRADE_TYPE, qGrade);
-                    return true;
-                }
-            } catch (ArrayIndexOutOfBoundsException e) {
-
-                // Debug
-                if (JemsGeoConfig.SERVER.debug_block_enqueuer.get()){
-                    JemsGeology.getInstance().LOGGER.warn(
-                            "Enq block at {} was out of bounds with values {} {} {}",
-                            qPos, xIndex, qPos.getY(), zIndex);
-                }
-
-                return false;
-            }
-
-            // If this statement reaches here, the OreBlock was not a valid placement stone or something has gone very wrong...
-            return false;
-        }
-
-        // If not in the currently generating chunk, and the enqueued chunk has generated, try to force placement
-        if (cgCap != null) {
-            if (cgCap.hasChunkGenerated(qChunk)) {
-                // Check if the block is placing in a valid deposit biome
-                if (!qDeposit.getBiomes().contains(level.getBiome(qPos).getCategory())) {
-                    return false;
-                }
-
-                BlockState state = level.getBlockState(qPos);
-                state = UtilMethods.convertVanillaToDetritus(state); // Convert vanilla detritus to respective OreBlocks for comparison
-
-                if (isValidStone(state.getBlock(), qDeposit.getValid())) {
-                    if (!level.setBlockState(qPos, state.with(StoneGeoBlock.ORE_TYPE, qType).with(StoneGeoBlock.GRADE_TYPE, qGrade), 2 | 16)) {
-
-                        // Debug
-                        if (JemsGeoConfig.SERVER.debug_block_enqueuer.get()){
-                            JemsGeology.getInstance().LOGGER.warn("Somehow {} could not be placed at {} even though chunk has generated",
-                                    state.getBlock().getRegistryName(), qPos);
-                        }
-
-                        return false;
-                    }
-                }
-                return true;
-            } else {
-                depCap.putPendingOre(new BlockPos(qPos), qType, qGrade, qName);
-                return false;
-            }
-        }
-
-        return false;
-    }
-
 
 
     ////////////////////////
@@ -289,4 +207,227 @@ public class DepositUtil {
         return biomeArray;
     }
 
+
+    //////////////////////
+    // Generation Utils //
+    //////////////////////
+
+    // Process the enqueued blocks for a chunk
+    public static boolean enqueueBlockPlacement(ISeedReader level, BlockPos qPos, OreType qType, GradeType qGrade,
+                                                String qName, BlockPos genPos, StateMapBuilder stateMap,
+                                                IDepositCapability depCap, @Nullable IChunkGennedCapability cgCap) {
+
+        BlockState[][][] stoneStateMap = stateMap.getStoneStateMap();
+
+        // genPos and genChunk are the corner BlockPos and ChunkPos that the statemap is being generated for
+        ChunkPos genChunk = new ChunkPos(genPos);
+
+        // qPos and qChuck are the specific block position and respective chunk of the enqueued placement
+        ChunkPos qChunk = new ChunkPos(qPos);
+
+        // qName is the name of the deposit type being enqueued from, with qDeposit being that deposit instance
+        IEnqueuedDeposit qDeposit = DepositRegistrar.getOreDeposits().get(qName);
+
+        // If the enqueued chunk is the current generating chunk, attempt to place into the statemap
+        if (qChunk.equals(genChunk)) {
+            // Check if the block is placing in a valid deposit biome
+            if (!qDeposit.getBiomes().contains(level.getBiome(qPos).getCategory())) {
+                return false;
+            }
+
+            int xIndex = Math.abs(qPos.getX() - genPos.getX());
+            int zIndex = Math.abs(qPos.getZ() - genPos.getZ());
+            try {
+                BlockState hostState = stoneStateMap[xIndex][qPos.getY()][zIndex];
+                if (isValidStone(hostState.getBlock(), qDeposit.getValid())) {
+                    stoneStateMap[xIndex][qPos.getY()][zIndex] = hostState.with(StoneGeoBlock.ORE_TYPE, qType)
+                            .with(StoneGeoBlock.GRADE_TYPE, qGrade);
+                    return true;
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+
+                // Debug
+                if (JemsGeoConfig.SERVER.debug_block_enqueuer.get()){
+                    JemsGeology.getInstance().LOGGER.warn(
+                            "Enq block at {} was out of bounds with values {} {} {}",
+                            qPos, xIndex, qPos.getY(), zIndex);
+                }
+
+                return false;
+            }
+
+            // If this statement reaches here, the OreBlock was not a valid placement stone or something has gone very wrong...
+            return false;
+        }
+
+        // If not in the currently generating chunk, and the enqueued chunk has generated, try to force placement
+        if (cgCap != null) {
+            if (cgCap.hasChunkGenerated(qChunk)) {
+                // Check if the block is placing in a valid deposit biome
+                if (!qDeposit.getBiomes().contains(level.getBiome(qPos).getCategory())) {
+                    return false;
+                }
+
+                BlockState state = level.getBlockState(qPos);
+                state = UtilMethods.convertVanillaToDetritus(state); // Convert vanilla detritus to respective OreBlocks for comparison
+
+                if (isValidStone(state.getBlock(), qDeposit.getValid())) {
+                    if (!level.setBlockState(qPos, state.with(StoneGeoBlock.ORE_TYPE, qType).with(StoneGeoBlock.GRADE_TYPE, qGrade), 2 | 16)) {
+
+                        // Debug
+                        if (JemsGeoConfig.SERVER.debug_block_enqueuer.get()){
+                            JemsGeology.getInstance().LOGGER.warn("Somehow {} could not be placed at {} even though chunk has generated",
+                                    state.getBlock().getRegistryName(), qPos);
+                        }
+
+                        return false;
+                    }
+                }
+                return true;
+            } else {
+                depCap.putPendingOre(new BlockPos(qPos), qType, qGrade, qName);
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+
+// have generate function determine based on size what function to use (if small, not even MC code is good)
+// change from accepting range to accepting average value
+// IF USING MINECRAFT METHOD, ALWAYS PASS TO STANDARD UNLESS AVG = 1
+
+
+    // Gets the placement area for the Minecraft ore cubes
+    public static boolean genMinecraftOre(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, IScatterDeposit scatterDeposit) {
+        float angle = rand.nextFloat() * (float)Math.PI;
+        float radius = (float)scatterDeposit.getSize() / 8.0F; // Determines the longest radius in any direction
+        int extension = MathHelper.ceil((radius + 1.0F) / 2.0F); // Determines how much further out to check to ensure all spots evaluated (cubes will overhang from placement area)
+        double xMax = (double)pos.getX() + Math.sin(angle) * (double)radius; // V Determines horizontal geometry (narrow or blob)
+        double xMin = (double)pos.getX() - Math.sin(angle) * (double)radius; // |
+        double zMax = (double)pos.getZ() + Math.cos(angle) * (double)radius; // |
+        double zMin = (double)pos.getZ() - Math.cos(angle) * (double)radius; // ^
+        double y1 = (pos.getY() + rand.nextInt(3) - 2); // V Determines vertical geometry (thick or thin)
+        double y2 = (pos.getY() + rand.nextInt(3) - 2); // ^
+        int startX = pos.getX() - MathHelper.ceil(radius) - extension; // Starting X to check (increases from here)
+        int startY = pos.getY() - 2 - extension; // Starting Y to check (increases from here)
+        int startZ = pos.getZ() - MathHelper.ceil(radius) - extension; // Starting Z to check (increases from here)
+        int horizDiameter = 2 * (MathHelper.ceil(radius) + extension); // Horizontal diameter of deposit placement area
+        int vertDiameter = 2 * (2 + extension); // Vertical diameter of deposit placement area
+
+        // Iterate over the potential placement area and try to confirm some part of it is underground
+        for(int checkX = startX; checkX <= startX + horizDiameter; ++checkX) {
+            for(int checkZ = startZ; checkZ <= startZ + horizDiameter; ++checkZ) {
+                // If any Y value is underground, then:
+                if (startY <= reader.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, checkX, checkZ)) {
+                    // Try to place ore deposit
+                    return placeOreCubes(reader, rand, scatterDeposit, xMax, xMin, zMax, zMin, y1, y2, startX, startY, startZ, horizDiameter, vertDiameter);
+                }
+            }
+        }
+        return false; // If no blocks placed, then return false
+    }
+
+    // Place Minecraft ore cubes over the placement area
+    private static boolean placeOreCubes(IWorld reader, Random rand, IScatterDeposit scatterDeposit, double xMax, double xMin, double zMax, double zMin, double y1, double y2, int startX, int startY, int startZ, int horizDiameter, int vertDiameter) {
+        // Get the weighted random grade of the specific placement try
+        GradeType grade = scatterDeposit.getGrades().nextElt();
+
+        int blocksPlaced = 0; // Counts number of placed blocks
+        BitSet bitset = new BitSet(horizDiameter * vertDiameter * horizDiameter); // Make empty bitset with size length*width*height to track all placements
+        BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
+        int size = scatterDeposit.getSize(); // How many cubes of diameter (size/4) aka radius (size/8) are placed
+        double[] cube = new double[size * 4]; // Holds coords and random factor for every cube
+
+        for(int k = 0; k < size; ++k) {
+            float f = (float)k / (float)size;
+            double cubeCenterX = MathHelper.lerp(f, xMax, xMin);
+            double cubeCenterY = MathHelper.lerp(f, y1, y2);
+            double cubeCenterZ = MathHelper.lerp(f, zMax, zMin);
+            double halfRadiusVariation = rand.nextDouble() * (double)size / 16.0D; // random amount by a half-radius
+            double d7 = ((double)(MathHelper.sin((float)Math.PI * f) + 1.0F) * halfRadiusVariation + 1.0D) / 2.0D;
+            cube[k * 4 + 0] = cubeCenterX;
+            cube[k * 4 + 1] = cubeCenterY;
+            cube[k * 4 + 2] = cubeCenterZ;
+            cube[k * 4 + 3] = d7; //some kind of radius fluxation, based on its later usage
+        }
+
+        //check if two cubes overlap?, cancel one of them if so
+        for(int Ci = 0; Ci < size - 1; ++Ci) {
+            if (!(cube[Ci * 4 + 3] <= 0.0D)) {
+                for(int Cj = Ci + 1; Cj < size; ++Cj) {
+                    if (!(cube[Cj * 4 + 3] <= 0.0D)) {
+                        double d12 = cube[Ci * 4 + 0] - cube[Cj * 4 + 0];
+                        double d13 = cube[Ci * 4 + 1] - cube[Cj * 4 + 1];
+                        double d14 = cube[Ci * 4 + 2] - cube[Cj * 4 + 2];
+                        double d15 = cube[Ci * 4 + 3] - cube[Cj * 4 + 3];
+                        if (d15 * d15 > d12 * d12 + d13 * d13 + d14 * d14) {
+                            if (d15 > 0.0D) {
+                                cube[Cj * 4 + 3] = -1.0D;
+                            } else {
+                                cube[Ci * 4 + 3] = -1.0D;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        for(int Ci = 0; Ci < size; ++Ci) {
+            double d11 = cube[Ci * 4 + 3];
+            if (!(d11 < 0.0D)) {
+                double d1 = cube[Ci * 4 + 0];
+                double d3 = cube[Ci * 4 + 1];
+                double d5 = cube[Ci * 4 + 2];
+                int cubeStartX = Math.max(MathHelper.floor(d1 - d11), startX); // V ensure coord outside max checked region
+                int cubeStartY = Math.max(MathHelper.floor(d3 - d11), startY); // |
+                int cubeStartZ = Math.max(MathHelper.floor(d5 - d11), startZ); // ^
+                int cubeEndX = Math.max(MathHelper.floor(d1 + d11), cubeStartX); // V same for the ending coords
+                int cubeEndY = Math.max(MathHelper.floor(d3 + d11), cubeStartY); // |
+                int cubeEndZ = Math.max(MathHelper.floor(d5 + d11), cubeStartZ); // ^
+
+                for(int placeX = cubeStartX; placeX <= cubeEndX; ++placeX) {
+                    double d8 = ((double)placeX + 0.5D - d1) / d11;
+                    if (d8 * d8 < 1.0D) {
+                        for(int placeY = cubeStartY; placeY <= cubeEndY; ++placeY) {
+                            double d9 = ((double)placeY + 0.5D - d3) / d11;
+                            if (d8 * d8 + d9 * d9 < 1.0D) {
+                                for(int placeZ = cubeStartZ; placeZ <= cubeEndZ; ++placeZ) {
+                                    double d10 = ((double)placeZ + 0.5D - d5) / d11;
+                                    if (d8 * d8 + d9 * d9 + d10 * d10 < 1.0D) {
+                                        // Convert placePos to its position in the bitset
+                                        int bitPos = placeX - startX + (placeY - startY) * horizDiameter + (placeZ - startZ) * horizDiameter * vertDiameter;
+                                        // If that position in the bitset is unfilled:
+                                        if (!bitset.get(bitPos)) {
+                                            bitset.set(bitPos); // Fill it so it is not placed over twice
+                                            blockpos$mutable.setPos(placeX, placeY, placeZ); // Position to try to place at
+                                            // If the position passes the configured placement requirement:
+                                            if (placeDepositOre(reader, scatterDeposit, grade, blockpos$mutable)) {
+                                                ++blocksPlaced; // If place successful, increment
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return blocksPlaced > 0; // Return true if any number of blocks were placed
+    }
+
+
+    // Place an ore block from a deposit
+    public static boolean placeDepositOre(IWorld reader, IDeposit deposit, GradeType grade, BlockPos placePos) {
+        BlockState hostState = UtilMethods.convertVanillaToDetritus(reader.getBlockState(placePos));
+        if (!DepositUtil.isValidStone(hostState.getBlock(), deposit.getValid())) {
+            return false;
+        }
+
+        return reader.setBlockState(placePos, hostState
+                .with(StoneGeoBlock.ORE_TYPE, deposit.getOres().nextElt())
+                .with(StoneGeoBlock.GRADE_TYPE, grade), 2);
+    }
 }

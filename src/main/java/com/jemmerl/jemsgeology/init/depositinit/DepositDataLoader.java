@@ -3,8 +3,10 @@ package com.jemmerl.jemsgeology.init.depositinit;
 import com.google.gson.*;
 import com.jemmerl.jemsgeology.JemsGeology;
 import com.jemmerl.jemsgeology.geology.deposits.DepositUtil;
+import com.jemmerl.jemsgeology.geology.deposits.instances.ConstantScatterDeposit;
 import com.jemmerl.jemsgeology.geology.deposits.instances.LayerEnqueuedDeposit;
 import com.jemmerl.jemsgeology.geology.deposits.instances.PlacerDeposit;
+import com.jemmerl.jemsgeology.geology.deposits.templates.ConstantScatterTemplate;
 import com.jemmerl.jemsgeology.geology.deposits.templates.LayerTemplate;
 import com.jemmerl.jemsgeology.geology.deposits.templates.PlacerTemplate;
 import com.jemmerl.jemsgeology.init.JemsGeoConfig;
@@ -56,10 +58,9 @@ public class DepositDataLoader extends JsonReloadListener {
                     throw new Exception();
                 }
 
-                // Sort and add deposits
+                // Parse the settings json element into the needed template and then use to create the respective deposit type
                 switch (jsonObj.get("deposit_type").getAsString()) {
                     case "layer":
-                        // Parse the settings json element into a LayerTemplate and then use to create a LayerDeposit
                         depositRegistrar.addOreDeposit(name, new LayerEnqueuedDeposit(
                                 GSON.fromJson(jsonObj.get("settings"), LayerTemplate.class))
                                         .setName(name)
@@ -67,11 +68,10 @@ public class DepositDataLoader extends JsonReloadListener {
                                         .setGrades(DepositUtil.getGrades(jsonObj.get("grades").getAsJsonObject(), name))
                                         .setValid(DepositUtil.getOreStones(jsonObj.get("stones").getAsJsonArray(), name))
                                         .setBiomes(DepositUtil.getBiomes(jsonObj.get("biomes").getAsJsonArray(), name)));
-                        JemsGeology.getInstance().LOGGER.info("Successfully loaded deposit {}!", rl);
+                        JemsGeology.getInstance().LOGGER.info("Successfully loaded Layer deposit {}!", rl);
                         break;
 
                     case "placer":
-                        // Parse the settings json element into a PlacerTemplate and then use to create a PlacerDeposit
                         depositRegistrar.addPlacerDeposit(name, new PlacerDeposit(
                                 GSON.fromJson(jsonObj.get("settings"), PlacerTemplate.class))
                                         .setName(name)
@@ -79,9 +79,19 @@ public class DepositDataLoader extends JsonReloadListener {
                                         .setGrades(DepositUtil.getGrades(jsonObj.get("grades").getAsJsonObject(), name))
                                         .setValid(DepositUtil.getOreStones(jsonObj.get("stones").getAsJsonArray(), name))
                                         .setBiomes(DepositUtil.getBiomes(jsonObj.get("biomes").getAsJsonArray(), name)));
-                        JemsGeology.getInstance().LOGGER.info("Successfully loaded deposit {}", rl);
+                        JemsGeology.getInstance().LOGGER.info("Successfully loaded Placer deposit {}", rl);
                         break;
 
+                    case "constant_scatter":
+                        depositRegistrar.addConstScatterDeposit(name, new ConstantScatterDeposit(
+                                GSON.fromJson(jsonObj.get("settings"), ConstantScatterTemplate.class))
+                                        .setName(name)
+                                        .setOres(DepositUtil.getOres(jsonObj.get("ores").getAsJsonArray(), name))
+                                        .setGrades(DepositUtil.getGrades(jsonObj.get("grades").getAsJsonObject(), name))
+                                        .setValid(DepositUtil.getOreStones(jsonObj.get("stones").getAsJsonArray(), name))
+                                        .setBiomes(DepositUtil.getBiomes(jsonObj.get("biomes").getAsJsonArray(), name)));
+                        JemsGeology.getInstance().LOGGER.info("Successfully loaded Constant-Scatter deposit {}", rl);
+                        break;
                     default:
                         JemsGeology.getInstance().LOGGER.warn("Deposit type {} not found in: {} ", jsonObj.get("deposit_type").getAsString(), rl);
                 }
