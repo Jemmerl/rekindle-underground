@@ -12,9 +12,9 @@ import net.minecraft.world.IBlockReader;
 
 public class RegolithGeoBlock extends BaseGeoBlock implements IGeoBlock {
 
-    public RegolithGeoBlock(AbstractBlock.Properties properties, GeologyType geologyType) {
-        super(properties, geologyType);
-        this.setDefaultState(this.stateContainer.getBaseState().with(ORE_TYPE, OreType.NONE).with(GRADE_TYPE, GradeType.LOWGRADE));
+    public RegolithGeoBlock(AbstractBlock.Properties properties, GeologyType geologyType, OreType oreType, GradeType gradeType) {
+        super(properties, geologyType, oreType, gradeType);
+        //this.setDefaultState(this.stateContainer.getBaseState().with(ORE_TYPE, OreType.NONE).with(GRADE_TYPE, GradeType.LOWGRADE));
     }
 
     @Override

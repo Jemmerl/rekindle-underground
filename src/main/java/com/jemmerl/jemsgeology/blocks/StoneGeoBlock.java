@@ -23,9 +23,9 @@ import net.minecraft.world.World;
 
 public class StoneGeoBlock extends BaseGeoBlock implements IGeoBlock {
 
-    public StoneGeoBlock(Properties properties, GeologyType geologyType) {
-        super(properties, geologyType);
-        this.setDefaultState(this.stateContainer.getBaseState().with(ORE_TYPE, OreType.NONE).with(GRADE_TYPE, GradeType.LOWGRADE));
+    public StoneGeoBlock(Properties properties, GeologyType geologyType, OreType oreType, GradeType gradeType) {
+        super(properties, geologyType, oreType, gradeType);
+        //this.setDefaultState(this.stateContainer.getBaseState().with(ORE_TYPE, OreType.NONE).with(GRADE_TYPE, GradeType.LOWGRADE));
     }
 
     @Override

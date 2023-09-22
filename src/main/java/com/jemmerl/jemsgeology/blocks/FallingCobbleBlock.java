@@ -27,12 +27,10 @@ public class FallingCobbleBlock extends FallingBlock {
         this.stoneGroupType = geologyType.getGroup();
     }
 
-    // Return the stone type of the block
     public GeologyType getGeologyType() {
         return this.geologyType;
     }
 
-    // Return stone group type of the block
     public StoneGroupType getStoneGroupType() {
         return this.stoneGroupType;
     }

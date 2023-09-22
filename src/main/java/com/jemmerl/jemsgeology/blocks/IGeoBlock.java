@@ -10,14 +10,11 @@ import net.minecraft.world.World;
 
 public interface IGeoBlock {
 
-    EnumProperty<OreType> ORE_TYPE = EnumProperty.create("oretype", OreType.class);
-    EnumProperty<GradeType> GRADE_TYPE = EnumProperty.create("gradetype", GradeType.class);
-
     // Return ore state of block
-    OreType getOreType(World world, BlockPos pos);
+    OreType getOreType();
 
     // Return grade state of block
-    GradeType getGradeType(World world, BlockPos pos);
+    GradeType getGradeType();
 
     // Return the stone type of the block
     GeologyType getGeologyType();
