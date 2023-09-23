@@ -322,7 +322,7 @@
   "item.jemsgeology.poor_uraninite_ore": "Small Uraninite",
   "item.jemsgeology.poor_wolframite_ore": "Small Wolframite",
 
-  "itemGroup.jemsgeo_stones_tab": "Jem's Geology: Stones",
+  "itemGroup.jemsgeo_base_stones_tab": "Jem's Geology: Stones",
   "itemGroup.jemsgeo_cobbles_tab": "Jem's Geology: Cobbles",
   "itemGroup.jemsgeo_ores_tab": "Jem's Geology: Ores",
   "itemGroup.jemsgeo_misc_tab": "Jem's Geology: Misc",

@@ -3,6 +3,9 @@ package com.jemmerl.jemsgeology.init;
 import com.jemmerl.jemsgeology.JemsGeology;
 import com.jemmerl.jemsgeology.blocks.*;
 import com.jemmerl.jemsgeology.data.enums.GeologyType;
+import com.jemmerl.jemsgeology.data.enums.ore.GradeType;
+import com.jemmerl.jemsgeology.data.enums.ore.OreType;
+import com.jemmerl.jemsgeology.init.blockinit.GeoBlockRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -16,11 +19,13 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class ModBlocks {
 
-    static final ItemGroup STONE_GROUP = ModItemGroups.JEMGEO_STONE_GROUP;
+    static final ItemGroup STONE_GROUP = ModItemGroups.JEMGEO_BASE_STONE_GROUP;
     static final ItemGroup COBBLE_GROUP = ModItemGroups.JEMGEO_COBBLE_GROUP;
 
     public static final DeferredRegister<Block> BLOCKS
@@ -32,6 +37,17 @@ public class ModBlocks {
 
     public static Block.Properties REGOLITH_PROP = AbstractBlock.Properties.create(Material.EARTH)
             .sound(SoundType.GROUND).harvestTool(ToolType.SHOVEL).harvestLevel(0).hardnessAndResistance(0.7f);
+
+    /////////////////////////
+    // GEOBLOCK REGISTRIES //
+    /////////////////////////
+
+    public static final Map<GeologyType, GeoBlockRegistry> geoRegistryMap = new HashMap<>();
+    static {
+        for (GeologyType geologyType: GeologyType.values()) {
+            geoRegistryMap.put(geologyType, new GeoBlockRegistry(geologyType));
+        }
+    }
 
 
     ////////////
@@ -307,10 +323,40 @@ public class ModBlocks {
         return STONE_PROP.hardnessAndResistance(2F, 7F);
     }
 
+
+
+    // TODO NAME
+    public static <T extends Block>RegistryObject<T> registerStoneGeoBlock(GeologyType geologyType, OreType oreType, GradeType gradeType) {
+        String name = "test";
+        Supplier<T> blockSupplier = () -> (T) new StoneGeoBlock(buildStoneProperties(geologyType), geologyType, oreType, gradeType);
+        return registerBlock(name, blockSupplier, ModItemGroups.JEMGEO_BASE_STONE_GROUP);
+    }
+
+    // TODO NAME
+    public static <T extends Block>RegistryObject<T> registerRegolithGeoBlock(GeologyType geologyType, OreType oreType, GradeType gradeType) {
+        String name = "test";
+        Supplier<T> blockSupplier = () -> (T) new RegolithGeoBlock(REGOLITH_PROP, geologyType, oreType, gradeType);
+        return registerBlock(name, blockSupplier, ModItemGroups.JEMGEO_BASE_STONE_GROUP);
+    }
+
+    public static <T extends Block>RegistryObject<T> registerCobblesBlock(GeologyType geologyType) {
+        String name = geologyType.getName() + "_cobbles";
+        Supplier<T> blockSupplier = () -> (T) new FallingCobbleBlock(buildCobblesProperties(geologyType), geologyType);
+        return registerBlock(name, blockSupplier, ModItemGroups.JEMGEO_BASE_STONE_GROUP);
+    }
+
+    public static <T extends Block>RegistryObject<T> registerCobblestoneBlock(GeologyType geologyType) {
+        String name = geologyType.getName() + "_cobblestone";
+        Supplier<T> blockSupplier = () -> (T) new Block(buildCobblestoneProperties());
+        return registerBlock(name, blockSupplier, ModItemGroups.JEMGEO_COBBLE_GROUP);
+    }
+
+
+
     // Block and BlockItem registry methods
-    private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block, int stackSize, ItemGroup itemGroup) {
+    public static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block, ItemGroup itemGroup) {
         RegistryObject<T> registeredBlock = BLOCKS.register(name, block);
-        registerBlockItem(name, registeredBlock, stackSize, itemGroup);
+        registerBlockItem(name, registeredBlock, 64, itemGroup);
         return registeredBlock;
     }
 

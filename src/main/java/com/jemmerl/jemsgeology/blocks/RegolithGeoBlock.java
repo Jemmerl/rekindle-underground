@@ -23,6 +23,7 @@ public class RegolithGeoBlock extends BaseGeoBlock implements IGeoBlock {
     }
 
     // Regolith blocks experience a hardness modifier, but not a depth scaling modifier
+    // TODO remove? replace with a general dirt/detritus/regolith hardness increase
     @Override
     public float getPlayerRelativeBlockHardness(BlockState state, PlayerEntity player, IBlockReader worldIn, BlockPos pos) {
         float f = state.getBlockHardness(worldIn, pos) * JemsGeoConfig.SERVER.stoneHardness.get();

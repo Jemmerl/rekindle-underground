@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 
 public class ModItemGroups {
 
-    public static final ItemGroup JEMGEO_STONE_GROUP = new ItemGroup("jemsgeo_stones_tab") {
+    public static final ItemGroup JEMGEO_BASE_STONE_GROUP = new ItemGroup("jemsgeo_base_stones_tab") {
         @Override
         public ItemStack createIcon() {
             return ModBlocks.BASALT_STONE.get().asItem().getDefaultInstance();

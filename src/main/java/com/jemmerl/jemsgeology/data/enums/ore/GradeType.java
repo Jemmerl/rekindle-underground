@@ -4,9 +4,10 @@ import net.minecraft.util.IStringSerializable;
 
 public enum GradeType implements IStringSerializable {
 
-    HIGHGRADE("highgrade"),
+    NONE("none"),
+    LOWGRADE("lowgrade"),
     MIDGRADE("midgrade"),
-    LOWGRADE("lowgrade");
+    HIGHGRADE("highgrade");
 
     private final String name;
 
