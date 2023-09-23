@@ -2,7 +2,9 @@ package com.jemmerl.jemsgeology.data.enums;
 
 import com.jemmerl.jemsgeology.init.JemsGeoConfig;
 
+import java.util.Arrays;
 import java.util.EnumSet;
+import java.util.List;
 
 public enum GeologyType {
 
@@ -153,5 +155,22 @@ public enum GeologyType {
         }
         return enumSet;
     }
+
+
+    ///////////
+    // LISTS //
+    ///////////
+
+    public static final List<GeologyType> STABLE_DET = Arrays.asList(
+            GeologyType.DIRT,
+            GeologyType.COARSE_DIRT,
+            GeologyType.CLAY
+    );
+
+    public static final List<GeologyType> FALLING_DET = Arrays.asList(
+            GeologyType.SAND,
+            GeologyType.RED_SAND,
+            GeologyType.GRAVEL
+    );
 
 }

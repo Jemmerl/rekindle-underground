@@ -8,6 +8,10 @@ import com.jemmerl.jemsgeology.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.RegistryObject;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class OreRegistry {
 
     private final RegistryObject<Block> lowOreBlock;
@@ -20,6 +24,7 @@ public class OreRegistry {
         this.highOreBlock = registerOreBlock(geoType, oreType, GradeType.HIGHGRADE, blockType);
     }
 
+    // Get an ore block with a specific grade (NONE returns null)
     public RegistryObject<Block> getGradeOre(GradeType gradeType) {
         switch (gradeType) {
             case LOWGRADE:
@@ -31,6 +36,11 @@ public class OreRegistry {
             default:
                 return null;
         }
+    }
+
+    // Build a list of all three graded ore blocks
+    public List<Block> getAllGradedOreBlocks() {
+        return Arrays.asList(lowOreBlock.get(), midOreBlock.get(), highOreBlock.get());
     }
 
     private RegistryObject<Block> registerOreBlock(GeologyType geoType, OreType oreType, GradeType gradeType, OreBlockType blockType) {

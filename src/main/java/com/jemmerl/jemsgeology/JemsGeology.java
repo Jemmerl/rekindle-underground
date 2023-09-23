@@ -1,6 +1,7 @@
 package com.jemmerl.jemsgeology;
 
 import com.jemmerl.jemsgeology.init.*;
+import com.jemmerl.jemsgeology.init.blockinit.GeoBlockRegistry;
 import com.jemmerl.jemsgeology.init.featureinit.FeatureDataLoader;
 import com.jemmerl.jemsgeology.init.depositinit.DepositDataLoader;
 import com.jemmerl.jemsgeology.util.lists.ModBlockLists;
@@ -86,9 +87,10 @@ public class JemsGeology
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
-        // Set transparent textures for the stone ore blocks
-        for (Block block : ModBlockLists.ALL_OREBLOCKS) {
-            RenderTypeLookup.setRenderLayer(block, RenderType.getCutout());
+        // Set transparent textures for all ore blocks
+        for (GeoBlockRegistry geoBlockRegistry : ModBlocks.GEOBLOCKS.values()) {
+            for(Block block: geoBlockRegistry.getAllOreBlocks())
+                RenderTypeLookup.setRenderLayer(block, RenderType.getCutout());
         }
     }
 

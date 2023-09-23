@@ -147,151 +147,19 @@ public class ModBlockLists {
     );
 
 
-    //////////////
-    // DETRITUS //
-    //////////////
-
-    public static List<Block> STABLE_DET = Arrays.asList(
-            ModBlocks.DIRT_STONE.get(),
-            ModBlocks.COARSE_DIRT_STONE.get(),
-            ModBlocks.CLAY_STONE.get()
-    );
-
-    public static List<Block> FALLING_DET = Arrays.asList(
-            ModBlocks.SAND_STONE.get(),
-            ModBlocks.RED_SAND_STONE.get(),
-            ModBlocks.GRAVEL_STONE.get()
-    );
-
 
     /////////////
     // COBBLES //
     /////////////
 
-    public static List<Block> COBBLES = Arrays.asList(
-            // Sedimentary
-            ModBlocks.CHALK_COBBLES.get(),
-            ModBlocks.LIMESTONE_COBBLES.get(),
-            ModBlocks.DOLOSTONE_COBBLES.get(),
-            ModBlocks.MARLSTONE_COBBLES.get(),
-            ModBlocks.SHALE_COBBLES.get(),
-            ModBlocks.LIMY_SHALE_COBBLES.get(),
-            ModBlocks.SANDSTONE_COBBLES.get(),
-            ModBlocks.RED_SANDSTONE_COBBLES.get(),
-            ModBlocks.ARKOSE_COBBLES.get(),
-            ModBlocks.GREYWACKE_COBBLES.get(),
-            ModBlocks.MUDSTONE_COBBLES.get(),
-            ModBlocks.CLAYSTONE_COBBLES.get(),
-            ModBlocks.SILTSTONE_COBBLES.get(),
-            ModBlocks.CONGLOMERATE_COBBLES.get(),
-            ModBlocks.VEIN_QUARTZ_COBBLES.get(),
-
-            // Igneous Extrusive
-            ModBlocks.RHYOLITE_COBBLES.get(),
-            ModBlocks.DACITE_COBBLES.get(),
-            ModBlocks.ANDESITE_COBBLES.get(),
-            ModBlocks.TRACHYTE_COBBLES.get(),
-            ModBlocks.BASALT_COBBLES.get(),
-
-            // Igneous Intrusive
-            ModBlocks.DIORITE_COBBLES.get(),
-            ModBlocks.GRANODIORITE_COBBLES.get(),
-            ModBlocks.GRANITE_COBBLES.get(),
-            ModBlocks.SYENITE_COBBLES.get(),
-            ModBlocks.GABBRO_COBBLES.get(),
-            ModBlocks.DIABASE_COBBLES.get(),
-            ModBlocks.KIMBERLITE_COBBLES.get(),
-            ModBlocks.LAMPROITE_COBBLES.get(),
-
-            // Metamorphic
-            ModBlocks.QUARTZITE_COBBLES.get(),
-            ModBlocks.SCHIST_COBBLES.get(),
-            ModBlocks.PHYLLITE_COBBLES.get(),
-            ModBlocks.SLATE_COBBLES.get(),
-            ModBlocks.GNEISS_COBBLES.get(),
-            ModBlocks.MARBLE_COBBLES.get(),
-            ModBlocks.PELITIC_HORNFELS_COBBLES.get(),
-            ModBlocks.CARBONATE_HORNFELS_COBBLES.get(),
-            ModBlocks.MAFIC_HORNFELS_COBBLES.get(),
-            ModBlocks.METACONGLOMERATE_COBBLES.get(),
-            ModBlocks.GREISEN_COBBLES.get()
-    );
-
-
-    //////////////////
-    // COBBLESTONES //
-    //////////////////
-
-    public static List<Block> COBBLESTONES = Arrays.asList(
-            // Sedimentary
-            ModBlocks.CHALK_COBBLESTONE.get(),
-            ModBlocks.LIMESTONE_COBBLESTONE.get(),
-            ModBlocks.DOLOSTONE_COBBLESTONE.get(),
-            ModBlocks.MARLSTONE_COBBLESTONE.get(),
-            ModBlocks.SHALE_COBBLESTONE.get(),
-            ModBlocks.LIMY_SHALE_COBBLESTONE.get(),
-            ModBlocks.SANDSTONE_COBBLESTONE.get(),
-            ModBlocks.RED_SANDSTONE_COBBLESTONE.get(),
-            ModBlocks.ARKOSE_COBBLESTONE.get(),
-            ModBlocks.GREYWACKE_COBBLESTONE.get(),
-            ModBlocks.MUDSTONE_COBBLESTONE.get(),
-            ModBlocks.CLAYSTONE_COBBLESTONE.get(),
-            ModBlocks.SILTSTONE_COBBLESTONE.get(),
-            ModBlocks.CONGLOMERATE_COBBLESTONE.get(),
-            ModBlocks.VEIN_QUARTZ_COBBLESTONE.get(),
-
-            // Igneous Extrusive
-            ModBlocks.RHYOLITE_COBBLESTONE.get(),
-            ModBlocks.DACITE_COBBLESTONE.get(),
-            ModBlocks.ANDESITE_COBBLESTONE.get(),
-            ModBlocks.TRACHYTE_COBBLESTONE.get(),
-            ModBlocks.BASALT_COBBLESTONE.get(),
-
-            // Igneous Intrusive
-            ModBlocks.DIORITE_COBBLESTONE.get(),
-            ModBlocks.GRANODIORITE_COBBLESTONE.get(),
-            ModBlocks.GRANITE_COBBLESTONE.get(),
-            ModBlocks.SYENITE_COBBLESTONE.get(),
-            ModBlocks.GABBRO_COBBLESTONE.get(),
-            ModBlocks.DIABASE_COBBLESTONE.get(),
-            ModBlocks.KIMBERLITE_COBBLESTONE.get(),
-            ModBlocks.LAMPROITE_COBBLESTONE.get(),
-
-            // Metamorphic
-            ModBlocks.QUARTZITE_COBBLESTONE.get(),
-            ModBlocks.SCHIST_COBBLESTONE.get(),
-            ModBlocks.PHYLLITE_COBBLESTONE.get(),
-            ModBlocks.SLATE_COBBLESTONE.get(),
-            ModBlocks.GNEISS_COBBLESTONE.get(),
-            ModBlocks.MARBLE_COBBLESTONE.get(),
-            ModBlocks.PELITIC_HORNFELS_COBBLESTONE.get(),
-            ModBlocks.CARBONATE_HORNFELS_COBBLESTONE.get(),
-            ModBlocks.MAFIC_HORNFELS_COBBLESTONE.get(),
-            ModBlocks.METACONGLOMERATE_COBBLESTONE.get(),
-            ModBlocks.GREISEN_COBBLESTONE.get()
-    );
-
-
-    public static List<Block> ALL_STONES = new ArrayList<>();
-    public static List<Block> ALL_REGOLITH = new ArrayList<>();
-    public static List<Block> ALL_DETRITUS = new ArrayList<>();
-    public static List<Block> ALL_OREBLOCKS = new ArrayList<>();
-
+    public static final List<Block> COBBLES = new ArrayList<>();
+    public static final List<Block> COBBLESTONES = new ArrayList<>();
     static {
-        ALL_STONES.addAll(SED_STONES);
-        ALL_STONES.addAll(IGN_STONES);
-        ALL_STONES.addAll(MET_STONES);
-
-        ALL_REGOLITH.addAll(SED_REGOLITH);
-        ALL_REGOLITH.addAll(IGN_REGOLITH);
-        ALL_REGOLITH.addAll(MET_REGOLITH);
-
-        ALL_DETRITUS.addAll(STABLE_DET);
-        ALL_DETRITUS.addAll(FALLING_DET);
-
-        ALL_OREBLOCKS.addAll(ALL_STONES);
-        ALL_OREBLOCKS.addAll(ALL_REGOLITH);
-        ALL_OREBLOCKS.addAll(ALL_DETRITUS);
+        for (GeologyType geoType: GeologyType.values()) {
+            if (!geoType.hasCobble()) continue;
+            COBBLES.add(ModBlocks.GEOBLOCKS.get(geoType).getCobbles());
+            COBBLESTONES.add(ModBlocks.GEOBLOCKS.get(geoType).getCobblestone());
+        }
     }
 
 

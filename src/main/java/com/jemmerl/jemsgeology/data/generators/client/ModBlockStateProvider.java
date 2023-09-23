@@ -1,6 +1,7 @@
 package com.jemmerl.jemsgeology.data.generators.client;
 
 import com.jemmerl.jemsgeology.blocks.StoneGeoBlock;
+import com.jemmerl.jemsgeology.data.enums.GeologyType;
 import com.jemmerl.jemsgeology.util.lists.ModBlockLists;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
@@ -37,7 +38,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
             });
         }
 
-        for (Block block : ModBlockLists.STABLE_DET) {
+        for (GeologyType geoType: GeologyType.STABLE_DET) {
             // Generate stone ore model and block states
 //            String blockPath;
 //            blockPath = block.getRegistryName().getPath();
@@ -52,7 +53,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
             });
         }
 
-        for (Block block : ModBlockLists.FALLING_DET) {
+        for (GeologyType geoType : GeologyType.FALLING_DET) {
             // Generate stone ore model and block states
 //            String blockPath;
 //            blockPath = block.getRegistryName().getPath();
