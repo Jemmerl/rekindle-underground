@@ -3,10 +3,8 @@ package com.jemmerl.jemsgeology.init;
 import com.jemmerl.jemsgeology.JemsGeology;
 import com.jemmerl.jemsgeology.blocks.*;
 import com.jemmerl.jemsgeology.data.enums.GeologyType;
-import com.jemmerl.jemsgeology.data.enums.StoneGroupType;
 import com.jemmerl.jemsgeology.data.enums.ore.GradeType;
 import com.jemmerl.jemsgeology.data.enums.ore.OreType;
-import com.jemmerl.jemsgeology.init.blockinit.DetritusBlockRegistry;
 import com.jemmerl.jemsgeology.init.blockinit.GeoBlockRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -21,7 +19,6 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -36,22 +33,10 @@ public class ModBlocks {
     // GEOBLOCK REGISTRY //
     ///////////////////////
 
-    public static final Map<GeologyType, GeoBlockRegistry> geoRegistryMap = new HashMap<>();
+    public static final Map<GeologyType, GeoBlockRegistry> GEOBLOCKS = new HashMap<>();
     static {
-        for (GeologyType geologyType: EnumSet.complementOf(GeologyType.getAllInGroup(StoneGroupType.DETRITUS))) {
-            geoRegistryMap.put(geologyType, new GeoBlockRegistry(geologyType));
-        }
-    }
-
-
-    ///////////////////////
-    // DETRITUS REGISTRY //
-    ///////////////////////
-
-    public static final Map<GeologyType, DetritusBlockRegistry> detRegistryMap = new HashMap<>();
-    static {
-        for (GeologyType geologyType: GeologyType.getAllInGroup(StoneGroupType.DETRITUS)) {
-            detRegistryMap.put(geologyType, new DetritusBlockRegistry(geologyType));
+        for (GeologyType geologyType: GeologyType.values()) {
+            GEOBLOCKS.put(geologyType, new GeoBlockRegistry(geologyType));
         }
     }
 

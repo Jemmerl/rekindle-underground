@@ -1,10 +1,10 @@
 package com.jemmerl.jemsgeology.commands;
 
-import com.jemmerl.jemsgeology.util.lists.ModBlockLists;
+import com.jemmerl.jemsgeology.data.enums.GeologyType;
+import com.jemmerl.jemsgeology.init.ModBlocks;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
@@ -33,8 +33,8 @@ public class JacksonCmd {
         int x = 0; // Width offset
 
         // Place stones
-        for (Block oreBlock : ModBlockLists.ALL_OREBLOCKS) {
-            BlockState state = oreBlock.getDefaultState();
+        for (GeologyType geologyType: GeologyType.values()) {
+            BlockState state = ModBlocks.GEOBLOCKS.get(geologyType).getBaseState();
 
             TileEntity tileentity = serverworld.getTileEntity(pos.up(y).north(x));
             IClearable.clearObj(tileentity);
@@ -50,11 +50,12 @@ public class JacksonCmd {
             }
         }
 
-        // Place cobbles
+        // Place cobblestones (look the same as cobbles, but will not fall)
         y = 1;
         x++;
-        for (Block cobbleBlock : ModBlockLists.COBBLESTONES) {
-            BlockState state = cobbleBlock.getDefaultState();
+        for (GeologyType geologyType: GeologyType.values()) {
+            if (!geologyType.hasCobble()) continue;
+            BlockState state = ModBlocks.GEOBLOCKS.get(geologyType).getCobblestone().getDefaultState();
 
             TileEntity tileentity = serverworld.getTileEntity(pos.up(y).north(x));
             IClearable.clearObj(tileentity);

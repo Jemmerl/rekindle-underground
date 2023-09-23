@@ -1,7 +1,10 @@
 package com.jemmerl.jemsgeology.commands;
 
 import com.jemmerl.jemsgeology.blocks.StoneGeoBlock;
+import com.jemmerl.jemsgeology.data.enums.GeologyType;
+import com.jemmerl.jemsgeology.data.enums.ore.GradeType;
 import com.jemmerl.jemsgeology.data.enums.ore.OreType;
+import com.jemmerl.jemsgeology.init.ModBlocks;
 import com.jemmerl.jemsgeology.util.lists.ModBlockLists;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -17,7 +20,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.fml.common.Mod;
 
+// TODO update to also accept grade type arguement
 public class OreWallCmd {
     public OreWallCmd (CommandDispatcher<CommandSource> dispatcher) {
         dispatcher.register(Commands.literal("jemsgeo").then(Commands.literal("orewall")
@@ -34,7 +39,7 @@ public class OreWallCmd {
     private int placeOreWall(CommandSource source, BlockPos pos, String oreString) throws CommandSyntaxException {
         ServerWorld serverworld = source.getWorld();
 
-        OreType oreType = null;
+        OreType oreType;
         try {
             // todo Error does not output if incorrect ore name
             oreType = OreType.valueOf(oreString.toUpperCase());
@@ -47,12 +52,12 @@ public class OreWallCmd {
         int x = 0; // Width offset
 
         // Place ores
-        for (Block oreBlock : ModBlockLists.ALL_OREBLOCKS) {
-            BlockState state = oreBlock.getDefaultState();
+        for (GeologyType geologyType: GeologyType.values()) {
+            BlockState state = ModBlocks.GEOBLOCKS.get(geologyType).getStoneOre(oreType, GradeType.MIDGRADE).getDefaultState();
 
             TileEntity tileentity = serverworld.getTileEntity(pos.up(y).north(x));
             IClearable.clearObj(tileentity);
-            if (!serverworld.setBlockState(pos.up(y).north(x), state.with(StoneGeoBlock.ORE_TYPE, oreType), 2)) {
+            if (!serverworld.setBlockState(pos.up(y).north(x), state, 2)) {
                 throw new SimpleCommandExceptionType(new StringTextComponent("Ore-wall placement failed!")).create();
             }
 

@@ -134,9 +134,10 @@ public enum GeologyType {
         return ((this.hardnessIndex == 0) ? GeologyType.Constants.RESISTS[1] : GeologyType.Constants.RESISTS[this.resistanceIndex]);
     }
 
-    public Boolean isInStoneGroup(StoneGroupType group){
+    public boolean isInStoneGroup(StoneGroupType group){
         return this.group.equals(group);
     }
+
 
     ////////////////////
     // STATIC METHODS //

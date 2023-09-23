@@ -370,14 +370,14 @@ public class ModBlockLists {
     // VANILLA DETRITUS //
     //////////////////////
 
-    public static Map<BlockState, BlockState> VANILLA_DET_LIST = new HashMap<>();
+    public static Map<BlockState, GeologyType> VANILLA_DET_LIST = new HashMap<>();
     static {
-        VANILLA_DET_LIST.put(Blocks.SAND.getDefaultState(), ModBlocks.SAND_STONE.get().getDefaultState());
-        VANILLA_DET_LIST.put(Blocks.RED_SAND.getDefaultState(), ModBlocks.RED_SAND_STONE.get().getDefaultState());
-        VANILLA_DET_LIST.put(Blocks.GRAVEL.getDefaultState(), ModBlocks.GRAVEL_STONE.get().getDefaultState());
-        VANILLA_DET_LIST.put(Blocks.DIRT.getDefaultState(), ModBlocks.DIRT_STONE.get().getDefaultState());
-        VANILLA_DET_LIST.put(Blocks.COARSE_DIRT.getDefaultState(), ModBlocks.COARSE_DIRT_STONE.get().getDefaultState());
-        VANILLA_DET_LIST.put(Blocks.CLAY.getDefaultState(), ModBlocks.CLAY_STONE.get().getDefaultState());
+        VANILLA_DET_LIST.put(Blocks.DIRT.getDefaultState(),  GeologyType.DIRT);
+        VANILLA_DET_LIST.put(Blocks.COARSE_DIRT.getDefaultState(),  GeologyType.COARSE_DIRT);
+        VANILLA_DET_LIST.put(Blocks.CLAY.getDefaultState(),  GeologyType.CLAY);
+        VANILLA_DET_LIST.put(Blocks.SAND.getDefaultState(), GeologyType.SAND);
+        VANILLA_DET_LIST.put(Blocks.RED_SAND.getDefaultState(),  GeologyType.RED_SAND);
+        VANILLA_DET_LIST.put(Blocks.GRAVEL.getDefaultState(),  GeologyType.GRAVEL);
     }
 
 
@@ -385,40 +385,40 @@ public class ModBlockLists {
     // CONTACT METAMORPHISM //
     //////////////////////////
 
-    public static Map<GeologyType, BlockState> CONTACT_META_MAP = new HashMap<>();
+    public static Map<GeologyType, GeologyType> CONTACT_META_MAP = new HashMap<>();
     static {
         // Quartzite
-        CONTACT_META_MAP.put(GeologyType.SANDSTONE, ModBlocks.QUARTZITE_STONE.get().getDefaultState());
-        CONTACT_META_MAP.put(GeologyType.RED_SANDSTONE, ModBlocks.QUARTZITE_STONE.get().getDefaultState());
-        CONTACT_META_MAP.put(GeologyType.ARKOSE, ModBlocks.QUARTZITE_STONE.get().getDefaultState());
+        CONTACT_META_MAP.put(GeologyType.SANDSTONE, GeologyType.QUARTZITE);
+        CONTACT_META_MAP.put(GeologyType.RED_SANDSTONE, GeologyType.QUARTZITE);
+        CONTACT_META_MAP.put(GeologyType.ARKOSE, GeologyType.QUARTZITE);
 
         // Marble
-        CONTACT_META_MAP.put(GeologyType.LIMESTONE, ModBlocks.MARBLE_STONE.get().getDefaultState());
-        CONTACT_META_MAP.put(GeologyType.DOLOSTONE, ModBlocks.MARBLE_STONE.get().getDefaultState());
-        CONTACT_META_MAP.put(GeologyType.CHALK, ModBlocks.MARBLE_STONE.get().getDefaultState());
+        CONTACT_META_MAP.put(GeologyType.LIMESTONE, GeologyType.MARBLE);
+        CONTACT_META_MAP.put(GeologyType.DOLOSTONE, GeologyType.MARBLE);
+        CONTACT_META_MAP.put(GeologyType.CHALK, GeologyType.MARBLE);
 
         // Carbonate Hornfels
-        CONTACT_META_MAP.put(GeologyType.MARLSTONE, ModBlocks.CARBONATE_HORNFELS_STONE.get().getDefaultState());
-        CONTACT_META_MAP.put(GeologyType.LIMY_SHALE, ModBlocks.CARBONATE_HORNFELS_STONE.get().getDefaultState());
-        CONTACT_META_MAP.put(GeologyType.GREYWACKE, ModBlocks.CARBONATE_HORNFELS_STONE.get().getDefaultState());
+        CONTACT_META_MAP.put(GeologyType.MARLSTONE, GeologyType.CARBONATE_HORNFELS);
+        CONTACT_META_MAP.put(GeologyType.LIMY_SHALE, GeologyType.CARBONATE_HORNFELS);
+        CONTACT_META_MAP.put(GeologyType.GREYWACKE, GeologyType.CARBONATE_HORNFELS);
 
         // Pelitic Hornfels
-        CONTACT_META_MAP.put(GeologyType.MUDSTONE, ModBlocks.PELITIC_HORNFELS_STONE.get().getDefaultState());
-        CONTACT_META_MAP.put(GeologyType.CLAYSTONE, ModBlocks.PELITIC_HORNFELS_STONE.get().getDefaultState());
-        CONTACT_META_MAP.put(GeologyType.SILTSTONE, ModBlocks.PELITIC_HORNFELS_STONE.get().getDefaultState());
-        CONTACT_META_MAP.put(GeologyType.SHALE, ModBlocks.PELITIC_HORNFELS_STONE.get().getDefaultState());
-        CONTACT_META_MAP.put(GeologyType.SLATE, ModBlocks.PELITIC_HORNFELS_STONE.get().getDefaultState());
-        CONTACT_META_MAP.put(GeologyType.SCHIST, ModBlocks.PELITIC_HORNFELS_STONE.get().getDefaultState());
+        CONTACT_META_MAP.put(GeologyType.MUDSTONE, GeologyType.PELITIC_HORNFELS);
+        CONTACT_META_MAP.put(GeologyType.CLAYSTONE, GeologyType.PELITIC_HORNFELS);
+        CONTACT_META_MAP.put(GeologyType.SILTSTONE, GeologyType.PELITIC_HORNFELS);
+        CONTACT_META_MAP.put(GeologyType.SHALE, GeologyType.PELITIC_HORNFELS);
+        CONTACT_META_MAP.put(GeologyType.SLATE, GeologyType.PELITIC_HORNFELS);
+        CONTACT_META_MAP.put(GeologyType.SCHIST, GeologyType.PELITIC_HORNFELS);
 
         // Mafic Hornfels TODO NOT COMPLETE LIST
-        CONTACT_META_MAP.put(GeologyType.RHYOLITIC_TUFF, ModBlocks.MAFIC_HORNFELS_STONE.get().getDefaultState());
-        CONTACT_META_MAP.put(GeologyType.TRACHYTIC_TUFF, ModBlocks.MAFIC_HORNFELS_STONE.get().getDefaultState());
-        CONTACT_META_MAP.put(GeologyType.ANDESITIC_TUFF, ModBlocks.MAFIC_HORNFELS_STONE.get().getDefaultState());
-        CONTACT_META_MAP.put(GeologyType.BASALTIC_TUFF, ModBlocks.MAFIC_HORNFELS_STONE.get().getDefaultState());
-        CONTACT_META_MAP.put(GeologyType.ULTRAMAFIC_TUFF, ModBlocks.MAFIC_HORNFELS_STONE.get().getDefaultState());
+        CONTACT_META_MAP.put(GeologyType.RHYOLITIC_TUFF, GeologyType.MAFIC_HORNFELS);
+        CONTACT_META_MAP.put(GeologyType.TRACHYTIC_TUFF, GeologyType.MAFIC_HORNFELS);
+        CONTACT_META_MAP.put(GeologyType.ANDESITIC_TUFF, GeologyType.MAFIC_HORNFELS);
+        CONTACT_META_MAP.put(GeologyType.BASALTIC_TUFF, GeologyType.MAFIC_HORNFELS);
+        CONTACT_META_MAP.put(GeologyType.ULTRAMAFIC_TUFF, GeologyType.MAFIC_HORNFELS);
 
         // Other
-        CONTACT_META_MAP.put(GeologyType.CONGLOMERATE, ModBlocks.METACONGLOMERATE_STONE.get().getDefaultState());
+        CONTACT_META_MAP.put(GeologyType.CONGLOMERATE, GeologyType.METACONGLOMERATE);
     }
 
 
@@ -444,7 +444,7 @@ public class ModBlockLists {
 
     // List of blocks with a different side texture
     public static List<Block> SIDE_TEXTURE_MODELS = Arrays.asList(
-            ModBlocks.PAHOEHOE_STONE.get()
+            ModBlocks.GEOBLOCKS.get(GeologyType.PAHOEHOE).getBaseStone()
     );
 
 }

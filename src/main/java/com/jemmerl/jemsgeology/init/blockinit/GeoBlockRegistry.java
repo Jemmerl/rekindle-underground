@@ -1,11 +1,13 @@
 package com.jemmerl.jemsgeology.init.blockinit;
 
 import com.jemmerl.jemsgeology.data.enums.GeologyType;
+import com.jemmerl.jemsgeology.data.enums.StoneGroupType;
 import com.jemmerl.jemsgeology.data.enums.ore.GradeType;
 import com.jemmerl.jemsgeology.data.enums.ore.OreBlockType;
 import com.jemmerl.jemsgeology.data.enums.ore.OreType;
 import com.jemmerl.jemsgeology.init.ModBlocks;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraftforge.fml.RegistryObject;
 
 import java.util.EnumSet;
@@ -14,6 +16,7 @@ import java.util.Map;
 
 public class GeoBlockRegistry {
 
+    private final  GeologyType geologyType;
     private final RegistryObject<Block> baseStone;
     private final RegistryObject<Block> regolith;
     private final RegistryObject<Block> cobbles;
@@ -23,12 +26,14 @@ public class GeoBlockRegistry {
 
     // TODO add to respective tags
     public GeoBlockRegistry(GeologyType geoType) {
+        this.geologyType = geoType;
         this.baseStone = ModBlocks.registerStoneGeoBlock(geoType);
-        this.regolith = ModBlocks.registerRegolithGeoBlock(geoType);
-        this.cobbles = ModBlocks.registerCobblesBlock(geoType);
-        this.cobblestone = ModBlocks.registerCobblestoneBlock(geoType);
-        this.stoneOreRegistry = fillOreRegistry(geoType, OreBlockType.STONE);
-        this.regolithOreRegistry = fillOreRegistry(geoType, OreBlockType.REGOLITH);
+        this.regolith = geoType.hasCobble() ? ModBlocks.registerRegolithGeoBlock(geoType) : null;
+        this.cobbles = geoType.hasCobble() ? ModBlocks.registerCobblesBlock(geoType) : null;
+        this.cobblestone = geoType.hasCobble() ? ModBlocks.registerCobblestoneBlock(geoType) : null;
+        this.stoneOreRegistry = geoType.isInStoneGroup(StoneGroupType.DETRITUS) ?
+                fillOreRegistry(geoType, OreBlockType.DETRITUS) : fillOreRegistry(geoType, OreBlockType.STONE);
+        this.regolithOreRegistry =  geoType.hasCobble() ? fillOreRegistry(geoType, OreBlockType.REGOLITH) : null;
     }
 
     /////////////
@@ -36,7 +41,12 @@ public class GeoBlockRegistry {
     /////////////
 
     public Block getBaseStone() { return baseStone.get(); }
-    public Block getRegolith() { return regolith.get(); }
+    public BlockState getBaseState() { return getBaseStone().getDefaultState(); } // Makes some hardcoded stuff cleaner
+
+    // GeoTypes with no cobble use their base stone as their own regolith
+    public Block getRegolith() {
+        return geologyType.hasCobble() ? regolith.get() : baseStone.get();
+    }
     public Block getCobbles() { return cobbles.get(); }
     public Block getCobblestone() { return cobblestone.get(); }
 
@@ -44,8 +54,10 @@ public class GeoBlockRegistry {
         return stoneOreRegistry.get(oreType).getGradeOre(gradeType).get();
     }
 
+    // GeoTypes with no cobble use their base stone as their own regolith
     public Block getRegolithOre(OreType oreType, GradeType gradeType) {
-        return regolithOreRegistry.get(oreType).getGradeOre(gradeType).get();
+        return  geologyType.hasCobble() ?
+                regolithOreRegistry.get(oreType).getGradeOre(gradeType).get() : getStoneOre(oreType, gradeType);
     }
 
 
