@@ -41,7 +41,7 @@ public class FallingGeoBlock extends FallingBlock implements IGeoBlock {
 
     @Override
     public OreType getOreType() {
-        return this.oreType
+        return this.oreType;
     }
 
     @Override

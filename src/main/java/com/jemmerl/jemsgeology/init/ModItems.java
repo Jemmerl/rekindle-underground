@@ -237,11 +237,11 @@ public class ModItems {
     }
 
     private static RegistryObject<Item> registerOreItem(OreType oreType) {
-        return ITEMS.register((oreType.getName() + "_ore"), () -> new Item(new Item.Properties().group(ModItemGroups.JEMGEO_ORES_GROUP)));
+        return ITEMS.register((oreType.getString() + "_ore"), () -> new Item(new Item.Properties().group(ModItemGroups.JEMGEO_ORES_GROUP)));
     }
 
     private static RegistryObject<Item> registerPoorOreItem(OreType oreType) {
-        return ITEMS.register(("poor_" + oreType.getName() + "_ore"), () -> new Item(new Item.Properties().group(ModItemGroups.JEMGEO_ORES_GROUP)));
+        return ITEMS.register(("poor_" + oreType.getString() + "_ore"), () -> new Item(new Item.Properties().group(ModItemGroups.JEMGEO_ORES_GROUP)));
     }
 
     // Item registry method

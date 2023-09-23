@@ -69,9 +69,14 @@ public enum OreType implements IStringSerializable{
         this.name = name;
     }
 
-    public String getName() {
-        return this.name;
+    @Override
+    public String getString() {
+        return name;
     }
+
+//    public String getString() {
+//        return this.name;
+//    }
 
 //    public static OreType fromString(String string) {
 //        for (OreType type : OreType.values()) {
@@ -98,9 +103,4 @@ public enum OreType implements IStringSerializable{
     }
 
     public Boolean hasOre() { return this != NONE; }
-
-    @Override
-    public String getString() {
-        return this.name;
-    }
 }
