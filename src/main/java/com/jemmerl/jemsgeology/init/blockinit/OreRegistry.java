@@ -40,9 +40,7 @@ public class OreRegistry {
             case REGOLITH:
                 return ModBlocks.registerRegolithGeoBlock(geoType, oreType, gradeType);
             case DETRITUS:
-                return;
-            case FALLING_DETRITUS:
-                return;
+                return ModBlocks.registerDetritusBlock(geoType, oreType, gradeType);
             default:
                 return null;
         }

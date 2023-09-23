@@ -8,6 +8,7 @@ import com.jemmerl.jemsgeology.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.RegistryObject;
 
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,10 +35,10 @@ public class GeoBlockRegistry {
     // Getters //
     /////////////
 
-    public Block getBaseStoneBlock() { return baseStone.get(); }
-    public Block getRegolithBlock() { return regolith.get(); }
-    public Block getCobblesBlock() { return cobbles.get(); }
-    public Block getCobblestoneBlock() { return cobblestone.get(); }
+    public Block getBaseStone() { return baseStone.get(); }
+    public Block getRegolith() { return regolith.get(); }
+    public Block getCobbles() { return cobbles.get(); }
+    public Block getCobblestone() { return cobblestone.get(); }
 
     public Block getStoneOre(OreType oreType, GradeType gradeType) {
         return stoneOreRegistry.get(oreType).getGradeOre(gradeType).get();
@@ -54,7 +55,7 @@ public class GeoBlockRegistry {
 
     private  Map<OreType, OreRegistry> fillOreRegistry(GeologyType geoType, OreBlockType blockType) {
         Map<OreType, OreRegistry> oreMap = new HashMap<>();
-        for (OreType oreType: OreType.values()) {
+        for (OreType oreType: EnumSet.complementOf(EnumSet.of(OreType.NONE))) {
             oreMap.put(oreType, new OreRegistry(geoType, oreType, blockType));
         }
         return oreMap;

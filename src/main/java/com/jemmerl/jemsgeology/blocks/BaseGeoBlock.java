@@ -44,7 +44,7 @@ public class BaseGeoBlock extends Block implements IGeoBlock {
 
     @Override
     public OreType getOreType() {
-        return this.oreType
+        return this.oreType;
     }
 
     @Override

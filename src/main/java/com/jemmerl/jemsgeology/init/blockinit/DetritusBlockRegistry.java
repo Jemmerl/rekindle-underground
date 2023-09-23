@@ -6,55 +6,32 @@ import com.jemmerl.jemsgeology.data.enums.ore.OreBlockType;
 import com.jemmerl.jemsgeology.data.enums.ore.OreType;
 import com.jemmerl.jemsgeology.init.ModBlocks;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraftforge.fml.RegistryObject;
 
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 
 public class DetritusBlockRegistry {
 
-    private final RegistryObject<Block> dirtBlock;
-    private final RegistryObject<Block> coarseDirtBlock;
-    private final RegistryObject<Block> clayBlock;
-    private final RegistryObject<Block> sandBlock;
-    private final RegistryObject<Block> redSandBlock;
-    private final RegistryObject<Block> gravelBlock;
-
-    private Map<OreType, OreRegistry> stoneOreRegistry;
-    private Map<OreType, RegolithOreRegistry> regolithOreRegistry;
+    private final RegistryObject<Block> baseDetritus;
+    private final Map<OreType, OreRegistry> oreRegistry;
 
     // TODO add to respective tags
     public DetritusBlockRegistry(GeologyType geoType) {
-        this.dirtBlock = ModBlocks.registerStoneGeoBlock(geoType);
-        this.coarseDirtBlock = ModBlocks.registerRegolithGeoBlock(geoType);
-        this.clayBlock = ModBlocks.registerCobblesBlock(geoType);
-        this.sandBlock = ModBlocks.registerCobblestoneBlock(geoType);
-        this.redSandBlock = ModBlocks.registerCobblestoneBlock(geoType);
-        this.gravelBlock = ModBlocks.registerCobblestoneBlock(geoType);
-
-
-        this.stoneOreRegistry = fillOreRegistry(geoType);
-        this.regolithOreRegistry = fillRegolithOreRegistry(geoType);
+        this.baseDetritus = ModBlocks.registerDetritusBlock(geoType);
+        this.oreRegistry = fillOreRegistry(geoType);
     }
 
     /////////////
     // Getters //
     /////////////
 
-    public Block getDirtBlock() { return baseStone.get(); }
-    public Block getCoarseDirtBlock() { return regolith.get(); }
-    public Block clayBlock() { return cobbles.get(); }
-    public Block sandBlock() { return cobblestone.get(); }
-    public Block redSandBlock() { return baseStone.get(); }
-    public Block gravelBlock() { return baseStone.get(); }
+    public Block getBaseDetritus() { return baseDetritus.get(); }
 
-
-    public Block getStoneOre(OreType oreType, GradeType gradeType) {
-        return stoneOreRegistry.get(oreType).getGradeOre(gradeType).get();
-    }
-
-    public Block getRegolithOre(OreType oreType, GradeType gradeType) {
-        return regolithOreRegistry.get(oreType).getGradeOre(gradeType).get();
+    public Block getDetritusOre(OreType oreType, GradeType gradeType) {
+        return oreRegistry.get(oreType).getGradeOre(gradeType).get();
     }
 
 
@@ -64,8 +41,8 @@ public class DetritusBlockRegistry {
 
     private  Map<OreType, OreRegistry> fillOreRegistry(GeologyType geoType) {
         Map<OreType, OreRegistry> oreMap = new HashMap<>();
-        for (OreType oreType: OreType.values()) {
-            oreMap.put(oreType, new OreRegistry(geoType, oreType, OreBlockType.STONE));
+        for (OreType oreType: EnumSet.complementOf(EnumSet.of(OreType.NONE))) {
+            oreMap.put(oreType, new OreRegistry(geoType, oreType, OreBlockType.DETRITUS));
         }
         return oreMap;
     }
