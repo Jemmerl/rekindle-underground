@@ -18,7 +18,7 @@ public class ModItemGroups {
     public static final ItemGroup JEMGEO_COBBLE_GROUP = new ItemGroup("jemsgeo_cobbles_tab") {
         @Override
         public ItemStack createIcon() {
-            return ModItems.BASALT_ROCK.get().getDefaultInstance();
+            return ModBlocks.GEOBLOCKS.get(GeologyType.BASALT).getRockItem().getDefaultInstance();
         }
     };
 

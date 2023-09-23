@@ -6,8 +6,10 @@ import com.jemmerl.jemsgeology.data.enums.ore.GradeType;
 import com.jemmerl.jemsgeology.data.enums.ore.OreBlockType;
 import com.jemmerl.jemsgeology.data.enums.ore.OreType;
 import com.jemmerl.jemsgeology.init.ModBlocks;
+import com.jemmerl.jemsgeology.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 
 import java.util.*;
@@ -15,10 +17,13 @@ import java.util.*;
 public class GeoBlockRegistry {
 
     private final boolean hasCobble;
+
     private final RegistryObject<Block> baseStone;
     private final RegistryObject<Block> regolith;
     private final RegistryObject<Block> cobbles;
     private final RegistryObject<Block> cobblestone;
+    private final RegistryObject<Item> rockItem;
+
     private final Map<OreType, OreRegistry> stoneOreRegistry;
     private final Map<OreType, OreRegistry> regolithOreRegistry;
 
@@ -30,6 +35,7 @@ public class GeoBlockRegistry {
         this.regolith = hasCobble ? ModBlocks.registerRegolithGeoBlock(geoType) : null;
         this.cobbles = hasCobble ? ModBlocks.registerCobblesBlock(geoType) : null;
         this.cobblestone = hasCobble ? ModBlocks.registerCobblestoneBlock(geoType) : null;
+        this.rockItem = hasCobble ? ModItems.registerRockItem(geoType) : null;
 
         this.stoneOreRegistry = geoType.isInStoneGroup(StoneGroupType.DETRITUS) ?
                 fillOreRegistry(geoType, OreBlockType.DETRITUS) : fillOreRegistry(geoType, OreBlockType.STONE);
@@ -50,6 +56,7 @@ public class GeoBlockRegistry {
     }
     public Block getCobbles() { return cobbles.get(); }
     public Block getCobblestone() { return cobblestone.get(); }
+    public Item getRockItem() { return rockItem.get(); }
 
     public Block getStoneOre(OreType oreType, GradeType gradeType) {
         return stoneOreRegistry.get(oreType).getGradeOre(gradeType).get();
