@@ -4,7 +4,7 @@ import com.jemmerl.jemsgeology.data.enums.GeologyType;
 import com.jemmerl.jemsgeology.init.ModBlocks;
 import com.jemmerl.jemsgeology.init.ModItems;
 import com.jemmerl.jemsgeology.init.ModTags;
-import com.jemmerl.jemsgeology.init.blockinit.GeoBlockRegistry;
+import com.jemmerl.jemsgeology.init.blockinit.GeoRegistry;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.data.*;
@@ -22,7 +22,7 @@ public class ModCobblestoneRecipeProvider extends RecipeProvider {
     protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
         for (GeologyType stone : GeologyType.values()) {
             if (stone.hasCobble() && !stone.equals(GeologyType.PAHOEHOE)) {
-                GeoBlockRegistry registry = ModBlocks.GEOBLOCKS.get(stone);
+                GeoRegistry registry = ModBlocks.GEOBLOCKS.get(stone);
                 Item rockItem = registry.getRockItem();
 
                 // Recipe to craft cobbles

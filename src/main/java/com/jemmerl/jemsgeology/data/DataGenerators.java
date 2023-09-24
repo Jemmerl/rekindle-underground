@@ -1,7 +1,7 @@
 package com.jemmerl.jemsgeology.data;
 
 import com.jemmerl.jemsgeology.JemsGeology;
-import com.jemmerl.jemsgeology.data.generators.client.ModBlockStateProvider;
+import com.jemmerl.jemsgeology.data.generators.client.ModBlockStateModelProvider;
 import com.jemmerl.jemsgeology.data.generators.client.ModItemModelProvider;
 import com.jemmerl.jemsgeology.data.generators.server.ModCobblestoneRecipeProvider;
 import com.jemmerl.jemsgeology.data.generators.server.ModLootTableProvider;
@@ -15,13 +15,15 @@ import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 public final class DataGenerators {
     private DataGenerators() {}
 
+    //TODO tag generator is desparately needed
+
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
         DataGenerator gen = event.getGenerator();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
         // Client-side data providers
-        gen.addProvider(new ModBlockStateProvider(gen, JemsGeology.MOD_ID, existingFileHelper));
+        gen.addProvider(new ModBlockStateModelProvider(gen, JemsGeology.MOD_ID, existingFileHelper));
         gen.addProvider(new ModItemModelProvider(gen, JemsGeology.MOD_ID, existingFileHelper));
 
         // Server-side data providers

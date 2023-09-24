@@ -14,8 +14,9 @@ import net.minecraftforge.fml.RegistryObject;
 
 import java.util.*;
 
-public class GeoBlockRegistry {
+public class GeoRegistry {
 
+    private final GeologyType geologyType;
     private final boolean hasCobble;
 
     private final RegistryObject<Block> baseStone;
@@ -28,7 +29,8 @@ public class GeoBlockRegistry {
     private final Map<OreType, OreRegistry> regolithOreRegistry;
 
     // TODO add to respective tags
-    public GeoBlockRegistry(GeologyType geoType) {
+    public GeoRegistry(GeologyType geoType) {
+        this.geologyType = geoType;
         this.hasCobble = geoType.hasCobble();
 
         this.baseStone = ModBlocks.registerStoneGeoBlock(geoType);
@@ -41,6 +43,10 @@ public class GeoBlockRegistry {
                 fillOreRegistry(geoType, OreBlockType.DETRITUS) : fillOreRegistry(geoType, OreBlockType.STONE);
         this.regolithOreRegistry =  hasCobble ? fillOreRegistry(geoType, OreBlockType.REGOLITH) : null;
     }
+
+
+    public GeologyType getGeoType() { return geologyType; }
+    public boolean hasCobble() { return hasCobble; }
 
 
     //////////////////////////
@@ -75,23 +81,37 @@ public class GeoBlockRegistry {
     // THESE ARE MAINLY TO BE USED DURING INITIALIZATION AND DATA GENERATION
     // The sheer amount of items generated would be excessive during any other stage
 
-    // Get all geo-blocks (not including cobbles and cobblestones)
+    // Get all geo-blocks (aka not including cobbles and cobblestones)
     public List<Block> getAllGeoBlocks() {
-        List<Block> allGeoBlocks = new ArrayList<>(getAllStoneOreBlocks());
-        allGeoBlocks.add(getBaseStone());
-        if (hasCobble) allGeoBlocks.add(getRegolith());
+        List<Block> allGeoBlocks = new ArrayList<>(getStoneGeoBlocks());
+        if (hasCobble) allGeoBlocks.addAll(getRegolithGeoBlocks());
         return allGeoBlocks;
+    }
+
+    // Get all stone geo-blocks
+    public List<Block> getStoneGeoBlocks() {
+        List<Block> stoneGeoBlocks = new ArrayList<>(getStoneOreBlocks());
+        stoneGeoBlocks.add(getBaseStone());
+        return stoneGeoBlocks;
+    }
+
+    // Get all regolith geo-blocks
+    // Assumes that the caller has confirmed the geo-type has regolith
+    public List<Block> getRegolithGeoBlocks() {
+        List<Block> regolithGeoBlocks = new ArrayList<>(getRegolithOreBlocks());
+        regolithGeoBlocks.add(getRegolith());
+        return regolithGeoBlocks;
     }
 
     // Get all ore-bearing geo-blocks
     public List<Block> getAllOreBlocks() {
-        List<Block> allOreBlocks = new ArrayList<>(getAllStoneOreBlocks());
-        if (hasCobble) allOreBlocks.addAll(getAllRegolithOreBlocks());
+        List<Block> allOreBlocks = new ArrayList<>(getStoneOreBlocks());
+        if (hasCobble) allOreBlocks.addAll(getRegolithOreBlocks());
         return allOreBlocks;
     }
 
     // Get all ore-bearing base stone geo-blocks
-    public List<Block> getAllStoneOreBlocks() {
+    private List<Block> getStoneOreBlocks() {
         List<Block> allStoneOreBlocks = new ArrayList<>();
         for (OreRegistry oreRegistry: stoneOreRegistry.values()) {
             allStoneOreBlocks.addAll(oreRegistry.getAllGradedOreBlocks());
@@ -100,10 +120,8 @@ public class GeoBlockRegistry {
     }
 
     // Get all ore-bearing regolith geo-blocks
-    // Assumes that the caller has confirmed the geo-type has regolith, else get a null return
-    public List<Block> getAllRegolithOreBlocks() {
-        if (regolithOreRegistry == null) return null;
-
+    // Assumes that the caller has confirmed the geo-type has regolith
+    private List<Block> getRegolithOreBlocks() {
         List<Block> allRegolithOreBlocks = new ArrayList<>();
         for (OreRegistry oreRegistry: regolithOreRegistry.values()) {
             allRegolithOreBlocks.addAll(oreRegistry.getAllGradedOreBlocks());

@@ -11,143 +11,6 @@ import java.util.*;
 
 public class ModBlockLists {
 
-    ////////////
-    // STONES //
-    ////////////
-
-    public static List<Block> SED_STONES = Arrays.asList(
-            ModBlocks.CHALK_STONE.get(),
-            ModBlocks.LIMESTONE_STONE.get(),
-            ModBlocks.DOLOSTONE_STONE.get(),
-            ModBlocks.MARLSTONE_STONE.get(),
-            ModBlocks.SHALE_STONE.get(),
-            ModBlocks.LIMY_SHALE_STONE.get(),
-            ModBlocks.SANDSTONE_STONE.get(),
-            ModBlocks.RED_SANDSTONE_STONE.get(),
-            ModBlocks.ARKOSE_STONE.get(),
-            ModBlocks.GREYWACKE_STONE.get(),
-            ModBlocks.MUDSTONE_STONE.get(),
-            ModBlocks.CLAYSTONE_STONE.get(),
-            ModBlocks.SILTSTONE_STONE.get(),
-            ModBlocks.CONGLOMERATE_STONE.get(),
-            ModBlocks.ROCKSALT_STONE.get(),
-            ModBlocks.ROCKGYPSUM_STONE.get(),
-            ModBlocks.BORAX_STONE.get(),
-            ModBlocks.KERNITE_STONE.get(),
-            ModBlocks.VEIN_QUARTZ_STONE.get()
-    );
-
-    public static List<Block> EXT_STONES = Arrays.asList(
-            ModBlocks.RHYOLITE_STONE.get(),
-            ModBlocks.DACITE_STONE.get(),
-            ModBlocks.ANDESITE_STONE.get(),
-            ModBlocks.TRACHYTE_STONE.get(),
-            ModBlocks.BASALT_STONE.get(),
-            ModBlocks.PAHOEHOE_STONE.get(),
-            ModBlocks.SCORIA_STONE.get(),
-            ModBlocks.RHYOLITIC_TUFF_STONE.get(),
-            ModBlocks.TRACHYTIC_TUFF_STONE.get(),
-            ModBlocks.ANDESITIC_TUFF_STONE.get(),
-            ModBlocks.BASALTIC_TUFF_STONE.get(),
-            ModBlocks.ULTRAMAFIC_TUFF_STONE.get()
-    );
-
-    public static List<Block> INT_STONES = Arrays.asList(
-            ModBlocks.DIORITE_STONE.get(),
-            ModBlocks.GRANODIORITE_STONE.get(),
-            ModBlocks.GRANITE_STONE.get(),
-            ModBlocks.SYENITE_STONE.get(),
-            ModBlocks.GABBRO_STONE.get(),
-            ModBlocks.DIABASE_STONE.get(),
-            ModBlocks.KIMBERLITE_STONE.get(),
-            ModBlocks.LAMPROITE_STONE.get()
-    );
-
-    public static List<Block> IGN_STONES = new ArrayList<>();
-    static {
-        IGN_STONES.addAll(EXT_STONES);
-        IGN_STONES.addAll(INT_STONES);
-    }
-
-    public static List<Block> MET_STONES = Arrays.asList(
-            ModBlocks.QUARTZITE_STONE.get(),
-            ModBlocks.SCHIST_STONE.get(),
-            ModBlocks.PHYLLITE_STONE.get(),
-            ModBlocks.SLATE_STONE.get(),
-            ModBlocks.GNEISS_STONE.get(),
-            ModBlocks.MARBLE_STONE.get(),
-            ModBlocks.PELITIC_HORNFELS_STONE.get(),
-            ModBlocks.CARBONATE_HORNFELS_STONE.get(),
-            ModBlocks.MAFIC_HORNFELS_STONE.get(),
-            ModBlocks.METACONGLOMERATE_STONE.get(),
-            ModBlocks.GREISEN_STONE.get()
-    );
-
-
-    //////////////
-    // REGOLITH //
-    //////////////
-
-    public static List<Block> SED_REGOLITH = Arrays.asList(
-            ModBlocks.CHALK_REGOLITH.get(),
-            ModBlocks.LIMESTONE_REGOLITH.get(),
-            ModBlocks.DOLOSTONE_REGOLITH.get(),
-            ModBlocks.MARLSTONE_REGOLITH.get(),
-            ModBlocks.SHALE_REGOLITH.get(),
-            ModBlocks.LIMY_SHALE_REGOLITH.get(),
-            ModBlocks.SANDSTONE_REGOLITH.get(),
-            ModBlocks.RED_SANDSTONE_REGOLITH.get(),
-            ModBlocks.ARKOSE_REGOLITH.get(),
-            ModBlocks.GREYWACKE_REGOLITH.get(),
-            ModBlocks.MUDSTONE_REGOLITH.get(),
-            ModBlocks.CLAYSTONE_REGOLITH.get(),
-            ModBlocks.SILTSTONE_REGOLITH.get(),
-            ModBlocks.CONGLOMERATE_REGOLITH.get(),
-            ModBlocks.VEIN_QUARTZ_REGOLITH.get()
-    );
-
-    public static List<Block> EXT_REGOLITH = Arrays.asList(
-            ModBlocks.RHYOLITE_REGOLITH.get(),
-            ModBlocks.DACITE_REGOLITH.get(),
-            ModBlocks.ANDESITE_REGOLITH.get(),
-            ModBlocks.TRACHYTE_REGOLITH.get(),
-            ModBlocks.BASALT_REGOLITH.get(),
-            ModBlocks.SCORIA_REGOLITH.get()
-    );
-
-    public static List<Block> INT_REGOLITH = Arrays.asList(
-            ModBlocks.DIORITE_REGOLITH.get(),
-            ModBlocks.GRANODIORITE_REGOLITH.get(),
-            ModBlocks.GRANITE_REGOLITH.get(),
-            ModBlocks.SYENITE_REGOLITH.get(),
-            ModBlocks.GABBRO_REGOLITH.get(),
-            ModBlocks.DIABASE_REGOLITH.get(),
-            ModBlocks.KIMBERLITE_REGOLITH.get(),
-            ModBlocks.LAMPROITE_REGOLITH.get()
-    );
-
-    public static List<Block> IGN_REGOLITH = new ArrayList<>();
-    static {
-        IGN_REGOLITH.addAll(EXT_REGOLITH);
-        IGN_REGOLITH.addAll(INT_REGOLITH);
-    }
-
-    public static List<Block> MET_REGOLITH = Arrays.asList(
-            ModBlocks.QUARTZITE_REGOLITH.get(),
-            ModBlocks.SCHIST_REGOLITH.get(),
-            ModBlocks.PHYLLITE_REGOLITH.get(),
-            ModBlocks.SLATE_REGOLITH.get(),
-            ModBlocks.GNEISS_REGOLITH.get(),
-            ModBlocks.MARBLE_REGOLITH.get(),
-            ModBlocks.PELITIC_HORNFELS_REGOLITH.get(),
-            ModBlocks.CARBONATE_HORNFELS_REGOLITH.get(),
-            ModBlocks.MAFIC_HORNFELS_REGOLITH.get(),
-            ModBlocks.METACONGLOMERATE_REGOLITH.get(),
-            ModBlocks.GREISEN_REGOLITH.get()
-    );
-
-
-
     /////////////
     // COBBLES //
     /////////////
@@ -240,13 +103,151 @@ public class ModBlockLists {
     ////////////////////
 
     // List of blocks with a different side texture
-    public static List<Block> SIDE_TEXTURE_MODELS = Arrays.asList(
-            ModBlocks.GEOBLOCKS.get(GeologyType.PAHOEHOE).getBaseStone()
+    public static List<GeologyType> SIDE_TEXTURE_MODELS = Arrays.asList(
+            GeologyType.PAHOEHOE
     );
 
 }
 
 // TODO Skarn will be an ore deposit type vs a rock to save my sanity
+
+// Old block lists, preserved if needed
+//    ////////////
+//    // STONES //
+//    ////////////
+//
+//    public static List<Block> SED_STONES = Arrays.asList(
+//            ModBlocks.CHALK_STONE.get(),
+//            ModBlocks.LIMESTONE_STONE.get(),
+//            ModBlocks.DOLOSTONE_STONE.get(),
+//            ModBlocks.MARLSTONE_STONE.get(),
+//            ModBlocks.SHALE_STONE.get(),
+//            ModBlocks.LIMY_SHALE_STONE.get(),
+//            ModBlocks.SANDSTONE_STONE.get(),
+//            ModBlocks.RED_SANDSTONE_STONE.get(),
+//            ModBlocks.ARKOSE_STONE.get(),
+//            ModBlocks.GREYWACKE_STONE.get(),
+//            ModBlocks.MUDSTONE_STONE.get(),
+//            ModBlocks.CLAYSTONE_STONE.get(),
+//            ModBlocks.SILTSTONE_STONE.get(),
+//            ModBlocks.CONGLOMERATE_STONE.get(),
+//            ModBlocks.ROCKSALT_STONE.get(),
+//            ModBlocks.ROCKGYPSUM_STONE.get(),
+//            ModBlocks.BORAX_STONE.get(),
+//            ModBlocks.KERNITE_STONE.get(),
+//            ModBlocks.VEIN_QUARTZ_STONE.get()
+//    );
+//
+//    public static List<Block> EXT_STONES = Arrays.asList(
+//            ModBlocks.RHYOLITE_STONE.get(),
+//            ModBlocks.DACITE_STONE.get(),
+//            ModBlocks.ANDESITE_STONE.get(),
+//            ModBlocks.TRACHYTE_STONE.get(),
+//            ModBlocks.BASALT_STONE.get(),
+//            ModBlocks.PAHOEHOE_STONE.get(),
+//            ModBlocks.SCORIA_STONE.get(),
+//            ModBlocks.RHYOLITIC_TUFF_STONE.get(),
+//            ModBlocks.TRACHYTIC_TUFF_STONE.get(),
+//            ModBlocks.ANDESITIC_TUFF_STONE.get(),
+//            ModBlocks.BASALTIC_TUFF_STONE.get(),
+//            ModBlocks.ULTRAMAFIC_TUFF_STONE.get()
+//    );
+//
+//    public static List<Block> INT_STONES = Arrays.asList(
+//            ModBlocks.DIORITE_STONE.get(),
+//            ModBlocks.GRANODIORITE_STONE.get(),
+//            ModBlocks.GRANITE_STONE.get(),
+//            ModBlocks.SYENITE_STONE.get(),
+//            ModBlocks.GABBRO_STONE.get(),
+//            ModBlocks.DIABASE_STONE.get(),
+//            ModBlocks.KIMBERLITE_STONE.get(),
+//            ModBlocks.LAMPROITE_STONE.get()
+//    );
+//
+//    public static List<Block> IGN_STONES = new ArrayList<>();
+//    static {
+//        IGN_STONES.addAll(EXT_STONES);
+//        IGN_STONES.addAll(INT_STONES);
+//    }
+//
+//    public static List<Block> MET_STONES = Arrays.asList(
+//            ModBlocks.QUARTZITE_STONE.get(),
+//            ModBlocks.SCHIST_STONE.get(),
+//            ModBlocks.PHYLLITE_STONE.get(),
+//            ModBlocks.SLATE_STONE.get(),
+//            ModBlocks.GNEISS_STONE.get(),
+//            ModBlocks.MARBLE_STONE.get(),
+//            ModBlocks.PELITIC_HORNFELS_STONE.get(),
+//            ModBlocks.CARBONATE_HORNFELS_STONE.get(),
+//            ModBlocks.MAFIC_HORNFELS_STONE.get(),
+//            ModBlocks.METACONGLOMERATE_STONE.get(),
+//            ModBlocks.GREISEN_STONE.get()
+//    );
+//
+//
+//    //////////////
+//    // REGOLITH //
+//    //////////////
+//
+//    public static List<Block> SED_REGOLITH = Arrays.asList(
+//            ModBlocks.CHALK_REGOLITH.get(),
+//            ModBlocks.LIMESTONE_REGOLITH.get(),
+//            ModBlocks.DOLOSTONE_REGOLITH.get(),
+//            ModBlocks.MARLSTONE_REGOLITH.get(),
+//            ModBlocks.SHALE_REGOLITH.get(),
+//            ModBlocks.LIMY_SHALE_REGOLITH.get(),
+//            ModBlocks.SANDSTONE_REGOLITH.get(),
+//            ModBlocks.RED_SANDSTONE_REGOLITH.get(),
+//            ModBlocks.ARKOSE_REGOLITH.get(),
+//            ModBlocks.GREYWACKE_REGOLITH.get(),
+//            ModBlocks.MUDSTONE_REGOLITH.get(),
+//            ModBlocks.CLAYSTONE_REGOLITH.get(),
+//            ModBlocks.SILTSTONE_REGOLITH.get(),
+//            ModBlocks.CONGLOMERATE_REGOLITH.get(),
+//            ModBlocks.VEIN_QUARTZ_REGOLITH.get()
+//    );
+//
+//    public static List<Block> EXT_REGOLITH = Arrays.asList(
+//            ModBlocks.RHYOLITE_REGOLITH.get(),
+//            ModBlocks.DACITE_REGOLITH.get(),
+//            ModBlocks.ANDESITE_REGOLITH.get(),
+//            ModBlocks.TRACHYTE_REGOLITH.get(),
+//            ModBlocks.BASALT_REGOLITH.get(),
+//            ModBlocks.SCORIA_REGOLITH.get()
+//    );
+//
+//    public static List<Block> INT_REGOLITH = Arrays.asList(
+//            ModBlocks.DIORITE_REGOLITH.get(),
+//            ModBlocks.GRANODIORITE_REGOLITH.get(),
+//            ModBlocks.GRANITE_REGOLITH.get(),
+//            ModBlocks.SYENITE_REGOLITH.get(),
+//            ModBlocks.GABBRO_REGOLITH.get(),
+//            ModBlocks.DIABASE_REGOLITH.get(),
+//            ModBlocks.KIMBERLITE_REGOLITH.get(),
+//            ModBlocks.LAMPROITE_REGOLITH.get()
+//    );
+//
+//    public static List<Block> IGN_REGOLITH = new ArrayList<>();
+//    static {
+//        IGN_REGOLITH.addAll(EXT_REGOLITH);
+//        IGN_REGOLITH.addAll(INT_REGOLITH);
+//    }
+//
+//    public static List<Block> MET_REGOLITH = Arrays.asList(
+//            ModBlocks.QUARTZITE_REGOLITH.get(),
+//            ModBlocks.SCHIST_REGOLITH.get(),
+//            ModBlocks.PHYLLITE_REGOLITH.get(),
+//            ModBlocks.SLATE_REGOLITH.get(),
+//            ModBlocks.GNEISS_REGOLITH.get(),
+//            ModBlocks.MARBLE_REGOLITH.get(),
+//            ModBlocks.PELITIC_HORNFELS_REGOLITH.get(),
+//            ModBlocks.CARBONATE_HORNFELS_REGOLITH.get(),
+//            ModBlocks.MAFIC_HORNFELS_REGOLITH.get(),
+//            ModBlocks.METACONGLOMERATE_REGOLITH.get(),
+//            ModBlocks.GREISEN_REGOLITH.get()
+//    );
+
+
 
 // Old GEO_LIST map. Preserved temporarily if needed for reference
 //public static Map<GeologyType, GeoListWrapper> GEO_LIST = new HashMap<>();

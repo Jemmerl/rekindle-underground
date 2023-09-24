@@ -4,19 +4,20 @@ import net.minecraft.util.IStringSerializable;
 
 public enum GradeType implements IStringSerializable {
 
-    NONE("none"),
-    LOWGRADE("lowgrade"),
-    MIDGRADE("midgrade"),
-    HIGHGRADE("highgrade");
+    NONE("none", ""),
+    LOWGRADE("lowgrade", "poor_"),
+    MIDGRADE("midgrade", ""),
+    HIGHGRADE("highgrade", "rich_");
 
     private final String name;
+    private final String assetName;
 
-    GradeType(String name) {
+    GradeType(String name, String assetName) {
         this.name = name;
+        this.assetName = assetName;
     }
 
     @Override
-    public String getString() {
-        return this.name;
-    }
+    public String getString() { return this.name; }
+    public String getAssetName() { return assetName; }
 }

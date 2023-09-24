@@ -5,4 +5,12 @@ public enum OreBlockType {
     REGOLITH,
     DETRITUS;
     //FALLING_DETRITUS; currently unneeded, may be useful in the future
+
+//    private final String name;
+//
+//    OreBlockType(String name) {
+//        this.name = name;
+//    }
+//
+//    public String getName() { return name; }
 }

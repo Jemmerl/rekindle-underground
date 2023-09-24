@@ -5,7 +5,7 @@ import com.jemmerl.jemsgeology.blocks.*;
 import com.jemmerl.jemsgeology.data.enums.GeologyType;
 import com.jemmerl.jemsgeology.data.enums.ore.GradeType;
 import com.jemmerl.jemsgeology.data.enums.ore.OreType;
-import com.jemmerl.jemsgeology.init.blockinit.GeoBlockRegistry;
+import com.jemmerl.jemsgeology.init.blockinit.GeoRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -33,10 +33,10 @@ public class ModBlocks {
     // GEOBLOCK REGISTRY //
     ///////////////////////
 
-    public static final Map<GeologyType, GeoBlockRegistry> GEOBLOCKS = new HashMap<>();
+    public static final Map<GeologyType, GeoRegistry> GEOBLOCKS = new HashMap<>();
     static {
         for (GeologyType geologyType: GeologyType.values()) {
-            GEOBLOCKS.put(geologyType, new GeoBlockRegistry(geologyType));
+            GEOBLOCKS.put(geologyType, new GeoRegistry(geologyType));
         }
     }
 
@@ -113,13 +113,13 @@ public class ModBlocks {
 
     // For base detritus blocks
     public static <T extends Block>RegistryObject<T> registerDetritusBlock(GeologyType geologyType) {
-        String name = geologyType.getName() + "_stone";
+        String name = geologyType.getName() + "_detritus";
         return registerBlock(name, buildDetritusBlock(geologyType, OreType.NONE, GradeType.NONE), ModItemGroups.JEMGEO_BASE_STONE_GROUP);
     }
 
     // For ore bearing detritus blocks
     public static <T extends Block>RegistryObject<T> registerDetritusBlock(GeologyType geologyType, OreType oreType, GradeType gradeType) {
-        String name = geologyType.getName() + "stone/" + oreType.getString() + "/" + gradeType.getString();
+        String name = geologyType.getName() + "detritus/" + oreType.getString() + "/" + gradeType.getString();
         return registerBlock(name, buildDetritusBlock(geologyType, oreType, gradeType), ModItemGroups.JEMGEO_ORE_BLOCK_GROUP);
     }
 

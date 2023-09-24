@@ -1,10 +1,9 @@
 package com.jemmerl.jemsgeology;
 
 import com.jemmerl.jemsgeology.init.*;
-import com.jemmerl.jemsgeology.init.blockinit.GeoBlockRegistry;
+import com.jemmerl.jemsgeology.init.blockinit.GeoRegistry;
 import com.jemmerl.jemsgeology.init.featureinit.FeatureDataLoader;
 import com.jemmerl.jemsgeology.init.depositinit.DepositDataLoader;
-import com.jemmerl.jemsgeology.util.lists.ModBlockLists;
 import com.jemmerl.jemsgeology.world.capability.chunk.ChunkGennedCapProvider;
 import com.jemmerl.jemsgeology.world.capability.chunk.ChunkGennedCapStorage;
 import com.jemmerl.jemsgeology.world.capability.chunk.ChunkGennedCapability;
@@ -88,8 +87,8 @@ public class JemsGeology
 
     private void clientSetup(final FMLClientSetupEvent event) {
         // Set transparent textures for all ore blocks
-        for (GeoBlockRegistry geoBlockRegistry : ModBlocks.GEOBLOCKS.values()) {
-            for(Block block: geoBlockRegistry.getAllOreBlocks())
+        for (GeoRegistry geoRegistry : ModBlocks.GEOBLOCKS.values()) {
+            for(Block block: geoRegistry.getAllOreBlocks())
                 RenderTypeLookup.setRenderLayer(block, RenderType.getCutout());
         }
     }
