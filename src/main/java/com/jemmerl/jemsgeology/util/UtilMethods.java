@@ -37,10 +37,10 @@ public class UtilMethods {
         return newVal;
     }
 
-    // Returns a block given a string representation of its resource location
-    // Reliance on this should be minimized
-    public static BlockState stringToBlockState(String blockName) {
-        return Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(blockName))).getDefaultState();
+    // Returns a GeologyType enum value given a string representation of its resource location
+    // Reliance on this should be minimized, just useful to cut down on repeated code in the data reader
+    public static GeologyType stringToGeologyType(String typeName) {
+        return Objects.requireNonNull(GeologyType.valueOf(typeName.toUpperCase()));
     }
 
     // Check if a block is a regolith geo block

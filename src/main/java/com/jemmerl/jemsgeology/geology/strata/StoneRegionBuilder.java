@@ -1,11 +1,11 @@
 package com.jemmerl.jemsgeology.geology.strata;
 
 import com.jemmerl.jemsgeology.data.enums.DefaultSets;
+import com.jemmerl.jemsgeology.data.enums.GeologyType;
 import com.jemmerl.jemsgeology.init.JemsGeoConfig;
 import com.jemmerl.jemsgeology.util.UtilMethods;
 import com.jemmerl.jemsgeology.util.noise.GenerationNoise.RegionNoise;
 import com.jemmerl.jemsgeology.util.noise.GenerationNoise.StrataNoise;
-import net.minecraft.block.BlockState;
 import net.minecraft.world.ISeedReader;
 
 import java.util.Collections;
@@ -37,16 +37,16 @@ public class StoneRegionBuilder {
     private static final int[] cachedLayerProperties1 = new int[]{0, 0, 0}; // Thickness, warp, tilt
     private static final int[] cachedLayerProperties2 = new int[]{0, 0, 0}; // Thickness, warp, tilt
     private static final int[] cachedLayerProperties3 = new int[]{0, 0, 0}; // Thickness, warp, tilt
-    private static List<BlockState> cachedBlockStateList1 = Collections.emptyList();
-    private static List<BlockState> cachedBlockStateList2 = Collections.emptyList();
-    private static List<BlockState> cachedBlockStateList3 = Collections.emptyList();
+    private static List<GeologyType> cachedGeologyTypeList1 = Collections.emptyList();
+    private static List<GeologyType> cachedGeologyTypeList2 = Collections.emptyList();
+    private static List<GeologyType> cachedGeologyTypeList3 = Collections.emptyList();
 
 
     ////////////////////////////////////////////////
     /////            Region Handler            /////
     ////////////////////////////////////////////////
 
-    public static BlockState getStoneStrataBlock(int x, int y, int z, ISeedReader reader, boolean contactMeta) {
+    public static GeologyType getStoneStrataBlock(int x, int y, int z, ISeedReader reader, boolean contactMeta) {
         float regionNoise = RegionNoise.stoneRegionNoise(x, y, z);
         int regionVal = (int)(regionNoise * 3); //TODO gives region types possible rn (-2 to 2)
 
@@ -63,23 +63,23 @@ public class StoneRegionBuilder {
             cachedRegionRandom3 = random.nextFloat();
         }
 
-        BlockState blockState;
+        GeologyType geologyType;
         switch (regionVal) {
             case -2: // Young Flood Basalt
-                blockState = youngFloodBasaltGen(x, y, z);
+                geologyType = youngFloodBasaltGen(x, y, z);
                 break;
             case 1: // One Layer
-                blockState = oneLayerGeneration(x, y, z, regionNoise);
+                geologyType = oneLayerGeneration(x, y, z, regionNoise);
                 break;
             case 2: // Old Flood Basalt
-                blockState = oldFloodBasaltGen(x, y, z, regionNoise);
+                geologyType = oldFloodBasaltGen(x, y, z, regionNoise);
                 break;
             default: // Two Layer (Case 0 and uncaught ints)
-                blockState = twoLayerGeneration(x, y, z, regionNoise);
+                geologyType = twoLayerGeneration(x, y, z, regionNoise);
                 break;
         }
 
-        return blockState;
+        return geologyType;
     }
 
 
@@ -104,58 +104,58 @@ public class StoneRegionBuilder {
     // The description indicates what layers the generator sets, and if they are always (F) or sometimes (F?) faulted
 
     // Young Flood Basalt region generator
-    private static BlockState youngFloodBasaltGen(int xPos, int yPos, int zPos) {
-        BlockState state;
+    private static GeologyType youngFloodBasaltGen(int xPos, int yPos, int zPos) {
+        GeologyType geologyType;
 
         if (yPos <= (9 + (4 * StrataNoise.strataDividingNoise((xPos * 2), (yPos), (zPos * 2))))) { // Adds Diabase layer smoothly below y 7-15
-            state = UtilMethods.stringToBlockState("jemsgeology:diabase_stone");
+            geologyType = GeologyType.DIABASE;
         } else { // Adds flood basalt layer above
             float noiseVal = StrataNoise.strataFloodBasaltNoise(xPos, yPos, zPos);
             if (noiseVal < -0.1f) {
-                state = UtilMethods.stringToBlockState("jemsgeology:gabbro_stone");
+                geologyType = GeologyType.GABBRO;
             } else {
-                state = UtilMethods.stringToBlockState("jemsgeology:basalt_stone");
+                geologyType = GeologyType.BASALT;
             }
         }
-        return state;
+        return geologyType;
     }
 
     // Old Flood Basalt region generator (surface layer of sedimentary rocks)
-    private static BlockState oldFloodBasaltGen(int xPos, int yPos, int zPos, float regionNoise) {
-        BlockState state;
+    private static GeologyType oldFloodBasaltGen(int xPos, int yPos, int zPos, float regionNoise) {
+        GeologyType geologyType;
         float noiseVal;
 
         // Setup sedimentary layer
         if (!useCached) {
-            List<String> blockList = DefaultSets.getAllBlocks(DefaultSets.SED_SOIL, DefaultSets.SED_SANDY);
-            cachedBlockStateList1 = BlockPicker.buildStateList(blockList);
+            List<String> geoTypesList = DefaultSets.getAllBlocks(DefaultSets.SED_SOIL, DefaultSets.SED_SANDY);
+            cachedGeologyTypeList1 = BlockPicker.buildGeologyTypeList(geoTypesList);
         }
 
         // Sets faulted y for the older flood basalt
         // This is done independently, unlike adjustable layers, due to the unique generation
         int yFault = yPos + (int)(10f * stoneFaultNoise(xPos, yPos, zPos));
         if (yFault <= (9 + (3 * StrataNoise.strataDividingNoise((xPos * 2), (yFault), (zPos * 2))))) { // Adds Diabase layer smoothly below y 4-12
-            state = UtilMethods.stringToBlockState("jemsgeology:diabase_stone");
+            geologyType = GeologyType.DIABASE;
         } else if (yPos <= (55 + (10 * StrataNoise.strataDividingNoise((xPos * 3), (yFault), (zPos * 3))))) { // Adds flood basalt layer below y 45-65
             noiseVal = StrataNoise.strataFloodBasaltNoise(xPos, yPos, zPos);
             if (noiseVal < -0.1f) {
-                state = UtilMethods.stringToBlockState("jemsgeology:gabbro_stone");
+                geologyType = GeologyType.GABBRO;
             } else {
-                state = UtilMethods.stringToBlockState("jemsgeology:basalt_stone");
+                geologyType = GeologyType.BASALT;
             }
         } else { // Adds sedimentary strata above
             // TODO rewrite this section, needs to use older methods and make a sedimentary rock layer
             noiseVal = genAdjustableLayers(xPos, yPos, zPos, 1.5f, 20, 10, 30, 0, 1300);
-            state = BlockPicker.selectBlock(cachedBlockStateList1, regionNoise, noiseVal);
+            geologyType = BlockPicker.selectBlock(cachedGeologyTypeList1, regionNoise, noiseVal);
         }
-        return state;
+        return geologyType;
     }
 
     // One layer region generator
-    private static BlockState oneLayerGeneration(int xPos, int yPos, int zPos, float regionNoise) {
+    private static GeologyType oneLayerGeneration(int xPos, int yPos, int zPos, float regionNoise) {
         // Setup only layer
         if (!useCached) {
-            cachedBlockStateList1 = blockPicker.getBlockStateList(blockPicker.getRandomPresetName(regionNoise, -1902));
+            cachedGeologyTypeList1 = blockPicker.getGeologyTypeList(blockPicker.getRandomPresetName(regionNoise, -1902));
             cachedLayerProperties1[0] = genProperty(35, 25, 40, THICK_MIN, THICK_MAX); // Thickness
             cachedLayerProperties1[1] = genProperty(45, 35, 20, WARP_MIN, WARP_MAX); // Warp
             cachedLayerProperties1[2] = genProperty(25, 50, 25, TILT_MIN, TILT_MAX); // Tilt
@@ -163,24 +163,24 @@ public class StoneRegionBuilder {
 
         float noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f,
                 cachedLayerProperties1[0], cachedLayerProperties1[1], cachedLayerProperties1[2], 20, -13370);
-        return BlockPicker.selectBlock(cachedBlockStateList1, regionNoise, noiseVal);
+        return BlockPicker.selectBlock(cachedGeologyTypeList1, regionNoise, noiseVal);
     }
 
 
     // Two layer region generator
-    private static BlockState twoLayerGeneration(int xPos, int yPos, int zPos, float regionNoise) {
-        BlockState state;
+    private static GeologyType twoLayerGeneration(int xPos, int yPos, int zPos, float regionNoise) {
+        GeologyType geologyType;
 
         // Refresh cached settings if different region
         if (!useCached) {
             // Setup bottom layer
-            cachedBlockStateList2 = blockPicker.getBlockStateList(blockPicker.getRandomPresetName(regionNoise, 2902));
+            cachedGeologyTypeList2 = blockPicker.getGeologyTypeList(blockPicker.getRandomPresetName(regionNoise, 2902));
             cachedLayerProperties2[0] = genProperty(15, 65, 20, THICK_MIN, THICK_MAX); // Thickness
             cachedLayerProperties2[1] = genProperty(25, 45, 30, WARP_MIN, WARP_MAX); // Warp
             cachedLayerProperties2[2] = genProperty(35, 25, 40, TILT_MIN, TILT_MAX); // Tilt
 
             // Setup top layer
-            cachedBlockStateList1 = blockPicker.getBlockStateList(blockPicker.getRandomPresetName(regionNoise, -6110));
+            cachedGeologyTypeList1 = blockPicker.getGeologyTypeList(blockPicker.getRandomPresetName(regionNoise, -6110));
             cachedLayerProperties1[0] = genProperty(25, 50, 25, THICK_MIN, THICK_MAX); // Thickness
             cachedLayerProperties1[1] = genProperty(60, 25, 15, WARP_MIN, WARP_MAX); // Warp
             cachedLayerProperties1[2] = genProperty(20, 35, 45, TILT_MIN, TILT_MAX); // Tilt
@@ -189,39 +189,39 @@ public class StoneRegionBuilder {
         if (yPos < 35) { // BOTTOM LAYER // TODO TEMP DIVISION
             float noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f,
                     cachedLayerProperties2[0], cachedLayerProperties2[1], cachedLayerProperties2[2], 20, 86753);
-            state = BlockPicker.selectBlock(cachedBlockStateList2, regionNoise, noiseVal);
+            geologyType = BlockPicker.selectBlock(cachedGeologyTypeList2, regionNoise, noiseVal);
 
         } else { // TOP LAYER
             float noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f,
                     cachedLayerProperties1[0], cachedLayerProperties1[1], cachedLayerProperties1[2], 20, -9055);
-            state = BlockPicker.selectBlock(cachedBlockStateList1, regionNoise, noiseVal);
+            geologyType = BlockPicker.selectBlock(cachedGeologyTypeList1, regionNoise, noiseVal);
 
         }
 
-        return state;
+        return geologyType;
     }
 
 
     // Three layer region generator
-    private static BlockState threeLayerGeneration(int xPos, int yPos, int zPos, float regionNoise) {
-        BlockState state;
+    private static GeologyType threeLayerGeneration(int xPos, int yPos, int zPos, float regionNoise) {
+        GeologyType geologyType;
 
         // Refresh cached settings if different region
         if (!useCached) {
             // Setup bottom layer
-            cachedBlockStateList3 = blockPicker.getBlockStateList(blockPicker.getRandomPresetName(regionNoise,  8675), 2);
+            cachedGeologyTypeList3 = blockPicker.getGeologyTypeList(blockPicker.getRandomPresetName(regionNoise,  8675), 2);
             cachedLayerProperties3[0] = genProperty(45, 35, 20, THICK_MIN, THICK_MAX); // Thickness
             cachedLayerProperties3[1] = genProperty(35, 25, 40, WARP_MIN, WARP_MAX); // Warp
             cachedLayerProperties3[2] = genProperty(25, 50, 25, TILT_MIN, TILT_MAX); // Tilt
 
             // Setup middle layer
-            cachedBlockStateList2 = blockPicker.getBlockStateList(blockPicker.getRandomPresetName(regionNoise, 3090), 2);
+            cachedGeologyTypeList2 = blockPicker.getGeologyTypeList(blockPicker.getRandomPresetName(regionNoise, 3090), 2);
             cachedLayerProperties2[0] = genProperty(45, 40, 15, THICK_MIN, THICK_MAX); // Thickness
             cachedLayerProperties2[1] = genProperty(50, 20, 30, WARP_MIN, WARP_MAX); // Warp
             cachedLayerProperties2[2] = genProperty(15, 65, 20, TILT_MIN, TILT_MAX); // Tilt
 
             // Setup top layer
-            cachedBlockStateList1 = blockPicker.getBlockStateList(blockPicker.getRandomPresetName(regionNoise, -1337), 2);
+            cachedGeologyTypeList1 = blockPicker.getGeologyTypeList(blockPicker.getRandomPresetName(regionNoise, -1337), 2);
             cachedLayerProperties1[0] = genProperty(20, 45, 35, THICK_MIN, THICK_MAX); // Thickness
             cachedLayerProperties1[1] = genProperty(50, 40, 10, WARP_MIN, WARP_MAX); // Warp
             cachedLayerProperties1[2] = genProperty(30, 50, 20, TILT_MIN, TILT_MAX); // Tilt
@@ -230,21 +230,21 @@ public class StoneRegionBuilder {
         if (yPos < 25) { // BOTTOM LAYER // TODO TEMP DIVISION
             float noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f,
                     cachedLayerProperties3[0], cachedLayerProperties3[1], cachedLayerProperties3[2], 20, 31301);
-            state = BlockPicker.selectBlock(cachedBlockStateList3, regionNoise, noiseVal);
+            geologyType = BlockPicker.selectBlock(cachedGeologyTypeList3, regionNoise, noiseVal);
 
         } else if (yPos < 50) { // MIDDLE LAYER // TODO TEMP DIVISION
             float noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f,
                     cachedLayerProperties2[0], cachedLayerProperties2[1], cachedLayerProperties2[2], 20, -13200);
-            state = BlockPicker.selectBlock(cachedBlockStateList2, regionNoise, noiseVal);
+            geologyType = BlockPicker.selectBlock(cachedGeologyTypeList2, regionNoise, noiseVal);
 
         } else { // TOP LAYER
             float noiseVal = genAdjustableLayers(xPos, yPos, zPos, 0.1f,
                     cachedLayerProperties1[0], cachedLayerProperties1[1], cachedLayerProperties1[2], 20, 13000);
-            state = BlockPicker.selectBlock(cachedBlockStateList1, regionNoise, noiseVal);
+            geologyType = BlockPicker.selectBlock(cachedGeologyTypeList1, regionNoise, noiseVal);
 
         }
 
-        return state;
+        return geologyType;
     }
 
 

@@ -4,6 +4,7 @@ import com.jemmerl.jemsgeology.JemsGeology;
 import com.jemmerl.jemsgeology.data.enums.GeologyType;
 import com.jemmerl.jemsgeology.geology.features.instances.BoulderEntry;
 import com.jemmerl.jemsgeology.init.JemsGeoConfig;
+import com.jemmerl.jemsgeology.init.ModBlocks;
 import com.jemmerl.jemsgeology.init.NoiseInit;
 import com.jemmerl.jemsgeology.init.featureinit.FeatureRegistrar;
 import com.jemmerl.jemsgeology.util.UtilMethods;
@@ -72,7 +73,7 @@ public class BoulderFeature extends Feature<NoFeatureConfig> {
 
 
     private boolean buildBoulder(BoulderEntry entry, ISeedReader reader, Random rand, BlockPos pos, GeologyType geologyType, boolean adjacent) {
-        final BlockState boulderState = ModBlockLists.GEO_LIST.get(geologyType).getStoneOreBlock().getDefaultState();
+        final BlockState boulderState = ModBlocks.GEOBLOCKS.get(geologyType).getBaseState();
         int rLong = rand.nextInt(entry.getLongRadiusMax() - entry.getLongRadiusMin() + 1) + entry.getLongRadiusMin();
         int rShort = rand.nextInt(entry.getShortRadiusMax() - entry.getShortRadiusMin() + 1) + entry.getShortRadiusMin();
         int embedDepth = rand.nextInt(rShort-1) + 1; // Depth the center is into the ground (1 to (rShort-1))

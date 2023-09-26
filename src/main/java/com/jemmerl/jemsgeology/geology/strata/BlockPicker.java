@@ -1,6 +1,7 @@
 package com.jemmerl.jemsgeology.geology.strata;
 
 import com.jemmerl.jemsgeology.JemsGeology;
+import com.jemmerl.jemsgeology.data.enums.GeologyType;
 import com.jemmerl.jemsgeology.util.UtilMethods;
 import com.jemmerl.jemsgeology.geology.strata.templates.PresetTemplate;
 import com.jemmerl.jemsgeology.geology.strata.templates.SetTemplate;
@@ -24,7 +25,7 @@ public class BlockPicker {
     private static final Logger LOGGER = LogManager.getLogger();
 
     private final JsonObject presetJsonObj;
-    private final LinkedHashMap<String, ArrayList<BlockState>> presetMap;
+    private final LinkedHashMap<String, ArrayList<GeologyType>> presetMap;
 
     public BlockPicker() {
         this.presetJsonObj = getPresetJsonObj();
@@ -32,11 +33,11 @@ public class BlockPicker {
     }
 
     // Picks a block to use for a layer given the options in form of a list of blockstates
-    public static BlockState selectBlock(List<BlockState> stateList, float regionNoise, float strataVal) {
+    public static GeologyType selectBlock(List<GeologyType> geologyTypeList, float regionNoise, float strataVal) {
         Random rand = new Random((int)(regionNoise * 10000));
-        int size = stateList.size();
-        int index = rand.nextInt(size) + (int)UtilMethods.remap(strataVal, new float[]{-1f, 1f}, new float[]{0, stateList.size()});
-        return stateList.get(((index = (index % size)) < 0) ? (index + size) : index);
+        int size = geologyTypeList.size();
+        int index = rand.nextInt(size) + (int)UtilMethods.remap(strataVal, new float[]{-1f, 1f}, new float[]{0, geologyTypeList.size()});
+        return geologyTypeList.get(((index = (index % size)) < 0) ? (index + size) : index);
     }
 
     // Get a random preset from the data-defined presets
@@ -54,29 +55,28 @@ public class BlockPicker {
 
     // Combines given blocks (resource locations of as a string) into one list of blockstates
     // Used for hard-coded block selections
-    public static List<BlockState> buildStateList(List<String> blocks) {
-        List<BlockState> stateList = new ArrayList<>();
-        for (String name : blocks) {
-            stateList.add(UtilMethods.stringToBlockState(name));
+    public static List<GeologyType> buildGeologyTypeList(List<String> geoTypeNames) {
+        List<GeologyType> geologyTypeList = new ArrayList<>();
+        for (String name : geoTypeNames) {
+            geologyTypeList.add(UtilMethods.stringToGeologyType(name));
         }
-        return stateList;
+        return geologyTypeList;
     }
 
     // Allows the layer generator to get a full preset list with no removed blocks
     // Used with data-generated block selections
-    public List<BlockState> getBlockStateList(String presetKey) {
-        List<BlockState> stateList = new ArrayList<>(this.presetMap.get(presetKey));
-        return stateList;
+    public List<GeologyType> getGeologyTypeList(String presetKey) {
+        return new ArrayList<>(this.presetMap.get(presetKey));
     }
 
     // Allows the layer generator to pick how many blocks will be used from a preset
     // Used with data-generated block selections
-    public List<BlockState> getBlockStateList(String presetKey, int numPick) {
-        List<BlockState> stateList = new ArrayList<>(this.presetMap.get(presetKey));
-        for (int i = (stateList.size() - numPick); i > 0; i--) {
-            stateList.remove(0);
+    public List<GeologyType> getGeologyTypeList(String presetKey, int numPick) {
+        List<GeologyType> geologyTypeList = new ArrayList<>(this.presetMap.get(presetKey));
+        for (int i = (geologyTypeList.size() - numPick); i > 0; i--) {
+            geologyTypeList.remove(0);
         }
-        return stateList;
+        return geologyTypeList;
     }
 
     // TODO save info to the level or world file, so changes to data file do not impact the world
@@ -106,7 +106,7 @@ public class BlockPicker {
             LOGGER.warn("Couldn't parse data file at " + resourceLocation, jsonParseException);
         }
 
-        // TEMP TO TEST PARSING
+        // todo remove this TEMP TO TEST PARSING
         result = "{\"block_presets\":[{\"name\":\"default\",\"sets\":[\"sed_soil\"],\"individuals\":[\"minecraft:iron_block\"]}],\"set_list\":[{\"name\":\"sed_soil\",\"blocks\":[\"jemsgeology:shale_stone\",\"rekindleunderground:mudstone_stone\"]}]}";
         presetJsonObj  = new JsonParser().parse(result).getAsJsonObject();
         return presetJsonObj;
@@ -126,41 +126,41 @@ public class BlockPicker {
     }
 
     // Build the preset map for strata using the block presets json
-    private LinkedHashMap<String, ArrayList<BlockState>> getPresetMap() {
+    private LinkedHashMap<String, ArrayList<GeologyType>> getPresetMap() {
         Gson gson = new Gson();
 
         // Build map of available sets for referencing
         JsonArray setListArr = this.presetJsonObj.getAsJsonArray("set_list");
         SetTemplate[] setTemplateList = gson.fromJson(setListArr, SetTemplate[].class);
-        Map<String, ArrayList<BlockState>> setListMap = new HashMap<>();
+        Map<String, ArrayList<GeologyType>> setListMap = new HashMap<>();
         for (SetTemplate data : setTemplateList) {
-            ArrayList<BlockState> blockStateArrayList = new ArrayList<>();
+            ArrayList<GeologyType> geologyTypeArrayList = new ArrayList<>();
             for (int i = 0; i < data.getBlocks().length; i++) {
-                blockStateArrayList.add(UtilMethods.stringToBlockState(data.getBlocks()[i]));
+                geologyTypeArrayList.add(UtilMethods.stringToGeologyType(data.getBlocks()[i]));
             }
-            setListMap.putIfAbsent(data.getName(), blockStateArrayList);
+            setListMap.putIfAbsent(data.getName(), geologyTypeArrayList);
         }
 
         // Build map of available presets from given sets and individual blocks
         JsonArray presetsArr = this.presetJsonObj.getAsJsonArray("block_presets");
         PresetTemplate[] presetTemplateList = gson.fromJson(presetsArr, PresetTemplate[].class);
-        LinkedHashMap<String, ArrayList<BlockState>> builtPresetMap = new LinkedHashMap<>();
+        LinkedHashMap<String, ArrayList<GeologyType>> builtPresetMap = new LinkedHashMap<>();
         for (PresetTemplate data : presetTemplateList) {
             String key = data.getName();
-            ArrayList<BlockState> blockStateArrayList = new ArrayList<>(); // List of blocks in preset
+            ArrayList<GeologyType> geologyTypeArrayList = new ArrayList<>(); // List of blocks in preset
 
             // Add all blocks from specified sets
             String[] sets = data.getSets(); // List of specified sets in preset
             for (int j = 0; j < sets.length; j++) {
-                blockStateArrayList.addAll(setListMap.get(sets[j]));
+                geologyTypeArrayList.addAll(setListMap.get(sets[j]));
             }
             // Add all specified individual blocks
             String[] individuals = data.getIndividuals(); // List of specified individual blocks in preset
             for (int j = 0; j < individuals.length; j++) {
-                blockStateArrayList.add(UtilMethods.stringToBlockState(individuals[j]));
+                geologyTypeArrayList.add(UtilMethods.stringToGeologyType(individuals[j]));
             }
 
-            builtPresetMap.putIfAbsent(key, blockStateArrayList);
+            builtPresetMap.putIfAbsent(key, geologyTypeArrayList);
         }
 
         return builtPresetMap;

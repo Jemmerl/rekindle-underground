@@ -28,7 +28,7 @@
     {
       "name": "seabed",
       "sets": ["sed_sandy", "sed_evaporate", "sed_carbonate"],
-      "individuals": ["jemsgeology:basalt_stone"]
+      "individuals": ["basalt"]
     },
     {
       "name": "metamorphic",
@@ -38,16 +38,16 @@
     {
       "name": "shale_and_friends",
       "sets": ["sed_soil"],
-      "individuals": ["jemsgeology:schist_stone", "jemsgeology:phyllite_stone"]
+      "individuals": ["schist", "phyllite"]
     }
   ],
   "set_list": [
-    {"name": "sed_soil", "blocks": ["jemsgeology:shale_stone", "jemsgeology:mudstone_stone"]},
-    {"name": "sed_sandy", "blocks": ["jemsgeology:sandstone_stone", "jemsgeology:red_sandstone_stone", "jemsgeology:greywacke_stone"]},
-    {"name": "sed_carbonate", "blocks": ["jemsgeology:chalk_stone", "jemsgeology:limestone_stone", "jemsgeology:dolostone_stone"]},
-    {"name": "sed_evaporate", "blocks": ["jemsgeology:rocksalt_stone", "jemsgeology:rockgypsum_stone", "jemsgeology:borax_stone", "jemsgeology:kernite_stone"]},
-    {"name": "ign_ext_main", "blocks": ["jemsgeology:dacite_stone", "jemsgeology:andesite_stone", "jemsgeology:basalt_stone"]},
-    {"name": "ign_ext_aux", "blocks": ["jemsgeology:rhyolite_stone", "jemsgeology:scoria_stone"]},
-    {"name": "metamorphic", "blocks": ["jemsgeology:quartzite_stone", "jemsgeology:schist_stone", "jemsgeology:phyllite_stone", "jemsgeology:gneiss_stone", "jemsgeology:marble_stone"]}
+    {"name": "sed_soil", "blocks": ["shale", "mudstone"]},
+    {"name": "sed_sandy", "blocks": ["sandstone", "red_sandstone", "greywacke"]},
+    {"name": "sed_carbonate", "blocks": ["chalk", "limestone", "dolostone"]},
+    {"name": "sed_evaporate", "blocks": ["rocksalt", "rockgypsum", "borax", "kernite"]},
+    {"name": "ign_ext_main", "blocks": ["dacite", "andesite", "basalt"]},
+    {"name": "ign_ext_aux", "blocks": ["rhyolite", "scoria"]},
+    {"name": "metamorphic", "blocks": ["quartzite", "schist", "phyllite", "gneiss", "marble"]}
   ]
 }

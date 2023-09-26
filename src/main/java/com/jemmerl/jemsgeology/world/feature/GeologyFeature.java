@@ -42,7 +42,7 @@ public class GeologyFeature extends Feature<NoFeatureConfig> {
     }
 
 
-    private void processChunk(ISeedReader reader, ChunkReader chunkReader, GeoMapBuilder stateMap, BlockPos pos) {
+    private void processChunk(ISeedReader reader, ChunkReader chunkReader, GeoMapBuilder geoMapBuilder, BlockPos pos) {
         IChunk chunk = reader.getChunk(pos);
         BlockPos.Mutable mutablePos = new BlockPos.Mutable();
         for (int x = 0; x < 16; x++) {
@@ -57,7 +57,7 @@ public class GeologyFeature extends Feature<NoFeatureConfig> {
                     mutablePos.setY(y);
 
                     BlockState originalState = chunk.getBlockState(mutablePos);
-                    BlockState stoneState = stateMap.getGeoWrapper(x, y, z);
+                    BlockState stoneState = geoMapBuilder.getGeoWrapper(x, y, z);
 
                     switch (UtilMethods.replaceableStatus(originalState)) {
                         case FAILED:
