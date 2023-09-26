@@ -7,13 +7,11 @@ import com.jemmerl.jemsgeology.init.ModBlocks;
 import com.jemmerl.jemsgeology.data.enums.ore.GradeType;
 import com.jemmerl.jemsgeology.data.enums.ore.OreType;
 import com.jemmerl.jemsgeology.init.blockinit.GeoRegistry;
-import com.jemmerl.jemsgeology.util.lists.GeoListWrapper;
 import com.jemmerl.jemsgeology.util.lists.ModBlockLists;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.advancements.criterion.EnchantmentPredicate;
 import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.advancements.criterion.MinMaxBounds;
-import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
@@ -323,7 +321,7 @@ public class ModLootTableProvider extends LootTableProvider {
         //                                                .alternatively(ItemLootEntry.builder(geoRegistry.getRockItem())
         //                                                        .acceptFunction(ExplosionDecay.builder()))))));
 
-        
+
         // Don't worry about this.
         @Override
         protected Iterable<Block> getKnownBlocks() {

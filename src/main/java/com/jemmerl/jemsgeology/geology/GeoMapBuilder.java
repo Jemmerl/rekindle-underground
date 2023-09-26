@@ -1,8 +1,9 @@
 package com.jemmerl.jemsgeology.geology;
 
 import com.jemmerl.jemsgeology.JemsGeology;
-import com.jemmerl.jemsgeology.blocks.IGeoBlock;
 import com.jemmerl.jemsgeology.data.enums.GeologyType;
+import com.jemmerl.jemsgeology.data.enums.ore.GradeType;
+import com.jemmerl.jemsgeology.data.enums.ore.OreType;
 import com.jemmerl.jemsgeology.geology.strata.StoneRegionBuilder;
 import com.jemmerl.jemsgeology.geology.strata.VolcanicRegionBuilder;
 import com.jemmerl.jemsgeology.init.JemsGeoConfig;
@@ -14,8 +15,6 @@ import com.jemmerl.jemsgeology.world.capability.chunk.ChunkGennedCapability;
 import com.jemmerl.jemsgeology.world.capability.chunk.IChunkGennedCapability;
 import com.jemmerl.jemsgeology.world.capability.deposit.DepositCapability;
 import com.jemmerl.jemsgeology.world.capability.deposit.IDepositCapability;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.ISeedReader;
@@ -23,38 +22,38 @@ import net.minecraft.world.ISeedReader;
 import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class StateMapBuilder {
+public class GeoMapBuilder {
 
     private final ChunkReader chunkReader;
     private final BlockPos blockPos; // Starting position of this chunk's generation
     private final Random rand;
-    private final BlockState[][][] stoneStateMap; // Positional map of stone blockstates to be generated
+    private final GeoWrapper[][][] geoWrapperMap; // Positional map of stone blockstates to be generated
     private final IDepositCapability depositCapability;
     private final IChunkGennedCapability chunkGennedCapability;
 
-    public StateMapBuilder(ChunkReader reader, BlockPos pos, Random rand) {
+    public GeoMapBuilder(ChunkReader reader, BlockPos pos, Random rand) {
         this.chunkReader = reader;
         this.blockPos = pos;
         this.rand = rand;
-        this.stoneStateMap = new BlockState[16][this.chunkReader.getMaxHeight()][16];
+        this.geoWrapperMap = new GeoWrapper[16][this.chunkReader.getMaxHeight()][16];
 
         this.depositCapability = this.chunkReader.getSeedReader().getWorld().getCapability(DepositCapability.JEMGEO_DEPOSIT_CAPABILITY)
                 .orElseThrow(() -> new RuntimeException("JemsGeo deposit capability is null..."));
         this.chunkGennedCapability = this.chunkReader.getSeedReader().getWorld().getCapability(ChunkGennedCapability.JEMGEO_CHUNK_GEN_CAPABILITY)
                 .orElseThrow(() -> new RuntimeException("JemsGeo chunk gen capability is null..."));
 
-        generateStateMap();
+        genGeoMap();
     }
 
-    public BlockState[][][] getStoneStateMap() {
-        return this.stoneStateMap;
+    public GeoWrapper[][][] getGeoWrapperMap() {
+        return this.geoWrapperMap;
     }
 
-    public BlockState getStoneState(int x, int y, int z) {
-        return this.stoneStateMap[x][y][z];
+    public GeoWrapper getGeoWrapper(int x, int y, int z) {
+        return this.geoWrapperMap[x][y][z];
     }
 
-    private void generateStateMap() {
+    private void genGeoMap() {
         PopulateIgneous();
         PopulateStrata();
         PopulateOres();
@@ -110,7 +109,7 @@ public class StateMapBuilder {
                     int posX = this.blockPos.getX() + x;
                     int posZ = this.blockPos.getZ() + z;
 
-                    this.stoneStateMap[x][y][z] = VolcanicRegionBuilder.getVolcanicState(posX, y, posZ,
+                    this.geoWrapperMap[x][y][z] = VolcanicRegionBuilder.getVolcanicBlock(posX, y, posZ,
                             chunkReader.getSeedReader());
                 }
             }
@@ -129,19 +128,19 @@ public class StateMapBuilder {
                     int posX = this.blockPos.getX() + x;
                     int posZ = this.blockPos.getZ() + z;
 
-                    BlockState ignState = this.stoneStateMap[x][y][z];
-                    boolean contactMeta = (ignState == Blocks.AIR.getDefaultState());
-                    if ((ignState == null) || contactMeta) {
-                        BlockState stoneState = StoneRegionBuilder.getStoneStrataBlock(posX, y, posZ,
+                    GeoWrapper ignBlock = this.geoWrapperMap[x][y][z];
+                    GeologyType geologyType = ignBlock.getGeologyType();
+                    boolean contactMeta = (ignBlock.getOreType() == null);
+                    if ((geologyType == null) || contactMeta) {
+                        GeologyType stoneGeoType = StoneRegionBuilder.getStoneStrataBlock(posX, y, posZ,
                                 chunkReader.getSeedReader(), contactMeta);
 
                         // might be temporary, may move into new strata gen
                         if (contactMeta) {
-                            GeologyType geoType = ((IGeoBlock)(stoneState.getBlock())).getGeologyType();
-                            stoneState = ModBlockLists.CONTACT_META_MAP.getOrDefault(geoType, stoneState);
+                            stoneGeoType = ModBlockLists.CONTACT_META_MAP.getOrDefault(stoneGeoType, stoneGeoType);
                         }
 
-                        this.stoneStateMap[x][y][z] = stoneState;
+                        this.geoWrapperMap[x][y][z] = new GeoWrapper(stoneGeoType, OreType.NONE, GradeType.NONE);
                     }
                 }
             }

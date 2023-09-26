@@ -160,7 +160,7 @@ public class DepositCapability implements IDepositCapability {
         private BlockPos pos;
         private OreType ore;
         private GradeType grade;
-        private String name;
+        private String name; // Name of the deposit generating the block
 
         public PendingBlock(BlockPos pos, OreType oreType, GradeType gradeType, String name) {
             this.pos = pos;

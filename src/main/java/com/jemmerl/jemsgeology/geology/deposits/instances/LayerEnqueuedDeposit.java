@@ -16,7 +16,7 @@ import com.jemmerl.jemsgeology.util.noise.GenerationNoise.BlobWarpNoise;
 import com.jemmerl.jemsgeology.world.capability.chunk.IChunkGennedCapability;
 import com.jemmerl.jemsgeology.world.capability.deposit.IDepositCapability;
 import com.jemmerl.jemsgeology.geology.ChunkReader;
-import com.jemmerl.jemsgeology.geology.StateMapBuilder;
+import com.jemmerl.jemsgeology.geology.GeoMapBuilder;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
@@ -117,7 +117,7 @@ public class LayerEnqueuedDeposit implements IEnqueuedDeposit {
     //////////////////////////
 
     @Override
-    public boolean generate(ChunkReader reader, Random rand, BlockPos pos, StateMapBuilder stateMap,
+    public boolean generate(ChunkReader reader, Random rand, BlockPos pos, GeoMapBuilder geoMapBuilder,
                             IDepositCapability depositCapability, IChunkGennedCapability chunkGennedCapability) {
 
         // Constants
@@ -232,7 +232,7 @@ public class LayerEnqueuedDeposit implements IEnqueuedDeposit {
                 if ((rand.nextFloat() < adjDensityPercent) &&
                         (UtilMethods.getDistance2D(areaPos.getX(), areaPos.getZ(), centerPos.getX(), centerPos.getZ()) <= radius)) {
                     DepositUtil.enqueueBlockPlacement(reader.getSeedReader(), areaPos, this.ores.nextElt(), grade,
-                            this.name, pos, stateMap, depositCapability, chunkGennedCapability);
+                            this.name, pos, geoMapBuilder, depositCapability, chunkGennedCapability);
                 }
             }
             layerHeightCount++;

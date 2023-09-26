@@ -8,7 +8,7 @@ import com.jemmerl.jemsgeology.util.UtilMethods;
 import com.jemmerl.jemsgeology.util.lists.ModBlockLists;
 import com.jemmerl.jemsgeology.util.noise.GenerationNoise.BlobWarpNoise;
 import com.jemmerl.jemsgeology.geology.ChunkReader;
-import com.jemmerl.jemsgeology.geology.StateMapBuilder;
+import com.jemmerl.jemsgeology.geology.GeoMapBuilder;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -35,14 +35,14 @@ public class GeologyFeature extends Feature<NoFeatureConfig> {
         }
 
         ChunkReader chunkReader = new ChunkReader(seedReader, pos);
-        StateMapBuilder stateMapBuilder = new StateMapBuilder(chunkReader, pos, rand);
-        processChunk(seedReader, chunkReader, stateMapBuilder, pos);
+        GeoMapBuilder geoMapBuilder = new GeoMapBuilder(chunkReader, pos, rand);
+        processChunk(seedReader, chunkReader, geoMapBuilder, pos);
 
         return true;
     }
 
 
-    private void processChunk(ISeedReader reader, ChunkReader chunkReader, StateMapBuilder stateMap, BlockPos pos) {
+    private void processChunk(ISeedReader reader, ChunkReader chunkReader, GeoMapBuilder stateMap, BlockPos pos) {
         IChunk chunk = reader.getChunk(pos);
         BlockPos.Mutable mutablePos = new BlockPos.Mutable();
         for (int x = 0; x < 16; x++) {
@@ -57,7 +57,7 @@ public class GeologyFeature extends Feature<NoFeatureConfig> {
                     mutablePos.setY(y);
 
                     BlockState originalState = chunk.getBlockState(mutablePos);
-                    BlockState stoneState = stateMap.getStoneState(x, y, z);
+                    BlockState stoneState = stateMap.getGeoWrapper(x, y, z);
 
                     switch (UtilMethods.replaceableStatus(originalState)) {
                         case FAILED:

@@ -1,15 +1,16 @@
 package com.jemmerl.jemsgeology.geology.strata;
 
 import com.jemmerl.jemsgeology.JemsGeology;
+import com.jemmerl.jemsgeology.data.enums.GeologyType;
 import com.jemmerl.jemsgeology.data.enums.igneous.BatholithType;
 import com.jemmerl.jemsgeology.data.enums.igneous.DikeType;
 import com.jemmerl.jemsgeology.data.enums.igneous.IgnProvinceType;
-import com.jemmerl.jemsgeology.init.ModBlocks;
+import com.jemmerl.jemsgeology.data.enums.ore.GradeType;
+import com.jemmerl.jemsgeology.data.enums.ore.OreType;
+import com.jemmerl.jemsgeology.geology.GeoWrapper;
 import com.jemmerl.jemsgeology.init.JemsGeoConfig;
 import com.jemmerl.jemsgeology.util.noise.GenerationNoise.BlobWarpNoise;
 import com.jemmerl.jemsgeology.util.noise.GenerationNoise.RegionNoise;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.world.ISeedReader;
 
 import java.util.Random;
@@ -25,13 +26,13 @@ public class VolcanicRegionBuilder {
 
     // Cached dike properties
     private static DikeType cachedDikeType;
-    private static BlockState cachedDikeStoneOne; // Stone the first dike will generate with (if applicable)
-    private static BlockState cachedDikeStoneTwo; // Stone the second dike will generate with (if applicable)
-    private static BlockState cachedDikeStoneThree; // Stone the third dike will generate with (if applicable)
+    private static GeologyType cachedDikeStoneOne; // Stone the first dike will generate with (if applicable)
+    private static GeologyType cachedDikeStoneTwo; // Stone the second dike will generate with (if applicable)
+    private static GeologyType cachedDikeStoneThree; // Stone the third dike will generate with (if applicable)
 
     // Cached batholith properties
     private static BatholithType cachedBatholithType;
-    private static BlockState cachedBatholithStone; // Stone the batholith will generate with (if applicable)
+    private static GeologyType cachedBatholithStone; // Stone the batholith will generate with (if applicable)
     private static int cachedBatholithHeight; // Max height of the batholith
 
     // Constants
@@ -40,10 +41,10 @@ public class VolcanicRegionBuilder {
     private static final int BATHOLITH_PROT_MIN = 65;
     private static final int BATHOLITH_PROT_MAX = 130;
 
-    public static BlockState getVolcanicState(int x, int y, int z, ISeedReader seedReader) {
+    public static GeoWrapper getVolcanicBlock(int x, int y, int z, ISeedReader seedReader) {
 
-        // Start as null, as a null return means no volcanic state to be generated
-        BlockState volcanicState = null;
+        // Start as null, as a null GeoType return means no volcanic block to be generated
+        GeoWrapper volcanicWrapper = new GeoWrapper(null, OreType.NONE, GradeType.NONE);
 
         // Get volcanic region value
         float volRegionVal = RegionNoise.volcanicRegionNoise(x, z, true);
@@ -96,22 +97,22 @@ public class VolcanicRegionBuilder {
             // Pick batholith stone
             rfloat = rand.nextFloat();
             if (cachedBatholithType.equals(BatholithType.NONE)) {
-                cachedBatholithStone = ModBlocks.SAND_STONE.get().getDefaultState(); // Debug, should not appear!
+                cachedBatholithStone = GeologyType.SANDSTONE; // Debug, should not appear!
             } else {
                 // Most batholiths are mixes of various felsic and intermediate plutonic rocks
                 // To save on computing cost (might experiment later), they will be generated as homogenous masses
                 // Gabbro is sometimes a small component of batholiths, which is represented here as a very
                 // rare chance of generation. Will also provide a non-oceanic source of gabbro for building
                 if (rfloat > 0.65f) {
-                    cachedBatholithStone = ModBlocks.GRANITE_STONE.get().getDefaultState(); // 35% -- felsic
+                    cachedBatholithStone = GeologyType.GRANITE; // 35% -- felsic
                 } else if (rfloat > 0.41f) {
-                    cachedBatholithStone = ModBlocks.SYENITE_STONE.get().getDefaultState(); // 24% -- felsic
+                    cachedBatholithStone = GeologyType.SYENITE; // 24% -- felsic
                 } else if (rfloat > 0.17f) {
-                    cachedBatholithStone = ModBlocks.GRANODIORITE_STONE.get().getDefaultState(); // 24% -- intermediate-felsic
+                    cachedBatholithStone = GeologyType.GRANODIORITE; // 24% -- intermediate-felsic
                 } else if (rfloat > 0.02f) {
-                    cachedBatholithStone = ModBlocks.DIORITE_STONE.get().getDefaultState(); // 15% -- intermediate
+                    cachedBatholithStone = GeologyType.DIORITE; // 15% -- intermediate
                 } else {
-                    cachedBatholithStone = ModBlocks.GABBRO_STONE.get().getDefaultState(); // 2% -- mafic
+                    cachedBatholithStone = GeologyType.GABBRO; // 2% -- mafic
                 }
             }
 
@@ -175,9 +176,12 @@ public class VolcanicRegionBuilder {
                 float percentContactMeta = -RegionNoise.volcanicRegionNoise(x, z, false);
                 float percentBatholith = (float)Math.pow(percentContactMeta, 1.5);
                 if ((y + 20) <= (((cachedBatholithHeight + 20) * percentBatholith) + (5 * BlobWarpNoise.blobWarpRadiusNoise((x * 4), y, (z * 4))))) {
-                    return cachedBatholithStone; // Batholith itself
+                    // The batholith itself
+                    volcanicWrapper.setGeologyType(cachedBatholithStone);
+                    return volcanicWrapper;
                 } else if ((y + 20) <= ((cachedBatholithHeight + 30) * percentContactMeta)) {
-                    volcanicState = Blocks.AIR.getDefaultState(); // Region of contact metamorphism
+                    // Region of contact metamorphism, null OreType signals contact metamorphism
+                    volcanicWrapper.setOreType(null);
                 }
 
                 // Debug
@@ -199,7 +203,7 @@ public class VolcanicRegionBuilder {
                 break;
         }
 
-        return volcanicState;
+        return volcanicWrapper;
     }
 }
 

@@ -43,6 +43,11 @@ public class UtilMethods {
         return Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(blockName))).getDefaultState();
     }
 
+    // Check if a block is a regolith geo block
+    public static boolean isRegolith(Block block) {
+        return ((block instanceof IGeoBlock) && Objects.requireNonNull(block.getRegistryName()).toString().contains("regolith"));
+    }
+
     // Returns an item given a string representation of its resource location
     // Reliance on this should be minimized
     public static Item stringToItem(String itemName) {
@@ -92,7 +97,7 @@ public class UtilMethods {
 //        return to.with(property, from.get(property));
 //    }
 
-    // Convert vanilla detritus to OreBlock detritus; If not convertible, return original state
+    // Convert vanilla detritus to GeoBlock detritus; If not convertible, return original state
     public static BlockState convertVanillaToDetritus(BlockState vanillaState) {
         GeologyType vanillaType = ModBlockLists.VANILLA_DET_LIST.getOrDefault(vanillaState, null);
         return (vanillaType == null) ? vanillaState : ModBlocks.GEOBLOCKS.get(vanillaType).getBaseState();

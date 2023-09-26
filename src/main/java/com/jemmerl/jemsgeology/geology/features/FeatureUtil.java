@@ -17,8 +17,8 @@ public class FeatureUtil {
         GeologyType geologyType;
 
         try {
-            String oreStoneStr = jsonElement.getAsString().toUpperCase();
-            geologyType = GeologyType.valueOf(oreStoneStr);
+            String geoStoneString = jsonElement.getAsString().toUpperCase();
+            geologyType = GeologyType.valueOf(geoStoneString);
         } catch (Exception e) {
             JemsGeology.getInstance().LOGGER.warn("Error in a feature: {}, invalid stone entry.", name);
 

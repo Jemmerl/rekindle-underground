@@ -7,15 +7,19 @@ import com.jemmerl.jemsgeology.blocks.IGeoBlock;
 import com.jemmerl.jemsgeology.blocks.StoneGeoBlock;
 import com.jemmerl.jemsgeology.data.enums.*;
 import com.jemmerl.jemsgeology.data.enums.ore.GradeType;
+import com.jemmerl.jemsgeology.data.enums.ore.OreBlockType;
 import com.jemmerl.jemsgeology.data.enums.ore.OreType;
+import com.jemmerl.jemsgeology.geology.GeoWrapper;
 import com.jemmerl.jemsgeology.init.JemsGeoConfig;
+import com.jemmerl.jemsgeology.init.ModBlocks;
+import com.jemmerl.jemsgeology.init.blockinit.GeoRegistry;
 import com.jemmerl.jemsgeology.init.depositinit.DepositRegistrar;
 import com.jemmerl.jemsgeology.util.Pair;
 import com.jemmerl.jemsgeology.util.UtilMethods;
 import com.jemmerl.jemsgeology.util.WeightedProbMap;
 import com.jemmerl.jemsgeology.world.capability.chunk.IChunkGennedCapability;
 import com.jemmerl.jemsgeology.world.capability.deposit.IDepositCapability;
-import com.jemmerl.jemsgeology.geology.StateMapBuilder;
+import com.jemmerl.jemsgeology.geology.GeoMapBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -26,7 +30,6 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.feature.OreFeature;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -56,7 +59,12 @@ public class DepositUtil {
     // If not a StoneOreBlock, then the second condition (which assumes that it is such) will never be reached.
     public static Boolean isValidStone(Block blockIn, ArrayList<GeologyType> validStones) {
         return ((blockIn instanceof IGeoBlock) && validStones.contains(((IGeoBlock) blockIn).getGeologyType()));
-        //return (blockIn instanceof IOreBlock); // Debug Tool
+        //return (blockIn instanceof IGeoBlock); // Debug Tool
+    }
+
+    // Check if a Geology Type is a valid stone for ore generation.
+    public static Boolean isValidStone(GeologyType geologyType, ArrayList<GeologyType> validStones) {
+        return validStones.contains(geologyType);
     }
 
 
@@ -123,7 +131,7 @@ public class DepositUtil {
         return new WeightedProbMap<>(elts);
     }
 
-    // Return an array list of valid StoneTypes from a JsonArray
+    // Return an array list of valid GeologyTypes from a JsonArray
     public static ArrayList<GeologyType> getOreStones(JsonArray jsonArray, String name) {
         HashSet<GeologyType> oreStoneSet = new HashSet<>(); // Using a set removes duplicate entries free of charge
             try {
@@ -214,10 +222,10 @@ public class DepositUtil {
 
     // Process the enqueued blocks for a chunk
     public static boolean enqueueBlockPlacement(ISeedReader level, BlockPos qPos, OreType qType, GradeType qGrade,
-                                                String qName, BlockPos genPos, StateMapBuilder stateMap,
+                                                String qName, BlockPos genPos, GeoMapBuilder geoMapBuilder,
                                                 IDepositCapability depCap, @Nullable IChunkGennedCapability cgCap) {
 
-        BlockState[][][] stoneStateMap = stateMap.getStoneStateMap();
+        GeoWrapper[][][] geoWrapperMap = geoMapBuilder.getGeoWrapperMap();
 
         // genPos and genChunk are the corner BlockPos and ChunkPos that the statemap is being generated for
         ChunkPos genChunk = new ChunkPos(genPos);
@@ -238,25 +246,22 @@ public class DepositUtil {
             int xIndex = Math.abs(qPos.getX() - genPos.getX());
             int zIndex = Math.abs(qPos.getZ() - genPos.getZ());
             try {
-                BlockState hostState = stoneStateMap[xIndex][qPos.getY()][zIndex];
-                if (isValidStone(hostState.getBlock(), qDeposit.getValid())) {
-                    stoneStateMap[xIndex][qPos.getY()][zIndex] = hostState.with(StoneGeoBlock.ORE_TYPE, qType)
-                            .with(StoneGeoBlock.GRADE_TYPE, qGrade);
+                GeologyType geologyType = geoWrapperMap[xIndex][qPos.getY()][zIndex].getGeologyType();
+                if (isValidStone(geologyType, qDeposit.getValid())) {
+                    geoWrapperMap[xIndex][qPos.getY()][zIndex] = new GeoWrapper(geologyType, qType, qGrade);
                     return true;
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
-
                 // Debug
                 if (JemsGeoConfig.SERVER.debug_block_enqueuer.get()){
                     JemsGeology.getInstance().LOGGER.warn(
                             "Enq block at {} was out of bounds with values {} {} {}",
                             qPos, xIndex, qPos.getY(), zIndex);
                 }
-
                 return false;
             }
 
-            // If this statement reaches here, the OreBlock was not a valid placement stone or something has gone very wrong...
+            // If this statement reaches here, the block was not a valid placement stone or something has gone very wrong...
             return false;
         }
 
@@ -270,16 +275,18 @@ public class DepositUtil {
 
                 BlockState state = level.getBlockState(qPos);
                 state = UtilMethods.convertVanillaToDetritus(state); // Convert vanilla detritus to respective OreBlocks for comparison
+                Block hostBlock = state.getBlock();
+                if (isValidStone(hostBlock, qDeposit.getValid())) {
+                    GeoRegistry geoRegistry = ModBlocks.GEOBLOCKS.get(((IGeoBlock) hostBlock).getGeologyType());
+                    Block placeBlock = (UtilMethods.isRegolith(hostBlock)) ?
+                            geoRegistry.getRegolithOre(qType, qGrade) : geoRegistry.getStoneOre(qType, qGrade);
 
-                if (isValidStone(state.getBlock(), qDeposit.getValid())) {
-                    if (!level.setBlockState(qPos, state.with(StoneGeoBlock.ORE_TYPE, qType).with(StoneGeoBlock.GRADE_TYPE, qGrade), 2 | 16)) {
-
+                    if (!level.setBlockState(qPos, placeBlock.getDefaultState(), 2 | 16)) {
                         // Debug
                         if (JemsGeoConfig.SERVER.debug_block_enqueuer.get()){
                             JemsGeology.getInstance().LOGGER.warn("Somehow {} could not be placed at {} even though chunk has generated",
                                     state.getBlock().getRegistryName(), qPos);
                         }
-
                         return false;
                     }
                 }
@@ -289,7 +296,6 @@ public class DepositUtil {
                 return false;
             }
         }
-
         return false;
     }
 
@@ -421,13 +427,16 @@ public class DepositUtil {
 
     // Place an ore block from a deposit
     public static boolean placeDepositOre(IWorld reader, IDeposit deposit, GradeType grade, BlockPos placePos) {
-        BlockState hostState = UtilMethods.convertVanillaToDetritus(reader.getBlockState(placePos));
-        if (!DepositUtil.isValidStone(hostState.getBlock(), deposit.getValid())) {
+        Block hostBlock = UtilMethods.convertVanillaToDetritus(reader.getBlockState(placePos)).getBlock();
+        if (!DepositUtil.isValidStone(hostBlock, deposit.getValid())) {
             return false;
         }
 
-        return reader.setBlockState(placePos, hostState
-                .with(StoneGeoBlock.ORE_TYPE, deposit.getOres().nextElt())
-                .with(StoneGeoBlock.GRADE_TYPE, grade), 2);
+        GeoRegistry geoRegistry = ModBlocks.GEOBLOCKS.get(((IGeoBlock) hostBlock).getGeologyType());
+        Block placeBlock = (UtilMethods.isRegolith(hostBlock)) ?
+                geoRegistry.getRegolithOre(deposit.getOres().nextElt(), grade) :
+                geoRegistry.getStoneOre(deposit.getOres().nextElt(), grade);
+
+        return reader.setBlockState(placePos, placeBlock.getDefaultState(), 2);
     }
 }
