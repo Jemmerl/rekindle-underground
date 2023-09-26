@@ -111,7 +111,7 @@ public class GeoRegistry {
     }
 
     // Get all ore-bearing base stone geo-blocks
-    private List<Block> getStoneOreBlocks() {
+    public List<Block> getStoneOreBlocks() {
         List<Block> allStoneOreBlocks = new ArrayList<>();
         for (OreRegistry oreRegistry: stoneOreRegistry.values()) {
             allStoneOreBlocks.addAll(oreRegistry.getAllGradedOreBlocks());
@@ -121,7 +121,7 @@ public class GeoRegistry {
 
     // Get all ore-bearing regolith geo-blocks
     // Assumes that the caller has confirmed the geo-type has regolith
-    private List<Block> getRegolithOreBlocks() {
+    public List<Block> getRegolithOreBlocks() {
         List<Block> allRegolithOreBlocks = new ArrayList<>();
         for (OreRegistry oreRegistry: regolithOreRegistry.values()) {
             allRegolithOreBlocks.addAll(oreRegistry.getAllGradedOreBlocks());

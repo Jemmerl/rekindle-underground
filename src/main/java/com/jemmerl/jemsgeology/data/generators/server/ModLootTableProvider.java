@@ -1,19 +1,20 @@
 package com.jemmerl.jemsgeology.data.generators.server;
 
 import com.google.common.collect.ImmutableList;
-import com.jemmerl.jemsgeology.blocks.FallingCobbleBlock;
 import com.jemmerl.jemsgeology.blocks.IGeoBlock;
-import com.jemmerl.jemsgeology.blocks.StoneGeoBlock;
 import com.jemmerl.jemsgeology.data.enums.GeologyType;
 import com.jemmerl.jemsgeology.init.ModBlocks;
 import com.jemmerl.jemsgeology.data.enums.ore.GradeType;
 import com.jemmerl.jemsgeology.data.enums.ore.OreType;
+import com.jemmerl.jemsgeology.init.blockinit.GeoRegistry;
 import com.jemmerl.jemsgeology.util.lists.GeoListWrapper;
 import com.jemmerl.jemsgeology.util.lists.ModBlockLists;
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.advancements.criterion.EnchantmentPredicate;
+import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.advancements.criterion.MinMaxBounds;
 import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.LootTableProvider;
@@ -22,9 +23,9 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.loot.*;
-import net.minecraft.loot.conditions.BlockStateProperty;
-import net.minecraft.loot.conditions.RandomChance;
-import net.minecraft.loot.conditions.TableBonus;
+import net.minecraft.loot.conditions.*;
+import net.minecraft.loot.functions.ExplosionDecay;
+import net.minecraft.loot.functions.SetCount;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
 
@@ -34,10 +35,13 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-import static com.jemmerl.jemsgeology.blocks.StoneGeoBlock.GRADE_TYPE;
-import static com.jemmerl.jemsgeology.blocks.StoneGeoBlock.ORE_TYPE;
-
 public class ModLootTableProvider extends LootTableProvider {
+
+    // Copied from BlockLootTables, as it is private
+    private static final ILootCondition.IBuilder SILK_TOUCH = MatchTool.builder(
+            ItemPredicate.Builder.create()
+                    .enchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.IntBound.atLeast(1))));
+
     public ModLootTableProvider(DataGenerator dataGeneratorIn) {
         super(dataGeneratorIn);
     }
@@ -50,244 +54,276 @@ public class ModLootTableProvider extends LootTableProvider {
     }
 
     @Override
-    protected void validate(Map<ResourceLocation, LootTable> map, ValidationTracker validationtracker) {
+    protected void validate(Map<ResourceLocation, LootTable> map, ValidationTracker validationTracker) {
 //        for (Map.Entry<ResourceLocation, LootTable> entry : map.entrySet())
-//            LootTableManager.validateLootTable(validationtracker, entry.getKey(), entry.getValue());
+//            LootTableManager.validateLootTable(validationTracker, entry.getKey(), entry.getValue());
     }
 
     // TODO Whole lotta TEMP shite in here
     private static class ModBlockLootTables extends BlockLootTables {
         @Override
         protected void addTables() {
+            for (GeoRegistry geoRegistry: ModBlocks.GEOBLOCKS.values()) {
+                boolean hasCobble = geoRegistry.hasCobble();
 
-            ////////////////////////
-            // Stones Loot Tables //
-            ////////////////////////
+                // Loot Tables for base stone ores
+                registerBaseStoneOreLootTables(geoRegistry);
 
-            for (Block block : ModBlockLists.ALL_STONES) {
-                GeologyType geologyType = ((IGeoBlock) block).getGeologyType();
-                if (geologyType.hasCobble()) {
-                    // Register stone -> rock drop
-                    LootTable.Builder lootTable = buildStoneLootTable(geologyType);
-                    registerLootTable(block, lootTable);
+                if (hasCobble) {
+                    registerBaseStoneLootTable(geoRegistry);
+                    registerRegolithLootTable(geoRegistry);
+                    registerCobblesLootTable(geoRegistry);
+                    registerDropSelfLootTable(geoRegistry.getCobblestone());
+
+                    // Loot Tables for base regolith ores
+                    registerRegolithOreLootTables(geoRegistry);
+
                 } else {
-                    // TODO TEMP
-                    registerDropSelfLootTable(block); // i mean it! temp!
+                    // TODO TEMP! Handles ore-less base stones with no cobble/regolith (evaporites) as well as detritus
+                    registerDropSelfLootTable(geoRegistry.getBaseStone());
                 }
             }
-
-            for (Block block : ModBlockLists.ALL_REGOLITH) {
-                GeologyType geologyType = ((IGeoBlock) block).getGeologyType();
-
-                LootTable.Builder lootTable = buildRegolithLootTable(geologyType);
-                registerLootTable(block, lootTable);
-            }
-
-
-            for (Block block : ModBlockLists.COBBLES) {
-                GeologyType geologyType = ((FallingCobbleBlock) block).getGeologyType();
-                GeoListWrapper geoList = ModBlockLists.GEO_LIST.get(geologyType);
-
-                LootTable.Builder lootTable = buildCobblesLootTable(geoList);
-                registerLootTable(block, lootTable);
-            }
-
-            for (Block block : ModBlockLists.COBBLESTONES) {
-                registerDropSelfLootTable(block);
-            }
-
-            //////////////////////////
-            // Detritus Loot Tables //
-            //////////////////////////
-
-            // Dirt
-            registerLootTable(ModBlocks.DIRT_STONE.get(), buildDetritusLootTable(Blocks.DIRT.getDefaultState()));
-
-            // Coarse Dirt
-            registerLootTable(ModBlocks.COARSE_DIRT_STONE.get(), buildDetritusLootTable(Blocks.COARSE_DIRT.getDefaultState()));
-
-            // Sand
-            registerLootTable(ModBlocks.SAND_STONE.get(), buildDetritusLootTable(Blocks.SAND.getDefaultState()));
-
-            // Red Sand
-            registerLootTable(ModBlocks.RED_SAND_STONE.get(), buildDetritusLootTable(Blocks.RED_SAND.getDefaultState()));
-
-            // Gravel -- lower flint drop rate
-            registerLootTable(ModBlocks.GRAVEL_STONE.get(), buildGravelDetritusLootTable());
-
-            // Clay -- may drop < 4 clay
-            registerLootTable(ModBlocks.CLAY_STONE.get(), buildClayDetritusLootTable());
-
         }
 
 
-        /////////////////////////
-        // Loot Table Builders //
-        /////////////////////////
+        //////////////////////////
+        // Loot Table Registers //
+        //////////////////////////
 
-        // Creates and fills a loot table with the respective rock for cobbles blocks
-        private static LootTable.Builder buildCobblesLootTable(GeoListWrapper geoList) {
-            LootTable.Builder lootTableBuilder = new LootTable.Builder();
-
-            lootTableBuilder.addLootPool(LootPool.builder()
-                    .name("Rocks")
-                    .rolls(ConstantRange.of(4))
-                    .addEntry(ItemLootEntry.builder(geoList.getRockItem()))
-            );
-
-            return lootTableBuilder;
+        // Register: LOOSE COBBLES
+        private void registerCobblesLootTable(GeoRegistry geoRegistry) {
+            Block cobbles = geoRegistry.getCobbles();
+            registerLootTable(cobbles, droppingWithSilkTouch(cobbles,
+                    withExplosionDecay(cobbles, ItemLootEntry.builder(geoRegistry.getRockItem())
+                            .acceptFunction(SetCount.builder(ConstantRange.of(4))))));
         }
 
 
-        // Creates and fills a loot table with pools for each OreType for stone blocks
-        private static LootTable.Builder buildStoneLootTable(GeologyType geologyType) {
-            GeoListWrapper geoList = ModBlockLists.GEO_LIST.get(geologyType);
-            LootTable.Builder lootTableBuilder = new LootTable.Builder();
+        // Register: BASE STONE/DETRITUS - NO ORE
+        private void registerBaseStoneLootTable(GeoRegistry geoRegistry) {
+            GeologyType geologyType = geoRegistry.getGeoType();
+            Block block = geoRegistry.getBaseStone();
 
-            // Loot pool for normal stone, "NONE" ore
-            if (ModBlockLists.FLINT_BEARING.containsKey(geologyType)) {
+            // Catch and handle detritus base stones
+            switch (geologyType) {
+                case DIRT:
+                case COARSE_DIRT:
+                case SAND:
+                case RED_SAND:
+                    registerDropSelfLootTable(ModBlockLists.VANILLA_DET_LIST.inverse().get(geologyType).getBlock());
+                    return;
+                case CLAY:
+                    registerLootTable(block,
+                            droppingWithSilkTouchOrRandomly(Blocks.CLAY, Items.CLAY_BALL, ConstantRange.of(4)));
+                    return;
+                case GRAVEL:
+                    registerLootTable(block, droppingWithSilkTouch(Blocks.GRAVEL,
+                            withSurvivesExplosion(Blocks.GRAVEL,
+                                    ItemLootEntry.builder(Items.FLINT)
+                                            .acceptCondition(TableBonus.builder(Enchantments.FORTUNE, 0.1F, 0.14285715F, 0.25F, 1.0F))
+                                            .alternatively(ItemLootEntry.builder(Blocks.GRAVEL)))));
+                return;
+                default:
+            }
+
+            // Register a Loot Table for rock-dropping base stone
+            if (!ModBlockLists.FLINT_BEARING.containsKey(geologyType)) {
+                // Base stone block without flint
+                registerLootTable(block, droppingWithSilkTouch(block,
+                        withExplosionDecay(block, ItemLootEntry.builder(geoRegistry.getRockItem())
+                                .acceptFunction(SetCount.builder(BinomialRange.of(3, 0.65f))))));
+            } else {
                 // Alternative loot entry for flint bearing stones
-                lootTableBuilder.addLootPool(LootPool.builder()
-                        .name("flint")
-                        .rolls(BinomialRange.of(3, 0.65f))
-                        .addEntry(ItemLootEntry.builder(Items.FLINT.asItem())
-                                        .acceptCondition(RandomChance.builder(ModBlockLists.FLINT_BEARING.get(geologyType) / 100f))
-                                .alternatively(ItemLootEntry.builder(geoList.getRockItem())))
-                );
-            } else {
-                // No flint drop
-                lootTableBuilder.addLootPool(LootPool.builder()
-                        .name(OreType.NONE.getString())
-                        .rolls(BinomialRange.of(3, 0.65f))
-                        .addEntry(ItemLootEntry.builder(geoList.getRockItem()))
-                );
+                registerWithSilkTouch(block,
+                        buildFlintAltLootEntry(BinomialRange.of(3, 0.65F), geoRegistry.getRockItem(), geologyType, 0));
             }
-
-            // Add ore loot pools
-            fillOreTables(lootTableBuilder, geoList.getStoneOreBlock());
-
-            return lootTableBuilder;
-        }
-
-        // Creates and fills a loot table with pools for each OreType for regolith blocks
-        private static LootTable.Builder buildRegolithLootTable(GeologyType geologyType) {
-            GeoListWrapper geoList = ModBlockLists.GEO_LIST.get(geologyType);
-            Block regolithBlock = geoList.getRegolithBlock();
-            LootTable.Builder lootTableBuilder = new LootTable.Builder();
-
-            // Loot pool for normal regolith, "NONE" ore
-            if (ModBlockLists.FLINT_BEARING.containsKey(geologyType)) {
-                // Additional loot pool for flint bearing regoliths (additional 2% flint drop rate for regoliths)
-                lootTableBuilder.addLootPool(LootPool.builder()
-                        .name("flint")
-                        .addEntry(ItemLootEntry.builder(Items.FLINT.asItem())
-                                .acceptCondition(RandomChance.builder((ModBlockLists.FLINT_BEARING.get(geologyType) + 2) / 100f))
-                                .alternatively(ItemLootEntry.builder(regolithBlock.asItem())))
-                );
-            } else {
-                // No flint drop
-                lootTableBuilder.addLootPool(LootPool.builder()
-                        .name(OreType.NONE.getString())
-                        .addEntry(ItemLootEntry.builder(regolithBlock.asItem()))
-                );
-            }
-
-            // Add ore loot pools
-            fillOreTables(lootTableBuilder, regolithBlock);
-
-            return lootTableBuilder;
-        }
-
-        // Creates and fills a loot table with pools for each OreType for detritus that drops itself
-        private static LootTable.Builder buildDetritusLootTable(BlockState vanillaState) {
-            LootTable.Builder lootTableBuilder = new LootTable.Builder();
-
-            // Loot pool for the detritus itself and "NONE" ore
-            lootTableBuilder.addLootPool(LootPool.builder()
-                    .name(OreType.NONE.getString())
-                    .addEntry(ItemLootEntry.builder(vanillaState.getBlock().asItem()))
-            );
-
-            // Add ore loot pools
-            fillOreTables(lootTableBuilder, ModBlockLists.VANILLA_DET_LIST.get(vanillaState).getBlock());
-
-            return lootTableBuilder;
         }
 
 
-        // Create and fills a loot table with pools for each OreType for gravel detritus
-        private static LootTable.Builder buildGravelDetritusLootTable() {
-            LootTable.Builder lootTableBuilder = new LootTable.Builder();
+        // Register: BASE STONE/DETRITUS - WITH ORE
+        private void registerBaseStoneOreLootTables(GeoRegistry geoRegistry) {
+            GeologyType geologyType = geoRegistry.getGeoType();
+            for (Block block: geoRegistry.getStoneOreBlocks()) {
+                OreType oreType = ((IGeoBlock) block).getOreType();
+                LootEntry.Builder<?> oreEntry = buildOreLootEntry(oreType, ((IGeoBlock) block).getGradeType());
 
-            // Gravel or flint loot pool for itself and "NONE" ore
-            // Flint drop rates are VERY nerfed. Might be removed if vanilla gravel is removed
-            lootTableBuilder.addLootPool(LootPool.builder()
-                    .name(OreType.NONE.getString())
-                    .addEntry(ItemLootEntry.builder(Items.FLINT)
-                            .acceptCondition(TableBonus.builder(Enchantments.FORTUNE, 0.005F, 0.14285715F, 0.25F, 1.0F))
-                            .alternatively(ItemLootEntry.builder(Blocks.GRAVEL)))
-            );
-
-            // Add ore loot pools
-            fillOreTables(lootTableBuilder, ModBlocks.GRAVEL_STONE.get());
-
-            return lootTableBuilder;
-        }
-
-
-        // Create and fills a loot table with pools for each OreType for clay detritus
-        private static LootTable.Builder buildClayDetritusLootTable() {
-            LootTable.Builder lootTableBuilder = new LootTable.Builder();
-
-            // Clay drops loot pool for the clay itself and "NONE" ore
-            lootTableBuilder.addLootPool(LootPool.builder()
-                    .name(OreType.NONE.getString())
-                    .rolls(BinomialRange.of(4, 0.6f))
-                    .addEntry(ItemLootEntry.builder(Items.CLAY_BALL))
-            );
-
-            // Add ore loot pools
-            fillOreTables(lootTableBuilder, ModBlocks.CLAY_STONE.get());
-
-            return lootTableBuilder;
-        }
-
-
-        // Add filled ore loot tables
-        // TODO make all drop some amount of small ore (<- what does this mean?)
-        private static void fillOreTables(LootTable.Builder lootTableBuilder, Block block) {
-            for (OreType oreType : EnumSet.complementOf(EnumSet.of(OreType.NONE))) {
-                for (GradeType gradeType : GradeType.values()) {
-                    String lootName;
-                    Item oreDropItem;
-                    IRandomRange rollsIn;
-                    if (gradeType.equals(GradeType.HIGHGRADE)) {
-                        lootName = oreType.getString() + "_highgrade";
-                        oreDropItem = oreType.getOreItem();
-                        rollsIn = RandomValueRange.of(2,4);
-                    } else if (gradeType.equals(GradeType.MIDGRADE)) {
-                        lootName = oreType.getString() + "_midgrade";
-                        oreDropItem = oreType.getOreItem();
-                        rollsIn = RandomValueRange.of(1,2);
-                    } else {
-                        lootName = oreType.getString() + "_lowgrade";
-                        oreDropItem = oreType.getPoorOreItem();
-                        rollsIn = RandomValueRange.of(1,2);
-                    }
-
-                    lootTableBuilder.addLootPool(LootPool.builder()
-                            .name(lootName)
-                            .rolls(rollsIn)
-                            .addEntry(ItemLootEntry.builder(Objects.requireNonNull(oreDropItem)))
-                            .acceptCondition(BlockStateProperty
-                                    .builder(block)
-                                    .fromProperties(StatePropertiesPredicate.Builder.newBuilder()
-                                            .withProp(ORE_TYPE, oreType)
-                                            .withProp(GRADE_TYPE, gradeType))));
+                // Catch and handle detritus ore blocks
+                switch (geologyType) {
+                    case DIRT:
+                    case COARSE_DIRT:
+                    case SAND:
+                    case RED_SAND:
+                        registerLootTable(block, buildOreLootTable(block, oreEntry));
+                        return;
+                    case CLAY:
+                        registerLootTable(block, buildOreLootTable(Blocks.CLAY, oreEntry,
+                                buildRockLootEntry(2, 0.65F, Items.CLAY_BALL)));
+                        return;
+                    case GRAVEL:
+                        registerLootTable(block, buildOreLootTable(Blocks.GRAVEL, oreEntry,
+                                buildRockLootEntry(1, 0.05F, Items.FLINT)));
+                        return;
+                    default:
                 }
+
+                // Otherwise, process for a stone ore block
+                LootEntry.Builder<?> rockEntry;
+                if (!ModBlockLists.FLINT_BEARING.containsKey(geologyType)) {
+                    // Base stone block without flint
+                    rockEntry = buildRockLootEntry(2, 0.33F, geoRegistry.getRockItem());
+                } else {
+                    // Alternative loot entry for flint bearing ore stones
+                    rockEntry = buildFlintAltLootEntry(BinomialRange.of(2, 0.33F),
+                            geoRegistry.getRockItem(), geologyType, 0);
+                }
+
+                registerLootTable(block, buildOreLootTable(block, oreEntry, rockEntry));
             }
         }
 
+
+        // Register: REGOLITH - NO ORE
+        private void registerRegolithLootTable(GeoRegistry geoRegistry) {
+            GeologyType geologyType = geoRegistry.getGeoType();
+            Block block = geoRegistry.getRegolith();
+            if (!ModBlockLists.FLINT_BEARING.containsKey(geologyType)) {
+                // Base stone block without flint
+                registerDropSelfLootTable(block);
+            } else {
+                // Alternative loot entry for flint bearing stones
+                registerWithSilkTouch(block,
+                        buildFlintAltLootEntry(ConstantRange.of(1), block.asItem(), geologyType, 2));
+            }
+        }
+
+
+        // Register: REGOLITH - WITH ORE
+        private void registerRegolithOreLootTables(GeoRegistry geoRegistry) {
+            GeologyType geologyType = geoRegistry.getGeoType();
+            boolean dropFlint = ModBlockLists.FLINT_BEARING.containsKey(geologyType);
+
+            for (Block block: geoRegistry.getRegolithOreBlocks()) {
+                OreType oreType = ((IGeoBlock) block).getOreType();
+                LootEntry.Builder<?> oreEntry = buildOreLootEntry(oreType, ((IGeoBlock) block).getGradeType());
+
+                LootEntry.Builder<?> rockEntry;
+                if (!ModBlockLists.FLINT_BEARING.containsKey(geologyType)) {
+                    // Base stone block without flint
+                    rockEntry = buildRockLootEntry(2, 0.15F, geoRegistry.getRockItem());
+                } else {
+                    // Alternative loot entry for flint bearing ore stones (+2% chance of flint drop)
+                    rockEntry = buildFlintAltLootEntry(BinomialRange.of(2, 0.15F), geoRegistry.getRockItem(), geologyType, 2);
+                }
+
+                registerLootTable(block, buildOreLootTable(block, oreEntry, rockEntry));
+            }
+        }
+
+
+        ///////////////////
+        // Loot Builders //
+        ///////////////////
+
+        // Build a random item drop Loot Entry for a base stone/detritus
+        private LootEntry.Builder<?> buildRockLootEntry(int nIn, float pIn, Item rockItem) {
+            return ItemLootEntry.builder(rockItem)
+                    .acceptFunction(ExplosionDecay.builder())
+                    .acceptFunction(SetCount.builder(BinomialRange.of(nIn, pIn)));
+        }
+
+        // Build a flint/alternate drop Loot Entry for a stone with cobbles
+        private LootEntry.Builder<?> buildFlintAltLootEntry(IRandomRange randomRange, Item alternate, GeologyType geologyType, int bonus) {
+            return ItemLootEntry.builder(Items.FLINT)
+                    .acceptFunction(ExplosionDecay.builder())
+                    .acceptFunction(SetCount.builder(randomRange))
+                    .acceptCondition(RandomChance.builder((ModBlockLists.FLINT_BEARING.getOrDefault(geologyType, 0) + bonus) / 100f))
+                    .alternatively(ItemLootEntry.builder(alternate)
+                            .acceptFunction(ExplosionDecay.builder()));
+        }
+
+        // Build an ore drop Loot Entry
+        private LootEntry.Builder<?> buildOreLootEntry(OreType oreType, GradeType gradeType) {
+            switch (gradeType) {
+                case HIGHGRADE:
+                    return buildOreLootEntry(RandomValueRange.of(2,4), oreType.getOreItem());
+                case MIDGRADE:
+                    return buildOreLootEntry(RandomValueRange.of(1,2), oreType.getOreItem());
+                case LOWGRADE:
+                default: // NONE should not happen anyway
+                    return buildOreLootEntry(RandomValueRange.of(1,2), oreType.getPoorOreItem());
+            }
+        }
+
+
+        // Build an ore drop Loot Entry
+        private LootEntry.Builder<?> buildOreLootEntry(IRandomRange randomRange, Item oreItem) {
+            return ItemLootEntry.builder(oreItem)
+                    .acceptFunction(ExplosionDecay.builder())
+                    .acceptFunction(SetCount.builder(randomRange));
+        }
+
+
+        // Register a block with the ability to be silk-touched. Much more... accepting than existing methods.
+        private void registerWithSilkTouch(Block block, LootEntry.Builder<?> lootEntry) {
+            registerLootTable(block, LootTable.builder()
+                    .addLootPool(LootPool.builder()
+                            .rolls(ConstantRange.of(1))
+                            .acceptCondition(SILK_TOUCH)
+                            .acceptCondition(SurvivesExplosion.builder())
+                            .addEntry(ItemLootEntry.builder(block)
+                                    .alternatively(lootEntry))));
+        }
+
+
+        // Register a base stone/detritus ore block with the ability to be silk-touched
+        private LootTable.Builder buildOreLootTable(Block block, LootEntry.Builder<?> oreEntry, LootEntry.Builder<?> rockEntry) {
+            return buildOreLootTable(block, oreEntry)
+                    .addLootPool(LootPool.builder()
+                            .rolls(ConstantRange.of(1))
+                            .acceptCondition(SILK_TOUCH.inverted())
+                            .acceptCondition(SurvivesExplosion.builder())
+                            .addEntry(rockEntry));
+        }
+
+
+        // Register a base stone/detritus ore block with the ability to be silk-touched
+        private LootTable.Builder buildOreLootTable(Block block, LootEntry.Builder<?> oreEntry) {
+            return LootTable.builder()
+                    .addLootPool(LootPool.builder()
+                            .rolls(ConstantRange.of(1))
+                            .acceptCondition(SILK_TOUCH)
+                            .acceptCondition(SurvivesExplosion.builder())
+                            .addEntry(ItemLootEntry.builder(block)))
+                    .addLootPool(LootPool.builder()
+                            .rolls(ConstantRange.of(1))
+                            .acceptCondition(SILK_TOUCH.inverted())
+                            .acceptCondition(SurvivesExplosion.builder())
+                            .addEntry(oreEntry));
+        }
+
+
+
+        //ItemLootEntry.builder(Items.FLINT)
+        //                                .acceptFunction(ExplosionDecay.builder())
+        //                                .acceptFunction(SetCount.builder(BinomialRange.of(3, 0.65f)))
+        //                                .acceptCondition(RandomChance.builder(ModBlockLists.FLINT_BEARING.get(geologyType) / 100f))
+        //                                .alternatively(ItemLootEntry.builder(geoRegistry.getRockItem())
+        //                                        .acceptFunction(ExplosionDecay.builder()))
+
+        //registerLootTable(block, LootTable.builder()
+        //                        .addLootPool(LootPool.builder()
+        //                                .rolls(ConstantRange.of(1))
+        //                                .acceptCondition(SILK_TOUCH)
+        //                                .acceptCondition(SurvivesExplosion.builder())
+        //                                .addEntry(ItemLootEntry.builder(block)
+        //                                        .alternatively(ItemLootEntry.builder(Items.FLINT)
+        //                                                .acceptFunction(ExplosionDecay.builder())
+        //                                                .acceptFunction(SetCount.builder(BinomialRange.of(3, 0.65f)))
+        //                                                .acceptCondition(RandomChance.builder(ModBlockLists.FLINT_BEARING.get(geologyType) / 100f))
+        //                                                .alternatively(ItemLootEntry.builder(geoRegistry.getRockItem())
+        //                                                        .acceptFunction(ExplosionDecay.builder()))))));
+
+        
         // Don't worry about this.
         @Override
         protected Iterable<Block> getKnownBlocks() {

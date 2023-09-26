@@ -1,8 +1,9 @@
 package com.jemmerl.jemsgeology.util.lists;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.jemmerl.jemsgeology.data.enums.GeologyType;
 import com.jemmerl.jemsgeology.init.ModBlocks;
-import com.jemmerl.jemsgeology.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -30,7 +31,7 @@ public class ModBlockLists {
     // VANILLA DETRITUS //
     //////////////////////
 
-    public static Map<BlockState, GeologyType> VANILLA_DET_LIST = new HashMap<>();
+    public static BiMap<BlockState, GeologyType> VANILLA_DET_LIST = HashBiMap.create();
     static {
         VANILLA_DET_LIST.put(Blocks.DIRT.getDefaultState(),  GeologyType.DIRT);
         VANILLA_DET_LIST.put(Blocks.COARSE_DIRT.getDefaultState(),  GeologyType.COARSE_DIRT);
@@ -87,7 +88,7 @@ public class ModBlockLists {
     ///////////////////
 
     // Lists with flint drop rates (out of 100) for the respective stones
-    // Regoliths of the same type have a +2% chance to drop flint
+    // Regolith of the same type have a +2% chance to drop flint
     // Todo needs balancing upon testing
     public static Map<GeologyType, Integer> FLINT_BEARING = new HashMap<>();
     static {
@@ -103,9 +104,14 @@ public class ModBlockLists {
     ////////////////////
 
     // List of blocks with a different side texture
-    public static List<GeologyType> SIDE_TEXTURE_MODELS = Arrays.asList(
+    public static List<GeologyType> SIDE_TEXTURE_MODELS = Collections.singletonList(
             GeologyType.PAHOEHOE
     );
+
+    // If/when more added (layered/banded stones like gneiss will likely join)
+    //public static List<GeologyType> SIDE_TEXTURE_MODELS = Arrays.asList(
+    //            GeologyType.PAHOEHOE
+    //    );
 
 }
 

@@ -2,7 +2,9 @@ package com.jemmerl.jemsgeology.util;
 
 import com.jemmerl.jemsgeology.blocks.IGeoBlock;
 import com.jemmerl.jemsgeology.blocks.StoneGeoBlock;
+import com.jemmerl.jemsgeology.data.enums.GeologyType;
 import com.jemmerl.jemsgeology.data.enums.StoneGroupType;
+import com.jemmerl.jemsgeology.init.ModBlocks;
 import com.jemmerl.jemsgeology.util.lists.ModBlockLists;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -92,7 +94,8 @@ public class UtilMethods {
 
     // Convert vanilla detritus to OreBlock detritus; If not convertible, return original state
     public static BlockState convertVanillaToDetritus(BlockState vanillaState) {
-        return ModBlockLists.VANILLA_DET_LIST.getOrDefault(vanillaState, vanillaState);
+        GeologyType vanillaType = ModBlockLists.VANILLA_DET_LIST.getOrDefault(vanillaState, null);
+        return (vanillaType == null) ? vanillaState : ModBlocks.GEOBLOCKS.get(vanillaType).getBaseState();
     }
 
     // Check if the block is some form of vanilla stone
