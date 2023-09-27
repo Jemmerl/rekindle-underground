@@ -65,12 +65,18 @@ public class GeoRegistry {
     public Item getRockItem() { return rockItem.get(); }
 
     public Block getStoneOre(OreType oreType, GradeType gradeType) {
-        return stoneOreRegistry.get(oreType).getGradeOre(gradeType).get();
+        if (oreType.hasOre() && gradeType.hasGrade()) {
+            return stoneOreRegistry.get(oreType).getGradeOre(gradeType).get();
+        }
+        return baseStone.get();
     }
 
     // GeoTypes with no cobble use their base stone as their own regolith
     public Block getRegolithOre(OreType oreType, GradeType gradeType) {
-        return  hasCobble ? regolithOreRegistry.get(oreType).getGradeOre(gradeType).get() : getStoneOre(oreType, gradeType);
+        if (oreType.hasOre() && gradeType.hasGrade()) {
+            return  hasCobble ? regolithOreRegistry.get(oreType).getGradeOre(gradeType).get() : getStoneOre(oreType, gradeType);
+        }
+        return  hasCobble ? regolith.get() : baseStone.get();
     }
 
 

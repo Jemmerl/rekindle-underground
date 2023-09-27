@@ -33,7 +33,7 @@ public class ModBlocks {
     // GEOBLOCK REGISTRY //
     ///////////////////////
 
-    public static final Map<GeologyType, GeoRegistry> GEOBLOCKS = new HashMap<>();
+    public static final HashMap<GeologyType, GeoRegistry> GEOBLOCKS = new HashMap<>();
     static {
         for (GeologyType geologyType: GeologyType.values()) {
             GEOBLOCKS.put(geologyType, new GeoRegistry(geologyType));
@@ -155,7 +155,6 @@ public class ModBlocks {
         Supplier<T> blockSupplier = () -> (T) new Block(buildCobblestoneProperties());
         return registerBlock(name, blockSupplier, ModItemGroups.JEMGEO_COBBLE_GROUP);
     }
-
 
     public static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block, ItemGroup itemGroup) {
         RegistryObject<T> registeredBlock = BLOCKS.register(name, block);

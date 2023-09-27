@@ -4,13 +4,8 @@ import com.jemmerl.jemsgeology.data.enums.GeologyType;
 import com.jemmerl.jemsgeology.data.enums.StoneGroupType;
 import com.jemmerl.jemsgeology.data.enums.ore.GradeType;
 import com.jemmerl.jemsgeology.data.enums.ore.OreType;
-import com.sun.org.apache.xpath.internal.operations.Or;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.state.StateContainer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 public class BaseGeoBlock extends Block implements IGeoBlock {
 

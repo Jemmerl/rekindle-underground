@@ -1,10 +1,12 @@
 package com.jemmerl.jemsgeology.world.feature;
 
 import com.jemmerl.jemsgeology.JemsGeology;
+import com.jemmerl.jemsgeology.blocks.IGeoBlock;
 import com.jemmerl.jemsgeology.blocks.StoneGeoBlock;
 import com.jemmerl.jemsgeology.data.enums.ore.GradeType;
 import com.jemmerl.jemsgeology.data.enums.ore.OreType;
 import com.jemmerl.jemsgeology.init.JemsGeoConfig;
+import com.jemmerl.jemsgeology.init.ModBlocks;
 import com.jemmerl.jemsgeology.init.depositinit.DepositRegistrar;
 import com.jemmerl.jemsgeology.geology.deposits.DepositUtil;
 import com.jemmerl.jemsgeology.geology.deposits.instances.PlacerDeposit;
@@ -12,6 +14,7 @@ import com.jemmerl.jemsgeology.init.NoiseInit;
 import com.jemmerl.jemsgeology.util.UtilMethods;
 import com.jemmerl.jemsgeology.util.noise.GenerationNoise.BlobWarpNoise;
 import com.mojang.serialization.Codec;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.tags.FluidTags;
@@ -93,16 +96,24 @@ public class OrePlacerFeature extends Feature<NoFeatureConfig>{
 
                         BlockState hostState = UtilMethods.convertVanillaToDetritus(reader.getBlockState(areaPos));
                         if (DepositUtil.isValidStone(hostState.getBlock(), placerDeposit.getValid())) {
+                            IGeoBlock hostBlock = (IGeoBlock) hostState.getBlock();
                             // Check if the block already has an ore in it; if so, roll to replace
-                            if (hostState.hasProperty(StoneGeoBlock.ORE_TYPE) && (hostState.get(StoneGeoBlock.ORE_TYPE) != OreType.NONE)) {
+                            if (hostBlock.getOreType().hasOre()) {
                                 // TODO Currently set to 40% chance to NOT replace
-                                // add to other deposits? if so, add to the placeDepositOre method in DepositUtils
+                                // add this to other deposits? if so, add to the placeDepositOre method in DepositUtils
                                 if (rand.nextFloat() > 0.60f) { continue; }
                             }
 
-                            reader.setBlockState(areaPos,hostState
-                                    .with(StoneGeoBlock.ORE_TYPE, placerDeposit.getOres().nextElt())
-                                    .with(StoneGeoBlock.GRADE_TYPE, grade), 2);
+                            Block placeBlock;
+                            if (UtilMethods.isRegolith(hostBlock)) {
+                                placeBlock = ModBlocks.GEOBLOCKS.get(hostBlock.getGeologyType())
+                                        .getRegolithOre(placerDeposit.getOres().nextElt(), grade);
+                            } else {
+                                placeBlock = ModBlocks.GEOBLOCKS.get(hostBlock.getGeologyType())
+                                        .getStoneOre(placerDeposit.getOres().nextElt(), grade);
+                            }
+
+                            reader.setBlockState(areaPos, placeBlock.getDefaultState(), 2);
 
                         }
 

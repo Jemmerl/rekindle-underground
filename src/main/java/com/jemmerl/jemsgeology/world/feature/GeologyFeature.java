@@ -3,6 +3,10 @@ package com.jemmerl.jemsgeology.world.feature;
 import com.jemmerl.jemsgeology.JemsGeology;
 import com.jemmerl.jemsgeology.blocks.IGeoBlock;
 import com.jemmerl.jemsgeology.blocks.StoneGeoBlock;
+import com.jemmerl.jemsgeology.data.enums.GeologyType;
+import com.jemmerl.jemsgeology.data.enums.ore.GradeType;
+import com.jemmerl.jemsgeology.data.enums.ore.OreType;
+import com.jemmerl.jemsgeology.init.ModBlocks;
 import com.jemmerl.jemsgeology.init.NoiseInit;
 import com.jemmerl.jemsgeology.util.UtilMethods;
 import com.jemmerl.jemsgeology.util.lists.ModBlockLists;
@@ -57,32 +61,30 @@ public class GeologyFeature extends Feature<NoFeatureConfig> {
                     mutablePos.setY(y);
 
                     BlockState originalState = chunk.getBlockState(mutablePos);
-                    BlockState stoneState = geoMapBuilder.getGeoWrapper(x, y, z);
+                    GeologyType stoneGeoType = geoMapBuilder.getGeoWrapper(x, y, z).getGeologyType();
+                    OreType oreType = geoMapBuilder.getGeoWrapper(x, y, z).getOreType();
+                    GradeType gradeType = geoMapBuilder.getGeoWrapper(x, y, z).getGradeType();
 
+                    BlockState placeState;
                     switch (UtilMethods.replaceableStatus(originalState)) {
                         case FAILED:
-                        case OREBLOCK_STONE:
+                        case GEOBLOCK_STONE:
                         case OREBLOCK_DETRITUS:
                             break;
                         case VANILLA_STONE:
-                            chunk.getSections()[y >> 4].setBlockState(x, y & 15, z, stoneState, false);
+                            placeState = ModBlocks.GEOBLOCKS.get(stoneGeoType)
+                                    .getStoneOre(oreType, gradeType).getDefaultState();
+
+                            chunk.getSections()[y >> 4].setBlockState(x, y & 15, z, placeState, false);
                             break;
                         case VANILLA_DETRITUS:
                             //if(gravel)
                             //ifelse{
                             if (y <= (topY - getDepth(mutablePos.toImmutable()))) {
-                                Block regolithBlock = ModBlockLists.GEO_LIST.get(((IGeoBlock) stoneState.getBlock()).getGeologyType()).getRegolithBlock();
+                                placeState = ModBlocks.GEOBLOCKS.get(stoneGeoType)
+                                        .getRegolithOre(oreType, gradeType).getDefaultState();
 
-                                BlockState regolith = stoneState;
-                                if (regolithBlock != null) {
-                                    regolith = regolithBlock.getDefaultState();
-                                }
-
-                                // Add ore properties from original stone
-                                regolith = regolith.with(StoneGeoBlock.GRADE_TYPE, stoneState.get(StoneGeoBlock.GRADE_TYPE))
-                                        .with(StoneGeoBlock.ORE_TYPE, stoneState.get(StoneGeoBlock.ORE_TYPE));
-
-                                chunk.getSections()[y >> 4].setBlockState(x, y & 15, z, regolith, false);
+                                chunk.getSections()[y >> 4].setBlockState(x, y & 15, z, placeState, false);
                             }
                             break;
                         default:

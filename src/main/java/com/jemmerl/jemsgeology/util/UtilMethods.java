@@ -14,12 +14,9 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Matrix3f;
-import net.minecraft.util.math.vector.Vector3i;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.awt.*;
 import java.util.Objects;
 
 public class UtilMethods {
@@ -45,7 +42,12 @@ public class UtilMethods {
 
     // Check if a block is a regolith geo block
     public static boolean isRegolith(Block block) {
-        return ((block instanceof IGeoBlock) && Objects.requireNonNull(block.getRegistryName()).toString().contains("regolith"));
+        return ((block instanceof IGeoBlock) && isRegolith((IGeoBlock) block));
+    }
+
+    // Check if a geo block is a regolith block
+    public static boolean isRegolith(IGeoBlock block) {
+        return block.getRegistryName().toString().contains("regolith");
     }
 
     // Returns an item given a string representation of its resource location
@@ -140,7 +142,7 @@ public class UtilMethods {
         Block replaced = blockState.getBlock();
 
         if (isOreBlockStone(replaced)) {
-            return ReplaceableStatus.OREBLOCK_STONE;
+            return ReplaceableStatus.GEOBLOCK_STONE;
         }
 
         if (isVanillaStone(replaced)) {

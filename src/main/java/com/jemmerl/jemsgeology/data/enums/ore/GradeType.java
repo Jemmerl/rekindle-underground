@@ -20,4 +20,5 @@ public enum GradeType implements IStringSerializable {
     @Override
     public String getString() { return this.name; }
     public String getAssetName() { return assetName; }
+    public boolean hasGrade() { return this != NONE; }
 }

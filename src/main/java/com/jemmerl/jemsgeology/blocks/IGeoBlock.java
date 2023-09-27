@@ -4,9 +4,7 @@ import com.jemmerl.jemsgeology.data.enums.GeologyType;
 import com.jemmerl.jemsgeology.data.enums.ore.GradeType;
 import com.jemmerl.jemsgeology.data.enums.ore.OreType;
 import com.jemmerl.jemsgeology.data.enums.StoneGroupType;
-import net.minecraft.state.EnumProperty;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.util.ResourceLocation;
 
 public interface IGeoBlock {
 
@@ -22,4 +20,6 @@ public interface IGeoBlock {
     // Return stone group type of the block
     StoneGroupType getStoneGroupType();
 
+    // All GeoBlocks are blocks, but I cannot call a block method from the interface without including here
+    ResourceLocation getRegistryName();
 }

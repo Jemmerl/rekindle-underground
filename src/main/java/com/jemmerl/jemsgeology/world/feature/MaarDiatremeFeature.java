@@ -14,7 +14,6 @@ import com.jemmerl.jemsgeology.util.Pair;
 import com.jemmerl.jemsgeology.util.ReplaceableStatus;
 import com.jemmerl.jemsgeology.util.UtilMethods;
 import com.jemmerl.jemsgeology.util.WeightedProbMap;
-import com.jemmerl.jemsgeology.util.lists.ModBlockLists;
 import com.jemmerl.jemsgeology.util.noise.GenerationNoise.BlobWarpNoise;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.Block;
@@ -73,29 +72,29 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
         //////////////////////////////////////
 
         // Determine the primary igneous matrix rock of the pipe
-        BlockState mainIgnBlock;
+        GeologyType mainIgnType;
         {
             int randInt = rand.nextInt(101);
             if (randInt > 65) {
-                mainIgnBlock = ModBlocks.KIMBERLITE_STONE.get().getDefaultState(); // (35% Chance)
+                mainIgnType = GeologyType.KIMBERLITE; // (35% Chance)
             } else if (randInt > 60) {
-                mainIgnBlock = ModBlocks.LAMPROITE_STONE.get().getDefaultState(); // (5% Chance)
+                mainIgnType = GeologyType.LAMPROITE; // (5% Chance)
             } else if (randInt > 35) {
-                mainIgnBlock = ModBlocks.BASALT_STONE.get().getDefaultState(); // (25% Chance)
+                mainIgnType = GeologyType.BASALT; // (25% Chance)
             } else if (randInt > 30) {
-                mainIgnBlock = ModBlocks.DACITE_STONE.get().getDefaultState(); // (5% Chance)
+                mainIgnType = GeologyType.DACITE; // (5% Chance)
             } else if (randInt > 20) {
-                mainIgnBlock = ModBlocks.ANDESITE_STONE.get().getDefaultState(); // (10% Chance)
+                mainIgnType = GeologyType.ANDESITE; // (10% Chance)
             } else {
-                mainIgnBlock = ModBlocks.RHYOLITE_STONE.get().getDefaultState(); // (20% Chance)
+                mainIgnType = GeologyType.RHYOLITE; // (20% Chance)
             }
         }
 
         // Determine if the pipe is diamond bearing
         boolean diamondiferous = false;
-        if (mainIgnBlock == ModBlocks.KIMBERLITE_STONE.get().getDefaultState() && (rand.nextFloat() < 0.25f)) {
+        if (mainIgnType == GeologyType.KIMBERLITE && (rand.nextFloat() < 0.25f)) {
             diamondiferous = true;
-        } else if (mainIgnBlock == ModBlocks.LAMPROITE_STONE.get().getDefaultState() && (rand.nextFloat() < 0.05f)) {
+        } else if (mainIgnType == GeologyType.LAMPROITE && (rand.nextFloat() < 0.05f)) {
             diamondiferous = true;
         }
 
@@ -160,7 +159,8 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
                     if ((rand.nextFloat() + 0.18f) < (distance / radius)) {
                         brecciaPosList.add(currPos);
                     } else {
-                        placeDiamondiferousBlock(rand, reader, currPos, mainIgnBlock, diamondiferous, diamondPercent);
+                        placeDiamondiferousBlock(rand, reader, currPos,
+                                ModBlocks.GEOBLOCKS.get(mainIgnType).getBaseState(), diamondiferous, diamondPercent);
                     }
                 }
             }
@@ -218,18 +218,18 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
                             int randInt = rand.nextInt(101);
                             if (randInt > 55) {
                                 // 45% Chance of tuff + 10% chance from brecca == 55% chance overall
-                                reader.setBlockState(currPos, ModBlocks.ULTRAMAFIC_TUFF_STONE.get().getDefaultState(), 2); //TODO TEMP
+                                reader.setBlockState(currPos, ModBlocks.GEOBLOCKS.get(GeologyType.ULTRAMAFIC_TUFF).getBaseState(), 2); //TODO TEMP
                             } else if (randInt > 15) {
                                 // 40% Chance of regolith (which gives 10% chance of tuff itself, giving 30% chance of true regolith)
                                 regolithPosList.add(currPos);
                             } else {
                                 // 15% Chance of main igneous
-                                reader.setBlockState(currPos, mainIgnBlock, 2);
+                                reader.setBlockState(currPos, ModBlocks.GEOBLOCKS.get(mainIgnType).getBaseState(), 2);
                             }
                         }
                     } else {
                         // Ejecta generation
-                        generateEjecta(rand, reader, currPos, mainIgnBlock, diamondiferous, diamondPercent, regolithPosList);
+                        generateEjecta(rand, reader, currPos, diamondiferous, diamondPercent, regolithPosList);
                     }
                 }
             }
@@ -255,7 +255,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
                     }
 
                     // Ejecta generation
-                    generateEjecta(rand, reader, currPos, mainIgnBlock, diamondiferous, diamondPercent, regolithPosList);
+                    generateEjecta(rand, reader, currPos, diamondiferous, diamondPercent, regolithPosList);
                 }
             }
         }
@@ -272,7 +272,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
                     if (rand.nextFloat() < 0.75f) {
                         reader.setBlockState(brecciaPos, brecciaProbMap.nextElt(), 2);
                     } else {
-                        reader.setBlockState(brecciaPos, ModBlocks.ULTRAMAFIC_TUFF_STONE.get().getDefaultState(), 2); //TODO TEMP
+                        reader.setBlockState(brecciaPos, ModBlocks.GEOBLOCKS.get(GeologyType.ULTRAMAFIC_TUFF).getBaseState(), 2); //TODO TEMP
                     }
                 }
 
@@ -281,9 +281,9 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
                 for (BlockPos brecciaPos : brecciaPosList) {
                     // 50% chance of tuff
                     if (rand.nextBoolean()) {
-                        reader.setBlockState(brecciaPos, mainIgnBlock, 2);
+                        reader.setBlockState(brecciaPos, ModBlocks.GEOBLOCKS.get(mainIgnType).getBaseState(), 2);
                     } else {
-                        reader.setBlockState(brecciaPos, ModBlocks.ULTRAMAFIC_TUFF_STONE.get().getDefaultState(), 2); //TODO TEMP
+                        reader.setBlockState(brecciaPos, ModBlocks.GEOBLOCKS.get(GeologyType.ULTRAMAFIC_TUFF).getBaseState(), 2); //TODO TEMP
                     }
                 }
             }
@@ -297,8 +297,9 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
         if (!regolithPosList.isEmpty()) {
             boolean emptyProbMap = brecciaProbMap.isEmpty();
             for (BlockPos regolithPos : regolithPosList) {
-                GeologyType regolithType = ((IGeoBlock) (((!emptyProbMap && (rand.nextFloat() > 0.35f)) ? brecciaProbMap.nextElt() : mainIgnBlock).getBlock())).getGeologyType();
-                BlockState regolithState = (ModBlockLists.GEO_LIST.get(regolithType).getRegolithBlock().getDefaultState());
+                GeologyType regolithType = (!emptyProbMap && (rand.nextFloat() > 0.35f)) ?
+                        ((IGeoBlock) brecciaProbMap.nextElt().getBlock()).getGeologyType() : mainIgnType;
+                BlockState regolithState = ModBlocks.GEOBLOCKS.get(regolithType).getRegolith().getDefaultState();
                 placeDiamondiferousBlock(rand, reader, regolithPos, regolithState, diamondiferous, diamondPercent);
             }
         }
@@ -338,8 +339,8 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
 
 
     // Place an ejecta block
-    private static void generateEjecta(Random rand, ISeedReader reader, BlockPos currPos, BlockState mainIgnBlock,
-                                       Boolean diamondiferous, float diamondPercent, ArrayList<BlockPos> regolithPosList) {
+    private static void generateEjecta(Random rand, ISeedReader reader, BlockPos currPos, Boolean diamondiferous,
+                                       float diamondPercent, ArrayList<BlockPos> regolithPosList) {
         if (rand.nextFloat() > 0.65f) {
             regolithPosList.add(currPos);
         } else {
@@ -358,7 +359,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
         if (currPos.getY() == height) {
             fillState = surfaceConfig.getTop();
         } else {
-            fillState = (rand.nextFloat() > 0.20f) ? surfaceConfig.getUnder() : ModBlocks.ULTRAMAFIC_TUFF_STONE.get().getDefaultState(); //TODO TEMP
+            fillState = (rand.nextFloat() > 0.20f) ? surfaceConfig.getUnder() : ModBlocks.GEOBLOCKS.get(GeologyType.ULTRAMAFIC_TUFF).getBaseState(); //TODO TEMP
 
             // Debug
             if (JemsGeoConfig.SERVER.debug_diatreme_maar.get() && (currPos.getY() > height)) {
@@ -378,17 +379,26 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
 
     // Place potentially diamondiferous block
     private static void placeDiamondiferousBlock(Random rand, ISeedReader reader, BlockPos currPos,
-                                                 BlockState blockState, Boolean diamondiferous, float diamondPercent) {
+                                                 BlockState blockState, boolean diamondiferous, float diamondPercent) {
         if (diamondiferous && (rand.nextFloat() < diamondPercent)) {
-            blockState = UtilMethods.convertVanillaToDetritus(blockState);
+            Block block = UtilMethods.convertVanillaToDetritus(blockState).getBlock();
+            if (block instanceof IGeoBlock) {
+                IGeoBlock geoBlock = (IGeoBlock) block;
 
-            // Select grade of individual ore and generate the block with diamond ore
-            reader.setBlockState(currPos, blockState
-                    .with(StoneGeoBlock.ORE_TYPE, OreType.DIAMOND)
-                    .with(StoneGeoBlock.GRADE_TYPE, getDiamondGrade(rand)), 2);
-        } else {
-            reader.setBlockState(currPos, blockState, 2);
+                // Select grade of individual ore and generate the block with diamond ore
+                if (UtilMethods.isRegolith(geoBlock)) {
+                    block = ModBlocks.GEOBLOCKS.get(geoBlock.getGeologyType())
+                            .getRegolithOre(OreType.DIAMOND, getDiamondGrade(rand));
+                } else {
+                    block = ModBlocks.GEOBLOCKS.get(geoBlock.getGeologyType())
+                            .getStoneOre(OreType.DIAMOND, getDiamondGrade(rand));
+                }
+
+                reader.setBlockState(currPos, block.getDefaultState(), 2);
+                return;
+            }
         }
+        reader.setBlockState(currPos, blockState, 2);
     }
 
 
