@@ -9,33 +9,33 @@ public enum DefaultSets {
     // block list. I could do it by hand, writing out each block into a list, but to be frank I find that
     // annoying. So I have compiled my default sets here for ease of coding!
 
-    SED_SOIL(new ArrayList<>(Arrays.asList("jemsgeology:shale_stone", "jemsgeology:mudstone_stone"))),
-    SED_SANDY(new ArrayList<>(Arrays.asList("jemsgeology:sandstone_stone", "jemsgeology:red_sandstone_stone", "jemsgeology:greywacke_stone"))),
-    SED_CARBONATE(new ArrayList<>(Arrays.asList("jemsgeology:chalk_stone", "jemsgeology:limestone_stone", "jemsgeology:dolostone_stone"))),
-    SED_EVAPORATE(new ArrayList<>(Arrays.asList("jemsgeology:rocksalt_stone", "jemsgeology:rockgypsum_stone", "jemsgeology:borax_stone", "jemsgeology:kernite_stone"))),
-    IGN_EXT_MAIN(new ArrayList<>(Arrays.asList("jemsgeology:dacite_stone", "jemsgeology:andesite_stone", "jemsgeology:basalt_stone"))),
-    IGN_EXT_AUX(new ArrayList<>(Arrays.asList("jemsgeology:rhyolite_stone", "jemsgeology:scoria_stone"))),
-    METAMORPHIC(new ArrayList<>(Arrays.asList("jemsgeology:quartzite_stone", "jemsgeology:schist_stone", "jemsgeology:phyllite_stone", "jemsgeology:gneiss_stone", "jemsgeology:marble_stone")));
+    SED_SOIL(new ArrayList<>(Arrays.asList("shale", "mudstone"))),
+    SED_SANDY(new ArrayList<>(Arrays.asList("sandstone", "red_sandstone", "greywacke"))),
+    SED_CARBONATE(new ArrayList<>(Arrays.asList("chalk", "limestone", "dolostone"))),
+    SED_EVAPORATE(new ArrayList<>(Arrays.asList("rocksalt", "rockgypsum", "borax", "kernite"))),
+    IGN_EXT_MAIN(new ArrayList<>(Arrays.asList("dacite", "andesite", "basalt"))),
+    IGN_EXT_AUX(new ArrayList<>(Arrays.asList("rhyolite", "scoria"))),
+    METAMORPHIC(new ArrayList<>(Arrays.asList("quartzite", "schist", "phyllite", "gneiss", "marble")));
 
-    private final List<String> blocks;
+    private final List<String> geoTypes;
 
-    DefaultSets(List<String> blocks) {
-        this.blocks = blocks;
+    DefaultSets(List<String> geoTypes) {
+        this.geoTypes = geoTypes;
     }
 
     public String toString() {
-        return this.blocks.toString();
+        return this.geoTypes.toString();
     }
 
-    public List<String> getBlocks() {
-        return this.blocks;
+    public List<String> getGeoTypes() {
+        return this.geoTypes;
     }
 
     // Allows for quick concatenation of default sets
     public static List<String> getAllBlocks(DefaultSets... defaultSets) {
         List<String> blockList = new ArrayList<>();
         for (DefaultSets set : defaultSets) {
-            blockList.addAll(set.getBlocks());
+            blockList.addAll(set.getGeoTypes());
         }
         return blockList;
     }
