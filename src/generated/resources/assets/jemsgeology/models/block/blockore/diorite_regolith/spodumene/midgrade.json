@@ -1,0 +1,8 @@
+{
+  "parent": "jemsgeology:block/stone_ore_parent",
+  "textures": {
+    "all": "jemsgeology:block/diorite_regolith",
+    "particle": "jemsgeology:block/diorite_regolith",
+    "overlay": "jemsgeology:block/ore/spodumene"
+  }
+}

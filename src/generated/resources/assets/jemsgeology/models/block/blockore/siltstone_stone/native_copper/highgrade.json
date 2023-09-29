@@ -1,0 +1,8 @@
+{
+  "parent": "jemsgeology:block/stone_ore_parent",
+  "textures": {
+    "all": "jemsgeology:block/siltstone_stone",
+    "particle": "jemsgeology:block/siltstone_stone",
+    "overlay": "jemsgeology:block/ore/rich_native_copper"
+  }
+}
