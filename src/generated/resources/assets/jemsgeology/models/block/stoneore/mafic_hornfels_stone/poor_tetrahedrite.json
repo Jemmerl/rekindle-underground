@@ -1,8 +1,0 @@
-{
-  "parent": "jemsgeology:block/stone_ore_parent",
-  "textures": {
-    "all": "jemsgeology:block/mafic_hornfels_stone",
-    "particle": "jemsgeology:block/mafic_hornfels_stone",
-    "overlay": "jemsgeology:block/ore/poor_tetrahedrite"
-  }
-}

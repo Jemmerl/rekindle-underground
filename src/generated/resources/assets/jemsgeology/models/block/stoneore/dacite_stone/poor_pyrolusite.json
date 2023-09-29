@@ -1,8 +1,0 @@
-{
-  "parent": "jemsgeology:block/stone_ore_parent",
-  "textures": {
-    "all": "jemsgeology:block/dacite_stone",
-    "particle": "jemsgeology:block/dacite_stone",
-    "overlay": "jemsgeology:block/ore/poor_pyrolusite"
-  }
-}

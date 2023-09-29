@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "jemsgeology:block/dirt_detritus",
+    "up": "jemsgeology:block/dirt_detritus",
+    "down": "jemsgeology:block/dirt_detritus",
+    "north": "jemsgeology:block/dirt_detritus",
+    "south": "jemsgeology:block/dirt_detritus",
+    "east": "jemsgeology:block/dirt_detritus",
+    "west": "jemsgeology:block/dirt_detritus"
+  }
+}

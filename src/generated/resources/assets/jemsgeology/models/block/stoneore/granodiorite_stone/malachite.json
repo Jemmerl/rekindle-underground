@@ -1,8 +1,0 @@
-{
-  "parent": "jemsgeology:block/stone_ore_parent",
-  "textures": {
-    "all": "jemsgeology:block/granodiorite_stone",
-    "particle": "jemsgeology:block/granodiorite_stone",
-    "overlay": "jemsgeology:block/ore/malachite"
-  }
-}

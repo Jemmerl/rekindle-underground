@@ -1,8 +1,0 @@
-{
-  "parent": "jemsgeology:block/stone_ore_parent",
-  "textures": {
-    "all": "jemsgeology:block/greywacke_stone",
-    "particle": "jemsgeology:block/greywacke_stone",
-    "overlay": "jemsgeology:block/ore/poor_tantalite"
-  }
-}

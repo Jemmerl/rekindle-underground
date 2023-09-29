@@ -1,8 +1,0 @@
-{
-  "parent": "jemsgeology:block/stone_ore_parent",
-  "textures": {
-    "all": "jemsgeology:block/coarse_dirt_stone",
-    "particle": "jemsgeology:block/coarse_dirt_stone",
-    "overlay": "jemsgeology:block/ore/rich_psilomelane"
-  }
-}

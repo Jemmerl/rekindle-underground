@@ -1,8 +1,0 @@
-{
-  "parent": "jemsgeology:block/stone_ore_parent",
-  "textures": {
-    "all": "jemsgeology:block/kernite_stone",
-    "particle": "jemsgeology:block/kernite_stone",
-    "overlay": "jemsgeology:block/ore/hematite"
-  }
-}

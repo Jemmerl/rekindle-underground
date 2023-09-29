@@ -1,8 +1,0 @@
-{
-  "parent": "jemsgeology:block/stone_ore_parent",
-  "textures": {
-    "all": "jemsgeology:block/granodiorite_regolith",
-    "particle": "jemsgeology:block/granodiorite_regolith",
-    "overlay": "jemsgeology:block/ore/azurite"
-  }
-}

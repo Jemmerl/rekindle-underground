@@ -1,8 +1,0 @@
-{
-  "parent": "jemsgeology:block/stone_ore_parent",
-  "textures": {
-    "all": "jemsgeology:block/gabbro_stone",
-    "particle": "jemsgeology:block/gabbro_stone",
-    "overlay": "jemsgeology:block/ore/native_gold"
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "parent": "jemsgeology:block/stone_ore_parent",
-  "textures": {
-    "all": "jemsgeology:block/quartzite_regolith",
-    "particle": "jemsgeology:block/quartzite_regolith",
-    "overlay": "jemsgeology:block/ore/rich_monazite"
-  }
-}

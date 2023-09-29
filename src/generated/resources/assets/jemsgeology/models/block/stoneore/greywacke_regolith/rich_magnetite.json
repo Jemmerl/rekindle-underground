@@ -1,8 +1,0 @@
-{
-  "parent": "jemsgeology:block/stone_ore_parent",
-  "textures": {
-    "all": "jemsgeology:block/greywacke_regolith",
-    "particle": "jemsgeology:block/greywacke_regolith",
-    "overlay": "jemsgeology:block/ore/rich_magnetite"
-  }
-}

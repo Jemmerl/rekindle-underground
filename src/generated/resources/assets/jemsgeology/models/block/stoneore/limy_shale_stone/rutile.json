@@ -1,8 +1,0 @@
-{
-  "parent": "jemsgeology:block/stone_ore_parent",
-  "textures": {
-    "all": "jemsgeology:block/limy_shale_stone",
-    "particle": "jemsgeology:block/limy_shale_stone",
-    "overlay": "jemsgeology:block/ore/rutile"
-  }
-}

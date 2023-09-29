@@ -1,8 +1,0 @@
-{
-  "parent": "jemsgeology:block/stone_ore_parent",
-  "textures": {
-    "all": "jemsgeology:block/gravel_stone",
-    "particle": "jemsgeology:block/gravel_stone",
-    "overlay": "jemsgeology:block/ore/poor_peridotite"
-  }
-}

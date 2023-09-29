@@ -1,8 +1,0 @@
-{
-  "parent": "jemsgeology:block/stone_ore_parent",
-  "textures": {
-    "all": "jemsgeology:block/arkose_stone",
-    "particle": "jemsgeology:block/arkose_stone",
-    "overlay": "jemsgeology:block/ore/pyrochlore"
-  }
-}

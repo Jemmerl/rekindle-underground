@@ -1,8 +1,0 @@
-{
-  "parent": "jemsgeology:block/stone_ore_parent",
-  "textures": {
-    "all": "jemsgeology:block/ultramafic_tuff_stone",
-    "particle": "jemsgeology:block/ultramafic_tuff_stone",
-    "overlay": "jemsgeology:block/ore/poor_baryte"
-  }
-}

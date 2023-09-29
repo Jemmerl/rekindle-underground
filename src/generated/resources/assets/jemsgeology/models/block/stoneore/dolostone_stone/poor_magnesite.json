@@ -1,8 +1,0 @@
-{
-  "parent": "jemsgeology:block/stone_ore_parent",
-  "textures": {
-    "all": "jemsgeology:block/dolostone_stone",
-    "particle": "jemsgeology:block/dolostone_stone",
-    "overlay": "jemsgeology:block/ore/poor_magnesite"
-  }
-}

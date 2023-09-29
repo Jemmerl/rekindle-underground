@@ -1,8 +1,0 @@
-{
-  "parent": "jemsgeology:block/stone_ore_parent",
-  "textures": {
-    "all": "jemsgeology:block/granite_stone",
-    "particle": "jemsgeology:block/granite_stone",
-    "overlay": "jemsgeology:block/ore/native_copper"
-  }
-}

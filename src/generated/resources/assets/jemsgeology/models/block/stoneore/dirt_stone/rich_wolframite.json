@@ -1,8 +1,0 @@
-{
-  "parent": "jemsgeology:block/stone_ore_parent",
-  "textures": {
-    "all": "jemsgeology:block/dirt_stone",
-    "particle": "jemsgeology:block/dirt_stone",
-    "overlay": "jemsgeology:block/ore/rich_wolframite"
-  }
-}
