@@ -37,7 +37,7 @@ public enum GeologyType {
     ANDESITE("andesite", StoneGroupType.EXTRUSIVE, true, 3, 3),
     TRACHYTE("trachyte", StoneGroupType.EXTRUSIVE, true, 3, 3),
     BASALT("basalt", StoneGroupType.EXTRUSIVE, true, 3, 3),
-    PAHOEHOE("pahoehoe", StoneGroupType.EXTRUSIVE, true, 2, 2),
+    PAHOEHOE("pahoehoe", StoneGroupType.EXTRUSIVE, false, 2, 2),
     SCORIA("scoria", StoneGroupType.EXTRUSIVE, false, 2, 2),
     RHYOLITIC_TUFF("rhyolitic_tuff", StoneGroupType.EXTRUSIVE, false, 0, 0),
     TRACHYTIC_TUFF("trachytic_tuff", StoneGroupType.EXTRUSIVE, false, 0, 0),

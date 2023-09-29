@@ -3,6 +3,7 @@ package com.jemmerl.jemsgeology.init;
 import com.jemmerl.jemsgeology.JemsGeology;
 import com.jemmerl.jemsgeology.blocks.*;
 import com.jemmerl.jemsgeology.data.enums.GeologyType;
+import com.jemmerl.jemsgeology.data.enums.StoneGroupType;
 import com.jemmerl.jemsgeology.data.enums.ore.GradeType;
 import com.jemmerl.jemsgeology.data.enums.ore.OreType;
 import com.jemmerl.jemsgeology.init.blockinit.GeoRegistry;
@@ -85,14 +86,16 @@ public class ModBlocks {
 
     // For base stone blocks
     public static <T extends Block>RegistryObject<T> registerStoneGeoBlock(GeologyType geologyType) {
-        String name = geologyType.getName() + "_stone";
+        String blockTypeName = (geologyType.isInStoneGroup(StoneGroupType.DETRITUS)) ? "_detritus" : "_stone";
+        String name = geologyType.getName() + blockTypeName;
         Supplier<T> blockSupplier = () -> (T) new StoneGeoBlock(buildStoneProperties(geologyType), geologyType, OreType.NONE, GradeType.NONE);
         return registerBlock(name, blockSupplier, ModItemGroups.JEMGEO_BASE_STONE_GROUP);
     }
 
     // For ore bearing stone blocks
     public static <T extends Block>RegistryObject<T> registerStoneGeoBlock(GeologyType geologyType, OreType oreType, GradeType gradeType) {
-        String name = geologyType.getName() + "_stone/" + oreType.getString() + "/" + gradeType.getString();
+        String blockTypeName = (geologyType.isInStoneGroup(StoneGroupType.DETRITUS)) ? "_detritus" : "_stone";
+        String name = geologyType.getName() + blockTypeName + "/" + oreType.getString() + "/" + gradeType.getString();
         Supplier<T> blockSupplier = () -> (T) new StoneGeoBlock(buildStoneProperties(geologyType), geologyType, oreType, gradeType);
         return registerBlock(name, blockSupplier, ModItemGroups.JEMGEO_ORE_BLOCK_GROUP);
     }
@@ -119,7 +122,7 @@ public class ModBlocks {
 
     // For ore bearing detritus blocks
     public static <T extends Block>RegistryObject<T> registerDetritusBlock(GeologyType geologyType, OreType oreType, GradeType gradeType) {
-        String name = geologyType.getName() + "detritus/" + oreType.getString() + "/" + gradeType.getString();
+        String name = geologyType.getName() + "_detritus/" + oreType.getString() + "/" + gradeType.getString();
         return registerBlock(name, buildDetritusBlock(geologyType, oreType, gradeType), ModItemGroups.JEMGEO_ORE_BLOCK_GROUP);
     }
 

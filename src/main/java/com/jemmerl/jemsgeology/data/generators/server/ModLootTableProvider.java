@@ -62,10 +62,12 @@ public class ModLootTableProvider extends LootTableProvider {
         @Override
         protected void addTables() {
             for (GeoRegistry geoRegistry: ModBlocks.GEOBLOCKS.values()) {
+                //System.out.println(geoRegistry.getGeoType().getName());
+
                 boolean hasCobble = geoRegistry.hasCobble();
 
                 // Loot Tables for base stone ores
-                registerBaseStoneOreLootTables(geoRegistry);
+                registerBaseStoneOreLootTables(geoRegistry, hasCobble);
 
                 if (hasCobble) {
                     registerBaseStoneLootTable(geoRegistry);
@@ -78,7 +80,11 @@ public class ModLootTableProvider extends LootTableProvider {
 
                 } else {
                     // TODO TEMP! Handles ore-less base stones with no cobble/regolith (evaporites) as well as detritus
-                    registerDropSelfLootTable(geoRegistry.getBaseStone());
+                    if (geoRegistry.getGeoType() == GeologyType.PAHOEHOE) {
+                        registerBaseStoneLootTable(geoRegistry);
+                    } else {
+                        registerDropSelfLootTable(geoRegistry.getBaseStone());
+                    }
                 }
             }
         }
@@ -125,7 +131,11 @@ public class ModLootTableProvider extends LootTableProvider {
             }
 
             // Register a Loot Table for rock-dropping base stone
-            if (!ModBlockLists.FLINT_BEARING.containsKey(geologyType)) {
+            if (geologyType == GeologyType.PAHOEHOE) {
+                registerLootTable(block, droppingWithSilkTouch(block,
+                        withExplosionDecay(block, ItemLootEntry.builder( ModBlocks.GEOBLOCKS.get(GeologyType.BASALT).getRockItem())
+                                .acceptFunction(SetCount.builder(BinomialRange.of(3, 0.65f))))));
+            } else if (!ModBlockLists.FLINT_BEARING.containsKey(geologyType)) {
                 // Base stone block without flint
                 registerLootTable(block, droppingWithSilkTouch(block,
                         withExplosionDecay(block, ItemLootEntry.builder(geoRegistry.getRockItem())
@@ -139,9 +149,11 @@ public class ModLootTableProvider extends LootTableProvider {
 
 
         // Register: BASE STONE/DETRITUS - WITH ORE
-        private void registerBaseStoneOreLootTables(GeoRegistry geoRegistry) {
+        private void registerBaseStoneOreLootTables(GeoRegistry geoRegistry, boolean hasCobble) {
             GeologyType geologyType = geoRegistry.getGeoType();
             for (Block block: geoRegistry.getStoneOreBlocks()) {
+                //System.out.println(block.getRegistryName());
+
                 OreType oreType = ((IGeoBlock) block).getOreType();
                 LootEntry.Builder<?> oreEntry = buildOreLootEntry(oreType, ((IGeoBlock) block).getGradeType());
 
@@ -152,21 +164,26 @@ public class ModLootTableProvider extends LootTableProvider {
                     case SAND:
                     case RED_SAND:
                         registerLootTable(block, buildOreLootTable(block, oreEntry));
-                        return;
+                        continue;
                     case CLAY:
                         registerLootTable(block, buildOreLootTable(Blocks.CLAY, oreEntry,
                                 buildRockLootEntry(2, 0.65F, Items.CLAY_BALL)));
-                        return;
+                        continue;
                     case GRAVEL:
                         registerLootTable(block, buildOreLootTable(Blocks.GRAVEL, oreEntry,
                                 buildRockLootEntry(1, 0.05F, Items.FLINT)));
-                        return;
+                        continue;
                     default:
                 }
 
                 // Otherwise, process for a stone ore block
                 LootEntry.Builder<?> rockEntry;
-                if (!ModBlockLists.FLINT_BEARING.containsKey(geologyType)) {
+                if (geologyType == GeologyType.PAHOEHOE) {
+                    rockEntry = buildRockLootEntry(2, 0.33F, ModBlocks.GEOBLOCKS.get(GeologyType.BASALT).getRockItem());
+                } else if (!hasCobble) {
+                    registerLootTable(block, buildOreLootTable(block, oreEntry));
+                    continue;
+                } else if (!ModBlockLists.FLINT_BEARING.containsKey(geologyType)) {
                     // Base stone block without flint
                     rockEntry = buildRockLootEntry(2, 0.33F, geoRegistry.getRockItem());
                 } else {

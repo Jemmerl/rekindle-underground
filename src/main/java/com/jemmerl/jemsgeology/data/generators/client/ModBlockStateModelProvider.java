@@ -14,6 +14,7 @@ import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
+import java.util.Locale;
 import java.util.Objects;
 
 public class ModBlockStateModelProvider extends BlockStateProvider {
@@ -26,7 +27,7 @@ public class ModBlockStateModelProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
         for (GeoRegistry geoRegistry: ModBlocks.GEOBLOCKS.values()) {
             // Base stone/ores
-            simpleBlock(geoRegistry.getBaseStone());
+            //simpleBlock(geoRegistry.getBaseStone());
             for (Block block: geoRegistry.getStoneGeoBlocks()) {
                 if (block instanceof IGeoBlock) {
                     buildSimpleOreBlock(block,
@@ -36,51 +37,45 @@ public class ModBlockStateModelProvider extends BlockStateProvider {
 
             // Cobble based blocks and regolith/ores
             if (geoRegistry.hasCobble()) {
-                simpleBlock(geoRegistry.getRegolith());
-                simpleBlock(geoRegistry.getCobbles());
-                simpleBlock(geoRegistry.getCobblestone());
+                //simpleBlock(geoRegistry.getRegolith());
 
-                for (Block block: geoRegistry.getRegolithGeoBlocks()) {
-                    if (block instanceof IGeoBlock) {
-                        buildSimpleOreBlock(block,
-                                Objects.requireNonNull(geoRegistry.getRegolith().getRegistryName()).getPath());
+                if (geoRegistry.getGeoType() != GeologyType.PAHOEHOE) {
+                    simpleBlock(geoRegistry.getCobbles());
+                    simpleBlock(geoRegistry.getCobblestone());
+
+                    for (Block block: geoRegistry.getRegolithGeoBlocks()) {
+                        if (block instanceof IGeoBlock) {
+                            buildSimpleOreBlock(block,
+                                    Objects.requireNonNull(geoRegistry.getRegolith().getRegistryName()).getPath());
+                        }
                     }
                 }
             }
-
         }
     }
 
 
     // Construct the state and model for a block with ore
     private void buildSimpleOreBlock(Block oreBlock, String basePath) {
-        simpleBlock(oreBlock, ConfiguredModel.builder()
-                .modelFile(buildModelFile(
-                        ((IGeoBlock) oreBlock).getGeologyType(),
-                        ((IGeoBlock) oreBlock).getOreType(),
-                        ((IGeoBlock) oreBlock).getGradeType(),
-                        basePath))
-                .build());
+        IGeoBlock geoBlock = (IGeoBlock) oreBlock;
+        buildModelFile(geoBlock.getGeologyType(), geoBlock.getOreType(), geoBlock.getGradeType(), basePath);
     }
 
 
     // Return the appropriate model file for a given block based on if it has different side textures
-    private ModelFile buildModelFile(GeologyType geologyType, OreType oreType, GradeType gradeType, String basePath) {
+    private void buildModelFile(GeologyType geologyType, OreType oreType, GradeType gradeType, String basePath) {
         if (ModBlockLists.SIDE_TEXTURE_MODELS.contains(geologyType)) {
-            return buildModelDiffSides(basePath, oreType, gradeType);
+            buildModelDiffSides(basePath, oreType, gradeType);
         } else {
-            return buildModelAllSides(basePath, oreType, gradeType);
+            buildModelAllSides(basePath, oreType, gradeType);
         }
     }
 
 
     // Build the model file given the block path and property names with the same texture on all faces
-    private ModelFile buildModelAllSides(String basePath, OreType oreType, GradeType gradeType) {
-        ModelFile modelFile;
-
+    private void buildModelAllSides(String basePath, OreType oreType, GradeType gradeType) {
         if (!oreType.hasOre()) {
-            modelFile = models().withExistingParent("block/" + basePath,
-                            mcLoc("block/cube"))
+            models().withExistingParent("block/" + basePath, mcLoc("block/cube"))
                     .texture("particle", modLoc("block/" + basePath))
                     .texture("up", modLoc("block/" + basePath))
                     .texture("down", modLoc("block/" + basePath))
@@ -89,28 +84,22 @@ public class ModBlockStateModelProvider extends BlockStateProvider {
                     .texture("east", modLoc("block/" + basePath))
                     .texture("west", modLoc("block/" + basePath));
         } else {
-            String oreName = oreType.name();
-            String gradeName = gradeType.name();
+            String oreName = oreType.name().toLowerCase(Locale.ROOT);
+            String gradeName = gradeType.name().toLowerCase(Locale.ROOT);
 
-            modelFile = models().withExistingParent("block/blockore/"
-                                    + basePath + "/" + oreName + "/" + gradeName,
+            models().withExistingParent("block/blockore/" + basePath + "/" + oreName + "/" + gradeName,
                             modLoc("block/stone_ore_parent"))
                     .texture("all", modLoc("block/" + basePath))
                     .texture("particle", modLoc("block/" + basePath))
                     .texture("overlay", modLoc("block/ore/" + gradeType.getAssetName() + oreName));
         }
-
-        return modelFile;
     }
 
 
     // Build the model file given the block path and property names with a different texture on the sides
-    private ModelFile buildModelDiffSides(String basePath, OreType oreType, GradeType gradeType) {
-        ModelFile modelFile;
-
+    private void buildModelDiffSides(String basePath, OreType oreType, GradeType gradeType) {
         if (!oreType.hasOre()) {
-            modelFile = models().withExistingParent("block/" + basePath,
-                            mcLoc("block/cube"))
+            models().withExistingParent("block/" + basePath, mcLoc("block/cube"))
                     .texture("particle", modLoc("block/" + basePath + "1"))
                     .texture("up", modLoc("block/" + basePath + "1"))
                     .texture("down", modLoc("block/" + basePath + "1"))
@@ -119,19 +108,16 @@ public class ModBlockStateModelProvider extends BlockStateProvider {
                     .texture("east", modLoc("block/" + basePath + "2"))
                     .texture("west", modLoc("block/" + basePath + "2"));
         } else {
-            String oreName = oreType.name();
-            String gradeName = gradeType.name();
+            String oreName = oreType.name().toLowerCase(Locale.ROOT);
+            String gradeName = gradeType.name().toLowerCase(Locale.ROOT);
 
-            modelFile = models().withExistingParent("block/blockore/"
-                                    + basePath + "/" + oreName + "/" + gradeName,
+            models().withExistingParent("block/blockore/" + basePath + "/" + oreName + "/" + gradeName,
                             modLoc("block/stone_ore_parent_sides"))
                     .texture("particle", modLoc("block/" + basePath + "1"))
                     .texture("ends", modLoc("block/" + basePath + "1"))
                     .texture("sides", modLoc("block/" + basePath + "2"))
                     .texture("overlay", modLoc("block/ore/" + gradeType.getAssetName() + oreName));
         }
-
-        return modelFile;
     }
 
 }

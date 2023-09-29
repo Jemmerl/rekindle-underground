@@ -10,6 +10,8 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.fml.RegistryObject;
 
+import java.util.Objects;
+
 public class ModItemModelProvider extends ItemModelProvider {
     public ModItemModelProvider(DataGenerator generator, String modid, ExistingFileHelper existingFileHelper) {
         super(generator, modid, existingFileHelper);
@@ -20,17 +22,24 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         // Generate block item models
         for (RegistryObject<Block> regBlock : ModBlocks.BLOCKS.getEntries()) {
-            String path;
-            path = regBlock.getId().getPath();
-            ModelFile blockItemGenerated = getExistingFile(modLoc("block/" + path));
-            getBuilder(path).parent(blockItemGenerated);
+            String path = regBlock.getId().getPath();
+            String regName = Objects.requireNonNull(regBlock.get().getRegistryName()).toString();
+
+            if (!(regName.contains("pahoehoe") && !regName.contains("_stone"))) {
+                ModelFile blockItemGenerated;
+                if (regName.contains("grade")) {
+                    blockItemGenerated = getExistingFile(modLoc("block/blockore/" + path));
+                } else {
+                    blockItemGenerated = getExistingFile(modLoc("block/" + path));
+                }
+                getBuilder("item/" + path).parent(blockItemGenerated);
+            }
         }
 
         // Generate item models excluding blocks
         for (RegistryObject<Item> regItem : ModItems.ITEMS.getEntries()) {
-            String path;
-            path = regItem.getId().getPath();
-            if (!path.contains("_stone") && !path.contains("_regolith") && !path.contains("_cobbles")) {
+            String path = regItem.getId().getPath();
+            if (!path.contains("_stone") && !path.contains("_detritus") && !path.contains("_regolith") && !path.contains("_cobbles") && !path.contains("pahoehoe")) {
                 getBuilder(path).parent(getExistingFile(mcLoc("item/generated"))).texture("layer0", "item/" + path);
             }
         }
