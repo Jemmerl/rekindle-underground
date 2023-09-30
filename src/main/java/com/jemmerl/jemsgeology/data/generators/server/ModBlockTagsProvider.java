@@ -37,11 +37,13 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         Builder<Block> tagBuilderOreMid = this.getOrCreateBuilder(ModTags.Blocks.JEMSGEO_ORE_MID);
         Builder<Block> tagBuilderOreLow = this.getOrCreateBuilder(ModTags.Blocks.JEMSGEO_ORE_LOW);
         Builder<Block> tagBuilderOreAll = this.getOrCreateBuilder(ModTags.Blocks.JEMSGEO_ORE);
+        Builder<Block> tagBuilderNoOre = this.getOrCreateBuilder(ModTags.Blocks.JEMSGEO_NO_ORE);
 
         for (GeoRegistry geoRegistry: ModBlocks.GEOBLOCKS.values()) {
             boolean isDetritus = geoRegistry.getGeoType().isInStoneGroup(StoneGroupType.DETRITUS);
             boolean hasCobble = geoRegistry.hasCobble();
 
+            tagBuilderNoOre.add(geoRegistry.getBaseStone());
             if (isDetritus) {
                 tagBuilderGeoDetritus.add(geoRegistry.getBaseStone());
             } else {
@@ -73,6 +75,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 tagBuilderGeoCobblestone.add(geoRegistry.getCobblestone());
 
                 tagBuilderGeoRegolith.add(geoRegistry.getRegolith());
+                tagBuilderNoOre.add(geoRegistry.getRegolith());
                 for (OreRegistry oreRegistry: geoRegistry.getRegolithOreRegistry().values()) {
                     Block highGrade = oreRegistry.getGradeOre(GradeType.HIGHGRADE).get();
                     Block midGrade = oreRegistry.getGradeOre(GradeType.MIDGRADE).get();

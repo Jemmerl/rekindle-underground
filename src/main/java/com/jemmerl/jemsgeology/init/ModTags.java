@@ -23,6 +23,7 @@ public class ModTags {
         public static final Tags.IOptionalNamedTag<Block> JEMSGEO_ORE_HIGH = createTag("highgrade");
         public static final Tags.IOptionalNamedTag<Block> JEMSGEO_ORE_MID = createTag("midgrade");
         public static final Tags.IOptionalNamedTag<Block> JEMSGEO_ORE_LOW = createTag("lowgrade");
+        public static final Tags.IOptionalNamedTag<Block> JEMSGEO_NO_ORE = createTag("barren");
 
         public static final Tags.IOptionalNamedTag<Block> DETRITUS = createTag("vanilla_detritus"); // I am not sure this is even used anymore
         public static final Tags.IOptionalNamedTag<Block> COBBLES_CAN_BREAK = createTag("jemsgeo_cobbles_break"); // Cobbles cannot be supported by...
