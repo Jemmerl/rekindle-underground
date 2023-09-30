@@ -41,7 +41,7 @@ public class GeoRegistry {
 
         this.stoneOreRegistry = geoType.isInStoneGroup(StoneGroupType.DETRITUS) ?
                 fillOreRegistry(geoType, OreBlockType.DETRITUS) : fillOreRegistry(geoType, OreBlockType.STONE);
-        this.regolithOreRegistry =  hasCobble ? fillOreRegistry(geoType, OreBlockType.REGOLITH) : null;
+        this.regolithOreRegistry =  hasCobble ? fillOreRegistry(geoType, OreBlockType.REGOLITH) : Collections.emptyMap();
     }
 
 
@@ -102,7 +102,6 @@ public class GeoRegistry {
     }
 
     // Get all regolith geo-blocks
-    // Assumes that the caller has confirmed the geo-type has regolith
     public List<Block> getRegolithGeoBlocks() {
         List<Block> regolithGeoBlocks = new ArrayList<>(getRegolithOreBlocks());
         regolithGeoBlocks.add(getRegolith());
@@ -126,7 +125,6 @@ public class GeoRegistry {
     }
 
     // Get all ore-bearing regolith geo-blocks
-    // Assumes that the caller has confirmed the geo-type has regolith
     public List<Block> getRegolithOreBlocks() {
         List<Block> allRegolithOreBlocks = new ArrayList<>();
         for (OreRegistry oreRegistry: regolithOreRegistry.values()) {
@@ -134,6 +132,9 @@ public class GeoRegistry {
         }
         return allRegolithOreBlocks;
     }
+
+    public Map<OreType, OreRegistry> getStoneOreRegistry() { return stoneOreRegistry; }
+    public Map<OreType, OreRegistry> getRegolithOreRegistry() { return regolithOreRegistry; }
 
 
     ////////////////////////

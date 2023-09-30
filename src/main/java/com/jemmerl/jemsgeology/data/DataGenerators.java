@@ -1,10 +1,13 @@
 package com.jemmerl.jemsgeology.data;
 
 import com.jemmerl.jemsgeology.JemsGeology;
+import com.jemmerl.jemsgeology.data.generators.server.ModBlockTagsProvider;
 import com.jemmerl.jemsgeology.data.generators.client.ModBlockStateModelProvider;
 import com.jemmerl.jemsgeology.data.generators.client.ModItemModelProvider;
 import com.jemmerl.jemsgeology.data.generators.server.ModCobblestoneRecipeProvider;
+import com.jemmerl.jemsgeology.data.generators.server.ModItemTagsProvider;
 import com.jemmerl.jemsgeology.data.generators.server.ModLootTableProvider;
+import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -15,7 +18,7 @@ import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 public final class DataGenerators {
     private DataGenerators() {}
 
-    //TODO tag generator is desparately needed
+    //TODO lang file generator
 
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
@@ -29,12 +32,8 @@ public final class DataGenerators {
         // Server-side data providers
         gen.addProvider(new ModCobblestoneRecipeProvider(gen));
         gen.addProvider(new ModLootTableProvider(gen));
-
-//        gen.addProvider(new ModItemModelProvider(gen, existingFileHelper));
-//        ModBlockTagsProvider blockTags = new ModBlockTagsProvider(gen, existingFileHelper);
-//        gen.addProvider(blockTags);
-//        gen.addProvider(new ModItemTagsProvider(gen, blockTags, existingFileHelper));
-//        gen.addProvider(new ModLootTableProvider(gen));
-//        gen.addProvider(new ModRecipeProvider(gen));
+        BlockTagsProvider blocktagsprovider = new ModBlockTagsProvider(gen, JemsGeology.MOD_ID, existingFileHelper);
+        gen.addProvider(blocktagsprovider);
+        gen.addProvider(new ModItemTagsProvider(gen, blocktagsprovider, JemsGeology.MOD_ID, existingFileHelper));
     }
 }

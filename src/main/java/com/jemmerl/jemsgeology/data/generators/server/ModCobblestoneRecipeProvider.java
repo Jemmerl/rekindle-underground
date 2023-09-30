@@ -31,14 +31,14 @@ public class ModCobblestoneRecipeProvider extends RecipeProvider {
                         .patternLine("xx")
                         .patternLine("xx")
                         .setGroup("cobbles")
-                        .addCriterion("has_rock", InventoryChangeTrigger.Instance.forItems(ItemPredicate.Builder.create().tag(ModTags.Items.ROCKS).build()))
+                        .addCriterion("has_rock", InventoryChangeTrigger.Instance.forItems(ItemPredicate.Builder.create().tag(ModTags.Items.JEMSGEO_ROCKS).build()))
                         .build(consumer);
 
                 // Recipe to break down cobbles
                 ShapelessRecipeBuilder.shapelessRecipe(rockItem, 4)
                         .addIngredient(registry.getCobbles())
                         .setGroup("rocks")
-                        .addCriterion("has_rock", InventoryChangeTrigger.Instance.forItems(ItemPredicate.Builder.create().tag(ModTags.Items.ROCKS).build()))
+                        .addCriterion("has_rock", InventoryChangeTrigger.Instance.forItems(ItemPredicate.Builder.create().tag(ModTags.Items.JEMSGEO_ROCKS).build()))
                         .build(consumer);
 
                 // Recipe to craft cobblestone
@@ -49,7 +49,7 @@ public class ModCobblestoneRecipeProvider extends RecipeProvider {
                         .patternLine("mxm")
                         .patternLine("xxx")
                         .setGroup("cobblestones")
-                        .addCriterion("has_rock", InventoryChangeTrigger.Instance.forItems(ItemPredicate.Builder.create().tag(ModTags.Items.ROCKS).build()))
+                        .addCriterion("has_rock", InventoryChangeTrigger.Instance.forItems(ItemPredicate.Builder.create().tag(ModTags.Items.JEMSGEO_ROCKS).build()))
                         .build(consumer);
             }
 
