@@ -42,12 +42,11 @@ public class ModTags {
         // Example
         // public static final Tags.IOptionalNamedTag<Item> AMETHYST = createForgeTag("gems/amethyst");
 
-        // rocks (cobbles)
-        // ore
-        // normal ore
-        // poor ore
+        public static final Tags.IOptionalNamedTag<Item> JEMSGEO_ROCKS = createTag("rocks");
+        public static final Tags.IOptionalNamedTag<Item> JEMSGEO_POOR_ORE = createTag("poor_ores");
+        public static final Tags.IOptionalNamedTag<Item> JEMSGEO_GOOD_ORE = createTag("good_ores");
+        public static final Tags.IOptionalNamedTag<Item> JEMSGEO_ALL_ORE = createTag("ores");
 
-        public static final Tags.IOptionalNamedTag<Item> JEMSGEO_ROCKS = createTag("jemsgeo_rocks");
 
         private static Tags.IOptionalNamedTag<Item> createTag(String name) {
             return ItemTags.createOptional(new ResourceLocation(JemsGeology.MOD_ID, name));

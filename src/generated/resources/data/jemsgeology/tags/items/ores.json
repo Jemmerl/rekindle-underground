@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#jemsgeology:poor_ores",
+    "#jemsgeology:good_ores"
+  ]
+}
