@@ -1,0 +1,8 @@
+{
+  "parent": "jemsgeology:block/stone_ore_parent",
+  "textures": {
+    "all": "jemsgeology:block/shale_regolith",
+    "particle": "jemsgeology:block/shale_regolith",
+    "overlay": "jemsgeology:block/ore/rich_native_electrum"
+  }
+}

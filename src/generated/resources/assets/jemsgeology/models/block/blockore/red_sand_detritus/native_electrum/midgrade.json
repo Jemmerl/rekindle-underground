@@ -1,0 +1,8 @@
+{
+  "parent": "jemsgeology:block/stone_ore_parent",
+  "textures": {
+    "all": "jemsgeology:block/red_sand_detritus",
+    "particle": "jemsgeology:block/red_sand_detritus",
+    "overlay": "jemsgeology:block/ore/native_electrum"
+  }
+}

@@ -68,9 +68,6 @@ public class ModItems {
 
     public static final RegistryObject<Item> POOR_DIAMOND_ORE = registerPoorOreItem(OreType.DIAMOND);
 
-    public static final RegistryObject<Item> ELECTRUM_ORE = registerOreItem(OreType.ELECTRUM);
-    public static final RegistryObject<Item> POOR_ELECTRUM_ORE = registerPoorOreItem(OreType.ELECTRUM);
-
     public static final RegistryObject<Item> FLUORITE_ORE = registerOreItem(OreType.FLUORITE);
     public static final RegistryObject<Item> POOR_FLUORITE_ORE = registerPoorOreItem(OreType.FLUORITE);
 
@@ -112,6 +109,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> NATIVE_COPPER_ORE = registerOreItem(OreType.NATIVE_COPPER);
     public static final RegistryObject<Item> POOR_NATIVE_COPPER_ORE = registerPoorOreItem(OreType.NATIVE_COPPER);
+
+    public static final RegistryObject<Item> NATIVE_ELECTRUM_ORE = registerOreItem(OreType.NATIVE_ELECTRUM);
+    public static final RegistryObject<Item> POOR_NATIVE_ELECTRUM_ORE = registerPoorOreItem(OreType.NATIVE_ELECTRUM);
 
     public static final RegistryObject<Item> NATIVE_GOLD_ORE = registerOreItem(OreType.NATIVE_GOLD);
     public static final RegistryObject<Item> POOR_NATIVE_GOLD_ORE = registerPoorOreItem(OreType.NATIVE_GOLD);

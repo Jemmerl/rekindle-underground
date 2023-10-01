@@ -26,7 +26,6 @@ public class ModOresList {
         ORE_LIST.put(OreType.COBALTITE, new OreListWrapper(ModItems.COBALTITE_ORE.get(), ModItems.POOR_COBALTITE_ORE.get()));
         ORE_LIST.put(OreType.CRYOLITE, new OreListWrapper(ModItems.CRYOLITE_ORE.get(), ModItems.POOR_CRYOLITE_ORE.get()));
         ORE_LIST.put(OreType.DIAMOND, new OreListWrapper(Items.DIAMOND, ModItems.POOR_DIAMOND_ORE.get()));
-        ORE_LIST.put(OreType.ELECTRUM, new OreListWrapper(ModItems.ELECTRUM_ORE.get(), ModItems.POOR_ELECTRUM_ORE.get()));
         ORE_LIST.put(OreType.FLUORITE, new OreListWrapper(ModItems.FLUORITE_ORE.get(), ModItems.POOR_FLUORITE_ORE.get()));
         ORE_LIST.put(OreType.GALENA, new OreListWrapper(ModItems.GALENA_ORE.get(), ModItems.POOR_GALENA_ORE.get()));
         ORE_LIST.put(OreType.GOETHITE, new OreListWrapper(ModItems.GOETHITE_ORE.get(), ModItems.POOR_GOETHITE_ORE.get()));
@@ -41,6 +40,7 @@ public class ModOresList {
         ORE_LIST.put(OreType.MOLYBDENITE, new OreListWrapper(ModItems.MOLYBDENITE_ORE.get(), ModItems.POOR_MOLYBDENITE_ORE.get()));
         ORE_LIST.put(OreType.MONAZITE, new OreListWrapper(ModItems.MONAZITE_ORE.get(), ModItems.POOR_MONAZITE_ORE.get()));
         ORE_LIST.put(OreType.NATIVE_COPPER, new OreListWrapper(ModItems.NATIVE_COPPER_ORE.get(), ModItems.POOR_NATIVE_COPPER_ORE.get()));
+        ORE_LIST.put(OreType.NATIVE_ELECTRUM, new OreListWrapper(ModItems.NATIVE_ELECTRUM_ORE.get(), ModItems.POOR_NATIVE_ELECTRUM_ORE.get()));
         ORE_LIST.put(OreType.NATIVE_GOLD, new OreListWrapper(ModItems.NATIVE_GOLD_ORE.get(), ModItems.POOR_NATIVE_GOLD_ORE.get()));
         ORE_LIST.put(OreType.NATIVE_SULFUR, new OreListWrapper(ModItems.NATIVE_SULFUR_ORE.get(), ModItems.POOR_NATIVE_SULFUR_ORE.get()));
         ORE_LIST.put(OreType.PENTLANDITE, new OreListWrapper(ModItems.PENTLANDITE_ORE.get(), ModItems.POOR_PENTLANDITE_ORE.get()));

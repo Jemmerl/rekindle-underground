@@ -48,7 +48,6 @@ public class ModTags {
         public static final Tags.IOptionalNamedTag<Item> JEMSGEO_GOOD_ORE = createTag("good_ores");
         public static final Tags.IOptionalNamedTag<Item> JEMSGEO_ALL_ORE = createTag("ores");
 
-
         private static Tags.IOptionalNamedTag<Item> createTag(String name) {
             return ItemTags.createOptional(new ResourceLocation(JemsGeology.MOD_ID, name));
         }
