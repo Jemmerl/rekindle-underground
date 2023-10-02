@@ -26,6 +26,7 @@ import net.minecraftforge.common.loot.LootModifier;
 
 import javax.annotation.Nonnull;
 import java.util.List;
+import java.util.Random;
 
 public class StoneQuarryModifier extends LootModifier {
     protected StoneQuarryModifier(ILootCondition[] conditionsIn) {
@@ -99,43 +100,17 @@ public class StoneQuarryModifier extends LootModifier {
 
     // Check if three connected faces that share a vertex are open to air
     private boolean canQuarryBlock(World world, BlockPos pos, PlayerEntity player) {
-        double reachDist = player.getAttribute(net.minecraftforge.common.ForgeMod.REACH_DISTANCE.get()).getValue();
+        boolean up = isFaceOpen(world, pos.offset(Direction.UP));
+        boolean down = isFaceOpen(world, pos.offset(Direction.DOWN));
+        if (!(up || down)) return false;
 
-        Direction facing = null;
-        RayTraceResult result = player.pick(reachDist, 0.0f, false);
-        if (result.getType() == RayTraceResult.Type.BLOCK) {
-            ItemUseContext context = new ItemUseContext(player, Hand.MAIN_HAND, ((BlockRayTraceResult) result));
-            BlockRayTraceResult res = new BlockRayTraceResult(context.getHitVec(), context.getFace(), context.getPos(), false);
-            facing = res.getFace();
-        }
+        boolean north = isFaceOpen(world, pos.offset(Direction.NORTH));
+        boolean south = isFaceOpen(world, pos.offset(Direction.SOUTH));
+        if (!(north || south)) return false;
 
-        // Catch no face found case
-        if (facing == null) {
-            return  false;
-        }
-
-        // Check if the interacted face is open (should always be, but just in case!)
-        boolean center = isFaceOpen(world, pos.offset(facing));
-        if (!center) {
-            return false;
-        }
-
-        // Check vertical pair, if neither are open, then no open corners are possible
-        BlockPos upPos = pos.offset(UtilMethods.rotateDirection(facing, Direction.NORTH));
-        BlockPos downPos = pos.offset(UtilMethods.rotateDirection(facing, Direction.SOUTH));
-        boolean up = isFaceOpen(world, upPos);
-        boolean down = isFaceOpen(world, downPos);
-        if (!(up || down)) {
-            return false;
-        }
-
-        // Check horizontal pair. If reached, one of the vertical is open, so any open horizontal means success
-        BlockPos leftPos = pos.offset(UtilMethods.rotateDirection(facing, Direction.WEST));
-        BlockPos rightPos = pos.offset(UtilMethods.rotateDirection(facing, Direction.EAST));
-        boolean left = isFaceOpen(world, leftPos);
-        boolean right = isFaceOpen(world, rightPos);
-
-        return (left || right);
+        boolean east = isFaceOpen(world, pos.offset(Direction.EAST));
+        boolean west = isFaceOpen(world, pos.offset(Direction.WEST));
+        return (east || west);
     }
 
     // Check if a face is exposed
