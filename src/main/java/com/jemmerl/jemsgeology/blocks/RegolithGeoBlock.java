@@ -17,10 +17,10 @@ public class RegolithGeoBlock extends BaseGeoBlock implements IGeoBlock {
         //this.setDefaultState(this.stateContainer.getBaseState().with(ORE_TYPE, OreType.NONE).with(GRADE_TYPE, GradeType.LOWGRADE));
     }
 
-    @Override
-    public float getExplosionResistance() {
-        return (this.blastResistance * JemsGeoConfig.SERVER.stoneResistance.get());
-    }
+//    @Override
+//    public float getExplosionResistance() {
+//        return (this.blastResistance * JemsGeoConfig.SERVER.stoneResistance.get());
+//    }
 
     // Regolith blocks experience a hardness modifier, but not a depth scaling modifier
     // TODO remove? replace with a general dirt/detritus/regolith hardness increase

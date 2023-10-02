@@ -8,7 +8,6 @@ public class ServerConfig {
     public static class Server {
         private static final int HARDNESS_DEPTH_FACTOR = 3; // 1 - 10 scale; 1 is no change by depth
         private static final int STONE_HARDNESS = 20; // Multiply relative stone hardnesses
-        private static final int STONE_RESISTANCE = 6; // Multiply relative stone resistances
         private static final boolean ORE_QUARRYING = true; // Drop some poor ore when ore-bearing stone is quarried?
 
 
@@ -68,7 +67,7 @@ public class ServerConfig {
 
         public final ForgeConfigSpec.ConfigValue<Integer> hardnessDepthFactor;
         public final ForgeConfigSpec.ConfigValue<Integer> stoneHardness;
-        public final ForgeConfigSpec.ConfigValue<Integer> stoneResistance;
+        //public final ForgeConfigSpec.ConfigValue<Integer> stoneResistance;
         public final ForgeConfigSpec.ConfigValue<Boolean> ore_quarrying;
 
         public final ForgeConfigSpec.ConfigValue<Integer> regionSize;
@@ -130,9 +129,9 @@ public class ServerConfig {
             this.stoneHardness = builder.comment("Set the multiplier for relative stone hardnesses; Recommended Default is 20")
                     .worldRestart()
                     .defineInRange("Hardness Multiplier", STONE_HARDNESS, 1, 50);
-            this.stoneResistance = builder.comment("Set the multiplier for relative stone resistances; Recommended Default is 6")
-                    .worldRestart()
-                    .defineInRange("Resistance Multiplier", STONE_RESISTANCE, 1, 30);
+//            this.stoneResistance = builder.comment("Set the multiplier for relative stone resistances; Recommended Default is 6")
+//                    .worldRestart()
+//                    .defineInRange("Resistance Multiplier", STONE_RESISTANCE, 1, 30);
             this.ore_quarrying = builder.comment("Enable some poor-ore drops when quarrying ore-bearing stone; Recommended Default is True")
                     .worldRestart()
                     .define("Ore Quarrying", ORE_QUARRYING);

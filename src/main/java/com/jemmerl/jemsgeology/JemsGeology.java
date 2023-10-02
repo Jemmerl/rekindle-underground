@@ -78,6 +78,8 @@ public class JemsGeology
         CapabilityManager.INSTANCE.register(IDepositCapability.class, new DepositCapStorage(), DepositCapability::new);
         CapabilityManager.INSTANCE.register(IChunkGennedCapability.class, new ChunkGennedCapStorage(), ChunkGennedCapability::new);
 
+        ModLootConditionTypes.registerLootConditions();
+
         // Dont remove lambda incase needed later
         DeferredWorkQueue.runLater(() -> {
             JemsGeoFeatures.registerConfiguredFeatures();

@@ -28,10 +28,10 @@ public class StoneGeoBlock extends BaseGeoBlock implements IGeoBlock {
         //this.setDefaultState(this.stateContainer.getBaseState().with(ORE_TYPE, OreType.NONE).with(GRADE_TYPE, GradeType.LOWGRADE));
     }
 
-    @Override
-    public float getExplosionResistance() {
-        return (this.blastResistance * JemsGeoConfig.SERVER.stoneResistance.get());
-    }
+//    @Override
+//    public float getExplosionResistance() {
+//        return (this.blastResistance * JemsGeoConfig.SERVER.stoneResistance.get());
+//    }
 
     // Stone blocks experience both a hardness modifier and depth scaling modifier
     @Override
@@ -49,83 +49,25 @@ public class StoneGeoBlock extends BaseGeoBlock implements IGeoBlock {
         return player.getDigSpeed(state, pos) / f / (float)i;
     }
 
-    @Override
-    public void onBlockHarvested(World world, BlockPos pos, BlockState state, PlayerEntity playerIn) {
-        if (!world.isRemote) {
-            if (!playerIn.isCreative()) {
-                if (holdingQuarryTools(state, playerIn) && canQuarryBlock(world, pos, playerIn)) {
-                    playerIn.getHeldItemOffhand().damageItem(1, playerIn, (player) -> {
-                        player.sendBreakAnimation(Hand.OFF_HAND);
-                    });
-                    world.destroyBlock(pos, false);
-                    spawnAsEntity(world, pos, new ItemStack(state.getBlock().asItem()));
-
-                    // Drop a poor ore item if the quarry'ed block has ore in it (with 50% chance)
-                    OreType oreType = ((StoneGeoBlock) state.getBlock()).getOreType();
-                    if (JemsGeoConfig.SERVER.ore_quarrying.get() && oreType.hasOre() && world.rand.nextBoolean()) {
-                        spawnAsEntity(world, pos, new ItemStack(oreType.getPoorOreItem()));
-                    }
-                }
-            }
-            super.onBlockHarvested(world, pos, state, playerIn);
-        }
-    }
-
-
-    // Check if the player is holding the right tools to quarry
-    private boolean holdingQuarryTools(BlockState state, PlayerEntity player) {
-        boolean quarryTool = player.getHeldItemOffhand().isItemEqual(ModItems.QUARRY_TOOL.get().getDefaultInstance());
-        boolean canBreak = player.getHeldItemMainhand().canHarvestBlock(state);
-
-        return (quarryTool && canBreak);
-    }
-
-    // Check if three connected faces that share a vertex are open to air
-    private boolean canQuarryBlock(World world, BlockPos pos, PlayerEntity player) {
-        double reachDist = player.getAttribute(net.minecraftforge.common.ForgeMod.REACH_DISTANCE.get()).getValue();
-
-        Direction facing = null;
-        RayTraceResult result = player.pick(reachDist, 0.0f, false);
-        if (result.getType() == RayTraceResult.Type.BLOCK) {
-            ItemUseContext context = new ItemUseContext(player, Hand.MAIN_HAND, ((BlockRayTraceResult) result));
-            BlockRayTraceResult res = new BlockRayTraceResult(context.getHitVec(), context.getFace(), context.getPos(), false);
-            facing = res.getFace();
-        }
-
-        // Catch no face found case
-        if (facing == null) {
-            return  false;
-        }
-
-        // Check if the interacted face is open (should always be, but just in case!)
-        boolean center = isFaceOpen(world, pos.offset(facing));
-        if (!center) {
-            return false;
-        }
-
-        // Check vertical pair, if neither are open, then no open corners are possible
-        BlockPos upPos = pos.offset(UtilMethods.rotateDirection(facing, Direction.NORTH));
-        BlockPos downPos = pos.offset(UtilMethods.rotateDirection(facing, Direction.SOUTH));
-        boolean up = isFaceOpen(world, upPos);
-        boolean down = isFaceOpen(world, downPos);
-        if (!(up || down)) {
-            return false;
-        }
-
-        // Check horizontal pair. If reached, one of the vertical is open, so any open horizontal means success
-        BlockPos leftPos = pos.offset(UtilMethods.rotateDirection(facing, Direction.WEST));
-        BlockPos rightPos = pos.offset(UtilMethods.rotateDirection(facing, Direction.EAST));
-        boolean left = isFaceOpen(world, leftPos);
-        boolean right = isFaceOpen(world, rightPos);
-
-        return (left || right);
-    }
-
-    // Check if a face is exposed
-    private boolean isFaceOpen(World world, BlockPos offsetPos) {
-        BlockState state = world.getBlockState(offsetPos);
-        Material stateMaterial = state.getMaterial();
-        return (state.isIn(BlockTags.FIRE) || stateMaterial.isLiquid() || stateMaterial.isReplaceable());
-    }
-
+//    @Override
+//    public void onBlockHarvested(World world, BlockPos pos, BlockState state, PlayerEntity playerIn) {
+//        if (!world.isRemote) {
+//            if (!playerIn.isCreative()) {
+//                if (holdingQuarryTools(state, playerIn) && canQuarryBlock(world, pos, playerIn)) {
+//                    playerIn.getHeldItemOffhand().damageItem(1, playerIn, (player) -> {
+//                        player.sendBreakAnimation(Hand.OFF_HAND);
+//                    });
+//                    world.destroyBlock(pos, false);
+//                    spawnAsEntity(world, pos, new ItemStack(state.getBlock().asItem()));
+//
+//                    // Drop a poor ore item if the quarry'ed block has ore in it (with 50% chance)
+//                    OreType oreType = ((StoneGeoBlock) state.getBlock()).getOreType();
+//                    if (JemsGeoConfig.SERVER.ore_quarrying.get() && oreType.hasOre() && world.rand.nextBoolean()) {
+//                        spawnAsEntity(world, pos, new ItemStack(oreType.getPoorOreItem()));
+//                    }
+//                }
+//            }
+//            super.onBlockHarvested(world, pos, state, playerIn);
+//        }
+//    }
 }
