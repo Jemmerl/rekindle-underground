@@ -1,8 +1,0 @@
-{
-  "parent": "jemsgeology:block/stone_ore_parent",
-  "textures": {
-    "all": "jemsgeology:block/borax_stone",
-    "particle": "jemsgeology:block/borax_stone",
-    "overlay": "jemsgeology:block/ore/rich_beryl"
-  }
-}

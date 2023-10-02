@@ -1,8 +1,0 @@
-{
-  "parent": "jemsgeology:block/stone_ore_parent",
-  "textures": {
-    "all": "jemsgeology:block/vein_quartz_stone",
-    "particle": "jemsgeology:block/vein_quartz_stone",
-    "overlay": "jemsgeology:block/ore/pyrite"
-  }
-}

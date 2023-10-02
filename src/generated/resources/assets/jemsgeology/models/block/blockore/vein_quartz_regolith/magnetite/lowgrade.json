@@ -1,8 +1,0 @@
-{
-  "parent": "jemsgeology:block/stone_ore_parent",
-  "textures": {
-    "all": "jemsgeology:block/vein_quartz_regolith",
-    "particle": "jemsgeology:block/vein_quartz_regolith",
-    "overlay": "jemsgeology:block/ore/poor_magnetite"
-  }
-}
