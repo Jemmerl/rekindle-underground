@@ -21,7 +21,7 @@ public class ModItems {
 
     public static final RegistryObject<Item> MORTAR = ITEMS.register("lime_mortar", () -> new Item(new Item.Properties().group(ModItemGroups.JEMGEO_MISC_GROUP)));
     public static final RegistryObject<Item> QUARRY_TOOL = ITEMS.register("quarry_tool", () -> new Item(new Item.Properties().maxDamage(128).group(ModItemGroups.JEMGEO_MISC_GROUP)));
-
+    // TODO make a quarry tool (tool kit?) item group so other mods can add their own.
 
     //////////
     // Ores //

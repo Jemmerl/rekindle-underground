@@ -103,16 +103,14 @@ public class VolcanicRegionBuilder {
                 // To save on computing cost (might experiment later), they will be generated as homogenous masses
                 // Gabbro is sometimes a small component of batholiths, which is represented here as a very
                 // rare chance of generation. Will also provide a non-oceanic source of gabbro for building
-                if (rfloat > 0.65f) {
-                    cachedBatholithStone = GeologyType.GRANITE; // 35% -- felsic
-                } else if (rfloat > 0.41f) {
-                    cachedBatholithStone = GeologyType.SYENITE; // 24% -- felsic
-                } else if (rfloat > 0.17f) {
-                    cachedBatholithStone = GeologyType.GRANODIORITE; // 24% -- intermediate-felsic
-                } else if (rfloat > 0.02f) {
+                if (rfloat > 0.40f) {
+                    cachedBatholithStone = GeologyType.GRANITE; // 60% -- felsic
+                } else if (rfloat > 0.20f) {
+                    cachedBatholithStone = GeologyType.GRANODIORITE; // 20% -- intermediate-felsic
+                } else if (rfloat > 0.05f) {
                     cachedBatholithStone = GeologyType.DIORITE; // 15% -- intermediate
                 } else {
-                    cachedBatholithStone = GeologyType.GABBRO; // 2% -- mafic
+                    cachedBatholithStone = GeologyType.GABBRO; // 5% -- mafic
                 }
             }
 

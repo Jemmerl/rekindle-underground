@@ -14,7 +14,6 @@ public class RegolithGeoBlock extends BaseGeoBlock implements IGeoBlock {
 
     public RegolithGeoBlock(AbstractBlock.Properties properties, GeologyType geologyType, OreType oreType, GradeType gradeType) {
         super(properties, geologyType, oreType, gradeType);
-        //this.setDefaultState(this.stateContainer.getBaseState().with(ORE_TYPE, OreType.NONE).with(GRADE_TYPE, GradeType.LOWGRADE));
     }
 
 //    @Override

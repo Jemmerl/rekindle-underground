@@ -25,6 +25,15 @@ public class GeoRegistry {
     private final RegistryObject<Block> cobblestone;
     private final RegistryObject<Item> rockItem;
 
+//    private final RegistryObject<Block> rawSlab;
+//    private final RegistryObject<Block> rawStairs;
+//    private final RegistryObject<Block> cobbleSlab;
+//    private final RegistryObject<Block> cobbleStairs;
+//    private final RegistryObject<Block> cobbleWall;
+//    private final RegistryObject<Block> polishedStone;
+//    private final RegistryObject<Block> polishedSlab;
+//    private final RegistryObject<Block> polishedStairs;
+
     private final Map<OreType, OreRegistry> stoneOreRegistry;
     private final Map<OreType, OreRegistry> regolithOreRegistry;
 
@@ -38,6 +47,15 @@ public class GeoRegistry {
         this.cobbles = hasCobble ? ModBlocks.registerCobblesBlock(geoType) : null;
         this.cobblestone = hasCobble ? ModBlocks.registerCobblestoneBlock(geoType) : null;
         this.rockItem = hasCobble ? ModItems.registerRockItem(geoType) : null;
+
+//        this.rawSlab = ;
+//        this.rawStairs = ;
+//        this.cobbleSlab = ;
+//        this.cobbleStairs = ;
+//        this.cobbleWall = ;
+//        this.polishedStone = ;
+//        this.polishedSlab = ;
+//        this.polishedStairs = ;
 
         this.stoneOreRegistry = geoType.isInStoneGroup(StoneGroupType.DETRITUS) ?
                 fillOreRegistry(geoType, OreBlockType.DETRITUS) : fillOreRegistry(geoType, OreBlockType.STONE);

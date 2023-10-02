@@ -19,7 +19,6 @@ public class FallingGeoBlock extends FallingBlock implements IGeoBlock {
         this.oreType = oreType;
         this.gradeType = gradeType;
         this.stoneGroupType = geologyType.getGroup();
-        //this.setDefaultState(this.stateContainer.getBaseState().with(ORE_TYPE, OreType.NONE).with(GRADE_TYPE, GradeType.LOWGRADE));
     }
 
 //    @Override

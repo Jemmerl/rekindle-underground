@@ -1,7 +1,5 @@
 package com.jemmerl.jemsgeology.data.enums;
 
-import com.jemmerl.jemsgeology.init.JemsGeoConfig;
-
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
@@ -23,13 +21,12 @@ public enum GeologyType {
     CLAYSTONE("claystone", StoneGroupType.SEDIMENTARY, true, 1, 1),
     SILTSTONE("siltstone", StoneGroupType.SEDIMENTARY, true, 1, 1),
     CONGLOMERATE("conglomerate", StoneGroupType.SEDIMENTARY, true, 2, 2),
-    VEIN_QUARTZ("vein_quartz", StoneGroupType.SEDIMENTARY, true, 4, 4),
+    CALCITE("calcite", StoneGroupType.SEDIMENTARY, true, 1, 1),
+    QUARTZ("quartz", StoneGroupType.SEDIMENTARY, true, 4, 4),
 
     // TODO evaporates
     ROCKSALT("rocksalt", StoneGroupType.SEDIMENTARY, false, 1, 1),
     ROCKGYPSUM("rockgypsum", StoneGroupType.SEDIMENTARY, false, 0, 0),
-    BORAX("borax", StoneGroupType.SEDIMENTARY, false, 0, 0),
-    KERNITE("kernite", StoneGroupType.SEDIMENTARY, false, 0, 0),
 
     // Extrusive Igneous
     RHYOLITE("rhyolite", StoneGroupType.EXTRUSIVE, true, 2, 2),
@@ -38,7 +35,6 @@ public enum GeologyType {
     TRACHYTE("trachyte", StoneGroupType.EXTRUSIVE, true, 3, 3),
     BASALT("basalt", StoneGroupType.EXTRUSIVE, true, 3, 3),
     PAHOEHOE("pahoehoe", StoneGroupType.EXTRUSIVE, false, 2, 2),
-    SCORIA("scoria", StoneGroupType.EXTRUSIVE, false, 2, 2),
     RHYOLITIC_TUFF("rhyolitic_tuff", StoneGroupType.EXTRUSIVE, false, 0, 0),
     TRACHYTIC_TUFF("trachytic_tuff", StoneGroupType.EXTRUSIVE, false, 0, 0),
     ANDESITIC_TUFF("andesitic_tuff", StoneGroupType.EXTRUSIVE, false, 0, 0),
@@ -49,7 +45,7 @@ public enum GeologyType {
     DIORITE("diorite", StoneGroupType.INTRUSIVE, true, 4, 4),
     GRANODIORITE("granodiorite", StoneGroupType.INTRUSIVE, true, 4, 4),
     GRANITE("granite", StoneGroupType.INTRUSIVE, true, 4, 4),
-    SYENITE("syenite", StoneGroupType.INTRUSIVE, true, 4, 4),
+//    SYENITE("syenite", StoneGroupType.INTRUSIVE, true, 4, 4),
     GABBRO("gabbro", StoneGroupType.INTRUSIVE, true, 4, 4),
     DIABASE("diabase", StoneGroupType.INTRUSIVE, true, 4, 4),
     KIMBERLITE("kimberlite", StoneGroupType.INTRUSIVE, true, 3, 3),

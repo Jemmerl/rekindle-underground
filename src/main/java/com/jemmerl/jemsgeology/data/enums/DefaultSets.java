@@ -12,9 +12,8 @@ public enum DefaultSets {
     SED_SOIL(new ArrayList<>(Arrays.asList("shale", "mudstone"))),
     SED_SANDY(new ArrayList<>(Arrays.asList("sandstone", "red_sandstone", "greywacke"))),
     SED_CARBONATE(new ArrayList<>(Arrays.asList("chalk", "limestone", "dolostone"))),
-    SED_EVAPORATE(new ArrayList<>(Arrays.asList("rocksalt", "rockgypsum", "borax", "kernite"))),
-    IGN_EXT_MAIN(new ArrayList<>(Arrays.asList("dacite", "andesite", "basalt"))),
-    IGN_EXT_AUX(new ArrayList<>(Arrays.asList("rhyolite", "scoria"))),
+    SED_EVAPORATE(new ArrayList<>(Arrays.asList("rocksalt", "rockgypsum"))),
+    IGN_EXT(new ArrayList<>(Arrays.asList("dacite", "andesite", "basalt", "rhyolite"))),
     METAMORPHIC(new ArrayList<>(Arrays.asList("quartzite", "schist", "phyllite", "gneiss", "marble")));
 
     private final List<String> geoTypes;

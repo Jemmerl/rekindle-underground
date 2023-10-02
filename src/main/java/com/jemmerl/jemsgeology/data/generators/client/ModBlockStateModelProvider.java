@@ -27,7 +27,6 @@ public class ModBlockStateModelProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
         for (GeoRegistry geoRegistry: ModBlocks.GEOBLOCKS.values()) {
             // Base stone/ores
-            //simpleBlock(geoRegistry.getBaseStone());
             for (Block block: geoRegistry.getStoneGeoBlocks()) {
                 if (block instanceof IGeoBlock) {
                     buildSimpleOreBlock(block,
@@ -37,7 +36,6 @@ public class ModBlockStateModelProvider extends BlockStateProvider {
 
             // Cobble based blocks and regolith/ores
             if (geoRegistry.hasCobble()) {
-                //simpleBlock(geoRegistry.getRegolith());
 
                 if (geoRegistry.getGeoType() != GeologyType.PAHOEHOE) {
                     simpleBlock(geoRegistry.getCobbles());
