@@ -25,14 +25,15 @@ public class GeoRegistry {
     private final RegistryObject<Block> cobblestone;
     private final RegistryObject<Item> rockItem;
 
-//    private final RegistryObject<Block> rawSlab;
-//    private final RegistryObject<Block> rawStairs;
-//    private final RegistryObject<Block> cobbleSlab;
-//    private final RegistryObject<Block> cobbleStairs;
-//    private final RegistryObject<Block> cobbleWall;
-//    private final RegistryObject<Block> polishedStone;
-//    private final RegistryObject<Block> polishedSlab;
-//    private final RegistryObject<Block> polishedStairs;
+    private final RegistryObject<Block> rawSlab;
+    private final RegistryObject<Block> rawStairs;
+    private final RegistryObject<Block> rawWall;
+    private final RegistryObject<Block> cobbleSlab;
+    private final RegistryObject<Block> cobbleStairs;
+    private final RegistryObject<Block> cobbleWall;
+    private final RegistryObject<Block> polishedStone;
+    private final RegistryObject<Block> polishedSlab;
+    private final RegistryObject<Block> polishedStairs;
 
     private final Map<OreType, OreRegistry> stoneOreRegistry;
     private final Map<OreType, OreRegistry> regolithOreRegistry;
@@ -40,7 +41,7 @@ public class GeoRegistry {
     // TODO add to respective tags
     public GeoRegistry(GeologyType geoType) {
         this.geologyType = geoType;
-        this.hasCobble = geoType.hasCobble();
+        this.hasCobble = geoType.hasCobble(); // Blocks without a cobble are also not solid enough for stone-working
 
         this.baseStone = ModBlocks.registerStoneGeoBlock(geoType);
         this.regolith = hasCobble ? ModBlocks.registerRegolithGeoBlock(geoType) : null;
@@ -48,14 +49,18 @@ public class GeoRegistry {
         this.cobblestone = hasCobble ? ModBlocks.registerCobblestoneBlock(geoType) : null;
         this.rockItem = hasCobble ? ModItems.registerRockItem(geoType) : null;
 
-//        this.rawSlab = ;
-//        this.rawStairs = ;
-//        this.cobbleSlab = ;
-//        this.cobbleStairs = ;
-//        this.cobbleWall = ;
-//        this.polishedStone = ;
-//        this.polishedSlab = ;
-//        this.polishedStairs = ;
+        this.rawSlab = hasCobble ? ModBlocks.registerRawStoneSlab(geoType) : null;
+        this.rawStairs = hasCobble ? ModBlocks.registerRawStoneStairs(geoType,
+                () -> this.baseStone.get().getDefaultState()) : null;
+        this.rawWall = hasCobble ? ModBlocks.registerRawStoneWall(geoType) : null;
+        this.cobbleSlab = hasCobble ? ModBlocks.registerCobbleSlab(geoType) : null;
+        this.cobbleStairs = hasCobble ? ModBlocks.registerCobbleStairs(geoType,
+                () -> this.cobblestone.get().getDefaultState()) : null;
+        this.cobbleWall = hasCobble ? ModBlocks.registerCobbleWall(geoType) : null;
+        this.polishedStone = hasCobble ? ModBlocks.registerPolishedStoneBlock(geoType) : null;
+        this.polishedSlab = hasCobble ? ModBlocks.registerPolishedSlab(geoType) : null;
+        this.polishedStairs = hasCobble ? ModBlocks.registerPolishedStairs(geoType,
+                () -> this.polishedStone.get().getDefaultState()) : null;
 
         this.stoneOreRegistry = geoType.isInStoneGroup(StoneGroupType.DETRITUS) ?
                 fillOreRegistry(geoType, OreBlockType.DETRITUS) : fillOreRegistry(geoType, OreBlockType.STONE);
@@ -81,6 +86,16 @@ public class GeoRegistry {
     public Block getCobbles() { return cobbles.get(); }
     public Block getCobblestone() { return cobblestone.get(); }
     public Item getRockItem() { return rockItem.get(); }
+
+    public Block getRawSlab() { return this.rawSlab.get(); }
+    public Block getRawStairs() { return this.rawStairs.get(); }
+    public Block getRawWall() { return this.rawWall.get(); }
+    public Block getCobbleSlab() { return this.cobbleSlab.get(); }
+    public Block getCobbleStairs() { return this.cobbleStairs.get(); }
+    public Block getCobbleWall() { return this.cobbleWall.get(); }
+    public Block getPolishedStone() { return this.polishedStone.get(); }
+    public Block getPolishedSlab() { return this.polishedSlab.get(); }
+    public Block getPolishedStairs() { return this.polishedStairs.get(); }
 
     public Block getStoneOre(OreType oreType, GradeType gradeType) {
         if (oreType.hasOre() && gradeType.hasGrade()) {
