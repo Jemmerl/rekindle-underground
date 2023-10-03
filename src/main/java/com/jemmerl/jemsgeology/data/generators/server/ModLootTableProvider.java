@@ -75,6 +75,16 @@ public class ModLootTableProvider extends LootTableProvider {
                     registerCobblesLootTable(geoRegistry);
                     registerDropSelfLootTable(geoRegistry.getCobblestone());
 
+                    registerDropSelfLootTable(geoRegistry.getRawSlab());
+                    registerDropSelfLootTable(geoRegistry.getRawStairs());
+                    registerDropSelfLootTable(geoRegistry.getRawWall());
+                    registerDropSelfLootTable(geoRegistry.getCobbleSlab());
+                    registerDropSelfLootTable(geoRegistry.getCobbleStairs());
+                    registerDropSelfLootTable(geoRegistry.getCobbleWall());
+                    registerDropSelfLootTable(geoRegistry.getPolishedStone());
+                    registerDropSelfLootTable(geoRegistry.getPolishedSlab());
+                    registerDropSelfLootTable(geoRegistry.getPolishedStairs());
+
                     // Loot Tables for base regolith ores
                     registerRegolithOreLootTables(geoRegistry);
 

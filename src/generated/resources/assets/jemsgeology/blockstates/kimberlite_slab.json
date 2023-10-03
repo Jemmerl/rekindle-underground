@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "jemsgeology:block/kimberlite_slab_top"
+    },
+    "type=bottom": {
+      "model": "jemsgeology:block/kimberlite_slab"
+    },
+    "type=double": {
+      "model": "jemsgeology:block/kimberlite_stone"
+    }
+  }
+}

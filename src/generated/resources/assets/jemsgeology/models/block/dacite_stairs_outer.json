@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "side": "jemsgeology:block/dacite_stone",
+    "bottom": "jemsgeology:block/dacite_stone",
+    "top": "jemsgeology:block/dacite_stone"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "side": "jemsgeology:block/lamproite_cobblestone",
+    "bottom": "jemsgeology:block/lamproite_cobblestone",
+    "top": "jemsgeology:block/lamproite_cobblestone"
+  }
+}

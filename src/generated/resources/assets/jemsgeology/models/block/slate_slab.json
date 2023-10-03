@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "side": "jemsgeology:block/slate_stone",
+    "bottom": "jemsgeology:block/slate_stone",
+    "top": "jemsgeology:block/slate_stone"
+  }
+}

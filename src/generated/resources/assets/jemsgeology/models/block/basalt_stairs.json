@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "side": "jemsgeology:block/basalt_stone",
+    "bottom": "jemsgeology:block/basalt_stone",
+    "top": "jemsgeology:block/basalt_stone"
+  }
+}

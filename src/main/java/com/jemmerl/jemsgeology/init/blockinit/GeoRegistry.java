@@ -119,6 +119,7 @@ public class GeoRegistry {
 
     // THESE ARE MAINLY TO BE USED DURING INITIALIZATION AND DATA GENERATION
     // The sheer amount of items generated would be excessive during any other stage
+    // These all assume proper checks are being done to ensure no null returns for cobble-less blocks!
 
     // Get all geo-blocks (aka not including cobbles and cobblestones)
     public List<Block> getAllGeoBlocks() {
@@ -169,6 +170,19 @@ public class GeoRegistry {
     public Map<OreType, OreRegistry> getStoneOreRegistry() { return stoneOreRegistry; }
     public Map<OreType, OreRegistry> getRegolithOreRegistry() { return regolithOreRegistry; }
 
+    public List<Block> getDecorBlocks() {
+        List<Block> allDecorBlocks = new ArrayList<>();
+        allDecorBlocks.add(rawSlab.get());
+        allDecorBlocks.add(rawStairs.get());
+        allDecorBlocks.add(rawWall.get());
+        allDecorBlocks.add(cobbleSlab.get());
+        allDecorBlocks.add(cobbleStairs.get());
+        allDecorBlocks.add(cobbleWall.get());
+        allDecorBlocks.add(polishedStone.get());
+        allDecorBlocks.add(polishedSlab.get());
+        allDecorBlocks.add(polishedStairs.get());
+        return allDecorBlocks;
+    }
 
     ////////////////////////
     // Registration Utils //

@@ -8,7 +8,11 @@ import com.jemmerl.jemsgeology.init.ModBlocks;
 import com.jemmerl.jemsgeology.init.blockinit.GeoRegistry;
 import com.jemmerl.jemsgeology.util.lists.ModBlockLists;
 import net.minecraft.block.Block;
+import net.minecraft.block.SlabBlock;
+import net.minecraft.block.StairsBlock;
+import net.minecraft.block.WallBlock;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -48,6 +52,38 @@ public class ModBlockStateModelProvider extends BlockStateProvider {
                         }
                     }
                 }
+            }
+
+            // Decorative stone variants
+            if (geoRegistry.hasCobble()) {
+                ResourceLocation baseStoneRL = modLoc("block/" +
+                        Objects.requireNonNull(geoRegistry.getBaseStone().getRegistryName()).getPath());
+                ResourceLocation cobbleRL = modLoc("block/" +
+                        Objects.requireNonNull(geoRegistry.getCobblestone().getRegistryName()).getPath());
+                ResourceLocation polishedRL = modLoc("block/" +
+                        Objects.requireNonNull(geoRegistry.getPolishedStone().getRegistryName()).getPath());
+
+                slabBlock((SlabBlock) geoRegistry.getRawSlab(), baseStoneRL, baseStoneRL);
+                stairsBlock((StairsBlock) geoRegistry.getRawStairs(), baseStoneRL);
+                wallBlock((WallBlock) geoRegistry.getRawWall(), baseStoneRL);
+
+                slabBlock((SlabBlock) geoRegistry.getCobbleSlab(), cobbleRL, cobbleRL);
+                stairsBlock((StairsBlock) geoRegistry.getCobbleStairs(), cobbleRL);
+                wallBlock((WallBlock) geoRegistry.getCobbleWall(), cobbleRL);
+
+                models().withExistingParent("block/" +
+                                Objects.requireNonNull(geoRegistry.getRawWall().getRegistryName()).getPath() +
+                                "_inventory", mcLoc("block/wall_inventory"))
+                        .texture("wall", baseStoneRL);
+
+                models().withExistingParent("block/" +
+                                Objects.requireNonNull(geoRegistry.getCobbleWall().getRegistryName()).getPath() +
+                                "_inventory", mcLoc("block/wall_inventory"))
+                        .texture("wall", cobbleRL);
+
+                simpleBlock(geoRegistry.getPolishedStone());
+                slabBlock((SlabBlock) geoRegistry.getPolishedSlab(), polishedRL, polishedRL);
+                stairsBlock((StairsBlock) geoRegistry.getPolishedStairs(), polishedRL);
             }
         }
     }

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "jemsgeology:block/greisen_slab_top"
+    },
+    "type=bottom": {
+      "model": "jemsgeology:block/greisen_slab"
+    },
+    "type=double": {
+      "model": "jemsgeology:block/greisen_stone"
+    }
+  }
+}

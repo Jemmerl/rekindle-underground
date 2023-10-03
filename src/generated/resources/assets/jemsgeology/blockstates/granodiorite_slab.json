@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "jemsgeology:block/granodiorite_slab_top"
+    },
+    "type=bottom": {
+      "model": "jemsgeology:block/granodiorite_slab"
+    },
+    "type=double": {
+      "model": "jemsgeology:block/granodiorite_stone"
+    }
+  }
+}

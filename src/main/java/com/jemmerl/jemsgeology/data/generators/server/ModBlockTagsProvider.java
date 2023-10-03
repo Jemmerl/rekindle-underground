@@ -9,6 +9,9 @@ import com.jemmerl.jemsgeology.init.blockinit.OreRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.Tag;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nullable;
@@ -38,6 +41,8 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         Builder<Block> tagBuilderOreLow = this.getOrCreateBuilder(ModTags.Blocks.JEMSGEO_ORE_LOW);
         Builder<Block> tagBuilderOreAll = this.getOrCreateBuilder(ModTags.Blocks.JEMSGEO_ORE);
         Builder<Block> tagBuilderNoOre = this.getOrCreateBuilder(ModTags.Blocks.JEMSGEO_NO_ORE);
+
+        Builder<Block> tagVanillaWalls = this.getOrCreateBuilder(BlockTags.WALLS);
 
         for (GeoRegistry geoRegistry: ModBlocks.GEOBLOCKS.values()) {
             boolean isDetritus = geoRegistry.getGeoType().isInStoneGroup(StoneGroupType.DETRITUS);
@@ -89,6 +94,9 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                     tagBuilderGeoRegolith.add(midGrade);
                     tagBuilderGeoRegolith.add(lowGrade);
                 }
+
+                tagVanillaWalls.add(geoRegistry.getCobbleWall());
+                tagVanillaWalls.add(geoRegistry.getRawWall());
             }
         }
 

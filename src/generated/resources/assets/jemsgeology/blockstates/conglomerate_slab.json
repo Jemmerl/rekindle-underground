@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "jemsgeology:block/conglomerate_slab_top"
+    },
+    "type=bottom": {
+      "model": "jemsgeology:block/conglomerate_slab"
+    },
+    "type=double": {
+      "model": "jemsgeology:block/conglomerate_stone"
+    }
+  }
+}

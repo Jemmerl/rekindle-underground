@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "side": "jemsgeology:block/lamproite_stone",
+    "bottom": "jemsgeology:block/lamproite_stone",
+    "top": "jemsgeology:block/lamproite_stone"
+  }
+}

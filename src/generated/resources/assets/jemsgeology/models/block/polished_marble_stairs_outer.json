@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "side": "jemsgeology:block/polished_marble_stone",
+    "bottom": "jemsgeology:block/polished_marble_stone",
+    "top": "jemsgeology:block/polished_marble_stone"
+  }
+}

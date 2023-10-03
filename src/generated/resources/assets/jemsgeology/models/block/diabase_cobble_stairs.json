@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "side": "jemsgeology:block/diabase_cobblestone",
+    "bottom": "jemsgeology:block/diabase_cobblestone",
+    "top": "jemsgeology:block/diabase_cobblestone"
+  }
+}

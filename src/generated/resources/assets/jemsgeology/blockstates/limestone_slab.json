@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "jemsgeology:block/limestone_slab_top"
+    },
+    "type=bottom": {
+      "model": "jemsgeology:block/limestone_slab"
+    },
+    "type=double": {
+      "model": "jemsgeology:block/limestone_stone"
+    }
+  }
+}

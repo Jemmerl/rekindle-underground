@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "side": "jemsgeology:block/schist_cobblestone",
+    "bottom": "jemsgeology:block/schist_cobblestone",
+    "top": "jemsgeology:block/schist_cobblestone"
+  }
+}

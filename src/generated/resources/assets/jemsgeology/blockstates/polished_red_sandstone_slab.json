@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "jemsgeology:block/polished_red_sandstone_slab_top"
+    },
+    "type=bottom": {
+      "model": "jemsgeology:block/polished_red_sandstone_slab"
+    },
+    "type=double": {
+      "model": "jemsgeology:block/polished_red_sandstone_stone"
+    }
+  }
+}

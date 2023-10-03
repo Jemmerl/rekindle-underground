@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "side": "jemsgeology:block/polished_claystone_stone",
+    "bottom": "jemsgeology:block/polished_claystone_stone",
+    "top": "jemsgeology:block/polished_claystone_stone"
+  }
+}

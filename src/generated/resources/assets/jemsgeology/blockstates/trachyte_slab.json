@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "jemsgeology:block/trachyte_slab_top"
+    },
+    "type=bottom": {
+      "model": "jemsgeology:block/trachyte_slab"
+    },
+    "type=double": {
+      "model": "jemsgeology:block/trachyte_stone"
+    }
+  }
+}

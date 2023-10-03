@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "side": "jemsgeology:block/metaconglomerate_cobblestone",
+    "bottom": "jemsgeology:block/metaconglomerate_cobblestone",
+    "top": "jemsgeology:block/metaconglomerate_cobblestone"
+  }
+}

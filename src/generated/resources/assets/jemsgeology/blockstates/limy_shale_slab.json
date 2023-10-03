@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "jemsgeology:block/limy_shale_slab_top"
+    },
+    "type=bottom": {
+      "model": "jemsgeology:block/limy_shale_slab"
+    },
+    "type=double": {
+      "model": "jemsgeology:block/limy_shale_stone"
+    }
+  }
+}

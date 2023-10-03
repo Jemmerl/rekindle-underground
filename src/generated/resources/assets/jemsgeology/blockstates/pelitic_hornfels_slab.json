@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "jemsgeology:block/pelitic_hornfels_slab_top"
+    },
+    "type=bottom": {
+      "model": "jemsgeology:block/pelitic_hornfels_slab"
+    },
+    "type=double": {
+      "model": "jemsgeology:block/pelitic_hornfels_stone"
+    }
+  }
+}

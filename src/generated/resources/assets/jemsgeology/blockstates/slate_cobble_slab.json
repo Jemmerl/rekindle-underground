@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "jemsgeology:block/slate_cobble_slab_top"
+    },
+    "type=bottom": {
+      "model": "jemsgeology:block/slate_cobble_slab"
+    },
+    "type=double": {
+      "model": "jemsgeology:block/slate_cobblestone"
+    }
+  }
+}

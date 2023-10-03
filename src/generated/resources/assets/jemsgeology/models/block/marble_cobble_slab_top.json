@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "side": "jemsgeology:block/marble_cobblestone",
+    "bottom": "jemsgeology:block/marble_cobblestone",
+    "top": "jemsgeology:block/marble_cobblestone"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "side": "jemsgeology:block/rhyolite_cobblestone",
+    "bottom": "jemsgeology:block/rhyolite_cobblestone",
+    "top": "jemsgeology:block/rhyolite_cobblestone"
+  }
+}

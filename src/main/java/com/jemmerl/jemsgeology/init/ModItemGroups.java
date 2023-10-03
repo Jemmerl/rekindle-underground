@@ -18,7 +18,7 @@ public class ModItemGroups {
     public static final ItemGroup JEMSGEO_DECOR_STONE_GROUP = new ItemGroup("jemsgeo_decor_stones_tab") {
         @Override
         public ItemStack createIcon() {
-            return ModBlocks.GEOBLOCKS.get(GeologyType.BASALT).getBaseStone().asItem().getDefaultInstance();
+            return ModBlocks.GEOBLOCKS.get(GeologyType.BASALT).getRawStairs().asItem().getDefaultInstance();
         }
     };
 
