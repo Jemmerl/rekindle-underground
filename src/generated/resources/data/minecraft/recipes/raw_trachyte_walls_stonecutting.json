@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "jemsgeology:trachyte_stone"
+  },
+  "result": "jemsgeology:trachyte_wall",
+  "count": 2
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "jemsgeology:diabase_stone"
+  },
+  "result": "jemsgeology:diabase_slab",
+  "count": 2
+}

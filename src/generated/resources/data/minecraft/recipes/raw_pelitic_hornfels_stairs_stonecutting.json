@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "jemsgeology:pelitic_hornfels_stone"
+  },
+  "result": "jemsgeology:pelitic_hornfels_stairs",
+  "count": 1
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "jemsgeology:metaconglomerate_stone"
+  },
+  "result": "jemsgeology:metaconglomerate_stairs",
+  "count": 1
+}

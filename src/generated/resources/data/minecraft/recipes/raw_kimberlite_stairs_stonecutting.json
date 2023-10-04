@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "jemsgeology:kimberlite_stone"
+  },
+  "result": "jemsgeology:kimberlite_stairs",
+  "count": 1
+}

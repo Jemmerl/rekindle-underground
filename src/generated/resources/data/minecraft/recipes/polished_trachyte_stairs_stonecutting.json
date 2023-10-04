@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "jemsgeology:polished_trachyte_stone"
+  },
+  "result": "jemsgeology:polished_trachyte_stairs",
+  "count": 1
+}

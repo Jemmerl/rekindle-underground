@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "jemsgeology:arkose_stone"
+  },
+  "result": "jemsgeology:arkose_slab",
+  "count": 2
+}

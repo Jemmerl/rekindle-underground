@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "jemsgeology:basalt_stone"
+  },
+  "result": "jemsgeology:polished_basalt_stone",
+  "count": 1
+}

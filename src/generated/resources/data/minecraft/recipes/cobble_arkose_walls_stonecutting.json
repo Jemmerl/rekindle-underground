@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "jemsgeology:arkose_cobblestone"
+  },
+  "result": "jemsgeology:arkose_cobble_wall",
+  "count": 2
+}

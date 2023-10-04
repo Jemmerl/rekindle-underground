@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "jemsgeology:diorite_stone"
+  },
+  "result": "jemsgeology:polished_diorite_stone",
+  "count": 1
+}

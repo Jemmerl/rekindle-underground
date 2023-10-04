@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "jemsgeology:dolostone_cobblestone"
+  },
+  "result": "jemsgeology:dolostone_cobble_stairs",
+  "count": 1
+}

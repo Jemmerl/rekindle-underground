@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "jemsgeology:quartzite_stone"
+  },
+  "result": "jemsgeology:polished_quartzite_stone",
+  "count": 1
+}

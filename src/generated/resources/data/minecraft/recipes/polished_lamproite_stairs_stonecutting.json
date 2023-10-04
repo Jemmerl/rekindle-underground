@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "jemsgeology:polished_lamproite_stone"
+  },
+  "result": "jemsgeology:polished_lamproite_stairs",
+  "count": 1
+}

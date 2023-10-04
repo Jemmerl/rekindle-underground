@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "jemsgeology:slate_stone"
+  },
+  "result": "jemsgeology:slate_stairs",
+  "count": 1
+}

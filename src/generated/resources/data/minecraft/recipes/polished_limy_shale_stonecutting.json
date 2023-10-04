@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "jemsgeology:limy_shale_stone"
+  },
+  "result": "jemsgeology:polished_limy_shale_stone",
+  "count": 1
+}

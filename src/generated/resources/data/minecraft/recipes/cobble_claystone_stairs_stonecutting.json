@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "jemsgeology:claystone_cobblestone"
+  },
+  "result": "jemsgeology:claystone_cobble_stairs",
+  "count": 1
+}

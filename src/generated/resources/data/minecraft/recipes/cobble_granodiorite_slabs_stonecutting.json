@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "jemsgeology:granodiorite_cobblestone"
+  },
+  "result": "jemsgeology:granodiorite_cobble_slab",
+  "count": 2
+}

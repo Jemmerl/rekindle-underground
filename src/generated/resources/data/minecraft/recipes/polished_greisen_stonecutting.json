@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "jemsgeology:greisen_stone"
+  },
+  "result": "jemsgeology:polished_greisen_stone",
+  "count": 1
+}

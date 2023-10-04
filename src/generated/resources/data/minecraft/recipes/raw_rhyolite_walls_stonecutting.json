@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "jemsgeology:rhyolite_stone"
+  },
+  "result": "jemsgeology:rhyolite_wall",
+  "count": 2
+}

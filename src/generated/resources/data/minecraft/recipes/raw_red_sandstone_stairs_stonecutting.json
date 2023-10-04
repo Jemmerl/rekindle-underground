@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "jemsgeology:red_sandstone_stone"
+  },
+  "result": "jemsgeology:red_sandstone_stairs",
+  "count": 1
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "jemsgeology:greywacke_cobblestone"
+  },
+  "result": "jemsgeology:greywacke_cobble_slab",
+  "count": 2
+}

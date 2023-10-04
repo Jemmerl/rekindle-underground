@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "jemsgeology:mafic_hornfels_stone"
+  },
+  "result": "jemsgeology:mafic_hornfels_slab",
+  "count": 2
+}

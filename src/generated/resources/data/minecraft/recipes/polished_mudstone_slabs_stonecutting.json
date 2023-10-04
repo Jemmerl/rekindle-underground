@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "jemsgeology:polished_mudstone_stone"
+  },
+  "result": "jemsgeology:polished_mudstone_slab",
+  "count": 2
+}

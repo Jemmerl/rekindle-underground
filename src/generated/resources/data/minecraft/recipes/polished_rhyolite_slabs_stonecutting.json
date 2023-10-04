@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "jemsgeology:polished_rhyolite_stone"
+  },
+  "result": "jemsgeology:polished_rhyolite_slab",
+  "count": 2
+}

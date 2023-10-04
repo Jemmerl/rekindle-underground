@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "jemsgeology:basalt_cobblestone"
+  },
+  "result": "jemsgeology:basalt_cobble_slab",
+  "count": 2
+}

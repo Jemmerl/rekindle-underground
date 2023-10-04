@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "jemsgeology:polished_dacite_stone"
+  },
+  "result": "jemsgeology:polished_dacite_slab",
+  "count": 2
+}

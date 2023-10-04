@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "jemsgeology:granite_cobblestone"
+  },
+  "result": "jemsgeology:granite_cobble_wall",
+  "count": 2
+}
