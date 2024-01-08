@@ -48,7 +48,7 @@ public class ServerConfig {
         private static final boolean DISABLE_SILVERFISH = true; // Disable vanilla silverfish stone (overridden, kept for debug)
 
         // Debug options
-        private static final boolean DEBUG_DIATREME_MAAR = false;
+        private static final boolean DEBUG_DIATREME_MAAR = true;
         private static final boolean DEBUG_BOULDERS = false;
         private static final boolean DEBUG_BATHOLITHS = false;
         private static final boolean DEBUG_TEST_GENFEATURES = true;
@@ -57,7 +57,7 @@ public class ServerConfig {
         private static final boolean DEBUG_DEPOSIT_READER = false;
         private static final boolean DEBUG_LAYER_DEPOSITS = false;
         private static final boolean DEBUG_PLACER_DEPOSITS = false;
-        private static final boolean DEBUG_BLOCK_ENQUEUER = false;
+        private static final boolean DEBUG_BLOCK_ENQUEUER = true;
         private static final boolean DEBUG_VANILLA_FEATURES = false;
 
         // TODO make placers and maar spawn in every chunk in registry, let config determine internal chance

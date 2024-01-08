@@ -125,22 +125,6 @@ public enum GeologyType {
     }
 
 
-    ////////////////////
-    // STATIC METHODS //
-    ////////////////////
-
-    // Get all the stone types for the supplied group
-    public static EnumSet<GeologyType> getAllInGroup(StoneGroupType group) {
-        EnumSet<GeologyType> enumSet = EnumSet.noneOf(GeologyType.class);
-        for (GeologyType geoType : GeologyType.values()) {
-            if (geoType.getGroup().equals(group)) {
-                enumSet.add(geoType);
-            }
-        }
-        return enumSet;
-    }
-
-
     ///////////
     // LISTS //
     ///////////
@@ -156,5 +140,51 @@ public enum GeologyType {
             GeologyType.RED_SAND,
             GeologyType.GRAVEL
     );
+
+
+    ////////////////////
+    // STATIC METHODS //
+    ////////////////////
+
+    // Get all the stone types for the supplied group
+    public static EnumSet<GeologyType> getAllInGroup(StoneGroupType group) {
+        EnumSet<GeologyType> enumSet = EnumSet.noneOf(GeologyType.class);
+        for (GeologyType geoType : GeologyType.values()) {
+            if (geoType.getGroup().equals(group)) {
+                enumSet.add(geoType);
+            }
+        }
+        return enumSet;
+    }
+
+    // Gets the appropriate tuff for a specific igneous block
+    public static GeologyType getTuff(GeologyType geologyType) {
+        switch (geologyType) {
+            case RHYOLITE:
+            case GRANITE:
+                return GeologyType.RHYOLITIC_TUFF;
+
+            case TRACHYTE:
+                //case SYENITE:
+                return GeologyType.TRACHYTIC_TUFF;
+
+            case DACITE:
+            case GRANODIORITE:
+            case ANDESITE:
+            case DIORITE:
+                return GeologyType.ANDESITIC_TUFF;
+
+            case BASALT:
+            case PAHOEHOE:
+            case GABBRO:
+            case DIABASE:
+                return GeologyType.BASALTIC_TUFF;
+
+            case KIMBERLITE:
+            case LAMPROITE:
+            default:
+                return GeologyType.ULTRAMAFIC_TUFF;
+        }
+    }
 
 }

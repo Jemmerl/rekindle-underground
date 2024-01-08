@@ -13,8 +13,6 @@ import com.jemmerl.jemsgeology.init.NoiseInit;
 import com.jemmerl.jemsgeology.util.UtilMethods;
 import com.jemmerl.jemsgeology.util.WeightedProbMap;
 import com.jemmerl.jemsgeology.util.noise.GenerationNoise.BlobWarpNoise;
-import com.jemmerl.jemsgeology.world.capability.chunk.IChunkGennedCapability;
-import com.jemmerl.jemsgeology.world.capability.deposit.IDepositCapability;
 import com.jemmerl.jemsgeology.geology.ChunkReader;
 import com.jemmerl.jemsgeology.geology.GeoMapBuilder;
 import net.minecraft.block.Blocks;
@@ -117,8 +115,7 @@ public class LayerEnqueuedDeposit implements IEnqueuedDeposit {
     //////////////////////////
 
     @Override
-    public boolean generate(ChunkReader reader, Random rand, BlockPos pos, GeoMapBuilder geoMapBuilder,
-                            IDepositCapability depositCapability, IChunkGennedCapability chunkGennedCapability) {
+    public boolean generate(ChunkReader reader, Random rand, BlockPos pos, GeoMapBuilder geoMapBuilder) {
 
         // Constants
         final int VARIANCE = 9; // The max +/- blocks radius variation
@@ -231,8 +228,8 @@ public class LayerEnqueuedDeposit implements IEnqueuedDeposit {
                 // Generate the ore block if within the radius and rolls a success against the density percent
                 if ((rand.nextFloat() < adjDensityPercent) &&
                         (UtilMethods.getDistance2D(areaPos.getX(), areaPos.getZ(), centerPos.getX(), centerPos.getZ()) <= radius)) {
-                    DepositUtil.enqueueBlockPlacement(reader.getSeedReader(), areaPos, this.ores.nextElt(), grade,
-                            this.name, pos, geoMapBuilder, depositCapability, chunkGennedCapability);
+                    DepositUtil.processGeoMapEnqueue(reader.getSeedReader(), areaPos, this.ores.nextElt(), grade,
+                            this.name, pos, geoMapBuilder);
                 }
             }
             layerHeightCount++;

@@ -10,14 +10,16 @@ public class DepositRegistrar {
     private static HashMap<String, IEnqueuedDeposit> oreDeposits;
     private static HashMap<String, PlacerDeposit> placerDeposits;
     private static HashMap<String, ConstantScatterDeposit> constScatterDeposits;
+    private static HashMap<String, IEnqueuedDeposit> utilDeposits;
 
     public DepositRegistrar() {
-        oreDeposits = new HashMap<>(); // Holds all enqueued deposits
+        oreDeposits = new HashMap<>();
         placerDeposits = new HashMap<>();
         constScatterDeposits = new HashMap<>();
+        utilDeposits = new HashMap<>();
     }
 
-    public void addOreDeposit(String nameKey, IEnqueuedDeposit deposit) {
+    public void addEnqueuedDeposit(String nameKey, IEnqueuedDeposit deposit) {
         oreDeposits.put(nameKey, deposit);
     }
 
@@ -29,20 +31,20 @@ public class DepositRegistrar {
         constScatterDeposits.put(nameKey, constScatterDeposit);
     }
 
-    public static HashMap<String, IEnqueuedDeposit> getOreDeposits() {
-        return oreDeposits;
+    public void addUtilDeposit(String nameKey, IEnqueuedDeposit utilDeposit) {
+        utilDeposits.put(nameKey, utilDeposit);
     }
-    public static HashMap<String, PlacerDeposit> getPlacerDeposits() {
-        return placerDeposits;
-    }
-    public static HashMap<String, ConstantScatterDeposit> getConstScatterDeposits() {
-        return constScatterDeposits;
-    }
+
+    public static HashMap<String, IEnqueuedDeposit> getEnqOreDeposits() { return oreDeposits; }
+    public static HashMap<String, PlacerDeposit> getPlacerDeposits() { return placerDeposits; }
+    public static HashMap<String, ConstantScatterDeposit> getConstScatterDeposits() { return constScatterDeposits; }
+    public static HashMap<String, IEnqueuedDeposit> getUtilDeposits() { return utilDeposits; }
 
     public void clearDeposits() {
         oreDeposits.clear();
         placerDeposits.clear();
         constScatterDeposits.clear();
+        utilDeposits.clear();
     }
 
 }

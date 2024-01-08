@@ -140,25 +140,11 @@ public class UtilMethods {
     // Check a block's type for evaluating its replaceability
     public static ReplaceableStatus replaceableStatus(BlockState blockState) {
         Block replaced = blockState.getBlock();
-
-        if (isOreBlockStone(replaced)) {
-            return ReplaceableStatus.GEOBLOCK_STONE;
-        }
-
-        if (isVanillaStone(replaced)) {
-            return ReplaceableStatus.VANILLA_STONE;
-        }
-
-        if (isOreBlockDetritus(replaced)) {
-            return ReplaceableStatus.OREBLOCK_DETRITUS;
-        }
-
-        if (isVanillaDetritus(replaced)) {
-            return ReplaceableStatus.VANILLA_DETRITUS;
-        }
-
-        // If not any stone or detritus,
-        return ReplaceableStatus.FAILED;
+        if (isOreBlockStone(replaced)) { return ReplaceableStatus.GEOBLOCK_STONE; }
+        if (isVanillaStone(replaced)) { return ReplaceableStatus.VANILLA_STONE; }
+        if (isOreBlockDetritus(replaced)) { return ReplaceableStatus.OREBLOCK_DETRITUS; }
+        if (isVanillaDetritus(replaced)) { return ReplaceableStatus.VANILLA_DETRITUS; }
+        return ReplaceableStatus.FAILED; // If not any stone or detritus,
     }
 
     // Rotate a face in a relative direction :)
@@ -217,4 +203,5 @@ public class UtilMethods {
                 return pos;
         }
     }
+
 }

@@ -1,7 +1,5 @@
 package com.jemmerl.jemsgeology.geology.deposits;
 
-import com.jemmerl.jemsgeology.world.capability.chunk.IChunkGennedCapability;
-import com.jemmerl.jemsgeology.world.capability.deposit.IDepositCapability;
 import com.jemmerl.jemsgeology.geology.ChunkReader;
 import com.jemmerl.jemsgeology.geology.GeoMapBuilder;
 import net.minecraft.util.math.BlockPos;
@@ -10,8 +8,7 @@ import java.util.Random;
 
 public interface IEnqueuedDeposit extends IDeposit {
 
-    boolean generate(ChunkReader reader, Random rand, BlockPos pos, GeoMapBuilder geoMapBuilder,
-                     IDepositCapability depositCapability, IChunkGennedCapability chunkGennedCapability);
+    boolean generate(ChunkReader reader, Random rand, BlockPos pos, GeoMapBuilder geoMapBuilder);
 
 }
 
@@ -19,7 +16,7 @@ public interface IEnqueuedDeposit extends IDeposit {
 
 /*
 Shapes:
- disk to blobby-disk (ala diatrememaar)
+ disk to blobby-disk
  LIKE: coals
  - can be layered over top of eachother
 

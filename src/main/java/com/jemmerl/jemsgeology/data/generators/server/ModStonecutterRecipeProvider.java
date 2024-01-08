@@ -1,22 +1,16 @@
 package com.jemmerl.jemsgeology.data.generators.server;
 
-import com.jemmerl.jemsgeology.data.enums.GeologyType;
 import com.jemmerl.jemsgeology.init.ModBlocks;
 import com.jemmerl.jemsgeology.init.ModTags;
 import com.jemmerl.jemsgeology.init.blockinit.GeoRegistry;
-import net.minecraft.advancements.criterion.BlockPredicate;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.data.RecipeProvider;
 import net.minecraft.data.SingleItemRecipeBuilder;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.item.crafting.StonecuttingRecipe;
-import net.minecraft.util.IItemProvider;
-import net.minecraftforge.fml.RegistryObject;
 
 import java.util.function.Consumer;
 

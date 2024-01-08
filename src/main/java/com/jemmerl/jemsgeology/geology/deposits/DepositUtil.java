@@ -4,10 +4,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.jemmerl.jemsgeology.JemsGeology;
 import com.jemmerl.jemsgeology.blocks.IGeoBlock;
-import com.jemmerl.jemsgeology.blocks.StoneGeoBlock;
 import com.jemmerl.jemsgeology.data.enums.*;
 import com.jemmerl.jemsgeology.data.enums.ore.GradeType;
-import com.jemmerl.jemsgeology.data.enums.ore.OreBlockType;
 import com.jemmerl.jemsgeology.data.enums.ore.OreType;
 import com.jemmerl.jemsgeology.geology.GeoWrapper;
 import com.jemmerl.jemsgeology.init.JemsGeoConfig;
@@ -17,7 +15,9 @@ import com.jemmerl.jemsgeology.init.depositinit.DepositRegistrar;
 import com.jemmerl.jemsgeology.util.Pair;
 import com.jemmerl.jemsgeology.util.UtilMethods;
 import com.jemmerl.jemsgeology.util.WeightedProbMap;
+import com.jemmerl.jemsgeology.world.capability.chunk.ChunkGennedCapability;
 import com.jemmerl.jemsgeology.world.capability.chunk.IChunkGennedCapability;
+import com.jemmerl.jemsgeology.world.capability.deposit.DepositCapability;
 import com.jemmerl.jemsgeology.world.capability.deposit.IDepositCapability;
 import com.jemmerl.jemsgeology.geology.GeoMapBuilder;
 import net.minecraft.block.Block;
@@ -36,6 +36,8 @@ import java.util.*;
 
 public class DepositUtil {
 
+    private static IDepositCapability depCap;
+    private static IChunkGennedCapability cgCap;
 
     ///////////////////
     // General Utils //
@@ -220,31 +222,50 @@ public class DepositUtil {
     // Generation Utils //
     //////////////////////
 
-    // Process the enqueued blocks for a chunk
-    public static boolean enqueueBlockPlacement(ISeedReader level, BlockPos qPos, OreType qType, GradeType qGrade,
-                                                String qName, BlockPos genPos, GeoMapBuilder geoMapBuilder,
-                                                IDepositCapability depCap, @Nullable IChunkGennedCapability cgCap) {
+    // Process the Geo-Map enqueued ore blocks for a chunk
+    public static boolean processGeoMapEnqueue(ISeedReader reader, BlockPos qPos, OreType qType, GradeType qGrade,
+                                               String qName, BlockPos cornerPos, GeoMapBuilder geoMapBuilder) {
+
+        if (depCap == null) {
+            depCap = reader.getWorld().getCapability(DepositCapability.JEMGEO_DEPOSIT_CAPABILITY)
+                    .orElseThrow(() -> new RuntimeException("JemsGeo deposit capability is null..."));
+        }
+
+        if (cgCap == null) {
+            cgCap = reader.getWorld().getCapability(ChunkGennedCapability.JEMGEO_CHUNK_GEN_CAPABILITY)
+                    .orElseThrow(() -> new RuntimeException("JemsGeo chunk gen capability is null..."));
+        }
 
         GeoWrapper[][][] geoWrapperMap = geoMapBuilder.getGeoWrapperMap();
 
-        // genPos and genChunk are the corner BlockPos and ChunkPos that the statemap is being generated for
-        ChunkPos genChunk = new ChunkPos(genPos);
+        ChunkPos genChunk = new ChunkPos(cornerPos); // Current generating corner and respective chunk
+        ChunkPos qChunk = new ChunkPos(qPos); // Enqueued block and chunk positions
+        IDeposit qDeposit = DepositRegistrar.getEnqOreDeposits()
+                .getOrDefault(qName, DepositRegistrar.getUtilDeposits().get(qName)); // Get the enqueued deposit
 
-        // qPos and qChuck are the specific block position and respective chunk of the enqueued placement
-        ChunkPos qChunk = new ChunkPos(qPos);
+        System.out.println(qDeposit.getName());
+        System.out.println(qPos);
+        System.out.println(qType.name());
 
-        // qName is the name of the deposit type being enqueued from, with qDeposit being that deposit instance
-        IEnqueuedDeposit qDeposit = DepositRegistrar.getOreDeposits().get(qName);
+        if (qDeposit == null) {
+            // Debug
+            if (JemsGeoConfig.SERVER.debug_block_enqueuer.get()){
+                JemsGeology.getInstance().LOGGER.warn(("Block enqueuer unable to load deposit with name: {}"), qName);
+            }
+            return false;
+        }
 
         // If the enqueued chunk is the current generating chunk, attempt to place into the statemap
         if (qChunk.equals(genChunk)) {
+            System.out.println("is gen chunk");
             // Check if the block is placing in a valid deposit biome
-            if (!qDeposit.getBiomes().contains(level.getBiome(qPos).getCategory())) {
+            if (!qDeposit.getBiomes().contains(reader.getBiome(qPos).getCategory())) {
+                System.out.println("bad biome");
                 return false;
             }
 
-            int xIndex = Math.abs(qPos.getX() - genPos.getX());
-            int zIndex = Math.abs(qPos.getZ() - genPos.getZ());
+            int xIndex = Math.abs(qPos.getX() - cornerPos.getX());
+            int zIndex = Math.abs(qPos.getZ() - cornerPos.getZ());
             try {
                 GeologyType geologyType = geoWrapperMap[xIndex][qPos.getY()][zIndex].getGeologyType();
                 if (isValidStone(geologyType, qDeposit.getValid())) {
@@ -260,43 +281,62 @@ public class DepositUtil {
                 }
                 return false;
             }
-
             // If this statement reaches here, the block was not a valid placement stone or something has gone very wrong...
+            System.out.println("invalid stone");
             return false;
         }
 
+        // Otherwise, process already or not yet generated chunks
+        System.out.println("did an ore already " + qPos);
+        return processOreEnqueue(reader, qPos, qType, qGrade, qDeposit);
+    }
+
+
+    // Process an enqueued ore block for an already or not yet generated chunk
+    public static boolean processOreEnqueue(ISeedReader reader, BlockPos qPos, OreType qType, GradeType qGrade, IDeposit qDeposit) {
+
+        if (depCap == null) {
+            depCap = reader.getWorld().getCapability(DepositCapability.JEMGEO_DEPOSIT_CAPABILITY)
+                    .orElseThrow(() -> new RuntimeException("JemsGeo deposit capability is null..."));
+        }
+
+        if (cgCap == null) {
+            cgCap = reader.getWorld().getCapability(ChunkGennedCapability.JEMGEO_CHUNK_GEN_CAPABILITY)
+                    .orElseThrow(() -> new RuntimeException("JemsGeo chunk gen capability is null..."));
+        }
+
         // If not in the currently generating chunk, and the enqueued chunk has generated, try to force placement
-        if (cgCap != null) {
-            if (cgCap.hasChunkGenerated(qChunk)) {
-                // Check if the block is placing in a valid deposit biome
-                if (!qDeposit.getBiomes().contains(level.getBiome(qPos).getCategory())) {
-                    return false;
-                }
-
-                BlockState state = level.getBlockState(qPos);
-                state = UtilMethods.convertVanillaToDetritus(state); // Convert vanilla detritus to respective OreBlocks for comparison
-                Block hostBlock = state.getBlock();
-                if (isValidStone(hostBlock, qDeposit.getValid())) {
-                    GeoRegistry geoRegistry = ModBlocks.GEOBLOCKS.get(((IGeoBlock) hostBlock).getGeologyType());
-                    Block placeBlock = (UtilMethods.isRegolith(hostBlock)) ?
-                            geoRegistry.getRegolithOre(qType, qGrade) : geoRegistry.getStoneOre(qType, qGrade);
-
-                    if (!level.setBlockState(qPos, placeBlock.getDefaultState(), 2 | 16)) {
-                        // Debug
-                        if (JemsGeoConfig.SERVER.debug_block_enqueuer.get()){
-                            JemsGeology.getInstance().LOGGER.warn("Somehow {} could not be placed at {} even though chunk has generated",
-                                    state.getBlock().getRegistryName(), qPos);
-                        }
-                        return false;
-                    }
-                }
-                return true;
-            } else {
-                depCap.putPendingOre(new BlockPos(qPos), qType, qGrade, qName);
+        ChunkPos qChunk = new ChunkPos(qPos);
+        if (cgCap.hasChunkGenerated(qChunk)) {
+            System.out.println("chunk genned");
+            // Check if the block is placing in a valid deposit biome
+            if (!qDeposit.getBiomes().contains(reader.getBiome(qPos).getCategory())) {
                 return false;
             }
+
+            BlockState state = reader.getBlockState(qPos);
+            state = UtilMethods.convertVanillaToDetritus(state); // Convert vanilla detritus to respective OreBlocks for comparison
+            Block hostBlock = state.getBlock();
+            if (isValidStone(hostBlock, qDeposit.getValid())) {
+                GeoRegistry geoRegistry = ModBlocks.GEOBLOCKS.get(((IGeoBlock) hostBlock).getGeologyType());
+                Block placeBlock = (UtilMethods.isRegolith(hostBlock)) ?
+                        geoRegistry.getRegolithOre(qType, qGrade) : geoRegistry.getStoneOre(qType, qGrade);
+
+                if (!reader.setBlockState(qPos, placeBlock.getDefaultState(), 2 | 16)) {
+                    // Debug
+                    if (JemsGeoConfig.SERVER.debug_block_enqueuer.get()){
+                        JemsGeology.getInstance().LOGGER.warn("Somehow {} could not be placed at {} even though chunk has generated",
+                                state.getBlock().getRegistryName(), qPos);
+                    }
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            System.out.println("else");
+            depCap.putPendingOre(new BlockPos(qPos), qType, qGrade, qDeposit.getName());
+            return false;
         }
-        return false;
     }
 
 

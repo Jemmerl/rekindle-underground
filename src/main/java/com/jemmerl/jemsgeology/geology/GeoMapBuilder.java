@@ -25,7 +25,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class GeoMapBuilder {
 
     private final ChunkReader chunkReader;
-    private final BlockPos blockPos; // Starting position of this chunk's generation
+    private final BlockPos cornerPos; // Starting position of this chunk's generation
     private final Random rand;
     private final GeoWrapper[][][] geoWrapperMap; // Positional map of stone blockstates to be generated
     private final IDepositCapability depositCapability;
@@ -33,7 +33,7 @@ public class GeoMapBuilder {
 
     public GeoMapBuilder(ChunkReader reader, BlockPos pos, Random rand) {
         this.chunkReader = reader;
-        this.blockPos = pos;
+        this.cornerPos = pos;
         this.rand = rand;
         this.geoWrapperMap = new GeoWrapper[16][this.chunkReader.getMaxHeight()][16];
 
@@ -59,7 +59,7 @@ public class GeoMapBuilder {
         PopulateOres();
 
         // Mark that this chunk was generated
-        this.chunkGennedCapability.setChunkGenerated(this.chunkReader.getSeedReader().getChunk(this.blockPos).getPos());
+        this.chunkGennedCapability.setChunkGenerated(this.chunkReader.getSeedReader().getChunk(this.cornerPos).getPos());
     }
 
     /////////////////////////////////////////////////
@@ -106,8 +106,8 @@ public class GeoMapBuilder {
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
                 for (int y = 0; y < this.chunkReader.getMaxHeight(); y++) {
-                    int posX = this.blockPos.getX() + x;
-                    int posZ = this.blockPos.getZ() + z;
+                    int posX = this.cornerPos.getX() + x;
+                    int posZ = this.cornerPos.getZ() + z;
 
                     this.geoWrapperMap[x][y][z] = VolcanicRegionBuilder.getVolcanicBlock(posX, y, posZ,
                             chunkReader.getSeedReader());
@@ -122,8 +122,8 @@ public class GeoMapBuilder {
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
                 for (int y = 0; y < this.chunkReader.getMaxHeight(); y++) {
-                    int posX = this.blockPos.getX() + x;
-                    int posZ = this.blockPos.getZ() + z;
+                    int posX = this.cornerPos.getX() + x;
+                    int posZ = this.cornerPos.getZ() + z;
 
                     GeoWrapper ignBlock = this.geoWrapperMap[x][y][z];
                     GeologyType geologyType = ignBlock.getGeologyType();
@@ -148,11 +148,13 @@ public class GeoMapBuilder {
     // Populate ore deposits
     public void PopulateOres() {
 
+        // TODO Move to its own feature, run last?
+
         // Fill the oremap with (or attempt to place) any previously pending blocks
         // Method adapted from Geolosys (oitsjustjose)
         // https://github.com/oitsjustjose/Geolosys/tree/a8e2ba469a2627bfee862f5d8b99774cc1b5981c
         ISeedReader reader = this.chunkReader.getSeedReader();
-        ChunkPos cp = new ChunkPos(this.blockPos);
+        ChunkPos cp = new ChunkPos(this.cornerPos);
         ConcurrentLinkedQueue<DepositCapability.PendingBlock> queue = depositCapability.getPendingBlocks(cp);
 
         // Debug
@@ -167,20 +169,20 @@ public class GeoMapBuilder {
             }
         }
 
-        queue.stream().forEach(x -> DepositUtil.enqueueBlockPlacement(reader, x.getPos(), x.getOre(), x.getGrade(),
-                x.getName(), this.blockPos, this, this.depositCapability, this.chunkGennedCapability));
+        queue.stream().forEach(x -> DepositUtil.processGeoMapEnqueue(reader, x.getPos(), x.getOre(), x.getGrade(),
+                x.getName(), this.cornerPos, this));
         depositCapability.removePendingBlocksForChunk(cp);
 
         // Generates and enqueues the ore deposit with a one out of the deposit's weight chance
         // I.e. with a weight of 100, 1 in 100 chunks will ATTEMPT to generate the deposit
-        for (IEnqueuedDeposit deposit : DepositRegistrar.getOreDeposits().values()) {
+        for (IEnqueuedDeposit deposit : DepositRegistrar.getEnqOreDeposits().values()) {
             if (this.rand.nextInt(deposit.getWeight()) == 0) {
                 // Tries to update the stateMap with the generating feature
-                if (!deposit.generate(this.chunkReader, this.rand, this.blockPos, this,
-                        this.depositCapability, this.chunkGennedCapability) && JemsGeoConfig.SERVER.debug_block_enqueuer.get()) {
+                if (!deposit.generate(this.chunkReader, this.rand, this.cornerPos, this) &&
+                        JemsGeoConfig.SERVER.debug_block_enqueuer.get()) {
                     // Debug
                     JemsGeology.getInstance().LOGGER.warn(
-                            "Failed to generate deposit at {}, {}", this.blockPos.getX(), this.blockPos.getZ());
+                            "Failed to generate deposit at {}, {}", this.cornerPos.getX(), this.cornerPos.getZ());
                 }
             }
         }

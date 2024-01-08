@@ -4,6 +4,7 @@ import com.google.gson.*;
 import com.jemmerl.jemsgeology.JemsGeology;
 import com.jemmerl.jemsgeology.geology.deposits.DepositUtil;
 import com.jemmerl.jemsgeology.geology.deposits.instances.ConstantScatterDeposit;
+import com.jemmerl.jemsgeology.geology.deposits.instances.DiatremeMaarUtilDeposit;
 import com.jemmerl.jemsgeology.geology.deposits.instances.LayerEnqueuedDeposit;
 import com.jemmerl.jemsgeology.geology.deposits.instances.PlacerDeposit;
 import com.jemmerl.jemsgeology.geology.deposits.templates.ConstantScatterTemplate;
@@ -17,6 +18,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
 
 // Reader class and related methods heavily built from Geolosys (oitsjustjose)
@@ -28,6 +30,10 @@ public class DepositDataLoader extends JsonReloadListener {
     private static final Gson GSON = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
     private final DepositRegistrar depositRegistrar = new DepositRegistrar();
 
+    // Names reserved for build in deposit generation
+    private final ArrayList<String> reservedNameList = new ArrayList<>(Collections.singletonList("diatreme_maar"));
+    // if needed later as a reminder -- Arrays.asList("Buenos Aires", "Córdoba", "La Plata");
+
     public DepositDataLoader() {
         super(GSON, "generation/deposits"); // Second field is the folder
     }
@@ -37,6 +43,11 @@ public class DepositDataLoader extends JsonReloadListener {
         JemsGeology.getInstance().LOGGER.info("Beginning to load ore deposits...");
         ArrayList<String> nameList = new ArrayList<>(); // Stores the names of each deposits to check for duplicates
         depositRegistrar.clearDeposits(); // Flush the previously cached deposits, to ensure a clean slate
+
+        // Statically initialized, feature-specific generators used to implement ore enqueueing outside of regular gen
+        depositRegistrar.addUtilDeposit("diatreme_maar", DiatremeMaarUtilDeposit.getDepositInstance());
+
+        if (true) return;
 
         objectIn.forEach((rl, jsonElement) -> {
             try {
@@ -51,17 +62,17 @@ public class DepositDataLoader extends JsonReloadListener {
                     return;
                 }
 
-                if (!nameList.contains(name)) {
-                    nameList.add(name);
-                } else {
-                    JemsGeology.getInstance().LOGGER.warn("Deposit has duplicate name: {} in {}", name, rl);
+                if (nameList.contains(name) || reservedNameList.contains(name)) {
+                    JemsGeology.getInstance().LOGGER.warn("Deposit has duplicate or reserved name: {} in {}", name, rl);
                     throw new Exception();
+                } else {
+                    nameList.add(name);
                 }
 
                 // Parse the settings json element into the needed template and then use to create the respective deposit type
                 switch (jsonObj.get("deposit_type").getAsString()) {
                     case "layer":
-                        depositRegistrar.addOreDeposit(name, new LayerEnqueuedDeposit(
+                        depositRegistrar.addEnqueuedDeposit(name, new LayerEnqueuedDeposit(
                                 GSON.fromJson(jsonObj.get("settings"), LayerTemplate.class))
                                         .setName(name)
                                         .setOres(DepositUtil.getOres(jsonObj.get("ores").getAsJsonArray(), name))

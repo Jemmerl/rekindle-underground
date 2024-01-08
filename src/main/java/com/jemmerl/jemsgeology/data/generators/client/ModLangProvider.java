@@ -31,6 +31,7 @@ public class ModLangProvider extends LanguageProvider {
         add("item." + JemsGeology.MOD_ID + ".lime_mortar", "Lime Mortar");
         add("item." + JemsGeology.MOD_ID + ".quarry_tool", "Quarrying Chisel");
         add("itemGroup.jemsgeo_base_stones_tab", "Jem's Geology: Stones");
+        add("itemGroup.jemsgeo_decor_stones_tab", "Jem's Geology: Decor");
         add("itemGroup.jemsgeo_cobbles_tab", "Jem's Geology: Cobbles");
         add("itemGroup.jemsgeo_ores_tab", "Jem's Geology: Ores");
         add("itemGroup.jemsgeo_misc_tab", "Jem's Geology: Misc");
@@ -177,7 +178,12 @@ public class ModLangProvider extends LanguageProvider {
     // Stone Decor Blocks
     private void nameStoneDecorBlock(Block block) {
         String path = Objects.requireNonNull(block.getRegistryName()).getPath().toLowerCase(Locale.ROOT);
-        String displayName = StringUtils.capitaliseAllWords(path.replace('_', ' '));
+        String displayName;
+        if (path.contains("_stone")) {
+            displayName = StringUtils.capitaliseAllWords(path.split("_stone", 2)[0].replace('_', ' '));
+        } else {
+            displayName = StringUtils.capitaliseAllWords(path.replace('_', ' '));
+        }
         add(block, displayName);
     }
 
