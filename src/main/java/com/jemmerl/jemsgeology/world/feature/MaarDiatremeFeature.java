@@ -187,7 +187,6 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
                     reader.setBlockState(placePos, mainIgnState, 2); // this will not stay here, handle placement in IFs
 
                     if (diamondBearing && (rand.nextFloat() < diamondPercent)) {
-                        System.out.println(placePos);
                         diaMaarDep.enqDiamondOre(reader, placePos);
                     }
 

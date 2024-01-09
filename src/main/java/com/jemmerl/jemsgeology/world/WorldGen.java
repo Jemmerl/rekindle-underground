@@ -36,11 +36,12 @@ public class WorldGen {
         return allStoneFeatures;
     }
 
-    // Features in TOP_LAYER_MODIFICATION stage
+    // Features in TOP_LAYER_MODIFICATION stage ADD DELAYED ORES HERE!!!!!!!!!!!!!!!!!!!!
     private static List<LinkedHashMap.SimpleEntry<ConfiguredFeature<?,?>, List<ResourceLocation>>> topLayerModStageFeatures() {
         List<LinkedHashMap.SimpleEntry<ConfiguredFeature<?, ?>, List<ResourceLocation>>> allStoneFeatures = new ArrayList<>();
 
         allStoneFeatures.add(new AbstractMap.SimpleEntry<>(JemsGeoFeatures.ORE_PLACER_CONFIG, null));
+        allStoneFeatures.add(new AbstractMap.SimpleEntry<>(JemsGeoFeatures.DELAYED_ORE_GEN_CONFIG, null));
 
         return allStoneFeatures;
     }

@@ -47,8 +47,6 @@ public class DepositDataLoader extends JsonReloadListener {
         // Statically initialized, feature-specific generators used to implement ore enqueueing outside of regular gen
         depositRegistrar.addUtilDeposit("diatreme_maar", DiatremeMaarUtilDeposit.getDepositInstance());
 
-        if (true) return;
-
         objectIn.forEach((rl, jsonElement) -> {
             try {
                 JsonObject jsonObj = jsonElement.getAsJsonObject();

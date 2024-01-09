@@ -30,6 +30,9 @@ public class ModFeatures {
     public static final RegistryObject<Feature<NoFeatureConfig>> ORE_CONST_SCATTER_GEN
             = FEATURES.register("ore_const_scatter_gen", () -> new OreConstantScatterFeature(NoFeatureConfig.CODEC));
 
+    public static final RegistryObject<Feature<NoFeatureConfig>> DELAYED_ORE_GEN
+            = FEATURES.register("delayed_ore_gen", () -> new DelayedOreFeature(NoFeatureConfig.CODEC));
+
     public static void register(IEventBus eventBus) {
         FEATURES.register(eventBus); }
 }

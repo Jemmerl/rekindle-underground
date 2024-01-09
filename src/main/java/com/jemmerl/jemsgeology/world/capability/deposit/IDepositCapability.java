@@ -18,13 +18,21 @@ public interface IDepositCapability extends INBTSerializable<CompoundNBT> {
 
     void setDepositGenerated(ChunkPos pos);
 
-    void putPendingOre(BlockPos pos, OreType oreType, GradeType gradeType, String name);
+    void putImmediatePendingOre(BlockPos pos, OreType oreType, GradeType gradeType, String name);
 
-    void removePendingBlocksForChunk(ChunkPos cp);
+    void putDelayedPendingOre(BlockPos pos, OreType oreType, GradeType gradeType, String name);
 
-    ConcurrentLinkedQueue<DepositCapability.PendingBlock> getPendingBlocks(ChunkPos cp);
+    void removeImmediatePendingBlocksForChunk(ChunkPos cp);
 
-    int getPendingBlockCount();
+    void removeDelayedPendingBlocksForChunk(ChunkPos cp);
+
+    ConcurrentLinkedQueue<DepositCapability.PendingBlock> getImmediatePendingBlocks(ChunkPos cp);
+
+    ConcurrentLinkedQueue<DepositCapability.PendingBlock> getDelayedPendingBlocks(ChunkPos cp);
+
+    int getImmediatePendingBlockCount();
+
+    int getDelayedPendingBlockCount();
 
     ConcurrentLinkedQueue<ChunkPos> getGenMap();
 }

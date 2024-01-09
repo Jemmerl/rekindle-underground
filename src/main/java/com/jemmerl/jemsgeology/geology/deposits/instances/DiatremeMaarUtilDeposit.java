@@ -116,7 +116,7 @@ public class DiatremeMaarUtilDeposit implements IEnqueuedDeposit {
     }
 
     public boolean enqDiamondOre(ISeedReader reader, BlockPos pos) {
-        DepositUtil.processOreEnqueue(reader, pos, OreType.DIAMOND, gradesMap.nextElt(), this);
+        DepositUtil.processOreEnqueue(reader, pos, OreType.DIAMOND, gradesMap.nextElt(), true, this);
         return true;
     }
 }

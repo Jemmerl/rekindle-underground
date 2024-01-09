@@ -10,11 +10,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
-import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.Collectors;
@@ -29,11 +27,13 @@ public class DepositCapability implements IDepositCapability {
     public static final Capability<IDepositCapability> JEMGEO_DEPOSIT_CAPABILITY = null;
 
     private final ConcurrentLinkedQueue<ChunkPos> oreGenMap;
-    private final ConcurrentHashMap<ChunkPos, ConcurrentLinkedQueue<PendingBlock>> pendingBlocks;
+    private final ConcurrentHashMap<ChunkPos, ConcurrentLinkedQueue<PendingBlock>> immediatePendingBlocks;
+    private final ConcurrentHashMap<ChunkPos, ConcurrentLinkedQueue<PendingBlock>> delayedPendingBlocks;
 
     public DepositCapability() {
         this.oreGenMap = new ConcurrentLinkedQueue<>();
-        this.pendingBlocks = new ConcurrentHashMap<>();
+        this.immediatePendingBlocks = new ConcurrentHashMap<>();
+        this.delayedPendingBlocks = new ConcurrentHashMap<>();
     }
 
     @Override
@@ -42,26 +42,49 @@ public class DepositCapability implements IDepositCapability {
     }
 
     @Override
-    public void putPendingOre(BlockPos pos, OreType oreType, GradeType gradeType, String name) {
-        PendingBlock p = new PendingBlock(pos, oreType, gradeType, name);
+    public void putImmediatePendingOre(BlockPos pos, OreType oreType, GradeType gradeType, String name) {
+        PendingBlock p = new PendingBlock(pos, oreType, gradeType, false, name);
         ChunkPos cp = new ChunkPos(pos);
-        this.pendingBlocks.putIfAbsent(cp, new ConcurrentLinkedQueue<>());
-        this.pendingBlocks.get(cp).add(p);
+        this.immediatePendingBlocks.putIfAbsent(cp, new ConcurrentLinkedQueue<>());
+        this.immediatePendingBlocks.get(cp).add(p);
     }
 
     @Override
-    public void removePendingBlocksForChunk(ChunkPos cp) {
-        this.pendingBlocks.remove(cp);
+    public void putDelayedPendingOre(BlockPos pos, OreType oreType, GradeType gradeType, String name) {
+        PendingBlock p = new PendingBlock(pos, oreType, gradeType, true, name);
+        ChunkPos cp = new ChunkPos(pos);
+        this.delayedPendingBlocks.putIfAbsent(cp, new ConcurrentLinkedQueue<>());
+        this.delayedPendingBlocks.get(cp).add(p);
     }
 
     @Override
-    public ConcurrentLinkedQueue<PendingBlock> getPendingBlocks(ChunkPos chunkPos) {
-        return this.pendingBlocks.getOrDefault(chunkPos, new ConcurrentLinkedQueue<>());
+    public void removeImmediatePendingBlocksForChunk(ChunkPos cp) {
+        this.immediatePendingBlocks.remove(cp);
     }
 
     @Override
-    public int getPendingBlockCount() {
-        return (int) this.pendingBlocks.values().stream().collect(Collectors.summarizingInt(x -> x.size())).getSum();
+    public void removeDelayedPendingBlocksForChunk(ChunkPos cp) {
+        this.delayedPendingBlocks.remove(cp);
+    }
+
+    @Override
+    public ConcurrentLinkedQueue<PendingBlock> getImmediatePendingBlocks(ChunkPos chunkPos) {
+        return this.immediatePendingBlocks.getOrDefault(chunkPos, new ConcurrentLinkedQueue<>());
+    }
+
+    @Override
+    public ConcurrentLinkedQueue<PendingBlock> getDelayedPendingBlocks(ChunkPos chunkPos) {
+        return this.delayedPendingBlocks.getOrDefault(chunkPos, new ConcurrentLinkedQueue<>());
+    }
+
+    @Override
+    public int getImmediatePendingBlockCount() {
+        return (int) this.immediatePendingBlocks.values().stream().collect(Collectors.summarizingInt(x -> x.size())).getSum();
+    }
+
+    @Override
+    public int getDelayedPendingBlockCount() {
+        return (int) this.delayedPendingBlocks.values().stream().collect(Collectors.summarizingInt(x -> x.size())).getSum();
     }
 
     @Override
@@ -84,7 +107,13 @@ public class DepositCapability implements IDepositCapability {
         CompoundNBT pendingBlocks = compound.getCompound("PendingBlocks");
 
         this.getGenMap().forEach(cp -> oreDeposits.putBoolean(serializeChunkPos(cp), true));
-        this.pendingBlocks.entrySet().forEach(e -> {
+        this.immediatePendingBlocks.entrySet().forEach(e -> {
+            ListNBT p = new ListNBT();
+            String key = e.getKey().x + "_" + e.getKey().z;
+            e.getValue().forEach(pb -> p.add(pb.serialize()));
+            pendingBlocks.put(key, p);
+        });
+        this.delayedPendingBlocks.entrySet().forEach(e -> {
             ListNBT p = new ListNBT();
             String key = e.getKey().x + "_" + e.getKey().z;
             e.getValue().forEach(pb -> p.add(pb.serialize()));
@@ -109,7 +138,11 @@ public class DepositCapability implements IDepositCapability {
                     OreType ore = OreType.valueOf(compoundNBT.getString("ore"));
                     GradeType grade = GradeType.valueOf(compoundNBT.getString("grade"));
                     String name = (compoundNBT.getString("name"));
-                    this.putPendingOre(pos, ore, grade, name);
+                    if (compoundNBT.getBoolean("delayed")) {
+                        this.putDelayedPendingOre(pos, ore, grade, name);
+                    } else {
+                        this.putImmediatePendingOre(pos, ore, grade, name);
+                    }
                 });
             });
         }
@@ -121,14 +154,20 @@ public class DepositCapability implements IDepositCapability {
                 ChunkPos cp = new ChunkPos(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
 
                 ListNBT pending = compound.getList(chunkPosAsString, 10);
-                ConcurrentLinkedQueue<PendingBlock> lq = new ConcurrentLinkedQueue<>();
+                ConcurrentLinkedQueue<PendingBlock> lqi = new ConcurrentLinkedQueue<>();
+                ConcurrentLinkedQueue<PendingBlock> lqd = new ConcurrentLinkedQueue<>();
                 pending.forEach(x -> {
                     PendingBlock pb = PendingBlock.deserialize(x);
                     if (pb != null) {
-                        lq.add(pb);
+                        if (pb.delayed) {
+                            lqd.add(pb);
+                        } else {
+                            lqi.add(pb);
+                        }
                     }
                 });
-                this.pendingBlocks.put(cp, lq);
+                this.immediatePendingBlocks.put(cp, lqi);
+                this.delayedPendingBlocks.put(cp, lqd);
             });
         }
 
@@ -160,30 +199,22 @@ public class DepositCapability implements IDepositCapability {
         private BlockPos pos;
         private OreType ore;
         private GradeType grade;
+        private boolean delayed;
         private String name; // Name of the deposit generating the block
 
-        public PendingBlock(BlockPos pos, OreType oreType, GradeType gradeType, String name) {
+        public PendingBlock(BlockPos pos, OreType oreType, GradeType gradeType, boolean delayed, String name) {
             this.pos = pos;
             this.ore = oreType;
             this.grade = gradeType;
+            this.delayed = delayed;
             this.name = name;
         }
 
-        public BlockPos getPos() {
-            return this.pos;
-        }
-
-        public OreType getOre() {
-            return this.ore;
-        }
-
-        public GradeType getGrade() {
-            return this.grade;
-        }
-
-        public String getName() {
-            return this.name;
-        }
+        public BlockPos getPos() { return this.pos; }
+        public OreType getOre() { return this.ore; }
+        public GradeType getGrade() { return this.grade; }
+        public boolean getDelayed() { return this.delayed; }
+        public String getName() { return this.name; }
 
         public CompoundNBT serialize() {
             CompoundNBT tag = new CompoundNBT();
@@ -191,6 +222,7 @@ public class DepositCapability implements IDepositCapability {
             tag.put("pos", posTag);
             tag.putString("ore", this.ore.getString());
             tag.putString("grade", this.grade.getString());
+            tag.putBoolean("delayed", this.delayed);
             tag.putString("name", this.name);
             return tag;
         }
@@ -202,8 +234,9 @@ public class DepositCapability implements IDepositCapability {
                 BlockPos pos = NBTUtil.readBlockPos(tag.getCompound("pos"));
                 String ore = tag.getCompound("ore").toString();
                 String grade = tag.getCompound("grade").toString();
+                boolean delayed = tag.getBoolean("delayed");
                 String name = tag.getCompound("name").toString();
-                return new PendingBlock(pos, OreType.valueOf(ore), GradeType.valueOf(grade), name);
+                return new PendingBlock(pos, OreType.valueOf(ore), GradeType.valueOf(grade), delayed, name);
             }
 
             return null;

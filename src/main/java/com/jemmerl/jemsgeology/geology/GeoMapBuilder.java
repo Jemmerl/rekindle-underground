@@ -28,8 +28,8 @@ public class GeoMapBuilder {
     private final BlockPos cornerPos; // Starting position of this chunk's generation
     private final Random rand;
     private final GeoWrapper[][][] geoWrapperMap; // Positional map of stone blockstates to be generated
-    private final IDepositCapability depositCapability;
-    private final IChunkGennedCapability chunkGennedCapability;
+    private final IDepositCapability depCap;
+    private final IChunkGennedCapability cpCap;
 
     public GeoMapBuilder(ChunkReader reader, BlockPos pos, Random rand) {
         this.chunkReader = reader;
@@ -37,9 +37,9 @@ public class GeoMapBuilder {
         this.rand = rand;
         this.geoWrapperMap = new GeoWrapper[16][this.chunkReader.getMaxHeight()][16];
 
-        this.depositCapability = this.chunkReader.getSeedReader().getWorld().getCapability(DepositCapability.JEMGEO_DEPOSIT_CAPABILITY)
+        this.depCap = this.chunkReader.getSeedReader().getWorld().getCapability(DepositCapability.JEMGEO_DEPOSIT_CAPABILITY)
                 .orElseThrow(() -> new RuntimeException("JemsGeo deposit capability is null..."));
-        this.chunkGennedCapability = this.chunkReader.getSeedReader().getWorld().getCapability(ChunkGennedCapability.JEMGEO_CHUNK_GEN_CAPABILITY)
+        this.cpCap = this.chunkReader.getSeedReader().getWorld().getCapability(ChunkGennedCapability.JEMGEO_CHUNK_GEN_CAPABILITY)
                 .orElseThrow(() -> new RuntimeException("JemsGeo chunk gen capability is null..."));
 
         genGeoMap();
@@ -59,7 +59,7 @@ public class GeoMapBuilder {
         PopulateOres();
 
         // Mark that this chunk was generated
-        this.chunkGennedCapability.setChunkGenerated(this.chunkReader.getSeedReader().getChunk(this.cornerPos).getPos());
+        this.cpCap.setChunkGenerated(this.chunkReader.getSeedReader().getChunk(this.cornerPos).getPos());
     }
 
     /////////////////////////////////////////////////
@@ -148,30 +148,28 @@ public class GeoMapBuilder {
     // Populate ore deposits
     public void PopulateOres() {
 
-        // TODO Move to its own feature, run last?
-
-        // Fill the oremap with (or attempt to place) any previously pending blocks
+        // Fill the oremap with (or attempt to place) any previously immediate pending blocks
         // Method adapted from Geolosys (oitsjustjose)
         // https://github.com/oitsjustjose/Geolosys/tree/a8e2ba469a2627bfee862f5d8b99774cc1b5981c
         ISeedReader reader = this.chunkReader.getSeedReader();
         ChunkPos cp = new ChunkPos(this.cornerPos);
-        ConcurrentLinkedQueue<DepositCapability.PendingBlock> queue = depositCapability.getPendingBlocks(cp);
+        ConcurrentLinkedQueue<DepositCapability.PendingBlock> queue = depCap.getImmediatePendingBlocks(cp);
 
         // Debug
         if (JemsGeoConfig.SERVER.debug_block_enqueuer.get()) {
             // Manual toggle. It is useful, sometimes, but it's too spammy to enable with the other debug tools
             // and likely won't be of use to any pack devs trying to understand why my spaghetti-code mod broke!
             if (false) { JemsGeology.getInstance().LOGGER.info("Trying to place queue with size {}", queue.size()); }
-            if (chunkGennedCapability.hasChunkGenerated(cp) && (queue.size() > 0)) {
+            if (cpCap.hasChunkGenerated(cp) && (queue.size() > 0)) {
                 JemsGeology.getInstance().LOGGER.info(
-                        "Chunk [{}, {}] has already generated but attempting to place pending blocks anyways",
+                        "Chunk [{}, {}] has already generated, trying to place immediately pending blocks anyways",
                         cp.x, cp.z);
             }
         }
 
         queue.stream().forEach(x -> DepositUtil.processGeoMapEnqueue(reader, x.getPos(), x.getOre(), x.getGrade(),
                 x.getName(), this.cornerPos, this));
-        depositCapability.removePendingBlocksForChunk(cp);
+        depCap.removeImmediatePendingBlocksForChunk(cp);
 
         // Generates and enqueues the ore deposit with a one out of the deposit's weight chance
         // I.e. with a weight of 100, 1 in 100 chunks will ATTEMPT to generate the deposit

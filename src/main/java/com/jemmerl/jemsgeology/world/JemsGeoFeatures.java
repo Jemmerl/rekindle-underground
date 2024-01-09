@@ -32,6 +32,9 @@ public class JemsGeoFeatures {
     public static final ConfiguredFeature<?, ?> ORE_CONST_SCATTER_CONFIG = ModFeatures.ORE_CONST_SCATTER_GEN.get().withConfiguration(new NoFeatureConfig())
             .withPlacement(ModFeaturePlacements.BOTTOM_CORNER_PLACEMENT.get().configure(IPlacementConfig.NO_PLACEMENT_CONFIG));
 
+    public static final ConfiguredFeature<?, ?> DELAYED_ORE_GEN_CONFIG = ModFeatures.DELAYED_ORE_GEN.get().withConfiguration(new NoFeatureConfig())
+            .withPlacement(ModFeaturePlacements.BOTTOM_CORNER_PLACEMENT.get().configure(IPlacementConfig.NO_PLACEMENT_CONFIG));
+
     /////////////////////////////////////////////////////////////////////////////////////////
 
     private static <FC extends IFeatureConfig> void CFRegister(String name, ConfiguredFeature<FC, ?> configuredFeature) {
@@ -44,6 +47,7 @@ public class JemsGeoFeatures {
         CFRegister("boulder_generator", BOULDER_GEN_CONFIG);
         CFRegister("ore_placer_generator", ORE_PLACER_CONFIG);
         CFRegister("ore_const_scatter_generator", ORE_CONST_SCATTER_CONFIG);
+        CFRegister("delayed_ore_generator", DELAYED_ORE_GEN_CONFIG);
     }
 
 }

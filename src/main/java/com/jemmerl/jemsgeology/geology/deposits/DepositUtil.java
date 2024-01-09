@@ -31,7 +31,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 
-import javax.annotation.Nullable;
 import java.util.*;
 
 public class DepositUtil {
@@ -243,10 +242,6 @@ public class DepositUtil {
         IDeposit qDeposit = DepositRegistrar.getEnqOreDeposits()
                 .getOrDefault(qName, DepositRegistrar.getUtilDeposits().get(qName)); // Get the enqueued deposit
 
-        System.out.println(qDeposit.getName());
-        System.out.println(qPos);
-        System.out.println(qType.name());
-
         if (qDeposit == null) {
             // Debug
             if (JemsGeoConfig.SERVER.debug_block_enqueuer.get()){
@@ -257,10 +252,8 @@ public class DepositUtil {
 
         // If the enqueued chunk is the current generating chunk, attempt to place into the statemap
         if (qChunk.equals(genChunk)) {
-            System.out.println("is gen chunk");
             // Check if the block is placing in a valid deposit biome
             if (!qDeposit.getBiomes().contains(reader.getBiome(qPos).getCategory())) {
-                System.out.println("bad biome");
                 return false;
             }
 
@@ -282,18 +275,25 @@ public class DepositUtil {
                 return false;
             }
             // If this statement reaches here, the block was not a valid placement stone or something has gone very wrong...
-            System.out.println("invalid stone");
             return false;
         }
 
         // Otherwise, process already or not yet generated chunks
-        System.out.println("did an ore already " + qPos);
-        return processOreEnqueue(reader, qPos, qType, qGrade, qDeposit);
+        // Note: all ores that use this method are inherently not placed delayed
+        return processOreEnqueue(reader, qPos, qType, qGrade, false, qDeposit);
+    }
+
+
+    // Overload for use in lambda methods that only provide the string deposit name
+    public static boolean processOreEnqueue(ISeedReader reader, BlockPos qPos, OreType qType, GradeType qGrade, boolean delayed, String qName) {
+        IDeposit qDeposit = DepositRegistrar.getEnqOreDeposits()
+                .getOrDefault(qName, DepositRegistrar.getUtilDeposits().get(qName)); // Get the enqueued deposit
+        return processOreEnqueue(reader, qPos, qType, qGrade, delayed, qDeposit);
     }
 
 
     // Process an enqueued ore block for an already or not yet generated chunk
-    public static boolean processOreEnqueue(ISeedReader reader, BlockPos qPos, OreType qType, GradeType qGrade, IDeposit qDeposit) {
+    public static boolean processOreEnqueue(ISeedReader reader, BlockPos qPos, OreType qType, GradeType qGrade, boolean delayed, IDeposit qDeposit) {
 
         if (depCap == null) {
             depCap = reader.getWorld().getCapability(DepositCapability.JEMGEO_DEPOSIT_CAPABILITY)
@@ -308,7 +308,6 @@ public class DepositUtil {
         // If not in the currently generating chunk, and the enqueued chunk has generated, try to force placement
         ChunkPos qChunk = new ChunkPos(qPos);
         if (cgCap.hasChunkGenerated(qChunk)) {
-            System.out.println("chunk genned");
             // Check if the block is placing in a valid deposit biome
             if (!qDeposit.getBiomes().contains(reader.getBiome(qPos).getCategory())) {
                 return false;
@@ -333,8 +332,11 @@ public class DepositUtil {
             }
             return true;
         } else {
-            System.out.println("else");
-            depCap.putPendingOre(new BlockPos(qPos), qType, qGrade, qDeposit.getName());
+            if (delayed) {
+                depCap.putDelayedPendingOre(new BlockPos(qPos), qType, qGrade, qDeposit.getName());
+            } else {
+                depCap.putImmediatePendingOre(new BlockPos(qPos), qType, qGrade, qDeposit.getName());
+            }
             return false;
         }
     }
