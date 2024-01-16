@@ -1,20 +1,16 @@
 package com.jemmerl.jemsgeology.world.feature;
 
 import com.jemmerl.jemsgeology.JemsGeology;
-import com.jemmerl.jemsgeology.blocks.IGeoBlock;
-import com.jemmerl.jemsgeology.blocks.StoneGeoBlock;
 import com.jemmerl.jemsgeology.data.enums.GeologyType;
 import com.jemmerl.jemsgeology.data.enums.ore.GradeType;
 import com.jemmerl.jemsgeology.data.enums.ore.OreType;
 import com.jemmerl.jemsgeology.init.ModBlocks;
 import com.jemmerl.jemsgeology.init.NoiseInit;
 import com.jemmerl.jemsgeology.util.UtilMethods;
-import com.jemmerl.jemsgeology.util.lists.ModBlockLists;
 import com.jemmerl.jemsgeology.util.noise.GenerationNoise.BlobWarpNoise;
 import com.jemmerl.jemsgeology.geology.ChunkReader;
 import com.jemmerl.jemsgeology.geology.GeoMapBuilder;
 import com.mojang.serialization.Codec;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
@@ -69,7 +65,8 @@ public class GeologyFeature extends Feature<NoFeatureConfig> {
                     switch (UtilMethods.replaceableStatus(originalState)) {
                         case FAILED:
                         case GEOBLOCK_STONE:
-                        case OREBLOCK_DETRITUS:
+                        case GEOBLOCK_REGOLITH:
+                        case GEOBLOCK_DETRITUS:
                             break;
                         case VANILLA_STONE:
                             placeState = ModBlocks.GEOBLOCKS.get(stoneGeoType)

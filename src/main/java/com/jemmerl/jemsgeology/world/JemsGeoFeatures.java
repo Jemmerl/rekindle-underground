@@ -21,7 +21,7 @@ public class JemsGeoFeatures {
 
     // TODO make chance config based? registration shouldnt use configs... move chance into generate method -- see same for boulders
     public static final ConfiguredFeature<?, ?> MAAR_DIATREME_GEN_CONFIG = ModFeatures.MAAR_DIATREME_GEN.get().withConfiguration(new NoFeatureConfig())
-            .withPlacement(ModFeaturePlacements.PIPE_CHANCE_PLACEMENT.get().configure(new ChanceConfig(300))); // Normally 300, larger is less likely (100 for testing)
+            .withPlacement(ModFeaturePlacements.PIPE_CHANCE_PLACEMENT.get().configure(new ChanceConfig(200))); // Normally 300, larger is less likely (100 for testing)
 
     public static final ConfiguredFeature<?, ?> BOULDER_GEN_CONFIG = ModFeatures.BOULDER_GEN.get().withConfiguration(new NoFeatureConfig())
             .withPlacement(ModFeaturePlacements.BOTTOM_CORNER_PLACEMENT.get().configure(IPlacementConfig.NO_PLACEMENT_CONFIG)); // Placement chance is determined via data

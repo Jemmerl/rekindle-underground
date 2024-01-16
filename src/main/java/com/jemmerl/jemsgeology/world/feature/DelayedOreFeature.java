@@ -51,13 +51,17 @@ public class DelayedOreFeature extends Feature<NoFeatureConfig> {
             // Manual toggle. It is useful, sometimes, but it's too spammy to enable with the other debug tools
             // and likely won't be of use to any pack devs trying to understand why my spaghetti-code mod broke!
             if (false) { JemsGeology.getInstance().LOGGER.info("Trying to place queue with size {}", queue.size()); }
+        }
 
-            // Unlike the immediate ore enqueueing, delayed placement should always already be "generated"
-            if (!cgCap.hasChunkGenerated(cp) && (queue.size() > 0)) {
+        // Unlike the immediate ore enqueueing, delayed placement should always already be "generated"
+        if (!cgCap.hasChunkGenerated(cp) && (queue.size() > 0)) {
+            if (JemsGeoConfig.SERVER.debug_block_enqueuer.get()) {
                 JemsGeology.getInstance().LOGGER.info(
-                        "Chunk [{}, {}] is not generated, trying to place delayed pending blocks anyways",
+                        "Chunk [{}, {}] is not generated, NOT trying to place delayed pending blocks",
                         cp.x, cp.z);
             }
+            depCap.removeDelayedPendingBlocksForChunk(cp);
+            return false;
         }
 
         queue.stream().forEach(x ->

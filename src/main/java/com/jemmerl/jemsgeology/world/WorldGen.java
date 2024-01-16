@@ -16,7 +16,7 @@ import java.util.*;
 @Mod.EventBusSubscriber
 public class WorldGen {
 
-    // Featues in UNDERGROUND_ORES stage
+    // Features in UNDERGROUND_ORES stage
     private static List<LinkedHashMap.SimpleEntry<ConfiguredFeature<?,?>, List<ResourceLocation>>> undergroundOresStageFeatures() {
         List<LinkedHashMap.SimpleEntry<ConfiguredFeature<?, ?>, List<ResourceLocation>>> allStoneFeatures = new ArrayList<>();
 
@@ -26,7 +26,7 @@ public class WorldGen {
         return allStoneFeatures;
     }
 
-    // Featues in UNDERGROUND_DECORATION stage
+    // Features in UNDERGROUND_DECORATION stage
     private static List<LinkedHashMap.SimpleEntry<ConfiguredFeature<?,?>, List<ResourceLocation>>> undergroundDecorationStageFeatures() {
         List<LinkedHashMap.SimpleEntry<ConfiguredFeature<?, ?>, List<ResourceLocation>>> allStoneFeatures = new ArrayList<>();
 
@@ -36,7 +36,7 @@ public class WorldGen {
         return allStoneFeatures;
     }
 
-    // Features in TOP_LAYER_MODIFICATION stage ADD DELAYED ORES HERE!!!!!!!!!!!!!!!!!!!!
+    // Features in TOP_LAYER_MODIFICATION stage
     private static List<LinkedHashMap.SimpleEntry<ConfiguredFeature<?,?>, List<ResourceLocation>>> topLayerModStageFeatures() {
         List<LinkedHashMap.SimpleEntry<ConfiguredFeature<?, ?>, List<ResourceLocation>>> allStoneFeatures = new ArrayList<>();
 

@@ -1,6 +1,7 @@
 package com.jemmerl.jemsgeology.util;
 
 import com.jemmerl.jemsgeology.blocks.IGeoBlock;
+import com.jemmerl.jemsgeology.blocks.RegolithGeoBlock;
 import com.jemmerl.jemsgeology.blocks.StoneGeoBlock;
 import com.jemmerl.jemsgeology.data.enums.GeologyType;
 import com.jemmerl.jemsgeology.data.enums.StoneGroupType;
@@ -35,19 +36,41 @@ public class UtilMethods {
     }
 
     // Returns a GeologyType enum value given a string representation of its resource location
-    // Reliance on this should be minimized, just useful to cut down on repeated code in the data reader
+    @Deprecated
     public static GeologyType stringToGeologyType(String typeName) {
         return Objects.requireNonNull(GeologyType.valueOf(typeName.toUpperCase()));
     }
 
     // Check if a block is a regolith geo block
+    @Deprecated
     public static boolean isRegolith(Block block) {
         return ((block instanceof IGeoBlock) && isRegolith((IGeoBlock) block));
     }
 
     // Check if a geo block is a regolith block
+    @Deprecated
     public static boolean isRegolith(IGeoBlock block) {
         return block.getRegistryName().toString().contains("regolith");
+    }
+
+    // Attempt to convert a geoblock to a regolith form, preserving properties (else return original)
+    public static BlockState convertRegolith(BlockState blockState, boolean keepOre) {
+        // Catch errors if the passed block state does not belong to an IGeoBlock
+        if (!(blockState.getBlock() instanceof IGeoBlock)) {
+            return blockState;
+        }
+        IGeoBlock geoBlock = (IGeoBlock) (blockState.getBlock());
+        GeologyType geologyType = geoBlock.getGeologyType();
+
+        if (keepOre) {
+            // Detritus is its own regolith ...regolith is its own regolith too
+            if ((geoBlock.getStoneGroupType() == StoneGroupType.DETRITUS) || (isGeoBlockRegolith(blockState.getBlock()))) {
+                return blockState;
+            }
+            return ModBlocks.GEOBLOCKS.get(geologyType)
+                    .getRegolithOre(geoBlock.getOreType(), geoBlock.getGradeType()).getDefaultState();
+        }
+        return ModBlocks.GEOBLOCKS.get(geologyType).getRegolith().getDefaultState();
     }
 
     // Returns an item given a string representation of its resource location
@@ -55,6 +78,11 @@ public class UtilMethods {
     public static Item stringToItem(String itemName) {
         return ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemName));
     }
+
+
+    ////////////////////////
+    // ARITHMETIC METHODS //
+    ////////////////////////
 
     // Returns the 2D unit vector using 2D coordinates
     public static float[] points2DUnitVec(float x, float y) {
@@ -94,6 +122,10 @@ public class UtilMethods {
         return ((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)) + ((z2 - z1) * (z2 - z1));
     }
 
+    ////////////////////////
+    // BLOCK-TYPE METHODS //
+    ////////////////////////
+
 //    // Copy blockstate property from one similar block to another
 //    public static <T extends Comparable<T>> BlockState copyProperty(BlockState from, BlockState to, Property<T> property) {
 //        return to.with(property, from.get(property));
@@ -112,8 +144,13 @@ public class UtilMethods {
     }
 
     // Check if the block is some form of OreBlock stone
-    public static boolean isOreBlockStone (Block block) {
+    public static boolean isGeoBlockStone(Block block) {
         return (block instanceof StoneGeoBlock);
+    }
+
+    // Check if the block is some form of OreBlock regolith
+    public static boolean isGeoBlockRegolith(Block block) {
+        return (block instanceof RegolithGeoBlock);
     }
 
     // Check if the block is some form of vanilla detritus
@@ -123,26 +160,27 @@ public class UtilMethods {
     }
 
     // Check if the block is some form of OreBlock detritus
-    public static boolean isOreBlockDetritus (Block block) {
+    public static boolean isGeoBlockDetritus(Block block) {
         return ((block instanceof IGeoBlock) && ((IGeoBlock) block).getStoneGroupType().equals(StoneGroupType.DETRITUS));
     }
 
     // Check if the block is some form of stone (vanilla or oreblock)
     public static boolean isStoneBlock (Block block) {
-        return (isOreBlockStone(block) || isVanillaStone(block));
+        return (isGeoBlockStone(block) || isVanillaStone(block));
     }
 
     // Check if the block is some form of vanilla detritus
     public static boolean isDetritusBlock(Block block) {
-        return (isVanillaDetritus(block) || isOreBlockDetritus(block));
+        return (isVanillaDetritus(block) || isGeoBlockDetritus(block));
     }
 
     // Check a block's type for evaluating its replaceability
     public static ReplaceableStatus replaceableStatus(BlockState blockState) {
         Block replaced = blockState.getBlock();
-        if (isOreBlockStone(replaced)) { return ReplaceableStatus.GEOBLOCK_STONE; }
+        if (isGeoBlockStone(replaced)) { return ReplaceableStatus.GEOBLOCK_STONE; }
         if (isVanillaStone(replaced)) { return ReplaceableStatus.VANILLA_STONE; }
-        if (isOreBlockDetritus(replaced)) { return ReplaceableStatus.OREBLOCK_DETRITUS; }
+        if (isGeoBlockRegolith(replaced)) { return ReplaceableStatus.GEOBLOCK_REGOLITH; }
+        if (isGeoBlockDetritus(replaced)) { return ReplaceableStatus.GEOBLOCK_DETRITUS; }
         if (isVanillaDetritus(replaced)) { return ReplaceableStatus.VANILLA_DETRITUS; }
         return ReplaceableStatus.FAILED; // If not any stone or detritus,
     }

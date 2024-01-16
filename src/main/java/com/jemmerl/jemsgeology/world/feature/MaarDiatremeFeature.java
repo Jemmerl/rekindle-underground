@@ -16,7 +16,6 @@ import com.jemmerl.jemsgeology.util.UtilMethods;
 import com.jemmerl.jemsgeology.util.WeightedProbMap;
 import com.jemmerl.jemsgeology.util.noise.GenerationNoise.BlobWarpNoise;
 import com.mojang.serialization.Codec;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -38,13 +37,13 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
         super(codec);
     }
 
-    private static final int MAX_TOP_RADIUS = 20;
+    private static final int MAX_TOP_RADIUS = 20; // (actual is one less)
     private static final int MIN_TOP_RADIUS = 12;
     private static final int MIN_BASE_RADIUS = 4;
     private static final int MAX_BASE_DECREMENT = 10;
 
     private static final int MIN_DIATREME_HEIGHT = 40; // Minimum height of the top of the diatreme
-    private static final int MAX_DIATREME_HEIGHT = 65; // Maximum height of the top of the diatreme
+    private static final int MAX_DIATREME_HEIGHT = 65; // Maximum height of the top of the diatreme (actual is one less)
     private static final int MAAR_THICKNESS = 20;
 
 
@@ -74,26 +73,26 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
             return false;
         }
 
-        // TODO
-        // Add tuff and peridotite as random sprinkles
-        // occasional partial beds of tuff
 
-
-        //////////////////////////////////////
-        /// COMPOSITION PROPERTY SELECTION ///
-        //////////////////////////////////////
+        ////////////////////////////////////
+        // COMPOSITION PROPERTY SELECTION //
+        ////////////////////////////////////
 
         DiatremeMaarUtilDeposit diaMaarDep = DiatremeMaarUtilDeposit.getDepositInstance();
 
-        GeologyType mainIgnType = getMainIgnType(rand);
-        BlockState mainIgnState = ModBlocks.GEOBLOCKS.get(mainIgnType).getBaseState();
-        BlockState tuffState = ModBlocks.GEOBLOCKS.get(GeologyType.getTuff(mainIgnType)).getBaseState();
+        final GeologyType mainIgnType = getMainIgnType(rand);
+        final BlockState mainIgnState = ModBlocks.GEOBLOCKS.get(mainIgnType).getBaseState();
+        final BlockState mainRegState = ModBlocks.GEOBLOCKS.get(mainIgnType).getRegolith().getDefaultState();
+        final BlockState tuffState = ModBlocks.GEOBLOCKS.get(GeologyType.getTuff(mainIgnType)).getBaseState();
 
-//        boolean diamondBearing = isDiamondBearing(rand, mainIgnType);
-//        float diamondPercent = diamondBearing ? ((0.10f * rand.nextFloat()) + 0.05f) : 0f; // Richness from 5% to 15%
+        final BlockState testState2 = ModBlocks.GEOBLOCKS.get(GeologyType.SANDSTONE).getBaseState();
 
-        boolean diamondBearing = true;
-        float diamondPercent = 0.3f;
+        final boolean diamondBearing = isDiamondBearing(rand, mainIgnType);
+        final float diamondPercent = diamondBearing ? ((0.10f * rand.nextFloat()) + 0.05f) : 0f; // Richness from 5% to 15%
+        final float regTopPercent = rand.nextFloat() * 0.30f + 0.05f; // Surface building: percent regolith (for variability)
+
+//        boolean diamondBearing = true;
+//        float diamondPercent = 1.00f;
 
         // Debug
         if (diamondBearing && JemsGeoConfig.SERVER.debug_diatreme_maar.get()) {
@@ -102,32 +101,39 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
         }
 
 
-        ///////////////////////////////
-        /// SIZE PROPERTY SELECTION ///
-        ///////////////////////////////
+        /////////////////////////////
+        // SIZE PROPERTY SELECTION //
+        /////////////////////////////
 
-        // Note: feature is placed in the center of the chunk
-        int topRadius = rand.nextInt(MAX_TOP_RADIUS - MIN_TOP_RADIUS) + MIN_TOP_RADIUS;
-        int baseRadius = rand.nextInt(topRadius - MIN_BASE_RADIUS) + MIN_BASE_RADIUS;
-        int baseDifference = topRadius - baseRadius;
+        // Note: diatreme feature is placed in the center of the chunk
 
-        int diatremeHeight = rand.nextInt(MAX_DIATREME_HEIGHT - MIN_DIATREME_HEIGHT) + MIN_DIATREME_HEIGHT;
+        // Diamondiferous diatremes are on average, bigger than non-diamond bearing pipes due to the higher
+        // volume of erupted magma provided by the longer eruptions diamonds need to reach the surface from deep down.
+        // The +1 to max ensures that with conversion to integer, the maximum value is possible.
+        final int topRadius = (diamondBearing ? triDist((MIN_TOP_RADIUS+4), (MAX_TOP_RADIUS+1), (MAX_TOP_RADIUS+1), rand)
+                : triDist(MIN_TOP_RADIUS, (MAX_TOP_RADIUS+1), MIN_TOP_RADIUS, rand));
+
+        final int baseRadius = rand.nextInt(topRadius - MIN_BASE_RADIUS) + MIN_BASE_RADIUS;
+        final int baseDifference = topRadius - baseRadius;
+
+        int diatremeHeight = rand.nextInt(MAX_DIATREME_HEIGHT + 1 - MIN_DIATREME_HEIGHT) + MIN_DIATREME_HEIGHT;
         if (reader.getBiome(pos).getCategory() == Biome.Category.EXTREME_HILLS) {
             diatremeHeight += 20; // Add height depending on certain biomes, due to the overall added terrain height
         }
-        int maarHeight = diatremeHeight + MAAR_THICKNESS; // Main maar: 10 blocks, scattered debris: 20 blocks
+        final int maarHeight = diatremeHeight + MAAR_THICKNESS; // Main maar: 10 blocks, scattered debris: 20 blocks
+
+        //System.out.println("Dia Height: " + diatremeHeight + ", Maar Height: " + maarHeight + ", " + reader.getChunk(pos).getPos());
 
 
         ////////////////
         // GENERATION //
         ////////////////
 
-        ChunkPos genChunk = new ChunkPos(pos);
-
         HashMap<BlockState, Integer> brecciaMap = new HashMap<>(); // Count the relative amounts of replaced stones for breccia ratios
         int brecciaCount = 0; // Count the overall number of recorded replaced stones
-        ArrayList<BlockPos> brecciaPosList = new ArrayList<>(); // Store locations to place breccia
-        ArrayList<BlockPos> tuffPosList = new ArrayList<>(); // Store locations to place tuff
+        HashMap<BlockPos, Boolean> brecciaPosMap = new HashMap<>(); // Store breccia locations and if regolith
+        ArrayList<BlockPos> diaPosList = new ArrayList<>(); // Store diamond ore locations
+        ArrayList<BlockPos> olivePosList = new ArrayList<>(); // Store olvine ore locations
 
         // Pre-calculate the pure radius, which is the same for every location. Dither and warp added later
         float[] radius = new float[(maarHeight + 1)];
@@ -150,56 +156,68 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
                     continue;
                 }
 
-                boolean isPlaced = false;
-                boolean isRegolith = false;
-                if (y > (surfaceHeight - 1 - rand.nextInt(4))) { // Surface weathering
+                if (y == surfaceHeight) { // Surface weathering
                     if (distance > topRadius) continue;
-                    isPlaced = true;
+
+                    if (rand.nextFloat() < regTopPercent) {
+                        if (rand.nextFloat() < 0.33f) {
+                            brecciaPosMap.put(placePos, true);
+                        } else {
+                            reader.setBlockState(placePos, mainRegState, 2);
+                        }
+                    } else {
+                        reader.setBlockState(placePos, surfaceConfig.getTop(), 2);
+                    }
+
+
                 } else if (y > maarHeight) { // Upper ejecta
                     if (distance > topRadius) continue;
-                    isPlaced = true;
+                    reader.setBlockState(placePos, testState2, 2); // this will not stay here, handle placement in IFs
+
+
                 } else if (y > diatremeHeight) { // Maar
                     if (distance > radius[y]) continue;
-                    if (rand.nextFloat() < (-0.1f + (0.90f * (distance / radius[y])))) {
-                        brecciaPosList.add(placePos); // Place a breccia block (later) here
+
+                    // Weathering if near-surface
+                    boolean regoWeather = (y > (surfaceHeight - 2 - rand.nextInt(4)));
+
+                    if (rand.nextFloat() < (-0.10f + (0.90f * (distance / radius[y])))) {
+                        brecciaPosMap.put(placePos, true); // Place a breccia block (later) here
                     } else if (rand.nextFloat() < (0.15f + (0.65f * (((float) y - diatremeHeight) / MAAR_THICKNESS)))) {
-                        tuffPosList.add(placePos); // Place a tuff block (later) here
+                        reader.setBlockState(placePos, tuffState, 2); // Place a tuff block here
                     } else {
-                        reader.setBlockState(placePos, mainIgnState, 2); // Place the primary stone here
+                        reader.setBlockState(placePos,
+                                (regoWeather ? mainRegState : mainIgnState), 2); // Place the primary stone here
                     }
-                    isPlaced = true;
+
+
                 } else { // Diatreme
                     if (distance > radius[y]) continue;
+
+                    // Weathering if near-surface
+                    boolean regoWeather = (y > (surfaceHeight - 2 - rand.nextInt(4)));
+
                     if (rand.nextFloat() < (-0.15f + (0.90f * (distance / radius[y])))) {
-                        brecciaPosList.add(placePos); // Place a breccia block (later) here
+                        brecciaPosMap.put(placePos, regoWeather); // Place a breccia block (later) here
                     } else if (rand.nextFloat() < 0.1f) {
-                        tuffPosList.add(placePos); // Place a tuff block (later) here
+                        reader.setBlockState(placePos, tuffState, 2); // Place a tuff block here
                     } else {
-                        reader.setBlockState(placePos, mainIgnState, 2); // Place the primary stone here
+                        reader.setBlockState(placePos,
+                                (regoWeather ? mainRegState : mainIgnState), 2); // Place the primary stone here
                     }
-                    isPlaced = true;
                 }
 
-                if (isPlaced) {
-                    // Record what block was replaced for later brecciation
-                    brecciaCount += updateBrecciaMap(brecciaMap, replaced, replaceStatus);
+                // Record what block was replaced for later brecciation
+                brecciaCount += updateBrecciaMap(brecciaMap, replaced, replaceStatus);
 
-                    reader.setBlockState(placePos, mainIgnState, 2); // this will not stay here, handle placement in IFs
+                // Mark a location for ore
+                if (diamondBearing && (rand.nextFloat() < diamondPercent)) {
+                    diaPosList.add(placePos);
+                } else {
 
-                    if (diamondBearing && (rand.nextFloat() < diamondPercent)) {
-                        diaMaarDep.enqDiamondOre(reader, placePos);
-                    }
-
-
-                    // ORE HANDLE
-                    // check if diamond?
-                    // check if olivine?
                 }
 
-//                BlockState placed = mainIgnState;
-//                if (isRegolith) {
-//                    placed = ModBlocks.GEOBLOCKS.get(mainIgnType).getRegolith().getDefaultState();
-//                }
+
             }
         }
 
@@ -232,33 +250,30 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
         ////////////////////////
 
         if (!brecciaProbMap.isEmpty()) {
-            for (BlockPos brecciaPos : brecciaPosList) {
+            brecciaPosMap.forEach((bPos, isReg) -> {
                 // 25% chance of tuff
-                reader.setBlockState(brecciaPos, ((rand.nextFloat() < 0.75f) ? brecciaProbMap.nextElt() : tuffState), 2);
-            }
+                BlockState state = isReg ?
+                        UtilMethods.convertRegolith(brecciaProbMap.nextElt(), true) : brecciaProbMap.nextElt();
+                reader.setBlockState(bPos, ((rand.nextFloat() < 0.75f) ? state : tuffState), 2);
+            });
         } else {
             // If no breccias were recorded, replace breccia positions with the main igneous rock (very unlikely)
-            for (BlockPos brecciaPos : brecciaPosList) {
+            brecciaPosMap.forEach((bPos, isReg) -> {
                 // 50% chance of tuff
-                reader.setBlockState(brecciaPos, ((rand.nextBoolean()) ? mainIgnState : tuffState), 2);
-            }
+                BlockState state = isReg ? mainRegState : mainIgnState;
+                reader.setBlockState(bPos, ((rand.nextBoolean()) ? state : tuffState), 2);
+            });
         }
 
 
-        /////////////////////
-        /// TUFF HANDLING ///
-        /////////////////////
+        //////////////////
+        // ORE HANDLING //
+        //////////////////
 
-        for (BlockPos tuffPos : tuffPosList) {
-            reader.setBlockState(tuffPos, tuffState, 2);
+        // Place/enqueue diamond ores
+        for (BlockPos placePos : diaPosList) {
+            diaMaarDep.enqDiamondOre(reader, placePos);
         }
-
-
-
-
-
-
-
 
 
         return true;
@@ -705,5 +720,16 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
             return 1;
         }
         return 0;
+    }
+
+    // Triangular value probability distribution with configurable peak between the min and max values
+    public static int triDist(int min, int max, int peak, Random rand) {
+        float F = (peak - min) / (float) (max - min);
+        float r = rand.nextFloat();
+        if (r < F) {
+            return (int) (min + Math.sqrt(r * (max - min) * (peak - min)));
+        } else {
+            return (int) (max - Math.sqrt((1 - r) * (max - min) * (max - peak)));
+        }
     }
 }

@@ -105,7 +105,7 @@ public class OrePlacerFeature extends Feature<NoFeatureConfig>{
                             }
 
                             Block placeBlock;
-                            if (UtilMethods.isRegolith(hostBlock)) {
+                            if (UtilMethods.isGeoBlockRegolith(hostState.getBlock())) {
                                 placeBlock = ModBlocks.GEOBLOCKS.get(hostBlock.getGeologyType())
                                         .getRegolithOre(placerDeposit.getOres().nextElt(), grade);
                             } else {

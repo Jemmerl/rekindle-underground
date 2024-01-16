@@ -47,4 +47,5 @@ public class FallingGeoBlock extends FallingBlock implements IGeoBlock {
     public StoneGroupType getStoneGroupType() {
         return this.stoneGroupType;
     }
+
 }

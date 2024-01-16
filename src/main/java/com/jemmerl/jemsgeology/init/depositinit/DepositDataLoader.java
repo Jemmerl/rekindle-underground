@@ -45,7 +45,7 @@ public class DepositDataLoader extends JsonReloadListener {
         depositRegistrar.clearDeposits(); // Flush the previously cached deposits, to ensure a clean slate
 
         // Statically initialized, feature-specific generators used to implement ore enqueueing outside of regular gen
-        depositRegistrar.addUtilDeposit("diatreme_maar", DiatremeMaarUtilDeposit.getDepositInstance());
+        depositRegistrar.addUtilDeposit("diatreme_maar_diamond", DiatremeMaarUtilDeposit.getDepositInstance());
 
         objectIn.forEach((rl, jsonElement) -> {
             try {

@@ -30,7 +30,7 @@ public class DiatremeMaarUtilDeposit implements IEnqueuedDeposit {
 
     // Utility deposit for diatreme-maar diamond and olivine placement
     private DiatremeMaarUtilDeposit() {
-        this.name = "diatreme_maar";
+        this.name = "diatreme_maar_diamond";
 
         ArrayList<Pair<Integer, GradeType>> elts = new ArrayList<>();
         elts.add( new Pair<>(1, GradeType.HIGHGRADE));
@@ -115,6 +115,7 @@ public class DiatremeMaarUtilDeposit implements IEnqueuedDeposit {
         return false;
     }
 
+    // maybe rework to be the DIAMONDS diatreme util deposit, adding second for olivine... or combine somehow
     public boolean enqDiamondOre(ISeedReader reader, BlockPos pos) {
         DepositUtil.processOreEnqueue(reader, pos, OreType.DIAMOND, gradesMap.nextElt(), true, this);
         return true;

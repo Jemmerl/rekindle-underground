@@ -9,7 +9,6 @@ import com.jemmerl.jemsgeology.data.enums.ore.OreType;
 import com.jemmerl.jemsgeology.init.blockinit.GeoRegistry;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -20,7 +19,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Supplier;
 
 public class ModBlocks {

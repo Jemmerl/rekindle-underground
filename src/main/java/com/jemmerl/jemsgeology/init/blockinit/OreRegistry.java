@@ -8,7 +8,6 @@ import com.jemmerl.jemsgeology.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.RegistryObject;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

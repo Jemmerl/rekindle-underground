@@ -316,9 +316,10 @@ public class DepositUtil {
             BlockState state = reader.getBlockState(qPos);
             state = UtilMethods.convertVanillaToDetritus(state); // Convert vanilla detritus to respective OreBlocks for comparison
             Block hostBlock = state.getBlock();
+
             if (isValidStone(hostBlock, qDeposit.getValid())) {
                 GeoRegistry geoRegistry = ModBlocks.GEOBLOCKS.get(((IGeoBlock) hostBlock).getGeologyType());
-                Block placeBlock = (UtilMethods.isRegolith(hostBlock)) ?
+                Block placeBlock = (UtilMethods.isGeoBlockRegolith(hostBlock)) ?
                         geoRegistry.getRegolithOre(qType, qGrade) : geoRegistry.getStoneOre(qType, qGrade);
 
                 if (!reader.setBlockState(qPos, placeBlock.getDefaultState(), 2 | 16)) {
@@ -475,7 +476,7 @@ public class DepositUtil {
         }
 
         GeoRegistry geoRegistry = ModBlocks.GEOBLOCKS.get(((IGeoBlock) hostBlock).getGeologyType());
-        Block placeBlock = (UtilMethods.isRegolith(hostBlock)) ?
+        Block placeBlock = (UtilMethods.isGeoBlockRegolith(hostBlock)) ?
                 geoRegistry.getRegolithOre(deposit.getOres().nextElt(), grade) :
                 geoRegistry.getStoneOre(deposit.getOres().nextElt(), grade);
 
