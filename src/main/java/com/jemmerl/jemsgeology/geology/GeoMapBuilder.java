@@ -60,6 +60,9 @@ public class GeoMapBuilder {
 
         // Mark that this chunk was generated
         this.cpCap.setChunkGenerated(this.chunkReader.getSeedReader().getChunk(this.cornerPos).getPos());
+        //System.out.println("??? GENNED");
+        // WHAT IN THE HELL WHYYYYYY
+        //519 ~ 183
     }
 
     /////////////////////////////////////////////////

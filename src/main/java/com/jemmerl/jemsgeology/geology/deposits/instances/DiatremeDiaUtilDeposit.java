@@ -19,33 +19,38 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-public class DiatremeMaarUtilDeposit implements IEnqueuedDeposit {
+public class DiatremeDiaUtilDeposit implements IEnqueuedDeposit {
 
-    private static DiatremeMaarUtilDeposit INSTANCE = null;
+    private static DiatremeDiaUtilDeposit INSTANCE = null;
 
     private final String name;
     private final WeightedProbMap<GradeType> gradesMap;
+    private final WeightedProbMap<OreType> oresMap;
     private final ArrayList<GeologyType> validList;
     private final ArrayList<Biome.Category> validBiomes;
 
     // Utility deposit for diatreme-maar diamond and olivine placement
-    private DiatremeMaarUtilDeposit() {
+    private DiatremeDiaUtilDeposit() {
         this.name = "diatreme_maar_diamond";
 
-        ArrayList<Pair<Integer, GradeType>> elts = new ArrayList<>();
-        elts.add( new Pair<>(1, GradeType.HIGHGRADE));
-        elts.add( new Pair<>(9, GradeType.MIDGRADE));
-        elts.add( new Pair<>(90, GradeType.LOWGRADE));
-        this.gradesMap = new WeightedProbMap<>(elts);
+        ArrayList<Pair<Integer, GradeType>> gradeElts = new ArrayList<>();
+        gradeElts.add( new Pair<>(1, GradeType.HIGHGRADE));
+        gradeElts.add( new Pair<>(9, GradeType.MIDGRADE));
+        gradeElts.add( new Pair<>(90, GradeType.LOWGRADE));
+        this.gradesMap = new WeightedProbMap<>(gradeElts);
+
+        ArrayList<Pair<Integer, OreType>> oreElts = new ArrayList<>();
+        oreElts.add( new Pair<>(100, OreType.DIAMOND));
+        this.oresMap = new WeightedProbMap<>(oreElts);
 
         this.validList = new ArrayList<>(Arrays.asList(GeologyType.values()));
         this.validBiomes = new ArrayList<>(Arrays.asList(Biome.Category.values()));
     }
 
     // Singleton pattern
-    public static DiatremeMaarUtilDeposit getDepositInstance() {
+    public static DiatremeDiaUtilDeposit getDepositInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new DiatremeMaarUtilDeposit();
+            INSTANCE = new DiatremeDiaUtilDeposit();
         }
         return INSTANCE;
     }
@@ -87,7 +92,7 @@ public class DiatremeMaarUtilDeposit implements IEnqueuedDeposit {
 
     @Override
     public WeightedProbMap<OreType> getOres() {
-        return null;
+        return oresMap;
     }
 
     @Override

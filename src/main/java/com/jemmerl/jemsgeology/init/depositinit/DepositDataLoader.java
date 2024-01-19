@@ -3,10 +3,7 @@ package com.jemmerl.jemsgeology.init.depositinit;
 import com.google.gson.*;
 import com.jemmerl.jemsgeology.JemsGeology;
 import com.jemmerl.jemsgeology.geology.deposits.DepositUtil;
-import com.jemmerl.jemsgeology.geology.deposits.instances.ConstantScatterDeposit;
-import com.jemmerl.jemsgeology.geology.deposits.instances.DiatremeMaarUtilDeposit;
-import com.jemmerl.jemsgeology.geology.deposits.instances.LayerEnqueuedDeposit;
-import com.jemmerl.jemsgeology.geology.deposits.instances.PlacerDeposit;
+import com.jemmerl.jemsgeology.geology.deposits.instances.*;
 import com.jemmerl.jemsgeology.geology.deposits.templates.ConstantScatterTemplate;
 import com.jemmerl.jemsgeology.geology.deposits.templates.LayerTemplate;
 import com.jemmerl.jemsgeology.geology.deposits.templates.PlacerTemplate;
@@ -45,7 +42,8 @@ public class DepositDataLoader extends JsonReloadListener {
         depositRegistrar.clearDeposits(); // Flush the previously cached deposits, to ensure a clean slate
 
         // Statically initialized, feature-specific generators used to implement ore enqueueing outside of regular gen
-        depositRegistrar.addUtilDeposit("diatreme_maar_diamond", DiatremeMaarUtilDeposit.getDepositInstance());
+        depositRegistrar.addUtilDeposit("diatreme_maar_diamond", DiatremeDiaUtilDeposit.getDepositInstance());
+        depositRegistrar.addUtilDeposit("diatreme_maar_olivine", DiatremeOliveUtilDeposit.getDepositInstance());
 
         objectIn.forEach((rl, jsonElement) -> {
             try {

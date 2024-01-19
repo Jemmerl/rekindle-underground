@@ -1,12 +1,9 @@
 package com.jemmerl.jemsgeology.world.feature;
 
 import com.jemmerl.jemsgeology.JemsGeology;
-import com.jemmerl.jemsgeology.blocks.IGeoBlock;
 import com.jemmerl.jemsgeology.data.enums.GeologyType;
-import com.jemmerl.jemsgeology.data.enums.StoneGroupType;
-import com.jemmerl.jemsgeology.data.enums.ore.OreType;
-import com.jemmerl.jemsgeology.geology.deposits.DepositUtil;
-import com.jemmerl.jemsgeology.geology.deposits.instances.DiatremeMaarUtilDeposit;
+import com.jemmerl.jemsgeology.geology.deposits.instances.DiatremeDiaUtilDeposit;
+import com.jemmerl.jemsgeology.geology.deposits.instances.DiatremeOliveUtilDeposit;
 import com.jemmerl.jemsgeology.init.JemsGeoConfig;
 import com.jemmerl.jemsgeology.init.ModBlocks;
 import com.jemmerl.jemsgeology.init.NoiseInit;
@@ -14,11 +11,10 @@ import com.jemmerl.jemsgeology.util.Pair;
 import com.jemmerl.jemsgeology.util.ReplaceableStatus;
 import com.jemmerl.jemsgeology.util.UtilMethods;
 import com.jemmerl.jemsgeology.util.WeightedProbMap;
-import com.jemmerl.jemsgeology.util.noise.GenerationNoise.BlobWarpNoise;
+import com.jemmerl.jemsgeology.util.noise.GenerationNoise.RegionNoise;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -40,18 +36,13 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
     private static final int MAX_TOP_RADIUS = 20; // (actual is one less)
     private static final int MIN_TOP_RADIUS = 12;
     private static final int MIN_BASE_RADIUS = 4;
-    private static final int MAX_BASE_DECREMENT = 10;
 
     private static final int MIN_DIATREME_HEIGHT = 40; // Minimum height of the top of the diatreme
     private static final int MAX_DIATREME_HEIGHT = 65; // Maximum height of the top of the diatreme (actual is one less)
     private static final int MAAR_THICKNESS = 20;
 
-
-    private static final int MAX_RADIUS = 18; // Max radius of upper diatreme
     private static final int RADIUS_VARIATION = 7; // How much the diatreme radius can vary
-
-    private static final int MAX_MAAR_RADIUS = 22; // Max radius of upper diatreme
-
+    
     private static final int MAAR_HEIGHT = 10; // Height of the maar section
     private static final int MAAR_EJECTA_HEIGHT = 30; // Height of the maar and scattered debris above the maar
 
@@ -78,21 +69,24 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
         // COMPOSITION PROPERTY SELECTION //
         ////////////////////////////////////
 
-        DiatremeMaarUtilDeposit diaMaarDep = DiatremeMaarUtilDeposit.getDepositInstance();
+        DiatremeDiaUtilDeposit diaMaarDep = DiatremeDiaUtilDeposit.getDepositInstance();
+        DiatremeOliveUtilDeposit oliveMaarDep = DiatremeOliveUtilDeposit.getDepositInstance();
 
         final GeologyType mainIgnType = getMainIgnType(rand);
         final BlockState mainIgnState = ModBlocks.GEOBLOCKS.get(mainIgnType).getBaseState();
         final BlockState mainRegState = ModBlocks.GEOBLOCKS.get(mainIgnType).getRegolith().getDefaultState();
         final BlockState tuffState = ModBlocks.GEOBLOCKS.get(GeologyType.getTuff(mainIgnType)).getBaseState();
 
+        // temp dev
         final BlockState testState2 = ModBlocks.GEOBLOCKS.get(GeologyType.SANDSTONE).getBaseState();
 
-        final boolean diamondBearing = isDiamondBearing(rand, mainIgnType);
+        final boolean diamondBearing = isDiamondBearing(pos, mainIgnType);
         final float diamondPercent = diamondBearing ? ((0.10f * rand.nextFloat()) + 0.05f) : 0f; // Richness from 5% to 15%
-        final float regTopPercent = rand.nextFloat() * 0.30f + 0.05f; // Surface building: percent regolith (for variability)
+        final float olivinePercent = isOlivineBearing(mainIgnType) ? ((0.25f * rand.nextFloat()) + 0.15f) : 0f; // Richness from 5% to 15%
+        final float regTopPercent = rand.nextFloat() * 0.20f + 0.05f; // Surface building: percent regolith (for variability)
 
 //        boolean diamondBearing = true;
-//        float diamondPercent = 1.00f;
+//        float diamondPercent = 0.10f;
 
         // Debug
         if (diamondBearing && JemsGeoConfig.SERVER.debug_diatreme_maar.get()) {
@@ -156,12 +150,15 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
                     continue;
                 }
 
+                // TODO config toggle to remove diamonds from the surface (to make players need to check for them?)
+                boolean brecciaSpot = false;
                 if (y == surfaceHeight) { // Surface weathering
                     if (distance > topRadius) continue;
 
                     if (rand.nextFloat() < regTopPercent) {
                         if (rand.nextFloat() < 0.33f) {
-                            brecciaPosMap.put(placePos, true);
+                            brecciaPosMap.put(placePos, true); // Place a breccia block (later) here
+                            brecciaSpot = true;
                         } else {
                             reader.setBlockState(placePos, mainRegState, 2);
                         }
@@ -183,6 +180,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
 
                     if (rand.nextFloat() < (-0.10f + (0.90f * (distance / radius[y])))) {
                         brecciaPosMap.put(placePos, true); // Place a breccia block (later) here
+                        brecciaSpot = true;
                     } else if (rand.nextFloat() < (0.15f + (0.65f * (((float) y - diatremeHeight) / MAAR_THICKNESS)))) {
                         reader.setBlockState(placePos, tuffState, 2); // Place a tuff block here
                     } else {
@@ -199,6 +197,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
 
                     if (rand.nextFloat() < (-0.15f + (0.90f * (distance / radius[y])))) {
                         brecciaPosMap.put(placePos, regoWeather); // Place a breccia block (later) here
+                        brecciaSpot = true;
                     } else if (rand.nextFloat() < 0.1f) {
                         reader.setBlockState(placePos, tuffState, 2); // Place a tuff block here
                     } else {
@@ -213,8 +212,10 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
                 // Mark a location for ore
                 if (diamondBearing && (rand.nextFloat() < diamondPercent)) {
                     diaPosList.add(placePos);
-                } else {
-
+                } else if (!brecciaSpot && (rand.nextFloat() < olivinePercent)) {
+                    // Can appear in the igneous rock and tuff, not breccia
+                    // TODO Note, currently does not consider breccia spots later marked as tuff. May not change.
+                    olivePosList.add(placePos);
                 }
 
 
@@ -251,10 +252,10 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
 
         if (!brecciaProbMap.isEmpty()) {
             brecciaPosMap.forEach((bPos, isReg) -> {
-                // 25% chance of tuff
+                // 20% chance of tuff
                 BlockState state = isReg ?
                         UtilMethods.convertRegolith(brecciaProbMap.nextElt(), true) : brecciaProbMap.nextElt();
-                reader.setBlockState(bPos, ((rand.nextFloat() < 0.75f) ? state : tuffState), 2);
+                reader.setBlockState(bPos, ((rand.nextFloat() < 0.80f) ? state : tuffState), 2);
             });
         } else {
             // If no breccias were recorded, replace breccia positions with the main igneous rock (very unlikely)
@@ -273,6 +274,11 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
         // Place/enqueue diamond ores
         for (BlockPos placePos : diaPosList) {
             diaMaarDep.enqDiamondOre(reader, placePos);
+        }
+
+        // Place/enqueue olivine ores
+        for (BlockPos placePos : olivePosList) {
+            oliveMaarDep.enqOlivineOre(reader, placePos, diamondBearing);
         }
 
 
@@ -680,28 +686,43 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
     // Determine the primary igneous matrix rock of the pipe
     private static GeologyType getMainIgnType (Random rand){
         int randInt = rand.nextInt(101);
-        if (randInt > 65) {
-            return GeologyType.KIMBERLITE; // (35% Chance)
-        } else if (randInt > 60) {
+        if (randInt > 60) {
+            return GeologyType.KIMBERLITE; // (40% Chance)
+        } else if (randInt > 55) {
             return GeologyType.LAMPROITE; // (5% Chance)
-        } else if (randInt > 35) {
-            return GeologyType.BASALT; // (25% Chance)
         } else if (randInt > 30) {
+            return GeologyType.BASALT; // (25% Chance)
+        } else if (randInt > 25) {
             return GeologyType.DACITE; // (5% Chance)
         } else if (randInt > 20) {
-            return GeologyType.ANDESITE; // (10% Chance)
+            return GeologyType.ANDESITE; // (5% Chance)
         } else {
             return GeologyType.RHYOLITE; // (20% Chance)
         }
     }
 
     // Only Kimberlite and Lamproite pipes can contain diamonds
-    private static boolean isDiamondBearing (Random rand, GeologyType mainIgnType){
+    // Note: diamond pipes in reality tend to cluster over a "good diamond conditions" area, simulated using regions
+    private static boolean isDiamondBearing (BlockPos pos, GeologyType mainIgnType) {
+        Random rand = new Random((long) (RegionNoise.volcanicRegionNoise(pos.getX(), pos.getZ(), true) * 100000));
+
         switch (mainIgnType) {
             case KIMBERLITE:
-                return (rand.nextFloat() < 0.25f); // 25% chance if Kimberlite
+                return (rand.nextFloat() < 0.35f); // 35% region chance if Kimberlite
             case LAMPROITE:
-                return (rand.nextFloat() < 0.10f); // 10% chance if Lamproite
+                return (rand.nextFloat() < 0.15f); // 15% region chance if Lamproite
+            default:
+                return false;
+        }
+    }
+
+    // Only the (ultra)mafic lavas contain peridotite (olivine) xenoliths in diatremes. As far as I can tell, anyway.
+    private static boolean isOlivineBearing(GeologyType mainIgnType) {
+        switch (mainIgnType) {
+            case KIMBERLITE:
+            case LAMPROITE:
+            case BASALT:
+                return true;
             default:
                 return false;
         }
