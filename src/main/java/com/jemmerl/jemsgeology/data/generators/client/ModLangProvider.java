@@ -132,7 +132,7 @@ public class ModLangProvider extends LanguageProvider {
             String oreName = StringUtils.capitaliseAllWords(dividePath[1].replace('_', ' '));
             String[] divideGrade = dividePath[2].split("grade", 2);
             String gradeName = StringUtils.capitalise(divideGrade[0]) + "-Grade";
-            displayName = gradeName + " " + stoneName + " " + oreName + " Ore";
+            displayName = gradeName + " " + oreName + " " + stoneName;
         } else {
             String[] dividePath = path.split("_stone", 2);
             displayName = StringUtils.capitaliseAllWords(dividePath[0].replace('_', ' '));
@@ -150,7 +150,7 @@ public class ModLangProvider extends LanguageProvider {
             String oreName = StringUtils.capitaliseAllWords(dividePath[1].replace('_', ' '));
             String[] divideGrade = dividePath[2].split("grade", 2);
             String gradeName = StringUtils.capitalise(divideGrade[0]) + "-Grade";
-            displayName = gradeName + " " + regolithName + " " + oreName + " Ore";
+            displayName = gradeName + " " + oreName + " " + regolithName;
         } else {
             displayName = StringUtils.capitaliseAllWords(path.replace('_', ' '));
         }
@@ -167,7 +167,7 @@ public class ModLangProvider extends LanguageProvider {
             String oreName = StringUtils.capitaliseAllWords(dividePath[1].replace('_', ' '));
             String[] divideGrade = dividePath[2].split("grade", 2);
             String gradeName = StringUtils.capitalise(divideGrade[0]) + "-Grade";
-            displayName = gradeName + " " + detritusName + " " + oreName + " Ore";
+            displayName = gradeName + " " + oreName + " " + detritusName;
         } else {
             String[] dividePath = path.split("_detritus", 2);
             displayName = StringUtils.capitaliseAllWords(dividePath[0].replace('_', ' '));

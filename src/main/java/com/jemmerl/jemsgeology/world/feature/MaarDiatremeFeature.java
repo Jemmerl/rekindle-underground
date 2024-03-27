@@ -42,7 +42,7 @@ public class MaarDiatremeFeature extends Feature<NoFeatureConfig> {
     private static final int MAAR_THICKNESS = 20;
 
     private static final int RADIUS_VARIATION = 7; // How much the diatreme radius can vary
-    
+
     private static final int MAAR_HEIGHT = 10; // Height of the maar section
     private static final int MAAR_EJECTA_HEIGHT = 30; // Height of the maar and scattered debris above the maar
 
