@@ -5,7 +5,7 @@ import com.jemmerl.jemsgeology.data.enums.ore.GradeType;
 import com.jemmerl.jemsgeology.init.ModBlocks;
 import com.jemmerl.jemsgeology.init.ModTags;
 import com.jemmerl.jemsgeology.init.blockinit.GeoRegistry;
-import com.jemmerl.jemsgeology.init.blockinit.OreRegistry;
+import com.jemmerl.jemsgeology.init.blockinit.OreBlockRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
@@ -53,10 +53,10 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 tagBuilderGeoStone.add(geoRegistry.getBaseStone());
             }
 
-            for (OreRegistry oreRegistry: geoRegistry.getStoneOreRegistry().values()) {
-                Block highGrade = oreRegistry.getGradeOre(GradeType.HIGHGRADE).get();
-                Block midGrade = oreRegistry.getGradeOre(GradeType.MIDGRADE).get();
-                Block lowGrade = oreRegistry.getGradeOre(GradeType.LOWGRADE).get();
+            for (OreBlockRegistry oreBlockRegistry : geoRegistry.getStoneOreRegistry().values()) {
+                Block highGrade = oreBlockRegistry.getGradeOre(GradeType.HIGHGRADE).get();
+                Block midGrade = oreBlockRegistry.getGradeOre(GradeType.MIDGRADE).get();
+                Block lowGrade = oreBlockRegistry.getGradeOre(GradeType.LOWGRADE).get();
 
                 tagBuilderOreHigh.add(highGrade);
                 tagBuilderOreMid.add(midGrade);
@@ -79,10 +79,10 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
                 tagBuilderGeoRegolith.add(geoRegistry.getRegolith());
                 tagBuilderNoOre.add(geoRegistry.getRegolith());
-                for (OreRegistry oreRegistry: geoRegistry.getRegolithOreRegistry().values()) {
-                    Block highGrade = oreRegistry.getGradeOre(GradeType.HIGHGRADE).get();
-                    Block midGrade = oreRegistry.getGradeOre(GradeType.MIDGRADE).get();
-                    Block lowGrade = oreRegistry.getGradeOre(GradeType.LOWGRADE).get();
+                for (OreBlockRegistry oreBlockRegistry : geoRegistry.getRegolithOreRegistry().values()) {
+                    Block highGrade = oreBlockRegistry.getGradeOre(GradeType.HIGHGRADE).get();
+                    Block midGrade = oreBlockRegistry.getGradeOre(GradeType.MIDGRADE).get();
+                    Block lowGrade = oreBlockRegistry.getGradeOre(GradeType.LOWGRADE).get();
 
                     tagBuilderOreHigh.add(highGrade);
                     tagBuilderOreMid.add(midGrade);

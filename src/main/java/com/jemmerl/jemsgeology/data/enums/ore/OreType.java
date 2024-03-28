@@ -1,7 +1,8 @@
 package com.jemmerl.jemsgeology.data.enums.ore;
 
-import com.jemmerl.jemsgeology.util.lists.ModOresList;
+import com.jemmerl.jemsgeology.init.ModItems;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.util.IStringSerializable;
 
 import java.util.*;
@@ -20,11 +21,11 @@ public enum OreType implements IStringSerializable{
     CHROMITE("chromite"),
     CINNABAR("cinnabar"),
     COBALTITE("cobaltite"),
+    COLTAN("coltan"),
     CRYOLITE("cryolite"),
     DIAMOND("diamond"),
     FLUORITE ("fluorite"),
     GALENA("galena"),
-    GOETHITE("goethite"),
     GRAPHITE("graphite"),
     HEMATITE("hematite"),
     ILMENITE("ilmenite"),
@@ -42,7 +43,6 @@ public enum OreType implements IStringSerializable{
     PENTLANDITE("pentlandite"),
     PERIDOTITE("peridotite"),
     POLLUCITE("pollucite"),
-    PSILOMELANE("psilomelane"),
     PYRITE("pyrite"),
     PYROCHLORE("pyrochlore"),
     PYROLUSITE("pyrolusite"),
@@ -53,7 +53,6 @@ public enum OreType implements IStringSerializable{
     SPODUMENE("spodumene"),
     STIBNITE("stibnite"),
     SYLVITE("sylvite"),
-    TANTALITE("tantalite"),
     TETRAHEDRITE("tetrahedrite"),
     TRONA("trona"),
     URANINITE("uraninite"),
@@ -61,9 +60,8 @@ public enum OreType implements IStringSerializable{
 
     private final String name;
 
-    private static final List<OreType> VALUESALL = Collections.unmodifiableList(Arrays.asList(values()));
-    private static final List<OreType> VALUES = new ArrayList<>(EnumSet.complementOf(EnumSet.of(OreType.NONE)));
-    private static final int SIZE = VALUES.size();
+    public static final List<OreType> VALUES = new ArrayList<>(EnumSet.complementOf(EnumSet.of(OreType.NONE)));
+    public static final int SIZE = VALUES.size();
 
     OreType(String name) {
         this.name = name;
@@ -89,12 +87,14 @@ public enum OreType implements IStringSerializable{
 
     // Returns the respective regular ore item for the enum. "DIAMOND" and "NONE" are special cases
     public Item getOreItem() {
-        return ModOresList.ORE_LIST.get(this).getOreItem();
+        if (this == NONE) return null;
+        if (this == DIAMOND) return Items.DIAMOND;
+        return ModItems.OREITEMS.get(this).getOreItem();
     }
 
     // Returns the respective poor ore item for the enum. "DIAMOND" and "NONE" are special cases
     public Item getPoorOreItem() {
-        return ModOresList.ORE_LIST.get(this).getPoorOreItem();
+        return (this == NONE) ? null : ModItems.OREITEMS.get(this).getPoorOreItem();
     }
 
     // Gets a random ore, excluding NONE

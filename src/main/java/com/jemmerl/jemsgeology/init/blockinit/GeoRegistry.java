@@ -35,8 +35,8 @@ public class GeoRegistry {
     private final RegistryObject<Block> polishedSlab;
     private final RegistryObject<Block> polishedStairs;
 
-    private final Map<OreType, OreRegistry> stoneOreRegistry;
-    private final Map<OreType, OreRegistry> regolithOreRegistry;
+    private final Map<OreType, OreBlockRegistry> stoneOreRegistry;
+    private final Map<OreType, OreBlockRegistry> regolithOreRegistry;
 
     // TODO add to respective tags
     public GeoRegistry(GeologyType geoType) {
@@ -152,7 +152,7 @@ public class GeoRegistry {
     // Get all ore-bearing base stone geo-blocks
     public List<Block> getStoneOreBlocks() {
         List<Block> allStoneOreBlocks = new ArrayList<>();
-        for (OreRegistry oreRegistry: stoneOreRegistry.values()) {
+        for (OreBlockRegistry oreRegistry: stoneOreRegistry.values()) {
             allStoneOreBlocks.addAll(oreRegistry.getAllGradedOreBlocks());
         }
         return allStoneOreBlocks;
@@ -161,14 +161,14 @@ public class GeoRegistry {
     // Get all ore-bearing regolith geo-blocks
     public List<Block> getRegolithOreBlocks() {
         List<Block> allRegolithOreBlocks = new ArrayList<>();
-        for (OreRegistry oreRegistry: regolithOreRegistry.values()) {
+        for (OreBlockRegistry oreRegistry: regolithOreRegistry.values()) {
             allRegolithOreBlocks.addAll(oreRegistry.getAllGradedOreBlocks());
         }
         return allRegolithOreBlocks;
     }
 
-    public Map<OreType, OreRegistry> getStoneOreRegistry() { return stoneOreRegistry; }
-    public Map<OreType, OreRegistry> getRegolithOreRegistry() { return regolithOreRegistry; }
+    public Map<OreType, OreBlockRegistry> getStoneOreRegistry() { return stoneOreRegistry; }
+    public Map<OreType, OreBlockRegistry> getRegolithOreRegistry() { return regolithOreRegistry; }
 
     public List<Block> getDecorBlocks() {
         List<Block> allDecorBlocks = new ArrayList<>();
@@ -188,10 +188,10 @@ public class GeoRegistry {
     // Registration Utils //
     ////////////////////////
 
-    private  Map<OreType, OreRegistry> fillOreRegistry(GeologyType geoType, OreBlockType blockType) {
-        Map<OreType, OreRegistry> oreMap = new HashMap<>();
+    private  Map<OreType, OreBlockRegistry> fillOreRegistry(GeologyType geoType, OreBlockType blockType) {
+        Map<OreType, OreBlockRegistry> oreMap = new HashMap<>();
         for (OreType oreType: EnumSet.complementOf(EnumSet.of(OreType.NONE))) {
-            oreMap.put(oreType, new OreRegistry(geoType, oreType, blockType));
+            oreMap.put(oreType, new OreBlockRegistry(geoType, oreType, blockType));
         }
         return oreMap;
     }
