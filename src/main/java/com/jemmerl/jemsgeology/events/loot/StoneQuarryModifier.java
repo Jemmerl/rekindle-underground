@@ -2,6 +2,7 @@ package com.jemmerl.jemsgeology.events.loot;
 
 import com.google.gson.JsonObject;
 import com.jemmerl.jemsgeology.init.ModItems;
+import com.jemmerl.jemsgeology.items.QuarryItem;
 import com.jemmerl.jemsgeology.util.UtilMethods;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
@@ -93,7 +94,7 @@ public class StoneQuarryModifier extends LootModifier {
 
     // Check if the player is holding the right tools to quarry
     private boolean holdingQuarryTools(BlockState state, PlayerEntity player) {
-        boolean quarryTool = player.getHeldItemOffhand().isItemEqual(ModItems.QUARRY_TOOL.get().getDefaultInstance());
+        boolean quarryTool = player.getHeldItemOffhand().getItem() instanceof QuarryItem;
         boolean canBreak = player.getHeldItemMainhand().canHarvestBlock(state);
         return (quarryTool && canBreak);
     }

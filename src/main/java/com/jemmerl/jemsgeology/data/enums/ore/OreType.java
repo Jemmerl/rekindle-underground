@@ -97,10 +97,5 @@ public enum OreType implements IStringSerializable{
         return (this == NONE) ? null : ModItems.OREITEMS.get(this).getPoorOreItem();
     }
 
-    // Gets a random ore, excluding NONE
-    public static OreType getRandomOreType(Random rand) {
-        return VALUES.get(rand.nextInt(SIZE));
-    }
-
     public Boolean hasOre() { return this != NONE; }
 }

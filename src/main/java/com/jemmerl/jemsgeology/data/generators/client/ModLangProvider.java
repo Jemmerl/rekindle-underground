@@ -29,7 +29,12 @@ public class ModLangProvider extends LanguageProvider {
 
         // Misc items and stuff
         add("item." + JemsGeology.MOD_ID + ".lime_mortar", "Lime Mortar");
-        add("item." + JemsGeology.MOD_ID + ".quarry_tool", "Quarrying Chisel");
+        add("item." + JemsGeology.MOD_ID + ".wooden_quarry_tool", "Wooden Quarrying Chisel");
+        add("item." + JemsGeology.MOD_ID + ".stone_quarry_tool", "Stone Quarrying Chisel");
+        add("item." + JemsGeology.MOD_ID + ".iron_quarry_tool", "Iron Quarrying Chisel");
+        add("item." + JemsGeology.MOD_ID + ".golden_quarry_tool", "Golden Quarrying Chisel");
+        add("item." + JemsGeology.MOD_ID + ".diamond_quarry_tool", "Diamond Quarrying Chisel");
+        add("item." + JemsGeology.MOD_ID + ".netherite_quarry_tool", "Netherite Quarrying Chisel");
         add("itemGroup.jemsgeo_base_stones_tab", "Jem's Geology: Stones");
         add("itemGroup.jemsgeo_decor_stones_tab", "Jem's Geology: Decor");
         add("itemGroup.jemsgeo_cobbles_tab", "Jem's Geology: Cobbles");

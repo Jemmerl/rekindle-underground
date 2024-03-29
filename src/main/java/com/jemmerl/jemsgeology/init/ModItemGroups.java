@@ -39,7 +39,7 @@ public class ModItemGroups {
     public static final ItemGroup JEMGEO_MISC_GROUP = new ItemGroup("jemsgeo_misc_tab") {
         @Override
         public ItemStack createIcon() {
-            return ModItems.QUARRY_TOOL.get().getDefaultInstance();
+            return ModItems.IRON_QUARRY_TOOL.get().getDefaultInstance();
         }
     };
 

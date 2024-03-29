@@ -25,7 +25,7 @@ public class ServerConfig {
         private static final double PLACER_CHANCE = 0.90; // 0.00 - 1.00 scale, chance of placer deposit attempt in chunk; 0 is no placers
 
         private static final boolean GEN_BOULDERS = true; // Generate any boulder features?
-        private static final boolean GEN_MAAR_DIATREMES = true; // Generate maar-diatremes?
+        private static final boolean GEN_MAAR_DIATREMES = false; // Generate maar-diatremes?
         private static final boolean GEN_BATHOLITHS = true; // Generate batholiths?
 
         // Disable vanilla options
@@ -48,7 +48,7 @@ public class ServerConfig {
         private static final boolean DISABLE_SILVERFISH = true; // Disable vanilla silverfish stone (overridden, kept for debug)
 
         // Debug options
-        private static final boolean DEBUG_DIATREME_MAAR = true;
+        private static final boolean DEBUG_DIATREME_MAAR = false;
         private static final boolean DEBUG_BOULDERS = false;
         private static final boolean DEBUG_BATHOLITHS = false;
         private static final boolean DEBUG_TEST_GENFEATURES = true;
