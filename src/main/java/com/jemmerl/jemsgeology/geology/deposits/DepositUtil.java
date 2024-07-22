@@ -235,7 +235,7 @@ public class DepositUtil {
                     .orElseThrow(() -> new RuntimeException("JemsGeo chunk gen capability is null..."));
         }
 
-        GeoWrapper[][][] geoWrapperMap = geoMapBuilder.getGeoWrapperMap();
+        GeoWrapper[][][] geoWrapperMap = geoMapBuilder.getGeoWrapperArray();
 
         ChunkPos genChunk = new ChunkPos(cornerPos); // Current generating corner and respective chunk
         ChunkPos qChunk = new ChunkPos(qPos); // Enqueued block and chunk positions

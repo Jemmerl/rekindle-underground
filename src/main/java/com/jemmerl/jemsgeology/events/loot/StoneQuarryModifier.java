@@ -82,7 +82,7 @@ public class StoneQuarryModifier extends LootModifier {
             return false;
         }
 
-        if (holdingQuarryTools(state, playerIn) && canQuarryBlock(world, pos, playerIn)) {
+        if (holdingQuarryTools(state, playerIn) && canQuarryBlock(world, pos)) {
             playerIn.getHeldItemOffhand().damageItem(1, playerIn, (player) -> {
                 player.sendBreakAnimation(Hand.OFF_HAND);
             });
@@ -100,7 +100,7 @@ public class StoneQuarryModifier extends LootModifier {
     }
 
     // Check if three connected faces that share a vertex are open to air
-    private boolean canQuarryBlock(World world, BlockPos pos, PlayerEntity player) {
+    private boolean canQuarryBlock(World world, BlockPos pos) {
         boolean up = isFaceOpen(world, pos.offset(Direction.UP));
         boolean down = isFaceOpen(world, pos.offset(Direction.DOWN));
         if (!(up || down)) return false;

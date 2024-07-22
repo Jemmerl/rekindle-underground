@@ -3,10 +3,10 @@
   "deposit_type": "constant_scatter",
   "settings": {
     "chunk_spawn_tries": 20,
-    "size": 9,
+    "size": 64,
     "max_height": 80,
     "min_height": 35,
-    "accurate_size": false
+    "accurate_size": true
   },
   "grades": {
     "high": 80,

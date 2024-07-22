@@ -1,2 +1,2 @@
-# Automatically completely strips a chunk-sized area near by you down to y=10
-fill ~ ~ ~ ~16 10 ~16 air
+# Automatically completely strips a chunk-sized area near by you down to y=5
+fill ~ ~ ~ ~16 5 ~16 air

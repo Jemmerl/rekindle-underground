@@ -27,7 +27,8 @@ public class GeoMapBuilder {
     private final ChunkReader chunkReader;
     private final BlockPos cornerPos; // Starting position of this chunk's generation
     private final Random rand;
-    private final GeoWrapper[][][] geoWrapperMap; // Positional map of stone blockstates to be generated
+    private final GeoWrapper[][][] geoWrapperArray; // Positional map of stone blockstates to be generated
+    private final int[][] batholithHeights;
     private final IDepositCapability depCap;
     private final IChunkGennedCapability cpCap;
 
@@ -35,7 +36,8 @@ public class GeoMapBuilder {
         this.chunkReader = reader;
         this.cornerPos = pos;
         this.rand = rand;
-        this.geoWrapperMap = new GeoWrapper[16][this.chunkReader.getMaxHeight()][16];
+        this.geoWrapperArray = new GeoWrapper[16][this.chunkReader.getMaxHeight()][16];
+        this.batholithHeights = new int[16][16];
 
         this.depCap = this.chunkReader.getSeedReader().getWorld().getCapability(DepositCapability.JEMGEO_DEPOSIT_CAPABILITY)
                 .orElseThrow(() -> new RuntimeException("JemsGeo deposit capability is null..."));
@@ -45,12 +47,12 @@ public class GeoMapBuilder {
         genGeoMap();
     }
 
-    public GeoWrapper[][][] getGeoWrapperMap() {
-        return this.geoWrapperMap;
+    public GeoWrapper[][][] getGeoWrapperArray() {
+        return this.geoWrapperArray;
     }
 
     public GeoWrapper getGeoWrapper(int x, int y, int z) {
-        return this.geoWrapperMap[x][y][z];
+        return this.geoWrapperArray[x][y][z];
     }
 
     private void genGeoMap() {
@@ -106,17 +108,27 @@ public class GeoMapBuilder {
         // If not null, then there is no need to generate the strata block as the volcanic
         // spot technically is to generate on top of the strata, replacing it.
         // If a spot is to be contact metamorphosed, then it will be set as AIR
-        for (int x = 0; x < 16; x++) {
-            for (int z = 0; z < 16; z++) {
-                for (int y = 0; y < this.chunkReader.getMaxHeight(); y++) {
-                    int posX = this.cornerPos.getX() + x;
-                    int posZ = this.cornerPos.getZ() + z;
+        VolcanicRegionBuilder.getVolcanicBlocks(this.geoWrapperArray, this.batholithHeights, this.chunkReader, this.cornerPos);
 
-                    this.geoWrapperMap[x][y][z] = VolcanicRegionBuilder.getVolcanicBlock(posX, y, posZ,
-                            chunkReader.getSeedReader());
-                }
-            }
-        }
+//        int[][] bathHeights =
+//        for(int i = 0; i < bathHeights.length; i++) {
+//            int[] aMatrix = bathHeights[i];
+//            int aLength = aMatrix.length;
+//            this.batholithHeights[i] = new int[aLength];
+//            System.arraycopy(aMatrix, 0, this.batholithHeights[i], 0, aLength);
+//        }
+
+//        for (int x = 0; x < 16; x++) {
+//            for (int z = 0; z < 16; z++) {
+//                for (int y = 0; y < this.chunkReader.getMaxHeight(); y++) {
+//                    int posX = this.cornerPos.getX() + x;
+//                    int posZ = this.cornerPos.getZ() + z;
+//
+//                    this.geoWrapperArray[x][y][z] = VolcanicRegionBuilder.getVolcanicBlock(posX, y, posZ,
+//                            chunkReader.getSeedReader());
+//                }
+//            }
+//        }
     }
 
 
@@ -128,7 +140,7 @@ public class GeoMapBuilder {
                     int posX = this.cornerPos.getX() + x;
                     int posZ = this.cornerPos.getZ() + z;
 
-                    GeoWrapper ignBlock = this.geoWrapperMap[x][y][z];
+                    GeoWrapper ignBlock = this.geoWrapperArray[x][y][z];
                     GeologyType geologyType = ignBlock.getGeologyType();
                     boolean contactMeta = (ignBlock.getOreType() == null);
                     if ((geologyType == null) || contactMeta) {
@@ -140,7 +152,7 @@ public class GeoMapBuilder {
                             stoneGeoType = ModBlockLists.CONTACT_META_MAP.getOrDefault(stoneGeoType, stoneGeoType);
                         }
 
-                        this.geoWrapperMap[x][y][z] = new GeoWrapper(stoneGeoType, OreType.NONE, GradeType.NONE);
+                        this.geoWrapperArray[x][y][z] = new GeoWrapper(stoneGeoType, OreType.NONE, GradeType.NONE);
                     }
                 }
             }
