@@ -1,5 +1,5 @@
 {
-  "name": "const_scatter_two",
+  "name": "testconst_scatter_two",
   "deposit_type": "constant_scatter",
   "settings": {
     "chunk_spawn_tries": 20,

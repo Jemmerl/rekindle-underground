@@ -13,7 +13,6 @@ public class ModLootConditionTypes {
     public static LootConditionType IS_GEOSTONE;
 
     public static void registerLootConditions() {
-        System.out.println("added");
         IS_GEOSTONE = add("is_geostone", new StonesCondition.Serializer());
     }
 

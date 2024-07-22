@@ -144,7 +144,7 @@ public class GeoMapBuilder {
                     GeologyType geologyType = ignBlock.getGeologyType();
                     boolean contactMeta = (ignBlock.getOreType() == null);
                     if ((geologyType == null) || contactMeta) {
-                        GeologyType stoneGeoType = StoneRegionBuilder.getStoneStrataBlock(posX, y, posZ,
+                        GeologyType stoneGeoType = StoneRegionBuilder.getStoneStrataBlock(posX, (y - batholithHeights[x][z]), posZ,
                                 chunkReader.getSeedReader(), contactMeta);
 
                         // might be temporary, may move into new strata gen

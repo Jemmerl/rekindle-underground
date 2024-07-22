@@ -183,7 +183,8 @@ public class VolcanicRegionBuilder {
                         case DEEP:
                             float percentContactMeta = -RegionNoise.volcanicRegionNoise(posX, posZ, false);
                             float percentBatholith = (float)Math.pow(percentContactMeta, 1.5);
-                            int warpAddition = (int)(7 * BlobWarpNoise.blobWarpRadiusNoise((posX * 2), y, (posZ * 2))); //5, 4, 4
+                            int warpAddition = (int)(40 * BlobWarpNoise.blobWarpRadiusNoise((posX * 2), y, (posZ * 2))); //5, 4, 4
+                            //int warpAddition = (int)(40 * percentContactMeta * BlobWarpNoise.blobWarpRadiusNoise((posX * 2), y, (posZ * 2))); //5, 4, 4
                             if ((y + 20) <= (((cachedBatholithHeight + 20) * percentBatholith) + warpAddition)) {
                                 // The batholith itself
                                 volcanicWrapper.setGeologyType(cachedBatholithStone);
