@@ -28,7 +28,7 @@ public class GeoMapBuilder {
     private final BlockPos cornerPos; // Starting position of this chunk's generation
     private final Random rand;
     private final GeoWrapper[][][] geoWrapperArray; // Positional map of stone blockstates to be generated
-    private final int[][] batholithHeights;
+    private final int[][][] deformHeights;
     private final IDepositCapability depCap;
     private final IChunkGennedCapability cpCap;
 
@@ -37,7 +37,7 @@ public class GeoMapBuilder {
         this.cornerPos = pos;
         this.rand = rand;
         this.geoWrapperArray = new GeoWrapper[16][this.chunkReader.getMaxHeight()][16];
-        this.batholithHeights = new int[16][16];
+        this.deformHeights = new int[16][this.chunkReader.getMaxHeight()][16];
 
         this.depCap = this.chunkReader.getSeedReader().getWorld().getCapability(DepositCapability.JEMGEO_DEPOSIT_CAPABILITY)
                 .orElseThrow(() -> new RuntimeException("JemsGeo deposit capability is null..."));
@@ -101,6 +101,8 @@ public class GeoMapBuilder {
 //            }
 //        }
 
+        // MOVING DIKES/SILLS/LACCOLITHS TO THE VOLCANIC REGION BUILDER
+
 
 
         // Generate the potential blockstate given the larger volcanic region.
@@ -108,27 +110,7 @@ public class GeoMapBuilder {
         // If not null, then there is no need to generate the strata block as the volcanic
         // spot technically is to generate on top of the strata, replacing it.
         // If a spot is to be contact metamorphosed, then it will be set as AIR
-        VolcanicRegionBuilder.getVolcanicBlocks(this.geoWrapperArray, this.batholithHeights, this.chunkReader, this.cornerPos);
-
-//        int[][] bathHeights =
-//        for(int i = 0; i < bathHeights.length; i++) {
-//            int[] aMatrix = bathHeights[i];
-//            int aLength = aMatrix.length;
-//            this.batholithHeights[i] = new int[aLength];
-//            System.arraycopy(aMatrix, 0, this.batholithHeights[i], 0, aLength);
-//        }
-
-//        for (int x = 0; x < 16; x++) {
-//            for (int z = 0; z < 16; z++) {
-//                for (int y = 0; y < this.chunkReader.getMaxHeight(); y++) {
-//                    int posX = this.cornerPos.getX() + x;
-//                    int posZ = this.cornerPos.getZ() + z;
-//
-//                    this.geoWrapperArray[x][y][z] = VolcanicRegionBuilder.getVolcanicBlock(posX, y, posZ,
-//                            chunkReader.getSeedReader());
-//                }
-//            }
-//        }
+        VolcanicRegionBuilder.getVolcanicBlocks(this.geoWrapperArray, this.deformHeights, this.chunkReader, this.cornerPos);
     }
 
 
@@ -144,7 +126,7 @@ public class GeoMapBuilder {
                     GeologyType geologyType = ignBlock.getGeologyType();
                     boolean contactMeta = (ignBlock.getOreType() == null);
                     if ((geologyType == null) || contactMeta) {
-                        GeologyType stoneGeoType = StoneRegionBuilder.getStoneStrataBlock(posX, (y - batholithHeights[x][z]), posZ,
+                        GeologyType stoneGeoType = StoneRegionBuilder.getStoneStrataBlock(posX, (y - deformHeights[x][y][z]), posZ,
                                 chunkReader.getSeedReader(), contactMeta);
 
                         // might be temporary, may move into new strata gen

@@ -3,5 +3,6 @@ package com.jemmerl.jemsgeology.data.enums.igneous;
 public enum BatholithType {
     NONE,
     DEEP,
-    PROTRUDING;
+    DEEP_STOCK,
+    PROTRUDING
 }
