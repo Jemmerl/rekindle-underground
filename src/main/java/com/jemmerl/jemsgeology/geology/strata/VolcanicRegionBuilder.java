@@ -211,9 +211,10 @@ public class VolcanicRegionBuilder {
                                     // Region of contact metamorphism, null OreType signals contact metamorphism
                                     volcanicWrapper.setOreType(null); //todo replace with contact meta bool feild and mayb contact ign (felsic) type for ore reason
                                 }
-                                //deformHeights[x][y][z] = Math.max(0, (y - (int)Math.floor((y-bathTop) * (y-bathTop) * 0.1))); // trails off too fast, eextend compress
-                                //deformHeights[x][y][z] = Math.max(0, (y - (int)Math.floor(3.8*((10f / (-y+bathTop-4)) + 3)))); // trails off too fast, eextend compress
-                                deformHeights[x][y][z] = Math.max(0, Math.round((-0.025f * (y-bathTop) * (y-bathTop)) + 10)); // trails off too fast, eextend compress
+                                //deformHeights[x][y][z] = Math.max(0, (y - (int)Math.floor((y-bathTop) * (y-bathTop) * 0.1))); // trails off too fast, extend compress
+                                //deformHeights[x][y][z] = Math.max(0, (y - (int)Math.floor(3.8*((10f / (-y+bathTop-4)) + 3))));
+                                int wildDeform = (int) Math.round(Math.exp((-0.12 + (0.0008*bathTop))*(y-bathTop)+2.3)); //10
+                                deformHeights[x][y][z] = Math.max(0, Math.min(10, wildDeform));
 
                             }
 
