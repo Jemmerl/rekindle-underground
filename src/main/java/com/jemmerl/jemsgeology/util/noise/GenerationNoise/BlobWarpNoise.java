@@ -13,7 +13,7 @@ public class BlobWarpNoise {
     ////////////////////////////////////////////////////////////
 
     // Returns the noise value to warp a radius
-    public static float blobWarpRadiusNoise(int x, int y, int z) {
+    public static float blobWarpRadiusNoise(float x, float y, float z) {
         FastNoiseLite.Vector3 v3 = new FastNoiseLite.Vector3(x, y, z);
         blobWarpNoise.DomainWarp(v3);
         return blobWarpNoise.GetNoise(v3.x, (v3.y / 5f), v3.z);
