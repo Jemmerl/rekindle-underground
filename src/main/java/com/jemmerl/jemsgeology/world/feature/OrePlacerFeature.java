@@ -12,7 +12,7 @@ import com.jemmerl.jemsgeology.geology.deposits.DepositUtil;
 import com.jemmerl.jemsgeology.geology.deposits.instances.PlacerDeposit;
 import com.jemmerl.jemsgeology.init.NoiseInit;
 import com.jemmerl.jemsgeology.util.UtilMethods;
-import com.jemmerl.jemsgeology.util.noise.GenerationNoise.BlobWarpNoise;
+import com.jemmerl.jemsgeology.util.noise.GenerationNoise.BlobNoise;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -86,7 +86,7 @@ public class OrePlacerFeature extends Feature<NoFeatureConfig>{
                         continue;
                     }
 
-                    float radius = (BlobWarpNoise.blobWarpRadiusNoise((areaPos.getX() * 5), (areaPos.getY() * 6), (areaPos.getZ() * 5))
+                    float radius = (BlobNoise.blobWarpRadiusNoise((areaPos.getX() * 5), (areaPos.getY() * 6), (areaPos.getZ() * 5))
                             * variance) + avgDepositRadius;
                     //System.out.println(radius);
 

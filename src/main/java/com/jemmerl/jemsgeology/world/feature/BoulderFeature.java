@@ -8,7 +8,6 @@ import com.jemmerl.jemsgeology.init.ModBlocks;
 import com.jemmerl.jemsgeology.init.NoiseInit;
 import com.jemmerl.jemsgeology.init.featureinit.FeatureRegistrar;
 import com.jemmerl.jemsgeology.util.UtilMethods;
-import com.jemmerl.jemsgeology.util.lists.ModBlockLists;
 import com.jemmerl.jemsgeology.util.noise.GenerationNoise.BlobNoise;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.Block;
@@ -159,7 +158,7 @@ public class BoulderFeature extends Feature<NoFeatureConfig> {
                 continue;
             }
 
-            float noiseVal = BlobNoise.getNoise((xRot * BlobNoise.xLength / (rShort * 4f)), (zRot * BlobNoise.zLength / (rLong * 4f)));
+            float noiseVal = BlobNoise.getBoulderNoise((xRot * BlobNoise.xLengthBoulder / (rShort * 4f)), (zRot * BlobNoise.zLengthBoulder / (rLong * 4f)));
             if (noiseVal < -(0.43f - (0.13f * yPercent))) {
                 reader.setBlockState(currPos, boulderState, 2);
             }

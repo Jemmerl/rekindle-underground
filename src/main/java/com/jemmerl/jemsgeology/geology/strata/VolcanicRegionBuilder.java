@@ -10,9 +10,10 @@ import com.jemmerl.jemsgeology.data.enums.ore.OreType;
 import com.jemmerl.jemsgeology.geology.ChunkReader;
 import com.jemmerl.jemsgeology.geology.GeoWrapper;
 import com.jemmerl.jemsgeology.init.JemsGeoConfig;
-import com.jemmerl.jemsgeology.util.noise.GenerationNoise.BlobWarpNoise;
+import com.jemmerl.jemsgeology.util.noise.GenerationNoise.BlobNoise;
 import com.jemmerl.jemsgeology.util.noise.GenerationNoise.RegionNoise;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 
 import java.util.Random;
 
@@ -21,9 +22,6 @@ public class VolcanicRegionBuilder {
     // Note, LIPs are usually 1 million sq km, which translates to 1000 km on each side
     // Now that is a bit much for MC, but it shows these regions will be much larger than the "stone" ones!
     private static float cachedVolRegionVal;
-
-    // Cached flood basalt properties
-    private static IgnProvinceType cachedProvinceType;
 
     // Cached dike properties
     private static IgnBodyType cachedDikeType;
@@ -39,8 +37,8 @@ public class VolcanicRegionBuilder {
 
 
     // Batholith properties
-    private static final int BATHOLITH_DEEP_MIN = 25;
-    private static final int BATHOLITH_DEEP_MAX = 50;
+    private static final int BATHOLITH_DEEP_MIN = 25;//25
+    private static final int BATHOLITH_DEEP_MAX = 50;//50
     private static final int BATHOLITH_PROT_MIN = 65;
     private static final int BATHOLITH_PROT_MAX = 130;
 
@@ -62,8 +60,19 @@ public class VolcanicRegionBuilder {
     //todo add xenoliths within batholith by a bubbly noise preserving overlying strata randomly (read 5-10 strata blocks up)
     // can be done by not placing a (eg granite) bath block at the spot, but adding a NEGATIVE deform to the spot
 
+    //todo occasionally batholiths have different stones for the same seed- is a bug.
 
     public static void getVolcanicBlocks(GeoWrapper[][][] volcanicWrappers, int[][][] deformHeights, ChunkReader chunkReader, BlockPos cornerPos) {
+
+        // do other stuff
+        //TODO dont allow batholiths and flood basalts together?, one or the other
+        generateBatholith(volcanicWrappers, deformHeights, chunkReader, cornerPos);
+
+
+    }
+
+
+    private static void generateBatholith(GeoWrapper[][][] volcanicWrappers, int[][][] deformHeights, ChunkReader chunkReader, BlockPos cornerPos) {
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
                 int posX = cornerPos.getX() + x;
@@ -82,47 +91,31 @@ public class VolcanicRegionBuilder {
                     cachedVolRegionVal = volRegionVal;
                     Random rand = new Random((long)(cachedVolRegionVal * 100000));
 
-                    // Select igneous province type
+                    // Select batholith type
                     float rfloat = rand.nextFloat();
-                    if (rfloat > 0.97f) {
-                        cachedProvinceType = IgnProvinceType.ERODED; // 3%
-                    } else if (rfloat > 0.90f) {
-                        cachedProvinceType = IgnProvinceType.EXTRUDED; // 7%
-                    } else {
-                        cachedProvinceType = IgnProvinceType.NONE; // 90%
+                    // Config to disable batholiths
+                    if (!JemsGeoConfig.SERVER.gen_batholiths.get()) {
+                        cachedBathType = BatholithType.NONE;
+                        continue;
                     }
 
-                    // Select batholith type
-                    rfloat = rand.nextFloat();
-                    switch (cachedProvinceType) {
-                        case NONE:
-                            // Config to disable batholiths
-                            if (!JemsGeoConfig.SERVER.gen_batholiths.get()) {
-                                cachedBathType = BatholithType.NONE;
-                                break;
-                            }
+                    if (rfloat > 0.60f) { //0.90
+                        cachedBathType = BatholithType.PROTRUDING; // 10%
+                        cachedBathHeight = rand.nextInt(BATHOLITH_PROT_MAX - BATHOLITH_PROT_MIN) + BATHOLITH_PROT_MIN;
+                        //TODO TEMP DUPE FROM DEEP
+                        cachedBathZMult = rand.nextFloat() * 0.4f + 0.1f;
+                        cachedBathXMult = rand.nextFloat() * 0.4f + 0.1f;
+                        cachedBathHeightMult = rand.nextInt(41);
 
-                            if (rfloat > 0.60f) { //0.90
-                                cachedBathType = BatholithType.PROTRUDING; // 10%
-                                cachedBathHeight = rand.nextInt(BATHOLITH_PROT_MAX - BATHOLITH_PROT_MIN) + BATHOLITH_PROT_MIN;
-                                //TODO TEMP DUPE FROM DEEP
-                                cachedBathXMult = rand.nextFloat() * 0.4f + 0.1f;
-                                cachedBathZMult = rand.nextFloat() * 0.4f + 0.1f;
-                                cachedBathHeightMult = rand.nextInt(41);
-                                break;
-                            } else if (rfloat > 0.35f) { //0.65
-                                cachedBathType = BatholithType.DEEP; // 25%
-                                cachedBathHeight = rand.nextInt(BATHOLITH_DEEP_MAX - BATHOLITH_DEEP_MIN) + BATHOLITH_DEEP_MIN;
-                                cachedBathXMult = rand.nextFloat() * 0.4f + 0.1f;
-                                cachedBathZMult = rand.nextFloat() * 0.4f + 0.1f;
-                                cachedBathHeightMult = rand.nextInt(41);
-                                break;
-                            }
-                        case EXTRUDED:
-                        case ERODED:
-                        case INTRUDED:
-                        default:
-                            cachedBathType = BatholithType.NONE; // 75% (35% chance for a batholith if no FB)
+                    } else if (rfloat > 0.35f) { //0.65
+                        cachedBathType = BatholithType.DEEP; // 25%
+                        cachedBathHeight = rand.nextInt(BATHOLITH_DEEP_MAX - BATHOLITH_DEEP_MIN) + BATHOLITH_DEEP_MIN;
+                        cachedBathXMult = rand.nextFloat() * 0.4f + 0.1f;
+                        cachedBathZMult = rand.nextFloat() * 0.4f + 0.1f;
+                        cachedBathHeightMult = rand.nextInt(41);
+
+                    } else {
+                        cachedBathType = BatholithType.NONE; // 65%
                     }
 
                     // Pick batholith stone
@@ -146,30 +139,6 @@ public class VolcanicRegionBuilder {
                             // TODO add anorthosite? major batholith rock (see Archean anorthosites as a non-batholith source)
                         }
                     }
-
-
-                    // Select dike type
-                    rfloat = rand.nextFloat();
-                    switch (cachedProvinceType) {
-                        case EXTRUDED:
-                        case ERODED:
-                        case INTRUDED:
-                            cachedDikeType = IgnBodyType.NONE; // LIPs always have swarm feeder dikes
-                            break;
-                        case NONE:
-                        default:
-                            if (rfloat > 0.96f) {
-                                cachedDikeType = IgnBodyType.NONE; // 4%
-                            } else if (rfloat > 0.90f) {
-                                cachedDikeType = IgnBodyType.NONE; // 6%
-                            } else if (rfloat > 0.65f) {
-                                cachedDikeType = IgnBodyType.NONE; // 25%
-                            } else if (rfloat > 0.35f) {
-                                cachedDikeType = IgnBodyType.NONE; // 30%
-                            } else {
-                                cachedDikeType = IgnBodyType.NONE; // 35% (65% chance of some dike)
-                            }
-                    }
                 }
 
 
@@ -177,89 +146,67 @@ public class VolcanicRegionBuilder {
                 // GENERATION //
                 ////////////////
 
-                int bathTop = 0;
-                // y=-10 isnt so needed for lower deform because the bedrock layer hides lowest levels anyway
+                float percentContactMeta;
+                float percentBatholith;
+                int bathWarp;
+                float bathTop;
+                switch (cachedBathType) {
+                    case PROTRUDING:
+                        // Massive batholith that rapidly reaches surface
+                    case DEEP:
+                        // Low-lying batholith deep underground
+                        percentContactMeta = -RegionNoise.volcanicRegionNoise(posX, posZ, false);
+                        percentBatholith = (float)Math.pow(percentContactMeta, 1.5);
+                        bathWarp = Math.round(cachedBathHeightMult * BlobNoise.blobWarpRadiusNoise((posX * cachedBathXMult), 0, (posZ * cachedBathZMult)));
+                        bathTop = ((cachedBathHeight + 20) * percentBatholith) + bathWarp;
+                        break;
+                    case NONE:
+                    default:
+                        continue;
+                }
+
+
                 for (int y = 0; y < chunkReader.getMaxHeight(); y++) {
-                    // Start as null, as a null GeoType return means no volcanic block to be generated
-                    GeoWrapper volcanicWrapper = new GeoWrapper(null, OreType.NONE, GradeType.NONE);
+                    int yShift = y + 10; // Kinda just moving it down to help balance warp overshooting the max height
 
-                    // Builder exits with return if a block is placed, given the appearance of the following:
-                    // Flood basalts on top, followed by batholiths, with both overlaying on dikes.
-                    // This is subject to change.
+                    if (yShift <= bathTop) {
+                        // Country rock xenoliths
+                        float xenoPercent = 0.0065f*(yShift-bathTop+25);
+                        if ((-0.55f+xenoPercent) > BlobNoise.getXenolithNoise(posX, y, posZ)) {
+                            volcanicWrappers[x][y][z].setOreType(null); // Contact metamorph any strata engulfed, ofc
+                            volcanicWrappers[x][y][z].setGeologyType(null);
+                            continue;
+                        }
 
-                    // Build flood basalt
-                    switch (cachedProvinceType) {
-                        case INTRUDED:
-                            // if below wiggly y
-                            // and above wiggly y
+                        // Regular batholith stone
+                        volcanicWrappers[x][y][z].setGeologyType(cachedBathStone);
+                        continue;
 
+                    } else {
+                        // Calculate contact metamorphism
+                        float metaWarp = cachedBathHeightMult * BlobNoise.blobWarpRadiusNoise((posX * cachedBathXMult), y, (posZ * cachedBathZMult));
+                        float metaHeight = ((cachedBathHeight + 30) * percentContactMeta) + metaWarp;
+                        if (yShift <= metaHeight) {
+                            // Region of contact metamorphism, null OreType signals contact metamorphism
+                            volcanicWrappers[x][y][z].setOreType(null); //todo replace with contact meta bool feild and mayb contact ign (like felsic) type for ore reason
+                        }
 
-                            break;
-                        case ERODED:
-
-                            break;
-                        case EXTRUDED:
-
-                            break;
-                        case NONE:
-                        default:
-                            break;
+                        // Deform overlaying strata
+                        int wildDeform = (int) Math.round(Math.exp((-0.12 + (0.0008*bathTop))*(yShift-bathTop)+2.3)); //10
+                        deformHeights[x][y][z] = Math.max(0, Math.min(10, wildDeform));
                     }
 
-                    // Build batholith
-                    switch (cachedBathType) {
-                        case PROTRUDING:
-                            // Massive batholith that rapidly reaches surface
-                        case DEEP:
-                            // Low-lying batholith deep underground
-                            float percentContactMeta = -RegionNoise.volcanicRegionNoise(posX, posZ, false);
-                            float percentBatholith = (float)Math.pow(percentContactMeta, 1.5);
-                            int warpAddition = (int)(cachedBathHeightMult * BlobWarpNoise.blobWarpRadiusNoise((posX * cachedBathXMult), y, (posZ * cachedBathZMult)));
-                            if ((y + 20) <= (((cachedBathHeight + 20) * percentBatholith) + warpAddition)) {
-                                // The batholith itself
-                                volcanicWrapper.setGeologyType(cachedBathStone);
-                                volcanicWrappers[x][y][z] = volcanicWrapper; // Acts as a return does in the old way
-                                bathTop = y; // Y starts at 0, so last update is the highest batholith point
-                                // /tp Dev 2 76 -409 2050211422615214186
-                                // tp Dev 61 70 -428
-                                // tp Dev 211 63 -392
-                                continue;
-                            } else {
-                                if ((y + 20) <= (((cachedBathHeight + 30) * percentContactMeta) + warpAddition)) {
-                                    // Region of contact metamorphism, null OreType signals contact metamorphism
-                                    volcanicWrapper.setOreType(null); //todo replace with contact meta bool feild and mayb contact ign (felsic) type for ore reason
-                                }
-                                //deformHeights[x][y][z] = Math.max(0, (y - (int)Math.floor((y-bathTop) * (y-bathTop) * 0.1))); // trails off too fast, extend compress
-                                //deformHeights[x][y][z] = Math.max(0, (y - (int)Math.floor(3.8*((10f / (-y+bathTop-4)) + 3))));
-                                int wildDeform = (int) Math.round(Math.exp((-0.12 + (0.0008*bathTop))*(y-bathTop)+2.3)); //10
-                                deformHeights[x][y][z] = Math.max(0, Math.min(10, wildDeform));
-                            }
-
-                            // Debug
-                            if (JemsGeoConfig.SERVER.debug_batholiths.get() && (percentBatholith > 0.605f) && (percentBatholith < 0.61f)) {
-                                JemsGeology.getInstance().LOGGER.info(
-                                        "Generating batholith with type {} and max height {} at: ({}, {})",
-                                        cachedBathType, cachedBathHeight, posX, posZ);
-                            }
-
-                            break;
-                        case NONE:
-                        default:
-                            break;
+                    // Debug
+                    if (JemsGeoConfig.SERVER.debug_batholiths.get() && (percentBatholith > 0.605f) && (percentBatholith < 0.61f)) {
+                        JemsGeology.getInstance().LOGGER.info(
+                                "Generating batholith with type {} and max height {} at: ({}, {})",
+                                cachedBathType, cachedBathHeight, posX, posZ);
                     }
-
-                    volcanicWrappers[x][y][z] = volcanicWrapper; // Acts as a return does in the old way
                 }
             }
         }
-
-
     }
-
+// fill ~-18 ~-10 ~-18 ~18 ~10 ~18 air replace jemsgeology:diorite_stone
+    // tp Dev 211 63 -392
 
 }
-
-// Batholith Learnings
-
-
-// Metamorphism Learnings

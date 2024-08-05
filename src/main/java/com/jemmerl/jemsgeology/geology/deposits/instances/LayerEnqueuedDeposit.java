@@ -12,7 +12,7 @@ import com.jemmerl.jemsgeology.init.JemsGeoConfig;
 import com.jemmerl.jemsgeology.init.NoiseInit;
 import com.jemmerl.jemsgeology.util.UtilMethods;
 import com.jemmerl.jemsgeology.util.WeightedProbMap;
-import com.jemmerl.jemsgeology.util.noise.GenerationNoise.BlobWarpNoise;
+import com.jemmerl.jemsgeology.util.noise.GenerationNoise.BlobNoise;
 import com.jemmerl.jemsgeology.geology.ChunkReader;
 import com.jemmerl.jemsgeology.geology.GeoMapBuilder;
 import net.minecraft.block.Blocks;
@@ -222,7 +222,7 @@ public class LayerEnqueuedDeposit implements IEnqueuedDeposit {
 //                        * (taperPercent / 100f));
                 // TODO ABOVE THIS SUCKS
 
-                float radius = (BlobWarpNoise.blobWarpRadiusNoise((areaPos.getX() * 5), (y * 6), (areaPos.getZ() * 5)) * VARIANCE)
+                float radius = (BlobNoise.blobWarpRadiusNoise((areaPos.getX() * 5), (y * 6), (areaPos.getZ() * 5)) * VARIANCE)
                         + avgDepositRadius;
 
                 // Generate the ore block if within the radius and rolls a success against the density percent

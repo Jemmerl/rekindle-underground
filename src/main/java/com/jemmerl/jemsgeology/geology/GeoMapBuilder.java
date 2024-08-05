@@ -19,6 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.ISeedReader;
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -56,6 +57,16 @@ public class GeoMapBuilder {
     }
 
     private void genGeoMap() {
+        // Fill the array WITHOUT SHALLOW COPYING AN ENTIRE DIMENSION OF IT THIS TIME
+        for (int i = 0; i < geoWrapperArray.length; i++) {
+            for (int j = 0; j < geoWrapperArray[0].length; j++) {
+                for (int k = 0; k < geoWrapperArray[0][0].length; k++) {
+                    geoWrapperArray[i][j][k] =  new GeoWrapper(null, OreType.NONE, GradeType.NONE);
+                }
+            }
+        }
+
+
         PopulateIgneous();
         PopulateStrata();
         PopulateOres();
