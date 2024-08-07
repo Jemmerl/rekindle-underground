@@ -135,7 +135,7 @@ public class GeoMapBuilder {
 
                     GeoWrapper ignBlock = this.geoWrapperArray[x][y][z];
                     GeologyType geologyType = ignBlock.getGeologyType();
-                    boolean contactMeta = (ignBlock.getOreType() == null);
+                    boolean contactMeta = ignBlock.getContactMeta();
                     if ((geologyType == null) || contactMeta) {
                         GeologyType stoneGeoType = StoneRegionBuilder.getStoneStrataBlock(posX, (y - deformHeights[x][y][z]), posZ,
                                 chunkReader.getSeedReader(), contactMeta);

@@ -13,7 +13,6 @@ import com.jemmerl.jemsgeology.init.JemsGeoConfig;
 import com.jemmerl.jemsgeology.util.noise.GenerationNoise.BlobNoise;
 import com.jemmerl.jemsgeology.util.noise.GenerationNoise.RegionNoise;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 
 import java.util.Random;
 
@@ -29,13 +28,6 @@ public class VolcanicRegionBuilder {
     private static GeologyType cachedDikeStoneTwo; // Stone the second dike will generate with (if applicable)
     private static GeologyType cachedDikeStoneThree; // Stone the third dike will generate with (if applicable)
 
-    // Cached batholith properties
-
-
-    // Constants
-
-
-
     // Batholith properties
     private static final int BATHOLITH_DEEP_MIN = 25;//25
     private static final int BATHOLITH_DEEP_MAX = 50;//50
@@ -50,24 +42,19 @@ public class VolcanicRegionBuilder {
     private static float cachedBathHeightMult;
 
 
-    // do some dikes and laccoliths and sills
-    // batholith time
-    // do some more dikes and laccoliths and sills
 
     //todo have stark separations where eroded batholiths started and stopped, maybe do with a sharp jump of
     // deform heights over a boundary?
-
-    //todo add xenoliths within batholith by a bubbly noise preserving overlying strata randomly (read 5-10 strata blocks up)
-    // can be done by not placing a (eg granite) bath block at the spot, but adding a NEGATIVE deform to the spot
 
     //todo occasionally batholiths have different stones for the same seed- is a bug.
 
     public static void getVolcanicBlocks(GeoWrapper[][][] volcanicWrappers, int[][][] deformHeights, ChunkReader chunkReader, BlockPos cornerPos) {
 
-        // do other stuff
+        // do some dikes and laccoliths and sills
+        // batholith time
         //TODO dont allow batholiths and flood basalts together?, one or the other
         generateBatholith(volcanicWrappers, deformHeights, chunkReader, cornerPos);
-
+        // do some more dikes and laccoliths and sills
 
     }
 
@@ -122,11 +109,11 @@ public class VolcanicRegionBuilder {
                     if (cachedBathType.equals(BatholithType.NONE)) {
                         cachedBathStone = GeologyType.SANDSTONE; // Debug, should not appear!
                     } else {
-                        // Most batholiths are mixes of various felsic and intermediate plutonic rocks
-                        // To save on computing cost (might experiment later), they will be generated as homogenous masses
-                        // Gabbro is sometimes a small component of batholiths, NEVER a major by any means,
-                        // which is represented here as a very rare chance of generation.
-                        // Will also provide a non-oceanic source of gabbro for building
+                        // todo Most batholiths are mixes of various felsic and intermediate plutonic rocks
+                        //  To save on computing cost (might experiment later), they will be generated as homogenous masses
+                        //  Gabbro is sometimes a small component of batholiths, NEVER a major by any means,
+                        //  which is represented here as a very rare chance of generation.
+                        //  Will also provide a non-oceanic source of gabbro for building
                         if (rfloat > 0.40f) {
                             cachedBathStone = GeologyType.GRANITE; // 60% -- felsic
                         } else if (rfloat > 0.20f) {
@@ -160,24 +147,22 @@ public class VolcanicRegionBuilder {
                         // Country rock xenoliths
                         float xenoPercent = 0.0065f*(yShift-bathTop+25);
                         if ((-0.55f+xenoPercent) > BlobNoise.getXenolithNoise(posX, y, posZ)) {
-                            volcanicWrappers[x][y][z].setOreType(null); // Contact metamorph any strata engulfed, ofc
-                            volcanicWrappers[x][y][z].setGeologyType(null);
+                            volcanicWrappers[x][y][z].setContactMeta(true); // Contact metamorph any strata engulfed, ofc
                             deformHeights[x][y][z] = batholithDeform(yShift, bathTop); // Matches with strata if on edge of batholith
                             continue;
                         }
 
-                        // Regular batholith stone
+                        // Else, regular batholith stone
                         volcanicWrappers[x][y][z].setGeologyType(cachedBathStone);
                         continue;
 
                     } else {
-                        // Calculate contact metamorphism
+                        // Region of contact metamorphism above batholith
                         float metaWarp = (cachedBathHeightMult) * Math.abs(BlobNoise.blobWarpRadiusNoise(
                                 ((posX+1000) * cachedBathXMult), y, ((posZ-1000) * cachedBathZMult)));
                         float metaHeight = bathTop + 13 + metaWarp;
                         if (yShift <= metaHeight) {
-                            // Region of contact metamorphism, null OreType signals contact metamorphism
-                            volcanicWrappers[x][y][z].setOreType(null); //todo replace with contact meta bool feild and mayb contact ign (like felsic) type for ore reason
+                            volcanicWrappers[x][y][z].setContactMeta(true); //todo replace with mayb contact ign (like felsic) type for ore reasons
                         }
 
                         // Deform overlaying strata
@@ -193,10 +178,8 @@ public class VolcanicRegionBuilder {
                 }
             }
         }
+        // fill ~-18 ~-10 ~-18 ~18 ~10 ~18 air replace jemsgeology:diorite_stone
     }
-// fill ~-18 ~-10 ~-18 ~18 ~10 ~18 air replace jemsgeology:diorite_stone
-
-    // tp Dev -1141 80 -116
 
     private static int batholithDeform(int yShift, float bathTop) {
         int wildDeform = (int) Math.round(Math.exp(-0.05*(yShift-bathTop-40)+0.8))-1; //15

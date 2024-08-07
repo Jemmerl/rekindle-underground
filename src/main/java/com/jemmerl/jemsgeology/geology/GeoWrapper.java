@@ -8,6 +8,7 @@ public class GeoWrapper {
     private GeologyType geologyType;
     private OreType oreType;
     private GradeType gradeType;
+    private boolean contactMeta = false;
     //private boolean isRegolith;
 
     public GeoWrapper(GeologyType geologyType, OreType oreType, GradeType gradeType) {
@@ -20,10 +21,12 @@ public class GeoWrapper {
     public void setGeologyType(GeologyType geologyType) { this.geologyType = geologyType; }
     public void setOreType(OreType oreType) { this.oreType = oreType; }
     public void setGradeType(GradeType gradeType) { this.gradeType = gradeType; }
+    public void setContactMeta(boolean contactMeta) { this.contactMeta = contactMeta; }
     //public void setRegolith(boolean isRegolith) { this.isRegolith = isRegolith; }
 
     public GeologyType getGeologyType() { return geologyType; }
     public OreType getOreType() { return oreType; }
     public GradeType getGradeType() { return gradeType; }
+    public boolean getContactMeta() { return contactMeta; }
     //public GradeType isRegolith() { return isRegolith; }
 }
