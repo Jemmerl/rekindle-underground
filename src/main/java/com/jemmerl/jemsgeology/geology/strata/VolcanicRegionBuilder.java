@@ -99,15 +99,14 @@ public class VolcanicRegionBuilder {
                         continue;
                     }
 
-                    if (rfloat > 0.60f) { //0.90
+                    if (rfloat > 0.9f) { //0.90
                         cachedBathType = BatholithType.PROTRUDING; // 10%
                         cachedBathHeight = rand.nextInt(BATHOLITH_PROT_MAX - BATHOLITH_PROT_MIN) + BATHOLITH_PROT_MIN;
-                        //TODO TEMP DUPE FROM DEEP
-                        cachedBathZMult = rand.nextFloat() * 0.4f + 0.1f;
-                        cachedBathXMult = rand.nextFloat() * 0.4f + 0.1f;
-                        cachedBathHeightMult = rand.nextInt(41);
+                        cachedBathXMult = rand.nextFloat() * 0.5f + 0.1f;
+                        cachedBathZMult = rand.nextFloat() * 0.5f + 0.1f;
+                        cachedBathHeightMult = rand.nextInt(61);
 
-                    } else if (rfloat > 0.35f) { //0.65
+                    } else if (rfloat > 0.65f) { //0.65
                         cachedBathType = BatholithType.DEEP; // 25%
                         cachedBathHeight = rand.nextInt(BATHOLITH_DEEP_MAX - BATHOLITH_DEEP_MIN) + BATHOLITH_DEEP_MIN;
                         cachedBathXMult = rand.nextFloat() * 0.4f + 0.1f;
@@ -146,25 +145,13 @@ public class VolcanicRegionBuilder {
                 // GENERATION //
                 ////////////////
 
-                float percentContactMeta;
-                float percentBatholith;
-                int bathWarp;
-                float bathTop;
-                switch (cachedBathType) {
-                    case PROTRUDING:
-                        // Massive batholith that rapidly reaches surface
-                    case DEEP:
-                        // Low-lying batholith deep underground
-                        percentContactMeta = -RegionNoise.volcanicRegionNoise(posX, posZ, false);
-                        percentBatholith = (float)Math.pow(percentContactMeta, 1.5);
-                        bathWarp = Math.round(cachedBathHeightMult * BlobNoise.blobWarpRadiusNoise((posX * cachedBathXMult), 0, (posZ * cachedBathZMult)));
-                        bathTop = ((cachedBathHeight + 20) * percentBatholith) + bathWarp;
-                        break;
-                    case NONE:
-                    default:
-                        continue;
+                if (cachedBathType == BatholithType.NONE) {
+                    continue;
                 }
 
+                float percentBatholith = -RegionNoise.volcanicRegionNoise(posX, posZ, false)*0.85f;
+                float bathWarp = cachedBathHeightMult * BlobNoise.blobWarpRadiusNoise((posX * cachedBathXMult), 0, (posZ * cachedBathZMult));
+                float bathTop = ((cachedBathHeight + 20) * percentBatholith) + bathWarp;
 
                 for (int y = 0; y < chunkReader.getMaxHeight(); y++) {
                     int yShift = y + 10; // Kinda just moving it down to help balance warp overshooting the max height
@@ -175,6 +162,7 @@ public class VolcanicRegionBuilder {
                         if ((-0.55f+xenoPercent) > BlobNoise.getXenolithNoise(posX, y, posZ)) {
                             volcanicWrappers[x][y][z].setOreType(null); // Contact metamorph any strata engulfed, ofc
                             volcanicWrappers[x][y][z].setGeologyType(null);
+                            deformHeights[x][y][z] = batholithDeform(yShift, bathTop); // Matches with strata if on edge of batholith
                             continue;
                         }
 
@@ -184,16 +172,16 @@ public class VolcanicRegionBuilder {
 
                     } else {
                         // Calculate contact metamorphism
-                        float metaWarp = cachedBathHeightMult * BlobNoise.blobWarpRadiusNoise((posX * cachedBathXMult), y, (posZ * cachedBathZMult));
-                        float metaHeight = ((cachedBathHeight + 30) * percentContactMeta) + metaWarp;
+                        float metaWarp = (cachedBathHeightMult) * Math.abs(BlobNoise.blobWarpRadiusNoise(
+                                ((posX+1000) * cachedBathXMult), y, ((posZ-1000) * cachedBathZMult)));
+                        float metaHeight = bathTop + 13 + metaWarp;
                         if (yShift <= metaHeight) {
                             // Region of contact metamorphism, null OreType signals contact metamorphism
                             volcanicWrappers[x][y][z].setOreType(null); //todo replace with contact meta bool feild and mayb contact ign (like felsic) type for ore reason
                         }
 
                         // Deform overlaying strata
-                        int wildDeform = (int) Math.round(Math.exp((-0.12 + (0.0008*bathTop))*(yShift-bathTop)+2.3)); //10
-                        deformHeights[x][y][z] = Math.max(0, Math.min(10, wildDeform));
+                        deformHeights[x][y][z] = batholithDeform(yShift, bathTop);
                     }
 
                     // Debug
@@ -207,6 +195,11 @@ public class VolcanicRegionBuilder {
         }
     }
 // fill ~-18 ~-10 ~-18 ~18 ~10 ~18 air replace jemsgeology:diorite_stone
-    // tp Dev 211 63 -392
 
+    // tp Dev -1141 80 -116
+
+    private static int batholithDeform(int yShift, float bathTop) {
+        int wildDeform = (int) Math.round(Math.exp(-0.05*(yShift-bathTop-40)+0.8))-1; //15
+        return Math.max(0, Math.min(15, wildDeform));
+    }
 }
