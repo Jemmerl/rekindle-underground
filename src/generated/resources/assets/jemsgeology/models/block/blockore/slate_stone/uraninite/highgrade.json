@@ -1,8 +1,0 @@
-{
-  "parent": "jemsgeology:block/stone_ore_parent",
-  "textures": {
-    "all": "jemsgeology:block/slate_stone",
-    "particle": "jemsgeology:block/slate_stone",
-    "overlay": "jemsgeology:block/ore/rich_uraninite"
-  }
-}

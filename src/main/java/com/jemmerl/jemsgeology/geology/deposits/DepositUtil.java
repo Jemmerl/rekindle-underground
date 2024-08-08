@@ -103,20 +103,20 @@ public class DepositUtil {
 
     // Return an array list of grade chances from a JsonObject
     public static WeightedProbMap<GradeType> getGrades(JsonObject jsonObject, String name) {
-        int highGrade, midGrade, lowGrade;
+        int midGrade, lowGrade;
         ArrayList<Pair<Integer, GradeType>> elts = new ArrayList<>();
 
         try {
-            highGrade = Math.min(Math.max(jsonObject.get("high").getAsInt(), 0), 100);
+//            highGrade = Math.min(Math.max(jsonObject.get("high").getAsInt(), 0), 100);
             midGrade = Math.min(Math.max(jsonObject.get("mid").getAsInt(), 0), 100);
             lowGrade = Math.min(Math.max(jsonObject.get("low").getAsInt(), 0), 100);
-            if ((highGrade + midGrade + lowGrade) > 100) {
+            if ((midGrade + lowGrade) > 100) {
                 throw new Exception("Grade weights sum to over 100 in deposit: " + name);
             }
 
-            elts.add( new Pair<>(highGrade, GradeType.HIGHGRADE));
-            elts.add( new Pair<>(midGrade, GradeType.MIDGRADE));
-            elts.add( new Pair<>(lowGrade, GradeType.LOWGRADE));
+//            elts.add( new Pair<>(highGrade, GradeType.HIGHGRADE));
+            elts.add( new Pair<>(midGrade, GradeType.MID));
+            elts.add( new Pair<>(lowGrade, GradeType.LOW));
 
         } catch (Exception e) {
             JemsGeology.getInstance().LOGGER.warn("Error in a deposit: {}, invalid ore grades entry.", name);

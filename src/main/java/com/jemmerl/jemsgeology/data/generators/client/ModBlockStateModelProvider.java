@@ -124,7 +124,7 @@ public class ModBlockStateModelProvider extends BlockStateProvider {
                     .texture("west", modLoc("block/" + basePath));
         } else {
             String oreName = oreType.name().toLowerCase(Locale.ROOT);
-            String gradeName = gradeType.name().toLowerCase(Locale.ROOT);
+            String gradeName = gradeType.getString().toLowerCase(Locale.ROOT);
 
             modelFile = models().withExistingParent("block/blockore/" + basePath + "/" + oreName + "/" + gradeName,
                             modLoc("block/stone_ore_parent"))
@@ -152,7 +152,7 @@ public class ModBlockStateModelProvider extends BlockStateProvider {
                     .texture("west", modLoc("block/" + basePath + "2"));
         } else {
             String oreName = oreType.name().toLowerCase(Locale.ROOT);
-            String gradeName = gradeType.name().toLowerCase(Locale.ROOT);
+            String gradeName = gradeType.getString().toLowerCase(Locale.ROOT);
 
             modelFile = models().withExistingParent("block/blockore/" + basePath + "/" + oreName + "/" + gradeName,
                             modLoc("block/stone_ore_parent_sides"))

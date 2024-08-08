@@ -1,8 +1,0 @@
-{
-  "parent": "jemsgeology:block/stone_ore_parent",
-  "textures": {
-    "all": "jemsgeology:block/carbonate_hornfels_stone",
-    "particle": "jemsgeology:block/carbonate_hornfels_stone",
-    "overlay": "jemsgeology:block/ore/rich_graphite"
-  }
-}

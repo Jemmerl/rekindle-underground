@@ -15,23 +15,23 @@ public class OreBlockRegistry {
 
     private final RegistryObject<Block> lowOreBlock;
     private final RegistryObject<Block> midOreBlock;
-    private final RegistryObject<Block> highOreBlock;
+//    private final RegistryObject<Block> highOreBlock;
 
     public OreBlockRegistry(GeologyType geoType, OreType oreType, OreBlockType blockType) {
-        this.lowOreBlock = registerOreBlock(geoType, oreType, GradeType.LOWGRADE, blockType);
-        this.midOreBlock = registerOreBlock(geoType, oreType, GradeType.MIDGRADE, blockType);
-        this.highOreBlock = registerOreBlock(geoType, oreType, GradeType.HIGHGRADE, blockType);
+        this.lowOreBlock = registerOreBlock(geoType, oreType, GradeType.LOW, blockType);
+        this.midOreBlock = registerOreBlock(geoType, oreType, GradeType.MID, blockType);
+//        this.highOreBlock = registerOreBlock(geoType, oreType, GradeType.HIGHGRADE, blockType);
     }
 
     // Get an ore block with a specific grade (NONE returns null)
     public RegistryObject<Block> getGradeOre(GradeType gradeType) {
         switch (gradeType) {
-            case LOWGRADE:
+            case LOW:
                 return lowOreBlock;
-            case MIDGRADE:
+            case MID:
                 return midOreBlock;
-            case HIGHGRADE:
-                return highOreBlock;
+//            case HIGHGRADE:
+//                return highOreBlock;
             default:
                 return null;
         }
@@ -39,7 +39,8 @@ public class OreBlockRegistry {
 
     // Build a list of all three graded ore blocks
     public List<Block> getAllGradedOreBlocks() {
-        return Arrays.asList(lowOreBlock.get(), midOreBlock.get(), highOreBlock.get());
+        return Arrays.asList(lowOreBlock.get(), midOreBlock.get());
+//        return Arrays.asList(lowOreBlock.get(), midOreBlock.get(), highOreBlock.get());
     }
 
     private RegistryObject<Block> registerOreBlock(GeologyType geoType, OreType oreType, GradeType gradeType, OreBlockType blockType) {

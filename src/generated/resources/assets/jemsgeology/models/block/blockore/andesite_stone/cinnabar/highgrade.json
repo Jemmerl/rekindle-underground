@@ -1,8 +1,0 @@
-{
-  "parent": "jemsgeology:block/stone_ore_parent",
-  "textures": {
-    "all": "jemsgeology:block/andesite_stone",
-    "particle": "jemsgeology:block/andesite_stone",
-    "overlay": "jemsgeology:block/ore/rich_cinnabar"
-  }
-}

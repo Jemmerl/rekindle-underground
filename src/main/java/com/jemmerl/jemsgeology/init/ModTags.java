@@ -20,7 +20,7 @@ public class ModTags {
         public static final Tags.IOptionalNamedTag<Block> JEMSGEO_COBBLES = createTag("cobbles");
         public static final Tags.IOptionalNamedTag<Block> JEMSGEO_COBBLESTONE = createTag("cobblestone");
         public static final Tags.IOptionalNamedTag<Block> JEMSGEO_ORE = createTag("ore_blocks");
-        public static final Tags.IOptionalNamedTag<Block> JEMSGEO_ORE_HIGH = createTag("highgrade");
+//        public static final Tags.IOptionalNamedTag<Block> JEMSGEO_ORE_HIGH = createTag("highgrade");
         public static final Tags.IOptionalNamedTag<Block> JEMSGEO_ORE_MID = createTag("midgrade");
         public static final Tags.IOptionalNamedTag<Block> JEMSGEO_ORE_LOW = createTag("lowgrade");
         public static final Tags.IOptionalNamedTag<Block> JEMSGEO_NO_ORE = createTag("barren");

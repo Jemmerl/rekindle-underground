@@ -5,9 +5,9 @@ import net.minecraft.util.IStringSerializable;
 public enum GradeType implements IStringSerializable {
 
     NONE("none", ""),
-    LOWGRADE("lowgrade", "poor_"),
-    MIDGRADE("midgrade", ""),
-    HIGHGRADE("highgrade", "rich_");
+    LOW("lowgrade", "poor_"),
+    MID("midgrade", "");
+    //HIGHGRADE("highgrade", "rich_");
 
     private final String name;
     private final String assetName;

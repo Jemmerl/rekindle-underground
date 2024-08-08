@@ -1,8 +1,0 @@
-{
-  "parent": "jemsgeology:block/stone_ore_parent",
-  "textures": {
-    "all": "jemsgeology:block/dirt_detritus",
-    "particle": "jemsgeology:block/dirt_detritus",
-    "overlay": "jemsgeology:block/ore/rich_tetrahedrite"
-  }
-}

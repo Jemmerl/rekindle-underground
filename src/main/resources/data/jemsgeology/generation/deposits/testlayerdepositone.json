@@ -12,9 +12,8 @@
     "max_yheight": 100
   },
   "grades": {
-    "high": 80,
-    "mid": 20,
-    "low": 0
+    "mid": 80,
+    "low": 20
   },
   "ores": [
     {

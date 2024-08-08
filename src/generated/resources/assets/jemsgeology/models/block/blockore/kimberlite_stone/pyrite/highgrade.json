@@ -1,8 +1,0 @@
-{
-  "parent": "jemsgeology:block/stone_ore_parent",
-  "textures": {
-    "all": "jemsgeology:block/kimberlite_stone",
-    "particle": "jemsgeology:block/kimberlite_stone",
-    "overlay": "jemsgeology:block/ore/rich_pyrite"
-  }
-}

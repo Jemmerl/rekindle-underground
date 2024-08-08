@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "#jemsgeology:highgrade",
     "#jemsgeology:midgrade",
     "#jemsgeology:lowgrade"
   ]

@@ -1,8 +1,0 @@
-{
-  "parent": "jemsgeology:block/stone_ore_parent",
-  "textures": {
-    "all": "jemsgeology:block/sand_detritus",
-    "particle": "jemsgeology:block/sand_detritus",
-    "overlay": "jemsgeology:block/ore/rich_trona"
-  }
-}

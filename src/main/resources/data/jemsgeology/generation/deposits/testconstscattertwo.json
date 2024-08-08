@@ -9,9 +9,8 @@
     "accurate_size": true
   },
   "grades": {
-    "high": 80,
-    "mid": 20,
-    "low": 0
+    "mid": 80,
+    "low": 20
   },
   "ores": [
     {

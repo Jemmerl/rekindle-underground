@@ -269,11 +269,11 @@ public class ModLootTableProvider extends LootTableProvider {
         // Build an ore drop Loot Entry
         private LootEntry.Builder<?> buildOreLootEntry(OreType oreType, GradeType gradeType) {
             switch (gradeType) {
-                case HIGHGRADE:
-                    return buildOreLootEntry(RandomValueRange.of(2,4), oreType.getOreItem());
-                case MIDGRADE:
+//                case HIGHGRADE:
+//                    return buildOreLootEntry(RandomValueRange.of(2,4), oreType.getOreItem());
+                case MID:
                     return buildOreLootEntry(RandomValueRange.of(1,2), oreType.getOreItem());
-                case LOWGRADE:
+                case LOW:
                 default: // NONE should not happen anyway
                     return buildOreLootEntry(RandomValueRange.of(1,2), oreType.getPoorOreItem());
             }

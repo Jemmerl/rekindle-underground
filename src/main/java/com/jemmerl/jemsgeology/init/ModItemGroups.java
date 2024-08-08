@@ -47,7 +47,7 @@ public class ModItemGroups {
         @Override
         public ItemStack createIcon() {
             return ModBlocks.GEOBLOCKS.get(GeologyType.BASALT)
-                    .getStoneOre(OreType.APATITE, GradeType.MIDGRADE).asItem().getDefaultInstance();
+                    .getStoneOre(OreType.APATITE, GradeType.MID).asItem().getDefaultInstance();
         }
     };
 

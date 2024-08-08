@@ -34,7 +34,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         Builder<Block> tagBuilderGeoCobbles = this.getOrCreateBuilder(ModTags.Blocks.JEMSGEO_COBBLES);
         Builder<Block> tagBuilderGeoCobblestone = this.getOrCreateBuilder(ModTags.Blocks.JEMSGEO_COBBLESTONE);
 
-        Builder<Block> tagBuilderOreHigh = this.getOrCreateBuilder(ModTags.Blocks.JEMSGEO_ORE_HIGH);
+//        Builder<Block> tagBuilderOreHigh = this.getOrCreateBuilder(ModTags.Blocks.JEMSGEO_ORE_HIGH);
         Builder<Block> tagBuilderOreMid = this.getOrCreateBuilder(ModTags.Blocks.JEMSGEO_ORE_MID);
         Builder<Block> tagBuilderOreLow = this.getOrCreateBuilder(ModTags.Blocks.JEMSGEO_ORE_LOW);
         Builder<Block> tagBuilderOreAll = this.getOrCreateBuilder(ModTags.Blocks.JEMSGEO_ORE);
@@ -54,20 +54,20 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             }
 
             for (OreBlockRegistry oreBlockRegistry : geoRegistry.getStoneOreRegistry().values()) {
-                Block highGrade = oreBlockRegistry.getGradeOre(GradeType.HIGHGRADE).get();
-                Block midGrade = oreBlockRegistry.getGradeOre(GradeType.MIDGRADE).get();
-                Block lowGrade = oreBlockRegistry.getGradeOre(GradeType.LOWGRADE).get();
+//                Block highGrade = oreBlockRegistry.getGradeOre(GradeType.HIGHGRADE).get();
+                Block midGrade = oreBlockRegistry.getGradeOre(GradeType.MID).get();
+                Block lowGrade = oreBlockRegistry.getGradeOre(GradeType.LOW).get();
 
-                tagBuilderOreHigh.add(highGrade);
+//                tagBuilderOreHigh.add(highGrade);
                 tagBuilderOreMid.add(midGrade);
                 tagBuilderOreLow.add(lowGrade);
 
                 if (isDetritus) {
-                    tagBuilderGeoDetritus.add(highGrade);
+//                    tagBuilderGeoDetritus.add(highGrade);
                     tagBuilderGeoDetritus.add(midGrade);
                     tagBuilderGeoDetritus.add(lowGrade);
                 } else {
-                    tagBuilderGeoStone.add(highGrade);
+//                    tagBuilderGeoStone.add(highGrade);
                     tagBuilderGeoStone.add(midGrade);
                     tagBuilderGeoStone.add(lowGrade);
                 }
@@ -80,15 +80,15 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 tagBuilderGeoRegolith.add(geoRegistry.getRegolith());
                 tagBuilderNoOre.add(geoRegistry.getRegolith());
                 for (OreBlockRegistry oreBlockRegistry : geoRegistry.getRegolithOreRegistry().values()) {
-                    Block highGrade = oreBlockRegistry.getGradeOre(GradeType.HIGHGRADE).get();
-                    Block midGrade = oreBlockRegistry.getGradeOre(GradeType.MIDGRADE).get();
-                    Block lowGrade = oreBlockRegistry.getGradeOre(GradeType.LOWGRADE).get();
+//                    Block highGrade = oreBlockRegistry.getGradeOre(GradeType.HIGHGRADE).get();
+                    Block midGrade = oreBlockRegistry.getGradeOre(GradeType.MID).get();
+                    Block lowGrade = oreBlockRegistry.getGradeOre(GradeType.LOW).get();
 
-                    tagBuilderOreHigh.add(highGrade);
+//                    tagBuilderOreHigh.add(highGrade);
                     tagBuilderOreMid.add(midGrade);
                     tagBuilderOreLow.add(lowGrade);
 
-                    tagBuilderGeoRegolith.add(highGrade);
+//                    tagBuilderGeoRegolith.add(highGrade);
                     tagBuilderGeoRegolith.add(midGrade);
                     tagBuilderGeoRegolith.add(lowGrade);
                 }
@@ -98,7 +98,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             }
         }
 
-        tagBuilderOreAll.addTag(ModTags.Blocks.JEMSGEO_ORE_HIGH);
+//        tagBuilderOreAll.addTag(ModTags.Blocks.JEMSGEO_ORE_HIGH);
         tagBuilderOreAll.addTag(ModTags.Blocks.JEMSGEO_ORE_MID);
         tagBuilderOreAll.addTag(ModTags.Blocks.JEMSGEO_ORE_LOW);
     }

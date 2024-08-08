@@ -35,16 +35,15 @@ public class DiatremeOliveUtilDeposit implements IEnqueuedDeposit {
         this.name = "diatreme_maar_olivine";
 
         ArrayList<Pair<Integer, GradeType>> gradeElts = new ArrayList<>();
-        gradeElts.add( new Pair<>(3, GradeType.HIGHGRADE));
-        gradeElts.add( new Pair<>(12, GradeType.MIDGRADE));
-        gradeElts.add( new Pair<>(85, GradeType.LOWGRADE));
+        gradeElts.add( new Pair<>(15, GradeType.MID));
+        gradeElts.add( new Pair<>(85, GradeType.LOW));
         this.gradesMap = new WeightedProbMap<>(gradeElts);
 
         // Used exclusively in internal hardcoded environments, does not need regular access
         ArrayList<Pair<Integer, GradeType>> gradeEltsAlt = new ArrayList<>();
-        gradeEltsAlt.add( new Pair<>(35, GradeType.HIGHGRADE));
-        gradeEltsAlt.add( new Pair<>(50, GradeType.MIDGRADE));
-        gradeEltsAlt.add( new Pair<>(20, GradeType.LOWGRADE));
+//        gradeEltsAlt.add( new Pair<>(21, GradeType.HIGHGRADE));
+        gradeEltsAlt.add( new Pair<>(70, GradeType.MID));
+        gradeEltsAlt.add( new Pair<>(30, GradeType.LOW));
         this.gradesMapAlt = new WeightedProbMap<>(gradeEltsAlt);
 
         ArrayList<Pair<Integer, OreType>> oreElts = new ArrayList<>();

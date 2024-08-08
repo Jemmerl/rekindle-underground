@@ -34,9 +34,9 @@ public class DiatremeDiaUtilDeposit implements IEnqueuedDeposit {
         this.name = "diatreme_maar_diamond";
 
         ArrayList<Pair<Integer, GradeType>> gradeElts = new ArrayList<>();
-        gradeElts.add( new Pair<>(1, GradeType.HIGHGRADE));
-        gradeElts.add( new Pair<>(9, GradeType.MIDGRADE));
-        gradeElts.add( new Pair<>(90, GradeType.LOWGRADE));
+//        gradeElts.add( new Pair<>(1, GradeType.HIGHGRADE));
+        gradeElts.add( new Pair<>(10, GradeType.MID));
+        gradeElts.add( new Pair<>(90, GradeType.LOW));
         this.gradesMap = new WeightedProbMap<>(gradeElts);
 
         ArrayList<Pair<Integer, OreType>> oreElts = new ArrayList<>();

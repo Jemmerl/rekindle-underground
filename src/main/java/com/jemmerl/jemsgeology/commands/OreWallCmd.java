@@ -49,7 +49,7 @@ public class OreWallCmd {
 
         // Place ores
         for (GeologyType geologyType: GeologyType.values()) {
-            BlockState state = ModBlocks.GEOBLOCKS.get(geologyType).getStoneOre(oreType, GradeType.MIDGRADE).getDefaultState();
+            BlockState state = ModBlocks.GEOBLOCKS.get(geologyType).getStoneOre(oreType, GradeType.MID).getDefaultState();
 
             TileEntity tileentity = serverworld.getTileEntity(pos.up(y).north(x));
             IClearable.clearObj(tileentity);

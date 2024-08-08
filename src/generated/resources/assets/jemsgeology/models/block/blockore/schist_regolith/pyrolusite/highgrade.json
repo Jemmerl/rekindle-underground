@@ -1,8 +1,0 @@
-{
-  "parent": "jemsgeology:block/stone_ore_parent",
-  "textures": {
-    "all": "jemsgeology:block/schist_regolith",
-    "particle": "jemsgeology:block/schist_regolith",
-    "overlay": "jemsgeology:block/ore/rich_pyrolusite"
-  }
-}
