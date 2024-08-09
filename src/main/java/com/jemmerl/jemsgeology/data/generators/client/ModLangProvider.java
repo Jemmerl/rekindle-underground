@@ -13,10 +13,7 @@ import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.fml.RegistryObject;
 import org.codehaus.plexus.util.StringUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
+import java.util.*;
 
 public class ModLangProvider extends LanguageProvider {
 
@@ -135,9 +132,11 @@ public class ModLangProvider extends LanguageProvider {
             String[] dividePath = path.split("/", 3);
             String stoneName = StringUtils.capitaliseAllWords(dividePath[0].split("_stone", 2)[0].replace('_', ' '));
             String oreName = StringUtils.capitaliseAllWords(dividePath[1].replace('_', ' '));
-            String[] divideGrade = dividePath[2].split("grade", 2);
-            String gradeName = StringUtils.capitalise(divideGrade[0]) + "-Grade";
-            displayName = gradeName + " " + oreName + " " + stoneName;
+            if (dividePath[2].contains("low")) {
+                displayName = "Poor " + oreName + " " + stoneName;
+            } else {
+                displayName = oreName + " " + stoneName;
+            }
         } else {
             String[] dividePath = path.split("_stone", 2);
             displayName = StringUtils.capitaliseAllWords(dividePath[0].replace('_', ' '));
@@ -153,9 +152,11 @@ public class ModLangProvider extends LanguageProvider {
             String[] dividePath = path.split("/", 3);
             String regolithName = StringUtils.capitaliseAllWords(dividePath[0].replace('_', ' '));
             String oreName = StringUtils.capitaliseAllWords(dividePath[1].replace('_', ' '));
-            String[] divideGrade = dividePath[2].split("grade", 2);
-            String gradeName = StringUtils.capitalise(divideGrade[0]) + "-Grade";
-            displayName = gradeName + " " + oreName + " " + regolithName;
+            if (dividePath[2].contains("low")) {
+                displayName = "Poor " + oreName + " " + regolithName;
+            } else {
+                displayName = oreName + " " + regolithName;
+            }
         } else {
             displayName = StringUtils.capitaliseAllWords(path.replace('_', ' '));
         }
@@ -170,9 +171,11 @@ public class ModLangProvider extends LanguageProvider {
             String[] dividePath = path.split("/", 3);
             String detritusName = StringUtils.capitaliseAllWords(dividePath[0].split("_detritus", 2)[0].replace('_', ' '));
             String oreName = StringUtils.capitaliseAllWords(dividePath[1].replace('_', ' '));
-            String[] divideGrade = dividePath[2].split("grade", 2);
-            String gradeName = StringUtils.capitalise(divideGrade[0]) + "-Grade";
-            displayName = gradeName + " " + oreName + " " + detritusName;
+            if (dividePath[2].contains("low")) {
+                displayName = "Poor " + oreName + " " + detritusName;
+            } else {
+                displayName = oreName + " " + detritusName;
+            }
         } else {
             String[] dividePath = path.split("_detritus", 2);
             displayName = StringUtils.capitaliseAllWords(dividePath[0].replace('_', ' '));
